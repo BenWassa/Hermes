@@ -13,6 +13,8 @@ from .writer import write_digest
 
 def setup_logging() -> None:
     """Configure logging for the application."""
+    # Ensure logs directory exists
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
     log_file = LOGS_DIR / "hermes.log"
     
     logging.basicConfig(

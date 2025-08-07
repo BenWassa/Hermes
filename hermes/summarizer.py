@@ -50,7 +50,7 @@ def _summarize_text(text: str) -> List[str]:
 
 def _can_use_openai() -> bool:
     """Check if OpenAI API is available and configured."""
-    return HAS_OPENAI and OPENAI_API_KEY is not None
+    return HAS_OPENAI and OPENAI_API_KEY is not None and OPENAI_API_KEY.strip() != ""
 
 
 def _openai_summary(text: str) -> List[str]:
@@ -72,7 +72,7 @@ def _openai_summary(text: str) -> List[str]:
         
         content = response.choices[0].message.content
         bullets = [
-            line.strip().lstrip('•-* ').strip() 
+            "• " + line.strip().lstrip('•-* ').strip() 
             for line in content.split('\n') 
             if line.strip() and not line.strip().startswith('Summary')
         ]
@@ -87,7 +87,7 @@ def _openai_summary(text: str) -> List[str]:
 def _fallback_summary(text: str) -> List[str]:
     """Generate fallback summary without external APIs."""
     if not text:
-        return ["No content available for summary."]
+        return ["• No content available for summary"]
     
     # Split into sentences and take the most important ones
     sentences = [s.strip() for s in text.replace('\n', ' ').split('.') if s.strip()]
@@ -98,8 +98,8 @@ def _fallback_summary(text: str) -> List[str]:
         if len(sentence) > 150:
             # Wrap long sentences
             wrapped = textwrap.fill(sentence, width=120)
-            summary_sentences.append(wrapped.split('\n')[0] + '...')
+            summary_sentences.append("• " + wrapped.split('\n')[0] + '...')
         else:
-            summary_sentences.append(sentence)
+            summary_sentences.append("• " + sentence)
     
-    return summary_sentences if summary_sentences else ["Content available but could not generate summary."]
+    return summary_sentences if summary_sentences else ["• Content available but could not generate summary"]

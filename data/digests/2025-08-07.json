@@ -1,32 +1,22 @@
 {
-  "date": "2025-08-07",
-  "generated_at": "2025-08-07T18:23:57.265841",
+  "digest_date": "2025-08-07",
+  "generated_at": "2025-08-07T19:37:59.123525",
   "categories": {
-    "📰 Other": [
-      {
-        "title": "Bank of England cuts interest rates to two-year low of 4%",
-        "summary": "The Bank of England cuts its key rate to 4%, the fifth reduction since August last year.",
-        "link": "https://www.bbc.com/news/articles/c5yprwyxjlxo?at_medium=RSS&at_campaign=rss",
-        "bullets": [
-          "The Bank of England cuts its key rate to 4%, the fifth reduction since August last year"
-        ]
-      }
-    ],
     "⚙️ Tech & AI": [
+      {
+        "title": "Homelessness Minister Rushanari Ali quits over rent hike claims",
+        "summary": "It comes after she increased rent on a house she owns within weeks of the previous tenants' contracts ending.",
+        "link": "https://www.bbc.com/news/articles/clyd3l2x2n8o?at_medium=RSS&at_campaign=rss",
+        "bullets": [
+          "• It comes after she increased rent on a house she owns within weeks of the previous tenants' contracts ending"
+        ]
+      },
       {
         "title": "Faisal Islam: Why cut rates when inflation remains high?",
         "summary": "Rates are now at their lowest since March 2023 even though inflation is well above target.",
         "link": "https://www.bbc.com/news/articles/cq6899yleg8o?at_medium=RSS&at_campaign=rss",
         "bullets": [
-          "Rates are now at their lowest since March 2023 even though inflation is well above target"
-        ]
-      },
-      {
-        "title": "Dozens of migrants detained under 'one in, one out' deal with France",
-        "summary": "The detentions came as people arrived in Dover on Wednesday, the first day the pilot scheme came into force.",
-        "link": "https://www.bbc.com/news/articles/ce35v0zyzvlo?at_medium=RSS&at_campaign=rss",
-        "bullets": [
-          "The detentions came as people arrived in Dover on Wednesday, the first day the pilot scheme came into force"
+          "• Rates are now at their lowest since March 2023 even though inflation is well above target"
         ]
       },
       {
@@ -34,7 +24,17 @@
         "summary": "Trials of a daily obesity pill showed patients lost about 12% of their body weight over 72 weeks.",
         "link": "https://www.bbc.com/news/articles/czerly4wwwyo?at_medium=RSS&at_campaign=rss",
         "bullets": [
-          "Trials of a daily obesity pill showed patients lost about 12% of their body weight over 72 weeks"
+          "• Trials of a daily obesity pill showed patients lost about 12% of their body weight over 72 weeks"
+        ]
+      }
+    ],
+    "📰 Other": [
+      {
+        "title": "Bank of England cuts interest rates to two-year low of 4%",
+        "summary": "The Bank of England cuts its key rate to 4%, the fifth reduction since August last year.",
+        "link": "https://www.bbc.com/news/articles/c5yprwyxjlxo?at_medium=RSS&at_campaign=rss",
+        "bullets": [
+          "• The Bank of England cuts its key rate to 4%, the fifth reduction since August last year"
         ]
       }
     ],
@@ -44,7 +44,7 @@
         "summary": "Even with Trump's direct involvement, Moscow's preconditions for a ceasefire in Ukraine make a swift ending to the bloodshed difficult to reach.",
         "link": "https://www.bbc.com/news/articles/c14gkkzvpx8o?at_medium=RSS&at_campaign=rss",
         "bullets": [
-          "Even with Trump's direct involvement, Moscow's preconditions for a ceasefire in Ukraine make a swift ending to the bloodshed difficult to reach"
+          "• Even with Trump's direct involvement, Moscow's preconditions for a ceasefire in Ukraine make a swift ending to the bloodshed difficult to reach"
         ]
       }
     ]

@@ -54,6 +54,9 @@ def _write_markdown_digest(categorized: Dict[str, List[NewsArticle]], date: str)
     """Write digest in Markdown format."""
     filepath = DIGEST_DIR / f"{date}.md"
     
+    # Ensure directory exists
+    filepath.parent.mkdir(parents=True, exist_ok=True)
+    
     lines = [
         f"# 🗞️ Hermes Daily Digest — {date}",
         "",
@@ -107,6 +110,9 @@ def _write_markdown_digest(categorized: Dict[str, List[NewsArticle]], date: str)
 def _write_html_digest(categorized: Dict[str, List[NewsArticle]], date: str) -> Path:
     """Write digest in HTML format."""
     filepath = DIGEST_DIR / f"{date}.html"
+    
+    # Ensure directory exists
+    filepath.parent.mkdir(parents=True, exist_ok=True)
     
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -174,8 +180,11 @@ def _write_json_digest(categorized: Dict[str, List[NewsArticle]], date: str) -> 
     
     filepath = DIGEST_DIR / f"{date}.json"
     
+    # Ensure directory exists
+    filepath.parent.mkdir(parents=True, exist_ok=True)
+    
     data = {
-        "date": date,
+        "digest_date": date,
         "generated_at": datetime.utcnow().isoformat(),
         "categories": {}
     }
