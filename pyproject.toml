@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hermes-news"
+version = "0.1.0"
+description = "A signal filter for noise-free news digests"
+readme = "README.md"
+authors = [
+    {name = "Benjamin P. Haddon", email = "benjamin.haddon@example.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content :: News/Diary",
+]
+keywords = ["news", "ai", "summarization", "digest", "filter"]
+dependencies = [
+    "feedparser>=6.0.0",
+    "newspaper3k>=0.2.8",
+    "requests>=2.31.0",
+]
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+ai = ["openai>=1.0.0"]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+docs = ["sphinx>=7.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/BenWassa/Hermes"
+Repository = "https://github.com/BenWassa/Hermes"
+Issues = "https://github.com/BenWassa/Hermes/issues"
+
+[project.scripts]
+hermes = "hermes.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hermes*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

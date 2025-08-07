@@ -1,0 +1,18 @@
+# Project Hermes Dependencies
+
+# Core dependencies
+feedparser>=6.0.0
+newspaper3k>=0.2.8
+requests>=2.31.0
+
+# Optional AI/LLM dependencies
+openai>=1.0.0
+
+# Development dependencies
+pytest>=7.0.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+
+# Documentation
+sphinx>=7.0.0
