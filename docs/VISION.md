@@ -309,6 +309,25 @@ professional
 
 Not flashy.
 
+## Current UI Direction (March 2026)
+
+The active visual direction is a Stark-style mobile HUD: futuristic, high-contrast, and glass-based while still preserving readability and information hierarchy.
+
+Design rules for this mode:
+
+Deep obsidian base with subtle radial glow  
+Translucent floating panels (`bg-white/5`, `backdrop-blur`)  
+Cyan/amber accent lighting for priority and state  
+Rounded aerodynamic surfaces instead of harsh terminal rails  
+Depth expressed through emitted light and glow, not heavy gray shadows  
+
+Tone target:
+
+premium  
+technical  
+responsive  
+cinematic, but disciplined
+
 ---
 
 # Icon Strategy
