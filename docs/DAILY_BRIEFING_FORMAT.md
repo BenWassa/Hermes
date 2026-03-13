@@ -58,12 +58,16 @@ The current UI expects the following structure.
       }
     ]
   },
-  "macro_sparklines": [
+  "macro_indicators": [
     {
-      "label": "Brent",
-      "value": "$98.40",
-      "change": "+7D momentum",
-      "points": [{ "value": 84 }, { "value": 86 }, { "value": 98.4 }]
+      "id": "ind-01",
+      "title": "Brent Crude",
+      "metric": "7-DAY VOLATILITY",
+      "currentValue": "$98.40",
+      "trendValue": "+4.2%",
+      "trendDirection": "up",
+      "data": [79.2, 79.5, 80.1, 81.0, 78.5, 82.4, 84.5],
+      "details": "Spike driven by overnight supply chain disruptions in the Red Sea corridor. Risk premium holding."
     }
   ],
   "analyst_consensus": {
@@ -96,8 +100,10 @@ The current UI expects the following structure.
 - `risk_matrix`: optional 2x2 risk grid for daily threat concentration.
 - `risk_matrix.risks[].probability`: numeric score from `0` to `1`.
 - `risk_matrix.risks[].impact`: numeric score from `0` to `1`.
-- `macro_sparklines`: optional inline trend cards for market or macro series.
-- `macro_sparklines[].points`: ordered numeric values for a 7-day or 30-day sparkline.
+- `macro_indicators`: optional native-SVG sparkline cards for market or macro series.
+- `macro_indicators[].trendDirection`: `up`, `down`, or `flat`, used to theme the HUD colors.
+- `macro_indicators[].data`: ordered numeric values for a 7-day or 30-day sparkline.
+- `macro_sparklines`: legacy fallback still supported by the UI, but new prompt outputs should use `macro_indicators`.
 - `analyst_consensus.consensus`: areas of broad agreement.
 - `analyst_consensus.friction`: areas of disagreement or uncertainty.
 - `strategic_context`: paragraph-level context blocks, ordered from most important to least important.

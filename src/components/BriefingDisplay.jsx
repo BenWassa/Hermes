@@ -4,7 +4,7 @@ import { DevelopmentCard } from './DevelopmentCard';
 import { DisclosurePanel } from './DisclosurePanel';
 import { TimelineWidget } from './TimelineWidget';
 import { RiskMatrixWidget } from './RiskMatrixWidget';
-import { SparklineWidget } from './SparklineWidget';
+import { MacroSparklineWidget } from './MacroSparklineWidget';
 
 export function BriefingDisplay({ briefing }) {
   const [activeDomain, setActiveDomain] = useState('ALL');
@@ -17,11 +17,25 @@ export function BriefingDisplay({ briefing }) {
   const strategicContext = Array.isArray(briefing?.strategic_context) ? briefing.strategic_context : [];
   const timelineContext = briefing?.timeline_context;
   const riskMatrix = briefing?.risk_matrix;
-  const macroSparklines = Array.isArray(briefing?.macro_sparklines) ? briefing.macro_sparklines : [];
+  const macroIndicators = useMemo(() => {
+    if (Array.isArray(briefing?.macro_indicators)) return briefing.macro_indicators;
+    if (!Array.isArray(briefing?.macro_sparklines)) return [];
+
+    return briefing.macro_sparklines.map((item) => ({
+      id: item.id || item.label,
+      title: item.title || item.label || 'Macro Trend',
+      metric: item.metric || '',
+      currentValue: item.currentValue || item.value || '',
+      trendValue: item.trendValue || item.change || '',
+      trendDirection: item.trendDirection || 'flat',
+      data: Array.isArray(item.data) ? item.data : Array.isArray(item.points) ? item.points.map((point) => point.value) : [],
+      details: item.details || ''
+    }));
+  }, [briefing?.macro_indicators, briefing?.macro_sparklines]);
   const hasSignalArchitecture =
     (Array.isArray(timelineContext?.events) && timelineContext.events.length > 0) ||
     (Array.isArray(riskMatrix?.risks) && riskMatrix.risks.length > 0) ||
-    macroSparklines.length > 0;
+    macroIndicators.length > 0;
 
   const meceDomains = useMemo(() => {
     const domains = developments.map((dev) => dev.domain || 'MACRO');
@@ -152,7 +166,22 @@ export function BriefingDisplay({ briefing }) {
                 {riskMatrix?.risks?.length ? (
                   <RiskMatrixWidget title={riskMatrix.title || 'Risk Matrix'} risks={riskMatrix.risks} />
                 ) : null}
-                {macroSparklines.length ? <SparklineWidget items={macroSparklines} /> : null}
+                {macroIndicators.length ? (
+                  <div className="grid grid-cols-1 gap-3">
+                    {macroIndicators.slice(0, 3).map((indicator) => (
+                      <MacroSparklineWidget
+                        key={indicator.id || indicator.title}
+                        title={indicator.title}
+                        metric={indicator.metric}
+                        currentValue={indicator.currentValue}
+                        trendValue={indicator.trendValue}
+                        trendDirection={indicator.trendDirection}
+                        data={indicator.data}
+                        details={indicator.details}
+                      />
+                    ))}
+                  </div>
+                ) : null}
               </div>
             </DisclosurePanel>
           </section>

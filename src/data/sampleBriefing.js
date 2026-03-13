@@ -90,34 +90,28 @@ export const SAMPLE_BRIEFING = {
       }
     ]
   },
-  macro_sparklines: [
+  macro_indicators: [
     {
-      label: 'Brent',
-      value: '$98.40',
-      change: '+7D momentum',
-      points: [
-        { value: 84 },
-        { value: 86 },
-        { value: 87 },
-        { value: 89 },
-        { value: 93 },
-        { value: 96 },
-        { value: 98.4 }
-      ]
+      id: 'ind-01',
+      title: 'Brent Crude',
+      metric: '7-DAY VOLATILITY',
+      currentValue: '$98.40',
+      trendValue: '+17.1%',
+      trendDirection: 'up',
+      data: [84, 86, 87, 89, 93, 96, 98.4],
+      details:
+        'Risk premium remains embedded as energy desks model further shipping disruption and retaliatory risk.'
     },
     {
-      label: 'Gold',
-      value: '$2,214',
-      change: 'Safe-haven bid',
-      points: [
-        { value: 2148 },
-        { value: 2151 },
-        { value: 2160 },
-        { value: 2178 },
-        { value: 2190 },
-        { value: 2205 },
-        { value: 2214 }
-      ]
+      id: 'ind-02',
+      title: 'Gold',
+      metric: 'SAFE-HAVEN FLOW',
+      currentValue: '$2,214',
+      trendValue: '+3.1%',
+      trendDirection: 'up',
+      data: [2148, 2151, 2160, 2178, 2190, 2205, 2214],
+      details:
+        'Capital rotated into defensive stores of value as geopolitical uncertainty bled into broader macro positioning.'
     }
   ],
   analyst_consensus: {
