@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Menu } from 'lucide-react';
 import { TimelineWidget } from './TimelineWidget';
 import { RiskMatrixWidget } from './RiskMatrixWidget';
 import { MacroSparklineWidget } from './MacroSparklineWidget';
@@ -166,7 +166,7 @@ function DevelopmentModal({ dev, onClose }) {
   );
 }
 
-export function BriefingDisplay({ briefing }) {
+export function BriefingDisplay({ briefing, onOpenMenu }) {
   const [modalDev, setModalDev] = useState(null);
   const [consensusExpanded, setConsensusExpanded] = useState(false);
   const [contextExpanded, setContextExpanded] = useState(false);
@@ -213,18 +213,31 @@ export function BriefingDisplay({ briefing }) {
 
   return (
     <div className="pb-32 max-w-2xl mx-auto px-3">
-      <header className="pt-6 pb-5 flex flex-col gap-3">
-        <h1 className="text-center text-[24px] font-extrabold uppercase tracking-[0.14em] stark-gradient-text drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">
-          Hermes
-        </h1>
+      <header className="pt-6 pb-5 flex flex-col gap-4">
+        <div className="flex items-center justify-between px-1">
+          <button
+            type="button"
+            aria-label="Open menu"
+            onClick={onOpenMenu}
+            className="text-cyan-400 hover:text-cyan-300 transition-colors p-1 -ml-1"
+          >
+            <Menu size={24} />
+          </button>
+          
+          <h1 className="text-center text-[24px] font-extrabold uppercase tracking-[0.14em] stark-gradient-text drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">
+            Hermes
+          </h1>
+          
+          <div className="w-8"></div> {/* Spacer to keep header centered perfectly balances the 32px of the button (24px + padding) */}
+        </div>
 
         <div className="flex items-center justify-between gap-3">
-          <div className="inline-flex min-h-[48px] items-center rounded-2xl border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)]">
-            <div className="flex flex-col justify-center leading-none">
+          <div className="inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)] flex-1 max-w-[150px]">
+            <div className="flex flex-col items-center justify-center leading-none text-center">
               <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
                 {briefing.date?.replace(/,?\s*\d{4}$/, '')}
               </span>
-              <div className="mt-1.5 flex items-center gap-2 text-[9px] font-mono uppercase tracking-[0.18em]">
+              <div className="mt-1.5 flex items-center justify-center gap-1.5 text-[8px] font-mono uppercase tracking-[0.18em]">
                 {briefingDateMeta.weekday ? <span className="text-cyan-300/75">{briefingDateMeta.weekday}</span> : null}
                 {briefingDateMeta.weekday && briefingDateMeta.quarter ? <span className="text-cyan-300/45">|</span> : null}
                 {briefingDateMeta.quarter ? <span className="text-cyan-300/75">{briefingDateMeta.quarter}</span> : null}
@@ -234,15 +247,15 @@ export function BriefingDisplay({ briefing }) {
 
           {systemStatus ? (
             <div
-              className={`inline-flex min-h-[48px] justify-self-end items-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell}`}
+              className={`inline-flex min-h-[48px] items-center justify-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell} flex-1 max-w-[150px]`}
             >
-              <div className="flex flex-col justify-center gap-1.5 leading-none">
+              <div className="flex flex-col items-center justify-center gap-1.5 leading-none text-center">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em]">{systemStatus.condition || 'NOMINAL'}</span>
-                <div className="flex items-center gap-[3px]">
+                <div className="flex items-center justify-center gap-[3px]">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <div
                       key={i}
-                      className={`h-[3px] w-4 rounded-full transition-all ${
+                      className={`h-[3px] w-3.5 rounded-full transition-all ${
                         i <= systemStatusTone.level
                           ? systemStatusTone.bar
                           : 'bg-white/10'
@@ -252,7 +265,9 @@ export function BriefingDisplay({ briefing }) {
                 </div>
               </div>
             </div>
-          ) : null}
+          ) : (
+            <div className="flex-1 max-w-[150px] min-h-[48px]"></div>
+          )}
         </div>
       </header>
 

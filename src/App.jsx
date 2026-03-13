@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Menu } from 'lucide-react';
 import { BottomNav } from './components/BottomNav';
+import { AppMenu } from './components/AppMenu';
 import { SAMPLE_BRIEFING } from './data/sampleBriefing';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { signInWithGoogle, signOutUser, subscribeToAuthState } from './lib/firebase';
@@ -10,8 +12,26 @@ import { ArchiveView } from './views/ArchiveView';
 import { HomeView } from './views/HomeView';
 import { OnboardingView } from './views/OnboardingView';
 import { SearchView } from './views/SearchView';
+import packageMetadata from '../package.json';
 
 const ALLOWED_UIDS = new Set(['aavtqWTiNUZk5NQpDJkvo9IIqh02']);
+const APP_VERSION = packageMetadata.version;
+
+function getExportTimestamp() {
+  return new Date().toISOString().replace(/[:]/g, '-').replace(/\.\d{3}Z$/, 'Z');
+}
+
+function downloadFile(filename, contents, type) {
+  const blob = new Blob([contents], { type });
+  const objectUrl = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+
+  link.href = objectUrl;
+  link.download = filename;
+  link.click();
+
+  URL.revokeObjectURL(objectUrl);
+}
 
 export default function App() {
   const [authReady, setAuthReady] = useState(false);
@@ -24,6 +44,8 @@ export default function App() {
   const [jsonInput, setJsonInput] = useState('');
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const fileInputRef = useRef(null);
 
   const todayBriefing = briefings.find((briefing) => briefing.id === getTodayId());
   const activeBriefing = viewingDateId
@@ -75,6 +97,9 @@ export default function App() {
     }
   };
 
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
+
   const handleImport = () => {
     try {
       setError('');
@@ -119,6 +144,75 @@ export default function App() {
     }
   };
 
+  const handleImportFileClick = () => {
+    closeMenu();
+    fileInputRef.current?.click();
+  };
+
+  const handleImportFileSelected = async (event) => {
+    const [file] = Array.from(event.target.files || []);
+    event.target.value = '';
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      setJsonInput(text);
+      setError('');
+      setCurrentView('add');
+    } catch {
+      setError('Failed to read the selected file.');
+      setCurrentView('add');
+    }
+  };
+
+  const handleExport = () => {
+    const timestamp = getExportTimestamp();
+    const exportPayload = {
+      exportedAt: new Date().toISOString(),
+      appVersion: APP_VERSION,
+      briefingCount: briefings.length,
+      briefings
+    };
+    const readme = [
+      'Hermes data export',
+      `Generated: ${exportPayload.exportedAt}`,
+      `App version: ${APP_VERSION}`,
+      `Briefing count: ${briefings.length}`,
+      '',
+      'Files in this export:',
+      `- hermes-export-${timestamp}.json: full local briefing archive`,
+      `- hermes-export-${timestamp}-README.txt: export summary and restore notes`,
+      '',
+      'Import notes:',
+      '- The in-app importer currently accepts a single briefing JSON object.',
+      '- To restore from the archive export, extract one briefing object from the JSON array and import that file through the app menu.'
+    ].join('\n');
+
+    downloadFile(
+      `hermes-export-${timestamp}.json`,
+      JSON.stringify(exportPayload, null, 2),
+      'application/json'
+    );
+    downloadFile(`hermes-export-${timestamp}-README.txt`, readme, 'text/plain;charset=utf-8');
+    closeMenu();
+  };
+
+  const handleDeleteAll = () => {
+    closeMenu();
+    const shouldDelete = window.confirm(
+      `Delete all ${briefings.length} saved briefing${briefings.length === 1 ? '' : 's'} from this device?`
+    );
+
+    if (!shouldDelete) return;
+
+    setBriefings([]);
+    setViewingDateId(null);
+    setJsonInput('');
+    setError('');
+    setQuery('');
+    setCurrentView('home');
+  };
+
   const loadSample = () => {
     setJsonInput(JSON.stringify(SAMPLE_BRIEFING, null, 2));
     setError('');
@@ -158,15 +252,51 @@ export default function App() {
     );
   }
 
+  const showFloatingMenuButton = !(currentView === 'home' && activeBriefing);
+
   return (
     <div className="min-h-screen font-sans text-slate-50 selection:bg-cyan-400/20 selection:text-white">
-      <main className="px-4 pb-32 md:px-6">
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".json,application/json,text/json"
+        className="hidden"
+        onChange={handleImportFileSelected}
+      />
+
+      <AppMenu
+        isOpen={isMenuOpen}
+        user={user}
+        version={APP_VERSION}
+        onClose={closeMenu}
+        onSignOut={() => {
+          closeMenu();
+          signOutUser();
+        }}
+        onImport={handleImportFileClick}
+        onExport={handleExport}
+        onDeleteAll={handleDeleteAll}
+      />
+
+      {showFloatingMenuButton ? (
+        <button
+          type="button"
+          aria-label="Open menu"
+          onClick={openMenu}
+          className="fixed left-4 top-4 z-40 flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-500/20 bg-slate-950/75 text-cyan-300 shadow-[0_14px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-colors hover:border-cyan-400/40 hover:text-cyan-200 md:left-6 md:top-6"
+        >
+          <Menu size={20} strokeWidth={2.3} />
+        </button>
+      ) : null}
+
+      <main className={`px-4 pb-32 md:px-6 ${showFloatingMenuButton ? 'pt-16 md:pt-20' : ''}`}>
         {currentView === 'home' && (
           <HomeView
             activeBriefing={activeBriefing}
             latestBriefing={latestBriefing}
             onGoAdd={() => setCurrentView('add')}
             onOpenBriefing={openBriefing}
+            onOpenMenu={openMenu}
           />
         )}
 

@@ -1,9 +1,9 @@
 import { Plus, ArrowRight, Terminal } from 'lucide-react';
 import { BriefingDisplay } from '../components/BriefingDisplay';
 
-export function HomeView({ activeBriefing, latestBriefing, onGoAdd, onOpenBriefing }) {
+export function HomeView({ activeBriefing, latestBriefing, onGoAdd, onOpenBriefing, onOpenMenu }) {
   if (activeBriefing) {
-    return <BriefingDisplay briefing={activeBriefing} />;
+    return <BriefingDisplay briefing={activeBriefing} onOpenMenu={onOpenMenu} />;
   }
 
   return (
