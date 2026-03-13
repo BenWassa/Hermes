@@ -36,6 +36,36 @@ The current UI expects the following structure.
       "sources": ["Reuters", "Bloomberg", "FT"]
     }
   ],
+  "timeline_context": {
+    "title": "Middle East Escalation Sequence",
+    "events": [
+      {
+        "date": "MARCH 12, 2026",
+        "headline": "Strait of Hormuz Disruption",
+        "details": "Commercial vessels rerouted following unconfirmed drone activity near major shipping lanes."
+      }
+    ]
+  },
+  "risk_matrix": {
+    "title": "24-Hour Threat Map",
+    "risks": [
+      {
+        "id": "risk-1",
+        "label": "Hormuz transit shock",
+        "probability": 0.82,
+        "impact": 0.93,
+        "details": "Could hit energy, inflation expectations, and shipping simultaneously."
+      }
+    ]
+  },
+  "macro_sparklines": [
+    {
+      "label": "Brent",
+      "value": "$98.40",
+      "change": "+7D momentum",
+      "points": [{ "value": 84 }, { "value": 86 }, { "value": 98.4 }]
+    }
+  ],
   "analyst_consensus": {
     "consensus": [
       "Energy shock could delay rate cuts globally."
@@ -61,6 +91,13 @@ The current UI expects the following structure.
 - `major_developments[].region`: optional scanning anchor shown above the card headline. Example values: `GLOBAL`, `US`, `EUROPE`, `MIDDLE EAST`, `ASIA`.
 - `major_developments[].impact`: optional scanning anchor for visual priority. Recommended values: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
 - `major_developments[].sources`: short source labels only.
+- `timeline_context`: optional chronology block for conflict, policy sequencing, or escalation chains.
+- `timeline_context.events`: up to 8 nodes, ordered newest first.
+- `risk_matrix`: optional 2x2 risk grid for daily threat concentration.
+- `risk_matrix.risks[].probability`: numeric score from `0` to `1`.
+- `risk_matrix.risks[].impact`: numeric score from `0` to `1`.
+- `macro_sparklines`: optional inline trend cards for market or macro series.
+- `macro_sparklines[].points`: ordered numeric values for a 7-day or 30-day sparkline.
 - `analyst_consensus.consensus`: areas of broad agreement.
 - `analyst_consensus.friction`: areas of disagreement or uncertainty.
 - `strategic_context`: paragraph-level context blocks, ordered from most important to least important.
@@ -75,6 +112,9 @@ The current UI expects the following structure.
 - Keep summaries dense and analytical, not conversational.
 - Keep `major_developments[].domain` MECE where possible so each story fits one primary bucket.
 - Prefer consistent uppercase values for `domain`, `region`, and `impact`.
+- Use the optional visual-stream fields only when they materially improve scan speed; do not force them into every story.
+- For `timeline_context.events`, keep each `headline` short and each `details` line specific enough to justify expansion.
+- For `risk_matrix`, reserve the top-right quadrant for genuinely high-impact, high-probability scenarios.
 - Use standard JSON double quotes: `"`, not smart quotes like `“` or `”`.
 
 ## Paste Handling

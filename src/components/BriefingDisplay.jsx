@@ -1,6 +1,10 @@
 import { useMemo, useState } from 'react';
 import { Zap, Layers } from 'lucide-react';
 import { DevelopmentCard } from './DevelopmentCard';
+import { DisclosurePanel } from './DisclosurePanel';
+import { TimelineWidget } from './TimelineWidget';
+import { RiskMatrixWidget } from './RiskMatrixWidget';
+import { SparklineWidget } from './SparklineWidget';
 
 export function BriefingDisplay({ briefing }) {
   const [activeDomain, setActiveDomain] = useState('ALL');
@@ -11,6 +15,13 @@ export function BriefingDisplay({ briefing }) {
     : [];
   const friction = Array.isArray(briefing?.analyst_consensus?.friction) ? briefing.analyst_consensus.friction : [];
   const strategicContext = Array.isArray(briefing?.strategic_context) ? briefing.strategic_context : [];
+  const timelineContext = briefing?.timeline_context;
+  const riskMatrix = briefing?.risk_matrix;
+  const macroSparklines = Array.isArray(briefing?.macro_sparklines) ? briefing.macro_sparklines : [];
+  const hasSignalArchitecture =
+    (Array.isArray(timelineContext?.events) && timelineContext.events.length > 0) ||
+    (Array.isArray(riskMatrix?.risks) && riskMatrix.risks.length > 0) ||
+    macroSparklines.length > 0;
 
   const meceDomains = useMemo(() => {
     const domains = developments.map((dev) => dev.domain || 'MACRO');
@@ -121,12 +132,34 @@ export function BriefingDisplay({ briefing }) {
           </div>
         </section>
 
-        <section>
-          <div className="flex items-center gap-2 mb-4 pl-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)]"></div>
-            <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">Network Consensus</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {hasSignalArchitecture ? (
+          <section>
+            <div className="flex items-center gap-2 mb-4 pl-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(165,243,252,0.8)]"></div>
+              <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">Signal Architecture</h2>
+            </div>
+
+            <DisclosurePanel
+              title="Visual streams for chronology, risk concentration, and trend direction."
+              eyebrow="Scan Layer"
+              accentClassName="text-cyan-400"
+              defaultOpen
+            >
+              <div className="grid grid-cols-1 gap-4">
+                {timelineContext?.events?.length ? (
+                  <TimelineWidget title={timelineContext.title || 'Escalation Timeline'} events={timelineContext.events} />
+                ) : null}
+                {riskMatrix?.risks?.length ? (
+                  <RiskMatrixWidget title={riskMatrix.title || 'Risk Matrix'} risks={riskMatrix.risks} />
+                ) : null}
+                {macroSparklines.length ? <SparklineWidget items={macroSparklines} /> : null}
+              </div>
+            </DisclosurePanel>
+          </section>
+        ) : null}
+
+        <DisclosurePanel title="Where the network broadly agrees, and where it doesn’t." eyebrow="Network Consensus" accentClassName="text-purple-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
             <div className="bg-gradient-to-br from-cyan-950/30 to-slate-900/40 backdrop-blur-xl p-5 rounded-2xl border border-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.05)]">
               <h3 className="text-[11px] font-extrabold uppercase tracking-widest text-cyan-400 mb-4">Verified Patterns</h3>
               <ul className="space-y-3">
@@ -149,31 +182,23 @@ export function BriefingDisplay({ briefing }) {
               </ul>
             </div>
           </div>
-        </section>
+        </DisclosurePanel>
 
-        <section>
-          <div className="flex items-center gap-2 mb-4 pl-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(165,243,252,0.8)]"></div>
-            <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">Strategic Context</h2>
-          </div>
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <DisclosurePanel title="Longer-form strategic framing behind the daily signals." eyebrow="Strategic Context" accentClassName="text-cyan-200">
+          <div className="pt-1">
             {strategicContext.map((paragraph, index) => (
               <p key={index} className="text-slate-200 leading-loose mb-4 last:mb-0 text-[14.5px]">
                 {paragraph}
               </p>
             ))}
           </div>
-        </section>
+        </DisclosurePanel>
 
-        <section>
-          <div className="flex items-center gap-2 mb-4 pl-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]"></div>
-            <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">Watchlist</h2>
-          </div>
-          <div className="bg-gradient-to-r from-amber-950/40 to-transparent backdrop-blur-xl border border-amber-500/20 rounded-2xl px-5 py-4">
+        <DisclosurePanel title="Forward-looking analyst note for the next 24 to 72 hours." eyebrow="Watchlist" accentClassName="text-amber-300">
+          <div className="bg-gradient-to-r from-amber-950/40 to-transparent backdrop-blur-xl border border-amber-500/20 rounded-2xl px-5 py-4 mt-1">
             <p className="text-amber-100 font-medium leading-relaxed text-[15px]">{briefing.watchlist}</p>
           </div>
-        </section>
+        </DisclosurePanel>
       </div>
     </div>
   );

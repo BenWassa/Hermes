@@ -10,6 +10,9 @@ export const SAMPLE_BRIEFING = {
   major_developments: [
     {
       id: 'dev-1',
+      domain: 'ENERGY',
+      region: 'MIDDLE EAST',
+      impact: 'CRITICAL',
       icon: '🛢️',
       headline: 'Oil Shock and War Risk',
       executive_summary:
@@ -23,6 +26,9 @@ export const SAMPLE_BRIEFING = {
     },
     {
       id: 'dev-2',
+      domain: 'TECH',
+      region: 'GLOBAL',
+      impact: 'HIGH',
       icon: '🤖',
       headline: 'Sovereign AI Compute Race',
       executive_summary:
@@ -33,6 +39,85 @@ export const SAMPLE_BRIEFING = {
         'Talent acquisition becomes state-level priority'
       ],
       sources: ['WSJ', 'TechCrunch', 'State Dept']
+    }
+  ],
+  timeline_context: {
+    title: 'Middle East Escalation Sequence',
+    events: [
+      {
+        date: 'MARCH 12',
+        headline: 'Shipping disruption reports intensify',
+        details:
+          'Commercial routing desks flagged new insurance premiums and rerouting pressure across Gulf-linked cargo flows.'
+      },
+      {
+        date: 'MARCH 11',
+        headline: 'Energy desks widen hedging activity',
+        details:
+          'Options flows accelerated as traders repriced tail-risk around supply interruption and retaliatory action.'
+      },
+      {
+        date: 'MARCH 10',
+        headline: 'Back-channel diplomacy stalls',
+        details:
+          'Regional intermediaries reported reduced confidence that maritime security talks would stabilize near-term flows.'
+      }
+    ]
+  },
+  risk_matrix: {
+    title: '24-Hour Threat Map',
+    risks: [
+      {
+        id: 'risk-1',
+        label: 'Hormuz transit shock',
+        probability: 0.78,
+        impact: 0.95,
+        details: 'Would reprice energy, inflation, and shipping risk simultaneously.'
+      },
+      {
+        id: 'risk-2',
+        label: 'Oil spike mean reversion',
+        probability: 0.64,
+        impact: 0.34,
+        details: 'Fast diplomatic signaling could unwind the most extreme front-end pricing.'
+      },
+      {
+        id: 'risk-3',
+        label: 'ECB hawkish spillover',
+        probability: 0.41,
+        impact: 0.71,
+        details: 'A sustained energy move could harden developed-market rate expectations.'
+      }
+    ]
+  },
+  macro_sparklines: [
+    {
+      label: 'Brent',
+      value: '$98.40',
+      change: '+7D momentum',
+      points: [
+        { value: 84 },
+        { value: 86 },
+        { value: 87 },
+        { value: 89 },
+        { value: 93 },
+        { value: 96 },
+        { value: 98.4 }
+      ]
+    },
+    {
+      label: 'Gold',
+      value: '$2,214',
+      change: 'Safe-haven bid',
+      points: [
+        { value: 2148 },
+        { value: 2151 },
+        { value: 2160 },
+        { value: 2178 },
+        { value: 2190 },
+        { value: 2205 },
+        { value: 2214 }
+      ]
     }
   ],
   analyst_consensus: {
