@@ -96,7 +96,7 @@ export function BriefingDisplay({ briefing }) {
                   }`}
                   type="button"
                 >
-                  <div className="absolute bottom-3 right-3 text-cyan-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div className="absolute bottom-3 right-3 text-cyan-400 opacity-30 transition-opacity duration-300 group-hover:opacity-100">
                     <ArrowDownRight size={14} strokeWidth={2.5} />
                   </div>
 

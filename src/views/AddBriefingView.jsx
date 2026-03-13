@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Database, AlertTriangle, CheckCircle, Info } from 'lucide-react';
 import { DisclosurePanel } from '../components/DisclosurePanel';
+import { sanitizeJsonInput } from '../utils/json';
 
 const SCHEMA_REFERENCE = `{
   "id": "2026-03-13",
@@ -25,7 +26,7 @@ export function AddBriefingView({ jsonInput, error: submitError, onJsonChange, o
       }
 
       try {
-        const parsed = JSON.parse(jsonInput);
+        const parsed = JSON.parse(sanitizeJsonInput(jsonInput));
         const missing = [];
 
         if (!parsed.id) missing.push('id');
