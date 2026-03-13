@@ -25,6 +25,10 @@ Fresh project reset initialized on March 10, 2026.
 - Changelog is maintained in `CHANGELOG.md`.
 - Versioning and release policy lives in `docs/VERSIONING.md`.
 
+## Briefing Format
+
+- Daily JSON import format is documented in `docs/DAILY_BRIEFING_FORMAT.md`.
+
 ## Firebase Setup
 
 1. Copy `.env.example` to `.env`.
