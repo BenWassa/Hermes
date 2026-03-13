@@ -24,7 +24,7 @@ export function AddBriefingView({ jsonInput, error, onJsonChange, onImport, onLo
 
       <div className="relative group">
         <div className="absolute top-0 left-0 w-full h-9 bg-white/10 rounded-t-2xl flex items-center px-4 border border-b-0 border-white/10 backdrop-blur-xl">
-          <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-slate-400">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-[0.24em] text-slate-400">
             data.json
           </span>
         </div>
@@ -32,7 +32,7 @@ export function AddBriefingView({ jsonInput, error, onJsonChange, onImport, onLo
           value={jsonInput}
           onChange={(event) => onJsonChange(event.target.value)}
           placeholder="Paste generated JSON schema here..."
-          className="w-full h-[400px] mt-9 bg-white/5 border border-white/10 rounded-b-2xl p-4 text-[13px] text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/40 resize-none transition-colors backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.2)]"
+          className="w-full h-[400px] mt-9 bg-white/5 border border-white/10 rounded-b-2xl p-4 font-mono text-[13px] text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/40 resize-none transition-colors backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.2)]"
           spellCheck={false}
         />
       </div>
