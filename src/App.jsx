@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { BottomNav } from './components/BottomNav';
 import { SAMPLE_BRIEFING } from './data/sampleBriefing';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { signInWithGoogle, subscribeToAuthState } from './lib/firebase';
+import { signInWithGoogle, signOutUser, subscribeToAuthState } from './lib/firebase';
 import { getTodayId } from './utils/date';
 import { sanitizeJsonInput } from './utils/json';
 import { AddBriefingView } from './views/AddBriefingView';
@@ -10,6 +10,8 @@ import { ArchiveView } from './views/ArchiveView';
 import { HomeView } from './views/HomeView';
 import { OnboardingView } from './views/OnboardingView';
 import { SearchView } from './views/SearchView';
+
+const ALLOWED_UIDS = new Set(['aavtqWTiNUZk5NQpDJkvo9IIqh02']);
 
 export default function App() {
   const [authReady, setAuthReady] = useState(false);
@@ -40,10 +42,22 @@ export default function App() {
 
   useEffect(() => {
     const unsubscribe = subscribeToAuthState((nextUser) => {
-      setUser(nextUser);
       setAuthReady(true);
       setIsSigningIn(false);
-      if (nextUser) setAuthError('');
+      if (!nextUser) {
+        setUser(null);
+        return;
+      }
+
+      if (!ALLOWED_UIDS.has(nextUser.uid)) {
+        setUser(null);
+        setAuthError(`This account is not authorized for Hermes. Signed in UID: ${nextUser.uid}`);
+        signOutUser().catch(() => {});
+        return;
+      }
+
+      setUser(nextUser);
+      setAuthError('');
     });
 
     return unsubscribe;
