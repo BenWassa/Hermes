@@ -17,6 +17,8 @@ node_modules/
 build/
 dist/
 coverage/
+.firebase/
+firebase-debug.log
 
 # Environment
 .env

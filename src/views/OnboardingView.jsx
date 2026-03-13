@@ -1,4 +1,5 @@
 import { AlertTriangle, LockKeyhole, LogIn } from 'lucide-react';
+import { HermesMark } from '../components/HermesMark';
 
 export function OnboardingView({ isSigningIn, error, onSignIn }) {
   return (
@@ -11,9 +12,12 @@ export function OnboardingView({ isSigningIn, error, onSignIn }) {
         <div className="text-[10px] font-mono font-bold uppercase tracking-[0.32em] text-cyan-400/80">
           Hermes Access Gate
         </div>
-        <h1 className="text-4xl font-extrabold uppercase tracking-tight stark-gradient-text drop-shadow-[0_0_15px_rgba(34,211,238,0.35)]">
-          Hermes
-        </h1>
+        <div className="flex items-center justify-center gap-3">
+          <HermesMark className="h-11 w-11 shrink-0 rounded-2xl shadow-[0_0_20px_rgba(34,211,238,0.16)]" />
+          <h1 className="text-4xl font-extrabold uppercase tracking-tight stark-gradient-text drop-shadow-[0_0_15px_rgba(34,211,238,0.35)]">
+            Hermes
+          </h1>
+        </div>
         <p className="text-[14px] font-medium leading-relaxed text-slate-400">
           Sign in with Google to unlock the intelligence console. If your session expires or authentication fails, Hermes returns here automatically.
         </p>

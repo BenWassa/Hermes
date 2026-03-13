@@ -108,12 +108,12 @@ The current UI expects the following structure.
 ## Field Notes
 
 - `today_in_60_seconds`: short, high-signal scan layer for the home Bento grid.
-- `system_status`: optional global HUD state shown in the header. Use concise uppercase values such as `NOMINAL`, `ELEVATED`, or `CRITICAL`.
-- `system_status.condition`: primary overall posture for the session.
-- `system_status.indicator`: secondary descriptor such as `VOLATILE`, `STABLE`, or `TRANSITIONING`.
+- `system_status`: optional global HUD state shown in the header.
+- `system_status.condition`: primary posture tier. Five levels, highest to lowest: `CRITICAL` (rose), `SEVERE` / `HIGH` (orange), `ELEVATED` / `VOLATILE` (amber), `GUARDED` / `MODERATE` (blue), `NOMINAL` / `LOW` (cyan).
+- `system_status.indicator`: secondary mood descriptor shown below the condition. Examples: `VOLATILE`, `STABLE`, `TRANSITIONING`, `WATCH`, `ESCALATING`.
 - `today_in_60_seconds[].domain`: optional routing bucket for pulse tiles. When present, tapping a pulse tile opens the matching development in a modal overlay.
 - `today_in_60_seconds[].summary`: optional dense summary text, best used on the apex tile.
-- `today_in_60_seconds[].status`: optional live status label such as `ESCALATING`, `STABILIZING`, or `MONITOR`.
+- `today_in_60_seconds[].status`: optional live status label for the tile dot indicator. Matches the same 5-tier color system as `system_status.condition`: `CRITICAL` / `ESCALATING` (rose), `SEVERE` / `HIGH` (orange), `ELEVATED` / `VOLATILE` / `MONITOR` (amber), `GUARDED` / `WATCH` (blue), `STABILIZING` / `HOLD` / `NOMINAL` (cyan).
 - `today_in_60_seconds[].target`: optional target asset, entity, or region label shown in the tile footer.
 - `today_in_60_seconds[].metric`: optional hard metric or state tag shown in the tile footer.
 - `major_developments`: each item renders as an expandable story card.
@@ -121,7 +121,7 @@ The current UI expects the following structure.
 - `major_developments[].domain`: used to match pulse tiles to story modals. Use strict uppercase buckets such as `GEOPOLITICS`, `MACRO`, `TECH`, `ENERGY`, or `DEFENSE`.
 - `major_developments[].region`: optional scanning anchor shown above the card headline. Example values: `GLOBAL`, `US`, `EUROPE`, `MIDDLE EAST`, `ASIA`.
 - `major_developments[].impact`: optional scanning anchor for visual priority. Recommended values: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
-- `major_developments[].sources`: short source labels only.
+- `major_developments[].sources`: short source labels or URLs. Three supported formats: plain string `"Reuters"` (static label), URL string `"https://..."` (rendered as a clickable link), or object `{"name": "Reuters", "url": "https://..."}` (named link). Use URLs when you want direct follow-up access to the original article.
 - `timeline_context`: optional chronology block for conflict, policy sequencing, or escalation chains.
 - `timeline_context.events`: up to 8 nodes, ordered newest first.
 - `risk_matrix`: optional 2x2 risk grid for daily threat concentration.
