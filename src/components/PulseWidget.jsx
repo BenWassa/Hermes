@@ -12,8 +12,90 @@ const getStatusGlow = (status) => {
 
 export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
   const safeItems = Array.isArray(items) ? items : [];
+  const apexItem = safeItems[0];
+  const secondaryItems = safeItems.slice(1);
 
   if (safeItems.length === 0) return null;
+
+  const renderCard = (item, index, isApex) => (
+    <button
+      key={item.id || item.headline || index}
+      onClick={() => onItemClick?.(item.domain)}
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white/5 text-left shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl outline-none transition-all duration-300 hover:bg-white/10 active:scale-95 ${
+        isApex
+          ? 'border-cyan-500/30 p-5 hover:border-cyan-400/60 active:bg-cyan-900/20'
+          : 'sm:min-h-[11.5rem] border-white/10 p-5 hover:border-cyan-500/40 active:bg-slate-800/50'
+      }`}
+      type="button"
+    >
+      <div className="mb-3 flex w-full items-start justify-between">
+        <div className="flex items-center gap-2">
+          <span className={`drop-shadow-md ${isApex ? 'text-xl' : 'text-sm'}`}>{item.icon}</span>
+          {isApex ? (
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">
+              Apex Signal
+            </div>
+          ) : item.domain ? (
+            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
+              {item.domain}
+            </span>
+          ) : null}
+        </div>
+
+        {item.status ? (
+          <div className="flex items-center gap-1.5 rounded-[3px] border border-white/5 bg-slate-950/50 px-1.5 py-0.5">
+            <div className={`h-1.5 w-1.5 rounded-full ${getStatusGlow(item.status)}`}></div>
+            <span className="font-mono text-[8px] uppercase tracking-widest text-slate-300">{item.status}</span>
+          </div>
+        ) : null}
+      </div>
+
+      <div className={`relative z-10 w-full ${isApex ? 'mb-4' : 'mb-3 flex-1 pr-6'}`}>
+        <h3
+          className={`font-semibold leading-snug text-white transition-colors group-hover:text-cyan-50 ${
+            isApex ? 'mb-2 text-[17px]' : 'text-[13px] line-clamp-3'
+          }`}
+        >
+          {item.headline}
+        </h3>
+
+        {isApex && item.summary ? (
+          <p className="pr-4 text-[13px] font-medium leading-relaxed text-slate-400">
+            <span className="mr-1.5 font-mono text-[10px] text-cyan-500/50">///</span>
+            {item.summary}
+          </p>
+        ) : null}
+      </div>
+
+      <div className={`mt-auto flex w-full items-end justify-between border-t border-white/10 ${isApex ? 'pt-3' : 'gap-2 pt-2.5 pr-6'}`}>
+        <div className="min-w-0 pr-2">
+          {item.target ? (
+            <div className="flex items-center gap-1.5 text-slate-400">
+              <Crosshair size={10} className="shrink-0 text-cyan-500/50" />
+              <span className="truncate font-mono text-[9px] uppercase tracking-widest">{item.target}</span>
+            </div>
+          ) : null}
+        </div>
+
+        {item.metric ? (
+          <div
+            className={`shrink-0 flex items-center gap-1 rounded border border-white/5 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
+              item.metric.includes('+') || item.metric.includes('-') || item.metric.includes('CRIT')
+                ? 'border-cyan-500/20 bg-cyan-950/20 text-cyan-300'
+                : 'bg-white/5 text-slate-300'
+            }`}
+          >
+            <Activity size={10} strokeWidth={2.5} />
+            {item.metric}
+          </div>
+        ) : null}
+      </div>
+
+      <div className="absolute bottom-3 right-3 -translate-x-2 text-cyan-400 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-active:scale-110 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
+        <ArrowDownRight size={14} strokeWidth={3} />
+      </div>
+    </button>
+  );
 
   return (
     <section>
@@ -27,90 +109,13 @@ export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 auto-rows-fr">
-        {safeItems.map((item, index) => {
-          const isApex = index === 0;
-
-          return (
-            <button
-              key={item.id || item.headline || index}
-              onClick={() => onItemClick?.(item.domain)}
-              className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white/5 text-left shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl outline-none transition-all duration-300 hover:bg-white/10 active:scale-95 ${
-                isApex
-                  ? 'col-span-2 border-cyan-500/30 p-5 hover:border-cyan-400/60 active:bg-cyan-900/20'
-                  : 'col-span-1 border-white/10 p-4 hover:border-cyan-500/40 active:bg-slate-800/50'
-              }`}
-              type="button"
-            >
-              <div className="mb-3 flex w-full items-start justify-between">
-                <div className="flex items-center gap-2">
-                  <span className={`drop-shadow-md ${isApex ? 'text-xl' : 'text-sm'}`}>{item.icon}</span>
-                  {isApex ? (
-                    <div className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">
-                      Apex Signal
-                    </div>
-                  ) : item.domain ? (
-                    <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                      {item.domain}
-                    </span>
-                  ) : null}
-                </div>
-
-                {item.status ? (
-                  <div className="flex items-center gap-1.5 rounded-[3px] border border-white/5 bg-slate-950/50 px-1.5 py-0.5">
-                    <div className={`h-1.5 w-1.5 rounded-full ${getStatusGlow(item.status)}`}></div>
-                    <span className="font-mono text-[8px] uppercase tracking-widest text-slate-300">{item.status}</span>
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="relative z-10 mb-4 w-full">
-                <h3
-                  className={`font-semibold leading-snug text-white transition-colors group-hover:text-cyan-50 ${
-                    isApex ? 'mb-2 text-[17px]' : 'text-[13px] line-clamp-3'
-                  }`}
-                >
-                  {item.headline}
-                </h3>
-
-                {isApex && item.summary ? (
-                  <p className="pr-4 text-[13px] font-medium leading-relaxed text-slate-400">
-                    <span className="mr-1.5 font-mono text-[10px] text-cyan-500/50">///</span>
-                    {item.summary}
-                  </p>
-                ) : null}
-              </div>
-
-              <div className="mt-auto flex w-full items-end justify-between border-t border-white/10 pt-3">
-                <div className="min-w-0 pr-2">
-                  {item.target ? (
-                    <div className="flex items-center gap-1.5 text-slate-400">
-                      <Crosshair size={10} className="shrink-0 text-cyan-500/50" />
-                      <span className="truncate font-mono text-[9px] uppercase tracking-widest">{item.target}</span>
-                    </div>
-                  ) : null}
-                </div>
-
-                {item.metric ? (
-                  <div
-                    className={`shrink-0 flex items-center gap-1 rounded border border-white/5 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
-                      item.metric.includes('+') || item.metric.includes('-') || item.metric.includes('CRIT')
-                        ? 'border-cyan-500/20 bg-cyan-950/20 text-cyan-300'
-                        : 'bg-white/5 text-slate-300'
-                    }`}
-                  >
-                    <Activity size={10} strokeWidth={2.5} />
-                    {item.metric}
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="absolute bottom-3 right-3 -translate-x-2 text-cyan-400 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-active:scale-110 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
-                <ArrowDownRight size={14} strokeWidth={3} />
-              </div>
-            </button>
-          );
-        })}
+      <div className="space-y-3">
+        {apexItem ? renderCard(apexItem, 0, true) : null}
+        {secondaryItems.length ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
+            {secondaryItems.map((item, index) => renderCard(item, index + 1, false))}
+          </div>
+        ) : null}
       </div>
     </section>
   );

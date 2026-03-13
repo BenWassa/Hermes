@@ -90,18 +90,20 @@ export function BriefingDisplay({ briefing }) {
 
   return (
     <div className="pb-32 max-w-2xl mx-auto px-4">
-      <header className="pt-8 pb-6 flex flex-col items-center text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight stark-gradient-text uppercase drop-shadow-[0_0_15px_rgba(34,211,238,0.4)] mb-2">
+      <header className="pt-8 pb-6 flex flex-col gap-3">
+        <h1 className="text-center text-[30px] font-extrabold uppercase tracking-tight stark-gradient-text drop-shadow-[0_0_15px_rgba(34,211,238,0.4)] sm:text-[34px]">
           GlobalBrief
         </h1>
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-[11px] font-bold tracking-widest uppercase text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.15)] backdrop-blur-md">
+
+        <div className="flex items-center justify-between gap-2">
+          <div className="inline-flex min-h-9 items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-[11px] font-bold tracking-widest uppercase text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.15)] backdrop-blur-md">
             <Zap size={14} className="animate-pulse" />
-            {briefing.date}
+            {briefing.date?.replace(/,?\s*\d{4}$/, '')}
           </div>
+
           {systemStatus ? (
             <div
-              className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-[0.22em] backdrop-blur-md ${systemStatusTone.shell}`}
+              className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 py-1.5 text-[10px] font-mono font-bold uppercase tracking-[0.22em] backdrop-blur-md ${systemStatusTone.shell}`}
             >
               <div className={`h-2 w-2 rounded-full ${systemStatusTone.dot}`}></div>
               <span>{systemStatus.condition || 'Nominal'}</span>

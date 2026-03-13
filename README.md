@@ -31,5 +31,9 @@ GlobalBrief is a mobile-first intelligence dashboard for daily AI-generated geop
 
 1. Copy `.env.example` to `.env`.
 2. Set `VITE_FIREBASE_API_KEY` manually.
+
+## Development
+
+- Dev server on your local network: `npm run dev`
 3. Install dependencies with `npm install`.
 4. Run `npm run dev`.
