@@ -119,20 +119,22 @@ export function PulseWidget({ title = 'Pulse', items, onItemClick }) {
 
   return (
     <section>
-      <div className="mb-4 flex items-center justify-between border-l-2 border-cyan-500/40 pl-3">
-        <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">{title}</h2>
-        <div className="hidden text-[9px] font-mono uppercase tracking-widest text-cyan-500/50 sm:block">
-          Net-Assessment // {safeItems.length} Vectors
+      <div className="flex gap-3">
+        <div className="flex flex-col items-center shrink-0 pt-1">
+          <div className="h-24 w-px mb-1.5 bg-cyan-500/40" />
+          {title.toUpperCase().split('').map((char, i) => (
+            <span key={i} className="font-mono font-bold text-[14px] leading-[1.7] select-none text-cyan-400 drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]">{char}</span>
+          ))}
+          <div className="flex-1 w-px mt-1.5 bg-cyan-500/40" />
         </div>
-      </div>
-
-      <div className="space-y-3">
-        {apexItem ? renderCard(apexItem, 0, true) : null}
-        {secondaryItems.length ? (
-          <div className="grid grid-cols-2 gap-3 auto-rows-fr">
-            {secondaryItems.map((item, index) => renderCard(item, index + 1, false))}
-          </div>
-        ) : null}
+        <div className="flex-1 min-w-0 space-y-3">
+          {apexItem ? renderCard(apexItem, 0, true) : null}
+          {secondaryItems.length ? (
+            <div className="grid grid-cols-2 gap-3 auto-rows-fr">
+              {secondaryItems.map((item, index) => renderCard(item, index + 1, false))}
+            </div>
+          ) : null}
+        </div>
       </div>
     </section>
   );
