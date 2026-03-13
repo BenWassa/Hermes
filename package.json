@@ -1,12 +1,13 @@
 {
   "name": "globalbrief-mobile-intelligence",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
+    "deploy:hosting": "npm run build && firebase deploy --only hosting",
     "release:check": "npm run build",
     "release:patch": "npm run release:check && npm version patch -m \"chore(release): %s\"",
     "release:minor": "npm run release:check && npm version minor -m \"chore(release): %s\"",

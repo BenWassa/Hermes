@@ -1,15 +1,21 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BottomNav } from './components/BottomNav';
 import { SAMPLE_BRIEFING } from './data/sampleBriefing';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { signInWithGoogle, subscribeToAuthState } from './lib/firebase';
 import { getTodayId } from './utils/date';
 import { sanitizeJsonInput } from './utils/json';
 import { AddBriefingView } from './views/AddBriefingView';
 import { ArchiveView } from './views/ArchiveView';
 import { HomeView } from './views/HomeView';
+import { OnboardingView } from './views/OnboardingView';
 import { SearchView } from './views/SearchView';
 
 export default function App() {
+  const [authReady, setAuthReady] = useState(false);
+  const [user, setUser] = useState(null);
+  const [authError, setAuthError] = useState('');
+  const [isSigningIn, setIsSigningIn] = useState(false);
   const [briefings, setBriefings] = useLocalStorage('globalbrief_data', []);
   const [currentView, setCurrentView] = useState('home');
   const [viewingDateId, setViewingDateId] = useState(null);
@@ -31,6 +37,17 @@ export default function App() {
       JSON.stringify(briefing).toLowerCase().includes(normalizedQuery)
     );
   }, [briefings, query]);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToAuthState((nextUser) => {
+      setUser(nextUser);
+      setAuthReady(true);
+      setIsSigningIn(false);
+      if (nextUser) setAuthError('');
+    });
+
+    return unsubscribe;
+  }, []);
 
   const openBriefing = (briefingId) => {
     setViewingDateId(briefingId);
@@ -92,6 +109,40 @@ export default function App() {
     setJsonInput(JSON.stringify(SAMPLE_BRIEFING, null, 2));
     setError('');
   };
+
+  const handleGoogleSignIn = async () => {
+    setAuthError('');
+    setIsSigningIn(true);
+
+    try {
+      await signInWithGoogle();
+    } catch (signInError) {
+      setAuthError(signInError.message || 'Google sign-in failed. Check Firebase Auth provider settings and try again.');
+      setIsSigningIn(false);
+    }
+  };
+
+  if (!authReady) {
+    return (
+      <div className="flex min-h-screen items-center justify-center px-6 text-center">
+        <div className="space-y-3">
+          <div className="text-[10px] font-mono font-bold uppercase tracking-[0.32em] text-cyan-400/80">
+            Hermes Access Gate
+          </div>
+          <div className="text-2xl font-extrabold uppercase tracking-tight stark-gradient-text">Authenticating</div>
+          <div className="text-[13px] text-slate-500">Checking active Firebase session...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen font-sans text-slate-50 selection:bg-cyan-400/20 selection:text-white">
+        <OnboardingView isSigningIn={isSigningIn} error={authError} onSignIn={handleGoogleSignIn} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen font-sans text-slate-50 selection:bg-cyan-400/20 selection:text-white">
