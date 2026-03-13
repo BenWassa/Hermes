@@ -38,32 +38,46 @@ function getBriefingDateMeta(briefing) {
     return { weekday: '', quarter: '' };
   }
 
-  const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(baseDate).toUpperCase();
+  const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(baseDate).toUpperCase();
   const quarter = `Q${Math.floor(baseDate.getMonth() / 3) + 1}`;
   return { weekday, quarter };
 }
 
 const LABEL_COLORS = {
-  cyan:   { letter: 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.55)]',   sep: 'bg-cyan-500/30',   line: 'bg-cyan-500/15',   note: 'text-cyan-500/40' },
-  purple: { letter: 'text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.55)]', sep: 'bg-purple-500/30', line: 'bg-purple-500/15', note: 'text-purple-500/40' },
-  amber:  { letter: 'text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.55)]',  sep: 'bg-amber-500/30',  line: 'bg-amber-500/15',  note: 'text-amber-500/40' },
-  slate:  { letter: 'text-slate-400',                                               sep: 'bg-slate-500/30',  line: 'bg-slate-500/15',  note: 'text-slate-500/40' },
+  cyan:   { letter: 'text-cyan-400 drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]',   line: 'bg-cyan-500/40' },
+  purple: { letter: 'text-purple-400 drop-shadow-[0_0_6px_rgba(168,85,247,0.5)]', line: 'bg-purple-500/40' },
+  amber:  { letter: 'text-amber-400 drop-shadow-[0_0_6px_rgba(245,158,11,0.5)]',  line: 'bg-amber-500/40' },
+  slate:  { letter: 'text-slate-400',                                              line: 'bg-slate-500/35' },
 };
 
-function SectionLabel({ label, color = 'cyan', note }) {
+function SectionColumn({ label, color = 'cyan', children }) {
   const c = LABEL_COLORS[color] || LABEL_COLORS.slate;
   return (
-    <div className="flex items-center mb-4">
-      <div className="flex items-center shrink-0 mr-3">
+    <div className="flex gap-3">
+      <div className="flex flex-col items-center shrink-0 pt-1">
+        <div className={`h-24 w-px mb-1.5 ${c.line}`} />
         {label.toUpperCase().split('').map((char, i) => (
-          <span key={i} className="flex items-center">
-            {i > 0 && <span className={`inline-block w-px h-3.5 mx-[5px] ${c.sep}`} />}
-            <span className={`font-mono font-bold text-[14px] ${c.letter}`}>{char}</span>
-          </span>
+          <span key={i} className={`font-mono font-bold text-[14px] leading-[1.7] select-none ${c.letter}`}>{char}</span>
         ))}
+        <div className={`flex-1 w-px mt-1.5 ${c.line}`} />
       </div>
-      <div className={`flex-1 h-px ${c.line}`} />
-      {note && <div className={`ml-3 shrink-0 font-mono text-[9px] uppercase tracking-widest ${c.note}`}>{note}</div>}
+      <div className="flex-1 min-w-0">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function SectionRow({ label, color = 'cyan', children }) {
+  const c = LABEL_COLORS[color] || LABEL_COLORS.slate;
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-2">
+        <div className={`h-px w-4 shrink-0 ${c.line}`} />
+        <span className={`font-mono font-bold text-[11px] uppercase tracking-[0.22em] select-none shrink-0 ${c.letter}`}>{label}</span>
+        <div className={`flex-1 h-px ${c.line}`} />
+      </div>
+      <div>{children}</div>
     </div>
   );
 }
@@ -200,15 +214,12 @@ export function BriefingDisplay({ briefing }) {
 
   return (
     <div className="pb-32 max-w-2xl mx-auto px-3">
-      <header className="pt-6 pb-5 flex flex-col gap-2.5">
-        <div className="flex flex-col items-center justify-center gap-1.5">
-          <h1 className="text-center text-[24px] font-extrabold uppercase tracking-[0.14em] stark-gradient-text drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">
-            Hermes
-          </h1>
-          <HermesMark className="h-14 w-14 shrink-0 object-contain drop-shadow-[0_0_20px_rgba(34,211,238,0.18)]" />
-        </div>
+      <header className="pt-6 pb-5 flex flex-col gap-3">
+        <h1 className="text-center text-[24px] font-extrabold uppercase tracking-[0.14em] stark-gradient-text drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">
+          Hermes
+        </h1>
 
-        <div className="flex items-center justify-between gap-2">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3">
           <div className="inline-flex rounded-2xl border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)]">
             <div className="flex flex-col leading-none">
               <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
@@ -222,9 +233,13 @@ export function BriefingDisplay({ briefing }) {
             </div>
           </div>
 
+          <div className="flex justify-center">
+            <HermesMark className="h-14 w-14 shrink-0 object-contain drop-shadow-[0_0_20px_rgba(34,211,238,0.18)]" />
+          </div>
+
           {systemStatus ? (
             <div
-              className={`inline-flex min-h-[42px] items-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell}`}
+              className={`inline-flex justify-self-end items-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell}`}
             >
               <div className="flex flex-col gap-1.5 leading-none">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em]">{systemStatus.condition || 'NOMINAL'}</span>
@@ -242,7 +257,9 @@ export function BriefingDisplay({ briefing }) {
                 </div>
               </div>
             </div>
-          ) : null}
+          ) : (
+            <div />
+          )}
         </div>
       </header>
 
@@ -250,9 +267,7 @@ export function BriefingDisplay({ briefing }) {
         <PulseWidget items={todayIn60} onItemClick={handlePulseClick} />
 
         {hasSignalArchitecture ? (
-          <section>
-            <SectionLabel label="Signals" color="cyan" />
-
+          <SectionColumn label="Signals" color="cyan">
             <div className="grid grid-cols-1 gap-4">
               {timelineContext?.events?.length ? (
                 <div>
@@ -286,12 +301,11 @@ export function BriefingDisplay({ briefing }) {
                 </div>
               ) : null}
             </div>
-          </section>
+          </SectionColumn>
         ) : null}
 
         {(consensus.length > 0 || friction.length > 0) ? (
-          <section>
-            <SectionLabel label="Consensus" color="purple" />
+          <SectionRow label="Consensus" color="purple">
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden">
               <div className="px-5 pt-4 pb-3 border-b border-white/8">
                 <div className="grid grid-cols-2 gap-3">
@@ -343,12 +357,11 @@ export function BriefingDisplay({ briefing }) {
                 </button>
               ) : null}
             </div>
-          </section>
+          </SectionRow>
         ) : null}
 
         {strategicContext.length > 0 ? (
-          <section>
-            <SectionLabel label="Context" color="slate" />
+          <SectionRow label="Context" color="slate">
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden">
               <div className="px-5 pt-4 pb-3 border-b border-white/8">
                 <p className="text-[13.5px] text-slate-300 leading-relaxed line-clamp-2">{strategicContext[0]}</p>
@@ -374,16 +387,15 @@ export function BriefingDisplay({ briefing }) {
                 </button>
               ) : null}
             </div>
-          </section>
+          </SectionRow>
         ) : null}
 
         {briefing.watchlist ? (
-          <section>
-            <SectionLabel label="Watchlist" color="amber" />
+          <SectionRow label="Watchlist" color="amber">
             <div className="bg-gradient-to-r from-amber-950/40 to-transparent backdrop-blur-xl border border-amber-500/20 rounded-2xl px-5 py-4">
               <p className="text-amber-100 font-medium leading-relaxed text-[15px]">{briefing.watchlist}</p>
             </div>
-          </section>
+          </SectionRow>
         ) : null}
       </div>
 
