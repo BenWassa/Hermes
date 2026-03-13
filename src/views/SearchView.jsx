@@ -1,43 +1,77 @@
-import { Search, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, DatabaseZap } from 'lucide-react';
 
 export function SearchView({ query, results, onQueryChange, onOpenBriefing }) {
+  const resultList = Array.isArray(results) ? results : [];
+
   return (
-    <div className="pb-24 max-w-2xl mx-auto pt-6 px-4">
-      <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Search Database</h1>
-      <div className="relative mb-8">
-        <Search className="absolute left-3 top-3.5 text-slate-400" size={20} />
+    <div className="pb-24 max-w-2xl mx-auto pt-8 px-4 animate-in fade-in duration-300">
+      <header className="mb-8 border-b-2 border-slate-900 dark:border-white pb-4">
+        <div className="flex items-center gap-3 mb-2">
+          <DatabaseZap size={24} strokeWidth={2} className="text-slate-900 dark:text-white" />
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white uppercase tracking-tight">
+            Database Query
+          </h1>
+        </div>
+        <p className="text-[11px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+          Global Intelligence Network Search
+        </p>
+      </header>
+
+      <div className="relative mb-8 group">
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-600 font-mono text-sm font-bold select-none">
+          &gt;_
+        </div>
         <input
           type="text"
-          placeholder="Search by keyword, tag, or theme..."
+          placeholder="ENTER KEYWORD, TAG, OR THEME..."
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
-          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl py-3 pl-10 pr-4 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-500 shadow-sm transition-all"
+          className="w-full bg-slate-200/50 dark:bg-[#05080f] border border-slate-300 dark:border-slate-700 rounded-sm py-4 pl-10 pr-4 text-[13px] font-mono text-slate-900 dark:text-white focus:outline-none focus:border-slate-900 dark:focus:border-slate-400 focus:ring-1 focus:ring-slate-900 dark:focus:ring-slate-400 transition-colors placeholder:text-slate-400 dark:placeholder:text-slate-600 uppercase"
+          spellCheck={false}
+          autoComplete="off"
         />
       </div>
 
       {query && (
         <div className="space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-            Results ({results.length})
-          </h2>
-          {results.length === 0 ? (
-            <p className="text-slate-500">No signals found matching your query.</p>
+          <div className="flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2">
+            <span>Query Results</span>
+            <span>[{resultList.length} MATCHES]</span>
+          </div>
+
+          {resultList.length === 0 ? (
+            <div className="text-[13px] font-mono text-slate-500 py-6 border-t border-slate-200 dark:border-slate-800">
+              STATUS: 0 signals found matching "{query}".
+            </div>
           ) : (
-            results.map((briefing) => (
-              <button
-                key={briefing.id}
-                onClick={() => onOpenBriefing(briefing.id)}
-                className="w-full flex flex-col gap-2 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm text-left active:scale-[0.98] transition-transform"
-              >
-                <div className="flex justify-between items-center w-full">
-                  <span className="font-semibold text-slate-900 dark:text-white">{briefing.date}</span>
-                  <ArrowRight size={16} className="text-slate-400" />
-                </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
-                  {briefing.major_developments?.map((development) => development.headline).join(' · ')}
-                </div>
-              </button>
-            ))
+            <div className="border-t border-slate-900 dark:border-slate-500">
+              {resultList.map((briefing) => (
+                <button
+                  key={briefing.id}
+                  onClick={() => onOpenBriefing(briefing.id)}
+                  className="w-full flex items-start justify-between py-4 border-b border-slate-200 dark:border-slate-800 hover:bg-slate-100/50 dark:hover:bg-slate-800/30 transition-colors text-left group"
+                >
+                  <div className="flex-1 pr-6">
+                    <div className="flex items-center gap-4 mb-2">
+                      <span className="text-[12px] font-mono font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                        {briefing.date}
+                      </span>
+                      <span className="text-[9px] font-mono text-slate-400 dark:text-slate-500 uppercase tracking-widest bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded-[2px]">
+                        SYS_ID: {briefing.id.slice(0, 8)}
+                      </span>
+                    </div>
+                    <div className="text-[13px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                      <span className="text-slate-400 font-mono text-[10px] mr-2">///</span>
+                      {briefing.major_developments?.map((development) => development.headline).join(' · ')}
+                    </div>
+                  </div>
+
+                  <div className="text-slate-300 dark:text-slate-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors mt-1">
+                    <ArrowUpRight size={20} strokeWidth={1.5} />
+                  </div>
+                </button>
+              ))}
+            </div>
           )}
         </div>
       )}

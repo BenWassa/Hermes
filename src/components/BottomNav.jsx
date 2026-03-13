@@ -1,4 +1,4 @@
-import { Home, Archive, Search, PlusCircle } from 'lucide-react';
+import { Home, Archive, Search, PlusSquare } from 'lucide-react';
 
 export function BottomNav({ currentView, viewingDateId, onSelectView }) {
   const todayActive = currentView === 'home' && !viewingDateId;
@@ -7,56 +7,31 @@ export function BottomNav({ currentView, viewingDateId, onSelectView }) {
   const addActive = currentView === 'add';
 
   return (
-    <nav className="fixed bottom-0 w-full bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,0,0,0.02)] z-50">
-      <div className="max-w-md mx-auto flex justify-between items-center px-6 py-3">
-        <button
-          onClick={() => onSelectView('home')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            todayActive
-              ? 'text-slate-900 dark:text-white'
-              : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
-          }`}
-        >
-          <Home size={24} strokeWidth={todayActive ? 2.5 : 2} />
-          <span className="text-[10px] font-medium tracking-wide">Today</span>
-        </button>
-
-        <button
-          onClick={() => onSelectView('archive')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            archiveActive
-              ? 'text-slate-900 dark:text-white'
-              : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
-          }`}
-        >
-          <Archive size={24} strokeWidth={archiveActive ? 2.5 : 2} />
-          <span className="text-[10px] font-medium tracking-wide">Archive</span>
-        </button>
-
-        <button
-          onClick={() => onSelectView('search')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            searchActive
-              ? 'text-slate-900 dark:text-white'
-              : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
-          }`}
-        >
-          <Search size={24} strokeWidth={searchActive ? 2.5 : 2} />
-          <span className="text-[10px] font-medium tracking-wide">Search</span>
-        </button>
-
-        <button
-          onClick={() => onSelectView('add')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            addActive
-              ? 'text-slate-900 dark:text-white'
-              : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
-          }`}
-        >
-          <PlusCircle size={24} strokeWidth={addActive ? 2.5 : 2} />
-          <span className="text-[10px] font-medium tracking-wide">Add</span>
-        </button>
+    <nav className="fixed bottom-0 w-full bg-[#f8fafc] dark:bg-[#0B0F19] border-t-2 border-slate-900 dark:border-white z-50">
+      <div className="max-w-md mx-auto flex justify-between items-center px-4 py-3">
+        <NavButton icon={Home} label="Today" isActive={todayActive} onClick={() => onSelectView('home')} />
+        <NavButton icon={Archive} label="Archive" isActive={archiveActive} onClick={() => onSelectView('archive')} />
+        <NavButton icon={Search} label="Search" isActive={searchActive} onClick={() => onSelectView('search')} />
+        <NavButton icon={PlusSquare} label="Import" isActive={addActive} onClick={() => onSelectView('add')} />
       </div>
     </nav>
+  );
+}
+
+function NavButton({ icon: Icon, label, isActive, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex flex-col items-center gap-1.5 transition-all px-4 py-2 ${
+        isActive
+          ? 'text-slate-900 dark:text-white'
+          : 'text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400'
+      }`}
+    >
+      <Icon size={22} strokeWidth={isActive ? 2.5 : 1.5} className={isActive ? 'opacity-100' : 'opacity-70'} />
+      <span className={`text-[9px] font-mono uppercase tracking-widest ${isActive ? 'font-bold' : 'font-medium'}`}>
+        {label}
+      </span>
+    </button>
   );
 }
