@@ -5,7 +5,8 @@ export const SAMPLE_BRIEFING = {
     { icon: '🛢️', headline: 'Oil volatility spikes', domain: 'ENERGY' },
     { icon: '📉', headline: 'Markets reprice inflation risk', domain: 'MACRO' },
     { icon: '🤖', headline: 'China accelerates AI push', domain: 'TECH' },
-    { icon: '⚖️', headline: 'Pentagon-AI tension emerges', domain: 'DEFENSE' }
+    { icon: '⚖️', headline: 'Pentagon-AI tension emerges', domain: 'DEFENSE' },
+    { icon: '🌍', headline: 'ECB signals hawkish hold', domain: 'MACRO' }
   ],
   major_developments: [
     {
