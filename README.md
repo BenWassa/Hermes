@@ -1,23 +1,20 @@
 # Hermes
 
-Fresh project reset initialized on March 10, 2026.
+GlobalBrief is a mobile-first intelligence dashboard for daily AI-generated geopolitical and macroeconomic briefings.
 
 ## Structure
 
 - `src/` - application source code
-- `tests/` - automated tests
 - `docs/` - project documentation
-- `scripts/` - utility scripts
-- `assets/` - static project assets
-- `config/` - configuration templates/files
 - `archive/` - previous project snapshots
 
-## Next Steps
+## Current Scope
 
-1. Define project goals and scope.
-2. Set up tooling and dependencies.
-3. Build initial app skeleton in `src/`.
-4. Add baseline tests in `tests/`.
+- Mobile HUD interface for daily briefings
+- JSON paste import flow
+- Archive and search views
+- Progressive disclosure briefing layout
+- Visual streams for timeline, risk matrix, and macro indicators
 
 ## Versioning
 
@@ -28,9 +25,11 @@ Fresh project reset initialized on March 10, 2026.
 ## Briefing Format
 
 - Daily JSON import format is documented in `docs/DAILY_BRIEFING_FORMAT.md`.
+- Product and UX vision is documented in `docs/VISION.md`.
 
 ## Firebase Setup
 
 1. Copy `.env.example` to `.env`.
 2. Set `VITE_FIREBASE_API_KEY` manually.
-3. Run `npm run dev`.
+3. Install dependencies with `npm install`.
+4. Run `npm run dev`.

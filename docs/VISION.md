@@ -88,7 +88,7 @@ This ensures the interface is never empty.
 
 Once JSON is added, the Home screen renders the full briefing.
 
-The layout flows through four structured UI components.
+The layout uses progressive disclosure. The top-level screen stays clean and fast to scan, while heavier context is revealed through expandable panels.
 
 ---
 
@@ -188,7 +188,37 @@ Each `major_developments` item should include a primary `domain` value. `region`
 
 ---
 
-# Component 3 - Analyst Consensus
+# Component 3 - Signal Architecture
+
+Section title:
+
+Signal Architecture
+
+Purpose:
+
+Convert dense chronology, threat clustering, and macro trend movement into compact visual frameworks before the user reads longer-form text.
+
+This layer is rendered inside an expandable disclosure panel and may include any combination of the following optional streams:
+
+Escalation Timeline  
+Vertical chronology with 4 to 8 events.  
+Best for conflict, policy sequencing, and diplomatic or military escalation.
+
+2x2 Risk Matrix  
+Quadrant view of probability versus impact.  
+Best for fast prioritization of the day’s threats.
+
+Macro Indicators  
+Native SVG sparkline cards with current value, trend delta, and directional color logic.  
+Best for rates, commodities, FX, or other compact market signals.
+
+JSON requirement:
+
+These visuals are driven by optional fields such as `timeline_context`, `risk_matrix`, and `macro_indicators`.
+
+---
+
+# Component 4 - Analyst Consensus
 
 Section title:
 
@@ -216,7 +246,7 @@ This makes disagreement visually explicit.
 
 ---
 
-# Component 4 - Strategic Context
+# Component 5 - Strategic Context
 
 Section title:
 
@@ -238,7 +268,7 @@ Typography should emphasize readability.
 
 ---
 
-# Component 5 - Watchlist
+# Component 6 - Watchlist
 
 Highlighted insight block.
 
@@ -305,9 +335,10 @@ Since the system relies on manual JSON paste, the interface must make this extre
 
 Add Briefing flow:
 
-1. Tap Add Briefing
-2. Paste JSON
-3. Press Import
+1. Open Archive
+2. Tap Import Briefing
+3. Paste JSON
+4. Press Import
 
 The app validates JSON format.
 
@@ -400,7 +431,10 @@ The JSON schema already supports these via:
 
 tags  
 ids  
-metadata
+metadata  
+timeline_context  
+risk_matrix  
+macro_indicators
 
 ---
 
