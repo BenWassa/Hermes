@@ -7,6 +7,15 @@ and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-03-13
+
+### Changed
+- Added a third header pill for an analyst-facing `Driver` signal, with a layout tuned to fit mobile widths more reliably.
+- Firebase Hosting GitHub Actions builds now require and inject the full `VITE_FIREBASE_*` web config at build time.
+
+### Fixed
+- Removed the fake Firebase API key fallback so broken auth config cannot silently ship in production bundles.
+
 ## [1.0.0] - 2026-03-13
 
 ### Added

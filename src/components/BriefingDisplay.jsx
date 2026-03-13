@@ -42,6 +42,21 @@ function getBriefingDateMeta(briefing) {
   return { weekday, quarter };
 }
 
+function getDriverLabel(briefing) {
+  const candidate = briefing?.driver
+    || briefing?.analyst_driver
+    || briefing?.primary_driver
+    || briefing?.theme
+    || briefing?.lead
+    || briefing?.focus;
+
+  if (typeof candidate === 'string' && candidate.trim()) {
+    return candidate.trim();
+  }
+
+  return 'Awaiting Signal';
+}
+
 const LABEL_COLORS = {
   cyan:   { letter: 'text-cyan-400 drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]',   line: 'bg-cyan-500/40' },
   purple: { letter: 'text-purple-400 drop-shadow-[0_0_6px_rgba(168,85,247,0.5)]', line: 'bg-purple-500/40' },
@@ -202,6 +217,7 @@ export function BriefingDisplay({ briefing, onOpenMenu }) {
 
   const systemStatusTone = getSystemStatusTone(systemStatus?.condition || systemStatus?.indicator);
   const briefingDateMeta = getBriefingDateMeta(briefing);
+  const driverLabel = getDriverLabel(briefing);
 
   const handlePulseClick = (domain, itemId) => {
     const match = developments.find((d) => d.id === itemId)
@@ -231,8 +247,8 @@ export function BriefingDisplay({ briefing, onOpenMenu }) {
           <div className="w-8"></div> {/* Spacer to keep header centered perfectly balances the 32px of the button (24px + padding) */}
         </div>
 
-        <div className="flex items-center justify-between gap-3">
-          <div className="inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)] flex-1 max-w-[150px]">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+          <div className="inline-flex min-h-[52px] min-w-0 items-center justify-center rounded-2xl border border-cyan-500/30 bg-cyan-950/40 px-2.5 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)] sm:px-3">
             <div className="flex flex-col items-center justify-center leading-none text-center">
               <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
                 {briefing.date?.replace(/,?\s*\d{4}$/, '')}
@@ -245,9 +261,22 @@ export function BriefingDisplay({ briefing, onOpenMenu }) {
             </div>
           </div>
 
+          <div className="inline-flex min-h-[52px] min-w-0 items-center justify-center rounded-2xl border border-amber-500/20 bg-slate-950/40 px-2.5 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(245,158,11,0.08)] sm:px-3">
+            <div className="flex flex-col items-center justify-center leading-none text-center">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-amber-300/80">
+                Driver
+              </span>
+              <div className="mt-1.5 min-w-0 max-w-full">
+                <span className="line-clamp-2 break-words text-[10px] font-semibold uppercase leading-[1.15] tracking-[0.06em] text-amber-50 sm:text-[11px]">
+                  {driverLabel}
+                </span>
+              </div>
+            </div>
+          </div>
+
           {systemStatus ? (
             <div
-              className={`inline-flex min-h-[48px] items-center justify-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell} flex-1 max-w-[150px]`}
+              className={`inline-flex min-h-[52px] min-w-0 items-center justify-center rounded-2xl border px-2.5 py-2 backdrop-blur-md sm:px-3 ${systemStatusTone.shell}`}
             >
               <div className="flex flex-col items-center justify-center gap-1.5 leading-none text-center">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em]">{systemStatus.condition || 'NOMINAL'}</span>
@@ -266,7 +295,7 @@ export function BriefingDisplay({ briefing, onOpenMenu }) {
               </div>
             </div>
           ) : (
-            <div className="flex-1 max-w-[150px] min-h-[48px]"></div>
+            <div className="min-h-[48px]" />
           )}
         </div>
       </header>

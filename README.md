@@ -46,6 +46,15 @@ Deploy flow:
 2. Log in: `firebase login`
 3. Build and deploy hosting: `npm run deploy:hosting`
 
+If you deploy through GitHub Actions instead of the local CLI, add these repository secrets so the Vite build can inject the Firebase web config:
+
+- `VITE_FIREBASE_API_KEY`
+- `VITE_FIREBASE_AUTH_DOMAIN`
+- `VITE_FIREBASE_PROJECT_ID`
+- `VITE_FIREBASE_STORAGE_BUCKET`
+- `VITE_FIREBASE_MESSAGING_SENDER_ID`
+- `VITE_FIREBASE_APP_ID`
+
 Because the app is a Vite SPA, Hosting only needs to serve `dist/` and rewrite routes to `index.html`.
 
 ## Authorization Note
