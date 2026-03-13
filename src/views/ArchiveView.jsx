@@ -55,11 +55,14 @@ export function ArchiveView({ briefings, onOpenBriefing, onAdd }) {
       )}
 
       {/* Prominent Import Button */}
-      <div className="fixed bottom-24 left-0 w-full z-40 pointer-events-none flex justify-center px-6">
+      <div
+        className="fixed left-0 w-full z-40 pointer-events-none flex justify-center px-6"
+        style={{ bottom: 'max(8.25rem, calc(env(safe-area-inset-bottom) + 6.75rem))' }}
+      >
         <div className="w-full max-w-2xl flex justify-end">
           <button
             onClick={onAdd}
-            className="pointer-events-auto flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-5 py-3.5 rounded-full font-bold uppercase tracking-wider text-xs font-mono shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:shadow-[0_0_35px_rgba(34,211,238,0.6)] transition-all transform hover:scale-105"
+            className="pointer-events-auto flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-5 py-3.5 rounded-full font-bold uppercase tracking-wider text-xs font-mono shadow-[0_12px_30px_rgba(0,0,0,0.35),_0_0_25px_rgba(34,211,238,0.35)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.4),_0_0_35px_rgba(34,211,238,0.5)] transition-all transform hover:scale-105"
           >
             <Plus size={18} strokeWidth={2.5} />
             Import Briefing
