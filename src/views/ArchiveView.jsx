@@ -27,24 +27,26 @@ export function ArchiveView({ briefings, onOpenBriefing }) {
               onClick={() => onOpenBriefing(briefing.id)}
               className="w-full flex items-center justify-between py-4 border-b border-white/10 last:border-b-0 hover:bg-white/5 transition-colors text-left group"
             >
-              <div className="flex-1 pr-6">
-                <div className="flex items-center gap-4 mb-1.5">
-                  <span className="text-[12px] font-bold text-slate-100 uppercase tracking-[0.2em]">
+              <div className="min-w-0 flex-1 pr-4">
+                <div className="mb-1.5 flex min-w-0 flex-wrap items-center gap-2 sm:gap-4">
+                  <span className="min-w-0 break-words text-[12px] font-bold text-slate-100 uppercase tracking-[0.2em]">
                     {briefing.date}
                   </span>
-                  <span className="text-[9px] text-slate-400 uppercase tracking-[0.22em] bg-white/5 border border-white/10 px-2 py-1 rounded-full">
+                  <span className="max-w-full truncate text-[9px] text-slate-400 uppercase tracking-[0.22em] bg-white/5 border border-white/10 px-2 py-1 rounded-full">
                     ID: {briefing.id.slice(0, 8)}
                   </span>
                 </div>
 
-                <div className="text-[13px] text-slate-400 truncate flex items-center gap-2">
-                  <span className="text-cyan-400 text-[10px]">///</span>
-                  {briefing.today_in_60_seconds?.[0]?.headline}
-                  <span className="text-slate-600">|</span>
-                  {briefing.today_in_60_seconds?.[1]?.headline}
+                <div className="min-w-0 flex items-center gap-2 text-[13px] text-slate-400">
+                  <span className="shrink-0 text-[10px] text-cyan-400">///</span>
+                  <span className="min-w-0 truncate">
+                    {[briefing.today_in_60_seconds?.[0]?.headline, briefing.today_in_60_seconds?.[1]?.headline]
+                      .filter(Boolean)
+                      .join(' | ') || 'No pulse preview available.'}
+                  </span>
                 </div>
               </div>
-              <div className="text-slate-500 group-hover:text-cyan-300 transition-colors">
+              <div className="ml-3 shrink-0 text-slate-500 group-hover:text-cyan-300 transition-colors">
                 <ArrowUpRight size={20} strokeWidth={1.5} />
               </div>
             </button>

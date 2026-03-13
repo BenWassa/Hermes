@@ -43,18 +43,40 @@ export function BriefingDisplay({ briefing }) {
             <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div>
             <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">60-Second Pulse</h2>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            {todayIn60.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5 flex flex-col gap-3 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/10 hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] transition-all duration-300 active:scale-95"
-              >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border border-white/5 flex items-center justify-center text-2xl shadow-inner">
-                  {item.icon}
+          <div className="grid grid-cols-2 gap-3 auto-rows-fr">
+            {todayIn60.map((item, index) => {
+              const isApex = index === 0;
+              return (
+                <div
+                  key={index}
+                  className={`bg-white/5 backdrop-blur-xl border rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/10 transition-all duration-300 active:scale-95 ${
+                    isApex
+                      ? 'col-span-2 p-6 border-cyan-500/20 hover:border-cyan-400/40 hover:shadow-[0_0_24px_rgba(34,211,238,0.12)]'
+                      : 'p-5 border-white/10 hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)]'
+                  }`}
+                >
+                  <div className={`flex ${isApex ? 'items-center gap-4' : 'flex-col gap-3'}`}>
+                    <div
+                      className={`rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border border-white/5 flex items-center justify-center shadow-inner ${
+                        isApex ? 'w-16 h-16 text-3xl' : 'w-12 h-12 text-2xl'
+                      }`}
+                    >
+                      {item.icon}
+                    </div>
+                    <div className="min-w-0">
+                      {isApex && (
+                        <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-cyan-400 mb-2">
+                          Apex Signal
+                        </div>
+                      )}
+                      <span className={`font-semibold text-white leading-snug ${isApex ? 'text-[18px]' : 'text-[14px]'}`}>
+                        {item.headline}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-[14px] font-semibold text-white leading-snug">{item.headline}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 

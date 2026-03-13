@@ -7,7 +7,10 @@ export function BottomNav({ currentView, viewingDateId, onSelectView }) {
   const addActive = currentView === 'add';
 
   return (
-    <nav className="fixed bottom-6 left-0 w-full z-50 px-4 pointer-events-none">
+    <nav
+      className="fixed left-0 w-full z-50 px-4 pointer-events-none"
+      style={{ bottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}
+    >
       <div className="max-w-md mx-auto pointer-events-auto">
         <div className="grid grid-cols-4 items-end gap-1 px-2 py-2 bg-slate-950/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_20px_40px_rgba(0,0,0,0.5),_0_0_20px_rgba(34,211,238,0.1)]">
           <NavButton icon={Home} label="Today" isActive={todayActive} onClick={() => onSelectView('home')} />

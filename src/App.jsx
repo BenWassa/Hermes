@@ -82,7 +82,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen font-sans text-slate-50 selection:bg-cyan-400/20 selection:text-white">
-      <main className="px-4 md:px-6">
+      <main className="px-4 pb-32 md:px-6">
         {currentView === 'home' && (
           <HomeView
             activeBriefing={activeBriefing}
