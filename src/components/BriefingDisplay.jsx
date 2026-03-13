@@ -31,6 +31,18 @@ function getSystemStatusTone(condition) {
   return STATUS_TIERS.find((t) => t.test(s)) || STATUS_TIER_DEFAULT;
 }
 
+function getBriefingDateMeta(briefing) {
+  const baseDate = briefing?.id ? new Date(`${briefing.id}T12:00:00`) : new Date(briefing?.date || '');
+
+  if (Number.isNaN(baseDate.getTime())) {
+    return { weekday: '', quarter: '' };
+  }
+
+  const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(baseDate).toUpperCase();
+  const quarter = `Q${Math.floor(baseDate.getMonth() / 3) + 1}`;
+  return { weekday, quarter };
+}
+
 const LABEL_COLORS = {
   cyan:   { letter: 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.55)]',   sep: 'bg-cyan-500/30',   line: 'bg-cyan-500/15',   note: 'text-cyan-500/40' },
   purple: { letter: 'text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.55)]', sep: 'bg-purple-500/30', line: 'bg-purple-500/15', note: 'text-purple-500/40' },
@@ -176,6 +188,7 @@ export function BriefingDisplay({ briefing }) {
     macroIndicators.length > 0;
 
   const systemStatusTone = getSystemStatusTone(systemStatus?.condition || systemStatus?.indicator);
+  const briefingDateMeta = getBriefingDateMeta(briefing);
 
   const handlePulseClick = (domain, itemId) => {
     const match = developments.find((d) => d.id === itemId)
@@ -188,21 +201,30 @@ export function BriefingDisplay({ briefing }) {
   return (
     <div className="pb-32 max-w-2xl mx-auto px-3">
       <header className="pt-6 pb-5 flex flex-col gap-2.5">
-        <div className="flex items-center justify-center gap-3">
-          <HermesMark className="h-10 w-10 shrink-0 object-contain drop-shadow-[0_0_18px_rgba(34,211,238,0.16)]" />
+        <div className="flex flex-col items-center justify-center gap-1.5">
           <h1 className="text-center text-[24px] font-extrabold uppercase tracking-[0.14em] stark-gradient-text drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">
             Hermes
           </h1>
+          <HermesMark className="h-14 w-14 shrink-0 object-contain drop-shadow-[0_0_20px_rgba(34,211,238,0.18)]" />
         </div>
 
         <div className="flex items-center justify-between gap-2">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1.5 text-[10px] font-bold tracking-widest uppercase text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.15)] backdrop-blur-md">
-            {briefing.date?.replace(/,?\s*\d{4}$/, '')}
+          <div className="inline-flex rounded-2xl border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)]">
+            <div className="flex flex-col leading-none">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
+                {briefing.date?.replace(/,?\s*\d{4}$/, '')}
+              </span>
+              <div className="mt-1.5 flex items-center gap-2 text-[9px] font-mono uppercase tracking-[0.18em]">
+                {briefingDateMeta.weekday ? <span className="text-cyan-300/75">{briefingDateMeta.weekday}</span> : null}
+                {briefingDateMeta.weekday && briefingDateMeta.quarter ? <span className="text-cyan-300/45">|</span> : null}
+                {briefingDateMeta.quarter ? <span className="text-cyan-300/75">{briefingDateMeta.quarter}</span> : null}
+              </div>
+            </div>
           </div>
 
           {systemStatus ? (
             <div
-              className={`inline-flex items-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell}`}
+              className={`inline-flex min-h-[42px] items-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell}`}
             >
               <div className="flex flex-col gap-1.5 leading-none">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em]">{systemStatus.condition || 'NOMINAL'}</span>
