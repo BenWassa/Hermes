@@ -124,67 +124,25 @@ Immediate situational awareness.
 
 ---
 
-# Component 2 - Major Developments
+# Component 2 - Major Developments (Modal)
 
-Below the Bento grid.
+Tapping any pulse tile in the Bento grid opens a centered modal overlay with the full story detail for the matching development.
 
-Stories appear as stacked cards inside a filterable tactical module.
+The modal contains:
 
-Above the cards, the interface exposes a horizontally scrolling MECE filter bar generated from the story taxonomy.
-
-Default tab:
-
-ALL
-
-Example domain tabs:
-
-GEOPOLITICS  
-MACRO  
-TECH  
-ENERGY
-
-Purpose:
-
-Move from visual scan into structured exploration without overwhelming the user.
-
-Card structure:
-
-Region / Domain / Impact metadata  
-Icon  
-Headline  
+Region / Domain / Impact metadata
+Icon + Headline
 Executive summary
-
-Expanded view reveals:
-
 Key facts (bullet list)
-
 Sources
 
-Example layout:
+Dismiss by tapping the backdrop, pressing Escape, or the close button.
 
-🛢️ Oil Shock and War Risk
-
-Oil surged nearly 30% before reversing as geopolitical tensions escalated.
-
-Key Facts  
-• Brent briefly crossed $100  
-• De-escalation signals caused reversal  
-• Market volatility spread to equities
-
-Sources  
-Reuters · Bloomberg · FT
-
-Interaction:
-
-Tap -> expand / collapse.
-
-Filter interaction:
-
-Tap domain tab -> isolate only stories in that sector.
+Matching logic: the UI first tries to match by `major_developments[].id` against the pulse item's `id`, then falls back to matching by `domain`.
 
 JSON requirement:
 
-Each `major_developments` item should include a primary `domain` value. `region` and `impact` should also be included when available to strengthen scanning anchors.
+Each `major_developments` item should include a primary `domain` value. `region` and `impact` should also be included when available to strengthen scanning anchors. Use stable `id` values to enable direct matching from pulse tiles.
 
 ---
 
@@ -259,6 +217,56 @@ Each paragraph appears as its own spaced element.
 Example:
 
 Theme: Conflict-Driven Inflation
+
+---
+
+# Upgrade Priorities
+
+The current direction is strong, but the next round of work should focus on balance, density, and clearer visual separation across the Home view.
+
+## Header Balance
+
+- Rename the top title from `GlobalBrief` to `Hermes`.
+- Rebalance the header so the title feels intentional rather than oversized and floating.
+- Use horizontal placement more effectively: date and system status should anchor the left and right edges while the title remains clearly legible in the center.
+- Reduce visual mess by making the header read like a clean HUD strip rather than a stacked badge cluster.
+
+## Section Framing
+
+- Move toward shorter section labels where possible. Example: `Pulse` instead of `60-Second Pulse`.
+- Add a subtle vertical color line or edge marker on the left side of major sections to improve separation without consuming meaningful width.
+- Keep the separators narrow and atmospheric rather than heavy-handed.
+
+## Pulse Tile Density
+
+- The lower four pulse cards currently over-compress on smaller viewports.
+- Remove overlapping footer content from those smaller cards; if only one footer item survives, prioritize the right-side takeaway / metric.
+- Increase icon size slightly so scan anchors are easier to catch at a glance.
+- Continue optimizing the pulse grid for true mobile readability rather than desktop-style symmetry.
+
+## Signal Architecture Enhancements
+
+- Preserve the Signal Architecture section, but make each stream feel more clearly separated through stronger labeling and color identity.
+- Use larger framing labels such as `Timeline`, `Threat Map`, and a clearer quantitative / financial label for the sparkline block.
+- Simplify titles where possible. Example: `Threat Map` instead of `24-Hour Threat Map`.
+- Expand the macro / quantitative block with additional indicators so the visual layer carries more analytical weight.
+
+## Lower-Screen Content Redesign
+
+- Revisit the disclosure-panel pattern used for `Network Consensus`, `Strategic Context`, and related sections.
+- The current collapsible treatment feels weak and should be replaced or redesigned.
+- Future options may include pinned summary cards, denser matrix layouts, or permanently open modular sections with stronger hierarchy.
+
+## Story Detail Follow-Up
+
+- Sources in the story detail view should become clickable links to the original articles.
+- This should support direct follow-up research instead of treating sources as static labels only.
+
+## Guiding Principle For Upgrades
+
+- Favor signal over decorative spacing.
+- Use every component to carry meaning.
+- Optimize for fast operator scan first, then richer drill-down second.
 
 • Energy shocks are reintroducing geopolitics into macroeconomic expectations.
 

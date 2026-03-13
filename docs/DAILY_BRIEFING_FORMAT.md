@@ -111,14 +111,14 @@ The current UI expects the following structure.
 - `system_status`: optional global HUD state shown in the header. Use concise uppercase values such as `NOMINAL`, `ELEVATED`, or `CRITICAL`.
 - `system_status.condition`: primary overall posture for the session.
 - `system_status.indicator`: secondary descriptor such as `VOLATILE`, `STABLE`, or `TRANSITIONING`.
-- `today_in_60_seconds[].domain`: optional routing bucket for pulse tiles. When present, tapping a pulse tile can jump to the matching Tactical Breakdown tab.
+- `today_in_60_seconds[].domain`: optional routing bucket for pulse tiles. When present, tapping a pulse tile opens the matching development in a modal overlay.
 - `today_in_60_seconds[].summary`: optional dense summary text, best used on the apex tile.
 - `today_in_60_seconds[].status`: optional live status label such as `ESCALATING`, `STABILIZING`, or `MONITOR`.
 - `today_in_60_seconds[].target`: optional target asset, entity, or region label shown in the tile footer.
 - `today_in_60_seconds[].metric`: optional hard metric or state tag shown in the tile footer.
 - `major_developments`: each item renders as an expandable story card.
 - `major_developments[].id`: stable story identifier within the day.
-- `major_developments[].domain`: required for the Tactical Breakdown filter bar. Use strict uppercase buckets such as `GEOPOLITICS`, `MACRO`, `TECH`, `ENERGY`, or `DEFENSE`.
+- `major_developments[].domain`: used to match pulse tiles to story modals. Use strict uppercase buckets such as `GEOPOLITICS`, `MACRO`, `TECH`, `ENERGY`, or `DEFENSE`.
 - `major_developments[].region`: optional scanning anchor shown above the card headline. Example values: `GLOBAL`, `US`, `EUROPE`, `MIDDLE EAST`, `ASIA`.
 - `major_developments[].impact`: optional scanning anchor for visual priority. Recommended values: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
 - `major_developments[].sources`: short source labels only.
@@ -183,4 +183,4 @@ The importer currently validates only:
 
 The rest of the fields should still be included, because the UI is built to render the full briefing shape.
 
-The current UI also expects `major_developments` to be present for the Tactical Breakdown section. If `domain` values are supplied, the interface generates filter tabs automatically from those values.
+The current UI uses `major_developments` to power the story modal overlay. When a pulse tile is tapped, the UI matches by `id` first, then falls back to `domain`. For reliable deep-linking, keep `id` stable and `domain` consistent between `today_in_60_seconds` items and their matching `major_developments` entries.

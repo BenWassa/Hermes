@@ -1,4 +1,4 @@
-import { ArrowDownRight, Activity, Crosshair } from 'lucide-react';
+import { ArrowDownRight, Activity } from 'lucide-react';
 
 const getStatusGlow = (status) => {
   if (!status) return 'bg-slate-500 shadow-[0_0_5px_rgba(148,163,184,0.5)]';
@@ -20,11 +20,11 @@ export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
   const renderCard = (item, index, isApex) => (
     <button
       key={item.id || item.headline || index}
-      onClick={() => onItemClick?.(item.domain)}
+      onClick={() => onItemClick?.(item.domain, item.id)}
       className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white/5 text-left shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl outline-none transition-all duration-300 hover:bg-white/10 active:scale-95 ${
         isApex
           ? 'border-cyan-500/30 p-5 hover:border-cyan-400/60 active:bg-cyan-900/20'
-          : 'sm:min-h-[11.5rem] border-white/10 p-5 hover:border-cyan-500/40 active:bg-slate-800/50'
+          : 'border-white/10 p-3 sm:p-5 hover:border-cyan-500/40 active:bg-slate-800/50'
       }`}
       type="button"
     >
@@ -35,10 +35,6 @@ export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
             <div className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">
               Apex Signal
             </div>
-          ) : item.domain ? (
-            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
-              {item.domain}
-            </span>
           ) : null}
         </div>
 
@@ -50,7 +46,7 @@ export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
         ) : null}
       </div>
 
-      <div className={`relative z-10 w-full ${isApex ? 'mb-4' : 'mb-3 flex-1 pr-6'}`}>
+      <div className={`relative z-10 w-full ${isApex ? 'mb-4' : 'mb-3 flex-1'}`}>
         <h3
           className={`font-semibold leading-snug text-white transition-colors group-hover:text-cyan-50 ${
             isApex ? 'mb-2 text-[17px]' : 'text-[13px] line-clamp-3'
@@ -67,13 +63,10 @@ export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
         ) : null}
       </div>
 
-      <div className={`mt-auto flex w-full items-end justify-between border-t border-white/10 ${isApex ? 'pt-3' : 'gap-2 pt-2.5 pr-6'}`}>
+      <div className={`mt-auto flex w-full items-end justify-between border-t border-white/10 ${isApex ? 'pt-3' : 'gap-2 pt-2.5'}`}>
         <div className="min-w-0 pr-2">
           {item.target ? (
-            <div className="flex items-center gap-1.5 text-slate-400">
-              <Crosshair size={10} className="shrink-0 text-cyan-500/50" />
-              <span className="truncate font-mono text-[9px] uppercase tracking-widest">{item.target}</span>
-            </div>
+            <span className="truncate font-mono text-[9px] uppercase tracking-widest text-slate-400">{item.target}</span>
           ) : null}
         </div>
 
@@ -112,7 +105,7 @@ export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
       <div className="space-y-3">
         {apexItem ? renderCard(apexItem, 0, true) : null}
         {secondaryItems.length ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
+          <div className="grid grid-cols-2 gap-3 auto-rows-fr">
             {secondaryItems.map((item, index) => renderCard(item, index + 1, false))}
           </div>
         ) : null}

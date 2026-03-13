@@ -1,6 +1,5 @@
-import { useMemo, useRef, useState } from 'react';
-import { Zap, Layers } from 'lucide-react';
-import { DevelopmentCard } from './DevelopmentCard';
+import { useEffect, useMemo, useState } from 'react';
+import { X } from 'lucide-react';
 import { DisclosurePanel } from './DisclosurePanel';
 import { TimelineWidget } from './TimelineWidget';
 import { RiskMatrixWidget } from './RiskMatrixWidget';
@@ -28,9 +27,84 @@ function getSystemStatusTone(condition) {
   };
 }
 
+function DevelopmentModal({ dev, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  const keyFacts = Array.isArray(dev.key_facts) ? dev.key_facts : [];
+  const sources = Array.isArray(dev.sources) ? dev.sources : [];
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-slate-950/75 backdrop-blur-sm" />
+      <div
+        className="relative w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-2xl border border-white/10 bg-slate-900 shadow-[0_24px_60px_rgba(0,0,0,0.6)] animate-in fade-in zoom-in-95 duration-200"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-slate-900/95 backdrop-blur-md px-5 py-3">
+          <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-slate-400">
+            <span>{dev.region || 'GLOBAL'}</span>
+            <span className="text-slate-600">|</span>
+            <span>{dev.domain || 'MACRO'}</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="text-[10px] font-mono uppercase tracking-widest text-slate-100 font-semibold bg-slate-800 px-2 py-0.5 rounded-[3px]">
+              Impact: {dev.impact || 'HIGH'}
+            </div>
+            <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
+              <X size={16} strokeWidth={2} />
+            </button>
+          </div>
+        </div>
+
+        <div className="px-5 py-5">
+          <div className="flex gap-4 items-start mb-5">
+            <div className="text-3xl mt-0.5 shrink-0">{dev.icon}</div>
+            <h3 className="font-semibold text-white text-[18px] leading-snug">{dev.headline}</h3>
+          </div>
+
+          {dev.executive_summary ? (
+            <p className="text-slate-300 text-[14px] leading-relaxed mb-6">{dev.executive_summary}</p>
+          ) : null}
+
+          {keyFacts.length > 0 ? (
+            <>
+              <h4 className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500 mb-3">Key Facts</h4>
+              <ul className="space-y-3 mb-6">
+                {keyFacts.map((fact, i) => (
+                  <li key={i} className="flex gap-3 text-[13px] text-slate-300 leading-relaxed">
+                    <span className="text-slate-600 font-mono mt-0.5 select-none">///</span>
+                    <span>{fact}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+
+          {sources.length > 0 ? (
+            <>
+              <h4 className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500 mb-2">Sources</h4>
+              <div className="flex flex-wrap text-[11px] font-mono text-slate-500">
+                {sources.map((source, i) => (
+                  <span key={i} className="uppercase tracking-wider">
+                    {source}
+                    {i < sources.length - 1 && <span className="mx-2 text-slate-700 select-none">|</span>}
+                  </span>
+                ))}
+              </div>
+            </>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function BriefingDisplay({ briefing }) {
-  const [activeDomain, setActiveDomain] = useState('ALL');
-  const tacticalRef = useRef(null);
+  const [modalDev, setModalDev] = useState(null);
   const systemStatus = briefing?.system_status;
   const todayIn60 = Array.isArray(briefing?.today_in_60_seconds) ? briefing.today_in_60_seconds : [];
   const developments = Array.isArray(briefing?.major_developments) ? briefing.major_developments : [];
@@ -61,29 +135,12 @@ export function BriefingDisplay({ briefing }) {
     (Array.isArray(riskMatrix?.risks) && riskMatrix.risks.length > 0) ||
     macroIndicators.length > 0;
 
-  const meceDomains = useMemo(() => {
-    const domains = [
-      ...developments.map((dev) => dev.domain || 'MACRO'),
-      ...todayIn60.map((item) => item.domain).filter(Boolean)
-    ];
-    const uniqueDomains = new Set(domains);
-    return ['ALL', ...Array.from(uniqueDomains)];
-  }, [developments, todayIn60]);
-
-  const filteredDevelopments = useMemo(() => {
-    if (activeDomain === 'ALL') return developments;
-    return developments.filter((dev) => (dev.domain || 'MACRO') === activeDomain);
-  }, [activeDomain, developments]);
   const systemStatusTone = getSystemStatusTone(systemStatus?.condition || systemStatus?.indicator);
 
-  const handlePulseClick = (domain) => {
-    if (domain) setActiveDomain(domain);
-
-    if (tacticalRef.current) {
-      const yOffset = -80;
-      const y = tacticalRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
+  const handlePulseClick = (domain, itemId) => {
+    const match = developments.find((d) => d.id === itemId)
+      || developments.find((d) => (d.domain || 'MACRO') === domain);
+    if (match) setModalDev(match);
   };
 
   if (!briefing) return null;
@@ -97,7 +154,6 @@ export function BriefingDisplay({ briefing }) {
 
         <div className="flex items-center justify-between gap-2">
           <div className="inline-flex min-h-9 items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-[11px] font-bold tracking-widest uppercase text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.15)] backdrop-blur-md">
-            <Zap size={14} className="animate-pulse" />
             {briefing.date?.replace(/,?\s*\d{4}$/, '')}
           </div>
 
@@ -116,47 +172,6 @@ export function BriefingDisplay({ briefing }) {
 
       <div className="space-y-8">
         <PulseWidget items={todayIn60} onItemClick={handlePulseClick} />
-
-        <section ref={tacticalRef} className="scroll-mt-24">
-          <div className="flex items-center gap-2 mb-4 pl-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]"></div>
-            <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">Tactical Breakdown</h2>
-          </div>
-
-          <div className="flex overflow-x-auto hide-scrollbar gap-2 mb-5 pb-2 -mx-4 px-4 md:mx-0 md:px-0">
-            {meceDomains.map((domain) => {
-              const isActive = activeDomain === domain;
-              return (
-                <button
-                  key={domain}
-                  onClick={() => setActiveDomain(domain)}
-                  className={`whitespace-nowrap px-4 py-2 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest transition-all duration-300 backdrop-blur-md flex items-center gap-2 ${
-                    isActive
-                      ? 'bg-cyan-950/60 border border-cyan-400/50 text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)] scale-105'
-                      : 'bg-white/5 border border-white/10 text-slate-400 hover:text-slate-200 hover:bg-white/10'
-                  }`}
-                >
-                  {isActive && <Layers size={12} className="text-cyan-400" />}
-                  {domain}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl px-5 py-3 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-            <div className="flex flex-col animate-in fade-in slide-in-from-bottom-2 duration-500">
-              {filteredDevelopments.length > 0 ? (
-                filteredDevelopments.map((development) => (
-                  <DevelopmentCard key={development.id} development={development} />
-                ))
-              ) : (
-                <div className="text-center py-8 text-slate-500 font-mono text-[11px] uppercase tracking-widest bg-white/5 border border-white/10 rounded-2xl">
-                  No active signals in this sector.
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
 
         {hasSignalArchitecture ? (
           <section>
@@ -199,7 +214,7 @@ export function BriefingDisplay({ briefing }) {
           </section>
         ) : null}
 
-        <DisclosurePanel title="Where the network broadly agrees, and where it doesn’t." eyebrow="Network Consensus" accentClassName="text-purple-300">
+        <DisclosurePanel title="Where the network broadly agrees, and where it doesn't." eyebrow="Network Consensus" accentClassName="text-purple-300">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
             <div className="bg-gradient-to-br from-cyan-950/30 to-slate-900/40 backdrop-blur-xl p-5 rounded-2xl border border-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.05)]">
               <h3 className="text-[11px] font-extrabold uppercase tracking-widest text-cyan-400 mb-4">Verified Patterns</h3>
@@ -241,6 +256,8 @@ export function BriefingDisplay({ briefing }) {
           </div>
         </DisclosurePanel>
       </div>
+
+      {modalDev ? <DevelopmentModal dev={modalDev} onClose={() => setModalDev(null)} /> : null}
     </div>
   );
 }

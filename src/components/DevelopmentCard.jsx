@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-export function DevelopmentCard({ development }) {
+export function DevelopmentCard({ development, forceExpand }) {
   const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    if (forceExpand) setExpanded(true);
+  }, [forceExpand]);
   const region = development.region || 'GLOBAL';
   const domain = development.domain || 'MACRO';
   const impact = development.impact || 'HIGH';
@@ -18,8 +22,8 @@ export function DevelopmentCard({ development }) {
   };
 
   return (
-    <div className="bg-transparent border-b border-slate-200 dark:border-slate-800 py-5 first:pt-2 last:border-0 transition-all duration-200">
-      <div className="flex items-center justify-between mb-3 pl-10">
+    <div className="bg-transparent border-b border-slate-200 dark:border-slate-800 py-4 first:pt-1 last:border-0 transition-all duration-200">
+      <div className="flex items-center justify-between mb-2 pl-10">
         <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
           <span>{region}</span>
           <span className="text-slate-300 dark:text-slate-700">|</span>
@@ -38,7 +42,7 @@ export function DevelopmentCard({ development }) {
         tabIndex={0}
       >
         <div className="flex gap-4 items-start">
-          <div className="text-2xl mt-0.5 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+          <div className={`text-2xl mt-0.5 transition-all duration-300 ${expanded ? 'grayscale-0 opacity-100' : 'grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100'}`}>
             {development.icon}
           </div>
           <div className="flex-1">
