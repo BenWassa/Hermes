@@ -31,6 +31,31 @@ function getSystemStatusTone(condition) {
   return STATUS_TIERS.find((t) => t.test(s)) || STATUS_TIER_DEFAULT;
 }
 
+const LABEL_COLORS = {
+  cyan:   { letter: 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.55)]',   sep: 'bg-cyan-500/30',   line: 'bg-cyan-500/15',   note: 'text-cyan-500/40' },
+  purple: { letter: 'text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.55)]', sep: 'bg-purple-500/30', line: 'bg-purple-500/15', note: 'text-purple-500/40' },
+  amber:  { letter: 'text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.55)]',  sep: 'bg-amber-500/30',  line: 'bg-amber-500/15',  note: 'text-amber-500/40' },
+  slate:  { letter: 'text-slate-400',                                               sep: 'bg-slate-500/30',  line: 'bg-slate-500/15',  note: 'text-slate-500/40' },
+};
+
+function SectionLabel({ label, color = 'cyan', note }) {
+  const c = LABEL_COLORS[color] || LABEL_COLORS.slate;
+  return (
+    <div className="flex items-center mb-4">
+      <div className="flex items-center shrink-0 mr-3">
+        {label.toUpperCase().split('').map((char, i) => (
+          <span key={i} className="flex items-center">
+            {i > 0 && <span className={`inline-block w-px h-3.5 mx-[5px] ${c.sep}`} />}
+            <span className={`font-mono font-bold text-[14px] ${c.letter}`}>{char}</span>
+          </span>
+        ))}
+      </div>
+      <div className={`flex-1 h-px ${c.line}`} />
+      {note && <div className={`ml-3 shrink-0 font-mono text-[9px] uppercase tracking-widest ${c.note}`}>{note}</div>}
+    </div>
+  );
+}
+
 function DevelopmentModal({ dev, onClose }) {
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -161,10 +186,10 @@ export function BriefingDisplay({ briefing }) {
   if (!briefing) return null;
 
   return (
-    <div className="pb-32 max-w-2xl mx-auto px-4">
+    <div className="pb-32 max-w-2xl mx-auto px-3">
       <header className="pt-6 pb-5 flex flex-col gap-2.5">
         <div className="flex items-center justify-center gap-3">
-          <HermesMark className="h-9 w-9 shrink-0 rounded-xl shadow-[0_0_18px_rgba(34,211,238,0.16)]" />
+          <HermesMark className="h-10 w-10 shrink-0 object-contain drop-shadow-[0_0_18px_rgba(34,211,238,0.16)]" />
           <h1 className="text-center text-[24px] font-extrabold uppercase tracking-[0.14em] stark-gradient-text drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">
             Hermes
           </h1>
@@ -204,9 +229,7 @@ export function BriefingDisplay({ briefing }) {
 
         {hasSignalArchitecture ? (
           <section>
-            <div className="mb-4 border-l-2 border-cyan-500/40 pl-3">
-              <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">Signal Architecture</h2>
-            </div>
+            <SectionLabel label="Signals" color="cyan" />
 
             <div className="grid grid-cols-1 gap-4">
               {timelineContext?.events?.length ? (
@@ -245,94 +268,96 @@ export function BriefingDisplay({ briefing }) {
         ) : null}
 
         {(consensus.length > 0 || friction.length > 0) ? (
-          <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden">
-            <div className="px-5 pt-4 pb-3 border-b border-white/8">
-              <div className="text-[10px] font-bold uppercase tracking-[0.24em] mb-1 text-purple-300">Network Consensus</div>
-              <div className="grid grid-cols-2 gap-3">
-                {consensus[0] ? (
-                  <p className="text-[13px] text-slate-300 leading-snug line-clamp-2">
-                    <span className="text-cyan-500 font-bold mr-1">›</span>{consensus[0]}
-                  </p>
-                ) : null}
-                {friction[0] ? (
-                  <p className="text-[13px] text-slate-300 leading-snug line-clamp-2">
-                    <span className="text-amber-500 font-bold mr-1">›</span>{friction[0]}
-                  </p>
-                ) : null}
+          <section>
+            <SectionLabel label="Consensus" color="purple" />
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden">
+              <div className="px-5 pt-4 pb-3 border-b border-white/8">
+                <div className="grid grid-cols-2 gap-3">
+                  {consensus[0] ? (
+                    <p className="text-[13px] text-slate-300 leading-snug line-clamp-2">
+                      <span className="text-cyan-500 font-bold mr-1">›</span>{consensus[0]}
+                    </p>
+                  ) : null}
+                  {friction[0] ? (
+                    <p className="text-[13px] text-slate-300 leading-snug line-clamp-2">
+                      <span className="text-amber-500 font-bold mr-1">›</span>{friction[0]}
+                    </p>
+                  ) : null}
+                </div>
               </div>
+
+              {consensusExpanded ? (
+                <div className="px-5 py-4 grid grid-cols-1 md:grid-cols-2 gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="bg-gradient-to-br from-cyan-950/30 to-slate-900/40 backdrop-blur-xl p-4 rounded-xl border border-cyan-500/20">
+                    <h3 className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-400 mb-3">Verified Patterns</h3>
+                    <ul className="space-y-2.5">
+                      {consensus.map((item, index) => (
+                        <li key={index} className="text-[13px] text-slate-200 leading-relaxed flex gap-2">
+                          <span className="text-cyan-500 font-bold shrink-0">›</span>{item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="bg-gradient-to-br from-amber-950/30 to-slate-900/40 backdrop-blur-xl p-4 rounded-xl border border-amber-500/20">
+                    <h3 className="text-[10px] font-extrabold uppercase tracking-widest text-amber-500 mb-3">Friction Points</h3>
+                    <ul className="space-y-2.5">
+                      {friction.map((item, index) => (
+                        <li key={index} className="text-[13px] text-slate-200 leading-relaxed flex gap-2">
+                          <span className="text-amber-500 font-bold shrink-0">›</span>{item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ) : null}
+
+              {(consensus.length > 1 || friction.length > 1) ? (
+                <button
+                  type="button"
+                  onClick={() => setConsensusExpanded((p) => !p)}
+                  className="w-full px-5 py-2.5 text-left text-[10px] font-mono uppercase tracking-widest text-slate-500 hover:text-cyan-400 transition-colors border-t border-white/5"
+                >
+                  {consensusExpanded ? '— Show less' : `+ Show all ${Math.max(consensus.length, friction.length)} signals`}
+                </button>
+              ) : null}
             </div>
-
-            {consensusExpanded ? (
-              <div className="px-5 py-4 grid grid-cols-1 md:grid-cols-2 gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
-                <div className="bg-gradient-to-br from-cyan-950/30 to-slate-900/40 backdrop-blur-xl p-4 rounded-xl border border-cyan-500/20">
-                  <h3 className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-400 mb-3">Verified Patterns</h3>
-                  <ul className="space-y-2.5">
-                    {consensus.map((item, index) => (
-                      <li key={index} className="text-[13px] text-slate-200 leading-relaxed flex gap-2">
-                        <span className="text-cyan-500 font-bold shrink-0">›</span>{item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-gradient-to-br from-amber-950/30 to-slate-900/40 backdrop-blur-xl p-4 rounded-xl border border-amber-500/20">
-                  <h3 className="text-[10px] font-extrabold uppercase tracking-widest text-amber-500 mb-3">Friction Points</h3>
-                  <ul className="space-y-2.5">
-                    {friction.map((item, index) => (
-                      <li key={index} className="text-[13px] text-slate-200 leading-relaxed flex gap-2">
-                        <span className="text-amber-500 font-bold shrink-0">›</span>{item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ) : null}
-
-            {(consensus.length > 1 || friction.length > 1) ? (
-              <button
-                type="button"
-                onClick={() => setConsensusExpanded((p) => !p)}
-                className="w-full px-5 py-2.5 text-left text-[10px] font-mono uppercase tracking-widest text-slate-500 hover:text-cyan-400 transition-colors border-t border-white/5"
-              >
-                {consensusExpanded ? '— Show less' : `+ Show all ${Math.max(consensus.length, friction.length)} signals`}
-              </button>
-            ) : null}
           </section>
         ) : null}
 
         {strategicContext.length > 0 ? (
-          <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden">
-            <div className="px-5 pt-4 pb-3 border-b border-white/8">
-              <div className="text-[10px] font-bold uppercase tracking-[0.24em] mb-1 text-cyan-200">Strategic Context</div>
-              <p className="text-[13.5px] text-slate-300 leading-relaxed line-clamp-2">{strategicContext[0]}</p>
-            </div>
-
-            {contextExpanded ? (
-              <div className="px-5 py-4 animate-in fade-in slide-in-from-top-2 duration-200">
-                {strategicContext.map((paragraph, index) => (
-                  <p key={index} className="text-slate-200 leading-loose mb-4 last:mb-0 text-[14px]">
-                    {paragraph}
-                  </p>
-                ))}
+          <section>
+            <SectionLabel label="Context" color="slate" />
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden">
+              <div className="px-5 pt-4 pb-3 border-b border-white/8">
+                <p className="text-[13.5px] text-slate-300 leading-relaxed line-clamp-2">{strategicContext[0]}</p>
               </div>
-            ) : null}
 
-            {strategicContext.length > 1 ? (
-              <button
-                type="button"
-                onClick={() => setContextExpanded((p) => !p)}
-                className="w-full px-5 py-2.5 text-left text-[10px] font-mono uppercase tracking-widest text-slate-500 hover:text-cyan-400 transition-colors border-t border-white/5"
-              >
-                {contextExpanded ? '— Show less' : `+ Show ${strategicContext.length - 1} more`}
-              </button>
-            ) : null}
+              {contextExpanded ? (
+                <div className="px-5 py-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                  {strategicContext.map((paragraph, index) => (
+                    <p key={index} className="text-slate-200 leading-loose mb-4 last:mb-0 text-[14px]">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              ) : null}
+
+              {strategicContext.length > 1 ? (
+                <button
+                  type="button"
+                  onClick={() => setContextExpanded((p) => !p)}
+                  className="w-full px-5 py-2.5 text-left text-[10px] font-mono uppercase tracking-widest text-slate-500 hover:text-cyan-400 transition-colors border-t border-white/5"
+                >
+                  {contextExpanded ? '— Show less' : `+ Show ${strategicContext.length - 1} more`}
+                </button>
+              ) : null}
+            </div>
           </section>
         ) : null}
 
         {briefing.watchlist ? (
           <section>
-            <div className="flex items-center gap-2 mb-3 border-l-2 border-amber-500/40 pl-3">
-              <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">Watchlist</h2>
-            </div>
+            <SectionLabel label="Watchlist" color="amber" />
             <div className="bg-gradient-to-r from-amber-950/40 to-transparent backdrop-blur-xl border border-amber-500/20 rounded-2xl px-5 py-4">
               <p className="text-amber-100 font-medium leading-relaxed text-[15px]">{briefing.watchlist}</p>
             </div>

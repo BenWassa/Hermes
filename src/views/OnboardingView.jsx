@@ -13,7 +13,7 @@ export function OnboardingView({ isSigningIn, error, onSignIn }) {
           Hermes Access Gate
         </div>
         <div className="flex items-center justify-center gap-3">
-          <HermesMark className="h-11 w-11 shrink-0 rounded-2xl shadow-[0_0_20px_rgba(34,211,238,0.16)]" />
+          <HermesMark className="h-12 w-12 shrink-0 object-contain drop-shadow-[0_0_20px_rgba(34,211,238,0.16)]" />
           <h1 className="text-4xl font-extrabold uppercase tracking-tight stark-gradient-text drop-shadow-[0_0_15px_rgba(34,211,238,0.35)]">
             Hermes
           </h1>
