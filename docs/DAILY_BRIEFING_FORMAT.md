@@ -67,6 +67,18 @@ The current UI expects the following structure.
 - Keep `id` aligned to the actual briefing date.
 - Keep headlines short enough to fit mobile cards cleanly.
 - Keep summaries dense and analytical, not conversational.
+- Use standard JSON double quotes: `"`, not smart quotes like `“` or `”`.
+
+## Paste Handling
+
+The importer now sanitizes a few common paste issues before parsing:
+
+- Smart double quotes are converted to standard JSON quotes.
+- Smart single quotes are normalized.
+- Markdown code fences such as ````json` ... ``` ` are stripped.
+- Non-breaking spaces and zero-width characters are removed.
+
+This makes pasted output from chat tools and rich-text editors more tolerant, but the payload still needs to be valid JSON after normalization.
 
 ## Minimal Valid Example
 

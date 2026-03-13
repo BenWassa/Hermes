@@ -3,6 +3,7 @@ import { BottomNav } from './components/BottomNav';
 import { SAMPLE_BRIEFING } from './data/sampleBriefing';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { getTodayId } from './utils/date';
+import { sanitizeJsonInput } from './utils/json';
 import { AddBriefingView } from './views/AddBriefingView';
 import { ArchiveView } from './views/ArchiveView';
 import { HomeView } from './views/HomeView';
@@ -46,7 +47,8 @@ export default function App() {
   const handleImport = () => {
     try {
       setError('');
-      const parsed = JSON.parse(jsonInput);
+      const sanitizedInput = sanitizeJsonInput(jsonInput);
+      const parsed = JSON.parse(sanitizedInput);
 
       if (!parsed.id || !parsed.date || !parsed.today_in_60_seconds) {
         throw new Error('Invalid format: missing required fields (id, date, today_in_60_seconds)');
@@ -66,7 +68,10 @@ export default function App() {
       setViewingDateId(parsed.id);
       setCurrentView('home');
     } catch (importError) {
-      setError(importError.message || 'Invalid JSON syntax. Please check your format.');
+      setError(
+        importError.message ||
+          'Invalid JSON syntax. Check for malformed structure or unsupported pasted formatting.'
+      );
     }
   };
 
