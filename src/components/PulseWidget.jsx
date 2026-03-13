@@ -120,10 +120,7 @@ export function PulseWidget({ title = 'Pulse', items, onItemClick }) {
   return (
     <section>
       <div className="mb-4 flex items-center justify-between border-l-2 border-cyan-500/40 pl-3">
-        <div className="flex items-center gap-2">
-          <div className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] animate-pulse"></div>
-          <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">{title}</h2>
-        </div>
+        <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">{title}</h2>
         <div className="hidden text-[9px] font-mono uppercase tracking-widest text-cyan-500/50 sm:block">
           Net-Assessment // {safeItems.length} Vectors
         </div>

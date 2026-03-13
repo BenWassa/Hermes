@@ -9,25 +9,20 @@ import { PulseWidget } from './PulseWidget';
 const STATUS_TIERS = [
   { level: 5, test: (s) => s.includes('CRIT'),
     shell: 'border-rose-500/30 bg-rose-950/30 text-rose-300 shadow-[0_0_20px_rgba(244,63,94,0.2)]',
-    dot: 'bg-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.9)] animate-pulse',
     bar: 'bg-rose-400 shadow-[0_0_4px_rgba(244,63,94,0.8)]' },
   { level: 4, test: (s) => s.includes('SEVER') || s.includes('HIGH'),
     shell: 'border-orange-500/30 bg-orange-950/30 text-orange-300 shadow-[0_0_20px_rgba(249,115,22,0.18)]',
-    dot: 'bg-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.9)] animate-pulse',
     bar: 'bg-orange-400 shadow-[0_0_4px_rgba(249,115,22,0.8)]' },
   { level: 3, test: (s) => s.includes('ELEVAT') || s.includes('VOLAT'),
     shell: 'border-amber-500/30 bg-amber-950/30 text-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.16)]',
-    dot: 'bg-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.85)] animate-pulse',
     bar: 'bg-amber-400 shadow-[0_0_4px_rgba(245,158,11,0.8)]' },
   { level: 2, test: (s) => s.includes('GUARD') || s.includes('MODER'),
     shell: 'border-blue-500/30 bg-blue-950/30 text-blue-300 shadow-[0_0_18px_rgba(59,130,246,0.14)]',
-    dot: 'bg-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.8)]',
     bar: 'bg-blue-400 shadow-[0_0_4px_rgba(59,130,246,0.7)]' },
 ];
 const STATUS_TIER_DEFAULT = {
   level: 1,
   shell: 'border-cyan-500/30 bg-cyan-950/30 text-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.14)]',
-  dot: 'bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]',
   bar: 'bg-cyan-400 shadow-[0_0_4px_rgba(34,211,238,0.7)]'
 };
 
@@ -182,9 +177,8 @@ export function BriefingDisplay({ briefing }) {
 
           {systemStatus ? (
             <div
-              className={`inline-flex items-center gap-2.5 rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell}`}
+              className={`inline-flex items-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell}`}
             >
-              <div className={`h-2 w-2 shrink-0 rounded-full ${systemStatusTone.dot}`}></div>
               <div className="flex flex-col gap-1.5 leading-none">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em]">{systemStatus.condition || 'NOMINAL'}</span>
                 <div className="flex items-center gap-[3px]">
@@ -210,8 +204,7 @@ export function BriefingDisplay({ briefing }) {
 
         {hasSignalArchitecture ? (
           <section>
-            <div className="flex items-center gap-2 mb-4 border-l-2 border-cyan-500/40 pl-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(165,243,252,0.8)]"></div>
+            <div className="mb-4 border-l-2 border-cyan-500/40 pl-3">
               <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">Signal Architecture</h2>
             </div>
 
