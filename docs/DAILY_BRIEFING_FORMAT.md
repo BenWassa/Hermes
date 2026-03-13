@@ -23,6 +23,9 @@ The current UI expects the following structure.
   "major_developments": [
     {
       "id": "dev-1",
+      "domain": "GEOPOLITICS",
+      "region": "MIDDLE EAST",
+      "impact": "HIGH",
       "icon": "🛢️",
       "headline": "Oil Shock and War Risk",
       "executive_summary": "Short executive summary.",
@@ -54,6 +57,9 @@ The current UI expects the following structure.
 - `today_in_60_seconds`: short, high-signal scan layer for the home Bento grid.
 - `major_developments`: each item renders as an expandable story card.
 - `major_developments[].id`: stable story identifier within the day.
+- `major_developments[].domain`: required for the Tactical Breakdown filter bar. Use strict uppercase buckets such as `GEOPOLITICS`, `MACRO`, `TECH`, `ENERGY`, or `DEFENSE`.
+- `major_developments[].region`: optional scanning anchor shown above the card headline. Example values: `GLOBAL`, `US`, `EUROPE`, `MIDDLE EAST`, `ASIA`.
+- `major_developments[].impact`: optional scanning anchor for visual priority. Recommended values: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
 - `major_developments[].sources`: short source labels only.
 - `analyst_consensus.consensus`: areas of broad agreement.
 - `analyst_consensus.friction`: areas of disagreement or uncertainty.
@@ -67,6 +73,8 @@ The current UI expects the following structure.
 - Keep `id` aligned to the actual briefing date.
 - Keep headlines short enough to fit mobile cards cleanly.
 - Keep summaries dense and analytical, not conversational.
+- Keep `major_developments[].domain` MECE where possible so each story fits one primary bucket.
+- Prefer consistent uppercase values for `domain`, `region`, and `impact`.
 - Use standard JSON double quotes: `"`, not smart quotes like `“` or `”`.
 
 ## Paste Handling
@@ -101,3 +109,5 @@ The importer currently validates only:
 - `today_in_60_seconds`
 
 The rest of the fields should still be included, because the UI is built to render the full briefing shape.
+
+The current UI also expects `major_developments` to be present for the Tactical Breakdown section. If `domain` values are supplied, the interface generates filter tabs automatically from those values.

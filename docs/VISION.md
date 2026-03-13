@@ -128,10 +128,28 @@ Immediate situational awareness.
 
 Below the Bento grid.
 
-Stories appear as stacked cards.
+Stories appear as stacked cards inside a filterable tactical module.
+
+Above the cards, the interface exposes a horizontally scrolling MECE filter bar generated from the story taxonomy.
+
+Default tab:
+
+ALL
+
+Example domain tabs:
+
+GEOPOLITICS  
+MACRO  
+TECH  
+ENERGY
+
+Purpose:
+
+Move from visual scan into structured exploration without overwhelming the user.
 
 Card structure:
 
+Region / Domain / Impact metadata  
 Icon  
 Headline  
 Executive summary
@@ -159,6 +177,14 @@ Reuters · Bloomberg · FT
 Interaction:
 
 Tap -> expand / collapse.
+
+Filter interaction:
+
+Tap domain tab -> isolate only stories in that sector.
+
+JSON requirement:
+
+Each `major_developments` item should include a primary `domain` value. `region` and `impact` should also be included when available to strengthen scanning anchors.
 
 ---
 
