@@ -65,8 +65,13 @@ export default function App() {
       });
 
       setJsonInput('');
-      setViewingDateId(parsed.id);
-      setCurrentView('home');
+      if (parsed.id === getTodayId()) {
+        setViewingDateId(null);
+        setCurrentView('home');
+      } else {
+        setViewingDateId(parsed.id);
+        setCurrentView('archive');
+      }
     } catch (importError) {
       setError(
         importError.message ||
