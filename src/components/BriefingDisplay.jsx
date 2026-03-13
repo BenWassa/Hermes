@@ -1,10 +1,11 @@
 import { useMemo, useRef, useState } from 'react';
-import { Zap, Layers, ArrowDownRight } from 'lucide-react';
+import { Zap, Layers } from 'lucide-react';
 import { DevelopmentCard } from './DevelopmentCard';
 import { DisclosurePanel } from './DisclosurePanel';
 import { TimelineWidget } from './TimelineWidget';
 import { RiskMatrixWidget } from './RiskMatrixWidget';
 import { MacroSparklineWidget } from './MacroSparklineWidget';
+import { PulseWidget } from './PulseWidget';
 
 export function BriefingDisplay({ briefing }) {
   const [activeDomain, setActiveDomain] = useState('ALL');
@@ -77,53 +78,7 @@ export function BriefingDisplay({ briefing }) {
       </header>
 
       <div className="space-y-8">
-        <section>
-          <div className="flex items-center gap-2 mb-4 pl-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div>
-            <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">60-Second Pulse</h2>
-          </div>
-          <div className="grid grid-cols-2 gap-3 auto-rows-fr">
-            {todayIn60.map((item, index) => {
-              const isApex = index === 0;
-              return (
-                <button
-                  key={index}
-                  onClick={() => handlePulseClick(item.domain)}
-                  className={`group relative overflow-hidden text-left bg-white/5 backdrop-blur-xl border rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/10 transition-all duration-300 active:scale-95 ${
-                    isApex
-                      ? 'col-span-2 p-6 border-cyan-500/20 hover:border-cyan-400/40 hover:shadow-[0_0_24px_rgba(34,211,238,0.12)] active:bg-cyan-900/20'
-                      : 'p-5 border-white/10 hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] active:bg-slate-800/50'
-                  }`}
-                  type="button"
-                >
-                  <div className="absolute bottom-3 right-3 text-cyan-400 opacity-30 transition-opacity duration-300 group-hover:opacity-100">
-                    <ArrowDownRight size={14} strokeWidth={2.5} />
-                  </div>
-
-                  <div className={`flex ${isApex ? 'items-center gap-4' : 'flex-col gap-3'}`}>
-                    <div
-                      className={`shrink-0 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border border-white/5 flex items-center justify-center shadow-inner ${
-                        isApex ? 'w-16 h-16 text-3xl' : 'w-12 h-12 text-2xl'
-                      }`}
-                    >
-                      {item.icon}
-                    </div>
-                    <div className="min-w-0 pr-4">
-                      {isApex && (
-                        <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-cyan-400 mb-2">
-                          Apex Signal
-                        </div>
-                      )}
-                      <span className={`font-semibold text-white leading-snug ${isApex ? 'text-[18px]' : 'text-[14px]'}`}>
-                        {item.headline}
-                      </span>
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </section>
+        <PulseWidget items={todayIn60} onItemClick={handlePulseClick} />
 
         <section ref={tacticalRef} className="scroll-mt-24">
           <div className="flex items-center gap-2 mb-4 pl-1">
