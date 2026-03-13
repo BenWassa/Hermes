@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { X } from 'lucide-react';
-import { HermesMark } from './HermesMark';
 import { TimelineWidget } from './TimelineWidget';
 import { RiskMatrixWidget } from './RiskMatrixWidget';
 import { MacroSparklineWidget } from './MacroSparklineWidget';
@@ -219,9 +218,9 @@ export function BriefingDisplay({ briefing }) {
           Hermes
         </h1>
 
-        <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3">
-          <div className="inline-flex rounded-2xl border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)]">
-            <div className="flex flex-col leading-none">
+        <div className="flex items-center justify-between gap-3">
+          <div className="inline-flex min-h-[48px] items-center rounded-2xl border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)]">
+            <div className="flex flex-col justify-center leading-none">
               <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
                 {briefing.date?.replace(/,?\s*\d{4}$/, '')}
               </span>
@@ -233,15 +232,11 @@ export function BriefingDisplay({ briefing }) {
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <HermesMark className="h-14 w-14 shrink-0 object-contain drop-shadow-[0_0_20px_rgba(34,211,238,0.18)]" />
-          </div>
-
           {systemStatus ? (
             <div
-              className={`inline-flex justify-self-end items-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell}`}
+              className={`inline-flex min-h-[48px] justify-self-end items-center rounded-2xl border px-3 py-2 backdrop-blur-md ${systemStatusTone.shell}`}
             >
-              <div className="flex flex-col gap-1.5 leading-none">
+              <div className="flex flex-col justify-center gap-1.5 leading-none">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em]">{systemStatus.condition || 'NOMINAL'}</span>
                 <div className="flex items-center gap-[3px]">
                   {[1, 2, 3, 4, 5].map((i) => (
@@ -257,9 +252,7 @@ export function BriefingDisplay({ briefing }) {
                 </div>
               </div>
             </div>
-          ) : (
-            <div />
-          )}
+          ) : null}
         </div>
       </header>
 
