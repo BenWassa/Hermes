@@ -7,6 +7,11 @@ and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+## [1.0.5] - 2026-03-13
+
+### Changed
+- Patch version bump for the current Firebase Hosting deployment line.
+
 ## [1.0.4] - 2026-03-13
 
 ### Changed
