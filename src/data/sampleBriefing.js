@@ -2,10 +2,10 @@ export const SAMPLE_BRIEFING = {
   id: '2026-03-09',
   date: 'March 9, 2026',
   today_in_60_seconds: [
-    { icon: '🛢️', headline: 'Oil volatility spikes' },
-    { icon: '📉', headline: 'Markets reprice inflation risk' },
-    { icon: '🤖', headline: 'China accelerates AI push' },
-    { icon: '⚖️', headline: 'Pentagon-AI tension emerges' }
+    { icon: '🛢️', headline: 'Oil volatility spikes', domain: 'ENERGY' },
+    { icon: '📉', headline: 'Markets reprice inflation risk', domain: 'MACRO' },
+    { icon: '🤖', headline: 'China accelerates AI push', domain: 'TECH' },
+    { icon: '⚖️', headline: 'Pentagon-AI tension emerges', domain: 'DEFENSE' }
   ],
   major_developments: [
     {
@@ -39,6 +39,38 @@ export const SAMPLE_BRIEFING = {
         'Talent acquisition becomes state-level priority'
       ],
       sources: ['WSJ', 'TechCrunch', 'State Dept']
+    },
+    {
+      id: 'dev-3',
+      domain: 'MACRO',
+      region: 'GLOBAL',
+      impact: 'HIGH',
+      icon: '📉',
+      headline: 'Inflation Path Repriced',
+      executive_summary:
+        'Bond and equity desks are resetting expectations for the timing and depth of rate cuts.',
+      key_facts: [
+        'Front-end yields rose as inflation hedges widened',
+        'Cross-asset volatility expanded beyond energy-sensitive sectors',
+        'FX desks repositioned around renewed dollar strength'
+      ],
+      sources: ['Bloomberg', 'FT', 'Reuters']
+    },
+    {
+      id: 'dev-4',
+      domain: 'DEFENSE',
+      region: 'UNITED STATES',
+      impact: 'MEDIUM',
+      icon: '⚖️',
+      headline: 'Pentagon-AI Governance Friction',
+      executive_summary:
+        'Procurement urgency is colliding with compliance, explainability, and operational control requirements.',
+      key_facts: [
+        'Program reviews slowed one autonomous systems deployment track',
+        'Vendors are being pushed to document model assurance more rigorously',
+        'Acquisition teams are splitting between speed and auditability priorities'
+      ],
+      sources: ['Defense One', 'WSJ', 'DoD']
     }
   ],
   timeline_context: {

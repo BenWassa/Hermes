@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Zap, Layers } from 'lucide-react';
+import { useMemo, useRef, useState } from 'react';
+import { Zap, Layers, ArrowDownRight } from 'lucide-react';
 import { DevelopmentCard } from './DevelopmentCard';
 import { DisclosurePanel } from './DisclosurePanel';
 import { TimelineWidget } from './TimelineWidget';
@@ -8,6 +8,7 @@ import { MacroSparklineWidget } from './MacroSparklineWidget';
 
 export function BriefingDisplay({ briefing }) {
   const [activeDomain, setActiveDomain] = useState('ALL');
+  const tacticalRef = useRef(null);
   const todayIn60 = Array.isArray(briefing?.today_in_60_seconds) ? briefing.today_in_60_seconds : [];
   const developments = Array.isArray(briefing?.major_developments) ? briefing.major_developments : [];
   const consensus = Array.isArray(briefing?.analyst_consensus?.consensus)
@@ -38,15 +39,28 @@ export function BriefingDisplay({ briefing }) {
     macroIndicators.length > 0;
 
   const meceDomains = useMemo(() => {
-    const domains = developments.map((dev) => dev.domain || 'MACRO');
+    const domains = [
+      ...developments.map((dev) => dev.domain || 'MACRO'),
+      ...todayIn60.map((item) => item.domain).filter(Boolean)
+    ];
     const uniqueDomains = new Set(domains);
     return ['ALL', ...Array.from(uniqueDomains)];
-  }, [developments]);
+  }, [developments, todayIn60]);
 
   const filteredDevelopments = useMemo(() => {
     if (activeDomain === 'ALL') return developments;
     return developments.filter((dev) => (dev.domain || 'MACRO') === activeDomain);
   }, [activeDomain, developments]);
+
+  const handlePulseClick = (domain) => {
+    if (domain) setActiveDomain(domain);
+
+    if (tacticalRef.current) {
+      const yOffset = -80;
+      const y = tacticalRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   if (!briefing) return null;
 
@@ -72,23 +86,29 @@ export function BriefingDisplay({ briefing }) {
             {todayIn60.map((item, index) => {
               const isApex = index === 0;
               return (
-                <div
+                <button
                   key={index}
-                  className={`bg-white/5 backdrop-blur-xl border rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/10 transition-all duration-300 active:scale-95 ${
+                  onClick={() => handlePulseClick(item.domain)}
+                  className={`group relative overflow-hidden text-left bg-white/5 backdrop-blur-xl border rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/10 transition-all duration-300 active:scale-95 ${
                     isApex
-                      ? 'col-span-2 p-6 border-cyan-500/20 hover:border-cyan-400/40 hover:shadow-[0_0_24px_rgba(34,211,238,0.12)]'
-                      : 'p-5 border-white/10 hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)]'
+                      ? 'col-span-2 p-6 border-cyan-500/20 hover:border-cyan-400/40 hover:shadow-[0_0_24px_rgba(34,211,238,0.12)] active:bg-cyan-900/20'
+                      : 'p-5 border-white/10 hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] active:bg-slate-800/50'
                   }`}
+                  type="button"
                 >
+                  <div className="absolute bottom-3 right-3 text-cyan-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <ArrowDownRight size={14} strokeWidth={2.5} />
+                  </div>
+
                   <div className={`flex ${isApex ? 'items-center gap-4' : 'flex-col gap-3'}`}>
                     <div
-                      className={`rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border border-white/5 flex items-center justify-center shadow-inner ${
+                      className={`shrink-0 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border border-white/5 flex items-center justify-center shadow-inner ${
                         isApex ? 'w-16 h-16 text-3xl' : 'w-12 h-12 text-2xl'
                       }`}
                     >
                       {item.icon}
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 pr-4">
                       {isApex && (
                         <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-cyan-400 mb-2">
                           Apex Signal
@@ -99,13 +119,13 @@ export function BriefingDisplay({ briefing }) {
                       </span>
                     </div>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
         </section>
 
-        <section>
+        <section ref={tacticalRef} className="scroll-mt-24">
           <div className="flex items-center gap-2 mb-4 pl-1">
             <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]"></div>
             <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">Tactical Breakdown</h2>

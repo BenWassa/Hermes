@@ -50,8 +50,16 @@ export default function App() {
       const sanitizedInput = sanitizeJsonInput(jsonInput);
       const parsed = JSON.parse(sanitizedInput);
 
-      if (!parsed.id || !parsed.date || !parsed.today_in_60_seconds) {
-        throw new Error('Invalid format: missing required fields (id, date, today_in_60_seconds)');
+      if (!parsed.id) {
+        throw new Error('Missing required field: "id" (Format: YYYY-MM-DD)');
+      }
+      if (!parsed.date) {
+        throw new Error('Missing required field: "date" (Display date string)');
+      }
+      if (!parsed.today_in_60_seconds || !Array.isArray(parsed.today_in_60_seconds)) {
+        throw new Error(
+          'Missing or invalid required field: "today_in_60_seconds" (Must be an array of { icon, headline })'
+        );
       }
 
       setBriefings((existing) => {
