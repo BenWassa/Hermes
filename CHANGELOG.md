@@ -7,6 +7,12 @@ and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+## [1.0.4] - 2026-03-13
+
+### Changed
+- Switched Hermes to a checked-in default Firebase web config so GitHub Actions and local builds no longer depend on repo secrets for the current project.
+- Simplified Firebase Hosting and release workflows by removing the temporary `VITE_FIREBASE_*` secret injection path.
+
 ## [1.0.3] - 2026-03-13
 
 ### Changed

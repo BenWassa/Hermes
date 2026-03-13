@@ -29,12 +29,13 @@ Hermes is a mobile-first intelligence dashboard for daily AI-generated geopoliti
 
 ## Firebase Setup
 
-1. Copy `.env.example` to `.env`.
-2. Fill in the Firebase web app values in `.env`.
-3. In Firebase Console, enable `Authentication` -> `Sign-in method` -> `Google`.
-4. In Firebase Authentication settings, make sure your local dev host and Firebase Hosting domain are listed under authorized domains.
-5. This app uses Firebase Auth client-side only. If the auth session disappears, the UI returns to the onboarding sign-in view automatically.
-6. Hermes currently enforces an app-level UID allowlist in `src/App.jsx`. Only approved Firebase user UIDs can enter the app shell.
+The default Firebase web app config for Hermes is checked into the client bundle, so local dev and GitHub Actions deploys do not require extra env setup for the current project.
+
+1. Optional: copy `.env.example` to `.env` only if you want to override the default Firebase project locally.
+2. In Firebase Console, enable `Authentication` -> `Sign-in method` -> `Google`.
+3. In Firebase Authentication settings, make sure your local dev host and Firebase Hosting domain are listed under authorized domains.
+4. This app uses Firebase Auth client-side only. If the auth session disappears, the UI returns to the onboarding sign-in view automatically.
+5. Hermes currently enforces an app-level UID allowlist in `src/App.jsx`. Only approved Firebase user UIDs can enter the app shell.
 
 ## Firebase Hosting
 
@@ -45,15 +46,6 @@ Deploy flow:
 1. Install the Firebase CLI if needed: `npm install -g firebase-tools`
 2. Log in: `firebase login`
 3. Build and deploy hosting: `npm run deploy:hosting`
-
-If you deploy through GitHub Actions instead of the local CLI, add these repository secrets so the Vite build can inject the Firebase web config:
-
-- `VITE_FIREBASE_API_KEY`
-- `VITE_FIREBASE_AUTH_DOMAIN`
-- `VITE_FIREBASE_PROJECT_ID`
-- `VITE_FIREBASE_STORAGE_BUCKET`
-- `VITE_FIREBASE_MESSAGING_SENDER_ID`
-- `VITE_FIREBASE_APP_ID`
 
 Because the app is a Vite SPA, Hosting only needs to serve `dist/` and rewrite routes to `index.html`.
 
