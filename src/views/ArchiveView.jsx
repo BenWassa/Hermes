@@ -1,8 +1,8 @@
-import { ArrowUpRight, FolderArchive } from 'lucide-react';
+import { ArrowUpRight, FolderArchive, Plus } from 'lucide-react';
 
-export function ArchiveView({ briefings, onOpenBriefing }) {
+export function ArchiveView({ briefings, onOpenBriefing, onAdd }) {
   return (
-    <div className="pb-24 max-w-2xl mx-auto pt-8 px-4 animate-in fade-in duration-300">
+    <div className="pb-32 max-w-2xl mx-auto pt-8 px-4 animate-in fade-in duration-300 relative min-h-[calc(100vh-8rem)]">
       <header className="pb-6 flex flex-col items-center text-center">
         <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-blue-950/40 border border-blue-500/20 text-blue-300 shadow-[0_0_20px_rgba(96,165,250,0.12)] backdrop-blur-md mb-4">
           <FolderArchive size={24} strokeWidth={2} />
@@ -53,6 +53,19 @@ export function ArchiveView({ briefings, onOpenBriefing }) {
           ))}
         </div>
       )}
+
+      {/* Prominent Import Button */}
+      <div className="fixed bottom-24 left-0 w-full z-40 pointer-events-none flex justify-center px-6">
+        <div className="w-full max-w-2xl flex justify-end">
+          <button
+            onClick={onAdd}
+            className="pointer-events-auto flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-5 py-3.5 rounded-full font-bold uppercase tracking-wider text-xs shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:shadow-[0_0_35px_rgba(34,211,238,0.6)] transition-all transform hover:scale-105"
+          >
+            <Plus size={18} strokeWidth={2.5} />
+            Import Briefing
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

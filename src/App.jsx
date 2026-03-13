@@ -93,7 +93,7 @@ export default function App() {
         )}
 
         {currentView === 'archive' && (
-          <ArchiveView briefings={briefings} onOpenBriefing={openBriefing} />
+          <ArchiveView briefings={briefings} onOpenBriefing={openBriefing} onAdd={() => setCurrentView('add')} />
         )}
 
         {currentView === 'search' && (
