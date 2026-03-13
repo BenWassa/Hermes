@@ -1,12 +1,53 @@
 export const SAMPLE_BRIEFING = {
   id: '2026-03-09',
   date: 'March 9, 2026',
+  system_status: {
+    condition: 'ELEVATED',
+    indicator: 'VOLATILE'
+  },
   today_in_60_seconds: [
-    { icon: '🛢️', headline: 'Oil volatility spikes', domain: 'ENERGY' },
-    { icon: '📉', headline: 'Markets reprice inflation risk', domain: 'MACRO' },
-    { icon: '🤖', headline: 'China accelerates AI push', domain: 'TECH' },
-    { icon: '⚖️', headline: 'Pentagon-AI tension emerges', domain: 'DEFENSE' },
-    { icon: '🌍', headline: 'ECB signals hawkish hold', domain: 'MACRO' }
+    {
+      icon: '🛢️',
+      headline: 'Oil volatility spikes following unconfirmed drone activity',
+      domain: 'ENERGY',
+      summary:
+        'Brent crude briefly crossed $100 before reversing. Options flows suggest traders are aggressively repricing tail-risk for maritime supply chain interruptions over the next 48 hours.',
+      status: 'ESCALATING',
+      target: 'Strait of Hormuz',
+      metric: '+17.1% VOL'
+    },
+    {
+      icon: '📉',
+      headline: 'Markets reprice inflation risk path',
+      domain: 'MACRO',
+      status: 'VOLATILE',
+      target: 'Front-End Yields',
+      metric: 'REPRICING'
+    },
+    {
+      icon: '🤖',
+      headline: 'China accelerates sovereign compute infrastructure',
+      domain: 'TECH',
+      status: 'ACTIVE',
+      target: 'Domestic Datacenters',
+      metric: 'CAPEX SURGE'
+    },
+    {
+      icon: '⚖️',
+      headline: 'Pentagon-AI governance friction delays deployments',
+      domain: 'DEFENSE',
+      status: 'MONITOR',
+      target: 'Autonomous Systems',
+      metric: 'DELAYED'
+    },
+    {
+      icon: '🌍',
+      headline: 'ECB signals hawkish hold on rate cuts',
+      domain: 'MACRO',
+      status: 'STABILIZING',
+      target: 'EUR/USD',
+      metric: 'HAWKISH'
+    }
   ],
   major_developments: [
     {

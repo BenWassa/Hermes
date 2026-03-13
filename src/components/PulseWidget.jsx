@@ -1,4 +1,14 @@
-import { ArrowDownRight } from 'lucide-react';
+import { ArrowDownRight, Activity, Crosshair } from 'lucide-react';
+
+const getStatusGlow = (status) => {
+  if (!status) return 'bg-slate-500 shadow-[0_0_5px_rgba(148,163,184,0.5)]';
+  const s = status.toUpperCase();
+
+  if (s.includes('ESCALAT') || s.includes('CRIT')) return 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)] animate-pulse';
+  if (s.includes('STABIL') || s.includes('HOLD')) return 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)]';
+  if (s.includes('MONITOR') || s.includes('VOLATIL')) return 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]';
+  return 'bg-slate-400';
+};
 
 export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
   const safeItems = Array.isArray(items) ? items : [];
@@ -7,9 +17,14 @@ export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
 
   return (
     <section>
-      <div className="mb-4 flex items-center gap-2 pl-1">
-        <div className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] animate-pulse"></div>
-        <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">{title}</h2>
+      <div className="mb-4 flex items-center justify-between pl-1">
+        <div className="flex items-center gap-2">
+          <div className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] animate-pulse"></div>
+          <h2 className="text-[12px] font-bold uppercase tracking-widest text-slate-300">{title}</h2>
+        </div>
+        <div className="hidden text-[9px] font-mono uppercase tracking-widest text-cyan-500/50 sm:block">
+          Net-Assessment // {safeItems.length} Vectors
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3 auto-rows-fr">
@@ -20,37 +35,78 @@ export function PulseWidget({ title = '60-Second Pulse', items, onItemClick }) {
             <button
               key={item.id || item.headline || index}
               onClick={() => onItemClick?.(item.domain)}
-              className={`group relative overflow-hidden rounded-2xl border bg-white/5 text-left shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl transition-all duration-300 hover:bg-white/10 active:scale-95 outline-none ${
+              className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white/5 text-left shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl outline-none transition-all duration-300 hover:bg-white/10 active:scale-95 ${
                 isApex
-                  ? 'col-span-2 border-cyan-500/20 p-6 hover:border-cyan-400/50 hover:shadow-[0_0_24px_rgba(34,211,238,0.2)] active:bg-cyan-500/20 active:border-cyan-400 active:shadow-[0_0_35px_rgba(34,211,238,0.4)]'
-                  : 'col-span-1 border-white/10 p-5 hover:border-cyan-500/40 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)] active:bg-slate-800/80 active:border-cyan-400/50'
+                  ? 'col-span-2 border-cyan-500/30 p-5 hover:border-cyan-400/60 active:bg-cyan-900/20'
+                  : 'col-span-1 border-white/10 p-4 hover:border-cyan-500/40 active:bg-slate-800/50'
               }`}
               type="button"
             >
-              <div className="absolute bottom-3 right-3 -translate-x-2 -translate-y-2 text-cyan-400 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-active:scale-110 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
-                <ArrowDownRight size={18} strokeWidth={2.5} />
-              </div>
-
-              <div className={`flex ${isApex ? 'items-center gap-4' : 'flex-col gap-3'}`}>
-                <div
-                  className={`shrink-0 rounded-full border border-white/5 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center shadow-inner transition-colors group-hover:border-white/10 ${
-                    isApex ? 'h-16 w-16 text-3xl' : 'h-12 w-12 text-2xl'
-                  }`}
-                >
-                  <span className="opacity-90 transition-opacity drop-shadow-md group-hover:opacity-100">
-                    {item.icon}
-                  </span>
-                </div>
-                <div className="min-w-0 pr-4">
+              <div className="mb-3 flex w-full items-start justify-between">
+                <div className="flex items-center gap-2">
+                  <span className={`drop-shadow-md ${isApex ? 'text-xl' : 'text-sm'}`}>{item.icon}</span>
                   {isApex ? (
-                    <div className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">
+                    <div className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">
                       Apex Signal
                     </div>
+                  ) : item.domain ? (
+                    <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                      {item.domain}
+                    </span>
                   ) : null}
-                  <span className={`font-semibold leading-snug text-white transition-colors group-hover:text-cyan-50 ${isApex ? 'text-[18px]' : 'text-[14px]'}`}>
-                    {item.headline}
-                  </span>
                 </div>
+
+                {item.status ? (
+                  <div className="flex items-center gap-1.5 rounded-[3px] border border-white/5 bg-slate-950/50 px-1.5 py-0.5">
+                    <div className={`h-1.5 w-1.5 rounded-full ${getStatusGlow(item.status)}`}></div>
+                    <span className="font-mono text-[8px] uppercase tracking-widest text-slate-300">{item.status}</span>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="relative z-10 mb-4 w-full">
+                <h3
+                  className={`font-semibold leading-snug text-white transition-colors group-hover:text-cyan-50 ${
+                    isApex ? 'mb-2 text-[17px]' : 'text-[13px] line-clamp-3'
+                  }`}
+                >
+                  {item.headline}
+                </h3>
+
+                {isApex && item.summary ? (
+                  <p className="pr-4 text-[13px] font-medium leading-relaxed text-slate-400">
+                    <span className="mr-1.5 font-mono text-[10px] text-cyan-500/50">///</span>
+                    {item.summary}
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="mt-auto flex w-full items-end justify-between border-t border-white/10 pt-3">
+                <div className="min-w-0 pr-2">
+                  {item.target ? (
+                    <div className="flex items-center gap-1.5 text-slate-400">
+                      <Crosshair size={10} className="shrink-0 text-cyan-500/50" />
+                      <span className="truncate font-mono text-[9px] uppercase tracking-widest">{item.target}</span>
+                    </div>
+                  ) : null}
+                </div>
+
+                {item.metric ? (
+                  <div
+                    className={`shrink-0 flex items-center gap-1 rounded border border-white/5 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
+                      item.metric.includes('+') || item.metric.includes('-') || item.metric.includes('CRIT')
+                        ? 'border-cyan-500/20 bg-cyan-950/20 text-cyan-300'
+                        : 'bg-white/5 text-slate-300'
+                    }`}
+                  >
+                    <Activity size={10} strokeWidth={2.5} />
+                    {item.metric}
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="absolute bottom-3 right-3 -translate-x-2 text-cyan-400 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-active:scale-110 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
+                <ArrowDownRight size={14} strokeWidth={3} />
               </div>
             </button>
           );

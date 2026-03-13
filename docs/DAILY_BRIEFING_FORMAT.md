@@ -16,9 +16,28 @@ The current UI expects the following structure.
 {
   "id": "2026-03-13",
   "date": "March 13, 2026",
+  "system_status": {
+    "condition": "ELEVATED",
+    "indicator": "VOLATILE"
+  },
   "today_in_60_seconds": [
-    { "icon": "🛢️", "headline": "Oil volatility spikes" },
-    { "icon": "📉", "headline": "Markets reprice inflation risk" }
+    {
+      "icon": "🛢️",
+      "headline": "Oil volatility spikes",
+      "domain": "ENERGY",
+      "summary": "Short apex summary.",
+      "status": "ESCALATING",
+      "target": "Strait of Hormuz",
+      "metric": "+17.1% VOL"
+    },
+    {
+      "icon": "📉",
+      "headline": "Markets reprice inflation risk",
+      "domain": "MACRO",
+      "status": "VOLATILE",
+      "target": "Front-End Yields",
+      "metric": "REPRICING"
+    }
   ],
   "major_developments": [
     {
@@ -89,6 +108,14 @@ The current UI expects the following structure.
 ## Field Notes
 
 - `today_in_60_seconds`: short, high-signal scan layer for the home Bento grid.
+- `system_status`: optional global HUD state shown in the header. Use concise uppercase values such as `NOMINAL`, `ELEVATED`, or `CRITICAL`.
+- `system_status.condition`: primary overall posture for the session.
+- `system_status.indicator`: secondary descriptor such as `VOLATILE`, `STABLE`, or `TRANSITIONING`.
+- `today_in_60_seconds[].domain`: optional routing bucket for pulse tiles. When present, tapping a pulse tile can jump to the matching Tactical Breakdown tab.
+- `today_in_60_seconds[].summary`: optional dense summary text, best used on the apex tile.
+- `today_in_60_seconds[].status`: optional live status label such as `ESCALATING`, `STABILIZING`, or `MONITOR`.
+- `today_in_60_seconds[].target`: optional target asset, entity, or region label shown in the tile footer.
+- `today_in_60_seconds[].metric`: optional hard metric or state tag shown in the tile footer.
 - `major_developments`: each item renders as an expandable story card.
 - `major_developments[].id`: stable story identifier within the day.
 - `major_developments[].domain`: required for the Tactical Breakdown filter bar. Use strict uppercase buckets such as `GEOPOLITICS`, `MACRO`, `TECH`, `ENERGY`, or `DEFENSE`.

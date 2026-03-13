@@ -7,9 +7,31 @@ import { RiskMatrixWidget } from './RiskMatrixWidget';
 import { MacroSparklineWidget } from './MacroSparklineWidget';
 import { PulseWidget } from './PulseWidget';
 
+function getSystemStatusTone(condition) {
+  const normalized = (condition || '').toUpperCase();
+
+  if (normalized.includes('CRIT')) {
+    return {
+      shell: 'border-rose-500/30 bg-rose-950/30 text-rose-300 shadow-[0_0_20px_rgba(244,63,94,0.18)]',
+      dot: 'bg-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.9)] animate-pulse'
+    };
+  }
+  if (normalized.includes('ELEVAT') || normalized.includes('VOLAT')) {
+    return {
+      shell: 'border-amber-500/30 bg-amber-950/30 text-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.16)]',
+      dot: 'bg-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.85)] animate-pulse'
+    };
+  }
+  return {
+    shell: 'border-cyan-500/30 bg-cyan-950/30 text-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.14)]',
+    dot: 'bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]'
+  };
+}
+
 export function BriefingDisplay({ briefing }) {
   const [activeDomain, setActiveDomain] = useState('ALL');
   const tacticalRef = useRef(null);
+  const systemStatus = briefing?.system_status;
   const todayIn60 = Array.isArray(briefing?.today_in_60_seconds) ? briefing.today_in_60_seconds : [];
   const developments = Array.isArray(briefing?.major_developments) ? briefing.major_developments : [];
   const consensus = Array.isArray(briefing?.analyst_consensus?.consensus)
@@ -52,6 +74,7 @@ export function BriefingDisplay({ briefing }) {
     if (activeDomain === 'ALL') return developments;
     return developments.filter((dev) => (dev.domain || 'MACRO') === activeDomain);
   }, [activeDomain, developments]);
+  const systemStatusTone = getSystemStatusTone(systemStatus?.condition || systemStatus?.indicator);
 
   const handlePulseClick = (domain) => {
     if (domain) setActiveDomain(domain);
@@ -71,9 +94,21 @@ export function BriefingDisplay({ briefing }) {
         <h1 className="text-3xl font-extrabold tracking-tight stark-gradient-text uppercase drop-shadow-[0_0_15px_rgba(34,211,238,0.4)] mb-2">
           GlobalBrief
         </h1>
-        <div className="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-500/30 text-cyan-400 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(34,211,238,0.15)] backdrop-blur-md">
-          <Zap size={14} className="animate-pulse" />
-          {briefing.date}
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-[11px] font-bold tracking-widest uppercase text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.15)] backdrop-blur-md">
+            <Zap size={14} className="animate-pulse" />
+            {briefing.date}
+          </div>
+          {systemStatus ? (
+            <div
+              className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-[0.22em] backdrop-blur-md ${systemStatusTone.shell}`}
+            >
+              <div className={`h-2 w-2 rounded-full ${systemStatusTone.dot}`}></div>
+              <span>{systemStatus.condition || 'Nominal'}</span>
+              {systemStatus.indicator ? <span className="text-white/35">/</span> : null}
+              {systemStatus.indicator ? <span>{systemStatus.indicator}</span> : null}
+            </div>
+          ) : null}
         </div>
       </header>
 

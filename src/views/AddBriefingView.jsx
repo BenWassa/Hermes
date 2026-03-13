@@ -6,11 +6,26 @@ import { sanitizeJsonInput } from '../utils/json';
 const SCHEMA_REFERENCE = `{
   "id": "2026-03-13",
   "date": "March 13, 2026",
+  "system_status": {
+    "condition": "ELEVATED",
+    "indicator": "VOLATILE"
+  },
   "today_in_60_seconds": [
     {
       "icon": "🛢️",
       "headline": "Oil volatility spikes",
-      "domain": "ENERGY"
+      "domain": "ENERGY",
+      "summary": "Optional apex summary",
+      "status": "ESCALATING",
+      "target": "Strait of Hormuz",
+      "metric": "+17.1% VOL"
+    }
+  ],
+  "major_developments": [
+    {
+      "id": "dev-1",
+      "domain": "ENERGY",
+      "headline": "Oil Shock and War Risk"
     }
   ]
 }`;
