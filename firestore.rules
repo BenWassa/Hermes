@@ -6,33 +6,40 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    function accessDoc(uid) {
-      return get(/databases/$(database)/documents/access/$(uid));
+    function isBootstrapAdmin() {
+      return isSignedIn()
+        && request.auth.uid == "aavtqWTiNUZk5NQpDJkvo9IIqh02";
     }
 
-    function isActiveApprovedUser() {
-      return isSignedIn()
-        && accessDoc(request.auth.uid).exists()
-        && accessDoc(request.auth.uid).data.active == true;
+    function isApprovedUser() {
+      return isBootstrapAdmin()
+        || (
+          isSignedIn()
+          && exists(/databases/$(database)/documents/access/$(request.auth.uid))
+          && get(/databases/$(database)/documents/access/$(request.auth.uid)).data.active == true
+        );
     }
 
     function isAdmin() {
-      return isActiveApprovedUser()
-        && accessDoc(request.auth.uid).data.role == 'admin';
+      return isBootstrapAdmin()
+        || (
+          isApprovedUser()
+          && get(/databases/$(database)/documents/access/$(request.auth.uid)).data.role == "admin"
+        );
     }
 
     match /briefings/{briefingId} {
-      allow read: if isActiveApprovedUser();
+      allow read: if isApprovedUser();
       allow create, update, delete: if isAdmin();
     }
 
     match /syntheses/{synthesisId} {
-      allow read: if isActiveApprovedUser();
+      allow read: if isApprovedUser();
       allow create, update, delete: if isAdmin();
     }
 
     match /amplifiers/{amplifierId} {
-      allow read: if isActiveApprovedUser();
+      allow read: if isApprovedUser();
       allow create, update, delete: if isAdmin();
     }
 

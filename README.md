@@ -46,7 +46,9 @@ Deploy flow:
 
 1. Install the Firebase CLI if needed: `npm install -g firebase-tools`
 2. Log in: `firebase login`
-3. Build and deploy hosting: `npm run deploy:hosting`
+3. For frontend-only changes, build and deploy hosting: `npm run deploy:hosting`
+4. For Firestore rules and indexes only, deploy Firestore config: `npm run deploy:firestore`
+5. For app releases that change both frontend code and Firestore access, deploy both together: `npm run deploy:app`
 
 Because the app is a Vite SPA, Hosting only needs to serve `dist/` and rewrite routes to `index.html`.
 
@@ -54,9 +56,11 @@ Because the app is a Vite SPA, Hosting only needs to serve `dist/` and rewrite r
 
 - `briefings/{id}` stores shared daily briefing documents keyed by `YYYY-MM-DD`
 - `syntheses/{id}` stores shared synthesis overlay documents
+- `amplifiers/{id}` stores shared intelligence amplifier documents keyed by briefing ID
 - `access/{uid}` stores allowlist and role data for each approved Firebase Auth user
 
 Firestore rules live in [firestore.rules](./firestore.rules). Only approved active users can read shared content, and only admins can write it.
+If a newly added collection ships in the frontend before Firestore rules are deployed, signed-in users will see `permission-denied` from that collection until `npm run deploy:firestore` or `npm run deploy:app` is run.
 
 ## Development
 
