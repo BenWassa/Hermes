@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { ArrowUpRight, FolderArchive, Plus } from 'lucide-react';
+import { ArrowUpRight, FolderArchive, Plus, Trash2 } from 'lucide-react';
 
 const CHANGE_TYPE_COLORS = {
   escalating:  'text-rose-300 border-rose-500/30 bg-rose-950/30',
@@ -21,7 +21,7 @@ function SynthesisBadge() {
   );
 }
 
-function DateView({ briefings, syntheses, onOpenBriefing }) {
+function DateView({ briefings, syntheses, onOpenBriefing, onDeleteBriefing, canDelete }) {
   const synthesisByDate = useMemo(() => {
     const map = {};
     (syntheses || []).forEach((synth) => {
@@ -42,35 +42,51 @@ function DateView({ briefings, syntheses, onOpenBriefing }) {
   return (
     <div className="bg-white/5 border border-white/10 rounded-2xl px-5 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.2)]">
       {briefings.map((briefing) => (
-        <button
+        <div
           key={briefing.id}
-          onClick={() => onOpenBriefing(briefing.id)}
-          className="w-full flex items-center justify-between py-4 border-b border-white/10 last:border-b-0 hover:bg-white/5 transition-colors text-left group"
+          className="flex items-center justify-between py-4 border-b border-white/10 last:border-b-0"
         >
-          <div className="min-w-0 flex-1 pr-4">
-            <div className="mb-1.5 flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
-              <span className="min-w-0 break-words text-[12px] font-bold font-mono text-slate-100 uppercase tracking-[0.2em]">
-                {briefing.date}
-              </span>
-              <span className="max-w-full truncate text-[9px] font-mono text-cyan-400 uppercase tracking-[0.22em] bg-cyan-950/40 border border-cyan-500/20 px-2 py-1 rounded-sm shadow-[0_0_10px_rgba(34,211,238,0.1)]">
-                ID: {briefing.id.slice(0, 8)}
-              </span>
-              {synthesisByDate[briefing.id]?.length > 0 ? <SynthesisBadge /> : null}
-            </div>
+          <button
+            type="button"
+            onClick={() => onOpenBriefing(briefing.id)}
+            className="group flex min-w-0 flex-1 items-center justify-between text-left transition-colors hover:bg-white/5"
+          >
+            <div className="min-w-0 flex-1 pr-4">
+              <div className="mb-1.5 flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
+                <span className="min-w-0 break-words text-[12px] font-bold font-mono text-slate-100 uppercase tracking-[0.2em]">
+                  {briefing.date}
+                </span>
+                <span className="max-w-full truncate text-[9px] font-mono text-cyan-400 uppercase tracking-[0.22em] bg-cyan-950/40 border border-cyan-500/20 px-2 py-1 rounded-sm shadow-[0_0_10px_rgba(34,211,238,0.1)]">
+                  ID: {briefing.id.slice(0, 8)}
+                </span>
+                {synthesisByDate[briefing.id]?.length > 0 ? <SynthesisBadge /> : null}
+              </div>
 
-            <div className="min-w-0 flex items-center gap-2 text-[13px] text-slate-400">
-              <span className="shrink-0 text-[10px] font-mono text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">///</span>
-              <span className="min-w-0 truncate font-medium">
-                {[briefing.today_in_60_seconds?.[0]?.headline, briefing.today_in_60_seconds?.[1]?.headline]
-                  .filter(Boolean)
-                  .join(' | ') || 'No pulse preview available.'}
-              </span>
+              <div className="min-w-0 flex items-center gap-2 text-[13px] text-slate-400">
+                <span className="shrink-0 text-[10px] font-mono text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">///</span>
+                <span className="min-w-0 truncate font-medium">
+                  {[briefing.today_in_60_seconds?.[0]?.headline, briefing.today_in_60_seconds?.[1]?.headline]
+                    .filter(Boolean)
+                    .join(' | ') || 'No pulse preview available.'}
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="ml-3 shrink-0 text-slate-500 group-hover:text-cyan-300 transition-colors">
-            <ArrowUpRight size={20} strokeWidth={1.5} />
-          </div>
-        </button>
+            <div className="ml-3 shrink-0 text-slate-500 transition-colors group-hover:text-cyan-300">
+              <ArrowUpRight size={20} strokeWidth={1.5} />
+            </div>
+          </button>
+
+          {canDelete ? (
+            <button
+              type="button"
+              aria-label={`Delete briefing ${briefing.date || briefing.id}`}
+              onClick={() => onDeleteBriefing?.(briefing)}
+              className="ml-3 shrink-0 rounded-xl border border-red-500/20 bg-red-950/20 p-2 text-red-300 transition-colors hover:border-red-400/40 hover:bg-red-950/30 hover:text-red-200"
+            >
+              <Trash2 size={15} strokeWidth={1.8} />
+            </button>
+          ) : null}
+        </div>
       ))}
     </div>
   );
@@ -145,7 +161,16 @@ function ThreadView({ briefings, onOpenThread }) {
   );
 }
 
-export function ArchiveView({ briefings, onOpenBriefing, onOpenThread, syntheses, onAdd, canImport }) {
+export function ArchiveView({
+  briefings,
+  onOpenBriefing,
+  onOpenThread,
+  syntheses,
+  onAdd,
+  onDeleteBriefing,
+  canImport,
+  canDelete
+}) {
   const [mode, setMode] = useState('date');
 
   return (
@@ -194,7 +219,13 @@ export function ArchiveView({ briefings, onOpenBriefing, onOpenThread, syntheses
           STATUS: No shared historical records available.
         </div>
       ) : mode === 'date' ? (
-        <DateView briefings={briefings} syntheses={syntheses} onOpenBriefing={onOpenBriefing} />
+        <DateView
+          briefings={briefings}
+          syntheses={syntheses}
+          onOpenBriefing={onOpenBriefing}
+          onDeleteBriefing={onDeleteBriefing}
+          canDelete={canDelete}
+        />
       ) : (
         <ThreadView briefings={briefings} onOpenThread={onOpenThread} />
       )}

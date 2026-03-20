@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -115,6 +116,10 @@ export async function upsertSynthesis(synthesis, user) {
     updatedAt: serverTimestamp(),
     updatedBy: user.uid
   });
+}
+
+export async function deleteBriefing(briefingId) {
+  await deleteDoc(doc(db, 'briefings', briefingId));
 }
 
 export async function clearSharedContent() {

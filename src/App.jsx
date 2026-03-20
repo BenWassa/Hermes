@@ -5,6 +5,7 @@ import { AppMenu } from './components/AppMenu';
 import { SAMPLE_BRIEFING } from './data/sampleBriefing';
 import {
   clearSharedContent,
+  deleteBriefing,
   getAccessRecord,
   signInWithGoogle,
   signOutUser,
@@ -391,6 +392,31 @@ export default function App() {
     }
   };
 
+  const handleDeleteBriefing = async (briefing) => {
+    if (!isAdmin) return;
+
+    const shouldDelete = window.confirm(
+      `Delete shared briefing ${briefing.date || briefing.id} for every Hermes user?`
+    );
+
+    if (!shouldDelete) return;
+
+    try {
+      setIsDeleting(true);
+      setError('');
+      await deleteBriefing(briefing.id);
+
+      if (viewingDateId === briefing.id) {
+        setViewingDateId(null);
+        setCurrentView('archive');
+      }
+    } catch (deleteError) {
+      setError(deleteError.message || `Failed to delete briefing ${briefing.id}.`);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   const loadSample = () => {
     setJsonInput(JSON.stringify(SAMPLE_BRIEFING, null, 2));
     setError('');
@@ -516,9 +542,11 @@ export default function App() {
             briefings={briefings}
             syntheses={syntheses}
             canImport={isAdmin}
+            canDelete={isAdmin && !isDeleting}
             onOpenBriefing={openBriefing}
             onOpenThread={openStory}
             onAdd={() => setCurrentView('add')}
+            onDeleteBriefing={handleDeleteBriefing}
           />
         )}
 
