@@ -39,10 +39,27 @@ Return a single valid JSON object matching the schema below. No commentary, no m
     }
   ],
   "what_changed": {
-    "new": ["What is genuinely new since yesterday."],
-    "intensified": ["What got worse or accelerated."],
-    "eased": ["What de-escalated or moderated."],
-    "changed_meaning": ["What story shifted in interpretation or implication."]
+        "new": ["What is genuinely new today."],
+    "escalating": ["What is heating up or getting closer to a trigger."],
+    "de_escalating": ["What is cooling down or stabilizing."],
+    "watch": ["What metric, event, or statement are we waiting for next."]
+  },
+  "major_developments": [
+    {
+      "story_id": "story-kebab-case-description",
+      "headline": "Punchy, factual headline.",
+      "summary": "2-3 sentence summary of the core development. No narrative filler.",
+      "domains": ["GEOPOLITICS"],
+      "regional_focus": ["Middle East"],
+      "impact_rating": 8,
+      "urgency_rating": 7,
+      "key_takeaways": [
+        "Bulleted takeaway one.",
+        "Bulleted takeaway two."
+      ],
+      "forward_signals": ["Immediate next indicator to watch."]
+    }
+  ],
   },
   "major_developments": [
     {
@@ -55,7 +72,6 @@ Return a single valid JSON object matching the schema below. No commentary, no m
       "driver": "One causal sentence: what is moving this story today, not just what happened.",
       "change_type": "escalating",
       "story_stage": "peak",
-      "previous_brief_refs": ["YYYY-MM-DD"],
       "headline": "Story headline",
       "why_it_matters_now": "Why today specifically changed the importance of this story.",
       "executive_summary": "2–3 sentence analytical summary.",
@@ -125,7 +141,6 @@ Return a single valid JSON object matching the schema below. No commentary, no m
 
 ## Hard rules
 
-- `story_id` must be **stable across days**. Use the same kebab-case ID for the same underlying story every day (e.g. `story-hormuz-coalition`, `story-fx-dollar-pressure`). Never rename a story that has already appeared. When in doubt, carry the prior ID forward.
 - top-level `driver` is for the header pill only. It must be a **single uppercase word** such as `ENERGY`, `RATES`, `TRADE`, `WAR`, `OIL`, `AI`, or `CHINA`. Never return a phrase or sentence here.
 - `driver` must be **causal, not descriptive**. State what is moving the story, not what happened. Bad: "Iran fired drones." Good: "Iran's renewed naval posture is raising the cost of commercial Hormuz transit for the second time this quarter."
 - `change_type` must be exactly one of: `new`, `escalating`, `stabilizing`, `resolving`, `unchanged`
@@ -149,6 +164,5 @@ Return a single valid JSON object matching the schema below. No commentary, no m
 - Include a top-level `driver` field as a one-word header label. Prefer concrete system drivers like `ENERGY`, `WAR`, `RATES`, `TRADE`, `TECH`, `CHINA`, or `POLITICS`.
 - The apex tile (first item in `today_in_60_seconds`) should be the highest-signal story of the day. Include `summary` on the apex tile only.
 - Include 4–6 items in `today_in_60_seconds` and 3–6 `major_developments`.
-- `previous_brief_refs` should list the 1–3 most recent briefing dates where this story appeared. Leave as `[]` for genuinely new stories.
 - Only include `timeline_context`, `risk_matrix`, and `macro_indicators` when they materially improve clarity — do not force them for every briefing.
 - `what_changed` is the most important continuity signal. Never skip it.

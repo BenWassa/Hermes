@@ -86,7 +86,6 @@ export const SAMPLE_BRIEFING = {
       icon: '🛢️',
       change_type: 'ESCALATION',
       story_stage: 'PEAKING',
-      previous_brief_refs: ['2026-03-08'],
       headline: 'Oil Shock and War Risk',
       why_it_matters_now:
         'The disruption is now materially altering inflation expectations, shipping costs, and central-bank path assumptions.',
@@ -117,7 +116,6 @@ export const SAMPLE_BRIEFING = {
       icon: '🤖',
       change_type: 'UPDATE',
       story_stage: 'ESCALATING',
-      previous_brief_refs: ['2026-03-07', '2026-03-08'],
       headline: 'Sovereign AI Compute Race',
       why_it_matters_now:
         'The story is widening from chip access into datacenter siting, energy allocation, and state-backed capital deployment.',
@@ -148,7 +146,6 @@ export const SAMPLE_BRIEFING = {
       icon: '📉',
       change_type: 'ESCALATION',
       story_stage: 'ESCALATING',
-      previous_brief_refs: ['2026-03-08'],
       headline: 'Inflation Path Repriced',
       why_it_matters_now:
         'This has shifted from a rates debate to a cross-asset repricing event driven by geopolitical inflation risk.',
@@ -179,7 +176,6 @@ export const SAMPLE_BRIEFING = {
       icon: '⚖️',
       change_type: 'UPDATE',
       story_stage: 'EMERGING',
-      previous_brief_refs: ['2026-03-08'],
       headline: 'Pentagon-AI Governance Friction',
       why_it_matters_now:
         'Today clarified that the bottleneck is not demand for deployment but governance confidence around auditability and control.',
@@ -210,7 +206,6 @@ export const SAMPLE_BRIEFING = {
       icon: '🌍',
       change_type: 'UPDATE',
       story_stage: 'STABILIZING',
-      previous_brief_refs: ['2026-03-08'],
       headline: 'ECB Holds Hawkish Bias',
       why_it_matters_now:
         'The ECB is signaling less urgency to ease if energy volatility threatens a renewed inflation impulse.',

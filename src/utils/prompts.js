@@ -32,10 +32,10 @@ REQUIRED OUTPUT SCHEMA:
     }
   ],
   "what_changed": {
-    "new": ["What is genuinely new since yesterday."],
-    "intensified": ["What got worse or accelerated."],
-    "eased": ["What de-escalated or moderated."],
-    "changed_meaning": ["What story shifted in interpretation or implication."]
+    "new": ["What is genuinely new today."],
+    "escalating": ["What is heating up or getting closer to a trigger."],
+    "de_escalating": ["What is cooling down or stabilizing."],
+    "watch": ["What metric, event, or statement are we waiting for next."]
   },
   "major_developments": [
     {
@@ -48,7 +48,6 @@ REQUIRED OUTPUT SCHEMA:
       "driver": "One causal sentence: what is moving this story today, not just what happened.",
       "change_type": "escalating",
       "story_stage": "peak",
-      "previous_brief_refs": ["YYYY-MM-DD"],
       "headline": "Story headline",
       "why_it_matters_now": "Why today specifically changed the importance of this story.",
       "executive_summary": "2–3 sentence analytical summary.",
@@ -105,8 +104,8 @@ REQUIRED OUTPUT SCHEMA:
 
 HARD RULES:
 
-- story_id must be STABLE ACROSS DAYS. Use the same kebab-case ID for the same underlying story every day. Never rename a story that has already appeared.
-- driver must be CAUSAL, not descriptive. State what is moving the story, not what happened. Bad: "Iran fired drones." Good: "Iran's renewed naval posture is raising the cost of commercial Hormuz transit for the second time this quarter."
+- top-level driver is for the header pill only. It must be a SINGLE UPPERCASE WORD such as ENERGY, WAR, RATES, TRADE.
+- driver in developments must be CAUSAL. State what is moving the story, not what happened.
 - change_type must be exactly one of: new, escalating, stabilizing, resolving, unchanged
 - story_stage must be exactly one of: emerging, active, peak, winding-down, resolved
 - system_status.condition must be exactly one of: CRITICAL, SEVERE, HIGH, ELEVATED, VOLATILE, GUARDED, MODERATE, NOMINAL, LOW
@@ -143,7 +142,7 @@ REQUIRED OUTPUT SCHEMA:
   "briefing_id": "${dateId}",
   "date": "${briefing.date || dateId}",
   "delta_lens": {
-    "system_shifts": ["What is now structurally true that was not true yesterday — a durable change in the system, not a news event."],
+    "system_shifts": ["What is now structurally true today — a durable change in the system, not a news event."],
     "threshold_crossings": ["What crossed a meaningful line today — a point of no return, a policy trigger, a market level."],
     "invalidations": ["What prior assumption, consensus view, or scenario no longer holds after today."]
   },

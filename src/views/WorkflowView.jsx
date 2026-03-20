@@ -156,11 +156,11 @@ function AmplifierSection({ todaysBriefing, onGoToImport }) {
       <ol className="space-y-3 mb-5">
         <li className="flex items-start gap-3 text-[12px] text-slate-300">
           <StepBadge n="1" />
-          <span>Copy the prompt below — today's briefing data is embedded automatically</span>
+          <span>Copy the prompt below — your briefing from Step 1 is embedded inside</span>
         </li>
         <li className="flex items-start gap-3 text-[12px] text-slate-300">
           <StepBadge n="2" />
-          <span>Paste into ChatGPT and copy the JSON response</span>
+          <span>Paste into ChatGPT and copy the Intelligence Amplifier JSON response</span>
         </li>
         <li className="flex items-start gap-3 text-[12px] text-slate-300">
           <StepBadge n="3" />

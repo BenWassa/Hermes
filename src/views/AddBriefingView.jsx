@@ -34,7 +34,6 @@ const SCHEMA_REFERENCE = `{
       "change_type": "escalating",
       "story_stage": "active",
       "tags": ["iran", "energy", "strait-of-hormuz"],
-      "previous_brief_refs": ["2026-03-12", "2026-03-11"]
     }
   ]
 }`;

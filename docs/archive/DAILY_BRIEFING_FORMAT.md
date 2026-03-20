@@ -71,7 +71,6 @@ The app imports one daily briefing as a JSON object with the following structure
       "driver": "Iran naval posture shift following US carrier redeployment to the Gulf",
       "change_type": "escalating",
       "story_stage": "peak",
-      "previous_brief_refs": ["2026-03-12", "2026-03-11"],
       "headline": "Oil Shock and War Risk",
       "why_it_matters_now": "The disruption has started repricing inflation, shipping, and central-bank expectations simultaneously.",
       "executive_summary": "Short executive summary.",
@@ -164,7 +163,6 @@ The app imports one daily briefing as a JSON object with the following structure
 - `major_developments[].driver`: **required** — one sentence stating what is actually moving this story today. Not what happened, but what is driving it. Keep it causally specific.
 - `major_developments[].change_type`: **required** cross-day state change. Lowercase. Use exactly: `new`, `escalating`, `stabilizing`, `resolving`, or `unchanged`.
 - `major_developments[].story_stage`: **required** lifecycle marker. Lowercase. Use exactly: `emerging`, `active`, `peak`, `winding-down`, or `resolved`.
-- `major_developments[].previous_brief_refs`: previous briefing `id` values that carry this same story forward.
 - `major_developments[].why_it_matters_now`: one concise line explaining why today changed the importance of the story.
 - `major_developments[].next_watchpoints`: short forward-looking triggers or milestones to monitor over the next 24 to 72 hours.
 - `major_developments[].tags`: free-form tags for search, clustering, and cross-day synthesis.
@@ -192,7 +190,6 @@ The app imports one daily briefing as a JSON object with the following structure
 - Keep summaries dense and analytical, not conversational.
 - Keep top-level `driver` to one uppercase word only. Do not use a phrase or sentence there.
 - **Every `major_developments` item must include `story_id`, `driver`, `change_type`, and `story_stage`.** These are required for the continuity system to function.
-- **`story_id` must be stable across days.** Use a consistent kebab-case identifier for the same underlying story (e.g. `story-hormuz-coalition`, `story-fx-dollar-pressure`). Do not rename a story that has already appeared in previous briefings. When in doubt, carry the prior ID forward.
 - **`driver` must be causal, not descriptive.** Write what is moving the story today, not just what happened. Bad: “Iran fired drones.” Good: “Iran's renewed naval posture is raising the cost of commercial Hormuz transit for the second time this quarter.”
 - **`change_type` must be one of:** `new`, `escalating`, `stabilizing`, `resolving`, `unchanged` (lowercase exactly).
 - **`story_stage` must be one of:** `emerging`, `active`, `peak`, `winding-down`, `resolved` (lowercase exactly).
