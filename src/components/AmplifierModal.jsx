@@ -39,7 +39,7 @@ function Bullet({ children }) {
   return (
     <div className="flex items-start gap-2 text-[12px] text-slate-300 leading-snug py-1">
       <span className="text-cyan-400/60 font-mono text-[10px] mt-0.5 shrink-0">///</span>
-      <span>{children}</span>
+      <span className="break-words whitespace-normal min-w-0">{children}</span>
     </div>
   );
 }
@@ -104,15 +104,15 @@ function ScenarioBlock({ label, colour, data }) {
 
       {data.trigger ? (
         <div className="text-[11px] text-slate-400 leading-snug break-words">
-          <span className="text-cyan-400/60 font-mono text-[9px] uppercase tracking-widest mr-1.5 shrink-0 inline-block">Trigger</span>
-          {data.trigger}
+          <span className="text-cyan-400/60 font-mono text-[9px] uppercase tracking-widest mr-1.5 shrink-0 inline-block align-baseline">Trigger</span>
+          <span className="break-words whitespace-normal inline">{data.trigger}</span>
         </div>
       ) : null}
 
       {data.invalidator ? (
         <div className="text-[11px] text-slate-500 leading-snug break-words">
-          <span className="text-slate-600 font-mono text-[9px] uppercase tracking-widest mr-1.5 shrink-0 inline-block">Breaks if</span>
-          {data.invalidator}
+          <span className="text-slate-600 font-mono text-[9px] uppercase tracking-widest mr-1.5 shrink-0 inline-block align-baseline">Breaks if</span>
+          <span className="break-words whitespace-normal inline">{data.invalidator}</span>
         </div>
       ) : null}
     </div>
@@ -142,12 +142,12 @@ export function AmplifierModal({ amplifier, open, onClose }) {
       {/* Panel */}
       <div className="relative z-10 flex flex-col h-full max-w-2xl w-full mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 pt-safe pb-4 shrink-0">
-          <div>
-            <div className="text-[9px] font-mono font-bold uppercase tracking-[0.28em] text-cyan-400/70 mb-0.5">
+        <div className="flex items-center justify-between gap-4 px-4 pt-safe pb-4 shrink-0">
+          <div className="min-w-0">
+            <div className="text-[9px] font-mono font-bold uppercase tracking-[0.28em] text-cyan-400/70 mb-0.5 truncate">
               Intelligence Layer
             </div>
-            <h2 className="text-[15px] font-extrabold uppercase tracking-tight stark-gradient-text">
+            <h2 className="text-[15px] font-extrabold uppercase tracking-tight stark-gradient-text truncate">
               Amplifier
             </h2>
           </div>
@@ -223,11 +223,11 @@ export function AmplifierModal({ amplifier, open, onClose }) {
               <div className="space-y-3">
                 {driver_decomposition.map((item, i) => (
                   <div key={i} className="space-y-1.5">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[10px] font-mono text-slate-500">{item.story_id}</span>
+                    <div className="flex items-center gap-2 flex-wrap min-w-0">
+                      <span className="text-[10px] font-mono text-slate-500 break-all">{item.story_id}</span>
                       {item.classification ? <ClassBadge label={item.classification} /> : null}
                     </div>
-                    <p className="text-[12px] text-slate-300 leading-snug">{item.driver}</p>
+                    <p className="text-[12px] text-slate-300 leading-snug break-words whitespace-normal">{item.driver}</p>
                   </div>
                 ))}
               </div>
@@ -240,11 +240,11 @@ export function AmplifierModal({ amplifier, open, onClose }) {
               <div className="space-y-3">
                 {second_order.map((item, i) => (
                   <div key={i} className="space-y-1 mt-1 border-t border-white/5 pt-2 first:mt-0 first:border-0 first:pt-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest">{item.domain}</span>
-                      <span className="text-[9px] font-mono text-slate-600 uppercase tracking-widest">{item.timing}</span>
+                    <div className="flex items-center gap-2 flex-wrap min-w-0">
+                      <span className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest break-words whitespace-normal">{item.domain}</span>
+                      <span className="text-[9px] font-mono text-slate-600 uppercase tracking-widest break-words whitespace-normal">{item.timing}</span>
                     </div>
-                    <p className="text-[12px] text-slate-300 leading-snug">{item.effect}</p>
+                    <p className="text-[12px] text-slate-300 leading-snug break-words whitespace-normal">{item.effect}</p>
                   </div>
                 ))}
               </div>
@@ -257,16 +257,16 @@ export function AmplifierModal({ amplifier, open, onClose }) {
               <div className="space-y-3">
                 {transmission_map.map((item, i) => (
                   <div key={i} className="rounded-xl border border-white/8 bg-white/3 p-3 space-y-1.5">
-                    <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-300 flex-wrap">
-                      <span className="text-slate-200 font-bold">{item.from}</span>
-                      <span className="text-slate-600">→</span>
-                      <span className="text-cyan-300">{item.to}</span>
+                    <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-300 flex-wrap shrink-0 min-w-0">
+                      <span className="text-slate-200 font-bold break-words whitespace-normal">{item.from}</span>
+                      <span className="text-slate-600 shrink-0">→</span>
+                      <span className="text-cyan-300 break-words whitespace-normal">{item.to}</span>
                     </div>
                     {item.channel ? (
-                      <p className="text-[11px] text-slate-500">{item.channel}</p>
+                      <p className="text-[11px] text-slate-500 break-words whitespace-normal leading-snug">{item.channel}</p>
                     ) : null}
-                    <div className="flex items-center gap-3">
-                      <span className="text-[9px] font-mono text-slate-600 uppercase tracking-widest">{item.timing}</span>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <span className="text-[9px] font-mono text-slate-600 uppercase tracking-widest break-words whitespace-normal">{item.timing}</span>
                       {item.magnitude ? <MagnitudeBadge label={item.magnitude} /> : null}
                     </div>
                   </div>
