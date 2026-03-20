@@ -1,6 +1,7 @@
 export const SAMPLE_BRIEFING = {
   id: '2026-03-09',
   date: 'March 9, 2026',
+  driver: 'ENERGY',
   system_status: {
     condition: 'ELEVATED',
     indicator: 'VOLATILE'
@@ -64,16 +65,16 @@ export const SAMPLE_BRIEFING = {
       'War-risk insurance costs jumped again for Gulf-linked commercial shipping routes.',
       'ECB messaging hardened around the risk of energy-led inflation persistence.'
     ],
-    intensified: [
+    escalating: [
       'Oil volatility is now feeding directly into front-end rate pricing and cross-asset hedging.',
       'Competition for sovereign AI capacity is expanding from technology policy into energy and industrial planning.'
     ],
-    eased: [
+    de_escalating: [
       'The most acute fear of a full maritime halt eased after some vessels resumed rerouted passage.'
     ],
-    changed_meaning: [
-      'The Hormuz story is no longer a regional disruption alone; it has become a macro transmission channel.',
-      'AI infrastructure is no longer just a technology race; it is becoming a state-capacity and strategic autonomy issue.'
+    watch: [
+      'Whether commercial vessel traffic through the Strait of Hormuz holds at rerouted but functioning levels.',
+      'Whether ECB speakers begin treating energy volatility as a direct reason to delay easing.'
     ]
   },
   major_developments: [
@@ -84,8 +85,11 @@ export const SAMPLE_BRIEFING = {
       region: 'MIDDLE EAST',
       impact: 'CRITICAL',
       icon: '🛢️',
-      change_type: 'ESCALATION',
-      story_stage: 'PEAKING',
+      driver:
+        'Renewed maritime risk and rising insurance costs are pushing the Hormuz story from a shipping disruption into a broader inflation and market-pricing channel.',
+      change_type: 'escalating',
+      story_stage: 'peak',
+      previous_brief_refs: ['2026-03-08'],
       headline: 'Oil Shock and War Risk',
       why_it_matters_now:
         'The disruption is now materially altering inflation expectations, shipping costs, and central-bank path assumptions.',
@@ -114,8 +118,11 @@ export const SAMPLE_BRIEFING = {
       region: 'GLOBAL',
       impact: 'HIGH',
       icon: '🤖',
-      change_type: 'UPDATE',
-      story_stage: 'ESCALATING',
+      driver:
+        'Export controls, power constraints, and state-backed capital are converging to make compute capacity a national infrastructure contest rather than a pure tech race.',
+      change_type: 'escalating',
+      story_stage: 'active',
+      previous_brief_refs: ['2026-03-08'],
       headline: 'Sovereign AI Compute Race',
       why_it_matters_now:
         'The story is widening from chip access into datacenter siting, energy allocation, and state-backed capital deployment.',
@@ -144,8 +151,11 @@ export const SAMPLE_BRIEFING = {
       region: 'GLOBAL',
       impact: 'HIGH',
       icon: '📉',
-      change_type: 'ESCALATION',
-      story_stage: 'ESCALATING',
+      driver:
+        'Energy volatility is feeding directly into inflation expectations, forcing rates desks to reprice the path and timing of cuts.',
+      change_type: 'escalating',
+      story_stage: 'active',
+      previous_brief_refs: ['2026-03-08'],
       headline: 'Inflation Path Repriced',
       why_it_matters_now:
         'This has shifted from a rates debate to a cross-asset repricing event driven by geopolitical inflation risk.',
@@ -174,8 +184,11 @@ export const SAMPLE_BRIEFING = {
       region: 'UNITED STATES',
       impact: 'MEDIUM',
       icon: '⚖️',
-      change_type: 'UPDATE',
-      story_stage: 'EMERGING',
+      driver:
+        'Governance and assurance requirements are becoming the real bottleneck on deployment speed inside defense procurement.',
+      change_type: 'new',
+      story_stage: 'emerging',
+      previous_brief_refs: [],
       headline: 'Pentagon-AI Governance Friction',
       why_it_matters_now:
         'Today clarified that the bottleneck is not demand for deployment but governance confidence around auditability and control.',
@@ -204,8 +217,11 @@ export const SAMPLE_BRIEFING = {
       region: 'EUROPE',
       impact: 'MEDIUM',
       icon: '🌍',
-      change_type: 'UPDATE',
-      story_stage: 'STABILIZING',
+      driver:
+        'Energy-linked inflation risk is hardening ECB caution and weakening the case for a near-term easing cycle.',
+      change_type: 'stabilizing',
+      story_stage: 'active',
+      previous_brief_refs: ['2026-03-08'],
       headline: 'ECB Holds Hawkish Bias',
       why_it_matters_now:
         'The ECB is signaling less urgency to ease if energy volatility threatens a renewed inflation impulse.',

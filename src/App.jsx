@@ -548,7 +548,7 @@ export default function App() {
 
   if (!authReady || !accessReady) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-6 text-center">
+      <div className="flex min-h-app items-center justify-center px-6 text-center">
         <div className="space-y-3">
           <div className="text-[10px] font-mono font-bold uppercase tracking-[0.32em] text-cyan-400/80">
             Hermes Access Gate
@@ -564,7 +564,7 @@ export default function App() {
 
   if (!user) {
     return (
-      <div className="min-h-screen font-sans text-slate-50 selection:bg-cyan-400/20 selection:text-white">
+      <div className="min-h-app font-sans text-slate-50 selection:bg-cyan-400/20 selection:text-white">
         <OnboardingView isSigningIn={isSigningIn} error={authError} onSignIn={handleGoogleSignIn} />
       </div>
     );
@@ -572,7 +572,7 @@ export default function App() {
 
   if (!contentReady) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-6 text-center">
+      <div className="flex min-h-app items-center justify-center px-6 text-center">
         <div className="space-y-3">
           <div className="text-[10px] font-mono font-bold uppercase tracking-[0.32em] text-cyan-400/80">
             Hermes Data Link
@@ -590,7 +590,7 @@ export default function App() {
   const showFloatingMenuButton = !(currentView === 'home' && activeBriefing) && currentView !== 'story';
 
   return (
-    <div className="min-h-screen font-sans text-slate-50 selection:bg-cyan-400/20 selection:text-white">
+    <div className="min-h-app font-sans text-slate-50 selection:bg-cyan-400/20 selection:text-white">
       <input
         ref={fileInputRef}
         type="file"

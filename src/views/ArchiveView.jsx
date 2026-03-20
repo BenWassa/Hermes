@@ -147,7 +147,7 @@ export function ArchiveView({
   const [mode, setMode] = useState('date');
 
   return (
-    <div className="pb-32 max-w-2xl mx-auto pt-8 px-4 animate-in fade-in duration-300 relative min-h-[calc(100vh-8rem)]">
+    <div className="pb-32 max-w-2xl mx-auto pt-8 px-4 animate-in fade-in duration-300 relative min-h-app-offset-8">
       <header className="pb-6 flex flex-col items-center text-center">
         <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-blue-950/40 border border-blue-500/20 text-blue-300 shadow-[0_0_20px_rgba(96,165,250,0.12)] backdrop-blur-md mb-4">
           <FolderArchive size={24} strokeWidth={2} />

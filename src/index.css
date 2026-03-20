@@ -14,6 +14,7 @@ body {
   background: radial-gradient(120% 100% at 50% 0%, #0a101f 0%, #03050a 100%);
   color: #f8fafc;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 .font-mono {
@@ -25,6 +26,16 @@ body {
 }
 
 @layer utilities {
+  .min-h-app {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .min-h-app-offset-8 {
+    min-height: calc(100vh - 8rem);
+    min-height: calc(100dvh - 8rem);
+  }
+
   .pt-safe {
     padding-top: max(1.25rem, env(safe-area-inset-top));
   }

@@ -3,7 +3,7 @@ import { HermesMark } from '../components/HermesMark';
 
 export function OnboardingView({ isSigningIn, error, onSignIn }) {
   return (
-    <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-6 pb-24 pt-10 text-center">
+    <div className="mx-auto flex min-h-app max-w-md flex-col items-center justify-center px-6 pb-24 pt-10 text-center">
       <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-500/20 bg-cyan-950/40 text-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.16)] backdrop-blur-md">
         <LockKeyhole size={30} strokeWidth={1.75} />
       </div>

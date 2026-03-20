@@ -28,34 +28,34 @@ export function PulseWidget({ title = 'Pulse', items, onItemClick }) {
     <button
       key={item.id || item.headline || index}
       onClick={() => onItemClick?.(item.domain, item.id)}
-      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white/5 text-left shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl outline-none transition-all duration-300 hover:bg-white/10 active:scale-95 ${
+      className={`group relative flex w-full min-w-0 flex-col justify-between overflow-hidden rounded-2xl border bg-white/5 text-left shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl outline-none transition-all duration-300 hover:bg-white/10 active:scale-95 ${
         isApex
           ? 'border-cyan-500/30 p-5 hover:border-cyan-400/60 active:bg-cyan-900/20'
           : 'border-white/10 p-3 sm:p-5 hover:border-cyan-500/40 active:bg-slate-800/50'
       }`}
       type="button"
     >
-      <div className="mb-3 flex w-full items-start justify-between">
-        <div className="flex items-center gap-2">
+      <div className="mb-3 flex w-full min-w-0 items-start justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-2">
           <span className={`drop-shadow-md ${isApex ? 'text-xl' : 'text-[15px]'}`}>{item.icon}</span>
           {isApex ? (
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">
+            <div className="min-w-0 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">
               Apex Signal
             </div>
           ) : null}
         </div>
 
         {item.status ? (
-          <div className="flex items-center gap-1.5 rounded-[3px] border border-white/5 bg-slate-950/50 px-1.5 py-0.5">
-            <div className={`h-1.5 w-1.5 rounded-full ${getStatusGlow(item.status)}`}></div>
-            <span className="font-mono text-[8px] uppercase tracking-widest text-slate-300">{item.status}</span>
+          <div className="flex max-w-[48%] shrink items-center gap-1.5 rounded-[3px] border border-white/5 bg-slate-950/50 px-1.5 py-0.5">
+            <div className={`h-1.5 w-1.5 shrink-0 rounded-full ${getStatusGlow(item.status)}`}></div>
+            <span className="truncate font-mono text-[8px] uppercase tracking-widest text-slate-300">{item.status}</span>
           </div>
         ) : null}
       </div>
 
       <div className={`relative z-10 w-full ${isApex ? 'mb-4' : 'mb-3 flex-1'}`}>
         <h3
-          className={`font-semibold leading-snug text-white transition-colors group-hover:text-cyan-50 ${
+          className={`break-words font-semibold leading-snug text-white transition-colors group-hover:text-cyan-50 ${
             isApex ? 'mb-2 text-[17px]' : 'text-[13px] line-clamp-2'
           }`}
         >
@@ -63,31 +63,31 @@ export function PulseWidget({ title = 'Pulse', items, onItemClick }) {
         </h3>
 
         {isApex && item.summary ? (
-          <p className="pr-4 text-[13px] font-medium leading-relaxed text-slate-400">
+          <p className="pr-4 break-words text-[13px] font-medium leading-relaxed text-slate-400">
             <span className="mr-1.5 font-mono text-[10px] text-cyan-500/50">///</span>
             {item.summary}
           </p>
         ) : null}
       </div>
 
-      <div className={`mt-auto flex w-full items-end justify-between border-t border-white/10 ${isApex ? 'pt-3' : 'gap-2 pt-2.5'}`}>
+      <div className={`mt-auto flex w-full min-w-0 items-end justify-between border-t border-white/10 ${isApex ? 'gap-2 pt-3' : 'gap-2 pt-2.5'}`}>
         {isApex ? (
           <>
             <div className="min-w-0 pr-2">
               {item.target ? (
-                <span className="truncate font-mono text-[9px] uppercase tracking-widest text-slate-400">{item.target}</span>
+                <span className="block truncate font-mono text-[9px] uppercase tracking-widest text-slate-400">{item.target}</span>
               ) : null}
             </div>
             {item.metric ? (
               <div
-                className={`shrink-0 flex items-center gap-1 rounded border border-white/5 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
+                className={`flex max-w-[48%] shrink items-center gap-1 rounded border border-white/5 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
                   item.metric.includes('+') || item.metric.includes('-') || item.metric.includes('CRIT')
                     ? 'border-cyan-500/20 bg-cyan-950/20 text-cyan-300'
                     : 'bg-white/5 text-slate-300'
                 }`}
               >
-                <Activity size={10} strokeWidth={2.5} />
-                {item.metric}
+                <Activity size={10} strokeWidth={2.5} className="shrink-0" />
+                <span className="truncate">{item.metric}</span>
               </div>
             ) : null}
           </>
@@ -95,17 +95,17 @@ export function PulseWidget({ title = 'Pulse', items, onItemClick }) {
           <div className="flex w-full justify-end">
             {item.metric ? (
               <div
-                className={`shrink-0 flex items-center gap-1 rounded border border-white/5 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
+                className={`flex max-w-full items-center gap-1 rounded border border-white/5 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
                   item.metric.includes('+') || item.metric.includes('-') || item.metric.includes('CRIT')
                     ? 'border-cyan-500/20 bg-cyan-950/20 text-cyan-300'
                     : 'bg-white/5 text-slate-300'
                 }`}
               >
-                <Activity size={10} strokeWidth={2.5} />
-                {item.metric}
+                <Activity size={10} strokeWidth={2.5} className="shrink-0" />
+                <span className="truncate">{item.metric}</span>
               </div>
             ) : item.target ? (
-              <span className="truncate font-mono text-[9px] uppercase tracking-widest text-slate-400">{item.target}</span>
+              <span className="block truncate font-mono text-[9px] uppercase tracking-widest text-slate-400">{item.target}</span>
             ) : null}
           </div>
         )}
@@ -119,7 +119,7 @@ export function PulseWidget({ title = 'Pulse', items, onItemClick }) {
 
   return (
     <section>
-      <div className="flex gap-3">
+      <div className="flex max-w-full min-w-0 gap-3">
         <div className="flex flex-col items-center shrink-0 pt-1">
           <div className="h-24 w-px mb-1.5 bg-cyan-500/40" />
           {title.toUpperCase().split('').map((char, i) => (
