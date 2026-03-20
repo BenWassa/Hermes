@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Database, AlertTriangle, CheckCircle, Info } from 'lucide-react';
 import { DisclosurePanel } from '../components/DisclosurePanel';
-import { sanitizeJsonInput } from '../utils/json';
+import { sanitizeJsonInput, validateDailyBriefing, validateSynthesis } from '../utils/json';
 
 const SCHEMA_REFERENCE = `{
   "id": "2026-03-13",
   "date": "March 13, 2026",
-  "system_status": {
-    "condition": "ELEVATED",
-    "indicator": "VOLATILE"
-  },
+  "system_status": { "condition": "ELEVATED", "indicator": "VOLATILE" },
   "today_in_60_seconds": [
     {
       "icon": "🛢️",
@@ -21,67 +18,102 @@ const SCHEMA_REFERENCE = `{
       "metric": "+17.1% VOL"
     }
   ],
+  "what_changed": {
+    "new_stories": ["story-hormuz-coalition"],
+    "escalated": ["story-fx-dollar-pressure"],
+    "stabilized": [],
+    "resolved": []
+  },
   "major_developments": [
     {
       "id": "dev-1",
+      "story_id": "story-hormuz-coalition",
       "domain": "ENERGY",
-      "headline": "Oil Shock and War Risk"
+      "headline": "Oil Shock and War Risk",
+      "driver": "Iran naval posture shift following US carrier redeployment",
+      "change_type": "escalating",
+      "story_stage": "active",
+      "tags": ["iran", "energy", "strait-of-hormuz"],
+      "previous_brief_refs": ["2026-03-12", "2026-03-11"]
     }
   ]
 }`;
 
-export function AddBriefingView({ jsonInput, error: submitError, onJsonChange, onImport, onLoadSample }) {
-  const [liveStatus, setLiveStatus] = useState({ type: '', message: '' });
+const SYNTHESIS_REFERENCE = `{
+  "type": "synthesis",
+  "id": "synth-2026-03-14-to-2026-03-20",
+  "date_range": { "from": "2026-03-14", "to": "2026-03-20" },
+  "active_threads": [
+    {
+      "story_id": "story-hormuz-coalition",
+      "title": "Hormuz Shipping Disruption",
+      "status": "active",
+      "phase": "escalation",
+      "first_seen": "2026-03-14",
+      "last_seen": "2026-03-20"
+    }
+  ],
+  "thematic_arcs": [],
+  "delta_risks": [],
+  "phase_shifts": [],
+  "dominant_system": "Middle East energy corridor",
+  "meta_findings": "..."
+}`;
+
+export function AddBriefingView({
+  jsonInput,
+  error: submitError,
+  isImporting = false,
+  onJsonChange,
+  onImport,
+  onLoadSample
+}) {
+  const [liveStatus, setLiveStatus] = useState({ type: '', message: '', warnings: [] });
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!jsonInput.trim()) {
-        setLiveStatus({ type: '', message: '' });
+        setLiveStatus({ type: '', message: '', warnings: [] });
         return;
       }
 
       try {
         const parsed = JSON.parse(sanitizeJsonInput(jsonInput));
-        
+
+        if (parsed.type === 'synthesis') {
+          const { valid, errors, warnings } = validateSynthesis(parsed);
+          if (!valid) {
+            setLiveStatus({ type: 'error', message: `Synthesis errors: ${errors.join('; ')}`, warnings });
+          } else {
+            setLiveStatus({ type: 'success', message: `Synthesis overlay valid — covers ${parsed.date_range?.from} to ${parsed.date_range?.to}.`, warnings });
+          }
+          return;
+        }
+
         if (parsed.briefings && Array.isArray(parsed.briefings)) {
           if (parsed.briefings.length === 0) {
-            setLiveStatus({
-              type: 'warning',
-              message: 'Valid JSON, but the archive appears to contain no briefings.'
-            });
+            setLiveStatus({ type: 'warning', message: 'Valid JSON, but the archive contains no briefings.', warnings: [] });
             return;
           }
+          setLiveStatus({ type: 'success', message: `Archive valid. Ready to import ${parsed.briefings.length} briefings.`, warnings: [] });
+          return;
+        }
+
+        const { valid, errors, warnings } = validateDailyBriefing(parsed);
+        if (!valid) {
+          setLiveStatus({ type: 'error', message: `Missing required fields: ${errors.join('; ')}`, warnings });
+        } else {
           setLiveStatus({
             type: 'success',
-            message: `Archive valid. Ready to import ${parsed.briefings.length} briefings.`
+            message: `Schema valid — ready to import ${parsed.id}.`,
+            warnings
           });
-          return;
         }
-
-        const missing = [];
-
-        if (!parsed.id) missing.push('id');
-        if (!parsed.date) missing.push('date');
-        if (!parsed.today_in_60_seconds || !Array.isArray(parsed.today_in_60_seconds)) {
-          missing.push('today_in_60_seconds (must be array)');
-        }
-
-        if (missing.length > 0) {
-          setLiveStatus({
-            type: 'warning',
-            message: `Valid JSON, but missing required fields: ${missing.join(', ')}`
-          });
-          return;
-        }
-
-        setLiveStatus({
-          type: 'success',
-          message: 'Schema valid and ready for import.'
-        });
       } catch {
         setLiveStatus({
           type: 'error',
-          message: 'Invalid JSON syntax - check for missing commas or unclosed brackets.'
+          message: 'Invalid JSON syntax — check for missing commas or unclosed brackets.',
+          warnings: []
         });
       }
     }, 400);
@@ -111,23 +143,37 @@ export function AddBriefingView({ jsonInput, error: submitError, onJsonChange, o
       )}
 
       {!submitError && liveStatus.message ? (
-        <div
-          className={`mb-6 flex items-start gap-3 rounded-2xl border p-4 backdrop-blur-md transition-colors ${
-            liveStatus.type === 'success'
-              ? 'border-emerald-500/20 bg-emerald-950/20 text-emerald-300 shadow-[0_0_20px_rgba(16,185,129,0.08)]'
-              : liveStatus.type === 'warning'
-                ? 'border-amber-500/20 bg-amber-950/20 text-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.08)]'
-                : 'border-slate-500/20 bg-slate-900/40 text-slate-400'
-          }`}
-        >
-          {liveStatus.type === 'success' ? (
-            <CheckCircle size={18} className="mt-0.5 shrink-0 text-emerald-400" />
-          ) : liveStatus.type === 'warning' ? (
-            <Info size={18} className="mt-0.5 shrink-0 text-amber-400" />
-          ) : (
-            <AlertTriangle size={18} className="mt-0.5 shrink-0 text-slate-500" />
-          )}
-          <div className="text-[12px] font-mono font-medium leading-relaxed">{liveStatus.message}</div>
+        <div className="mb-4 space-y-2">
+          <div
+            className={`flex items-start gap-3 rounded-2xl border p-4 backdrop-blur-md transition-colors ${
+              liveStatus.type === 'success'
+                ? 'border-emerald-500/20 bg-emerald-950/20 text-emerald-300 shadow-[0_0_20px_rgba(16,185,129,0.08)]'
+                : liveStatus.type === 'warning'
+                  ? 'border-amber-500/20 bg-amber-950/20 text-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.08)]'
+                  : 'border-red-500/20 bg-red-950/20 text-red-300 shadow-[0_0_20px_rgba(239,68,68,0.08)]'
+            }`}
+          >
+            {liveStatus.type === 'success' ? (
+              <CheckCircle size={18} className="mt-0.5 shrink-0 text-emerald-400" />
+            ) : liveStatus.type === 'warning' ? (
+              <Info size={18} className="mt-0.5 shrink-0 text-amber-400" />
+            ) : (
+              <AlertTriangle size={18} className="mt-0.5 shrink-0 text-red-400" />
+            )}
+            <div className="text-[12px] font-mono font-medium leading-relaxed">{liveStatus.message}</div>
+          </div>
+          {liveStatus.warnings?.length > 0 ? (
+            <div className="rounded-xl border border-amber-500/15 bg-amber-950/10 px-4 py-3">
+              <div className="text-[9px] font-mono font-bold uppercase tracking-[0.22em] text-amber-500/70 mb-1.5">Schema Warnings</div>
+              <ul className="space-y-1">
+                {liveStatus.warnings.map((w, i) => (
+                  <li key={i} className="text-[11px] font-mono text-amber-300/70 leading-relaxed flex gap-2">
+                    <span className="text-amber-500/40 shrink-0">›</span>{w}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       ) : null}
 
@@ -146,25 +192,38 @@ export function AddBriefingView({ jsonInput, error: submitError, onJsonChange, o
         />
       </div>
 
-      <DisclosurePanel
-        title="Expected JSON Structure"
-        eyebrow="Format Reference"
-        accentClassName="text-slate-400"
-      >
-        <pre className="overflow-x-auto rounded-xl border border-white/5 bg-slate-950/50 p-4 font-mono text-[11px] text-slate-300">
-          {SCHEMA_REFERENCE}
-        </pre>
-      </DisclosurePanel>
+      <div className="space-y-3">
+        <DisclosurePanel
+          title="Daily Briefing Schema"
+          eyebrow="Format Reference"
+          accentClassName="text-slate-400"
+        >
+          <pre className="overflow-x-auto rounded-xl border border-white/5 bg-slate-950/50 p-4 font-mono text-[11px] text-slate-300">
+            {SCHEMA_REFERENCE}
+          </pre>
+        </DisclosurePanel>
+        <DisclosurePanel
+          title="Synthesis Overlay Schema"
+          eyebrow="Format Reference"
+          accentClassName="text-slate-400"
+        >
+          <pre className="overflow-x-auto rounded-xl border border-white/5 bg-slate-950/50 p-4 font-mono text-[11px] text-slate-300">
+            {SYNTHESIS_REFERENCE}
+          </pre>
+        </DisclosurePanel>
+      </div>
 
       <div className="flex gap-4 mt-8">
         <button
           onClick={onImport}
+          disabled={isImporting}
           className="flex-1 bg-cyan-500 text-slate-950 font-bold py-3.5 px-4 rounded-full active:scale-[0.98] transition-all uppercase text-[12px] tracking-[0.24em] shadow-[0_0_20px_rgba(34,211,238,0.28)] hover:bg-cyan-400"
         >
-          Execute Import
+          {isImporting ? 'Syncing Import' : 'Execute Import'}
         </button>
         <button
           onClick={onLoadSample}
+          disabled={isImporting}
           className="px-6 py-3.5 bg-white/5 text-slate-200 font-bold rounded-full border border-white/10 hover:bg-white/10 active:scale-[0.98] transition-all uppercase text-[12px] tracking-[0.24em] backdrop-blur-xl"
         >
           Load Test Data

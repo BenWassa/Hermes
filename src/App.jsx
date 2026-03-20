@@ -3,18 +3,28 @@ import { Menu } from 'lucide-react';
 import { BottomNav } from './components/BottomNav';
 import { AppMenu } from './components/AppMenu';
 import { SAMPLE_BRIEFING } from './data/sampleBriefing';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { signInWithGoogle, signOutUser, subscribeToAuthState } from './lib/firebase';
+import {
+  clearSharedContent,
+  getAccessRecord,
+  signInWithGoogle,
+  signOutUser,
+  subscribeToAuthState,
+  subscribeToBriefings,
+  subscribeToSyntheses,
+  upsertBriefings,
+  upsertSynthesis
+} from './lib/firebase';
 import { getTodayId } from './utils/date';
-import { sanitizeJsonInput } from './utils/json';
+import { sanitizeJsonInput, validateDailyBriefing, validateSynthesis } from './utils/json';
 import { AddBriefingView } from './views/AddBriefingView';
 import { ArchiveView } from './views/ArchiveView';
 import { HomeView } from './views/HomeView';
 import { OnboardingView } from './views/OnboardingView';
 import { SearchView } from './views/SearchView';
+import { StoryView } from './views/StoryView';
+import { SynthesisView } from './views/SynthesisView';
 import packageMetadata from '../package.json';
 
-const ALLOWED_UIDS = new Set(['aavtqWTiNUZk5NQpDJkvo9IIqh02']);
 const APP_VERSION = packageMetadata.version;
 
 function getExportTimestamp() {
@@ -35,65 +45,175 @@ function downloadFile(filename, contents, type) {
 
 export default function App() {
   const [authReady, setAuthReady] = useState(false);
+  const [accessReady, setAccessReady] = useState(false);
+  const [contentReady, setContentReady] = useState(false);
   const [user, setUser] = useState(null);
+  const [accessRecord, setAccessRecord] = useState(null);
   const [authError, setAuthError] = useState('');
+  const [dataError, setDataError] = useState('');
   const [isSigningIn, setIsSigningIn] = useState(false);
-  const [briefings, setBriefings] = useLocalStorage('globalbrief_data', []);
+  const [isImporting, setIsImporting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [briefings, setBriefings] = useState([]);
+  const [syntheses, setSyntheses] = useState([]);
   const [currentView, setCurrentView] = useState('home');
   const [viewingDateId, setViewingDateId] = useState(null);
+  const [viewingStoryId, setViewingStoryId] = useState(null);
   const [jsonInput, setJsonInput] = useState('');
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const fileInputRef = useRef(null);
 
+  const isAdmin = accessRecord?.role === 'admin';
   const todayBriefing = briefings.find((briefing) => briefing.id === getTodayId());
   const activeBriefing = viewingDateId
     ? briefings.find((briefing) => briefing.id === viewingDateId)
     : todayBriefing;
-
   const latestBriefing = briefings.length > 0 ? briefings[0] : null;
 
   const results = useMemo(() => {
     if (!query.trim()) return [];
     const normalizedQuery = query.toLowerCase();
+
     return briefings.filter((briefing) =>
       JSON.stringify(briefing).toLowerCase().includes(normalizedQuery)
     );
   }, [briefings, query]);
 
   useEffect(() => {
-    console.log('Hermes App Mount Date Debug:', {
-      systemIso: new Date().toISOString(),
-      localDateId: getTodayId(),
-      timestamp: new Date().toString()
-    });
+    let isCancelled = false;
 
-    const unsubscribe = subscribeToAuthState((nextUser) => {
+    const unsubscribe = subscribeToAuthState(async (nextUser) => {
+      if (isCancelled) return;
+
       setAuthReady(true);
       setIsSigningIn(false);
+      setDataError('');
+
       if (!nextUser) {
         setUser(null);
+        setAccessRecord(null);
+        setAccessReady(true);
+        setContentReady(false);
+        setBriefings([]);
+        setSyntheses([]);
         return;
       }
 
-      if (!ALLOWED_UIDS.has(nextUser.uid)) {
+      setAccessReady(false);
+      setContentReady(false);
+
+      try {
+        const nextAccessRecord = await getAccessRecord(nextUser.uid);
+
+        if (isCancelled) return;
+
+        if (!nextAccessRecord?.active) {
+          setUser(null);
+          setAccessRecord(null);
+          setAccessReady(true);
+          setAuthError(
+            nextAccessRecord
+              ? 'This account is inactive for Hermes.'
+              : `This account is not authorized for Hermes. Signed in UID: ${nextUser.uid}`
+          );
+          signOutUser().catch(() => {});
+          return;
+        }
+
+        setUser(nextUser);
+        setAccessRecord(nextAccessRecord);
+        setAccessReady(true);
+        setAuthError('');
+      } catch (accessError) {
+        if (isCancelled) return;
         setUser(null);
-        setAuthError(`This account is not authorized for Hermes. Signed in UID: ${nextUser.uid}`);
+        setAccessRecord(null);
+        setAccessReady(true);
+        setAuthError(accessError.message || 'Failed to verify Hermes access.');
         signOutUser().catch(() => {});
-        return;
       }
-
-      setUser(nextUser);
-      setAuthError('');
     });
 
-    return unsubscribe;
+    return () => {
+      isCancelled = true;
+      unsubscribe();
+    };
   }, []);
+
+  useEffect(() => {
+    if (!user || !accessRecord?.active) {
+      return undefined;
+    }
+
+    let isCancelled = false;
+    let pendingStreams = 2;
+    let briefingsInitialized = false;
+    let synthesesInitialized = false;
+
+    setContentReady(false);
+    setDataError('');
+
+    const markStreamReady = () => {
+      pendingStreams -= 1;
+      if (!isCancelled && pendingStreams <= 0) {
+        setContentReady(true);
+      }
+    };
+
+    const handleStreamError = (streamLabel) => (streamError) => {
+      if (isCancelled) return;
+      setDataError(streamError.message || `Failed to load shared ${streamLabel}.`);
+      if (streamLabel === 'briefings' && !briefingsInitialized) {
+        briefingsInitialized = true;
+        markStreamReady();
+      }
+      if (streamLabel === 'syntheses' && !synthesesInitialized) {
+        synthesesInitialized = true;
+        markStreamReady();
+      }
+    };
+
+    const unsubscribeBriefings = subscribeToBriefings(
+      (nextBriefings) => {
+        if (isCancelled) return;
+        setBriefings(nextBriefings);
+        if (!briefingsInitialized) {
+          briefingsInitialized = true;
+          markStreamReady();
+        }
+      },
+      handleStreamError('briefings')
+    );
+
+    const unsubscribeSyntheses = subscribeToSyntheses(
+      (nextSyntheses) => {
+        if (isCancelled) return;
+        setSyntheses(nextSyntheses);
+        if (!synthesesInitialized) {
+          synthesesInitialized = true;
+          markStreamReady();
+        }
+      },
+      handleStreamError('syntheses')
+    );
+
+    return () => {
+      isCancelled = true;
+      unsubscribeBriefings();
+      unsubscribeSyntheses();
+    };
+  }, [user, accessRecord]);
 
   const openBriefing = (briefingId) => {
     setViewingDateId(briefingId);
     setCurrentView('home');
+  };
+
+  const openStory = (storyId) => {
+    setViewingStoryId(storyId);
+    setCurrentView('story');
   };
 
   const selectView = (view) => {
@@ -101,80 +221,102 @@ export default function App() {
     if (view === 'home') {
       setViewingDateId(null);
     }
+    if (view !== 'story') {
+      setViewingStoryId(null);
+    }
   };
 
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
 
-    const handleImport = () => {
-      try {
-        setError('');
-        const sanitizedInput = sanitizeJsonInput(jsonInput);
-        const parsed = JSON.parse(sanitizedInput);
+  const handleImport = async () => {
+    if (!isAdmin || !user) {
+      setError('Your account does not have permission to modify shared Hermes data.');
+      return;
+    }
 
-        let imports = [];
-        let isArchive = false;
+    try {
+      setError('');
+      setIsImporting(true);
 
-        if (parsed.briefings && Array.isArray(parsed.briefings)) {
-          imports = parsed.briefings;
-          isArchive = true;
-        } else {
-          imports = [parsed];
-        }
+      const sanitizedInput = sanitizeJsonInput(jsonInput);
+      const parsed = JSON.parse(sanitizedInput);
 
-        if (imports.length === 0) {
-          throw new Error('No briefings found in the provided JSON.');
-        }
+      if (parsed.type === 'synthesis') {
+        const { valid, errors } = validateSynthesis(parsed);
+        if (!valid) throw new Error(`Synthesis import failed: ${errors.join('; ')}`);
 
-        imports.forEach((brief, index) => {
-          const prefix = isArchive ? `Briefing at index ${index}: ` : '';
-          if (!brief.id) {
-            throw new Error(`${prefix}Missing required field: "id" (Format: YYYY-MM-DD)`);
-          }
-          if (!brief.date) {
-            throw new Error(`${prefix}Missing required field: "date" (Display date string)`);
-          }
-          if (!brief.today_in_60_seconds || !Array.isArray(brief.today_in_60_seconds)) {
-            throw new Error(
-              `${prefix}Missing or invalid required field: "today_in_60_seconds" (Must be an array of { icon, headline })`
-            );
-          }
-        });
-
-        setBriefings((existing) => {
-          const updated = [...existing];
-          imports.forEach((brief) => {
-            const existingIndex = updated.findIndex((b) => b.id === brief.id);
-            if (existingIndex >= 0) {
-              updated[existingIndex] = brief;
-            } else {
-              updated.push(brief);
-            }
-          });
-          return updated.sort((a, b) => new Date(b.id) - new Date(a.id));
-        });
-
+        await upsertSynthesis(parsed, user);
         setJsonInput('');
-        
-        if (isArchive) {
-          setViewingDateId(null);
-          setCurrentView('home');
-        } else {
-          if (parsed.id === getTodayId()) {
-            setViewingDateId(null);
-            setCurrentView('home');
-          } else {
-            setViewingDateId(parsed.id);
-            setCurrentView('archive');
-          }
-        }
-      } catch (importError) {
-        setError(
-          importError.message ||
-            'Invalid JSON syntax. Check for malformed structure or unsupported pasted formatting.'
-        );
+        setCurrentView('synthesis');
+        return;
       }
-    };  const handleImportFileClick = () => {
+
+      const archiveBriefings = Array.isArray(parsed.briefings) ? parsed.briefings : [];
+      const archiveSyntheses = Array.isArray(parsed.syntheses) ? parsed.syntheses : [];
+      const isArchive = Array.isArray(parsed.briefings) || Array.isArray(parsed.syntheses);
+
+      const imports = isArchive ? archiveBriefings : [parsed];
+
+      if (imports.length === 0 && archiveSyntheses.length === 0) {
+        throw new Error('No briefings or syntheses found in the provided JSON.');
+      }
+
+      imports.forEach((brief, index) => {
+        const { valid, errors } = validateDailyBriefing(brief);
+        if (!valid) {
+          const prefix = isArchive ? `Briefing at index ${index}: ` : '';
+          throw new Error(`${prefix}${errors.join('; ')}`);
+        }
+      });
+
+      archiveSyntheses.forEach((synthesis, index) => {
+        const { valid, errors } = validateSynthesis(synthesis);
+        if (!valid) {
+          throw new Error(`Synthesis at index ${index}: ${errors.join('; ')}`);
+        }
+      });
+
+      if (imports.length > 0) {
+        await upsertBriefings(imports, user);
+      }
+
+      if (archiveSyntheses.length > 0) {
+        await Promise.all(archiveSyntheses.map((synthesis) => upsertSynthesis(synthesis, user)));
+      }
+
+      setJsonInput('');
+
+      if (archiveSyntheses.length > 0 && imports.length === 0) {
+        setCurrentView('synthesis');
+        return;
+      }
+
+      if (isArchive) {
+        setViewingDateId(null);
+        setCurrentView('home');
+        return;
+      }
+
+      if (parsed.id === getTodayId()) {
+        setViewingDateId(null);
+        setCurrentView('home');
+      } else {
+        setViewingDateId(parsed.id);
+        setCurrentView('archive');
+      }
+    } catch (importError) {
+      setError(
+        importError.message ||
+          'Invalid JSON syntax. Check for malformed structure or unsupported pasted formatting.'
+      );
+    } finally {
+      setIsImporting(false);
+    }
+  };
+
+  const handleImportFileClick = () => {
+    if (!isAdmin) return;
     closeMenu();
     fileInputRef.current?.click();
   };
@@ -201,22 +343,28 @@ export default function App() {
       exportedAt: new Date().toISOString(),
       appVersion: APP_VERSION,
       briefingCount: briefings.length,
-      briefings
+      synthesisCount: syntheses.length,
+      briefings,
+      syntheses
     };
-      const readme = [
-        'Hermes data export',
-        `Generated: ${exportPayload.exportedAt}`,
-        `App version: ${APP_VERSION}`,
-        `Briefing count: ${briefings.length}`,
-        '',
-        'Files in this export:',
-        `- hermes-export-${timestamp}.json: full local briefing archive`,
-        `- hermes-export-${timestamp}-README.txt: export summary and restore notes`,
-        '',
-        'Import notes:',
-        '- You can import the full hermes-export .json file directly through the app menu to restore your archive.',
-        '- You can also import single briefing JSON objects directly.'
-      ].join('\n');    downloadFile(
+
+    const readme = [
+      'Hermes shared data export',
+      `Generated: ${exportPayload.exportedAt}`,
+      `App version: ${APP_VERSION}`,
+      `Briefing count: ${briefings.length}`,
+      `Synthesis count: ${syntheses.length}`,
+      '',
+      'Files in this export:',
+      `- hermes-export-${timestamp}.json: shared briefing and synthesis archive`,
+      `- hermes-export-${timestamp}-README.txt: export summary and restore notes`,
+      '',
+      'Import notes:',
+      '- Admin users can import the full hermes-export .json file directly through the app menu to restore shared data.',
+      '- Admin users can also import single briefing JSON objects or a single synthesis JSON object directly.'
+    ].join('\n');
+
+    downloadFile(
       `hermes-export-${timestamp}.json`,
       JSON.stringify(exportPayload, null, 2),
       'application/json'
@@ -225,20 +373,30 @@ export default function App() {
     closeMenu();
   };
 
-  const handleDeleteAll = () => {
+  const handleDeleteAll = async () => {
+    if (!isAdmin) return;
+
     closeMenu();
     const shouldDelete = window.confirm(
-      `Delete all ${briefings.length} saved briefing${briefings.length === 1 ? '' : 's'} from this device?`
+      `Delete all ${briefings.length} shared briefing${briefings.length === 1 ? '' : 's'} and ${syntheses.length} synthesis overlay${syntheses.length === 1 ? '' : 's'} for every Hermes user?`
     );
 
     if (!shouldDelete) return;
 
-    setBriefings([]);
-    setViewingDateId(null);
-    setJsonInput('');
-    setError('');
-    setQuery('');
-    setCurrentView('home');
+    try {
+      setIsDeleting(true);
+      await clearSharedContent();
+      setViewingDateId(null);
+      setViewingStoryId(null);
+      setJsonInput('');
+      setError('');
+      setQuery('');
+      setCurrentView('home');
+    } catch (deleteError) {
+      setError(deleteError.message || 'Failed to clear shared Hermes data.');
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const loadSample = () => {
@@ -253,20 +411,25 @@ export default function App() {
     try {
       await signInWithGoogle();
     } catch (signInError) {
-      setAuthError(signInError.message || 'Google sign-in failed. Check Firebase Auth provider settings and try again.');
+      setAuthError(
+        signInError.message ||
+          'Google sign-in failed. Check Firebase Auth provider settings and try again.'
+      );
       setIsSigningIn(false);
     }
   };
 
-  if (!authReady) {
+  if (!authReady || !accessReady) {
     return (
       <div className="flex min-h-screen items-center justify-center px-6 text-center">
         <div className="space-y-3">
           <div className="text-[10px] font-mono font-bold uppercase tracking-[0.32em] text-cyan-400/80">
             Hermes Access Gate
           </div>
-          <div className="text-2xl font-extrabold uppercase tracking-tight stark-gradient-text">Authenticating</div>
-          <div className="text-[13px] text-slate-500">Checking active Firebase session...</div>
+          <div className="text-2xl font-extrabold uppercase tracking-tight stark-gradient-text">
+            Authenticating
+          </div>
+          <div className="text-[13px] text-slate-500">Checking Firebase session and shared access...</div>
         </div>
       </div>
     );
@@ -280,7 +443,24 @@ export default function App() {
     );
   }
 
-  const showFloatingMenuButton = !(currentView === 'home' && activeBriefing);
+  if (!contentReady) {
+    return (
+      <div className="flex min-h-screen items-center justify-center px-6 text-center">
+        <div className="space-y-3">
+          <div className="text-[10px] font-mono font-bold uppercase tracking-[0.32em] text-cyan-400/80">
+            Hermes Data Link
+          </div>
+          <div className="text-2xl font-extrabold uppercase tracking-tight stark-gradient-text">
+            Syncing
+          </div>
+          <div className="text-[13px] text-slate-500">Loading shared briefings and synthesis overlays...</div>
+          {dataError ? <div className="text-[12px] text-red-300">{dataError}</div> : null}
+        </div>
+      </div>
+    );
+  }
+
+  const showFloatingMenuButton = !(currentView === 'home' && activeBriefing) && currentView !== 'story';
 
   return (
     <div className="min-h-screen font-sans text-slate-50 selection:bg-cyan-400/20 selection:text-white">
@@ -295,7 +475,10 @@ export default function App() {
       <AppMenu
         isOpen={isMenuOpen}
         user={user}
+        role={accessRecord?.role}
         version={APP_VERSION}
+        canImport={isAdmin && !isImporting && !isDeleting}
+        canDelete={isAdmin && !isDeleting && !isImporting}
         onClose={closeMenu}
         onSignOut={() => {
           closeMenu();
@@ -318,18 +501,33 @@ export default function App() {
       ) : null}
 
       <main className={`px-4 pb-32 md:px-6 ${showFloatingMenuButton ? 'pt-16 md:pt-20' : ''}`}>
+        {dataError ? (
+          <div className="mx-auto mb-5 max-w-2xl rounded-2xl border border-red-500/20 bg-red-950/20 px-4 py-3 text-[12px] text-red-200">
+            {dataError}
+          </div>
+        ) : null}
+
         {currentView === 'home' && (
           <HomeView
             activeBriefing={activeBriefing}
             latestBriefing={latestBriefing}
+            canImport={isAdmin}
             onGoAdd={() => setCurrentView('add')}
             onOpenBriefing={openBriefing}
             onOpenMenu={openMenu}
+            onViewThread={openStory}
           />
         )}
 
         {currentView === 'archive' && (
-          <ArchiveView briefings={briefings} onOpenBriefing={openBriefing} onAdd={() => setCurrentView('add')} />
+          <ArchiveView
+            briefings={briefings}
+            syntheses={syntheses}
+            canImport={isAdmin}
+            onOpenBriefing={openBriefing}
+            onOpenThread={openStory}
+            onAdd={() => setCurrentView('add')}
+          />
         )}
 
         {currentView === 'search' && (
@@ -345,9 +543,24 @@ export default function App() {
           <AddBriefingView
             jsonInput={jsonInput}
             error={error}
+            isImporting={isImporting}
             onJsonChange={setJsonInput}
             onImport={handleImport}
             onLoadSample={loadSample}
+          />
+        )}
+
+        {currentView === 'synthesis' && (
+          <SynthesisView syntheses={syntheses} onOpenThread={openStory} />
+        )}
+
+        {currentView === 'story' && (
+          <StoryView
+            storyId={viewingStoryId}
+            briefings={briefings}
+            syntheses={syntheses}
+            onBack={() => selectView('archive')}
+            onOpenBriefing={openBriefing}
           />
         )}
       </main>

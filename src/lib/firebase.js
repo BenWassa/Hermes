@@ -7,6 +7,19 @@ import {
   signInWithRedirect,
   signOut
 } from 'firebase/auth';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
+  writeBatch
+} from 'firebase/firestore';
 
 const DEFAULT_FIREBASE_CONFIG = {
   apiKey: 'AIzaSyAMGa-MaCDXaSHoVWSXOb3MUY7DDbT6WMg',
@@ -29,6 +42,7 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
+export const db = getFirestore(firebaseApp);
 export const googleProvider = new GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
@@ -53,4 +67,71 @@ export async function signInWithGoogle() {
 
 export function signOutUser() {
   return signOut(auth);
+}
+
+export async function getAccessRecord(uid) {
+  const snapshot = await getDoc(doc(db, 'access', uid));
+  return snapshot.exists() ? snapshot.data() : null;
+}
+
+export function subscribeToBriefings(callback, onError) {
+  return onSnapshot(
+    query(collection(db, 'briefings'), orderBy('id', 'desc')),
+    (snapshot) => {
+      callback(snapshot.docs.map((item) => item.data()));
+    },
+    onError
+  );
+}
+
+export function subscribeToSyntheses(callback, onError) {
+  return onSnapshot(
+    query(collection(db, 'syntheses'), orderBy('id', 'desc')),
+    (snapshot) => {
+      callback(snapshot.docs.map((item) => item.data()));
+    },
+    onError
+  );
+}
+
+export async function upsertBriefings(briefings, user) {
+  const batch = writeBatch(db);
+
+  briefings.forEach((briefing) => {
+    const ref = doc(db, 'briefings', briefing.id);
+    batch.set(ref, {
+      ...briefing,
+      updatedAt: serverTimestamp(),
+      updatedBy: user.uid
+    });
+  });
+
+  await batch.commit();
+}
+
+export async function upsertSynthesis(synthesis, user) {
+  await setDoc(doc(db, 'syntheses', synthesis.id), {
+    ...synthesis,
+    updatedAt: serverTimestamp(),
+    updatedBy: user.uid
+  });
+}
+
+export async function clearSharedContent() {
+  const [briefingsSnapshot, synthesesSnapshot] = await Promise.all([
+    getDocs(collection(db, 'briefings')),
+    getDocs(collection(db, 'syntheses'))
+  ]);
+
+  const batch = writeBatch(db);
+
+  briefingsSnapshot.forEach((item) => {
+    batch.delete(item.ref);
+  });
+
+  synthesesSnapshot.forEach((item) => {
+    batch.delete(item.ref);
+  });
+
+  await batch.commit();
 }

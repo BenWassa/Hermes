@@ -41,7 +41,10 @@ function MenuAction({ icon: Icon, label, hint, onClick, tone = 'default' }) {
 export function AppMenu({
   isOpen,
   user,
+  role,
   version,
+  canImport,
+  canDelete,
   onClose,
   onSignOut,
   onImport,
@@ -98,6 +101,9 @@ export function AppMenu({
                 {user?.displayName || 'Authorized User'}
               </div>
               <div className="mt-1 break-all text-[11px] text-slate-400">{user?.email || 'No email available'}</div>
+              <div className="mt-2 text-[10px] font-mono uppercase tracking-[0.18em] text-cyan-400/70">
+                Role: {role || 'reader'}
+              </div>
             </div>
             <MenuAction
               icon={LogOut}
@@ -108,25 +114,29 @@ export function AppMenu({
           </MenuSection>
 
           <MenuSection icon={Database} title="Data">
-            <MenuAction
-              icon={Upload}
-              label="Import JSON"
-              hint="Load a briefing file into the existing import flow."
-              onClick={onImport}
-            />
+            {canImport ? (
+              <MenuAction
+                icon={Upload}
+                label="Import JSON"
+                hint="Load shared briefings or synthesis overlays into Firestore."
+                onClick={onImport}
+              />
+            ) : null}
             <MenuAction
               icon={Download}
               label="Export archive"
-              hint="Download timestamped JSON and README backup files."
+              hint="Download the current shared briefings and synthesis overlays."
               onClick={onExport}
             />
-            <MenuAction
-              icon={Trash2}
-              label="Delete all data"
-              hint="Permanently clear all saved local briefings on this device."
-              onClick={onDeleteAll}
-              tone="danger"
-            />
+            {canDelete ? (
+              <MenuAction
+                icon={Trash2}
+                label="Delete shared data"
+                hint="Permanently clear shared briefings and syntheses for all approved users."
+                onClick={onDeleteAll}
+                tone="danger"
+              />
+            ) : null}
           </MenuSection>
         </div>
 

@@ -34,8 +34,9 @@ The default Firebase web app config for Hermes is checked into the client bundle
 1. Optional: copy `.env.example` to `.env` only if you want to override the default Firebase project locally.
 2. In Firebase Console, enable `Authentication` -> `Sign-in method` -> `Google`.
 3. In Firebase Authentication settings, make sure your local dev host and Firebase Hosting domain are listed under authorized domains.
-4. This app uses Firebase Auth client-side only. If the auth session disappears, the UI returns to the onboarding sign-in view automatically.
-5. Hermes currently enforces an app-level UID allowlist in `src/App.jsx`. Only approved Firebase user UIDs can enter the app shell.
+4. Enable `Firestore Database` in the same Firebase project.
+5. This app uses Firebase Auth for identity and Firestore for shared content plus access control.
+6. Access is managed by Firestore documents in `access/{uid}` rather than a hardcoded UID allowlist. Seed each approved user with `active: true` and `role: 'admin'` or `role: 'reader'`.
 
 ## Firebase Hosting
 
@@ -49,11 +50,13 @@ Deploy flow:
 
 Because the app is a Vite SPA, Hosting only needs to serve `dist/` and rewrite routes to `index.html`.
 
-## Authorization Note
+## Shared Data Model
 
-There is no Firestore or Storage usage in the current app, so Firebase security rules are not the active control surface yet.
+- `briefings/{id}` stores shared daily briefing documents keyed by `YYYY-MM-DD`
+- `syntheses/{id}` stores shared synthesis overlay documents
+- `access/{uid}` stores allowlist and role data for each approved Firebase Auth user
 
-Right now, access control is enforced in the client app by checking the signed-in Firebase Auth UID against an allowlist. If you later add Firestore, Storage, or other Firebase data services, mirror the same UID restriction in those service rules.
+Firestore rules live in [firestore.rules](./firestore.rules). Only approved active users can read shared content, and only admins can write it.
 
 ## Development
 
