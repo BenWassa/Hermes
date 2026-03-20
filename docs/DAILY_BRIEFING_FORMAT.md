@@ -1,8 +1,10 @@
 # Daily Briefing Format
 
-This app imports one daily briefing as a JSON object.
+Developer reference for the Hermes daily briefing schema.
 
-The current UI expects the following structure.
+> **Looking for the ChatGPT prompt?** See [DAILY_BRIEFING_PROMPT.md](./DAILY_BRIEFING_PROMPT.md) — the paste-ready prompt optimised for daily use.
+
+The app imports one daily briefing as a JSON object with the following structure.
 
 ## Required Fields
 
