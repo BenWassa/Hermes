@@ -67,3 +67,23 @@ If a newly added collection ships in the frontend before Firestore rules are dep
 - Dev server on your local network: `npm run dev`
 - Install dependencies with `npm install`.
 - Run `npm run dev`.
+
+# Testing on Mobile Devices
+
+Because Hermes uses Firebase Authentication, you cannot test on a mobile device on your local network (e.g., `192.168.x.x`) by default, because Firebase only authorizes `localhost` out of the box.
+
+To test on your mobile device over Wi-Fi without Firebase Auth blocking you:
+
+1. **Find your Mac's Local IP Address:** Run `ipconfig getifaddr en0` in your Mac's terminal (e.g., `192.168.1.164`).
+2. **Whitelist the IP in Firebase:** 
+   - Go to the [Firebase Console](https://console.firebase.google.com/) for this project.
+   - Navigate to **Authentication** > **Settings** > **Authorized domains**.
+   - Click **Add domain**, paste your IP address (e.g., `192.168.1.164`), and save.
+3. **Start the Dev Server:** Ensure you run `npm run dev` (which includes the `--host` flag to broadcast it locally).
+4. **Access on Mobile:** Navigate to `http://YOUR_LOCAL_IP:5173` on your mobile device connected to the same Wi-Fi.
+
+> **Note:** Your local IP address may change sporadically depending on your router's DHCP lease. If access breaks in the future, re-check your IP address and update the authorized domains list in Firebase.
+
+## Setup
+
+1. Copy `.env.template` to `.env` and fill in Firebase config
