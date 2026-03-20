@@ -22,6 +22,7 @@ import { sanitizeJsonInput, validateAmplifier, validateDailyBriefing, validateSy
 import { AddBriefingView } from './views/AddBriefingView';
 import { ArchiveView } from './views/ArchiveView';
 import { HomeView } from './views/HomeView';
+import { ImportFlowView } from './views/ImportFlowView';
 import { OnboardingView } from './views/OnboardingView';
 import { SearchView } from './views/SearchView';
 import { StoryView } from './views/StoryView';
@@ -30,6 +31,18 @@ import { WorkflowView } from './views/WorkflowView';
 import packageMetadata from '../package.json';
 
 const APP_VERSION = packageMetadata.version;
+
+function formatFirebaseError(error, fallbackMessage) {
+  if (!error) return fallbackMessage;
+
+  const message = error.message || fallbackMessage;
+
+  if (error.code === 'permission-denied') {
+    return 'Hermes could not read shared Firestore data. Your signed-in account may be missing an active access record, or the deployed Firestore rules may be out of date.';
+  }
+
+  return message;
+}
 
 function getExportTimestamp() {
   return new Date().toISOString().replace(/[:]/g, '-').replace(/\.\d{3}Z$/, 'Z');
@@ -61,6 +74,7 @@ export default function App() {
   const [briefings, setBriefings] = useState([]);
   const [syntheses, setSyntheses] = useState([]);
   const [amplifiers, setAmplifiers] = useState([]);
+  const [importPhase, setImportPhase] = useState(null); // null | 'step2' | 'loading'
   const [currentView, setCurrentView] = useState('home');
   const [viewingDateId, setViewingDateId] = useState(null);
   const [viewingStoryId, setViewingStoryId] = useState(null);
@@ -102,6 +116,7 @@ export default function App() {
         setBriefings([]);
         setSyntheses([]);
         setAmplifiers([]);
+        setImportPhase(null);
         return;
       }
 
@@ -132,10 +147,15 @@ export default function App() {
         setAuthError('');
       } catch (accessError) {
         if (isCancelled) return;
+        console.error('Hermes access verification failed', {
+          code: accessError?.code,
+          message: accessError?.message,
+          uid: nextUser?.uid
+        });
         setUser(null);
         setAccessRecord(null);
         setAccessReady(true);
-        setAuthError(accessError.message || 'Failed to verify Hermes access.');
+        setAuthError(formatFirebaseError(accessError, 'Failed to verify Hermes access.'));
         signOutUser().catch(() => {});
       }
     });
@@ -169,7 +189,14 @@ export default function App() {
 
     const handleStreamError = (streamLabel) => (streamError) => {
       if (isCancelled) return;
-      setDataError(streamError.message || `Failed to load shared ${streamLabel}.`);
+      console.error(`Hermes ${streamLabel} stream failed`, {
+        code: streamError?.code,
+        message: streamError?.message,
+        uid: user?.uid
+      });
+      setDataError(
+        formatFirebaseError(streamError, `Failed to load shared ${streamLabel}.`)
+      );
       if (streamLabel === 'briefings' && !briefingsInitialized) {
         briefingsInitialized = true;
         markStreamReady();
@@ -240,6 +267,7 @@ export default function App() {
 
   const selectView = (view) => {
     setCurrentView(view);
+    setImportPhase(null);
     if (view === 'home') {
       setViewingDateId(null);
     }
@@ -251,7 +279,7 @@ export default function App() {
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const handleImport = async () => {
+  const handleImport = async (inputOverride) => {
     if (!isAdmin || !user) {
       setError('Your account does not have permission to modify shared Hermes data.');
       return;
@@ -261,7 +289,7 @@ export default function App() {
       setError('');
       setIsImporting(true);
 
-      const sanitizedInput = sanitizeJsonInput(jsonInput);
+      const sanitizedInput = sanitizeJsonInput(inputOverride ?? jsonInput);
       const parsed = JSON.parse(sanitizedInput);
 
       if (parsed.type === 'amplifier') {
@@ -271,7 +299,11 @@ export default function App() {
         await upsertAmplifier(parsed, user);
         setJsonInput('');
         setViewingDateId(null);
-        setCurrentView('home');
+        setImportPhase('loading');
+        setTimeout(() => {
+          setImportPhase(null);
+          setCurrentView('home');
+        }, 1800);
         return;
       }
 
@@ -334,17 +366,36 @@ export default function App() {
       if (parsed.id === getTodayId()) {
         setViewingDateId(null);
         setCurrentView('home');
+        setImportPhase('step2');
       } else {
         setViewingDateId(parsed.id);
         setCurrentView('archive');
       }
     } catch (importError) {
+      console.error('Hermes import failed', {
+        code: importError?.code,
+        message: importError?.message,
+        uid: user?.uid
+      });
       setError(
-        importError.message ||
+        formatFirebaseError(
+          importError,
           'Invalid JSON syntax. Check for malformed structure or unsupported pasted formatting.'
+        )
       );
     } finally {
       setIsImporting(false);
+    }
+  };
+
+  const handleClipboardImport = async () => {
+    if (!isAdmin || !user) return;
+    try {
+      const text = await navigator.clipboard.readText();
+      setJsonInput(text);
+      await handleImport(text);
+    } catch {
+      setError('Could not read clipboard. Copy the JSON output and try again.');
     }
   };
 
@@ -426,7 +477,12 @@ export default function App() {
       setQuery('');
       setCurrentView('home');
     } catch (deleteError) {
-      setError(deleteError.message || 'Failed to clear shared Hermes data.');
+      console.error('Hermes clear shared content failed', {
+        code: deleteError?.code,
+        message: deleteError?.message,
+        uid: user?.uid
+      });
+      setError(formatFirebaseError(deleteError, 'Failed to clear shared Hermes data.'));
     } finally {
       setIsDeleting(false);
     }
@@ -451,7 +507,13 @@ export default function App() {
         setCurrentView('archive');
       }
     } catch (deleteError) {
-      setError(deleteError.message || `Failed to delete briefing ${briefing.id}.`);
+      console.error('Hermes delete briefing failed', {
+        code: deleteError?.code,
+        message: deleteError?.message,
+        uid: user?.uid,
+        briefingId: briefing?.id
+      });
+      setError(formatFirebaseError(deleteError, `Failed to delete briefing ${briefing.id}.`));
     } finally {
       setIsDeleting(false);
     }
@@ -469,9 +531,15 @@ export default function App() {
     try {
       await signInWithGoogle();
     } catch (signInError) {
+      console.error('Hermes Google sign-in failed', {
+        code: signInError?.code,
+        message: signInError?.message
+      });
       setAuthError(
-        signInError.message ||
+        formatFirebaseError(
+          signInError,
           'Google sign-in failed. Check Firebase Auth provider settings and try again.'
+        )
       );
       setIsSigningIn(false);
     }
@@ -565,15 +633,18 @@ export default function App() {
           </div>
         ) : null}
 
-        {currentView === 'home' && isAdmin && !todayBriefing && (
-          <WorkflowView
-            briefings={briefings}
-            todaysBriefing={todayBriefing}
-            onGoToImport={() => setCurrentView('add')}
+        {currentView === 'home' && isAdmin && (!todayBriefing || importPhase === 'step2' || importPhase === 'loading') && (
+          <ImportFlowView
+            step={!todayBriefing ? 1 : 2}
+            isLoading={importPhase === 'loading'}
+            error={error}
+            isImporting={isImporting}
+            onClipboardPaste={handleClipboardImport}
+            onGoToWorkflow={() => setCurrentView('workflow')}
           />
         )}
 
-        {currentView === 'home' && (!isAdmin || todayBriefing) && (
+        {currentView === 'home' && (!isAdmin || (todayBriefing && !importPhase)) && (
           <HomeView
             activeBriefing={activeBriefing}
             amplifier={activeAmplifier}
@@ -583,6 +654,14 @@ export default function App() {
             onOpenBriefing={openBriefing}
             onOpenMenu={openMenu}
             onViewThread={openStory}
+          />
+        )}
+
+        {currentView === 'workflow' && isAdmin && (
+          <WorkflowView
+            briefings={briefings}
+            todaysBriefing={todayBriefing}
+            onGoToImport={() => setCurrentView('add')}
           />
         )}
 
