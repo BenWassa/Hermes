@@ -24,6 +24,7 @@ import { OnboardingView } from './views/OnboardingView';
 import { SearchView } from './views/SearchView';
 import { StoryView } from './views/StoryView';
 import { SynthesisView } from './views/SynthesisView';
+import { WorkflowView } from './views/WorkflowView';
 import packageMetadata from '../package.json';
 
 const APP_VERSION = packageMetadata.version;
@@ -575,6 +576,10 @@ export default function App() {
           <SynthesisView syntheses={syntheses} onOpenThread={openStory} />
         )}
 
+        {currentView === 'workflow' && isAdmin && (
+          <WorkflowView briefings={briefings} onGoToImport={() => setCurrentView('add')} />
+        )}
+
         {currentView === 'story' && (
           <StoryView
             storyId={viewingStoryId}
@@ -586,7 +591,7 @@ export default function App() {
         )}
       </main>
 
-      <BottomNav currentView={currentView} viewingDateId={viewingDateId} onSelectView={selectView} />
+      <BottomNav currentView={currentView} viewingDateId={viewingDateId} isAdmin={isAdmin} onSelectView={selectView} />
     </div>
   );
 }
