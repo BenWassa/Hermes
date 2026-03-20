@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import { Copy, Check, ChevronDown, ChevronUp, ArrowRight, Zap, GitMerge } from 'lucide-react';
-import { getDailyPrompt, getSynthesisPrompt } from '../utils/prompts';
+import { Copy, Check, ChevronDown, ChevronUp, ArrowRight, Zap, GitMerge, Layers } from 'lucide-react';
+import { getDailyPrompt, getAmplifierPrompt, getSynthesisPrompt } from '../utils/prompts';
 
 function useCopy(timeout = 2000) {
   const [copied, setCopied] = useState(false);
@@ -27,7 +27,7 @@ function useCopy(timeout = 2000) {
   return [copied, copy];
 }
 
-function CopyButton({ text, label = 'Copy', copiedLabel = 'Copied', size = 'md' }) {
+function CopyButton({ text, label = 'Copy', copiedLabel = 'Copied', size = 'md', disabled = false }) {
   const [copied, copy] = useCopy();
   const base = size === 'lg'
     ? 'w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-[12px] font-mono uppercase tracking-[0.2em] transition-all'
@@ -35,10 +35,13 @@ function CopyButton({ text, label = 'Copy', copiedLabel = 'Copied', size = 'md' 
   return (
     <button
       type="button"
-      onClick={() => copy(text)}
-      className={`${base} ${copied
-        ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 shadow-[0_0_16px_rgba(52,211,153,0.2)]'
-        : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400/50 shadow-[0_0_12px_rgba(34,211,238,0.1)]'
+      onClick={() => !disabled && copy(text)}
+      disabled={disabled}
+      className={`${base} ${disabled
+        ? 'bg-white/3 border border-white/5 text-slate-600 cursor-not-allowed'
+        : copied
+          ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 shadow-[0_0_16px_rgba(52,211,153,0.2)]'
+          : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400/50 shadow-[0_0_12px_rgba(34,211,238,0.1)]'
       }`}
     >
       {copied
@@ -126,6 +129,71 @@ function DailySection({ onGoToImport }) {
   );
 }
 
+function AmplifierSection({ todaysBriefing, onGoToImport }) {
+  const prompt = useMemo(() => {
+    if (!todaysBriefing) return null;
+    return getAmplifierPrompt(todaysBriefing);
+  }, [todaysBriefing]);
+
+  const hasToday = Boolean(todaysBriefing);
+
+  return (
+    <SectionCard>
+      <div className="flex items-center gap-3 mb-4">
+        <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border ${hasToday ? 'bg-cyan-950/60 border-cyan-500/20 text-cyan-300' : 'bg-slate-900/60 border-white/8 text-slate-600'}`}>
+          <Layers size={16} strokeWidth={2} />
+        </div>
+        <div>
+          <h2 className="text-[12px] font-bold font-mono uppercase tracking-[0.22em] text-slate-100">
+            Intelligence Amplifier
+          </h2>
+          <p className="text-[10px] font-mono text-slate-500 uppercase tracking-[0.16em] mt-0.5">
+            {hasToday ? 'Today\'s briefing ready — run Step 2' : 'Import today\'s briefing first'}
+          </p>
+        </div>
+      </div>
+
+      <ol className="space-y-3 mb-5">
+        <li className="flex items-start gap-3 text-[12px] text-slate-300">
+          <StepBadge n="1" />
+          <span>Copy the prompt below — today's briefing data is embedded automatically</span>
+        </li>
+        <li className="flex items-start gap-3 text-[12px] text-slate-300">
+          <StepBadge n="2" />
+          <span>Paste into ChatGPT and copy the JSON response</span>
+        </li>
+        <li className="flex items-start gap-3 text-[12px] text-slate-300">
+          <StepBadge n="3" />
+          <span>Return here and tap <strong className="text-cyan-300">Import Result</strong></span>
+        </li>
+      </ol>
+
+      <CopyButton
+        text={prompt || ''}
+        label="Copy Amplifier Prompt"
+        copiedLabel="Prompt + Briefing Copied!"
+        size="lg"
+        disabled={!hasToday}
+      />
+
+      <button
+        type="button"
+        onClick={onGoToImport}
+        disabled={!hasToday}
+        className={`mt-3 w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl border font-bold text-[11px] font-mono uppercase tracking-[0.18em] transition-all ${hasToday ? 'border-white/10 bg-white/5 text-slate-300 hover:text-slate-100 hover:bg-white/10' : 'border-white/5 bg-white/3 text-slate-600 cursor-not-allowed'}`}
+      >
+        Import Result <ArrowRight size={14} strokeWidth={2} />
+      </button>
+
+      {!hasToday ? (
+        <p className="mt-3 text-center text-[10px] font-mono text-slate-600 uppercase tracking-[0.16em]">
+          Complete Step 1 to unlock
+        </p>
+      ) : null}
+    </SectionCard>
+  );
+}
+
 function SynthesisSection({ briefings, onGoToImport }) {
   const [open, setOpen] = useState(false);
 
@@ -147,36 +215,36 @@ function SynthesisSection({ briefings, onGoToImport }) {
   }, [selectedBriefings, fromDate, toDate]);
 
   return (
-    <SectionCard>
+    <div className="bg-white/3 border border-white/8 rounded-2xl overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((s) => !s)}
-        className="w-full flex items-center justify-between gap-3 text-left"
+        className="w-full flex items-center justify-between gap-3 text-left px-5 py-4"
       >
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-purple-950/60 border border-purple-500/20 text-purple-300 shrink-0">
-            <GitMerge size={16} strokeWidth={2} />
+          <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-purple-950/40 border border-purple-500/15 text-purple-400/70 shrink-0">
+            <GitMerge size={14} strokeWidth={2} />
           </div>
           <div>
-            <h2 className="text-[12px] font-bold font-mono uppercase tracking-[0.22em] text-slate-100">Cross-Day Synthesis</h2>
-            <p className="text-[10px] font-mono text-slate-500 uppercase tracking-[0.16em] mt-0.5">Run periodically to build memory layer</p>
+            <h2 className="text-[11px] font-bold font-mono uppercase tracking-[0.22em] text-slate-500">Cross-Day Synthesis</h2>
+            <p className="text-[9px] font-mono text-slate-600 uppercase tracking-[0.16em] mt-0.5">Advanced — PC use / periodic</p>
           </div>
         </div>
-        {open ? <ChevronUp size={16} className="text-slate-500 shrink-0" /> : <ChevronDown size={16} className="text-slate-500 shrink-0" />}
+        {open ? <ChevronUp size={14} className="text-slate-600 shrink-0" /> : <ChevronDown size={14} className="text-slate-600 shrink-0" />}
       </button>
 
       {open && (
-        <div className="mt-5 space-y-4">
+        <div className="px-5 pb-5 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
           <ol className="space-y-3">
-            <li className="flex items-start gap-3 text-[12px] text-slate-300">
+            <li className="flex items-start gap-3 text-[12px] text-slate-400">
               <StepBadge n="1" />
               <span>Select the date range of briefings to synthesise</span>
             </li>
-            <li className="flex items-start gap-3 text-[12px] text-slate-300">
+            <li className="flex items-start gap-3 text-[12px] text-slate-400">
               <StepBadge n="2" />
               <span>Copy the prompt — it includes all briefing data automatically</span>
             </li>
-            <li className="flex items-start gap-3 text-[12px] text-slate-300">
+            <li className="flex items-start gap-3 text-[12px] text-slate-400">
               <StepBadge n="3" />
               <span>Paste into ChatGPT, copy the JSON response, import it here</span>
             </li>
@@ -227,17 +295,17 @@ function SynthesisSection({ briefings, onGoToImport }) {
           <button
             type="button"
             onClick={onGoToImport}
-            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl border border-white/10 bg-white/5 text-slate-300 hover:text-slate-100 hover:bg-white/10 font-bold text-[11px] font-mono uppercase tracking-[0.18em] transition-all"
+            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl border border-white/10 bg-white/5 text-slate-400 hover:text-slate-200 hover:bg-white/10 font-bold text-[11px] font-mono uppercase tracking-[0.18em] transition-all"
           >
             Import Synthesis Result <ArrowRight size={14} strokeWidth={2} />
           </button>
         </div>
       )}
-    </SectionCard>
+    </div>
   );
 }
 
-export function WorkflowView({ briefings, onGoToImport }) {
+export function WorkflowView({ briefings, todaysBriefing, onGoToImport }) {
   return (
     <div className="pb-32 max-w-2xl mx-auto pt-8 px-4 animate-in fade-in duration-300">
       <header className="pb-6 flex flex-col items-center text-center">
@@ -254,6 +322,7 @@ export function WorkflowView({ briefings, onGoToImport }) {
 
       <div className="space-y-4">
         <DailySection onGoToImport={onGoToImport} />
+        <AmplifierSection todaysBriefing={todaysBriefing} onGoToImport={onGoToImport} />
         <SynthesisSection briefings={briefings} onGoToImport={onGoToImport} />
       </div>
     </div>

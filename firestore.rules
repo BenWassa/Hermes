@@ -31,6 +31,11 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    match /amplifiers/{amplifierId} {
+      allow read: if isActiveApprovedUser();
+      allow create, update, delete: if isAdmin();
+    }
+
     match /access/{uid} {
       allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
       allow create, update, delete: if isAdmin();

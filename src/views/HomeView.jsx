@@ -3,6 +3,7 @@ import { BriefingDisplay } from '../components/BriefingDisplay';
 
 export function HomeView({
   activeBriefing,
+  amplifier,
   latestBriefing,
   canImport,
   onGoAdd,
@@ -11,7 +12,7 @@ export function HomeView({
   onViewThread
 }) {
   if (activeBriefing) {
-    return <BriefingDisplay briefing={activeBriefing} onOpenMenu={onOpenMenu} onViewThread={onViewThread} />;
+    return <BriefingDisplay briefing={activeBriefing} amplifier={amplifier} onOpenMenu={onOpenMenu} onViewThread={onViewThread} />;
   }
 
   return (

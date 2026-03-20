@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { X, Menu } from 'lucide-react';
+import { X, Menu, Zap } from 'lucide-react';
 import { TimelineWidget } from './TimelineWidget';
 import { RiskMatrixWidget } from './RiskMatrixWidget';
 import { MacroSparklineWidget } from './MacroSparklineWidget';
 import { PulseWidget } from './PulseWidget';
+import { AmplifierModal } from './AmplifierModal';
 
 const STATUS_TIERS = [
   { level: 5, test: (s) => s.includes('CRIT'),
@@ -207,8 +208,9 @@ function DevelopmentModal({ dev, onClose, onViewThread }) {
   );
 }
 
-export function BriefingDisplay({ briefing, onOpenMenu, onViewThread }) {
+export function BriefingDisplay({ briefing, amplifier, onOpenMenu, onViewThread }) {
   const [modalDev, setModalDev] = useState(null);
+  const [amplifierOpen, setAmplifierOpen] = useState(false);
   const [consensusExpanded, setConsensusExpanded] = useState(false);
   const [contextExpanded, setContextExpanded] = useState(false);
   const systemStatus = briefing?.system_status;
@@ -271,7 +273,18 @@ export function BriefingDisplay({ briefing, onOpenMenu, onViewThread }) {
             Hermes
           </h1>
           
-          <div className="w-8"></div> {/* Spacer to keep header centered perfectly balances the 32px of the button (24px + padding) */}
+          {amplifier ? (
+            <button
+              type="button"
+              aria-label="Open Intelligence Layer"
+              onClick={() => setAmplifierOpen(true)}
+              className="flex items-center justify-center w-8 h-8 rounded-xl border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.2)] hover:border-cyan-400/50 hover:text-cyan-200 transition-colors"
+            >
+              <Zap size={15} strokeWidth={2.2} />
+            </button>
+          ) : (
+            <div className="w-8" />
+          )}
         </div>
 
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
@@ -464,6 +477,7 @@ export function BriefingDisplay({ briefing, onOpenMenu, onViewThread }) {
       </div>
 
       {modalDev ? <DevelopmentModal dev={modalDev} onClose={() => setModalDev(null)} onViewThread={onViewThread} /> : null}
+      <AmplifierModal amplifier={amplifier} open={amplifierOpen} onClose={() => setAmplifierOpen(false)} />
     </div>
   );
 }

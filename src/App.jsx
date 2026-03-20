@@ -9,14 +9,16 @@ import {
   getAccessRecord,
   signInWithGoogle,
   signOutUser,
+  subscribeToAmplifiers,
   subscribeToAuthState,
   subscribeToBriefings,
   subscribeToSyntheses,
+  upsertAmplifier,
   upsertBriefings,
   upsertSynthesis
 } from './lib/firebase';
 import { getTodayId } from './utils/date';
-import { sanitizeJsonInput, validateDailyBriefing, validateSynthesis } from './utils/json';
+import { sanitizeJsonInput, validateAmplifier, validateDailyBriefing, validateSynthesis } from './utils/json';
 import { AddBriefingView } from './views/AddBriefingView';
 import { ArchiveView } from './views/ArchiveView';
 import { HomeView } from './views/HomeView';
@@ -58,6 +60,7 @@ export default function App() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [briefings, setBriefings] = useState([]);
   const [syntheses, setSyntheses] = useState([]);
+  const [amplifiers, setAmplifiers] = useState([]);
   const [currentView, setCurrentView] = useState('home');
   const [viewingDateId, setViewingDateId] = useState(null);
   const [viewingStoryId, setViewingStoryId] = useState(null);
@@ -68,11 +71,16 @@ export default function App() {
   const fileInputRef = useRef(null);
 
   const isAdmin = accessRecord?.role === 'admin';
-  const todayBriefing = briefings.find((briefing) => briefing.id === getTodayId());
+  const todayId = getTodayId();
+  const todayBriefing = briefings.find((briefing) => briefing.id === todayId);
+  const todayAmplifier = amplifiers.find((a) => a.briefing_id === todayId);
 
   const activeBriefing = viewingDateId
     ? briefings.find((briefing) => briefing.id === viewingDateId)
     : todayBriefing;
+  const activeAmplifier = viewingDateId
+    ? amplifiers.find((a) => a.briefing_id === viewingDateId)
+    : todayAmplifier;
   const latestBriefing = briefings.length > 0 ? briefings[0] : null;
 
 
@@ -93,6 +101,7 @@ export default function App() {
         setContentReady(false);
         setBriefings([]);
         setSyntheses([]);
+        setAmplifiers([]);
         return;
       }
 
@@ -143,9 +152,10 @@ export default function App() {
     }
 
     let isCancelled = false;
-    let pendingStreams = 2;
+    let pendingStreams = 3;
     let briefingsInitialized = false;
     let synthesesInitialized = false;
+    let amplifiersInitialized = false;
 
     setContentReady(false);
     setDataError('');
@@ -166,6 +176,10 @@ export default function App() {
       }
       if (streamLabel === 'syntheses' && !synthesesInitialized) {
         synthesesInitialized = true;
+        markStreamReady();
+      }
+      if (streamLabel === 'amplifiers' && !amplifiersInitialized) {
+        amplifiersInitialized = true;
         markStreamReady();
       }
     };
@@ -194,10 +208,23 @@ export default function App() {
       handleStreamError('syntheses')
     );
 
+    const unsubscribeAmplifiers = subscribeToAmplifiers(
+      (nextAmplifiers) => {
+        if (isCancelled) return;
+        setAmplifiers(nextAmplifiers);
+        if (!amplifiersInitialized) {
+          amplifiersInitialized = true;
+          markStreamReady();
+        }
+      },
+      handleStreamError('amplifiers')
+    );
+
     return () => {
       isCancelled = true;
       unsubscribeBriefings();
       unsubscribeSyntheses();
+      unsubscribeAmplifiers();
     };
   }, [user, accessRecord]);
 
@@ -236,6 +263,17 @@ export default function App() {
 
       const sanitizedInput = sanitizeJsonInput(jsonInput);
       const parsed = JSON.parse(sanitizedInput);
+
+      if (parsed.type === 'amplifier') {
+        const { valid, errors } = validateAmplifier(parsed);
+        if (!valid) throw new Error(`Amplifier import failed: ${errors.join('; ')}`);
+
+        await upsertAmplifier(parsed, user);
+        setJsonInput('');
+        setViewingDateId(null);
+        setCurrentView('home');
+        return;
+      }
 
       if (parsed.type === 'synthesis') {
         const { valid, errors } = validateSynthesis(parsed);
@@ -528,12 +566,17 @@ export default function App() {
         ) : null}
 
         {currentView === 'home' && isAdmin && !todayBriefing && (
-          <WorkflowView briefings={briefings} onGoToImport={() => setCurrentView('add')} />
+          <WorkflowView
+            briefings={briefings}
+            todaysBriefing={todayBriefing}
+            onGoToImport={() => setCurrentView('add')}
+          />
         )}
 
         {currentView === 'home' && (!isAdmin || todayBriefing) && (
           <HomeView
             activeBriefing={activeBriefing}
+            amplifier={activeAmplifier}
             latestBriefing={latestBriefing}
             canImport={isAdmin}
             onGoAdd={() => setCurrentView('add')}

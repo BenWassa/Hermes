@@ -118,6 +118,24 @@ export async function upsertSynthesis(synthesis, user) {
   });
 }
 
+export function subscribeToAmplifiers(callback, onError) {
+  return onSnapshot(
+    query(collection(db, 'amplifiers'), orderBy('id', 'desc')),
+    (snapshot) => {
+      callback(snapshot.docs.map((item) => item.data()));
+    },
+    onError
+  );
+}
+
+export async function upsertAmplifier(amplifier, user) {
+  await setDoc(doc(db, 'amplifiers', amplifier.id), {
+    ...amplifier,
+    updatedAt: serverTimestamp(),
+    updatedBy: user.uid
+  });
+}
+
 export async function deleteBriefing(briefingId) {
   await deleteDoc(doc(db, 'briefings', briefingId));
 }

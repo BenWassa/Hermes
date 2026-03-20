@@ -38,6 +38,25 @@ export function validateDailyBriefing(parsed) {
 }
 
 // Returns { valid: bool, errors: string[], warnings: string[] }
+export function validateAmplifier(parsed) {
+  const errors = [];
+  const warnings = [];
+
+  if (parsed.type !== 'amplifier') errors.push('Field "type" must equal "amplifier"');
+  if (!parsed.id) errors.push('Missing required field: "id" (amp-YYYY-MM-DD)');
+  if (!parsed.briefing_id) errors.push('Missing required field: "briefing_id"');
+  if (!parsed.decision_layer) errors.push('Missing required field: "decision_layer"');
+
+  if (!parsed.scenarios) warnings.push('Missing "scenarios" — recommended for forward path analysis');
+  if (!parsed.delta_lens) warnings.push('Missing "delta_lens" — recommended for continuity signal');
+  if (!Array.isArray(parsed.driver_decomposition)) {
+    warnings.push('Missing "driver_decomposition" — recommended for causal clarity');
+  }
+
+  return { valid: errors.length === 0, errors, warnings };
+}
+
+// Returns { valid: bool, errors: string[], warnings: string[] }
 export function validateSynthesis(parsed) {
   const errors = [];
   const warnings = [];
