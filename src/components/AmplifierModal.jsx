@@ -9,6 +9,44 @@ const THEMES = {
   slate: { eyebrow: 'text-slate-400/80', border: 'border-white/10', bgOpen: 'bg-white/5', icon: 'text-slate-500/50' }
 };
 
+const STORY_ID_TOKEN_LABELS = {
+  ai: 'AI',
+  apac: 'APAC',
+  boe: 'BoE',
+  boj: 'BoJ',
+  cpi: 'CPI',
+  ecb: 'ECB',
+  eu: 'EU',
+  fed: 'Fed',
+  fx: 'FX',
+  g7: 'G7',
+  g20: 'G20',
+  ipo: 'IPO',
+  mna: 'M&A',
+  nato: 'NATO',
+  opec: 'OPEC',
+  pmi: 'PMI',
+  pce: 'PCE',
+  us: 'US',
+  uk: 'UK',
+  usd: 'USD'
+};
+
+function formatStoryIdLabel(storyId) {
+  if (!storyId || typeof storyId !== 'string') return '';
+
+  return storyId
+    .replace(/^story[-_]/i, '')
+    .split(/[-_]+/)
+    .filter(Boolean)
+    .map((token) => {
+      const normalized = token.toLowerCase();
+      if (STORY_ID_TOKEN_LABELS[normalized]) return STORY_ID_TOKEN_LABELS[normalized];
+      return normalized.charAt(0).toUpperCase() + normalized.slice(1);
+    })
+    .join(' ');
+}
+
 function Section({ title, eyebrow, defaultOpen = false, theme = 'slate', children }) {
   const [open, setOpen] = useState(defaultOpen);
   const t = THEMES[theme] || THEMES.slate;
@@ -263,7 +301,7 @@ export function AmplifierModal({ amplifier, open, onClose }) {
                     <div className="flex items-center gap-2 flex-wrap min-w-0">
                       {item.story_id ? (
                         <span className="text-[10px] font-mono text-slate-400 break-all bg-black/20 px-1.5 py-0.5 rounded max-w-full">
-                          {item.story_id}
+                          {formatStoryIdLabel(item.story_id)}
                         </span>
                       ) : null}
                       {item.classification ? <ClassBadge label={item.classification} /> : null}
