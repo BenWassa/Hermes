@@ -164,7 +164,7 @@ export function AmplifierModal({ amplifier, open, onClose }) {
     <div className="fixed inset-0 z-[60] flex flex-col sm:p-6 sm:items-center sm:justify-center">
       <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity" onClick={onClose} />
 
-      <div className="relative z-10 flex flex-col h-full sm:h-auto sm:max-h-[85vh] max-w-2xl w-full mx-auto bg-slate-950/90 sm:rounded-2xl sm:border border-white/10 shadow-[0_0_50px_rgba(8,145,178,0.15)] overflow-hidden animate-in fade-in slide-in-from-bottom-4 sm:zoom-in-95 duration-200">
+      <div className="relative z-10 flex flex-col h-full min-h-0 sm:h-auto sm:max-h-[85vh] max-w-2xl w-full mx-auto bg-slate-950/90 sm:rounded-2xl sm:border border-white/10 shadow-[0_0_50px_rgba(8,145,178,0.15)] overflow-hidden animate-in fade-in slide-in-from-bottom-4 sm:zoom-in-95 duration-200">
         <div className="flex items-center justify-between gap-4 px-5 pt-safe sm:pt-4 pb-4 shrink-0 bg-slate-900/50 border-b border-white/10 backdrop-blur-xl">
           <div className="flex items-center gap-3 min-w-0">
             <div className="flex items-center justify-center w-8 h-8 rounded-lg border border-cyan-500/30 bg-cyan-950/40 text-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.2)] shrink-0">
@@ -189,7 +189,7 @@ export function AmplifierModal({ amplifier, open, onClose }) {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-4 sm:px-5 pt-4 space-y-4 hide-scrollbar pb-[calc(7rem+env(safe-area-inset-bottom))] sm:pb-safe">
+        <div className="flex-1 min-h-0 overflow-y-auto px-4 sm:px-5 py-4 space-y-4 hide-scrollbar pb-safe">
           {decision_layer && (
             (Array.isArray(decision_layer.what_matters_now) && decision_layer.what_matters_now.length > 0) ||
             (Array.isArray(decision_layer.watch_next) && decision_layer.watch_next.length > 0)
