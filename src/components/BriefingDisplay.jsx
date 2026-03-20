@@ -96,7 +96,7 @@ function SectionRow({ label, color = 'cyan', children }) {
   );
 }
 
-function DevelopmentModal({ dev, onClose }) {
+function DevelopmentModal({ dev, onClose, onViewThread }) {
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', onKey);
@@ -135,8 +135,27 @@ function DevelopmentModal({ dev, onClose }) {
             <h3 className="font-semibold text-white text-[18px] leading-snug">{dev.headline}</h3>
           </div>
 
+          {dev.driver ? (
+            <p className="text-[11px] font-mono text-amber-300/70 uppercase tracking-[0.16em] mb-4">
+              <span className="text-amber-500/50 mr-1.5">Driver:</span>{dev.driver}
+            </p>
+          ) : null}
+
           {dev.executive_summary ? (
             <p className="text-slate-300 text-[14px] leading-relaxed mb-6">{dev.executive_summary}</p>
+          ) : null}
+
+          {dev.story_id && onViewThread ? (
+            <div className="flex items-center gap-2 mb-5">
+              <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.18em]">{dev.story_id}</span>
+              <button
+                type="button"
+                onClick={() => { onClose(); onViewThread(dev.story_id); }}
+                className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 bg-cyan-950/30 px-2.5 py-1 rounded-full transition-colors"
+              >
+                View Thread →
+              </button>
+            </div>
           ) : null}
 
           {keyFacts.length > 0 ? (
@@ -181,7 +200,7 @@ function DevelopmentModal({ dev, onClose }) {
   );
 }
 
-export function BriefingDisplay({ briefing, onOpenMenu }) {
+export function BriefingDisplay({ briefing, onOpenMenu, onViewThread }) {
   const [modalDev, setModalDev] = useState(null);
   const [consensusExpanded, setConsensusExpanded] = useState(false);
   const [contextExpanded, setContextExpanded] = useState(false);
@@ -221,6 +240,7 @@ export function BriefingDisplay({ briefing, onOpenMenu }) {
 
   const handlePulseClick = (domain, itemId) => {
     const match = developments.find((d) => d.id === itemId)
+      || developments.find((d) => d.story_id === itemId)
       || developments.find((d) => (d.domain || 'MACRO') === domain);
     if (match) setModalDev(match);
   };
@@ -436,7 +456,7 @@ export function BriefingDisplay({ briefing, onOpenMenu }) {
         ) : null}
       </div>
 
-      {modalDev ? <DevelopmentModal dev={modalDev} onClose={() => setModalDev(null)} /> : null}
+      {modalDev ? <DevelopmentModal dev={modalDev} onClose={() => setModalDev(null)} onViewThread={onViewThread} /> : null}
     </div>
   );
 }

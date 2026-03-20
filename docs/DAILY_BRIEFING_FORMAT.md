@@ -65,8 +65,9 @@ The current UI expects the following structure.
       "region": "MIDDLE EAST",
       "impact": "HIGH",
       "icon": "🛢️",
-      "change_type": "ESCALATION",
-      "story_stage": "PEAKING",
+      "driver": "Iran naval posture shift following US carrier redeployment to the Gulf",
+      "change_type": "escalating",
+      "story_stage": "peak",
       "previous_brief_refs": ["2026-03-12", "2026-03-11"],
       "headline": "Oil Shock and War Risk",
       "why_it_matters_now": "The disruption has started repricing inflation, shipping, and central-bank expectations simultaneously.",
@@ -149,15 +150,16 @@ The current UI expects the following structure.
 - `today_in_60_seconds[].status`: optional live status label for the tile dot indicator. Matches the same 5-tier color system as `system_status.condition`: `CRITICAL` / `ESCALATING` (rose), `SEVERE` / `HIGH` (orange), `ELEVATED` / `VOLATILE` / `MONITOR` (amber), `GUARDED` / `WATCH` (blue), `STABILIZING` / `HOLD` / `NOMINAL` (cyan).
 - `today_in_60_seconds[].target`: optional target asset, entity, or region label shown in the tile footer.
 - `today_in_60_seconds[].metric`: optional hard metric or state tag shown in the tile footer.
-- `what_changed`: recommended daily delta layer for continuity. Use it to distinguish what is new, what intensified, what eased, and what changed in meaning since the prior briefing.
+- `what_changed`: **required** daily delta layer for continuity. Distinguish what is new, what intensified, what eased, and what changed in meaning since the prior briefing. The importer will warn if this section is absent.
 - `major_developments`: each item renders as an expandable story card.
 - `major_developments[].id`: stable story identifier within the day.
 - `major_developments[].story_id`: stable cross-day identifier for a persistent narrative thread.
 - `major_developments[].domain`: used to match pulse tiles to story modals. Use strict uppercase buckets such as `GEOPOLITICS`, `MACRO`, `TECH`, `ENERGY`, or `DEFENSE`.
 - `major_developments[].region`: optional scanning anchor shown above the card headline. Example values: `GLOBAL`, `US`, `EUROPE`, `MIDDLE EAST`, `ASIA`.
 - `major_developments[].impact`: optional scanning anchor for visual priority. Recommended values: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
-- `major_developments[].change_type`: recommended cross-day state change. Use values such as `NEW`, `UPDATE`, `ESCALATION`, `DE_ESCALATION`, or `RESOLUTION`.
-- `major_developments[].story_stage`: recommended lifecycle marker. Use values such as `EMERGING`, `ESCALATING`, `PEAKING`, `STABILIZING`, `DORMANT`, or `RESOLVED`.
+- `major_developments[].driver`: **required** — one sentence stating what is actually moving this story today. Not what happened, but what is driving it. Keep it causally specific.
+- `major_developments[].change_type`: **required** cross-day state change. Lowercase. Use exactly: `new`, `escalating`, `stabilizing`, `resolving`, or `unchanged`.
+- `major_developments[].story_stage`: **required** lifecycle marker. Lowercase. Use exactly: `emerging`, `active`, `peak`, `winding-down`, or `resolved`.
 - `major_developments[].previous_brief_refs`: previous briefing `id` values that carry this same story forward.
 - `major_developments[].why_it_matters_now`: one concise line explaining why today changed the importance of the story.
 - `major_developments[].next_watchpoints`: short forward-looking triggers or milestones to monitor over the next 24 to 72 hours.
@@ -184,14 +186,20 @@ The current UI expects the following structure.
 - Keep `id` aligned to the actual briefing date.
 - Keep headlines short enough to fit mobile cards cleanly.
 - Keep summaries dense and analytical, not conversational.
-- Prefer continuity over novelty. When a story persists across days, update the existing `story_id` rather than inventing a new one.
+- **Every `major_developments` item must include `story_id`, `driver`, `change_type`, and `story_stage`.** These are required for the continuity system to function.
+- **`story_id` must be stable across days.** Use a consistent kebab-case identifier for the same underlying story (e.g. `story-hormuz-coalition`, `story-fx-dollar-pressure`). Do not rename a story that has already appeared in previous briefings. When in doubt, carry the prior ID forward.
+- **`driver` must be causal, not descriptive.** Write what is moving the story today, not just what happened. Bad: “Iran fired drones.” Good: “Iran's renewed naval posture is raising the cost of commercial Hormuz transit for the second time this quarter.”
+- **`change_type` must be one of:** `new`, `escalating`, `stabilizing`, `resolving`, `unchanged` (lowercase exactly).
+- **`story_stage` must be one of:** `emerging`, `active`, `peak`, `winding-down`, `resolved` (lowercase exactly).
+- Always include `what_changed` at the top level. Distinguish what is new, what intensified, what eased, and what changed in meaning.
+- Prefer continuity over novelty. When a story persists, update its existing `story_id` and set `change_type` appropriately — do not invent a new ID.
 - Keep `major_developments[].domain` MECE where possible so each story fits one primary bucket.
 - Prefer consistent uppercase values for `domain`, `region`, and `impact`.
-- Prefer full dates such as `"MARCH 12, 2026"` in timeline fields.
+- Prefer full dates such as `”MARCH 12, 2026”` in timeline fields.
 - Use the optional visual-stream fields only when they materially improve scan speed; do not force them into every story.
 - For `timeline_context.events`, keep each `headline` short and each `details` line specific enough to justify expansion.
 - For `risk_matrix`, reserve the top-right quadrant for genuinely high-impact, high-probability scenarios.
-- Use standard JSON double quotes: `"`, not smart quotes like `“` or `”`.
+- Use standard JSON double quotes: `”`, not smart quotes like `”` or `”`.
 
 ## Paste Handling
 
@@ -218,14 +226,31 @@ This makes pasted output from chat tools and rich-text editors more tolerant, bu
 
 ## Current Implementation Note
 
-The importer currently validates only:
+The importer validates the following **required** fields and will block import if they are missing:
 
 - `id`
 - `date`
 - `today_in_60_seconds`
 
-The rest of the fields should still be included, because the UI is built to render the full briefing shape.
+The importer also surfaces **warnings** (non-blocking) when any of the following are absent on a `major_developments` item:
 
-The current UI uses `major_developments` to power the story modal overlay. When a pulse tile is tapped, the UI matches by `id` first, then falls back to `domain`. For reliable deep-linking, keep `id` stable and `domain` consistent between `today_in_60_seconds` items and their matching `major_developments` entries.
+- `story_id`
+- `driver`
+- `change_type`
+- `story_stage`
 
-For the longer-term product direction, treat the daily briefing as an update layer on top of persistent stories. In practice, that means `story_id`, `what_changed`, `change_type`, and `previous_brief_refs` should become standard output fields even if the importer does not yet enforce them.
+And a warning when `what_changed` is absent at the top level.
+
+### Pulse → Story matching
+
+When a pulse tile is tapped, the app matches to a development modal in this order:
+
+1. `major_developments[].id === pulse item id`
+2. `major_developments[].story_id === pulse item id`
+3. `major_developments[].domain === pulse item domain` (fallback)
+
+For the most reliable deep-linking, set the pulse tile's `id` to the same value as the matching development's `story_id`.
+
+### Thread and archive views
+
+The archive can now be browsed by date or by thread. Thread view groups all `major_developments` by `story_id` across all briefings. Story view shows the full cross-day arc of a single `story_id` including `change_type`, `story_stage`, and `driver` per day. Search indexes `story_id`, `driver`, `tags`, `domain`, and `change_type`.

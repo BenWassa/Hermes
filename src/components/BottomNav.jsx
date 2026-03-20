@@ -1,8 +1,8 @@
 import { Home, Archive, Layers, Search } from 'lucide-react';
 
-export function BottomNav({ currentView, viewingDateId, onSelectView }) {
+export function BottomNav({ currentView, viewingDateId, synthesesCount, onSelectView }) {
   const todayActive = currentView === 'home' && !viewingDateId;
-  const archiveActive = currentView === 'archive' || Boolean(viewingDateId);
+  const archiveActive = currentView === 'archive' || currentView === 'story' || Boolean(viewingDateId);
   const searchActive = currentView === 'search';
   const synthesisActive = currentView === 'synthesis';
 

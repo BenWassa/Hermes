@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu } from 'lucide-react';
 import { BottomNav } from './components/BottomNav';
 import { AppMenu } from './components/AppMenu';
@@ -72,14 +72,6 @@ export default function App() {
     : todayBriefing;
   const latestBriefing = briefings.length > 0 ? briefings[0] : null;
 
-  const results = useMemo(() => {
-    if (!query.trim()) return [];
-    const normalizedQuery = query.toLowerCase();
-
-    return briefings.filter((briefing) =>
-      JSON.stringify(briefing).toLowerCase().includes(normalizedQuery)
-    );
-  }, [briefings, query]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -532,10 +524,11 @@ export default function App() {
 
         {currentView === 'search' && (
           <SearchView
+            briefings={briefings}
             query={query}
-            results={results}
             onQueryChange={setQuery}
             onOpenBriefing={openBriefing}
+            onOpenThread={openStory}
           />
         )}
 
