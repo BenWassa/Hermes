@@ -1,11 +1,12 @@
 import { Home, Archive, Layers, Search, Zap } from 'lucide-react';
 
-export function BottomNav({ currentView, viewingDateId, isAdmin, synthesesCount, onSelectView }) {
+export function BottomNav({ currentView, viewingDateId, isAdmin, hasTodayBriefing, synthesesCount, onSelectView }) {
   const todayActive = currentView === 'home' && !viewingDateId;
   const archiveActive = currentView === 'archive' || currentView === 'story' || Boolean(viewingDateId);
   const searchActive = currentView === 'search';
   const synthesisActive = currentView === 'synthesis';
   const workflowActive = currentView === 'workflow';
+  const showWorkflow = isAdmin && !hasTodayBriefing;
 
   return (
     <nav
@@ -13,7 +14,7 @@ export function BottomNav({ currentView, viewingDateId, isAdmin, synthesesCount,
       style={{ bottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}
     >
       <div className="max-w-md mx-auto pointer-events-auto">
-        <div className={`grid ${isAdmin ? 'grid-cols-5' : 'grid-cols-4'} items-end gap-1 px-2 py-2 bg-slate-950/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_20px_40px_rgba(0,0,0,0.5),_0_0_20px_rgba(34,211,238,0.1)]`}>
+        <div className={`grid ${showWorkflow ? 'grid-cols-5' : 'grid-cols-4'} items-end gap-1 px-2 py-2 bg-slate-950/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_20px_40px_rgba(0,0,0,0.5),_0_0_20px_rgba(34,211,238,0.1)]`}>
           <NavButton icon={Home} label="Today" isActive={todayActive} onClick={() => onSelectView('home')} />
           <NavButton
             icon={Layers}
@@ -28,7 +29,7 @@ export function BottomNav({ currentView, viewingDateId, isAdmin, synthesesCount,
             onClick={() => onSelectView('archive')}
           />
           <NavButton icon={Search} label="Search" isActive={searchActive} onClick={() => onSelectView('search')} />
-          {isAdmin && (
+          {showWorkflow && (
             <NavButton icon={Zap} label="Workflow" isActive={workflowActive} onClick={() => onSelectView('workflow')} />
           )}
         </div>

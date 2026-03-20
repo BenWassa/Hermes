@@ -69,6 +69,13 @@ export default function App() {
 
   const isAdmin = accessRecord?.role === 'admin';
   const todayBriefing = briefings.find((briefing) => briefing.id === getTodayId());
+
+  // If admin is on the workflow view but today's briefing has arrived, go home
+  useEffect(() => {
+    if (currentView === 'workflow' && todayBriefing) {
+      setCurrentView('home');
+    }
+  }, [todayBriefing, currentView]);
   const activeBriefing = viewingDateId
     ? briefings.find((briefing) => briefing.id === viewingDateId)
     : todayBriefing;
@@ -591,7 +598,7 @@ export default function App() {
         )}
       </main>
 
-      <BottomNav currentView={currentView} viewingDateId={viewingDateId} isAdmin={isAdmin} onSelectView={selectView} />
+      <BottomNav currentView={currentView} viewingDateId={viewingDateId} isAdmin={isAdmin} hasTodayBriefing={Boolean(todayBriefing)} onSelectView={selectView} />
     </div>
   );
 }
