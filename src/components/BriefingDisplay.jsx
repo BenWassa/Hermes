@@ -54,6 +54,13 @@ function getDriverLabel(briefing) {
     return candidate.trim();
   }
 
+  const developments = Array.isArray(briefing?.major_developments) ? briefing.major_developments : [];
+  const developmentDriver = developments.find((dev) => typeof dev?.driver === 'string' && dev.driver.trim());
+
+  if (developmentDriver?.driver) {
+    return developmentDriver.driver.trim();
+  }
+
   return 'Awaiting Signal';
 }
 
