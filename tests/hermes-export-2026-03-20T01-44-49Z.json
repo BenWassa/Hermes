@@ -1,0 +1,2278 @@
+{
+  "exportedAt": "2026-03-20T01:44:49.888Z",
+  "appVersion": "1.0.6",
+  "briefingCount": 7,
+  "briefings": [
+    {
+      "id": "2026-03-19",
+      "date": "March 19, 2026",
+      "system_status": {
+        "condition": "CRITICAL",
+        "indicator": "ESCALATING"
+      },
+      "today_in_60_seconds": [
+        {
+          "id": "story-energy-strikes-escalation",
+          "icon": "🪖",
+          "headline": "Iran hits Gulf energy infrastructure",
+          "domain": "DEFENSE",
+          "summary": "Iran launched coordinated strikes on refineries and LNG facilities across multiple Gulf states following Israeli attacks on its gas infrastructure.",
+          "signal_type": "ESCALATION",
+          "status": "ESCALATING",
+          "target": "Gulf Energy Infrastructure",
+          "metric": "MULTI-COUNTRY STRIKES"
+        },
+        {
+          "id": "story-oil-price-surge-115",
+          "icon": "📈",
+          "headline": "Oil spikes above $115 on attacks",
+          "domain": "MACRO",
+          "signal_type": "NEW_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Brent Crude",
+          "metric": "$115+"
+        },
+        {
+          "id": "story-global-market-shock",
+          "icon": "🌍",
+          "headline": "Global markets drop on energy shock",
+          "domain": "MACRO",
+          "signal_type": "NEW_SIGNAL",
+          "status": "VOLATILE",
+          "target": "Global Equities",
+          "metric": "BROAD SELLOFF"
+        },
+        {
+          "id": "story-saudi-red-sea-shift",
+          "icon": "🚢",
+          "headline": "Saudi reroutes oil via Red Sea",
+          "domain": "ENERGY",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "ESCALATING",
+          "target": "Saudi Exports",
+          "metric": "3.8M BPD"
+        },
+        {
+          "id": "story-energy-capital-flows",
+          "icon": "💰",
+          "headline": "Energy funds see surge inflows",
+          "domain": "MACRO",
+          "signal_type": "NEW_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Energy Sector Capital",
+          "metric": "$2B+ INFLOWS"
+        }
+      ],
+      "what_changed": {
+        "new": [
+          "Iran conducted coordinated strikes on energy infrastructure in Saudi Arabia, Qatar, Kuwait, and the UAE.",
+          "Oil prices surged above $115 per barrel following direct attacks on refineries and LNG facilities.",
+          "Global equity markets declined sharply in response to the escalating energy shock.",
+          "Energy-sector investment inflows accelerated to decade highs."
+        ],
+        "intensified": [
+          "The conflict expanded to direct targeting of major Gulf energy infrastructure across multiple countries.",
+          "Global energy price volatility increased significantly, extending into gas markets."
+        ],
+        "eased": [],
+        "changed_meaning": [
+          "The conflict has transitioned from supply disruption via shipping constraints to direct destruction of production and processing infrastructure."
+        ]
+      },
+      "major_developments": [
+        {
+          "id": "dev-1",
+          "story_id": "story-energy-strikes-escalation",
+          "domain": "DEFENSE",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🪖",
+          "change_type": "ESCALATION",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-18"
+          ],
+          "headline": "Iran strikes Gulf energy facilities after Israeli attack",
+          "why_it_matters_now": "Direct infrastructure targeting materially increases duration and severity of supply shock.",
+          "executive_summary": "Iran launched coordinated missile and drone strikes on energy infrastructure across Saudi Arabia, Qatar, Kuwait, and the UAE following Israeli attacks on its South Pars gas field. Targets included refineries and LNG facilities, causing fires, operational disruptions, and further tightening global supply conditions.",
+          "key_facts": [
+            "Attacks hit Qatar's Ras Laffan LNG facility and major Kuwaiti refineries.",
+            "Strikes were retaliation for Israeli attacks on Iran's South Pars gas field.",
+            "Multiple Gulf countries reported damage and operational disruptions."
+          ],
+          "next_watchpoints": [
+            "Further escalation targeting Saudi core production facilities",
+            "US or allied military response to attacks on Gulf infrastructure"
+          ],
+          "tags": [
+            "iran",
+            "energy-infrastructure",
+            "conflict"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/oil-rises-3-after-iran-strikes-middle-east-energy-facilities-2026-03-19/"
+            },
+            {
+              "name": "AP",
+              "url": "https://apnews.com/article/52e94398f2432b3aba9b02b51fbe5000"
+            }
+          ]
+        },
+        {
+          "id": "dev-2",
+          "story_id": "story-oil-price-surge-115",
+          "domain": "MACRO",
+          "region": "GLOBAL",
+          "impact": "CRITICAL",
+          "icon": "📈",
+          "change_type": "ESCALATION",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-18"
+          ],
+          "headline": "Oil surges above $115 as supply risks intensify",
+          "why_it_matters_now": "Markets are pricing in sustained and potentially worsening supply disruption.",
+          "executive_summary": "Oil prices surged above $115 per barrel after Iranian attacks on Gulf energy infrastructure intensified fears of prolonged supply disruption. Brent crude briefly exceeded $115 while gas prices also spiked sharply, reflecting tightening global energy markets.",
+          "key_facts": [
+            "Brent crude rose above $115 per barrel.",
+            "Prices have increased more than 50% since the conflict began.",
+            "European natural gas prices surged over 20%."
+          ],
+          "next_watchpoints": [
+            "Further price spikes if infrastructure damage spreads",
+            "Strategic reserve releases by major economies"
+          ],
+          "tags": [
+            "oil",
+            "inflation",
+            "energy-markets"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/oil-rises-3-after-iran-strikes-middle-east-energy-facilities-2026-03-19/"
+            },
+            {
+              "name": "AP",
+              "url": "https://apnews.com/article/1abeddf7c4bf19d1dc96b3f23c1de402"
+            }
+          ]
+        },
+        {
+          "id": "dev-3",
+          "story_id": "story-global-market-shock",
+          "domain": "MACRO",
+          "region": "GLOBAL",
+          "impact": "HIGH",
+          "icon": "🌍",
+          "change_type": "ESCALATION",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [],
+          "headline": "Global markets fall amid energy-driven shock",
+          "why_it_matters_now": "Energy shock is transmitting rapidly into global financial conditions.",
+          "executive_summary": "Global equity markets declined sharply as energy prices surged following Iranian strikes. Major Asian indices fell between 2% and 3.5%, with declines also seen across European and U.S. markets, reflecting rising recession and inflation risks.",
+          "key_facts": [
+            "Japan's Nikkei fell 3.4% and South Korea's Kospi dropped 2.7%.",
+            "European and U.S. markets also declined.",
+            "Central banks held rates steady amid rising uncertainty."
+          ],
+          "next_watchpoints": [
+            "Spillover into credit markets and liquidity conditions",
+            "Central bank responses to inflation shock"
+          ],
+          "tags": [
+            "markets",
+            "risk-off",
+            "global-economy"
+          ],
+          "sources": [
+            {
+              "name": "AP",
+              "url": "https://apnews.com/article/1abeddf7c4bf19d1dc96b3f23c1de402"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/oil-rises-3-after-iran-strikes-middle-east-energy-facilities-2026-03-19/"
+            }
+          ]
+        },
+        {
+          "id": "dev-4",
+          "story_id": "story-saudi-red-sea-shift",
+          "domain": "ENERGY",
+          "region": "MIDDLE EAST",
+          "impact": "HIGH",
+          "icon": "🚢",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-18"
+          ],
+          "headline": "Saudi Arabia boosts Red Sea export capacity",
+          "why_it_matters_now": "Alternative export routes are becoming critical to global supply continuity.",
+          "executive_summary": "Saudi Arabia is ramping up oil exports via its Red Sea Yanbu terminal to as much as 3.8 million barrels per day, leveraging pipeline capacity to bypass the Strait of Hormuz. This shift highlights the growing importance of alternative logistics routes amid ongoing maritime disruption.",
+          "key_facts": [
+            "Yanbu exports projected to reach 3.8 million bpd.",
+            "East-West pipeline capacity supports up to 7 million bpd.",
+            "Red Sea shipping remains stable despite regional conflict."
+          ],
+          "next_watchpoints": [
+            "Further expansion of non-Hormuz export routes",
+            "Potential attacks on Red Sea infrastructure"
+          ],
+          "tags": [
+            "saudi",
+            "oil-exports",
+            "logistics"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/saudi-red-sea-oil-exports-set-jump-38-million-bpd-march-shipping-data-shows-2026-03-18/"
+            }
+          ]
+        },
+        {
+          "id": "dev-5",
+          "story_id": "story-energy-capital-flows",
+          "domain": "MACRO",
+          "region": "GLOBAL",
+          "impact": "MEDIUM",
+          "icon": "💰",
+          "change_type": "NEW",
+          "story_stage": "EMERGING",
+          "previous_brief_refs": [],
+          "headline": "Energy sector sees largest inflows in decade",
+          "why_it_matters_now": "Capital is rapidly reallocating toward energy amid sustained price increases.",
+          "executive_summary": "Global investors are pouring capital into energy-sector funds at the fastest pace in over a decade, with inflows exceeding $2 billion in March. The trend reflects expectations of sustained high prices and profitability for producers amid the ongoing crisis.",
+          "key_facts": [
+            "Energy funds attracted over $2.1 billion in inflows this month.",
+            "Flows are approaching 12-year highs.",
+            "Investor positioning reflects expectations of prolonged disruption."
+          ],
+          "next_watchpoints": [
+            "Sustained inflows into commodity-linked assets",
+            "Rotation out of rate-sensitive sectors"
+          ],
+          "tags": [
+            "capital-flows",
+            "energy",
+            "markets"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/global-markets-oilflows-2026-03-18/"
+            }
+          ]
+        }
+      ],
+      "timeline_context": {
+        "title": "Energy Infrastructure Escalation",
+        "events": [
+          {
+            "date": "MARCH 19, 2026",
+            "headline": "Iran strikes Gulf energy infrastructure",
+            "details": "Coordinated attacks hit refineries and LNG facilities across the region."
+          },
+          {
+            "date": "MARCH 18, 2026",
+            "headline": "Israel strikes South Pars gas field",
+            "details": "Attack on Iran's largest gas field triggers escalation."
+          },
+          {
+            "date": "MARCH 16-18, 2026",
+            "headline": "Hormuz disruption constrains exports",
+            "details": "Shipping and production disruptions reduce global supply."
+          }
+        ]
+      },
+      "risk_matrix": {
+        "title": "24-Hour Threat Map",
+        "risks": [
+          {
+            "id": "risk-1",
+            "label": "Regional energy system failure",
+            "probability": 0.72,
+            "impact": 0.98,
+            "details": "Widespread infrastructure damage could remove large portions of global supply."
+          },
+          {
+            "id": "risk-2",
+            "label": "Global inflation shock",
+            "probability": 0.65,
+            "impact": 0.9,
+            "details": "Sustained oil and gas price increases could delay monetary easing globally."
+          },
+          {
+            "id": "risk-3",
+            "label": "Military escalation beyond region",
+            "probability": 0.48,
+            "impact": 0.92,
+            "details": "Direct US or allied intervention could widen the conflict."
+          }
+        ]
+      },
+      "macro_indicators": [
+        {
+          "id": "ind-01",
+          "title": "Brent Crude",
+          "metric": "7-DAY TREND",
+          "currentValue": "$115",
+          "trendValue": "+55%",
+          "trendDirection": "up",
+          "data": [
+            90,
+            97,
+            103,
+            104,
+            103,
+            110,
+            115
+          ],
+          "details": "Prices surged following direct attacks on Gulf energy infrastructure."
+        }
+      ],
+      "analyst_consensus": {
+        "consensus": [
+          "Energy infrastructure attacks mark a major escalation in the conflict.",
+          "Global energy markets are entering a severe supply shock phase."
+        ],
+        "friction": [
+          "Uncertainty remains on duration of infrastructure outages.",
+          "Debate continues on effectiveness of alternative export routes."
+        ]
+      },
+      "strategic_context": [
+        "The conflict has shifted from transport disruption to direct targeting of energy production and processing.",
+        "Alternative export routes such as the Saudi Red Sea corridor are becoming critical to global supply stability.",
+        "Energy markets are increasingly driven by geopolitical risk rather than fundamentals."
+      ],
+      "watchlist": "Monitor further strikes on Saudi core infrastructure, potential US military response, and emergency energy policy actions by major economies."
+    },
+    {
+      "id": "2026-03-18",
+      "date": "March 18, 2026",
+      "system_status": {
+        "condition": "CRITICAL",
+        "indicator": "VOLATILE"
+      },
+      "today_in_60_seconds": [
+        {
+          "id": "story-oil-price-pullback",
+          "icon": "📉",
+          "headline": "Oil dips as Iraq restarts exports",
+          "domain": "MACRO",
+          "summary": "Partial Iraqi export resumption via Turkey triggered a modest pullback in benchmarks despite ongoing Gulf disruption.",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "VOLATILE",
+          "target": "Brent Crude",
+          "metric": "$103"
+        },
+        {
+          "id": "story-hormuz-selective-flow",
+          "icon": "🚢",
+          "headline": "Selective Hormuz flows emerge",
+          "domain": "GEOPOLITICS",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "VOLATILE",
+          "target": "Strait of Hormuz",
+          "metric": "LIMITED TRANSIT"
+        },
+        {
+          "id": "story-physical-oil-spike",
+          "icon": "🛢️",
+          "headline": "Physical crude surges above $150",
+          "domain": "ENERGY",
+          "signal_type": "NEW_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Oman Crude",
+          "metric": "$150+"
+        },
+        {
+          "id": "story-export-collapse-persists",
+          "icon": "📦",
+          "headline": "Gulf export collapse persists",
+          "domain": "ENERGY",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Middle East Exports",
+          "metric": "-60%"
+        },
+        {
+          "id": "story-infrastructure-attacks",
+          "icon": "🪖",
+          "headline": "Energy site attacks continue",
+          "domain": "DEFENSE",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Gulf Infrastructure",
+          "metric": "MULTI-SITE"
+        }
+      ],
+      "what_changed": {
+        "new": [
+          "Iraq resumed limited crude exports via Turkey's Ceyhan port.",
+          "Selective tanker transit through Hormuz occurred under negotiated conditions."
+        ],
+        "intensified": [
+          "Physical crude prices surged sharply as buyers competed for non-Hormuz supply.",
+          "Attacks on Gulf energy infrastructure continued across multiple countries."
+        ],
+        "eased": [
+          "Benchmark oil prices pulled back slightly following incremental supply additions."
+        ],
+        "changed_meaning": [
+          "Global oil markets are fragmenting into restricted Gulf flows and premium-priced alternative supply chains."
+        ]
+      },
+      "major_developments": [
+        {
+          "id": "dev-1",
+          "story_id": "story-oil-price-pullback",
+          "domain": "MACRO",
+          "region": "GLOBAL",
+          "impact": "HIGH",
+          "icon": "📉",
+          "change_type": "UPDATE",
+          "story_stage": "VOLATILE",
+          "previous_brief_refs": [
+            "2026-03-17"
+          ],
+          "headline": "Oil dips as Iraq resumes exports via Turkey",
+          "why_it_matters_now": "Small supply additions are moving prices in a constrained market.",
+          "executive_summary": "Oil prices declined modestly after Iraq resumed exports via Turkey's Ceyhan port, initially targeting around 100,000 barrels per day. While the move provides incremental relief, it does not offset the broader disruption caused by the effective closure of the Strait of Hormuz and regional production losses.",
+          "key_facts": [
+            "Brent crude traded near $103 per barrel.",
+            "Iraq resumed exports via Turkey at roughly 100,000 bpd.",
+            "Hormuz disruption continues to constrain most Gulf exports."
+          ],
+          "next_watchpoints": [
+            "Expansion of Iraqi export volumes via Turkey",
+            "Additional non-Hormuz export routes coming online"
+          ],
+          "tags": [
+            "oil",
+            "iraq",
+            "markets"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/oil-prices-drop-us-crude-inventories-show-an-increase-2026-03-18/"
+            },
+            {
+              "name": "AP",
+              "url": "https://apnews.com/article/82a9acb473837f1bf7a821d0c3f95205"
+            }
+          ]
+        },
+        {
+          "id": "dev-2",
+          "story_id": "story-hormuz-selective-flow",
+          "domain": "GEOPOLITICS",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🚢",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-17"
+          ],
+          "headline": "Iran allows selective tanker transit through Hormuz",
+          "why_it_matters_now": "Iran is exerting control over global energy flows via selective access.",
+          "executive_summary": "Iran is permitting limited tanker transit through the Strait of Hormuz under negotiated conditions while maintaining broader restrictions. This creates uneven shipping flows, with certain countries securing passage while others remain blocked.",
+          "key_facts": [
+            "Selective vessels are transiting the strait under negotiated arrangements.",
+            "Most commercial traffic remains disrupted.",
+            "Iran is using maritime access as a strategic lever."
+          ],
+          "next_watchpoints": [
+            "Expansion of bilateral shipping agreements",
+            "Formalization of controlled transit corridors"
+          ],
+          "tags": [
+            "hormuz",
+            "shipping",
+            "geopolitics"
+          ],
+          "sources": [
+            {
+              "name": "AP",
+              "url": "https://apnews.com/article/82a9acb473837f1bf7a821d0c3f95205"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/asia-pacific/pakistan-bound-oil-tanker-passes-through-strait-hormuz-amid-iran-war-2026-03-16/"
+            }
+          ]
+        },
+        {
+          "id": "dev-3",
+          "story_id": "story-physical-oil-spike",
+          "domain": "ENERGY",
+          "region": "GLOBAL",
+          "impact": "CRITICAL",
+          "icon": "🛢️",
+          "change_type": "NEW",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [],
+          "headline": "Physical oil prices exceed $150 per barrel",
+          "why_it_matters_now": "Physical supply shortages are diverging sharply from benchmark prices.",
+          "executive_summary": "Physical crude markets tightened dramatically, with non-Hormuz supply such as Oman crude exceeding $150 per barrel. The surge reflects severe logistical constraints, tanker shortages, and strong demand for alternative supply routes.",
+          "key_facts": [
+            "Oman crude traded above $150 per barrel.",
+            "Hormuz disruption removed a major share of global supply.",
+            "Alternative producers are experiencing record demand."
+          ],
+          "next_watchpoints": [
+            "Spread between physical and benchmark prices",
+            "Refinery adjustments to alternative crude grades"
+          ],
+          "tags": [
+            "oil",
+            "markets",
+            "supply"
+          ],
+          "sources": [
+            {
+              "name": "Financial Times",
+              "url": "https://www.ft.com/content/e9d8e871-8344-487c-b0d7-aec8fd225d59"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/middle-east-oil-exports-drop-least-60-hormuz-stays-mostly-closed-data-shows-2026-03-16/"
+            }
+          ]
+        },
+        {
+          "id": "dev-4",
+          "story_id": "story-export-collapse-persists",
+          "domain": "ENERGY",
+          "region": "GLOBAL",
+          "impact": "CRITICAL",
+          "icon": "📦",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-17"
+          ],
+          "headline": "Middle East export collapse persists",
+          "why_it_matters_now": "Supply loss remains large and sustained.",
+          "executive_summary": "Oil exports from key Middle Eastern producers remain down roughly 60% compared to pre-conflict levels as the Strait of Hormuz stays largely closed. Production shut-ins and storage limits continue to constrain supply.",
+          "key_facts": [
+            "Exports fell from about 25 million bpd to under 10 million bpd.",
+            "Multiple Gulf producers have reduced output.",
+            "Shipping remains the primary bottleneck."
+          ],
+          "next_watchpoints": [
+            "Reopening of sustained export flows",
+            "Further production cuts across Gulf states"
+          ],
+          "tags": [
+            "oil",
+            "exports",
+            "hormuz"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/middle-east-oil-exports-drop-least-60-hormuz-stays-mostly-closed-data-shows-2026-03-16/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/uae-crude-output-falls-by-more-than-half-hormuz-closure-forces-shut-ins-2026-03-16/"
+            }
+          ]
+        }
+      ],
+      "timeline_context": {
+        "title": "Hormuz Crisis Progression",
+        "events": [
+          {
+            "date": "MARCH 18, 2026",
+            "headline": "Iraq resumes exports via Turkey",
+            "details": "Limited supply re-enters markets outside Hormuz."
+          },
+          {
+            "date": "MARCH 17, 2026",
+            "headline": "Exports collapse across Gulf producers",
+            "details": "Supply shock intensifies due to shipping disruption."
+          },
+          {
+            "date": "MARCH 14, 2026",
+            "headline": "US strikes Iranian targets on Kharg Island",
+            "details": "Conflict escalates near major export infrastructure."
+          }
+        ]
+      },
+      "risk_matrix": {
+        "title": "24-Hour Threat Map",
+        "risks": [
+          {
+            "id": "risk-1",
+            "label": "Fragmented oil market",
+            "probability": 0.8,
+            "impact": 0.93,
+            "details": "Parallel supply systems could distort global pricing."
+          },
+          {
+            "id": "risk-2",
+            "label": "Sustained supply shock",
+            "probability": 0.74,
+            "impact": 0.95,
+            "details": "Continued export disruption could tighten supply for months."
+          }
+        ]
+      },
+      "macro_indicators": [
+        {
+          "id": "ind-01",
+          "title": "Brent Crude",
+          "metric": "7-DAY TREND",
+          "currentValue": "$103",
+          "trendValue": "+35%",
+          "trendDirection": "up",
+          "data": [
+            85,
+            90,
+            97,
+            102,
+            104,
+            103,
+            103
+          ],
+          "details": "Prices remain elevated despite partial supply recovery."
+        }
+      ],
+      "analyst_consensus": {
+        "consensus": [
+          "Energy supply disruption remains the dominant macro risk.",
+          "Physical oil markets are tighter than benchmark prices suggest."
+        ],
+        "friction": [
+          "Uncertainty remains over how quickly alternative supply routes can scale.",
+          "Debate continues on duration of infrastructure disruptions."
+        ]
+      },
+      "strategic_context": [
+        "The Strait of Hormuz remains the central chokepoint for global energy flows.",
+        "The conflict is driving fragmentation in global oil supply chains.",
+        "Selective maritime access is emerging as a geopolitical lever."
+      ],
+      "watchlist": "Monitor expansion of alternative export routes, further divergence between physical and benchmark oil prices, and potential reopening scenarios for Hormuz."
+    },
+    {
+      "id": "2026-03-16",
+      "date": "March 16, 2026",
+      "system_status": {
+        "condition": "SEVERE",
+        "indicator": "ESCALATING"
+      },
+      "today_in_60_seconds": [
+        {
+          "id": "story-hormuz-coalition",
+          "icon": "🚢",
+          "headline": "US seeks coalition to reopen Hormuz",
+          "domain": "GEOPOLITICS",
+          "summary": "Washington is attempting to assemble a multinational naval coalition to reopen the Strait of Hormuz as Iran maintains effective closure and shipping disruption.",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "ESCALATING",
+          "target": "Strait of Hormuz",
+          "metric": "20% GLOBAL OIL"
+        },
+        {
+          "id": "story-allies-refuse-warships",
+          "icon": "🌏",
+          "headline": "Japan, Australia decline Hormuz patrols",
+          "domain": "GEOPOLITICS",
+          "signal_type": "NEW_SIGNAL",
+          "status": "VOLATILE",
+          "target": "US Alliance Network",
+          "metric": "NO DEPLOYMENT"
+        },
+        {
+          "id": "story-oil-price-surge",
+          "icon": "📈",
+          "headline": "Oil rises as export threats deepen",
+          "domain": "ENERGY",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "VOLATILE",
+          "target": "Global Oil Markets",
+          "metric": ">$100 BRENT"
+        },
+        {
+          "id": "story-gulf-market-stress",
+          "icon": "📉",
+          "headline": "Gulf equities fall on war risk",
+          "domain": "MACRO",
+          "signal_type": "NEW_SIGNAL",
+          "status": "VOLATILE",
+          "target": "Middle East Equity Markets",
+          "metric": "REGIONAL SELLOFF"
+        },
+        {
+          "id": "story-eu-hormuz-plan",
+          "icon": "🇪🇺",
+          "headline": "EU floats diplomatic corridor plan",
+          "domain": "GEOPOLITICS",
+          "signal_type": "NEW_SIGNAL",
+          "status": "MONITOR",
+          "target": "Hormuz Shipping",
+          "metric": "BLACK SEA MODEL"
+        }
+      ],
+      "what_changed": {
+        "new": [
+          "The United States began pushing to form a multinational naval coalition to reopen the Strait of Hormuz.",
+          "Japan and Australia signaled they currently have no plans to deploy warships to the Gulf.",
+          "EU officials proposed a diplomatic framework modeled on the Black Sea grain corridor to reopen the strait."
+        ],
+        "intensified": [
+          "Oil prices continued rising as investors priced sustained disruption to Middle East export infrastructure.",
+          "Regional financial markets in Gulf states declined amid uncertainty surrounding the conflict."
+        ],
+        "eased": [],
+        "changed_meaning": [
+          "The conflict is shifting from a purely military escalation toward a combined diplomatic and coalition-building effort to restore maritime trade."
+        ]
+      },
+      "major_developments": [
+        {
+          "id": "dev-1",
+          "story_id": "story-hormuz-coalition",
+          "domain": "GEOPOLITICS",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🚢",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-15"
+          ],
+          "headline": "US pushes coalition to reopen Hormuz",
+          "why_it_matters_now": "The effort signals a shift toward multinational enforcement to restore global energy flows.",
+          "executive_summary": "The United States is seeking to assemble a coalition of countries to reopen the Strait of Hormuz after Iran effectively halted shipping through the waterway. Washington has contacted multiple nations about deploying naval forces to protect tanker traffic and restore maritime trade through the strategic chokepoint.",
+          "key_facts": [
+            "The Strait of Hormuz carries roughly one‑fifth of global oil shipments.",
+            "The United States has approached several countries about contributing naval forces.",
+            "Iran has maintained pressure on shipping lanes since the escalation of the war."
+          ],
+          "next_watchpoints": [
+            "Formal announcements of naval coalition participation",
+            "Changes in commercial tanker traffic through the strait"
+          ],
+          "tags": [
+            "hormuz",
+            "naval-coalition",
+            "energy-security"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/trump-eyes-hormuz-coalition-seizure-irans-kharg-island-oil-hub-axios-reports-2026-03-16/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/trump-demands-others-help-secure-strait-hormuz-japan-australia-say-no-plans-send-2026-03-16/"
+            }
+          ]
+        },
+        {
+          "id": "dev-2",
+          "story_id": "story-allies-refuse-warships",
+          "domain": "GEOPOLITICS",
+          "region": "ASIA",
+          "impact": "HIGH",
+          "icon": "🌏",
+          "change_type": "NEW",
+          "story_stage": "EMERGING",
+          "previous_brief_refs": [],
+          "headline": "Japan, Australia decline Hormuz patrols",
+          "why_it_matters_now": "Alliance reluctance complicates U.S. efforts to quickly reopen the critical energy corridor.",
+          "executive_summary": "Japan and Australia stated they currently have no plans to send warships to help secure shipping routes through the Strait of Hormuz. The response highlights hesitancy among U.S. allies to become directly involved in military operations related to the Iran conflict.",
+          "key_facts": [
+            "Japan and Australia indicated they are not planning naval deployments to the strait.",
+            "The United States has urged multiple allies to contribute naval forces.",
+            "The strait remains effectively closed due to conflict risks."
+          ],
+          "next_watchpoints": [
+            "Policy changes by Asian allies regarding naval deployments",
+            "Potential European naval participation"
+          ],
+          "tags": [
+            "alliances",
+            "naval-security",
+            "energy-trade"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/trump-demands-others-help-secure-strait-hormuz-japan-australia-say-no-plans-send-2026-03-16/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://wkzo.com/2026/03/16/trump-demands-others-help-secure-strait-of-hormuz-japan-and-australia-say-no-plans-to-send-ships/"
+            }
+          ]
+        },
+        {
+          "id": "dev-3",
+          "story_id": "story-oil-price-surge",
+          "domain": "ENERGY",
+          "region": "GLOBAL",
+          "impact": "CRITICAL",
+          "icon": "📈",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-15"
+          ],
+          "headline": "Oil prices extend gains amid supply threats",
+          "why_it_matters_now": "Energy markets are pricing prolonged disruption to Gulf export capacity.",
+          "executive_summary": "Oil prices continued rising as investors focused on threats to Middle East export facilities and the continued disruption of shipping through the Strait of Hormuz. The conflict has sharply increased energy supply risk and volatility across global commodity markets.",
+          "key_facts": [
+            "Oil prices extended gains as the conflict entered its third week.",
+            "Disruption threatens both shipping lanes and oil export facilities.",
+            "Energy traders remain focused on potential infrastructure damage."
+          ],
+          "next_watchpoints": [
+            "Evidence of damage to Gulf export terminals",
+            "Strategic petroleum reserve releases by major economies"
+          ],
+          "tags": [
+            "oil",
+            "energy-markets",
+            "inflation"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/oil-extends-gains-middle-east-conflict-threatens-export-facilities-2026-03-15/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.koreaherald.com/article/10695084"
+            }
+          ]
+        },
+        {
+          "id": "dev-4",
+          "story_id": "story-gulf-market-stress",
+          "domain": "MACRO",
+          "region": "MIDDLE EAST",
+          "impact": "MEDIUM",
+          "icon": "📉",
+          "change_type": "NEW",
+          "story_stage": "EMERGING",
+          "previous_brief_refs": [],
+          "headline": "Gulf equities fall as conflict weighs",
+          "why_it_matters_now": "Regional markets are reflecting economic stress from the escalating war.",
+          "executive_summary": "Equity markets across Gulf countries declined as investors reacted to escalating tensions and continued disruption to oil exports. Regional financial markets have become increasingly volatile as the conflict affects trade flows and economic expectations.",
+          "key_facts": [
+            "Gulf stock markets declined amid rising geopolitical uncertainty.",
+            "Investors are responding to disruption in oil and shipping markets.",
+            "Energy sector volatility is driving broader market risk."
+          ],
+          "next_watchpoints": [
+            "Further declines in Gulf equities",
+            "Spillover into global risk‑off financial markets"
+          ],
+          "tags": [
+            "markets",
+            "middle-east",
+            "risk"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/middle-east/uae-equities-tumble-as-iran-conflict-fuels-regional-market-uncertainty-2026-03-16/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/oil-extends-gains-middle-east-conflict-threatens-export-facilities-2026-03-15/"
+            }
+          ]
+        },
+        {
+          "id": "dev-5",
+          "story_id": "story-eu-hormuz-plan",
+          "domain": "GEOPOLITICS",
+          "region": "EUROPE",
+          "impact": "MEDIUM",
+          "icon": "🇪🇺",
+          "change_type": "NEW",
+          "story_stage": "EMERGING",
+          "previous_brief_refs": [],
+          "headline": "EU proposes Black Sea–style shipping deal",
+          "why_it_matters_now": "European leaders are exploring diplomatic mechanisms to restore global energy trade routes.",
+          "executive_summary": "European Union officials proposed a diplomatic framework modeled on the Black Sea grain corridor to reopen the Strait of Hormuz and restore maritime energy flows. The idea involves coordinating international guarantees for safe shipping through the corridor, though internal EU support remains uncertain.",
+          "key_facts": [
+            "EU officials proposed adapting the Black Sea grain corridor model.",
+            "The initiative aims to reopen maritime trade through the strait.",
+            "The proposal faces skepticism among some EU member states."
+          ],
+          "next_watchpoints": [
+            "EU foreign ministers' decisions on expanding naval missions",
+            "International negotiations involving the UN"
+          ],
+          "tags": [
+            "eu",
+            "diplomacy",
+            "energy-security"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/eus-kallas-floats-black-sea-model-unblock-strait-hormuz-2026-03-16/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/trump-demands-others-help-secure-strait-hormuz-japan-australia-say-no-plans-send-2026-03-16/"
+            }
+          ]
+        }
+      ],
+      "timeline_context": {
+        "title": "Hormuz Crisis Escalation",
+        "events": [
+          {
+            "date": "MARCH 16, 2026",
+            "headline": "US pushes coalition to reopen strait",
+            "details": "Washington seeks multinational naval support for Hormuz security."
+          },
+          {
+            "date": "MARCH 15, 2026",
+            "headline": "Allies pressed to deploy warships",
+            "details": "US calls on partners to help protect shipping lanes."
+          },
+          {
+            "date": "MARCH 14, 2026",
+            "headline": "US strikes Iranian military sites on Kharg Island",
+            "details": "Large-scale airstrike targeted infrastructure tied to maritime disruption."
+          },
+          {
+            "date": "FEBRUARY 28, 2026",
+            "headline": "Regional war begins with US–Israel strikes",
+            "details": "Conflict escalates across Gulf energy infrastructure and shipping routes."
+          }
+        ]
+      },
+      "risk_matrix": {
+        "title": "24-Hour Threat Map",
+        "risks": [
+          {
+            "id": "risk-1",
+            "label": "Prolonged Hormuz closure",
+            "probability": 0.72,
+            "impact": 0.96,
+            "details": "Continued disruption could remove a major share of global oil supply from markets."
+          },
+          {
+            "id": "risk-2",
+            "label": "Energy infrastructure strikes",
+            "probability": 0.64,
+            "impact": 0.9,
+            "details": "Further attacks on refineries or export terminals could deepen supply shocks."
+          },
+          {
+            "id": "risk-3",
+            "label": "Global risk-off financial shock",
+            "probability": 0.48,
+            "impact": 0.75,
+            "details": "Market stress could spread from regional equities into broader global markets."
+          }
+        ]
+      },
+      "macro_indicators": [
+        {
+          "id": "ind-01",
+          "title": "Brent Crude",
+          "metric": "7-DAY TREND",
+          "currentValue": ">$100",
+          "trendValue": "+8%",
+          "trendDirection": "up",
+          "data": [
+            95,
+            97,
+            100,
+            102,
+            105,
+            107,
+            108
+          ],
+          "details": "Energy markets reacting to sustained Middle East export disruption."
+        }
+      ],
+      "analyst_consensus": {
+        "consensus": [
+          "The Strait of Hormuz remains the central economic transmission channel of the Iran conflict.",
+          "Energy supply risks are driving global market volatility."
+        ],
+        "friction": [
+          "Analysts disagree on how quickly shipping could resume if a coalition forms.",
+          "Uncertainty remains around whether Iran will escalate attacks on energy infrastructure."
+        ]
+      },
+      "strategic_context": [
+        "The Strait of Hormuz handles roughly one-fifth of global oil shipments and is the most critical maritime chokepoint in the global energy system.",
+        "The Iran conflict has transitioned from localized military strikes toward a global energy supply crisis.",
+        "Diplomatic proposals and coalition-building indicate growing international concern over the prolonged disruption of energy trade routes."
+      ],
+      "watchlist": "Monitor announcements of multinational naval deployments to the Strait of Hormuz, signs of resumed tanker traffic, and any direct attacks on regional oil export infrastructure."
+    },
+    {
+      "id": "2026-03-15",
+      "date": "March 15, 2026",
+      "system_status": {
+        "condition": "SEVERE",
+        "indicator": "ESCALATING"
+      },
+      "today_in_60_seconds": [
+        {
+          "id": "story-kharg-island-strikes",
+          "icon": "🛢️",
+          "headline": "US signals more strikes on Iran oil hub",
+          "domain": "GEOPOLITICS",
+          "summary": "Washington threatened additional attacks on Iran's Kharg Island after a large U.S. strike destroyed dozens of military targets there.",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "ESCALATING",
+          "target": "Kharg Island",
+          "metric": "90+ TARGETS HIT"
+        },
+        {
+          "id": "story-hormuz-disruption",
+          "icon": "🚢",
+          "headline": "Hormuz disruption deepens as warships urged",
+          "domain": "ENERGY",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Strait of Hormuz",
+          "metric": "20% GLOBAL OIL"
+        },
+        {
+          "id": "story-global-oil-shock",
+          "icon": "📈",
+          "headline": "Oil poised for further surge",
+          "domain": "MACRO",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "VOLATILE",
+          "target": "Global Energy Markets",
+          "metric": "+40% MONTH"
+        },
+        {
+          "id": "story-strategic-reserve-release",
+          "icon": "🛢️",
+          "headline": "Japan releases strategic oil reserves",
+          "domain": "MACRO",
+          "signal_type": "NEW_SIGNAL",
+          "status": "MONITOR",
+          "target": "Japan Energy Supply",
+          "metric": "80M BARRELS"
+        },
+        {
+          "id": "story-regional-retaliation-risk",
+          "icon": "🪖",
+          "headline": "Iran warns of retaliation across Gulf",
+          "domain": "DEFENSE",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Gulf Energy Infrastructure",
+          "metric": "REGIONAL STRIKES"
+        }
+      ],
+      "what_changed": {
+        "new": [
+          "Japan announced it will release 80 million barrels from strategic oil reserves to stabilize markets.",
+          "U.S. officials called for allied naval deployments to secure the Strait of Hormuz."
+        ],
+        "intensified": [
+          "The U.S. signaled additional strikes could target Iran's Kharg Island following a large strike destroying more than 90 military sites.",
+          "Iran threatened retaliation across Gulf states hosting U.S. forces."
+        ],
+        "eased": [],
+        "changed_meaning": [
+          "Energy market disruption is shifting from risk pricing toward coordinated government intervention through strategic reserve releases."
+        ]
+      },
+      "major_developments": [
+        {
+          "id": "dev-1",
+          "story_id": "story-kharg-island-strikes",
+          "domain": "GEOPOLITICS",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🛢️",
+          "change_type": "ESCALATION",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-14"
+          ],
+          "headline": "US threatens additional strikes on Iran's Kharg Island",
+          "why_it_matters_now": "The world's most important Iranian oil export hub is now directly linked to the military escalation cycle.",
+          "executive_summary": "U.S. leadership warned that additional strikes could target Iran's Kharg Island after U.S. forces destroyed more than 90 Iranian military sites on the island. Kharg handles the majority of Iran's crude exports. Washington said future strikes could expand if Tehran continues disrupting maritime traffic in the Strait of Hormuz.",
+          "key_facts": [
+            "U.S. forces struck more than 90 Iranian military targets on Kharg Island.",
+            "Kharg Island processes most Iranian crude exports.",
+            "Washington warned further strikes could follow if shipping disruptions persist."
+          ],
+          "next_watchpoints": [
+            "Evidence of damage to Iranian oil export infrastructure",
+            "Iranian retaliation against Gulf energy facilities"
+          ],
+          "tags": [
+            "iran-war",
+            "energy-security",
+            "middle-east",
+            "oil"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/middle-east/trump-calls-allies-help-secure-strait-hormuz-iran-vows-step-up-retaliation-2026-03-15/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/middle-east/us-strikes-more-than-90-iranian-military-targets-kharg-island-centcom-says-2026-03-14/"
+            }
+          ]
+        },
+        {
+          "id": "dev-2",
+          "story_id": "story-hormuz-disruption",
+          "domain": "ENERGY",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🚢",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-14"
+          ],
+          "headline": "Allies urged to deploy warships to secure Hormuz",
+          "why_it_matters_now": "Security of the world's most critical oil chokepoint is now an explicit military objective.",
+          "executive_summary": "The United States urged allied governments to deploy naval forces to protect shipping through the Strait of Hormuz as attacks on tankers and maritime threats continue. The waterway normally carries about one-fifth of global oil flows, and disruptions have significantly reduced shipping activity.",
+          "key_facts": [
+            "About 20% of global oil supply moves through the Strait of Hormuz.",
+            "At least 22 civilian ships have been attacked in recent weeks.",
+            "The U.S. has asked allied navies to help secure maritime traffic."
+          ],
+          "next_watchpoints": [
+            "Deployment of multinational naval escort missions",
+            "Return of large tanker traffic through the strait"
+          ],
+          "tags": [
+            "shipping",
+            "energy-security",
+            "chokepoint",
+            "geopolitics"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/middle-east/trump-calls-allies-help-secure-strait-hormuz-iran-vows-step-up-retaliation-2026-03-15/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/pictures/targeting-tankers-photos-irans-strikes-oil-container-shipping-2026-03-13/"
+            }
+          ]
+        },
+        {
+          "id": "dev-3",
+          "story_id": "story-global-oil-shock",
+          "domain": "MACRO",
+          "region": "GLOBAL",
+          "impact": "HIGH",
+          "icon": "📈",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-14"
+          ],
+          "headline": "Oil markets brace for prolonged supply shock",
+          "why_it_matters_now": "Energy markets are pricing sustained disruption to Gulf exports and possible infrastructure attacks.",
+          "executive_summary": "Oil prices are expected to rise further as the conflict between the U.S., Israel and Iran threatens critical oil infrastructure and shipping routes. Prices have surged sharply during the crisis, with traders factoring in the possibility of prolonged disruption to Gulf supply chains.",
+          "key_facts": [
+            "Oil prices have risen more than 40% during the conflict.",
+            "Shipping disruptions through Hormuz threaten major crude and LNG flows.",
+            "Energy traders warn supply losses could reach millions of barrels per day."
+          ],
+          "next_watchpoints": [
+            "Additional energy infrastructure strikes",
+            "Further coordinated strategic reserve releases"
+          ],
+          "tags": [
+            "oil",
+            "inflation",
+            "energy-markets",
+            "macro"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/oil-poised-further-gains-middle-east-conflict-threatens-export-facilities-2026-03-15/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/oil-jumps-us-iran-conflict-escalates-disrupts-shipping-2026-03-01/"
+            }
+          ]
+        },
+        {
+          "id": "dev-4",
+          "story_id": "story-strategic-reserve-release",
+          "domain": "MACRO",
+          "region": "ASIA",
+          "impact": "MEDIUM",
+          "icon": "🛢️",
+          "change_type": "NEW",
+          "story_stage": "EMERGING",
+          "previous_brief_refs": [],
+          "headline": "Japan releases 80M barrels from reserves",
+          "why_it_matters_now": "Strategic reserve deployment indicates governments preparing for prolonged energy disruption.",
+          "executive_summary": "Japan announced plans to release 80 million barrels of oil from its strategic reserves beginning Monday as the Iran conflict disrupts global energy flows. The release is part of a broader effort coordinated with international partners to stabilize markets amid rising prices and supply uncertainty.",
+          "key_facts": [
+            "Japan will release roughly 80 million barrels from reserves.",
+            "The release equals about 45 days of domestic oil supply.",
+            "The move is part of global reserve coordination efforts."
+          ],
+          "next_watchpoints": [
+            "Additional IEA-coordinated reserve releases",
+            "Market reaction to emergency supply injections"
+          ],
+          "tags": [
+            "energy-policy",
+            "strategic-reserves",
+            "oil-markets"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/japan-release-oil-stocks-us-says-buy-american-2026-03-15/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/business/energy/oil-poised-further-gains-middle-east-conflict-threatens-export-facilities-2026-03-15/"
+            }
+          ]
+        }
+      ],
+      "timeline_context": {
+        "title": "Iran War Energy Escalation Timeline",
+        "events": [
+          {
+            "date": "MARCH 15, 2026",
+            "headline": "US signals additional strikes on Kharg Island",
+            "details": "Washington threatens further attacks on Iran's oil export hub."
+          },
+          {
+            "date": "MARCH 14, 2026",
+            "headline": "US strikes more than 90 Iranian military targets",
+            "details": "Large-scale precision strike conducted on Kharg Island military infrastructure."
+          },
+          {
+            "date": "MARCH 13, 2026",
+            "headline": "Attacks on tankers escalate in Gulf",
+            "details": "More than twenty civilian vessels damaged or attacked across the region."
+          },
+          {
+            "date": "FEBRUARY 28, 2026",
+            "headline": "Regional war begins with US–Israel strikes",
+            "details": "Initial strikes against Iranian targets triggered wider conflict."
+          }
+        ]
+      },
+      "risk_matrix": {
+        "title": "24-Hour Threat Map",
+        "risks": [
+          {
+            "id": "risk-1",
+            "label": "Energy infrastructure attacks",
+            "probability": 0.78,
+            "impact": 0.95,
+            "details": "Iran or allied forces could target Gulf oil terminals or export pipelines."
+          },
+          {
+            "id": "risk-2",
+            "label": "Full Hormuz closure",
+            "probability": 0.7,
+            "impact": 0.96,
+            "details": "Escalation could halt tanker traffic entirely through the strait."
+          },
+          {
+            "id": "risk-3",
+            "label": "Regional retaliation expansion",
+            "probability": 0.65,
+            "impact": 0.82,
+            "details": "Iran may expand strikes against Gulf states hosting U.S. military assets."
+          }
+        ]
+      },
+      "macro_indicators": [
+        {
+          "id": "ind-01",
+          "title": "Brent Crude",
+          "metric": "7-DAY TREND",
+          "currentValue": ">$100",
+          "trendValue": "+40% MONTH",
+          "trendDirection": "up",
+          "data": [
+            82,
+            86,
+            91,
+            95,
+            101,
+            104,
+            108
+          ],
+          "details": "Oil markets surging amid escalating Middle East conflict and shipping disruption."
+        }
+      ],
+      "analyst_consensus": {
+        "consensus": [
+          "Energy supply risk is the primary transmission channel from the Iran war into global markets.",
+          "Strait of Hormuz security now represents the single most critical geopolitical risk to global energy supply."
+        ],
+        "friction": [
+          "Uncertainty remains over how long shipping disruptions will persist.",
+          "Analysts disagree on whether energy infrastructure will become a primary military target."
+        ]
+      },
+      "strategic_context": [
+        "The Strait of Hormuz remains the most critical maritime chokepoint in global energy trade, carrying roughly one-fifth of global oil supply.",
+        "Direct military activity around Iran's primary export hub signals a shift toward energy-system warfare.",
+        "Strategic petroleum reserve releases indicate governments preparing for a prolonged supply shock."
+      ],
+      "watchlist": "Watch for multinational naval escort operations in the Strait of Hormuz, Iranian retaliation against Gulf energy infrastructure, and additional strategic oil reserve releases by major economies."
+    },
+    {
+      "id": "2026-03-14",
+      "date": "March 14, 2026",
+      "system_status": {
+        "condition": "SEVERE",
+        "indicator": "ESCALATING"
+      },
+      "today_in_60_seconds": [
+        {
+          "id": "story-iran-kharg-strike",
+          "icon": "🛢️",
+          "headline": "US strikes Iran's Kharg Island hub",
+          "domain": "ENERGY",
+          "summary": "U.S. airstrikes hit military targets on Iran's primary oil export island while Washington threatens to target energy infrastructure if shipping disruption continues.",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "ESCALATING",
+          "target": "Kharg Island Oil Terminal",
+          "metric": "90% IRAN EXPORTS"
+        },
+        {
+          "id": "story-hormuz-shipping",
+          "icon": "🚢",
+          "headline": "Hormuz shipping effectively halted",
+          "domain": "GEOPOLITICS",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Strait of Hormuz",
+          "metric": "20% GLOBAL OIL"
+        },
+        {
+          "id": "story-oil-market-volatility",
+          "icon": "📈",
+          "headline": "Energy markets price conflict risk",
+          "domain": "MACRO",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "VOLATILE",
+          "target": "Global Oil Markets",
+          "metric": ">$100 BRENT"
+        },
+        {
+          "id": "story-us-china-trade-probe",
+          "icon": "🌏",
+          "headline": "China rebukes new US trade probe",
+          "domain": "GEOPOLITICS",
+          "signal_type": "NEW_SIGNAL",
+          "status": "MONITOR",
+          "target": "US–China Trade",
+          "metric": "SECTION 301"
+        },
+        {
+          "id": "story-regional-war-expansion",
+          "icon": "🪖",
+          "headline": "Iran war spreads across region",
+          "domain": "DEFENSE",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Middle East Theater",
+          "metric": "MULTI-FRONT"
+        }
+      ],
+      "what_changed": {
+        "new": [
+          "U.S. forces struck military installations on Iran's Kharg Island, a key oil export hub.",
+          "Washington threatened direct attacks on Iranian oil infrastructure if shipping disruptions persist."
+        ],
+        "intensified": [
+          "Regional conflict expanded with continued Iranian missile and drone activity and additional U.S.–Israeli strikes.",
+          "Shipping disruption in the Strait of Hormuz deepened as commercial traffic avoided the corridor."
+        ],
+        "eased": [
+          "Initial reports indicate Iranian oil facilities on Kharg Island were not directly targeted in the strike."
+        ],
+        "changed_meaning": [
+          "The conflict has moved from proxy and maritime disruption toward direct threats against strategic energy infrastructure."
+        ]
+      },
+      "major_developments": [
+        {
+          "id": "dev-1",
+          "story_id": "story-iran-kharg-strike",
+          "domain": "ENERGY",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🛢️",
+          "change_type": "ESCALATION",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-13"
+          ],
+          "headline": "US strikes military targets on Iran oil hub",
+          "why_it_matters_now": "Direct strikes near Iran's primary export terminal increase the risk of a deliberate energy infrastructure war.",
+          "executive_summary": "U.S. forces carried out airstrikes on military facilities on Iran's Kharg Island, the country's main crude export terminal. The island handles roughly 90% of Iran's oil shipments, making it one of the most strategically sensitive energy sites in the region. U.S. officials said military installations were targeted while oil facilities were spared, but Washington warned that Iran's energy infrastructure could be attacked if Tehran continues interfering with shipping lanes.",
+          "key_facts": [
+            "Kharg Island handles about 90% of Iran's oil exports.",
+            "U.S. strikes targeted air defenses, naval facilities and military infrastructure on the island.",
+            "Washington threatened future strikes on oil facilities if maritime disruption continues."
+          ],
+          "next_watchpoints": [
+            "Evidence of damage to Kharg Island export pipelines or storage facilities",
+            "Iranian retaliation against Gulf energy infrastructure"
+          ],
+          "tags": [
+            "iran-war",
+            "oil",
+            "energy-security",
+            "middle-east"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/middle-east/trump-threatens-strike-irans-kharg-island-oil-network-if-shipping-lanes-remain-2026-03-14/"
+            },
+            {
+              "name": "AP",
+              "url": "https://apnews.com/article/a2399398b4c590995b814d7640362a11"
+            }
+          ]
+        },
+        {
+          "id": "dev-2",
+          "story_id": "story-hormuz-shipping",
+          "domain": "GEOPOLITICS",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🚢",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-13"
+          ],
+          "headline": "Commercial traffic collapses in Strait of Hormuz",
+          "why_it_matters_now": "The world's most important energy chokepoint is experiencing a near halt in shipping traffic.",
+          "executive_summary": "Attacks on civilian vessels and warnings from Iran's Revolutionary Guards have sharply reduced maritime transit through the Strait of Hormuz. The waterway normally carries roughly one‑fifth of global oil and major LNG flows. Shipping companies and insurers have begun diverting vessels or suspending transit as the conflict expands.",
+          "key_facts": [
+            "About 20% of global oil normally passes through the Strait of Hormuz.",
+            "At least 22 civilian ships have been attacked since the start of the conflict.",
+            "Shipping firms have suspended or diverted traffic amid security risks."
+          ],
+          "next_watchpoints": [
+            "Return or suspension of tanker traffic through the strait",
+            "Naval escort operations by the U.S. or allied fleets"
+          ],
+          "tags": [
+            "shipping",
+            "energy-trade",
+            "chokepoints",
+            "geopolitics"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/middle-east/tracking-iranian-attacks-civilian-ships-gulf-2026-03-12/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/middle-east/trump-threatens-strike-irans-kharg-island-oil-network-if-shipping-lanes-remain-2026-03-14/"
+            }
+          ]
+        },
+        {
+          "id": "dev-3",
+          "story_id": "story-oil-market-volatility",
+          "domain": "MACRO",
+          "region": "GLOBAL",
+          "impact": "HIGH",
+          "icon": "📈",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-13"
+          ],
+          "headline": "Oil volatility surges amid war escalation",
+          "why_it_matters_now": "Energy prices are responding to both real supply disruption and risk of infrastructure attacks.",
+          "executive_summary": "Oil markets remain highly volatile as traders price the risk of sustained disruption in Gulf shipping and potential attacks on energy infrastructure. Brent crude has climbed above $100 as maritime insurance premiums surge and tanker transit declines across the Persian Gulf.",
+          "key_facts": [
+            "Brent crude has moved above $100 during the crisis.",
+            "Energy shipping insurance premiums have widened sharply.",
+            "Supply disruption fears are tied to Hormuz shipping risk and Iranian export infrastructure."
+          ],
+          "next_watchpoints": [
+            "Strategic petroleum reserve releases by major economies",
+            "Energy demand responses in major importing countries"
+          ],
+          "tags": [
+            "oil",
+            "inflation",
+            "markets",
+            "energy-security"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/middle-east/trump-threatens-strike-irans-kharg-island-oil-network-if-shipping-lanes-remain-2026-03-14/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/middle-east/tracking-iranian-attacks-civilian-ships-gulf-2026-03-12/"
+            }
+          ]
+        },
+        {
+          "id": "dev-4",
+          "story_id": "story-us-china-trade-probe",
+          "domain": "GEOPOLITICS",
+          "region": "GLOBAL",
+          "impact": "MEDIUM",
+          "icon": "🌏",
+          "change_type": "NEW",
+          "story_stage": "EMERGING",
+          "previous_brief_refs": [],
+          "headline": "China warns of countermeasures to US trade probe",
+          "why_it_matters_now": "The investigation risks reopening major trade tensions between the world's two largest economies.",
+          "executive_summary": "China criticized a new U.S. investigation into industrial overcapacity and labor practices, warning that it reserves the right to take countermeasures. The dispute could complicate upcoming trade talks and add friction to already strained U.S.–China economic relations.",
+          "key_facts": [
+            "The U.S. launched investigations into Chinese industrial overcapacity and labor practices.",
+            "China's Commerce Ministry said it may take countermeasures.",
+            "The dispute comes ahead of new bilateral trade discussions."
+          ],
+          "next_watchpoints": [
+            "Outcome of upcoming U.S.–China trade talks",
+            "Potential retaliatory trade measures from Beijing"
+          ],
+          "tags": [
+            "trade",
+            "us-china",
+            "industrial-policy"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/world/china/china-slams-us-trade-probe-ahead-paris-talks-2026-03-13/"
+            },
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/"
+            }
+          ]
+        }
+      ],
+      "timeline_context": {
+        "title": "Iran War Escalation Sequence",
+        "events": [
+          {
+            "date": "MARCH 14, 2026",
+            "headline": "US strikes Kharg Island military targets",
+            "details": "Airstrikes hit Iranian military installations on the country's main oil export island."
+          },
+          {
+            "date": "MARCH 13, 2026",
+            "headline": "Washington threatens Iranian oil infrastructure",
+            "details": "U.S. leadership warns that energy assets could be targeted if shipping disruption continues."
+          },
+          {
+            "date": "MARCH 12, 2026",
+            "headline": "Multiple civilian ships attacked in Gulf",
+            "details": "Explosive boat attacks damaged several tankers near Iraqi waters."
+          },
+          {
+            "date": "FEBRUARY 28, 2026",
+            "headline": "Regional war begins with US–Israel strikes",
+            "details": "Initial strikes against Iran triggered retaliatory attacks across the Gulf."
+          }
+        ]
+      },
+      "risk_matrix": {
+        "title": "24-Hour Threat Map",
+        "risks": [
+          {
+            "id": "risk-1",
+            "label": "Energy infrastructure strikes",
+            "probability": 0.78,
+            "impact": 0.96,
+            "details": "Direct attacks on Iranian or Gulf oil infrastructure could remove millions of barrels per day from global supply."
+          },
+          {
+            "id": "risk-2",
+            "label": "Full closure of Hormuz",
+            "probability": 0.71,
+            "impact": 0.95,
+            "details": "Sustained closure of the strait would disrupt roughly one‑fifth of global oil flows."
+          },
+          {
+            "id": "risk-3",
+            "label": "US–China trade escalation",
+            "probability": 0.46,
+            "impact": 0.63,
+            "details": "Retaliatory tariffs or restrictions could amplify global trade fragmentation."
+          }
+        ]
+      },
+      "macro_indicators": [
+        {
+          "id": "ind-01",
+          "title": "Brent Crude",
+          "metric": "7-DAY TREND",
+          "currentValue": ">$100",
+          "trendValue": "+9%",
+          "trendDirection": "up",
+          "data": [
+            92,
+            94,
+            97,
+            101,
+            104,
+            103,
+            105
+          ],
+          "details": "Oil prices rising as markets price sustained shipping disruption in the Gulf."
+        }
+      ],
+      "analyst_consensus": {
+        "consensus": [
+          "Energy market disruption is currently the primary economic transmission channel of the Iran war.",
+          "The Strait of Hormuz remains the most critical vulnerability in global oil supply chains."
+        ],
+        "friction": [
+          "Analysts disagree on whether the shipping disruption represents a temporary shock or a prolonged closure.",
+          "Uncertainty remains over whether energy infrastructure will become a direct target."
+        ]
+      },
+      "strategic_context": [
+        "The Strait of Hormuz remains the most important maritime chokepoint for global energy trade, carrying roughly one‑fifth of the world's oil.",
+        "Direct strikes near export infrastructure signal a shift toward energy‑system warfare rather than limited regional confrontation.",
+        "Energy market volatility is now transmitting geopolitical risk directly into global inflation and macro expectations."
+      ],
+      "watchlist": "Monitor evidence of damage to Iranian export infrastructure, naval escort deployments in the Gulf, and whether commercial tanker traffic resumes through the Strait of Hormuz."
+    },
+    {
+      "id": "2026-03-13",
+      "date": "March 13, 2026",
+      "system_status": {
+        "condition": "ELEVATED",
+        "indicator": "VOLATILE"
+      },
+      "today_in_60_seconds": [
+        {
+          "id": "story-energy-hormuz",
+          "icon": "🛢️",
+          "headline": "Oil volatility spikes after tanker attacks",
+          "domain": "ENERGY",
+          "summary": "Explosive attacks on tankers in Iraqi waters pushed crude above $100 and raised immediate concern about disruption to Gulf shipping lanes.",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "ESCALATING",
+          "target": "Persian Gulf Shipping",
+          "metric": "BRENT > $100"
+        },
+        {
+          "id": "story-global-rates",
+          "icon": "📉",
+          "headline": "Markets reprice inflation risk",
+          "domain": "MACRO",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "VOLATILE",
+          "target": "Front-End Yields",
+          "metric": "RATE CUTS DELAY"
+        },
+        {
+          "id": "story-iea-reserves",
+          "icon": "📦",
+          "headline": "IEA considers coordinated reserve release",
+          "domain": "MACRO",
+          "signal_type": "NEW_SIGNAL",
+          "status": "MONITOR",
+          "target": "Strategic Petroleum Reserves",
+          "metric": "SPR DISCUSSION"
+        },
+        {
+          "id": "story-iraq-proxy",
+          "icon": "🪖",
+          "headline": "Proxy militia activity intensifies in Iraq",
+          "domain": "DEFENSE",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "ESCALATING",
+          "target": "US Regional Assets",
+          "metric": "MILITIA CLAIM"
+        },
+        {
+          "id": "story-hormuz-shipping",
+          "icon": "🚢",
+          "headline": "Shipping risk rises near Hormuz",
+          "domain": "GEOPOLITICS",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "MONITOR",
+          "target": "Strait of Hormuz",
+          "metric": "INSURANCE PREMIUMS"
+        }
+      ],
+      "what_changed": {
+        "new": [
+          "Insurance premiums for vessels transiting the Gulf widened following tanker explosions."
+        ],
+        "intensified": [
+          "Oil price volatility spread into developed-market inflation and interest-rate expectations."
+        ],
+        "eased": [
+          "Initial fears of a total halt in Gulf shipping moderated after some vessels rerouted successfully."
+        ],
+        "changed_meaning": [
+          "The disruption now affects global macro expectations, not just regional maritime security."
+        ]
+      },
+      "major_developments": [
+        {
+          "id": "dev-1",
+          "story_id": "story-energy-hormuz",
+          "domain": "ENERGY",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🛢️",
+          "change_type": "ESCALATION",
+          "story_stage": "PEAKING",
+          "previous_brief_refs": [
+            "2026-03-12",
+            "2026-03-11"
+          ],
+          "headline": "Tanker attacks disrupt Gulf oil shipping",
+          "why_it_matters_now": "The disruption is simultaneously repricing oil supply risk, inflation expectations, and global monetary policy outlooks.",
+          "executive_summary": "Explosive attacks damaged multiple commercial fuel tankers near Iraqi shipping routes, pushing Brent crude above $100 and intensifying concern about potential disruption to Persian Gulf energy flows.",
+          "key_facts": [
+            "Explosions damaged multiple commercial tankers near Iraqi waters.",
+            "Brent crude briefly traded above $100 per barrel.",
+            "Shipping insurance premiums for Gulf transit widened overnight."
+          ],
+          "next_watchpoints": [
+            "Commercial tanker transit volumes through the Strait of Hormuz over the next 24 hours",
+            "Further adjustments in maritime insurance premiums"
+          ],
+          "tags": [
+            "energy",
+            "shipping",
+            "inflation",
+            "middle-east"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com"
+            },
+            {
+              "name": "Bloomberg",
+              "url": "https://www.bloomberg.com"
+            }
+          ]
+        },
+        {
+          "id": "dev-2",
+          "story_id": "story-global-rates",
+          "domain": "MACRO",
+          "region": "GLOBAL",
+          "impact": "HIGH",
+          "icon": "📉",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-12"
+          ],
+          "headline": "Markets adjust inflation and rate expectations",
+          "why_it_matters_now": "Energy volatility is feeding directly into global rate pricing and inflation expectations.",
+          "executive_summary": "Financial markets reacted to the oil price spike with declines in equities and rising bond yields as investors reassessed inflation and central bank policy trajectories.",
+          "key_facts": [
+            "Global equity markets declined during trading.",
+            "Bond yields increased as inflation expectations rose.",
+            "Currency markets showed increased volatility tied to energy prices."
+          ],
+          "next_watchpoints": [
+            "Front-end yield movements in US and European bond markets",
+            "Central bank commentary on energy-driven inflation risk"
+          ],
+          "tags": [
+            "macro",
+            "inflation",
+            "rates",
+            "markets"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com"
+            },
+            {
+              "name": "Bloomberg",
+              "url": "https://www.bloomberg.com"
+            }
+          ]
+        }
+      ],
+      "timeline_context": {
+        "title": "Middle East Escalation Sequence",
+        "events": [
+          {
+            "date": "MARCH 13, 2026",
+            "headline": "Tanker explosions reported",
+            "details": "Multiple commercial vessels damaged near Iraqi shipping routes in the Persian Gulf."
+          },
+          {
+            "date": "MARCH 13, 2026",
+            "headline": "Oil prices spike above $100",
+            "details": "Energy markets surge as traders price risk to Gulf shipping lanes."
+          },
+          {
+            "date": "MARCH 12, 2026",
+            "headline": "Proxy militia tensions increase",
+            "details": "Iran-aligned militia activity intensifies across Iraq."
+          }
+        ]
+      },
+      "risk_matrix": {
+        "title": "24-Hour Threat Map",
+        "risks": [
+          {
+            "id": "risk-1",
+            "label": "Hormuz transit disruption",
+            "probability": 0.78,
+            "impact": 0.94,
+            "details": "A sustained disruption to Gulf shipping would affect energy supply, inflation expectations, and global trade simultaneously."
+          },
+          {
+            "id": "risk-2",
+            "label": "Regional proxy escalation",
+            "probability": 0.63,
+            "impact": 0.74,
+            "details": "Militia attacks on US or allied assets could widen the conflict across the region."
+          }
+        ]
+      },
+      "macro_indicators": [
+        {
+          "id": "ind-01",
+          "title": "Brent Crude",
+          "metric": "7-DAY VOLATILITY",
+          "currentValue": "$101.20",
+          "trendValue": "+5.4%",
+          "trendDirection": "up",
+          "data": [
+            84.1,
+            85,
+            87.3,
+            90.6,
+            94.2,
+            97.1,
+            101.2
+          ],
+          "details": "Oil volatility driven by perceived risk to Persian Gulf shipping and energy supply routes."
+        }
+      ],
+      "analyst_consensus": {
+        "consensus": [
+          "Energy supply risk in the Persian Gulf is the main transmission channel from the conflict into the global economy.",
+          "Strategic petroleum reserves are the fastest stabilization tool available to governments."
+        ],
+        "friction": [
+          "Analysts disagree on whether reserve releases would stabilize prices if shipping disruptions persist.",
+          "It remains unclear whether the price spike reflects real supply loss or precautionary risk pricing."
+        ]
+      },
+      "strategic_context": [
+        "Threats to maritime energy routes highlight the systemic importance of chokepoints such as the Strait of Hormuz in global oil supply.",
+        "Energy price volatility is feeding into inflation expectations and bond markets, complicating central bank policy decisions.",
+        "Expansion of conflict through proxy actors increases the risk of sustained regional instability."
+      ],
+      "watchlist": "Monitor tanker traffic through the Strait of Hormuz, maritime insurance premiums for Gulf shipping, and confirmation of further proxy attacks targeting energy infrastructure or US regional assets."
+    },
+    {
+      "id": "2026-03-12",
+      "date": "March 12, 2026",
+      "system_status": {
+        "condition": "ELEVATED",
+        "indicator": "ESCALATING"
+      },
+      "today_in_60_seconds": [
+        {
+          "id": "story-energy-hormuz",
+          "icon": "🛢️",
+          "headline": "Hormuz shipping disruption risk rises",
+          "domain": "ENERGY",
+          "summary": "Unconfirmed drone activity near major shipping lanes increases risk premium on oil transport.",
+          "signal_type": "NEW_SIGNAL",
+          "status": "ESCALATING",
+          "target": "Strait of Hormuz",
+          "metric": "Transit alerts issued"
+        },
+        {
+          "id": "story-ecb-rate-path",
+          "icon": "🏦",
+          "headline": "ECB rate path uncertainty widens",
+          "domain": "MACRO",
+          "summary": "Energy volatility and uneven inflation data complicate the expected June easing window.",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "ELEVATED",
+          "target": "Eurozone policy",
+          "metric": "June cut odds <65%"
+        },
+        {
+          "id": "story-ai-regulation-eu",
+          "icon": "⚖️",
+          "headline": "EU AI Act enforcement timeline firms",
+          "domain": "REGULATORY",
+          "summary": "European regulators clarify early enforcement scope, affecting enterprise AI deployments.",
+          "signal_type": "NEW_SIGNAL",
+          "status": "ELEVATED",
+          "target": "Enterprise AI",
+          "metric": "Compliance guidance issued"
+        }
+      ],
+      "what_changed": {
+        "new": [
+          "Drone activity reported near Hormuz commercial lanes",
+          "EU regulators clarify early enforcement windows for AI Act compliance"
+        ],
+        "intensified": [
+          "Energy-linked volatility feeding into European rate expectations"
+        ],
+        "eased": [
+          "US recession probabilities modestly decline after stable labor indicators"
+        ],
+        "changed_meaning": [
+          "Energy volatility now feeding directly into central bank rate narratives rather than remaining an isolated geopolitical story"
+        ]
+      },
+      "major_developments": [
+        {
+          "id": "dev-1",
+          "story_id": "hormuz-shipping-disruption",
+          "domain": "ENERGY",
+          "region": "MIDDLE EAST",
+          "impact": "HIGH",
+          "icon": "🛢️",
+          "change_type": "NEW",
+          "story_stage": "EMERGING",
+          "previous_brief_refs": [],
+          "headline": "Commercial Shipping Alert Near Hormuz",
+          "why_it_matters_now": "The Strait of Hormuz handles roughly one-fifth of global oil flows. Even unconfirmed disruptions create immediate risk premiums in shipping insurance and energy pricing.",
+          "executive_summary": "Commercial shipping advisories were issued after drone activity was reported near major Hormuz transit lanes. While no confirmed attacks occurred, insurers and energy traders rapidly repriced geopolitical risk, pushing volatility higher.",
+          "key_facts": [
+            "Commercial vessels rerouted in precautionary moves",
+            "Drone sightings reported near shipping corridor",
+            "Energy traders widen risk premium for Middle East supply routes"
+          ],
+          "transmission": "regional security alert → tanker insurance repricing → oil volatility → European input cost pressure → central bank hesitation",
+          "enterprise_implications": "Energy-intensive industries should stress-test supply chain exposure to Middle East transit risk and prepare procurement hedges if volatility persists.",
+          "second_order_effects": [
+            "Insurance premiums for tanker routes may spike",
+            "European industrial firms may adjust procurement guidance"
+          ],
+          "counterfactual": "Clear confirmation that drone activity was unrelated to state actors would quickly compress the geopolitical risk premium.",
+          "confidence": "MODERATE",
+          "analogue": "Similar early-stage signals appeared during the 2019 tanker tensions before confirmed incidents.",
+          "next_watchpoints": [
+            "Commercial transit volume changes",
+            "Regional military responses",
+            "Shipping insurance premium updates"
+          ],
+          "tags": [
+            "energy",
+            "shipping",
+            "geopolitics",
+            "middle-east"
+          ],
+          "sources": [
+            {
+              "name": "Reuters",
+              "url": "https://www.reuters.com/"
+            }
+          ]
+        },
+        {
+          "id": "dev-2",
+          "story_id": "ecb-rate-path",
+          "domain": "MACRO",
+          "region": "EUROPE",
+          "impact": "MEDIUM",
+          "icon": "🏦",
+          "change_type": "UPDATE",
+          "story_stage": "ESCALATING",
+          "previous_brief_refs": [
+            "2026-03-11"
+          ],
+          "headline": "Energy Volatility Complicates ECB Easing Path",
+          "why_it_matters_now": "European inflation expectations remain sensitive to energy prices, which could narrow the window for rate cuts.",
+          "executive_summary": "Recent volatility in energy markets and uneven inflation data have increased uncertainty around the ECB's expected June rate cut. Analysts now view the path to easing as dependent on whether energy prices stabilize.",
+          "key_facts": [
+            "Inflation expectations tick higher in energy-sensitive sectors",
+            "Market pricing for June easing drops slightly",
+            "ECB officials reiterate data-dependent stance"
+          ],
+          "transmission": "energy volatility → inflation expectations → central bank guidance → equity valuation sensitivity",
+          "enterprise_implications": "Boards should evaluate sensitivity of capital spending plans to delayed rate relief in Europe.",
+          "second_order_effects": [
+            "Euro volatility may increase",
+            "European industrial firms face higher financing uncertainty"
+          ],
+          "counterfactual": "A sustained drop in energy prices over the next month would restore the easing narrative quickly.",
+          "confidence": "MODERATE",
+          "analogue": "Mirrors the 2022–2023 period when energy shocks repeatedly altered ECB forward guidance.",
+          "next_watchpoints": [
+            "Upcoming eurozone inflation print",
+            "Energy price stabilization",
+            "ECB commentary from upcoming meetings"
+          ],
+          "tags": [
+            "macro",
+            "rates",
+            "inflation",
+            "europe"
+          ],
+          "sources": [
+            {
+              "name": "Financial Times",
+              "url": "https://www.ft.com/"
+            }
+          ]
+        },
+        {
+          "id": "dev-3",
+          "story_id": "eu-ai-regulatory-rollout",
+          "domain": "REGULATORY",
+          "region": "EUROPE",
+          "impact": "MEDIUM",
+          "icon": "⚖️",
+          "change_type": "NEW",
+          "story_stage": "EMERGING",
+          "previous_brief_refs": [],
+          "headline": "EU AI Act Compliance Clock Begins",
+          "why_it_matters_now": "Enterprises deploying AI in Europe face tightening timelines for governance, transparency, and model risk management.",
+          "executive_summary": "European regulators released additional guidance clarifying early compliance obligations under the AI Act, accelerating preparation timelines for companies deploying high-risk AI systems.",
+          "key_facts": [
+            "Early compliance windows clarified",
+            "High-risk AI system classification finalized",
+            "Enterprises expected to implement governance frameworks"
+          ],
+          "transmission": "regulatory clarity → compliance investment → enterprise AI governance build-out",
+          "enterprise_implications": "Companies deploying AI systems in Europe should accelerate governance frameworks and model documentation to avoid compliance gaps.",
+          "second_order_effects": [
+            "Consulting demand for AI governance likely to increase",
+            "Large firms may slow experimental AI deployments"
+          ],
+          "counterfactual": "Delayed enforcement guidance would ease compliance urgency for multinational firms.",
+          "confidence": "HIGH",
+          "analogue": "Regulatory rollout resembles early GDPR compliance cycles where enforcement clarity drove rapid enterprise investment.",
+          "next_watchpoints": [
+            "Member state enforcement guidance",
+            "Corporate compliance spending announcements"
+          ],
+          "tags": [
+            "regulation",
+            "ai",
+            "enterprise",
+            "europe"
+          ],
+          "sources": [
+            {
+              "name": "Politico Europe",
+              "url": "https://www.politico.eu/"
+            }
+          ]
+        }
+      ],
+      "active_threads": [
+        {
+          "story_id": "hormuz-shipping-disruption",
+          "label": "Hormuz Shipping Crisis",
+          "domain": "ENERGY",
+          "stage": "EMERGING",
+          "first_appeared": "2026-03-12",
+          "last_updated": "2026-03-12",
+          "days_active": 1,
+          "trend": "ESCALATING",
+          "summary": "Security alerts near Hormuz introduce new volatility into global oil shipping routes."
+        },
+        {
+          "story_id": "ecb-rate-path",
+          "label": "ECB Rate Path Uncertainty",
+          "domain": "MACRO",
+          "stage": "ESCALATING",
+          "first_appeared": "2026-03-11",
+          "last_updated": "2026-03-12",
+          "days_active": 2,
+          "trend": "STEADY",
+          "summary": "Energy volatility complicates the expected timeline for ECB monetary easing."
+        },
+        {
+          "story_id": "eu-ai-regulatory-rollout",
+          "label": "EU AI Act Implementation",
+          "domain": "REGULATORY",
+          "stage": "EMERGING",
+          "first_appeared": "2026-03-12",
+          "last_updated": "2026-03-12",
+          "days_active": 1,
+          "trend": "ESCALATING",
+          "summary": "European regulators begin operationalizing the AI Act, accelerating enterprise compliance planning."
+        }
+      ],
+      "thematic_arcs": [
+        {
+          "arc_id": "geopolitical-repricing-2026",
+          "label": "Geopolitical Risk Repricing into Macro",
+          "story_ids": [
+            "hormuz-shipping-disruption",
+            "ecb-rate-path"
+          ],
+          "stage": "EMERGING",
+          "first_appeared": "2026-03-12",
+          "thesis": "Localized geopolitical tensions are increasingly feeding directly into macroeconomic expectations.",
+          "evolution": "Initial signal emerges through energy volatility affecting central bank rate expectations."
+        },
+        {
+          "arc_id": "ai-governance-globalization",
+          "label": "Global AI Governance Expansion",
+          "story_ids": [
+            "eu-ai-regulatory-rollout"
+          ],
+          "stage": "EMERGING",
+          "first_appeared": "2026-03-12",
+          "thesis": "Governments are transitioning from AI principles to enforceable governance regimes.",
+          "evolution": "EU becomes first major jurisdiction to operationalize comprehensive AI regulation."
+        }
+      ],
+      "divergences": [
+        {
+          "id": "div-1",
+          "signal": "Equity markets remain stable despite rising energy volatility",
+          "contradiction": "Energy shocks historically feed into inflation expectations and rate repricing",
+          "implication": "If energy volatility persists, equity markets may reprice abruptly."
+        }
+      ],
+      "assumptions_at_risk": [
+        {
+          "id": "assumption-1",
+          "assumption": "Geopolitical tensions will remain isolated from macroeconomic policy decisions.",
+          "stress_point": "Energy price volatility is feeding into inflation expectations and rate path narratives.",
+          "break_trigger": "Sustained oil price increase above recent ranges combined with higher inflation prints."
+        }
+      ],
+      "quiet_signals": [
+        {
+          "signal": "No coordinated OPEC intervention despite volatility",
+          "last_active": "2026-03-10",
+          "implication": "Producers may be comfortable allowing geopolitical risk premiums to raise prices."
+        }
+      ],
+      "optionality_scan": [
+        {
+          "trigger": "Confirmed security incident affecting commercial tanker transit",
+          "asymmetric_outcome": "Insurance restrictions could disrupt a large share of global oil shipping routes.",
+          "story_id": "hormuz-shipping-disruption"
+        }
+      ],
+      "timeline_context": {
+        "title": "Middle East Escalation Sequence",
+        "events": [
+          {
+            "date": "MARCH 12, 2026",
+            "headline": "Drone Activity Near Hormuz Shipping Lanes",
+            "details": "Commercial vessels rerouted following precautionary alerts around potential drone sightings."
+          }
+        ]
+      },
+      "risk_matrix": {
+        "title": "24-Hour Threat Map",
+        "risks": [
+          {
+            "id": "risk-1",
+            "label": "Hormuz shipping disruption",
+            "probability": 0.61,
+            "impact": 0.88,
+            "velocity": "ACCELERATING",
+            "details": "Potential shipping insurance and oil supply volatility if tensions escalate."
+          }
+        ]
+      },
+      "macro_indicators": [
+        {
+          "id": "ind-01",
+          "title": "Brent Crude",
+          "metric": "7-DAY VOLATILITY",
+          "period": "7D",
+          "currentValue": "$96.20",
+          "trendValue": "+3.7%",
+          "trendDirection": "up",
+          "data": [
+            82.1,
+            82.6,
+            83.4,
+            84.1,
+            83.8,
+            85.2,
+            87
+          ],
+          "details": "Energy volatility rising amid Middle East shipping concerns."
+        }
+      ],
+      "analyst_consensus": {
+        "consensus": [
+          "ECB likely to cut rates in June if inflation moderates",
+          "Energy volatility expected to remain short-lived"
+        ],
+        "friction": [
+          "Energy-linked inflation could delay European easing",
+          "Geopolitical risks may persist longer than markets expect"
+        ]
+      },
+      "strategic_context": [
+        {
+          "theme": "GEOPOLITICAL REPRICING",
+          "context": "Energy supply route instability is increasingly feeding into macroeconomic expectations and central bank policy narratives."
+        },
+        {
+          "theme": "AI GOVERNANCE",
+          "context": "Regulatory regimes are shifting from advisory frameworks toward enforceable AI governance structures."
+        }
+      ],
+      "watchlist": [
+        {
+          "item": "Commercial tanker transit volumes through the Strait of Hormuz.",
+          "story_id": "hormuz-shipping-disruption"
+        },
+        {
+          "item": "ECB commentary on the June rate decision window.",
+          "story_id": "ecb-rate-path"
+        },
+        {
+          "item": "Enterprise compliance responses to EU AI Act enforcement timelines.",
+          "story_id": "eu-ai-regulatory-rollout"
+        }
+      ]
+    }
+  ]
+}
