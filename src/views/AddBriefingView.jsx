@@ -42,6 +42,22 @@ export function AddBriefingView({ jsonInput, error: submitError, onJsonChange, o
 
       try {
         const parsed = JSON.parse(sanitizeJsonInput(jsonInput));
+        
+        if (parsed.briefings && Array.isArray(parsed.briefings)) {
+          if (parsed.briefings.length === 0) {
+            setLiveStatus({
+              type: 'warning',
+              message: 'Valid JSON, but the archive appears to contain no briefings.'
+            });
+            return;
+          }
+          setLiveStatus({
+            type: 'success',
+            message: `Archive valid. Ready to import ${parsed.briefings.length} briefings.`
+          });
+          return;
+        }
+
         const missing = [];
 
         if (!parsed.id) missing.push('id');

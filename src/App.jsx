@@ -100,51 +100,75 @@ export default function App() {
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const handleImport = () => {
-    try {
-      setError('');
-      const sanitizedInput = sanitizeJsonInput(jsonInput);
-      const parsed = JSON.parse(sanitizedInput);
+    const handleImport = () => {
+      try {
+        setError('');
+        const sanitizedInput = sanitizeJsonInput(jsonInput);
+        const parsed = JSON.parse(sanitizedInput);
 
-      if (!parsed.id) {
-        throw new Error('Missing required field: "id" (Format: YYYY-MM-DD)');
-      }
-      if (!parsed.date) {
-        throw new Error('Missing required field: "date" (Display date string)');
-      }
-      if (!parsed.today_in_60_seconds || !Array.isArray(parsed.today_in_60_seconds)) {
-        throw new Error(
-          'Missing or invalid required field: "today_in_60_seconds" (Must be an array of { icon, headline })'
+        let imports = [];
+        let isArchive = false;
+
+        if (parsed.briefings && Array.isArray(parsed.briefings)) {
+          imports = parsed.briefings;
+          isArchive = true;
+        } else {
+          imports = [parsed];
+        }
+
+        if (imports.length === 0) {
+          throw new Error('No briefings found in the provided JSON.');
+        }
+
+        imports.forEach((brief, index) => {
+          const prefix = isArchive ? `Briefing at index ${index}: ` : '';
+          if (!brief.id) {
+            throw new Error(`${prefix}Missing required field: "id" (Format: YYYY-MM-DD)`);
+          }
+          if (!brief.date) {
+            throw new Error(`${prefix}Missing required field: "date" (Display date string)`);
+          }
+          if (!brief.today_in_60_seconds || !Array.isArray(brief.today_in_60_seconds)) {
+            throw new Error(
+              `${prefix}Missing or invalid required field: "today_in_60_seconds" (Must be an array of { icon, headline })`
+            );
+          }
+        });
+
+        setBriefings((existing) => {
+          const updated = [...existing];
+          imports.forEach((brief) => {
+            const existingIndex = updated.findIndex((b) => b.id === brief.id);
+            if (existingIndex >= 0) {
+              updated[existingIndex] = brief;
+            } else {
+              updated.push(brief);
+            }
+          });
+          return updated.sort((a, b) => new Date(b.id) - new Date(a.id));
+        });
+
+        setJsonInput('');
+        
+        if (isArchive) {
+          setViewingDateId(null);
+          setCurrentView('home');
+        } else {
+          if (parsed.id === getTodayId()) {
+            setViewingDateId(null);
+            setCurrentView('home');
+          } else {
+            setViewingDateId(parsed.id);
+            setCurrentView('archive');
+          }
+        }
+      } catch (importError) {
+        setError(
+          importError.message ||
+            'Invalid JSON syntax. Check for malformed structure or unsupported pasted formatting.'
         );
       }
-
-      setBriefings((existing) => {
-        const existingIndex = existing.findIndex((briefing) => briefing.id === parsed.id);
-        if (existingIndex >= 0) {
-          const updated = [...existing];
-          updated[existingIndex] = parsed;
-          return updated.sort((a, b) => new Date(b.id) - new Date(a.id));
-        }
-        return [parsed, ...existing].sort((a, b) => new Date(b.id) - new Date(a.id));
-      });
-
-      setJsonInput('');
-      if (parsed.id === getTodayId()) {
-        setViewingDateId(null);
-        setCurrentView('home');
-      } else {
-        setViewingDateId(parsed.id);
-        setCurrentView('archive');
-      }
-    } catch (importError) {
-      setError(
-        importError.message ||
-          'Invalid JSON syntax. Check for malformed structure or unsupported pasted formatting.'
-      );
-    }
-  };
-
-  const handleImportFileClick = () => {
+    };  const handleImportFileClick = () => {
     closeMenu();
     fileInputRef.current?.click();
   };
@@ -173,22 +197,20 @@ export default function App() {
       briefingCount: briefings.length,
       briefings
     };
-    const readme = [
-      'Hermes data export',
-      `Generated: ${exportPayload.exportedAt}`,
-      `App version: ${APP_VERSION}`,
-      `Briefing count: ${briefings.length}`,
-      '',
-      'Files in this export:',
-      `- hermes-export-${timestamp}.json: full local briefing archive`,
-      `- hermes-export-${timestamp}-README.txt: export summary and restore notes`,
-      '',
-      'Import notes:',
-      '- The in-app importer currently accepts a single briefing JSON object.',
-      '- To restore from the archive export, extract one briefing object from the JSON array and import that file through the app menu.'
-    ].join('\n');
-
-    downloadFile(
+      const readme = [
+        'Hermes data export',
+        `Generated: ${exportPayload.exportedAt}`,
+        `App version: ${APP_VERSION}`,
+        `Briefing count: ${briefings.length}`,
+        '',
+        'Files in this export:',
+        `- hermes-export-${timestamp}.json: full local briefing archive`,
+        `- hermes-export-${timestamp}-README.txt: export summary and restore notes`,
+        '',
+        'Import notes:',
+        '- You can import the full hermes-export .json file directly through the app menu to restore your archive.',
+        '- You can also import single briefing JSON objects directly.'
+      ].join('\n');    downloadFile(
       `hermes-export-${timestamp}.json`,
       JSON.stringify(exportPayload, null, 2),
       'application/json'
