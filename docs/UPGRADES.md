@@ -4,6 +4,19 @@ Planned and considered improvements, ordered roughly by priority.
 
 ---
 
+## Current Priority
+
+The backlog below predates the March 19, 2026 intelligence review and is now secondary to the schema and workflow upgrades documented in [INTELLIGENCE_REVIEW_2026-03-19.md](/Users/benjaminhaddon/Github Repos/Hermes/docs/INTELLIGENCE_REVIEW_2026-03-19.md).
+
+The near-term sequence is:
+
+1. stabilize the daily briefing schema
+2. add a separate synthesis overlay schema
+3. make persistent thread identity operational in the UI
+4. add validation and tests around import and continuity
+
+---
+
 ## Views
 
 ### Archive View
@@ -72,11 +85,26 @@ Add stable `id` values to pulse tile items so modal matching is exact rather tha
 ### Persistent `story_id` on `major_developments`
 Add a stable cross-day identifier so recurring developments can be linked into a single narrative thread across archive, search, and synthesis views.
 
+### Separate synthesis overlay artifact
+Introduce a second import type for multi-day analysis so cross-day memory objects do not have to live inside the daily briefing payload.
+
+### Canonical story identity rules
+Define stricter rules for canonical story IDs and thread repair so recurring narratives stop fragmenting across days.
+
 ### Change-state metadata on developments
 Add fields such as `change_type`, `story_stage`, and `previous_brief_refs` so each daily item can express whether it is new, escalating, stabilizing, or resolving relative to prior briefings.
+
+### Required daily driver field
+Add a required `driver` field so each daily briefing or major development states what is moving the system, not just what happened.
+
+### Cross-day memory objects
+Support durable objects such as `active_threads`, `thematic_arcs`, `phase_shifts`, and `delta_risks` as first-class data rather than optional one-off additions.
 
 ### Multi-day briefing bundle format
 A single JSON import that contains multiple days, for bulk backfill of the archive.
 
 ### Tags field on `major_developments`
 Free-form tag array to enable cross-briefing search and clustering without being constrained to the primary domain bucket.
+
+### Risk delta tracking
+Extend the risk schema with trend and delta fields such as `delta_probability`, `delta_impact`, and `trend`.
