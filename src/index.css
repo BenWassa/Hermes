@@ -25,6 +25,22 @@ body {
 }
 
 @layer utilities {
+  .pt-safe {
+    padding-top: max(1.25rem, env(safe-area-inset-top));
+  }
+
+  .pb-safe {
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+
+  .mt-safe {
+    margin-top: env(safe-area-inset-top);
+  }
+
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom);
+  }
+
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }

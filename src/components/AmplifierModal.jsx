@@ -11,13 +11,13 @@ function Section({ title, eyebrow, defaultOpen = false, children }) {
         onClick={() => setOpen((s) => !s)}
         className="w-full flex items-center justify-between gap-4 px-4 py-3.5 text-left"
       >
-        <div>
+        <div className="min-w-0">
           {eyebrow ? (
-            <div className="text-[9px] font-bold font-mono uppercase tracking-[0.24em] text-cyan-400/70 mb-0.5">
+            <div className="text-[9px] font-bold font-mono uppercase tracking-[0.24em] text-cyan-400/70 mb-0.5 truncate">
               {eyebrow}
             </div>
           ) : null}
-          <h3 className="text-[12px] font-bold font-mono uppercase tracking-[0.18em] text-slate-200">
+          <h3 className="text-[12px] font-bold font-mono uppercase tracking-[0.18em] text-slate-200 leading-snug">
             {title}
           </h3>
         </div>
@@ -100,18 +100,18 @@ function ScenarioBlock({ label, colour, data }) {
         <div className={`h-full rounded-full ${barColour}`} style={{ width: `${pct}%` }} />
       </div>
 
-      <p className="text-[12px] text-slate-300 leading-snug">{data.path}</p>
+      <p className="text-[12px] text-slate-300 leading-snug break-words whitespace-normal">{data.path}</p>
 
       {data.trigger ? (
-        <div className="text-[11px] text-slate-400 leading-snug">
-          <span className="text-cyan-400/60 font-mono text-[9px] uppercase tracking-widest mr-1.5">Trigger</span>
+        <div className="text-[11px] text-slate-400 leading-snug break-words">
+          <span className="text-cyan-400/60 font-mono text-[9px] uppercase tracking-widest mr-1.5 shrink-0 inline-block">Trigger</span>
           {data.trigger}
         </div>
       ) : null}
 
       {data.invalidator ? (
-        <div className="text-[11px] text-slate-500 leading-snug">
-          <span className="text-slate-600 font-mono text-[9px] uppercase tracking-widest mr-1.5">Breaks if</span>
+        <div className="text-[11px] text-slate-500 leading-snug break-words">
+          <span className="text-slate-600 font-mono text-[9px] uppercase tracking-widest mr-1.5 shrink-0 inline-block">Breaks if</span>
           {data.invalidator}
         </div>
       ) : null}
@@ -142,7 +142,7 @@ export function AmplifierModal({ amplifier, open, onClose }) {
       {/* Panel */}
       <div className="relative z-10 flex flex-col h-full max-w-2xl w-full mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 pt-safe pt-5 pb-4 shrink-0">
+        <div className="flex items-center justify-between px-4 pt-safe pb-4 shrink-0">
           <div>
             <div className="text-[9px] font-mono font-bold uppercase tracking-[0.28em] text-cyan-400/70 mb-0.5">
               Intelligence Layer
@@ -162,7 +162,7 @@ export function AmplifierModal({ amplifier, open, onClose }) {
         </div>
 
         {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto px-4 pb-10 space-y-3">
+        <div className="flex-1 overflow-y-auto px-4 pb-safe space-y-3">
 
           {/* Decision Layer — always open */}
           {decision_layer ? (
@@ -239,8 +239,8 @@ export function AmplifierModal({ amplifier, open, onClose }) {
             <Section title="Second-Order Effects" eyebrow="Downstream">
               <div className="space-y-3">
                 {second_order.map((item, i) => (
-                  <div key={i} className="space-y-1">
-                    <div className="flex items-center gap-2">
+                  <div key={i} className="space-y-1 mt-1 border-t border-white/5 pt-2 first:mt-0 first:border-0 first:pt-0">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest">{item.domain}</span>
                       <span className="text-[9px] font-mono text-slate-600 uppercase tracking-widest">{item.timing}</span>
                     </div>
@@ -278,21 +278,21 @@ export function AmplifierModal({ amplifier, open, onClose }) {
           {/* System Map — collapsed */}
           {Array.isArray(system_map) && system_map.length > 0 ? (
             <Section title="System Map" eyebrow="Causal Chains">
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {system_map.map((item, i) => (
-                  <div key={i} className="space-y-2">
+                  <div key={i} className="space-y-2.5 mt-2 border-t border-white/5 pt-3 first:mt-0 first:border-0 first:pt-0">
                     {Array.isArray(item.chain) ? (
                       <div className="flex items-start gap-1.5 flex-wrap">
                         {item.chain.map((node, j) => (
-                          <span key={j} className="flex items-center gap-1.5">
-                            <span className="text-[11px] text-slate-300 bg-white/5 border border-white/10 rounded-lg px-2 py-0.5">{node}</span>
-                            {j < item.chain.length - 1 ? <span className="text-slate-600 text-[10px]">→</span> : null}
+                          <span key={j} className="inline-flex items-center gap-1.5 max-w-full">
+                            <span className="text-[11px] text-slate-300 bg-white/5 border border-white/10 rounded-lg px-2 py-0.5 break-words whitespace-normal">{node}</span>
+                            {j < item.chain.length - 1 ? <span className="text-slate-600 text-[10px] shrink-0">→</span> : null}
                           </span>
                         ))}
                       </div>
                     ) : null}
                     {item.summary ? (
-                      <p className="text-[11px] text-slate-500 leading-snug">{item.summary}</p>
+                      <p className="text-[11px] text-slate-400 leading-snug">{item.summary}</p>
                     ) : null}
                   </div>
                 ))}
