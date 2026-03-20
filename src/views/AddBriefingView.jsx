@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Database, AlertTriangle, CheckCircle, Info } from 'lucide-react';
 import { DisclosurePanel } from '../components/DisclosurePanel';
-import { sanitizeJsonInput, validateDailyBriefing, validateSynthesis } from '../utils/json';
+import { sanitizeJsonInput, validateAmplifier, validateDailyBriefing, validateSynthesis } from '../utils/json';
 
 const SCHEMA_REFERENCE = `{
   "id": "2026-03-13",
@@ -68,12 +68,31 @@ export function AddBriefingView({
           return;
         }
 
-        if (parsed.briefings && Array.isArray(parsed.briefings)) {
-          if (parsed.briefings.length === 0) {
-            setLiveStatus({ type: 'warning', message: 'Valid JSON, but the archive contains no briefings.', warnings: [] });
+        if (parsed.type === 'amplifier') {
+          const { valid, errors, warnings } = validateAmplifier(parsed);
+          if (!valid) {
+            setLiveStatus({ type: 'error', message: `Import errors: ${errors.join('; ')}`, warnings });
+          } else {
+            setLiveStatus({ type: 'success', message: `Schema valid — ready to import amplifier ${parsed.id}.`, warnings });
+          }
+          return;
+        }
+
+        if (Array.isArray(parsed.briefings) || Array.isArray(parsed.syntheses) || Array.isArray(parsed.amplifiers)) {
+          const briefingCount = Array.isArray(parsed.briefings) ? parsed.briefings.length : 0;
+          const synthesisCount = Array.isArray(parsed.syntheses) ? parsed.syntheses.length : 0;
+          const amplifierCount = Array.isArray(parsed.amplifiers) ? parsed.amplifiers.length : 0;
+          const totalCount = briefingCount + synthesisCount + amplifierCount;
+
+          if (totalCount === 0) {
+            setLiveStatus({ type: 'warning', message: 'Valid JSON, but the archive contains no importable records.', warnings: [] });
             return;
           }
-          setLiveStatus({ type: 'success', message: `Archive valid. Ready to import ${parsed.briefings.length} briefings.`, warnings: [] });
+          setLiveStatus({
+            type: 'success',
+            message: `Archive valid. Ready to import ${briefingCount} briefing${briefingCount === 1 ? '' : 's'}, ${amplifierCount} amplifier${amplifierCount === 1 ? '' : 's'}, and ${synthesisCount} synthesis record${synthesisCount === 1 ? '' : 's'}.`,
+            warnings: []
+          });
           return;
         }
 

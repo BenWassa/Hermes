@@ -19,6 +19,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  where,
   writeBatch
 } from 'firebase/firestore';
 
@@ -137,13 +138,25 @@ export async function upsertAmplifier(amplifier, user) {
 }
 
 export async function deleteBriefing(briefingId) {
-  await deleteDoc(doc(db, 'briefings', briefingId));
+  const amplifierSnapshot = await getDocs(
+    query(collection(db, 'amplifiers'), where('briefing_id', '==', briefingId))
+  );
+
+  const batch = writeBatch(db);
+  batch.delete(doc(db, 'briefings', briefingId));
+
+  amplifierSnapshot.forEach((item) => {
+    batch.delete(item.ref);
+  });
+
+  await batch.commit();
 }
 
 export async function clearSharedContent() {
-  const [briefingsSnapshot, synthesesSnapshot] = await Promise.all([
+  const [briefingsSnapshot, synthesesSnapshot, amplifiersSnapshot] = await Promise.all([
     getDocs(collection(db, 'briefings')),
-    getDocs(collection(db, 'syntheses'))
+    getDocs(collection(db, 'syntheses')),
+    getDocs(collection(db, 'amplifiers'))
   ]);
 
   const batch = writeBatch(db);
@@ -153,6 +166,10 @@ export async function clearSharedContent() {
   });
 
   synthesesSnapshot.forEach((item) => {
+    batch.delete(item.ref);
+  });
+
+  amplifiersSnapshot.forEach((item) => {
     batch.delete(item.ref);
   });
 

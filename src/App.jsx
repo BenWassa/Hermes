@@ -319,12 +319,13 @@ export default function App() {
 
       const archiveBriefings = Array.isArray(parsed.briefings) ? parsed.briefings : [];
       const archiveSyntheses = Array.isArray(parsed.syntheses) ? parsed.syntheses : [];
-      const isArchive = Array.isArray(parsed.briefings) || Array.isArray(parsed.syntheses);
+      const archiveAmplifiers = Array.isArray(parsed.amplifiers) ? parsed.amplifiers : [];
+      const isArchive = Array.isArray(parsed.briefings) || Array.isArray(parsed.syntheses) || Array.isArray(parsed.amplifiers);
 
       const imports = isArchive ? archiveBriefings : [parsed];
 
-      if (imports.length === 0 && archiveSyntheses.length === 0) {
-        throw new Error('No briefings or syntheses found in the provided JSON.');
+      if (imports.length === 0 && archiveSyntheses.length === 0 && archiveAmplifiers.length === 0) {
+        throw new Error('No briefings, syntheses, or amplifiers found in the provided JSON.');
       }
 
       imports.forEach((brief, index) => {
@@ -342,6 +343,13 @@ export default function App() {
         }
       });
 
+      archiveAmplifiers.forEach((amplifier, index) => {
+        const { valid, errors } = validateAmplifier(amplifier);
+        if (!valid) {
+          throw new Error(`Amplifier at index ${index}: ${errors.join('; ')}`);
+        }
+      });
+
       if (imports.length > 0) {
         await upsertBriefings(imports, user);
       }
@@ -350,11 +358,21 @@ export default function App() {
         await Promise.all(archiveSyntheses.map((synthesis) => upsertSynthesis(synthesis, user)));
       }
 
+      if (archiveAmplifiers.length > 0) {
+        await Promise.all(archiveAmplifiers.map((amplifier) => upsertAmplifier(amplifier, user)));
+      }
+
       setJsonInput('');
 
-      if (archiveSyntheses.length > 0 && imports.length === 0) {
+      if (archiveSyntheses.length > 0 && archiveAmplifiers.length === 0 && imports.length === 0) {
         setViewingDateId(null);
         setCurrentView('archive');
+        return;
+      }
+
+      if (archiveAmplifiers.length > 0 && archiveSyntheses.length === 0 && imports.length === 0) {
+        setViewingDateId(null);
+        setCurrentView('home');
         return;
       }
 
@@ -429,8 +447,10 @@ export default function App() {
       appVersion: APP_VERSION,
       briefingCount: briefings.length,
       synthesisCount: syntheses.length,
+      amplifierCount: amplifiers.length,
       briefings,
-      syntheses
+      syntheses,
+      amplifiers
     };
 
     const readme = [
@@ -439,6 +459,7 @@ export default function App() {
       `App version: ${APP_VERSION}`,
       `Briefing count: ${briefings.length}`,
       `Additional overlay count: ${syntheses.length}`,
+      `Amplifier count: ${amplifiers.length}`,
       '',
       'Files in this export:',
       `- hermes-export-${timestamp}.json: shared Hermes archive export`,
@@ -463,7 +484,7 @@ export default function App() {
 
     closeMenu();
     const shouldDelete = window.confirm(
-      `Delete all shared Hermes data for every approved user? This includes ${briefings.length} briefing${briefings.length === 1 ? '' : 's'} and ${syntheses.length} hidden overlay record${syntheses.length === 1 ? '' : 's'}.`
+      `Delete all shared Hermes data for every approved user? This includes ${briefings.length} briefing${briefings.length === 1 ? '' : 's'}, ${amplifiers.length} amplifier${amplifiers.length === 1 ? '' : 's'}, and ${syntheses.length} hidden overlay record${syntheses.length === 1 ? '' : 's'}.`
     );
 
     if (!shouldDelete) return;
