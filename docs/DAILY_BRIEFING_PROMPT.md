@@ -2,7 +2,7 @@
 
 This is the prompt to paste into ChatGPT each day to generate the daily Hermes briefing.
 
-> **Running a cross-day synthesis?** See [SYNTHESIS_PROMPT.md](./SYNTHESIS_PROMPT.md).
+> **Step 2 — Intelligence Amplifier:** See [INTELLIGENCE_AMPLIFIER_PROMPT.md](./INTELLIGENCE_AMPLIFIER_PROMPT.md). Run immediately after importing this briefing — no historical data required.
 
 Copy everything between the `---` markers and paste it as your message.
 
