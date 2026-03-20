@@ -41,6 +41,15 @@ Allow opening a persistent story view that shows the full cross-day arc of a the
 ### Pulse tile → modal: expand to all developments in domain
 Currently the modal shows the first matching development. If multiple developments share a domain, add a swipe or pagination control inside the modal to navigate between them.
 
+### Apex pulse tiles: tap-to-expand quick-view panel
+Make the top three `today_in_60_seconds` tiles (the home bento grid) tappable to open a lightweight quick-view panel rather than the full development modal. Panel should surface:
+- Story date, local time, and key timeline dates relevant to this development
+- `driver` field — the one causal sentence explaining what is moving the story
+- Key factors and risk rationale (`why_it_matters_now`, `key_facts`)
+- `next_watchpoints` as a compact forward-looking list
+- A "Full story →" link to the development modal for the complete detail view
+Optimised for a 5-second scan: no scrolling needed to get the signal.
+
 ### Briefing import via URL / API
 Supplement the manual JSON paste flow with a fetch-from-URL option, enabling automated daily ingestion from a self-hosted or external endpoint.
 
