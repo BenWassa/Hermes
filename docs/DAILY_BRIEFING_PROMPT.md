@@ -2,6 +2,8 @@
 
 This is the prompt to paste into ChatGPT each day to generate the daily Hermes briefing.
 
+> **Running a cross-day synthesis?** See [SYNTHESIS_PROMPT.md](./SYNTHESIS_PROMPT.md).
+
 Copy everything between the `---` markers and paste it as your message.
 
 ---
