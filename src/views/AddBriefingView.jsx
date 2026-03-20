@@ -38,27 +38,6 @@ const SCHEMA_REFERENCE = `{
   ]
 }`;
 
-const SYNTHESIS_REFERENCE = `{
-  "type": "synthesis",
-  "id": "synth-2026-03-14-to-2026-03-20",
-  "date_range": { "from": "2026-03-14", "to": "2026-03-20" },
-  "active_threads": [
-    {
-      "story_id": "story-hormuz-coalition",
-      "title": "Hormuz Shipping Disruption",
-      "status": "active",
-      "phase": "escalation",
-      "first_seen": "2026-03-14",
-      "last_seen": "2026-03-20"
-    }
-  ],
-  "thematic_arcs": [],
-  "delta_risks": [],
-  "phase_shifts": [],
-  "dominant_system": "Middle East energy corridor",
-  "meta_findings": "..."
-}`;
-
 export function AddBriefingView({
   jsonInput,
   error: submitError,
@@ -82,9 +61,9 @@ export function AddBriefingView({
         if (parsed.type === 'synthesis') {
           const { valid, errors, warnings } = validateSynthesis(parsed);
           if (!valid) {
-            setLiveStatus({ type: 'error', message: `Synthesis errors: ${errors.join('; ')}`, warnings });
+            setLiveStatus({ type: 'error', message: `Import errors: ${errors.join('; ')}`, warnings });
           } else {
-            setLiveStatus({ type: 'success', message: `Synthesis overlay valid — covers ${parsed.date_range?.from} to ${parsed.date_range?.to}.`, warnings });
+            setLiveStatus({ type: 'success', message: 'Schema valid — ready to import JSON.', warnings });
           }
           return;
         }
@@ -199,15 +178,6 @@ export function AddBriefingView({
         >
           <pre className="overflow-x-auto rounded-xl border border-white/5 bg-slate-950/50 p-4 font-mono text-[11px] text-slate-300">
             {SCHEMA_REFERENCE}
-          </pre>
-        </DisclosurePanel>
-        <DisclosurePanel
-          title="Synthesis Overlay Schema"
-          eyebrow="Format Reference"
-          accentClassName="text-slate-400"
-        >
-          <pre className="overflow-x-auto rounded-xl border border-white/5 bg-slate-950/50 p-4 font-mono text-[11px] text-slate-300">
-            {SYNTHESIS_REFERENCE}
           </pre>
         </DisclosurePanel>
       </div>

@@ -118,21 +118,21 @@ export function AppMenu({
               <MenuAction
                 icon={Upload}
                 label="Import JSON"
-                hint="Load shared briefings or synthesis overlays into Firestore."
+                hint="Load shared Hermes archive data into Firestore."
                 onClick={onImport}
               />
             ) : null}
             <MenuAction
               icon={Download}
               label="Export archive"
-              hint="Download the current shared briefings and synthesis overlays."
+              hint="Download the current shared Hermes archive."
               onClick={onExport}
             />
             {canDelete ? (
               <MenuAction
                 icon={Trash2}
                 label="Delete shared data"
-                hint="Permanently clear shared briefings and syntheses for all approved users."
+                hint="Permanently clear shared Hermes data for all approved users."
                 onClick={onDeleteAll}
                 tone="danger"
               />

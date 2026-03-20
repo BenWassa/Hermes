@@ -24,7 +24,7 @@ function stageColor(stage) {
   return STAGE_COLORS[(stage || '').toLowerCase()] || 'text-slate-400';
 }
 
-export function StoryView({ storyId, briefings, syntheses, onBack, onOpenBriefing }) {
+export function StoryView({ storyId, briefings, onBack, onOpenBriefing }) {
   const appearances = [];
 
   (briefings || []).forEach((briefing) => {
@@ -40,14 +40,6 @@ export function StoryView({ storyId, briefings, syntheses, onBack, onOpenBriefin
 
   const latestDev = appearances[0]?.dev;
   const title = latestDev?.headline || storyId;
-
-  // Find any synthesis threads that cover this story
-  const synthThreads = [];
-  (syntheses || []).forEach((synth) => {
-    (synth.active_threads || []).forEach((t) => {
-      if (t.story_id === storyId) synthThreads.push({ synth, thread: t });
-    });
-  });
 
   return (
     <div className="pb-32 max-w-2xl mx-auto pt-8 px-4 animate-in fade-in duration-300">
@@ -67,20 +59,6 @@ export function StoryView({ storyId, briefings, syntheses, onBack, onOpenBriefin
           {appearances.length} briefing{appearances.length !== 1 ? 's' : ''} · first seen {appearances[appearances.length - 1]?.briefingId || '—'} · last seen {appearances[0]?.briefingId || '—'}
         </div>
       </header>
-
-      {synthThreads.length > 0 ? (
-        <div className="mb-6 bg-purple-950/20 border border-purple-500/20 rounded-2xl px-5 py-4 backdrop-blur-xl">
-          <div className="text-[9px] font-mono font-bold uppercase tracking-[0.26em] text-purple-400/70 mb-2">Synthesis Coverage</div>
-          {synthThreads.map(({ synth, thread }, i) => (
-            <div key={i} className="text-[12px] text-slate-300 leading-relaxed mb-1 last:mb-0">
-              <span className="text-purple-400/60 mr-1.5">›</span>
-              <span className="font-mono text-purple-300/60 mr-1.5">{synth.id}:</span>
-              phase <span className="text-amber-300">{thread.phase || thread.status || '—'}</span>
-              {thread.summary ? ` — ${thread.summary}` : ''}
-            </div>
-          ))}
-        </div>
-      ) : null}
 
       {appearances.length === 0 ? (
         <div className="text-[11px] text-slate-400 py-8 border border-white/10 bg-white/5 rounded-2xl px-5 backdrop-blur-xl font-mono uppercase tracking-[0.2em] text-center">

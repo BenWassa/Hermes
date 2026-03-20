@@ -1,16 +1,6 @@
 import { useState, useMemo } from 'react';
-import { Copy, Check, ChevronDown, ChevronUp, ArrowRight, Zap, GitMerge, Layers, Download } from 'lucide-react';
-
-function downloadFile(filename, contents, type) {
-  const blob = new Blob([contents], { type });
-  const objectUrl = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = objectUrl;
-  link.download = filename;
-  link.click();
-  URL.revokeObjectURL(objectUrl);
-}
-import { getDailyPrompt, getAmplifierPrompt, getSynthesisPrompt } from '../utils/prompts';
+import { Copy, Check, ChevronDown, ChevronUp, ArrowRight, Zap, Layers } from 'lucide-react';
+import { getDailyPrompt, getAmplifierPrompt } from '../utils/prompts';
 
 function useCopy(timeout = 2000) {
   const [copied, setCopied] = useState(false);
@@ -204,136 +194,7 @@ function AmplifierSection({ todaysBriefing, onGoToImport }) {
   );
 }
 
-function SynthesisSection({ briefings, onGoToImport }) {
-  const [open, setOpen] = useState(false);
-
-  const today = new Date();
-  const sevenDaysAgo = new Date(today);
-  sevenDaysAgo.setDate(today.getDate() - 7);
-
-  const fmt = (d) => d.toISOString().slice(0, 10);
-  const [fromDate, setFromDate] = useState(fmt(sevenDaysAgo));
-  const [toDate, setToDate] = useState(fmt(today));
-
-  const selectedBriefings = useMemo(() => {
-    return briefings.filter((b) => b.id >= fromDate && b.id <= toDate);
-  }, [briefings, fromDate, toDate]);
-
-  const prompt = useMemo(() => {
-    if (selectedBriefings.length === 0) return null;
-    return getSynthesisPrompt(fromDate, toDate, selectedBriefings);
-  }, [selectedBriefings, fromDate, toDate]);
-
-  return (
-    <div className="bg-white/3 border border-white/8 rounded-2xl overflow-hidden">
-      <button
-        type="button"
-        onClick={() => setOpen((s) => !s)}
-        className="w-full flex items-center justify-between gap-3 text-left px-5 py-4"
-      >
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-purple-950/40 border border-purple-500/15 text-purple-400/70 shrink-0">
-            <GitMerge size={14} strokeWidth={2} />
-          </div>
-          <div>
-            <h2 className="text-[11px] font-bold font-mono uppercase tracking-[0.22em] text-slate-500">Cross-Day Synthesis</h2>
-            <p className="text-[9px] font-mono text-slate-600 uppercase tracking-[0.16em] mt-0.5">Advanced — PC use / periodic</p>
-          </div>
-        </div>
-        {open ? <ChevronUp size={14} className="text-slate-600 shrink-0" /> : <ChevronDown size={14} className="text-slate-600 shrink-0" />}
-      </button>
-
-      {open && (
-        <div className="px-5 pb-5 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
-          <ol className="space-y-3">
-            <li className="flex items-start gap-3 text-[12px] text-slate-400">
-              <StepBadge n="1" />
-              <span>Select the date range of briefings to synthesise</span>
-            </li>
-            <li className="flex items-start gap-3 text-[12px] text-slate-400">
-              <StepBadge n="2" />
-              <span>Copy the prompt — it includes all briefing data automatically</span>
-            </li>
-            <li className="flex items-start gap-3 text-[12px] text-slate-400">
-              <StepBadge n="3" />
-              <span>Paste into ChatGPT, copy the JSON response, import it here</span>
-            </li>
-          </ol>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-[9px] font-mono uppercase tracking-[0.2em] text-slate-500 mb-1.5">From</label>
-              <input
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-                className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-2.5 text-[12px] font-mono text-slate-200 focus:outline-none focus:border-cyan-500/40"
-              />
-            </div>
-            <div>
-              <label className="block text-[9px] font-mono uppercase tracking-[0.2em] text-slate-500 mb-1.5">To</label>
-              <input
-                type="date"
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-                className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-2.5 text-[12px] font-mono text-slate-200 focus:outline-none focus:border-cyan-500/40"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500 uppercase tracking-[0.16em]">
-            <span className="text-cyan-400/60 font-bold">///</span>
-            {selectedBriefings.length === 0
-              ? <span className="text-amber-400/70">No briefings found in this range</span>
-              : <span>{selectedBriefings.length} briefing{selectedBriefings.length !== 1 ? 's' : ''} selected ({selectedBriefings.map((b) => b.id).join(', ')})</span>
-            }
-          </div>
-
-          {prompt ? (
-            <CopyButton
-              text={prompt}
-              label={`Copy Prompt + ${selectedBriefings.length} Briefing${selectedBriefings.length !== 1 ? 's' : ''}`}
-              copiedLabel="Prompt + Data Copied!"
-              size="lg"
-            />
-          ) : (
-            <div className="w-full py-4 rounded-2xl border border-white/5 bg-white/3 text-[11px] font-mono text-slate-600 uppercase tracking-[0.18em] text-center">
-              No briefings in range
-            </div>
-          )}
-
-          <button
-            type="button"
-            onClick={() => downloadFile(
-              `hermes-synthesis-prompt-${fromDate}-to-${toDate}.md`,
-              prompt,
-              'text/markdown;charset=utf-8'
-            )}
-            disabled={!prompt}
-            className={`w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl border font-bold text-[11px] font-mono uppercase tracking-[0.18em] transition-all ${
-              prompt
-                ? 'border-purple-500/30 bg-purple-500/10 text-purple-300 hover:bg-purple-500/20 hover:border-purple-400/50'
-                : 'border-white/5 bg-white/3 text-slate-600 cursor-not-allowed'
-            }`}
-          >
-            <Download size={14} strokeWidth={2} />
-            Export Prompt as MD
-          </button>
-
-          <button
-            type="button"
-            onClick={onGoToImport}
-            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl border border-white/10 bg-white/5 text-slate-400 hover:text-slate-200 hover:bg-white/10 font-bold text-[11px] font-mono uppercase tracking-[0.18em] transition-all"
-          >
-            Import Synthesis Result <ArrowRight size={14} strokeWidth={2} />
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export function WorkflowView({ briefings, todaysBriefing, onGoToImport }) {
+export function WorkflowView({ todaysBriefing, onGoToImport }) {
   return (
     <div className="pb-32 max-w-2xl mx-auto pt-8 px-4 animate-in fade-in duration-300">
       <header className="pb-6 flex flex-col items-center text-center">
@@ -351,7 +212,6 @@ export function WorkflowView({ briefings, todaysBriefing, onGoToImport }) {
       <div className="space-y-4">
         <DailySection onGoToImport={onGoToImport} />
         <AmplifierSection todaysBriefing={todaysBriefing} onGoToImport={onGoToImport} />
-        <SynthesisSection briefings={briefings} onGoToImport={onGoToImport} />
       </div>
     </div>
   );

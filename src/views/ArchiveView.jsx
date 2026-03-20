@@ -13,32 +13,7 @@ function changeTypeColor(ct) {
   return CHANGE_TYPE_COLORS[(ct || '').toLowerCase()] || CHANGE_TYPE_COLORS.unchanged;
 }
 
-function SynthesisBadge() {
-  return (
-    <span className="text-[8px] font-mono font-bold uppercase tracking-[0.18em] text-purple-300 border border-purple-500/20 bg-purple-950/20 px-1.5 py-0.5 rounded">
-      synth
-    </span>
-  );
-}
-
-function DateView({ briefings, syntheses, onOpenBriefing, onDeleteBriefing, canDelete }) {
-  const synthesisByDate = useMemo(() => {
-    const map = {};
-    (syntheses || []).forEach((synth) => {
-      if (!synth.date_range) return;
-      const from = new Date(synth.date_range.from);
-      const to = new Date(synth.date_range.to);
-      briefings.forEach((b) => {
-        const d = new Date(b.id);
-        if (d >= from && d <= to) {
-          if (!map[b.id]) map[b.id] = [];
-          map[b.id].push(synth);
-        }
-      });
-    });
-    return map;
-  }, [briefings, syntheses]);
-
+function DateView({ briefings, onOpenBriefing, onDeleteBriefing, canDelete }) {
   return (
     <div className="bg-white/5 border border-white/10 rounded-2xl px-5 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.2)]">
       {briefings.map((briefing) => (
@@ -59,7 +34,6 @@ function DateView({ briefings, syntheses, onOpenBriefing, onDeleteBriefing, canD
                 <span className="max-w-full truncate text-[9px] font-mono text-cyan-400 uppercase tracking-[0.22em] bg-cyan-950/40 border border-cyan-500/20 px-2 py-1 rounded-sm shadow-[0_0_10px_rgba(34,211,238,0.1)]">
                   ID: {briefing.id.slice(0, 8)}
                 </span>
-                {synthesisByDate[briefing.id]?.length > 0 ? <SynthesisBadge /> : null}
               </div>
 
               <div className="min-w-0 flex items-center gap-2 text-[13px] text-slate-400">
@@ -165,7 +139,6 @@ export function ArchiveView({
   briefings,
   onOpenBriefing,
   onOpenThread,
-  syntheses,
   onAdd,
   onDeleteBriefing,
   canImport,
@@ -221,7 +194,6 @@ export function ArchiveView({
       ) : mode === 'date' ? (
         <DateView
           briefings={briefings}
-          syntheses={syntheses}
           onOpenBriefing={onOpenBriefing}
           onDeleteBriefing={onDeleteBriefing}
           canDelete={canDelete}

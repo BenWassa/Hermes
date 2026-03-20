@@ -26,7 +26,6 @@ import { ImportFlowView } from './views/ImportFlowView';
 import { OnboardingView } from './views/OnboardingView';
 import { SearchView } from './views/SearchView';
 import { StoryView } from './views/StoryView';
-import { SynthesisView } from './views/SynthesisView';
 import { WorkflowView } from './views/WorkflowView';
 import packageMetadata from '../package.json';
 
@@ -266,7 +265,7 @@ export default function App() {
   };
 
   const selectView = (view) => {
-    setCurrentView(view);
+    setCurrentView(view === 'synthesis' ? 'archive' : view);
     setImportPhase(null);
     if (view === 'home') {
       setViewingDateId(null);
@@ -313,7 +312,8 @@ export default function App() {
 
         await upsertSynthesis(parsed, user);
         setJsonInput('');
-        setCurrentView('synthesis');
+        setViewingDateId(null);
+        setCurrentView('archive');
         return;
       }
 
@@ -353,7 +353,8 @@ export default function App() {
       setJsonInput('');
 
       if (archiveSyntheses.length > 0 && imports.length === 0) {
-        setCurrentView('synthesis');
+        setViewingDateId(null);
+        setCurrentView('archive');
         return;
       }
 
@@ -437,15 +438,15 @@ export default function App() {
       `Generated: ${exportPayload.exportedAt}`,
       `App version: ${APP_VERSION}`,
       `Briefing count: ${briefings.length}`,
-      `Synthesis count: ${syntheses.length}`,
+      `Additional overlay count: ${syntheses.length}`,
       '',
       'Files in this export:',
-      `- hermes-export-${timestamp}.json: shared briefing and synthesis archive`,
+      `- hermes-export-${timestamp}.json: shared Hermes archive export`,
       `- hermes-export-${timestamp}-README.txt: export summary and restore notes`,
       '',
       'Import notes:',
       '- Admin users can import the full hermes-export .json file directly through the app menu to restore shared data.',
-      '- Admin users can also import single briefing JSON objects or a single synthesis JSON object directly.'
+      '- Admin users can also import individual Hermes JSON objects directly.'
     ].join('\n');
 
     downloadFile(
@@ -462,7 +463,7 @@ export default function App() {
 
     closeMenu();
     const shouldDelete = window.confirm(
-      `Delete all ${briefings.length} shared briefing${briefings.length === 1 ? '' : 's'} and ${syntheses.length} synthesis overlay${syntheses.length === 1 ? '' : 's'} for every Hermes user?`
+      `Delete all shared Hermes data for every approved user? This includes ${briefings.length} briefing${briefings.length === 1 ? '' : 's'} and ${syntheses.length} hidden overlay record${syntheses.length === 1 ? '' : 's'}.`
     );
 
     if (!shouldDelete) return;
@@ -579,7 +580,7 @@ export default function App() {
           <div className="text-2xl font-extrabold uppercase tracking-tight stark-gradient-text">
             Syncing
           </div>
-          <div className="text-[13px] text-slate-500">Loading shared briefings and synthesis overlays...</div>
+          <div className="text-[13px] text-slate-500">Loading shared Hermes archive...</div>
           {dataError ? <div className="text-[12px] text-red-300">{dataError}</div> : null}
         </div>
       </div>
@@ -659,7 +660,6 @@ export default function App() {
 
         {currentView === 'workflow' && isAdmin && (
           <WorkflowView
-            briefings={briefings}
             todaysBriefing={todayBriefing}
             onGoToImport={() => setCurrentView('add')}
           />
@@ -668,7 +668,6 @@ export default function App() {
         {currentView === 'archive' && (
           <ArchiveView
             briefings={briefings}
-            syntheses={syntheses}
             canImport={isAdmin}
             canDelete={isAdmin && !isDeleting}
             onOpenBriefing={openBriefing}
@@ -699,15 +698,10 @@ export default function App() {
           />
         )}
 
-        {currentView === 'synthesis' && (
-          <SynthesisView syntheses={syntheses} onOpenThread={openStory} />
-        )}
-
 {currentView === 'story' && (
           <StoryView
             storyId={viewingStoryId}
             briefings={briefings}
-            syntheses={syntheses}
             onBack={() => selectView('archive')}
             onOpenBriefing={openBriefing}
           />
