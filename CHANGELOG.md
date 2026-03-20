@@ -7,6 +7,18 @@ and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-03-19
+
+### Added
+- Shared Firestore-backed `briefings` and `syntheses` collections so approved users see the same Hermes content across devices.
+- Firestore-backed `access/{uid}` authorization model with admin and reader roles.
+- Firestore security rules and checked-in Firestore project config files.
+
+### Changed
+- Import flow now writes shared data to Firestore instead of browser-local storage.
+- Export flow now includes both daily briefings and synthesis overlays in one archive.
+- UI controls now reflect role-based access, hiding shared write actions from readers.
+
 ## [1.0.5] - 2026-03-13
 
 ### Changed
