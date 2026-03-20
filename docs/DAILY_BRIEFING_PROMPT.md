@@ -20,6 +20,7 @@ Return a single valid JSON object matching the schema below. No commentary, no m
 {
   "id": "YYYY-MM-DD",
   "date": "Month D, YYYY",
+  "driver": "ENERGY",
   "system_status": {
     "condition": "ELEVATED",
     "indicator": "VOLATILE"
@@ -125,6 +126,7 @@ Return a single valid JSON object matching the schema below. No commentary, no m
 ## Hard rules
 
 - `story_id` must be **stable across days**. Use the same kebab-case ID for the same underlying story every day (e.g. `story-hormuz-coalition`, `story-fx-dollar-pressure`). Never rename a story that has already appeared. When in doubt, carry the prior ID forward.
+- top-level `driver` is for the header pill only. It must be a **single uppercase word** such as `ENERGY`, `RATES`, `TRADE`, `WAR`, `OIL`, `AI`, or `CHINA`. Never return a phrase or sentence here.
 - `driver` must be **causal, not descriptive**. State what is moving the story, not what happened. Bad: "Iran fired drones." Good: "Iran's renewed naval posture is raising the cost of commercial Hormuz transit for the second time this quarter."
 - `change_type` must be exactly one of: `new`, `escalating`, `stabilizing`, `resolving`, `unchanged`
 - `story_stage` must be exactly one of: `emerging`, `active`, `peak`, `winding-down`, `resolved`
@@ -144,6 +146,7 @@ Return a single valid JSON object matching the schema below. No commentary, no m
 ## Usage notes
 
 - Replace `{DATE}` with today's date before pasting.
+- Include a top-level `driver` field as a one-word header label. Prefer concrete system drivers like `ENERGY`, `WAR`, `RATES`, `TRADE`, `TECH`, `CHINA`, or `POLITICS`.
 - The apex tile (first item in `today_in_60_seconds`) should be the highest-signal story of the day. Include `summary` on the apex tile only.
 - Include 4–6 items in `today_in_60_seconds` and 3–6 `major_developments`.
 - `previous_brief_refs` should list the 1–3 most recent briefing dates where this story appeared. Leave as `[]` for genuinely new stories.

@@ -18,6 +18,7 @@ The app imports one daily briefing as a JSON object with the following structure
 {
   "id": "2026-03-13",
   "date": "March 13, 2026",
+  "driver": "ENERGY",
   "system_status": {
     "condition": "ELEVATED",
     "indicator": "VOLATILE"
@@ -144,6 +145,7 @@ The app imports one daily briefing as a JSON object with the following structure
 - `today_in_60_seconds`: short, high-signal scan layer for the home Bento grid.
 - `today_in_60_seconds[].id`: recommended stable link to the matching `major_developments[].story_id` or story thread.
 - `system_status`: optional global HUD state shown in the header.
+- `driver`: optional top-level header pill label. Prefer a **single uppercase word** such as `ENERGY`, `RATES`, `TRADE`, `WAR`, `AI`, or `CHINA`. This is a compact dashboard label, not the causal sentence used inside `major_developments[].driver`.
 - `system_status.condition`: primary posture tier. Five levels, highest to lowest: `CRITICAL` (rose), `SEVERE` / `HIGH` (orange), `ELEVATED` / `VOLATILE` (amber), `GUARDED` / `MODERATE` (blue), `NOMINAL` / `LOW` (cyan).
 - `system_status.indicator`: secondary mood descriptor shown below the condition. Examples: `VOLATILE`, `STABLE`, `TRANSITIONING`, `WATCH`, `ESCALATING`.
 - `today_in_60_seconds[].domain`: optional routing bucket for pulse tiles. When present, tapping a pulse tile opens the matching development in a modal overlay.
@@ -188,6 +190,7 @@ The app imports one daily briefing as a JSON object with the following structure
 - Keep `id` aligned to the actual briefing date.
 - Keep headlines short enough to fit mobile cards cleanly.
 - Keep summaries dense and analytical, not conversational.
+- Keep top-level `driver` to one uppercase word only. Do not use a phrase or sentence there.
 - **Every `major_developments` item must include `story_id`, `driver`, `change_type`, and `story_stage`.** These are required for the continuity system to function.
 - **`story_id` must be stable across days.** Use a consistent kebab-case identifier for the same underlying story (e.g. `story-hormuz-coalition`, `story-fx-dollar-pressure`). Do not rename a story that has already appeared in previous briefings. When in doubt, carry the prior ID forward.
 - **`driver` must be causal, not descriptive.** Write what is moving the story today, not just what happened. Bad: “Iran fired drones.” Good: “Iran's renewed naval posture is raising the cost of commercial Hormuz transit for the second time this quarter.”
