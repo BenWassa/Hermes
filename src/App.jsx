@@ -63,6 +63,12 @@ export default function App() {
   }, [briefings, query]);
 
   useEffect(() => {
+    console.log('Hermes App Mount Date Debug:', {
+      systemIso: new Date().toISOString(),
+      localDateId: getTodayId(),
+      timestamp: new Date().toString()
+    });
+
     const unsubscribe = subscribeToAuthState((nextUser) => {
       setAuthReady(true);
       setIsSigningIn(false);
