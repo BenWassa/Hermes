@@ -1,5 +1,15 @@
 import { useState, useMemo } from 'react';
-import { Copy, Check, ChevronDown, ChevronUp, ArrowRight, Zap, GitMerge, Layers } from 'lucide-react';
+import { Copy, Check, ChevronDown, ChevronUp, ArrowRight, Zap, GitMerge, Layers, Download } from 'lucide-react';
+
+function downloadFile(filename, contents, type) {
+  const blob = new Blob([contents], { type });
+  const objectUrl = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = objectUrl;
+  link.download = filename;
+  link.click();
+  URL.revokeObjectURL(objectUrl);
+}
 import { getDailyPrompt, getAmplifierPrompt, getSynthesisPrompt } from '../utils/prompts';
 
 function useCopy(timeout = 2000) {
@@ -291,6 +301,24 @@ function SynthesisSection({ briefings, onGoToImport }) {
               No briefings in range
             </div>
           )}
+
+          <button
+            type="button"
+            onClick={() => downloadFile(
+              `hermes-synthesis-prompt-${fromDate}-to-${toDate}.md`,
+              prompt,
+              'text/markdown;charset=utf-8'
+            )}
+            disabled={!prompt}
+            className={`w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl border font-bold text-[11px] font-mono uppercase tracking-[0.18em] transition-all ${
+              prompt
+                ? 'border-purple-500/30 bg-purple-500/10 text-purple-300 hover:bg-purple-500/20 hover:border-purple-400/50'
+                : 'border-white/5 bg-white/3 text-slate-600 cursor-not-allowed'
+            }`}
+          >
+            <Download size={14} strokeWidth={2} />
+            Export Prompt as MD
+          </button>
 
           <button
             type="button"
