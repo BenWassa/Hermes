@@ -1,12 +1,13 @@
 import { ArrowUpRight } from 'lucide-react';
 
 const PHASE_COLORS = {
-  escalation: 'text-rose-300 border-rose-500/20 bg-rose-950/20',
-  active:     'text-amber-300 border-amber-500/20 bg-amber-950/20',
-  emerging:   'text-cyan-300 border-cyan-500/20 bg-cyan-950/20',
-  peak:       'text-orange-300 border-orange-500/20 bg-orange-950/20',
-  resolution: 'text-emerald-300 border-emerald-500/20 bg-emerald-950/20',
-  default:    'text-slate-300 border-slate-500/20 bg-slate-800/20',
+  escalation:  'text-rose-300 border-rose-500/20 bg-rose-950/20',
+  active:      'text-amber-300 border-amber-500/20 bg-amber-950/20',
+  emerging:    'text-cyan-300 border-cyan-500/20 bg-cyan-950/20',
+  peak:        'text-orange-300 border-orange-500/20 bg-orange-950/20',
+  stabilising: 'text-sky-300 border-sky-500/20 bg-sky-950/20',
+  resolution:  'text-emerald-300 border-emerald-500/20 bg-emerald-950/20',
+  default:     'text-slate-300 border-slate-500/20 bg-slate-800/20',
 };
 
 function phaseColor(phase) {

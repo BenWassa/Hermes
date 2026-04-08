@@ -1,0 +1,391 @@
+{
+  "exportedAt": "2026-03-11T08:00:00.000Z",
+  "appVersion": "1.2.2",
+  "briefingCount": 2,
+  "synthesisCount": 1,
+  "briefings": [
+    {
+      "id": "2026-03-09",
+      "date": "March 9, 2026",
+      "system_status": {
+        "condition": "ELEVATED",
+        "indicator": "VOLATILE"
+      },
+      "today_in_60_seconds": [
+        {
+          "id": "story-energy-hormuz",
+          "icon": "🛢️",
+          "headline": "Oil volatility spikes following unconfirmed drone activity",
+          "domain": "ENERGY",
+          "summary": "Brent crude briefly crossed $100 before reversing. Options flows suggest traders are aggressively repricing tail-risk for maritime supply chain interruptions over the next 48 hours.",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "ESCALATING",
+          "target": "Strait of Hormuz",
+          "metric": "+17.1% VOL"
+        },
+        {
+          "id": "story-global-rates",
+          "icon": "📉",
+          "headline": "Markets reprice inflation risk path",
+          "domain": "MACRO",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "VOLATILE",
+          "target": "Front-End Yields",
+          "metric": "REPRICING"
+        },
+        {
+          "id": "story-sovereign-ai-compute",
+          "icon": "🤖",
+          "headline": "China accelerates sovereign compute infrastructure",
+          "domain": "TECH",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "HIGH",
+          "target": "Domestic Datacenters",
+          "metric": "CAPEX SURGE"
+        },
+        {
+          "id": "story-pentagon-ai-governance",
+          "icon": "⚖️",
+          "headline": "Pentagon-AI governance friction delays deployments",
+          "domain": "DEFENSE",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "MONITOR",
+          "target": "Autonomous Systems",
+          "metric": "DELAYED"
+        },
+        {
+          "id": "story-ecb-rate-path",
+          "icon": "🌍",
+          "headline": "ECB signals hawkish hold on rate cuts",
+          "domain": "MACRO",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "STABILIZING",
+          "target": "EUR/USD",
+          "metric": "HAWKISH"
+        }
+      ],
+      "what_changed": {
+        "new": [
+          "War-risk insurance costs jumped again for Gulf-linked commercial shipping routes.",
+          "ECB messaging hardened around the risk of energy-led inflation persistence."
+        ],
+        "escalating": [
+          "Oil volatility is now feeding directly into front-end rate pricing and cross-asset hedging.",
+          "Competition for sovereign AI capacity is expanding from technology policy into energy and industrial planning."
+        ],
+        "de_escalating": [
+          "The most acute fear of a full maritime halt eased after some vessels resumed rerouted passage."
+        ],
+        "watch": [
+          "Whether Hormuz transit volumes normalise or deteriorate over the next 24 hours.",
+          "Any central bank statement that explicitly links energy volatility to rate path revision."
+        ]
+      },
+      "major_developments": [
+        {
+          "id": "dev-1",
+          "story_id": "story-energy-hormuz",
+          "domain": "ENERGY",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🛢️",
+          "driver": "Unconfirmed drone activity near Gulf shipping lanes triggered war-risk repricing and forced rerouting decisions.",
+          "change_type": "escalating",
+          "story_stage": "peak",
+          "headline": "Oil Shock and War Risk",
+          "why_it_matters_now": "The disruption is now materially altering inflation expectations, shipping costs, and central-bank path assumptions.",
+          "executive_summary": "Oil surged nearly 30% before reversing as geopolitical tensions escalated and maritime risk began transmitting into macro pricing.",
+          "key_facts": [
+            "Brent briefly crossed $100 before retracing as traders digested mixed security signals.",
+            "Insurers widened Gulf transit premiums, lifting shipping costs within hours.",
+            "Volatility spread from energy into rates, equities, and FX positioning."
+          ],
+          "next_watchpoints": [
+            "Commercial vessel transit volumes through the Strait of Hormuz over the next 24 hours.",
+            "Whether regional actors issue credible de-escalation signals or expand interdiction risk."
+          ],
+          "tags": ["energy", "shipping", "oil", "inflation", "middle-east"],
+          "sources": [
+            { "name": "Reuters", "url": "https://www.reuters.com/world/middle-east/" },
+            { "name": "Bloomberg", "url": "https://www.bloomberg.com/energy" }
+          ]
+        },
+        {
+          "id": "dev-2",
+          "story_id": "story-global-rates",
+          "domain": "MACRO",
+          "region": "GLOBAL",
+          "impact": "HIGH",
+          "icon": "📉",
+          "driver": "Energy shock is re-entering the inflation calculus, pushing rate-cut timelines further out across G7 central banks.",
+          "change_type": "escalating",
+          "story_stage": "active",
+          "headline": "Inflation Path Repriced",
+          "why_it_matters_now": "This has shifted from a rates debate to a cross-asset repricing event driven by geopolitical inflation risk.",
+          "executive_summary": "Bond and equity desks are resetting expectations for the timing and depth of rate cuts.",
+          "key_facts": [
+            "Front-end yields rose as inflation hedges widened after the energy shock.",
+            "FX desks repositioned around renewed dollar strength and policy divergence risk."
+          ],
+          "next_watchpoints": [
+            "Whether the next inflation prints confirm pass-through from energy into broader expectations.",
+            "Any central-bank communication that reframes the likely path of cuts."
+          ],
+          "tags": ["macro", "rates", "inflation", "fx", "policy"],
+          "sources": [
+            { "name": "Bloomberg", "url": "https://www.bloomberg.com/markets" },
+            { "name": "Financial Times", "url": "https://www.ft.com/markets" }
+          ]
+        },
+        {
+          "id": "dev-3",
+          "story_id": "story-sovereign-ai-compute",
+          "domain": "TECH",
+          "region": "GLOBAL",
+          "impact": "HIGH",
+          "icon": "🤖",
+          "driver": "Export control tightening and energy competition are forcing state actors to treat compute infrastructure as a sovereignty asset.",
+          "change_type": "escalating",
+          "story_stage": "active",
+          "headline": "Sovereign AI Compute Race",
+          "why_it_matters_now": "The story is widening from chip access into datacenter siting, energy allocation, and state-backed capital deployment.",
+          "executive_summary": "Nations are increasingly treating high-tier compute clusters as critical national infrastructure.",
+          "key_facts": [
+            "New export control proposals are tightening access to advanced accelerator supply.",
+            "Sovereign and state-linked capital is moving into domestic datacenter buildout."
+          ],
+          "next_watchpoints": [
+            "Additional export-control coordination between the US and allies.",
+            "Announcements on power allocation, permits, or domestic compute subsidies."
+          ],
+          "tags": ["ai", "compute", "industrial-policy", "chips", "state-capacity"],
+          "sources": [
+            { "name": "Wall Street Journal", "url": "https://www.wsj.com/tech" }
+          ]
+        }
+      ],
+      "analyst_consensus": {
+        "consensus": [
+          "Energy shock could delay rate cuts globally.",
+          "Defense and compute spending will remain non-cyclical."
+        ],
+        "friction": [
+          "Some analysts believe the oil spike will reverse rapidly if conflict cools.",
+          "Disagreement on whether the ECB will follow the Fed's hawkish tilt."
+        ]
+      },
+      "strategic_context": [
+        "Energy shocks are reintroducing geopolitics into macroeconomic expectations.",
+        "The intersection of AI infrastructure demands and energy scarcity is becoming the defining macroeconomic theme of the decade."
+      ],
+      "watchlist": "Strait of Hormuz shipping flows over the next 48 hours may determine whether energy volatility persists and bleeds into core inflation metrics."
+    },
+    {
+      "id": "2026-03-10",
+      "date": "March 10, 2026",
+      "system_status": {
+        "condition": "HIGH",
+        "indicator": "ESCALATING"
+      },
+      "today_in_60_seconds": [
+        {
+          "id": "story-energy-hormuz",
+          "icon": "🛢️",
+          "headline": "Hormuz transit volumes fall 18% as rerouting accelerates",
+          "domain": "ENERGY",
+          "summary": "Shipping data confirmed a material drop in Strait of Hormuz transit as major carriers completed rerouting to the Cape of Good Hope, adding 11 days of transit time and locking in cost pressure.",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "CRITICAL",
+          "target": "Strait of Hormuz",
+          "metric": "-18% TRANSIT"
+        },
+        {
+          "id": "story-global-rates",
+          "icon": "📊",
+          "headline": "Fed speakers push back on early cut expectations",
+          "domain": "MACRO",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "ESCALATING",
+          "target": "Fed Funds Rate",
+          "metric": "HAWKISH TILT"
+        },
+        {
+          "id": "story-sovereign-ai-compute",
+          "icon": "🤖",
+          "headline": "US expands chip export controls to five new jurisdictions",
+          "domain": "TECH",
+          "signal_type": "SIGNAL_SHIFT",
+          "status": "ESCALATING",
+          "target": "Semiconductor Supply Chain",
+          "metric": "NEW CONTROLS"
+        },
+        {
+          "id": "story-ecb-rate-path",
+          "icon": "🌍",
+          "headline": "ECB holds rates, flags energy pass-through risk",
+          "domain": "MACRO",
+          "signal_type": "CONTINUING_SIGNAL",
+          "status": "MONITOR",
+          "target": "Eurozone Inflation",
+          "metric": "ON HOLD"
+        }
+      ],
+      "what_changed": {
+        "new": [
+          "Shipping data confirmed the rerouting is now structural, not precautionary — transit volumes are materially down.",
+          "US announced new chip export controls expanding the list of restricted jurisdictions."
+        ],
+        "escalating": [
+          "The Hormuz disruption moved from volatility event to confirmed supply-chain shift.",
+          "Fed speakers hardened the rate-higher-for-longer narrative in response to energy-driven inflation risk."
+        ],
+        "de_escalating": [
+          "Back-channel diplomatic signals suggested limited appetite for full escalation among regional actors."
+        ],
+        "watch": [
+          "Whether OPEC+ responds to supply disruption with production increases or holds output.",
+          "Any Fed communication that explicitly ties energy pass-through to a rate-cut delay."
+        ]
+      },
+      "major_developments": [
+        {
+          "id": "dev-1",
+          "story_id": "story-energy-hormuz",
+          "domain": "ENERGY",
+          "region": "MIDDLE EAST",
+          "impact": "CRITICAL",
+          "icon": "🛢️",
+          "driver": "Confirmed rerouting by major carriers locks in shipping cost increases and removes the scenario of a rapid return to normal flows.",
+          "change_type": "escalating",
+          "story_stage": "peak",
+          "headline": "Hormuz Rerouting Confirmed as Structural",
+          "why_it_matters_now": "The shift from 'disruption risk' to 'confirmed disruption' raises the floor on energy and shipping costs for weeks, not hours.",
+          "executive_summary": "Transit volumes fell 18% as carriers completed diversions, locking in cost increases and extending supply chain timelines materially.",
+          "key_facts": [
+            "Major carriers confirmed full diversion to Cape of Good Hope routing.",
+            "Transit time increase of 11 days adds ~$2.4M per voyage in additional fuel and time costs.",
+            "Brent held above $97 as the structural nature of the disruption became clear."
+          ],
+          "next_watchpoints": [
+            "Whether OPEC+ emergency production signals emerge to cap the price spike.",
+            "Whether insurance markets reprice Gulf of Oman routes or maintain extended exclusions."
+          ],
+          "tags": ["energy", "shipping", "hormuz", "supply-chain", "oil"],
+          "sources": [
+            { "name": "Reuters", "url": "https://www.reuters.com/world/middle-east/" },
+            { "name": "Bloomberg", "url": "https://www.bloomberg.com/energy" }
+          ]
+        },
+        {
+          "id": "dev-2",
+          "story_id": "story-global-rates",
+          "domain": "MACRO",
+          "region": "UNITED STATES",
+          "impact": "HIGH",
+          "icon": "📊",
+          "driver": "Fed speakers are recalibrating the rate-cut timeline explicitly in response to energy-driven inflation persistence.",
+          "change_type": "escalating",
+          "story_stage": "active",
+          "headline": "Fed Pushes Back on Rate Cut Timeline",
+          "why_it_matters_now": "The Fed's public reframing of the rate path removes the last major soft-landing argument underpinning equity valuations.",
+          "executive_summary": "Two Fed governors cited energy-driven inflation risk as a reason to delay the first cut beyond market expectations.",
+          "key_facts": [
+            "Market pricing for the first cut shifted from June to September following Fed commentary.",
+            "2-year Treasury yields rose 14bps on the day.",
+            "Dollar index strengthened 0.8% as rate divergence expectations widened."
+          ],
+          "next_watchpoints": [
+            "The next CPI print — any energy pass-through will validate the hawkish pivot.",
+            "Whether the ECB follows with similar messaging, deepening global rate divergence."
+          ],
+          "tags": ["macro", "fed", "rates", "inflation", "yields"],
+          "sources": [
+            { "name": "Financial Times", "url": "https://www.ft.com/markets" },
+            { "name": "Bloomberg", "url": "https://www.bloomberg.com/markets" }
+          ]
+        }
+      ],
+      "analyst_consensus": {
+        "consensus": [
+          "The Hormuz disruption is now a multi-week supply chain event, not a one-day volatility spike.",
+          "Rate cuts are pushed out in the US and Europe — the soft-landing window is narrowing."
+        ],
+        "friction": [
+          "Disagreement on whether oil can hold above $95 if OPEC+ signals emergency supply increases.",
+          "Some analysts argue the Fed commentary was positioning, not a genuine policy shift."
+        ]
+      },
+      "strategic_context": [
+        "Two separate shocks — maritime security and central bank communication — are compounding into a single macro regime shift.",
+        "The energy-inflation-rates transmission channel is now fully active, with each node reinforcing the next."
+      ],
+      "watchlist": "OPEC+ response and the next Fed communication are the two pivots that will determine whether this becomes a sustained macro disruption or a sharp but contained episode."
+    }
+  ],
+  "syntheses": [
+    {
+      "type": "synthesis",
+      "id": "synth-2026-03-09-to-2026-03-10",
+      "date_range": {
+        "from": "2026-03-09",
+        "to": "2026-03-10"
+      },
+      "dominant_system": "Gulf Energy-Inflation Transmission",
+      "active_threads": [
+        {
+          "story_id": "story-energy-hormuz",
+          "title": "Hormuz Shipping Disruption",
+          "status": "active",
+          "phase": "peak",
+          "first_seen": "2026-03-09",
+          "last_seen": "2026-03-10",
+          "summary": "What began as unconfirmed drone activity escalated within 48 hours into confirmed structural rerouting, with transit volumes down 18% and shipping costs locked in for weeks. The story crossed from risk event to supply chain reality on Day 2."
+        },
+        {
+          "story_id": "story-global-rates",
+          "title": "Rate Cut Timeline Repriced",
+          "status": "active",
+          "phase": "escalation",
+          "first_seen": "2026-03-09",
+          "last_seen": "2026-03-10",
+          "summary": "Energy-driven inflation risk moved the Fed and ECB from ambiguous to explicitly hawkish over two days, pushing market pricing for the first US cut from June to September. The rate story is now downstream of the energy story."
+        },
+        {
+          "story_id": "story-sovereign-ai-compute",
+          "title": "Sovereign Compute Race",
+          "status": "active",
+          "phase": "escalation",
+          "first_seen": "2026-03-09",
+          "last_seen": "2026-03-10",
+          "summary": "New US export controls expanded the compute sovereignty contest beyond China to five additional jurisdictions, accelerating the bifurcation of the global AI infrastructure supply chain. Energy and chip access are now co-dependent constraints."
+        }
+      ],
+      "thematic_arcs": [
+        "A single maritime security event triggered a complete macro regime shift within 48 hours — energy, inflation, rates, and FX all repriced in sequence, demonstrating the full transmission chain from geopolitics to financial conditions.",
+        "The AI infrastructure race and the energy disruption are converging: sovereign compute ambitions now compete directly for the same power capacity that is being threatened by the Hormuz crisis."
+      ],
+      "delta_risks": [
+        {
+          "story_id": "story-energy-hormuz",
+          "description": "Risk escalated from tail scenario to base case — confirmed rerouting removed the rapid-normalisation path and locked in elevated shipping and energy costs for the medium term.",
+          "direction": "increasing"
+        },
+        {
+          "story_id": "story-global-rates",
+          "description": "Rate-cut risk shifted from timing uncertainty to directional reversal — the market now prices significantly fewer cuts, and the probability of a hike re-entering the conversation is non-zero.",
+          "direction": "increasing"
+        }
+      ],
+      "phase_shifts": [
+        {
+          "story_id": "story-energy-hormuz",
+          "from": "emerging",
+          "to": "peak",
+          "date": "2026-03-10",
+          "reason": "Confirmed carrier rerouting converted the disruption from a risk event to an established supply-chain fact, marking peak impact as the new baseline."
+        }
+      ],
+      "meta_findings": "This two-day period demonstrated how rapidly a single geopolitical shock can activate the full macro transmission chain: energy → inflation → central bank communication → financial conditions tightening. The speed of the transmission — from unconfirmed drone activity to confirmed Fed hawkishness in under 48 hours — suggests the current macro environment has very low shock-absorption capacity. The simultaneous escalation of the AI compute race under energy-constrained conditions adds a structural dimension that no single daily briefing captured: two of the period's biggest stories are now competing for the same scarce resource."
+    }
+  ]
+}

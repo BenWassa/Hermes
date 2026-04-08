@@ -238,11 +238,13 @@ export function getSynthesisPrompt(fromDateStr, toDateStr, briefings) {
     .map((b) => JSON.stringify(b, null, 2))
     .join('\n\n---\n\n');
 
-  return `You are a senior strategic intelligence analyst reviewing a sequence of daily briefings. Your job is to produce a synthesis overlay — a cross-day analysis that identifies persistent story threads, narrative arcs, phase shifts, and risk deltas across the briefing period.
+  return `You are a senior strategic intelligence analyst reviewing a sequence of daily briefings produced by the Hermes intelligence system. Your job is to produce a synthesis overlay — a cross-day analytical layer that identifies persistent story threads, narrative arcs, phase shifts, and risk deltas across the briefing period.
+
+Do not re-summarise individual days. Your job is to show what the PERIOD reveals that no single briefing could.
 
 The date range you are analysing: **${fromDateStr} to ${toDateStr}**
 
-The daily briefings are appended below. Review all of them before writing your output.
+The daily briefings are appended below in full. Review all of them before writing your output.
 
 Return a single valid JSON object matching the schema below. No commentary, no markdown code fences, no explanation — only the JSON.
 
@@ -255,32 +257,26 @@ REQUIRED OUTPUT SCHEMA:
     "from": "${fromDateStr}",
     "to": "${toDateStr}"
   },
+  "dominant_system": "A short, punchy 3–7 word phrase naming the dominant geopolitical or macro system driving the period. Appears as a header label — be specific, not generic.",
   "active_threads": [
     {
-      "story_id": "story-kebab-id",
-      "title": "Human-readable story title",
+      "story_id": "story-kebab-id-matching-briefings",
+      "title": "Human-readable story title — not the story_id slug. A proper name like 'Gulf Energy Crisis' or 'Fed Pivot Uncertainty'.",
       "status": "active",
       "phase": "escalation",
       "first_seen": "YYYY-MM-DD",
       "last_seen": "YYYY-MM-DD",
-      "summary": "2–3 sentence arc summary: what this story did over the review period."
+      "summary": "Lead sentence capturing the arc across the full period. Second sentence on what drove the trajectory. The UI shows 2 lines — the first sentence must stand alone and deliver the key insight."
     }
   ],
   "thematic_arcs": [
-    "Cross-cutting structural pattern that connects multiple stories.",
-    "Second arc or system-level dynamic that emerged across the period."
-  ],
-  "story_clusters": [
-    {
-      "label": "Cluster label",
-      "story_ids": ["story-id-1", "story-id-2"],
-      "rationale": "Why these stories belong together thematically or causally."
-    }
+    "A single complete sentence naming a structural cross-domain pattern that ran through the period — not a restatement of one story.",
+    "A second arc: a different systemic dynamic connecting otherwise separate developments."
   ],
   "delta_risks": [
     {
       "story_id": "story-kebab-id",
-      "description": "How the risk profile of this story changed over the period.",
+      "description": "How the risk profile of this story materially changed over the period — focus on trajectory change, not current state.",
       "direction": "increasing"
     }
   ],
@@ -288,35 +284,47 @@ REQUIRED OUTPUT SCHEMA:
     {
       "story_id": "story-kebab-id",
       "from": "emerging",
-      "to": "active",
+      "to": "escalation",
       "date": "YYYY-MM-DD",
       "reason": "What caused the phase transition."
     }
   ],
-  "dominant_system": "One phrase naming the dominant geopolitical or macro system driving events this period.",
-  "coverage_bias": "Honest assessment of what may be underweighted or missing from the briefings reviewed.",
-  "meta_findings": "2–3 sentences on what the period reveals about the broader environment that a single daily briefing would miss."
+  "meta_findings": "2–3 sentences on what this period reveals about the broader environment that a single daily briefing would miss. This is the synthesis overlay's highest-value output — write it last, after seeing the full period pattern."
 }
 
 HARD RULES:
 
 - type must be exactly "synthesis"
 - id must follow format: synth-YYYY-MM-DD-to-YYYY-MM-DD
-- active_threads[].story_id must match story_id values from the briefings exactly — do not invent new IDs
+- active_threads[].story_id must match story_id values from the briefings exactly — do not invent or rename IDs
 - active_threads[].phase must be one of: emerging, escalation, peak, stabilising, resolution
 - active_threads[].status must be one of: active, dormant, resolved
 - delta_risks[].direction must be one of: increasing, decreasing, stable
 - phase_shifts[].from and .to must be one of: emerging, active, peak, winding-down, resolved
-- Do not overwrite or contradict the factual record of any individual daily briefing
+- dominant_system must be 3–7 words, not a full sentence
+- thematic_arcs must be plain strings, not objects
+- Do not overwrite or contradict the factual record of any individual daily briefing — the synthesis interprets across them, it does not revise them
+- Keep all string values compact — this is a mobile-first product rendered on small screens
 - Return valid JSON only. No markdown. No code fences. No commentary.
 
+DISPLAY NOTES (how the UI renders each field — write content to fit):
+
+- dominant_system: shown as a label in the top-right of the synthesis card header
+- active_threads: each renders as a card row with title (bold), phase badge (color-coded), story_id (monospace), first_seen→last_seen dates, and summary clipped to 2 lines
+  - phase badge colors: emerging=cyan, escalation=rose, peak=orange, stabilising=blue, resolution=green
+  - phase should reflect where the story stood at the END of the review period
+- thematic_arcs: rendered as a bulleted list — write as crisp single sentences
+- delta_risks: rendered as "story_id — description" with a △ marker
+- phase_shifts: rendered as "story_id: from → to" — reason is stored but not displayed in the UI
+- meta_findings: rendered as a paragraph block at the bottom of the card
+
 PRIORITISE:
-1. Thread continuity — which stories ran across multiple days and how did they evolve?
-2. Identity repair — if the same story appeared under different story_id values, note it in meta_findings
-3. Phase detection — look for stories that changed lifecycle stage
-4. Risk deltas — which risks got materially worse or better?
-5. System dominance — what single system was most structurally significant?
-6. Coverage gaps — what important dynamics were underweighted?
+1. active_threads — core output; include all stories that appeared across 2+ briefings; omit single-day flashes
+2. meta_findings — highest analytical value; write last after seeing the full period pattern
+3. dominant_system — the one system most structurally responsible for the period's dynamics
+4. thematic_arcs — cross-cutting structural patterns only; 2–4, quality over quantity
+5. delta_risks — only stories where risk trajectory materially changed direction; 2–5 items
+6. phase_shifts — only genuine transitions backed by evidence in the briefings; 1–4 items
 
 --- DAILY BRIEFINGS ---
 
