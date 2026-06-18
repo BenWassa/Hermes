@@ -1,0 +1,40 @@
+name: Notify The Daily
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # 07:00 ET, two crons for DST; runtime gate keeps only the 7 AM ET run.
+    - cron: "0 11 * * *"   # 07:00 EDT (summer, UTC-4)
+    - cron: "0 12 * * *"   # 07:00 EST (winter, UTC-5)
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: DST gate (skip scheduled runs that are not ~7 AM ET)
+        id: gate
+        run: |
+          HOUR=$(TZ=America/Toronto date +%H)
+          echo "Toronto hour: $HOUR"
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$HOUR" != "07" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push notification (ntfy.sh)
+        if: steps.gate.outputs.skip != 'true'
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        run: |
+          if [ -z "$NTFY_TOPIC" ]; then
+            echo "NTFY_TOPIC secret not set; skipping push." && exit 0
+          fi
+          URL="${PAGES_URL:-https://BenWassa.github.io/Hermes/}"
+          curl -fsS \
+            -H "Title: The Daily — $(TZ=America/Toronto date +'%b %-d')" \
+            -H "Click: ${URL}" \
+            -H "Tags: newspaper" \
+            -d "Today's edition is ready." \
+            "https://ntfy.sh/${NTFY_TOPIC}"

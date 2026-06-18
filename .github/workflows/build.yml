@@ -1,0 +1,67 @@
+name: Build The Daily
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Two crons cover the DST shift; a runtime gate ensures only the ~6 AM ET
+    # run proceeds, so shoulder-season weeks do not double-build.
+    - cron: "0 10 * * *"   # 06:00 EDT (summer, UTC-4)
+    - cron: "0 11 * * *"   # 06:00 EST (winter, UTC-5)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-the-daily
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: DST gate (skip scheduled runs that are not ~6 AM ET)
+        id: gate
+        run: |
+          HOUR=$(TZ=America/Toronto date +%H)
+          echo "Toronto hour: $HOUR"
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$HOUR" != "06" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Python
+        if: steps.gate.outputs.skip != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        if: steps.gate.outputs.skip != 'true'
+        run: pip install -r requirements.txt
+
+      - name: Build edition
+        if: steps.gate.outputs.skip != 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
+          NYT_API_KEY: ${{ secrets.NYT_API_KEY }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        run: python -m src.build
+
+      - name: Commit and push docs/
+        if: steps.gate.outputs.skip != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+          else
+            git commit -m "chore(edition): publish $(TZ=America/Toronto date +'%Y-%m-%d') edition"
+            git push
+          fi
