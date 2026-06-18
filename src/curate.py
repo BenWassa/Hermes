@@ -1,13 +1,13 @@
-"""Task 3 - Curate + Summarize.
+"""Task 3 - Curate + Summarize (Google Gemini).
 
-One Anthropic Messages API call turns the normalized raw-story array into the
-final structured edition: dedupe, section, rank, cap, summarize (house voice),
-and flag tag + sensitivity.
+One Gemini API call turns the normalized raw-story array into the final
+structured edition: dedupe, section, rank, cap, summarize (house voice), and
+flag tag + sensitivity.
 
-Uses structured outputs (`output_config.format` with a JSON schema) so the
-response is guaranteed to be schema-valid JSON, which removes most of the JSON
-drift risk. A light retry plus a post-pass (exactly one lead per section, caps)
-keeps the result well formed even if the model returns something off-spec.
+Gemini's free tier (Google AI Studio key) comfortably covers one run per day.
+`response_mime_type="application/json"` forces valid JSON; the detailed system
+prompt carries the exact schema, and a post-pass (exactly one lead per section,
+caps) plus a single retry keep the result well formed.
 """
 
 from __future__ import annotations
@@ -15,78 +15,99 @@ from __future__ import annotations
 import datetime as dt
 import json
 import logging
+import os
+import time
 
-import anthropic
+from google import genai
+from google.genai import errors as genai_errors
+from google.genai import types
 
 from . import config
 
 log = logging.getLogger("the-daily.curate")
 
-
-# JSON schema the model must return. Only the `sections` array; `date` and
-# `weather` are injected locally afterwards.
-_STORY_SCHEMA = {
-    "type": "object",
-    "additionalProperties": False,
-    "properties": {
-        "id": {"type": "string"},
-        "lead": {"type": "boolean"},
-        "kicker": {"type": "string"},
-        "headline": {"type": "string"},
-        "sub": {"type": "string"},
-        "summary": {"type": "string"},
-        "time": {"type": "string"},
-        "tag": {"type": ["string", "null"]},
-        "sensitivity": {"type": "boolean"},
-        "image": {"type": ["string", "null"]},
-        "link": {"type": "string"},
-    },
-    "required": [
-        "id", "lead", "kicker", "headline", "sub", "summary",
-        "time", "tag", "sensitivity", "image", "link",
-    ],
-}
-
-EDITION_SCHEMA = {
-    "type": "object",
-    "additionalProperties": False,
-    "properties": {
-        "sections": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "additionalProperties": False,
-                "properties": {
-                    "id": {"type": "string"},
-                    "label": {"type": "string"},
-                    "stories": {"type": "array", "items": _STORY_SCHEMA},
-                },
-                "required": ["id", "label", "stories"],
-            },
-        }
-    },
-    "required": ["sections"],
-}
+# Transient Gemini errors worth retrying (free tier can briefly 503/429).
+_RETRY_CODES = {429, 500, 503}
 
 
-def _call(client: anthropic.Anthropic, stories: list[dict], reinforce: bool = False) -> dict:
-    """One structured Messages API call; returns parsed JSON."""
+def _client() -> genai.Client:
+    key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not key:
+        raise RuntimeError("GEMINI_API_KEY (or GOOGLE_API_KEY) not set")
+    return genai.Client(api_key=key)
+
+
+def _gen_config() -> types.GenerateContentConfig:
+    kwargs = dict(
+        system_instruction=config.build_curate_system_prompt(),
+        response_mime_type="application/json",
+        max_output_tokens=config.CURATE_MAX_TOKENS,
+        temperature=0.3,
+    )
+    # Disable "thinking" on 2.5-series models so the whole output budget goes to
+    # the JSON (and the free-tier call stays fast). Older models ignore this.
+    if "2.5" in config.CURATE_MODEL:
+        kwargs["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
+    return types.GenerateContentConfig(**kwargs)
+
+
+def _generate(client: genai.Client, contents: str, retries: int = 3):
+    """generate_content with exponential backoff on transient 429/500/503."""
+    cfg = _gen_config()
+    last: Exception | None = None
+    for attempt in range(retries + 1):
+        try:
+            return client.models.generate_content(
+                model=config.CURATE_MODEL, contents=contents, config=cfg
+            )
+        except genai_errors.APIError as exc:
+            if getattr(exc, "code", None) in _RETRY_CODES and attempt < retries:
+                wait = 2 ** attempt
+                log.warning("Gemini %s; retrying in %ss", getattr(exc, "code", "?"), wait)
+                time.sleep(wait)
+                last = exc
+                continue
+            raise
+    raise last  # pragma: no cover
+
+
+def _call(client: genai.Client, stories: list[dict], reinforce: bool = False) -> dict:
     user_content = json.dumps(stories, ensure_ascii=False)
     if reinforce:
         user_content = "Return ONLY valid JSON matching the schema.\n\n" + user_content
-    resp = client.messages.create(
-        model=config.CURATE_MODEL,
-        max_tokens=config.CURATE_MAX_TOKENS,
-        system=config.build_curate_system_prompt(),
-        messages=[{"role": "user", "content": user_content}],
-        output_config={"format": {"type": "json_schema", "schema": EDITION_SCHEMA}},
-    )
-    if resp.stop_reason == "refusal":
-        raise RuntimeError(f"Curation refused: {resp.stop_details}")
-    if resp.stop_reason == "max_tokens":
-        log.warning("Curation hit max_tokens; output may be truncated")
-    text = next((b.text for b in resp.content if b.type == "text"), "")
+    resp = _generate(client, user_content)
+    text = resp.text
+    if not text:
+        reason = resp.candidates[0].finish_reason if resp.candidates else None
+        raise RuntimeError(f"Empty curation response (finish_reason={reason})")
     return json.loads(text)
+
+
+def _trim_input(stories: list[dict], total: int = config.CURATE_MAX_INPUT) -> list[dict]:
+    """Balance the raw stories across section hints, round-robin, up to `total`.
+
+    Keeps Toronto and each wire section represented rather than letting one
+    prolific feed crowd out the rest, and keeps the prompt (and output) small.
+    """
+    from collections import defaultdict
+
+    buckets: dict[str, list[dict]] = defaultdict(list)
+    for s in stories:
+        buckets[s.get("section_hint", "world")].append(s)
+
+    pools = list(buckets.values())
+    out: list[dict] = []
+    while len(out) < total and any(pools):
+        progressed = False
+        for pool in pools:
+            if pool:
+                out.append(pool.pop(0))
+                progressed = True
+                if len(out) >= total:
+                    break
+        if not progressed:
+            break
+    return out
 
 
 def _normalize_edition(raw: dict) -> list[dict]:
@@ -98,7 +119,6 @@ def _normalize_edition(raw: dict) -> list[dict]:
         if not section or not section.get("stories"):
             continue
         stories = section["stories"][: spec["cap"]]
-        # Exactly one lead: keep the first flagged, else promote the first story.
         seen_lead = False
         for story in stories:
             if story.get("lead") and not seen_lead:
@@ -114,7 +134,8 @@ def _normalize_edition(raw: dict) -> list[dict]:
 
 def curate(stories: list[dict], weather: dict | None = None, today: dt.date | None = None) -> dict:
     """Raw normalized stories -> finished edition dict (date, weather, sections)."""
-    client = anthropic.Anthropic()
+    client = _client()
+    stories = _trim_input(stories)
     try:
         raw = _call(client, stories)
     except json.JSONDecodeError:
@@ -146,7 +167,6 @@ if __name__ == "__main__":
 
     edition = curate(stories)
 
-    # Schema-ish validation for the test gate.
     sections = edition["sections"]
     assert 5 <= len(sections) <= 6, f"expected 5-6 sections, got {len(sections)}"
     for s in sections:

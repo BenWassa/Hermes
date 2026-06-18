@@ -1,7 +1,7 @@
 """Central configuration for The Daily.
 
 All tunable constants live here: location, sections, sources, weather mapping,
-the Anthropic model, and the curate system prompt (house voice). Secrets are
+the curation model, and the curate system prompt (house voice). Secrets are
 read from the environment, never hardcoded.
 """
 
@@ -74,10 +74,15 @@ TORONTO_RSS = [
 ]
 
 
-# --- Anthropic ------------------------------------------------------------
+# --- Gemini (curation model) ----------------------------------------------
 
-CURATE_MODEL = "claude-sonnet-4-6"
-CURATE_MAX_TOKENS = 8000
+# Google Gemini, free tier via an AI Studio key. Override with CURATE_MODEL
+# (e.g. "gemini-2.0-flash" or "gemini-2.5-flash-lite") if you hit free limits.
+CURATE_MODEL = os.environ.get("CURATE_MODEL", "gemini-2.5-flash")
+CURATE_MAX_TOKENS = 16000
+# Cap raw stories sent to the model (PRD targets ~40-60), balanced across
+# section hints so Toronto and the wire sections all stay represented.
+CURATE_MAX_INPUT = 60
 
 
 # --- Weather (Open-Meteo weather_code mapping) ----------------------------

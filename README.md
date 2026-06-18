@@ -3,9 +3,10 @@
 An autonomous overnight pipeline that assembles a personalized Toronto morning
 newspaper, renders it as a static web page, and pushes a notification to your
 phone at 7:00 AM. World and national news come from the Guardian and NYT APIs;
-Toronto local news comes from RSS. Claude (`claude-sonnet-4-6`) dedupes,
-sections, ranks, and summarizes; a sensitivity rule keeps hard news text-only.
-The result deploys to GitHub Pages and an ntfy.sh push links straight to it.
+Toronto local news comes from RSS. Google Gemini (`gemini-2.5-flash`, free
+tier) dedupes, sections, ranks, and summarizes; a sensitivity rule keeps hard
+news text-only. The result deploys to GitHub Pages and an ntfy.sh push links
+straight to it.
 
 > v2 of this repo. The previous React/Firebase intelligence dashboard ("Hermes
 > v1") is preserved under [archive/v1-hermes/](archive/v1-hermes/) and tagged
@@ -23,7 +24,7 @@ weather -> fetch -> normalize -> curate (Claude) -> resolve images -> render -> 
 | [src/weather.py](src/weather.py) | Open-Meteo Toronto forecast (no key) |
 | [src/fetch.py](src/fetch.py) | Guardian + NYT APIs, Toronto RSS (graceful per-source failure) |
 | [src/normalize.py](src/normalize.py) | Unify sources into one story schema |
-| [src/curate.py](src/curate.py) | One Anthropic call: dedupe, section, rank, summarize, flag |
+| [src/curate.py](src/curate.py) | One Gemini call: dedupe, section, rank, summarize, flag |
 | [src/images.py](src/images.py) | Keep source thumbnails; suppress on sensitive stories |
 | [src/render.py](src/render.py) | Inject edition JSON into the HTML template |
 | [src/build.py](src/build.py) | Orchestrator (single entrypoint) |
@@ -50,11 +51,12 @@ secrets in CI. See [.env.example](.env.example).
 
 | Var | Needed for |
 |---|---|
-| `ANTHROPIC_API_KEY` | curation |
+| `GEMINI_API_KEY` | curation (Google AI Studio, free tier) |
 | `GUARDIAN_API_KEY` | Guardian world/business/sport/opinion |
 | `NYT_API_KEY` | NYT world/business |
 | `NTFY_TOPIC` | morning push |
 | `PAGES_URL` | cache-buster + notification link (CI: set as a repo **variable**) |
+| `CURATE_MODEL` | optional model override (default `gemini-2.5-flash`) |
 
 Open-Meteo and the Toronto RSS feeds need no keys. Tunables (location, sections,
 caps, feed list, model, house voice) live in [src/config.py](src/config.py).
@@ -71,10 +73,11 @@ Pages serves `docs/` on `main` at `https://BenWassa.github.io/Hermes/`.
 
 ## First-run checklist (one-time, manual)
 
+- [ ] Get a Gemini API key — https://aistudio.google.com/apikey (free tier)
 - [ ] Get a Guardian API key — https://open-platform.theguardian.com/
 - [ ] Get an NYT API key — https://developer.nytimes.com/
 - [ ] Pick an ntfy topic (hard to guess), install the ntfy iOS app, subscribe
-- [ ] Add repo **secrets**: `ANTHROPIC_API_KEY`, `GUARDIAN_API_KEY`,
+- [ ] Add repo **secrets**: `GEMINI_API_KEY`, `GUARDIAN_API_KEY`,
       `NYT_API_KEY`, `NTFY_TOPIC`
 - [ ] Add repo **variable** `PAGES_URL` (e.g. `https://BenWassa.github.io/Hermes/`)
 - [ ] Enable GitHub Pages: Settings → Pages → source = `main`, folder = `/docs`

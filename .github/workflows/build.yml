@@ -47,9 +47,10 @@ jobs:
       - name: Build edition
         if: steps.gate.outputs.skip != 'true'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
           NYT_API_KEY: ${{ secrets.NYT_API_KEY }}
+          CURATE_MODEL: ${{ vars.CURATE_MODEL }}
           PAGES_URL: ${{ vars.PAGES_URL }}
         run: python -m src.build
 
