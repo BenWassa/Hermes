@@ -67,8 +67,10 @@ NYT_SECTIONS = {
 # run); verify these resolve and swap any that rot.
 TORONTO_RSS = [
     {"name": "CBC Toronto", "url": "https://www.cbc.ca/webfeed/rss/rss-canada-toronto"},
-    {"name": "CP24", "url": "https://www.cp24.com/rss"},
-    {"name": "CTV News Toronto", "url": "https://toronto.ctvnews.ca/rss/ctv-news-toronto-1.822319"},
+    {
+        "name": "Toronto Star GTA",
+        "url": "https://www.thestar.com/search/?f=rss&t=article&c=news/gta*&l=50&s=start_time&sd=desc",
+    },
 ]
 
 
