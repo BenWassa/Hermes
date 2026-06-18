@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="build" content="__BUILD_TS__" />
+  <meta name="theme-color" content="#1a2744" />
+  <title>The Daily</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #efece6; }
+    body {
+      font-family: 'Georgia', serif;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+    }
+    #app {
+      min-height: 100vh;
+      background: #fff;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Masthead */
+    .masthead {
+      border-bottom: 4px solid #1a2744;
+      padding: 18px 20px 14px;
+      background: #fff;
+    }
+    .masthead .date {
+      font-size: 11px; color: #999; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .masthead .title {
+      font-size: 38px; font-weight: 700; letter-spacing: -0.01em;
+      color: #1a2744; line-height: 1; margin-bottom: 2px;
+    }
+    .masthead .tagline {
+      font-family: 'Arial', sans-serif; font-size: 10px; color: #999;
+      letter-spacing: 0.18em; text-transform: uppercase;
+    }
+
+    /* Weather strip */
+    .weather {
+      background: #1a2744; color: #fff; cursor: pointer; user-select: none;
+    }
+    .weather .summary {
+      display: flex; align-items: center; gap: 16px;
+      padding: 10px 20px; overflow-x: auto; scrollbar-width: none;
+    }
+    .weather .summary::-webkit-scrollbar { display: none; }
+    .weather .ico { font-size: 22px; }
+    .weather .city { font-weight: 700; font-size: 15px; }
+    .weather .temp { font-size: 15px; }
+    .weather .muted { opacity: 0.7; font-size: 13px; white-space: nowrap; }
+    .weather .chev { margin-left: auto; opacity: 0.6; font-size: 12px; }
+    .weather .week {
+      display: flex; border-top: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 20px; overflow-x: auto; scrollbar-width: none;
+    }
+    .weather .week::-webkit-scrollbar { display: none; }
+    .weather .day {
+      text-align: center; min-width: 52px; padding: 0 8px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .weather .day .d { font-size: 11px; opacity: 0.6; margin-bottom: 4px; }
+    .weather .day .i { font-size: 18px; }
+    .weather .day .hi { font-size: 13px; font-weight: 700; margin-top: 4px; }
+    .weather .day .lo { font-size: 11px; opacity: 0.5; }
+
+    /* Tab nav */
+    .tabs {
+      display: flex; overflow-x: auto; border-bottom: 2px solid #1a2744;
+      background: #fff; scrollbar-width: none; position: sticky; top: 0; z-index: 10;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex-shrink: 0; padding: 12px 18px; border: none; background: none;
+      cursor: pointer; font-family: 'Georgia', serif; font-size: 13px;
+      font-weight: 400; color: #666; border-bottom: 3px solid transparent;
+      margin-bottom: -2px; letter-spacing: 0.04em; text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .tab.active { font-weight: 700; color: #1a2744; border-bottom-color: #1a2744; }
+
+    /* Stories */
+    .stories { padding: 0 20px 40px; }
+    .card {
+      border-top: 1px solid #ddd; padding: 14px 0; cursor: pointer;
+      background: #fff; transition: background 0.15s;
+    }
+    .card.lead { border-top: 3px solid #1a2744; padding: 20px 0 16px; }
+    .card.open { background: #f8f7f4; }
+    .card .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .card .kicker {
+      font-family: 'Arial', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; color: #8b1a1a; margin-bottom: 6px; text-transform: uppercase;
+    }
+    .card .tag {
+      background: #8b1a1a; color: #fff; padding: 1px 6px; margin-right: 8px;
+      font-size: 9px; border-radius: 2px;
+    }
+    .card .headline {
+      font-size: 17px; font-weight: 700; line-height: 1.25; color: #111; margin-bottom: 6px;
+    }
+    .card.lead .headline { font-size: 22px; }
+    .card .sub {
+      font-size: 14px; color: #444; line-height: 1.4; margin-bottom: 4px; font-style: italic;
+    }
+    .card .time { font-family: 'Arial', sans-serif; font-size: 11px; color: #999; margin-top: 4px; }
+    .card .toggle { color: #bbb; font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .card .expand {
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid #e0ddd8;
+      font-size: 15px; color: #333; line-height: 1.7;
+    }
+    .card .expand img {
+      display: block; width: 100%; height: auto; border-radius: 3px; margin-bottom: 12px;
+    }
+    .card .readmore {
+      display: inline-block; margin-top: 12px; font-family: 'Arial', sans-serif;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: #1a2744;
+      text-decoration: none;
+    }
+    .card .readmore:hover { text-decoration: underline; }
+
+    /* Footer */
+    .footer {
+      border-top: 2px solid #1a2744; padding: 16px 20px;
+      font-family: 'Arial', sans-serif; font-size: 11px; color: #aaa;
+      text-align: center; letter-spacing: 0.06em;
+    }
+    .notice { padding: 40px 20px; text-align: center; color: #999; font-style: italic; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script id="edition" type="application/json">/*__EDITION_JSON__*/</script>
+
+  <script>
+    (function () {
+      var raw = document.getElementById('edition').textContent;
+      var data;
+      try {
+        data = JSON.parse(raw);
+      } catch (e) {
+        document.getElementById('app').innerHTML =
+          '<div class="notice">No edition loaded. Run the build to generate today’s paper.</div>';
+        return;
+      }
+
+      var state = { active: (data.sections[0] || {}).id, openId: null };
+
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function weatherHtml(w) {
+        if (!w || !w.icon) return '';
+        var week = (w.week || []).map(function (d) {
+          return '<div class="day"><div class="d">' + esc(d.day) + '</div>' +
+            '<div class="i">' + esc(d.icon) + '</div>' +
+            '<div class="hi">' + esc(d.hi) + '°</div>' +
+            '<div class="lo">' + esc(d.lo) + '°</div></div>';
+        }).join('');
+        return '<div class="weather" id="weather">' +
+          '<div class="summary">' +
+            '<span class="ico">' + esc(w.icon) + '</span>' +
+            '<span class="city">Toronto</span>' +
+            '<span class="temp">' + esc(w.high) + '° / ' + esc(w.low) + '°</span>' +
+            '<span class="muted">' + esc(w.condition) + '</span>' +
+            '<span class="muted">Rain ' + esc(w.rain) + '</span>' +
+            '<span class="muted">Wind ' + esc(w.wind) + '</span>' +
+            '<span class="chev" id="wchev">▼</span>' +
+          '</div>' +
+          '<div class="week" id="wweek" style="display:none">' + week + '</div>' +
+        '</div>';
+      }
+
+      function tabsHtml() {
+        return '<div class="tabs">' + data.sections.map(function (s) {
+          return '<button class="tab' + (s.id === state.active ? ' active' : '') +
+            '" data-tab="' + esc(s.id) + '">' + esc(s.label) + '</button>';
+        }).join('') + '</div>';
+      }
+
+      function cardHtml(st) {
+        var open = st.id === state.openId;
+        var tag = st.tag ? '<span class="tag">' + esc(st.tag) + '</span>' : '';
+        var kicker = st.kicker ? '<div class="kicker">' + tag + esc(st.kicker) + '</div>' : '';
+        var sub = st.sub ? '<div class="sub">' + esc(st.sub) + '</div>' : '';
+        var expand = '';
+        if (open) {
+          var img = st.image ? '<img src="' + esc(st.image) + '" alt="" loading="lazy" />' : '';
+          var link = st.link
+            ? '<a class="readmore" href="' + esc(st.link) + '" target="_blank" rel="noopener">Read full story →</a>'
+            : '';
+          expand = '<div class="expand">' + img + esc(st.summary) + '<br>' + link + '</div>';
+        }
+        return '<div class="card' + (st.lead ? ' lead' : '') + (open ? ' open' : '') +
+          '" data-card="' + esc(st.id) + '">' +
+          '<div class="row"><div style="flex:1">' + kicker +
+            '<div class="headline">' + esc(st.headline) + '</div>' + sub +
+            '<div class="time">' + esc(st.time) + '</div></div>' +
+            '<div class="toggle">' + (open ? '−' : '+') + '</div>' +
+          '</div>' + expand +
+        '</div>';
+      }
+
+      function storiesHtml() {
+        var section = data.sections.filter(function (s) { return s.id === state.active; })[0];
+        if (!section) return '';
+        return '<div class="stories">' + section.stories.map(cardHtml).join('') + '</div>';
+      }
+
+      function render() {
+        document.getElementById('app').innerHTML =
+          '<div class="masthead">' +
+            '<div class="date">' + esc(data.date) + '</div>' +
+            '<div class="title">THE DAILY</div>' +
+            '<div class="tagline">Toronto · World · Business · Sport</div>' +
+          '</div>' +
+          weatherHtml(data.weather) +
+          tabsHtml() +
+          storiesHtml() +
+          '<div class="footer">THE DAILY · TORONTO · Tap any headline to read</div>';
+        bind();
+      }
+
+      function bind() {
+        var weather = document.getElementById('weather');
+        if (weather) {
+          weather.addEventListener('click', function () {
+            var week = document.getElementById('wweek');
+            var chev = document.getElementById('wchev');
+            var showing = week.style.display !== 'none';
+            week.style.display = showing ? 'none' : 'flex';
+            chev.textContent = showing ? '▼' : '▲';
+          });
+        }
+        Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (btn) {
+          btn.addEventListener('click', function () {
+            state.active = btn.getAttribute('data-tab');
+            state.openId = null;
+            render();
+          });
+        });
+        Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
+          card.addEventListener('click', function (ev) {
+            if (ev.target.closest('a')) return; // let the read-more link work
+            var id = card.getAttribute('data-card');
+            state.openId = state.openId === id ? null : id;
+            render();
+          });
+        });
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>
