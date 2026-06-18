@@ -10,7 +10,7 @@ __pycache__/
 venv/
 .pytest_cache/
 
-# Node
+# Node (archived v1 deps, kept on disk but never tracked)
 node_modules/
 
 # Build / coverage
@@ -24,3 +24,6 @@ firebase-debug.log
 .env
 .env.*
 !.env.example
+
+# Generated edition cache (the published copy lives in docs/index.html)
+data/latest.json
