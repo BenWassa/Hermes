@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="build" content="2026-06-18T00:36:06Z" />
+  <meta name="theme-color" content="#1a2744" />
+  <title>The Daily</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #efece6; }
+    body {
+      font-family: 'Georgia', serif;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+    }
+    #app {
+      min-height: 100vh;
+      background: #fff;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Masthead */
+    .masthead {
+      border-bottom: 4px solid #1a2744;
+      padding: 18px 20px 14px;
+      background: #fff;
+    }
+    .masthead .date {
+      font-size: 11px; color: #999; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .masthead .title {
+      font-size: 38px; font-weight: 700; letter-spacing: -0.01em;
+      color: #1a2744; line-height: 1; margin-bottom: 2px;
+    }
+    .masthead .tagline {
+      font-family: 'Arial', sans-serif; font-size: 10px; color: #999;
+      letter-spacing: 0.18em; text-transform: uppercase;
+    }
+
+    /* Weather strip */
+    .weather {
+      background: #1a2744; color: #fff; cursor: pointer; user-select: none;
+    }
+    .weather .summary {
+      display: flex; align-items: center; gap: 16px;
+      padding: 10px 20px; overflow-x: auto; scrollbar-width: none;
+    }
+    .weather .summary::-webkit-scrollbar { display: none; }
+    .weather .ico { font-size: 22px; }
+    .weather .city { font-weight: 700; font-size: 15px; }
+    .weather .temp { font-size: 15px; }
+    .weather .muted { opacity: 0.7; font-size: 13px; white-space: nowrap; }
+    .weather .chev { margin-left: auto; opacity: 0.6; font-size: 12px; }
+    .weather .week {
+      display: flex; border-top: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 20px; overflow-x: auto; scrollbar-width: none;
+    }
+    .weather .week::-webkit-scrollbar { display: none; }
+    .weather .day {
+      text-align: center; min-width: 52px; padding: 0 8px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .weather .day .d { font-size: 11px; opacity: 0.6; margin-bottom: 4px; }
+    .weather .day .i { font-size: 18px; }
+    .weather .day .hi { font-size: 13px; font-weight: 700; margin-top: 4px; }
+    .weather .day .lo { font-size: 11px; opacity: 0.5; }
+
+    /* Tab nav */
+    .tabs {
+      display: flex; overflow-x: auto; border-bottom: 2px solid #1a2744;
+      background: #fff; scrollbar-width: none; position: sticky; top: 0; z-index: 10;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex-shrink: 0; padding: 12px 18px; border: none; background: none;
+      cursor: pointer; font-family: 'Georgia', serif; font-size: 13px;
+      font-weight: 400; color: #666; border-bottom: 3px solid transparent;
+      margin-bottom: -2px; letter-spacing: 0.04em; text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .tab.active { font-weight: 700; color: #1a2744; border-bottom-color: #1a2744; }
+
+    /* Stories */
+    .stories { padding: 0 20px 40px; }
+    .card {
+      border-top: 1px solid #ddd; padding: 14px 0; cursor: pointer;
+      background: #fff; transition: background 0.15s;
+    }
+    .card.lead { border-top: 3px solid #1a2744; padding: 20px 0 16px; }
+    .card.open { background: #f8f7f4; }
+    .card .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .card .kicker {
+      font-family: 'Arial', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; color: #8b1a1a; margin-bottom: 6px; text-transform: uppercase;
+    }
+    .card .tag {
+      background: #8b1a1a; color: #fff; padding: 1px 6px; margin-right: 8px;
+      font-size: 9px; border-radius: 2px;
+    }
+    .card .headline {
+      font-size: 17px; font-weight: 700; line-height: 1.25; color: #111; margin-bottom: 6px;
+    }
+    .card.lead .headline { font-size: 22px; }
+    .card .sub {
+      font-size: 14px; color: #444; line-height: 1.4; margin-bottom: 4px; font-style: italic;
+    }
+    .card .time { font-family: 'Arial', sans-serif; font-size: 11px; color: #999; margin-top: 4px; }
+    .card .toggle { color: #bbb; font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .card .expand {
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid #e0ddd8;
+      font-size: 15px; color: #333; line-height: 1.7;
+    }
+    .card .expand img {
+      display: block; width: 100%; height: auto; border-radius: 3px; margin-bottom: 12px;
+    }
+    .card .readmore {
+      display: inline-block; margin-top: 12px; font-family: 'Arial', sans-serif;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: #1a2744;
+      text-decoration: none;
+    }
+    .card .readmore:hover { text-decoration: underline; }
+
+    /* Footer */
+    .footer {
+      border-top: 2px solid #1a2744; padding: 16px 20px;
+      font-family: 'Arial', sans-serif; font-size: 11px; color: #aaa;
+      text-align: center; letter-spacing: 0.06em;
+    }
+    .notice { padding: 40px 20px; text-align: center; color: #999; font-style: italic; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script id="edition" type="application/json">{"date": "Tuesday, June 16, 2026", "weather": {"condition": "Thunderstorms, then clearing", "high": 24, "low": 15, "rain": "40%", "wind": "29 km/h gusts", "icon": "⛈", "week": [{"day": "Tue", "icon": "⛈", "hi": 24, "lo": 15}, {"day": "Wed", "icon": "🌦", "hi": 23, "lo": 16}, {"day": "Thu", "icon": "🌧", "hi": 24, "lo": 14}, {"day": "Fri", "icon": "🌤", "hi": 25, "lo": 12}, {"day": "Sat", "icon": "🌤", "hi": 24, "lo": 13}, {"day": "Sun", "icon": "⛅", "hi": 24, "lo": 13}]}, "sections": [{"id": "front", "label": "Front Page", "stories": [{"id": "f1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Strait of Hormuz Deal Set to Close This Week", "sub": "Interim agreement would reopen critical shipping lane after months of Iranian blockade", "summary": "An interim accord to reopen the Strait of Hormuz is expected to be signed by week's end. The deal follows months of escalating tensions that sent oil prices surging. President Trump publicly claimed credit for brokering the agreement at a celebratory White House event.", "time": "6:45 AM", "tag": "DEVELOPING", "sensitivity": false, "image": "https://picsum.photos/seed/hormuz/640/360", "link": "https://example.com/hormuz-deal"}, {"id": "f2", "lead": false, "kicker": "UKRAINE", "headline": "Russia Strikes Kyiv Monastery, Kills 5 Rescue Workers in Kharkiv", "sub": "Landmark Kyiv Pechersk Lavra monastery set ablaze in overnight bombardment", "summary": "A large-scale Russian assault overnight killed five rescue workers in Kharkiv and wounded 20 in Kyiv. The strike sparked a fire at the Monastery of Caves, one of Ukraine's most significant religious and cultural landmarks. Apartment buildings across both cities were also set ablaze.", "time": "4:15 AM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://example.com/kharkiv-strike"}, {"id": "f3", "lead": false, "kicker": "NORWAY", "headline": "Crown Princess's Son Gets 4 Years for Sexual Assault", "sub": "Marius Borg Hoiby convicted on two of four rape charges in Oslo court", "summary": "Marius Borg Hoiby, son of Crown Princess Mette-Marit of Norway, was sentenced to four years in prison after being found guilty on two counts of rape. The ruling follows a prolonged trial that drew intense public attention in Norway.", "time": "5:20 AM", "tag": null, "sensitivity": true, "image": null, "link": "https://example.com/norway-verdict"}, {"id": "f4", "lead": false, "kicker": "CANADA", "headline": "Carney Heads to France for G7 as Iran Deal Dominates Agenda", "sub": "PM to meet allies as Ottawa also tables privacy and clean water legislation this week", "summary": "Prime Minister Carney is travelling to the G7 summit in France as the Iran interim deal reshapes alliance dynamics. Back home, the government is introducing privacy reform and clean drinking water legislation.", "time": "7:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/carney-g7"}]}, {"id": "toronto", "label": "Toronto", "stories": [{"id": "t1", "lead": true, "kicker": "WORLD CUP", "headline": "Drone Seizures Near World Cup Venues as Security Tightens Across City", "sub": "Toronto Police confirm multiple unauthorized drones intercepted since festivities began", "summary": "Toronto Police have seized several unauthorized drones near World Cup venues since the tournament's opening events began last week. Officers are expected to brief media Tuesday on arrests tied to multiple investigations in the city.", "time": "8:30 AM", "tag": "WORLD CUP", "sensitivity": false, "image": "https://picsum.photos/seed/drone/640/360", "link": "https://example.com/toronto-drones"}, {"id": "t2", "lead": false, "kicker": "TRANSIT", "headline": "Province Commits $198M to Ontario Place Parking Garage", "sub": "Critics question spending priority as transit gaps persist across the city", "summary": "The provincial government announced $198 million for a new parking facility at Ontario Place, drawing immediate criticism from transit advocates who argue the funds should address chronic gaps in the TTC and regional transit network.", "time": "6:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/ontario-place"}, {"id": "t3", "lead": false, "kicker": "COURTS", "headline": "Man Sentenced to 4.5 Years for 2023 East End Shooting Death", "sub": "Sentence handed down Monday in city's east end killing", "summary": "A Toronto man received a four-and-a-half-year prison sentence for his role in the 2023 fatal shooting in the city's east end. The case was among several high-profile Toronto violence cases to move through the courts this spring.", "time": "9:15 AM", "tag": null, "sensitivity": true, "image": null, "link": "https://example.com/toronto-sentence"}, {"id": "t4", "lead": false, "kicker": "POLITICS", "headline": "Olivia Chow Declares Re-election Bid; Bradford Mounts Challenge", "sub": "October 26 municipal vote shaping up as two-horse race for mayor", "summary": "Mayor Olivia Chow formally declared her candidacy for the October 26 municipal election. City Councillor Brad Bradford has registered as a challenger. The nomination period runs until August 21.", "time": "Yesterday", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/chow-reelection"}]}, {"id": "world", "label": "World", "stories": [{"id": "w1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Iran Deal: What's in the Interim Agreement and What Comes Next", "sub": "Analysts say temporary Hormuz reopening leaves core nuclear disputes unresolved", "summary": "The emerging interim deal to reopen the Strait of Hormuz would allow commercial shipping to resume while broader negotiations continue. Experts caution the arrangement is fragile and no framework has been established for permanent resolution.", "time": "7:30 AM", "tag": "DEVELOPING", "sensitivity": false, "image": "https://picsum.photos/seed/iran/640/360", "link": "https://example.com/iran-analysis"}, {"id": "w2", "lead": false, "kicker": "UKRAINE", "headline": "Kyiv Pechersk Lavra Fire: What Was Damaged at the Thousand-Year-Old Site", "sub": "UNESCO-listed monastery has survived wars and Soviet-era suppression", "summary": "The overnight fire at the Monastery of Caves, a UNESCO World Heritage site dating to 1051, destroyed portions of the historic Dormition Cathedral. Church officials and Ukrainian cultural authorities have begun assessing damage.", "time": "5:00 AM", "tag": null, "sensitivity": true, "image": null, "link": "https://example.com/lavra-damage"}, {"id": "w3", "lead": false, "kicker": "NORWAY", "headline": "Royal Family in Crisis After Conviction of Crown Princess's Son", "sub": "Four-year sentence follows trial that transfixed Norway for months", "summary": "The Norwegian royal family faces sustained public scrutiny following the conviction of Marius Borg Hoiby. Crown Princess Mette-Marit issued a brief statement expressing sorrow. Commentators note the monarchy's approval ratings have fallen.", "time": "6:10 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/norway-royals"}]}, {"id": "sports", "label": "Sports", "stories": [{"id": "s1", "lead": true, "kicker": "FIFA WORLD CUP", "headline": "Cape Verde Stuns Spain; Saudi Arabia Holds Uruguay to Shock Draws", "sub": "Day 5 rewrites early odds as tournament favourites drop points across the board", "summary": "Goalkeeper Vozinha became an overnight sensation Monday after Cape Verde held Spain to a 0-0 draw. Saudi Arabia also earned a hard-fought draw against Uruguay. Germany remains the standout performer after their 7-1 demolition of Curacao.", "time": "8:00 AM", "tag": "WORLD CUP", "sensitivity": false, "image": "https://picsum.photos/seed/capeverde/640/360", "link": "https://example.com/capeverde-spain"}, {"id": "s2", "lead": false, "kicker": "FIFA WORLD CUP", "headline": "Today's Fixtures: France, Argentina, Norway All in Action", "sub": "France vs. Senegal leads Day 6; Argentina face Algeria; Austria take on Jordan", "summary": "Tuesday's four-match slate opens with France against Senegal at MetLife Stadium at 3 PM local. Norway face Iraq, Argentina take on Algeria, and Austria close out the night against Jordan.", "time": "7:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/day6-fixtures"}, {"id": "s4", "lead": false, "kicker": "NHL", "headline": "Carolina Hurricanes Win the Stanley Cup", "sub": "Canes claim the title in a series that went the distance", "summary": "The Carolina Hurricanes are Stanley Cup champions. The title capped a long playoff run and ends a lengthy championship drought for the franchise. Details on the celebration plans are still emerging Tuesday morning.", "time": "Yesterday", "tag": "FINAL", "sensitivity": false, "image": "https://picsum.photos/seed/canes/640/360", "link": "https://example.com/hurricanes-cup"}]}, {"id": "business", "label": "Business", "stories": [{"id": "b1", "lead": true, "kicker": "AI INDUSTRY", "headline": "Anthropic Proposes Global AI Pause as Compute Costs Drive IPO Talk", "sub": "President Daniela Amodei says rising infrastructure costs make public offering increasingly likely", "summary": "Anthropic published what it called its most significant safety paper of the year: a proposal for a coordinated global AI development pause. Separately, president Daniela Amodei explained that surging compute costs are pushing the company toward an IPO.", "time": "6:00 AM", "tag": null, "sensitivity": false, "image": "https://picsum.photos/seed/anthropic/640/360", "link": "https://example.com/anthropic-pause"}, {"id": "b3", "lead": false, "kicker": "MARKETS", "headline": "Hormuz Deal Drives Oil Price Drop in Early Trading", "sub": "Brent crude falls sharply on news of interim agreement", "summary": "Oil markets moved decisively on news of the Hormuz interim deal, with Brent crude falling in early European trading. Traders caution the move may reverse if the agreement fails to materialize.", "time": "7:45 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/oil-drop"}]}, {"id": "opinion", "label": "Opinion", "stories": [{"id": "o1", "lead": true, "kicker": "EDITORIAL", "headline": "The Hormuz Deal Is Good News. Don't Let Trump Own the Narrative.", "sub": "Credit where it's due, but the hard work of durable peace in the Gulf is still ahead", "summary": "An interim deal to reopen the Strait of Hormuz is genuinely welcome. But framing it as a Trump diplomatic triumph misreads the underlying dynamics. Iran's economic pain and regional exhaustion drove this agreement as much as any White House positioning.", "time": "6:30 AM", "tag": "EDITORIAL", "sensitivity": false, "image": "https://picsum.photos/seed/editorial/640/360", "link": "https://example.com/hormuz-editorial"}, {"id": "o2", "lead": false, "kicker": "COLUMN", "headline": "Ontario Place Parking Garage Is Everything Wrong With Ontario's Priority List", "sub": "$198 million for a parking lot while transit crumbles is not a vision", "summary": "The province's commitment of $198 million to a parking garage at Ontario Place encapsulates a governing philosophy that consistently prioritizes automobiles over infrastructure that actually serves people. In a city strained by a global mega-event, this is a remarkable misalignment.", "time": "7:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/ontario-place-column"}]}]}</script>
+
+  <script>
+    (function () {
+      var raw = document.getElementById('edition').textContent;
+      var data;
+      try {
+        data = JSON.parse(raw);
+      } catch (e) {
+        document.getElementById('app').innerHTML =
+          '<div class="notice">No edition loaded. Run the build to generate today’s paper.</div>';
+        return;
+      }
+
+      var state = { active: (data.sections[0] || {}).id, openId: null };
+
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function weatherHtml(w) {
+        if (!w || !w.icon) return '';
+        var week = (w.week || []).map(function (d) {
+          return '<div class="day"><div class="d">' + esc(d.day) + '</div>' +
+            '<div class="i">' + esc(d.icon) + '</div>' +
+            '<div class="hi">' + esc(d.hi) + '°</div>' +
+            '<div class="lo">' + esc(d.lo) + '°</div></div>';
+        }).join('');
+        return '<div class="weather" id="weather">' +
+          '<div class="summary">' +
+            '<span class="ico">' + esc(w.icon) + '</span>' +
+            '<span class="city">Toronto</span>' +
+            '<span class="temp">' + esc(w.high) + '° / ' + esc(w.low) + '°</span>' +
+            '<span class="muted">' + esc(w.condition) + '</span>' +
+            '<span class="muted">Rain ' + esc(w.rain) + '</span>' +
+            '<span class="muted">Wind ' + esc(w.wind) + '</span>' +
+            '<span class="chev" id="wchev">▼</span>' +
+          '</div>' +
+          '<div class="week" id="wweek" style="display:none">' + week + '</div>' +
+        '</div>';
+      }
+
+      function tabsHtml() {
+        return '<div class="tabs">' + data.sections.map(function (s) {
+          return '<button class="tab' + (s.id === state.active ? ' active' : '') +
+            '" data-tab="' + esc(s.id) + '">' + esc(s.label) + '</button>';
+        }).join('') + '</div>';
+      }
+
+      function cardHtml(st) {
+        var open = st.id === state.openId;
+        var tag = st.tag ? '<span class="tag">' + esc(st.tag) + '</span>' : '';
+        var kicker = st.kicker ? '<div class="kicker">' + tag + esc(st.kicker) + '</div>' : '';
+        var sub = st.sub ? '<div class="sub">' + esc(st.sub) + '</div>' : '';
+        var expand = '';
+        if (open) {
+          var img = st.image ? '<img src="' + esc(st.image) + '" alt="" loading="lazy" />' : '';
+          var link = st.link
+            ? '<a class="readmore" href="' + esc(st.link) + '" target="_blank" rel="noopener">Read full story →</a>'
+            : '';
+          expand = '<div class="expand">' + img + esc(st.summary) + '<br>' + link + '</div>';
+        }
+        return '<div class="card' + (st.lead ? ' lead' : '') + (open ? ' open' : '') +
+          '" data-card="' + esc(st.id) + '">' +
+          '<div class="row"><div style="flex:1">' + kicker +
+            '<div class="headline">' + esc(st.headline) + '</div>' + sub +
+            '<div class="time">' + esc(st.time) + '</div></div>' +
+            '<div class="toggle">' + (open ? '−' : '+') + '</div>' +
+          '</div>' + expand +
+        '</div>';
+      }
+
+      function storiesHtml() {
+        var section = data.sections.filter(function (s) { return s.id === state.active; })[0];
+        if (!section) return '';
+        return '<div class="stories">' + section.stories.map(cardHtml).join('') + '</div>';
+      }
+
+      function render() {
+        document.getElementById('app').innerHTML =
+          '<div class="masthead">' +
+            '<div class="date">' + esc(data.date) + '</div>' +
+            '<div class="title">THE DAILY</div>' +
+            '<div class="tagline">Toronto · World · Business · Sport</div>' +
+          '</div>' +
+          weatherHtml(data.weather) +
+          tabsHtml() +
+          storiesHtml() +
+          '<div class="footer">THE DAILY · TORONTO · Tap any headline to read</div>';
+        bind();
+      }
+
+      function bind() {
+        var weather = document.getElementById('weather');
+        if (weather) {
+          weather.addEventListener('click', function () {
+            var week = document.getElementById('wweek');
+            var chev = document.getElementById('wchev');
+            var showing = week.style.display !== 'none';
+            week.style.display = showing ? 'none' : 'flex';
+            chev.textContent = showing ? '▼' : '▲';
+          });
+        }
+        Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (btn) {
+          btn.addEventListener('click', function () {
+            state.active = btn.getAttribute('data-tab');
+            state.openId = null;
+            render();
+          });
+        });
+        Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
+          card.addEventListener('click', function (ev) {
+            if (ev.target.closest('a')) return; // let the read-more link work
+            var id = card.getAttribute('data-card');
+            state.openId = state.openId === id ? null : id;
+            render();
+          });
+        });
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>
