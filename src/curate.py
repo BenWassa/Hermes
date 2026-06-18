@@ -29,6 +29,9 @@ log = logging.getLogger("the-daily.curate")
 # Transient Gemini errors worth retrying (free tier can briefly 503/429).
 _RETRY_CODES = {429, 500, 503}
 
+# If the configured model hits quota exhaustion, fall back to this.
+_FALLBACK_MODEL = "gemini-2.5-flash"
+
 
 def _client() -> genai.Client:
     key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
@@ -37,8 +40,9 @@ def _client() -> genai.Client:
     return genai.Client(api_key=key)
 
 
-def _gen_config() -> types.GenerateContentConfig:
-    kwargs = dict(
+def _gen_config(model: str | None = None) -> types.GenerateContentConfig:
+    m = model if model is not None else config.CURATE_MODEL
+    kwargs: dict = dict(
         system_instruction=config.build_curate_system_prompt(),
         response_mime_type="application/json",
         max_output_tokens=config.CURATE_MAX_TOKENS,
@@ -46,29 +50,40 @@ def _gen_config() -> types.GenerateContentConfig:
     )
     # Disable "thinking" on 2.5-series models so the whole output budget goes to
     # the JSON (and the free-tier call stays fast). Older models ignore this.
-    if "2.5" in config.CURATE_MODEL:
+    if "2.5" in m:
         kwargs["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
     return types.GenerateContentConfig(**kwargs)
 
 
 def _generate(client: genai.Client, contents: str, retries: int = 3):
-    """generate_content with exponential backoff on transient 429/500/503."""
-    cfg = _gen_config()
+    """generate_content with backoff on transient errors; falls back to gemini-2.5-flash on quota exhaustion."""
+    models_to_try = [config.CURATE_MODEL]
+    if config.CURATE_MODEL != _FALLBACK_MODEL:
+        models_to_try.append(_FALLBACK_MODEL)
+
     last: Exception | None = None
-    for attempt in range(retries + 1):
-        try:
-            return client.models.generate_content(
-                model=config.CURATE_MODEL, contents=contents, config=cfg
-            )
-        except genai_errors.APIError as exc:
-            if getattr(exc, "code", None) in _RETRY_CODES and attempt < retries:
-                wait = 2 ** attempt
-                log.warning("Gemini %s; retrying in %ss", getattr(exc, "code", "?"), wait)
-                time.sleep(wait)
+    for model in models_to_try:
+        cfg = _gen_config(model)
+        for attempt in range(retries + 1):
+            try:
+                return client.models.generate_content(
+                    model=model, contents=contents, config=cfg
+                )
+            except genai_errors.APIError as exc:
+                code = getattr(exc, "code", None)
+                if code in _RETRY_CODES and attempt < retries:
+                    # Use longer waits: Gemini free-tier often needs 30-60s to recover.
+                    wait = min(60, 5 * (2 ** attempt))  # 5, 10, 20 … capped at 60s
+                    log.warning("Gemini %s on %s; retrying in %ss", code, model, wait)
+                    time.sleep(wait)
+                    last = exc
+                    continue
                 last = exc
-                continue
-            raise
-    raise last  # pragma: no cover
+                if code == 429 and model != models_to_try[-1]:
+                    log.warning("Quota exhausted on %s; switching to fallback %s", model, models_to_try[-1])
+                break  # move to next model in list
+
+    raise last  # type: ignore[misc]
 
 
 def _call(client: genai.Client, stories: list[dict], reinforce: bool = False) -> dict:

@@ -3,7 +3,7 @@ name: Notify The Daily
 on:
   workflow_dispatch: {}
   schedule:
-    # 07:00 ET, two crons for DST; runtime gate keeps only the 7 AM ET run.
+    # 07:00 ET, two crons for DST; gate accepts 07–10 ET to absorb runner lag.
     - cron: "0 11 * * *"   # 07:00 EDT (summer, UTC-4)
     - cron: "0 12 * * *"   # 07:00 EST (winter, UTC-5)
 
@@ -11,15 +11,21 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: DST gate (skip scheduled runs that are not ~7 AM ET)
+      - name: Notify gate (skip outside 07:00–10:59 ET delivery window)
         id: gate
         run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           HOUR=$(TZ=America/Toronto date +%H)
           echo "Toronto hour: $HOUR"
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "$HOUR" != "07" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
+          # Window 07–10 absorbs up to ~4h of GitHub Actions scheduling lag.
+          if [ "$HOUR" -ge 7 ] && [ "$HOUR" -le 10 ]; then
             echo "skip=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Outside delivery window (hour=$HOUR); skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Push notification (ntfy.sh)

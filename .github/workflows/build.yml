@@ -3,8 +3,8 @@ name: Build The Daily
 on:
   workflow_dispatch: {}
   schedule:
-    # Two crons cover the DST shift; a runtime gate ensures only the ~6 AM ET
-    # run proceeds, so shoulder-season weeks do not double-build.
+    # Two crons cover the DST shift. The build gate skips whichever cron runs
+    # second (checking git history), so there is never a double-build.
     - cron: "0 10 * * *"   # 06:00 EDT (summer, UTC-4)
     - cron: "0 11 * * *"   # 06:00 EST (winter, UTC-5)
 
@@ -22,14 +22,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: DST gate (skip scheduled runs that are not ~6 AM ET)
+      - name: Build gate (skip scheduled run if today's edition already published)
         id: gate
         run: |
-          HOUR=$(TZ=America/Toronto date +%H)
-          echo "Toronto hour: $HOUR"
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "$HOUR" != "06" ]; then
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          TODAY=$(TZ=America/Toronto date +%Y-%m-%d)
+          LAST=$(TZ=America/Toronto git log -1 --format=%cd --date=format-local:'%Y-%m-%d' -- docs/index.html 2>/dev/null || echo "")
+          echo "Today (ET): $TODAY  Last build (ET): ${LAST:-never}"
+          if [ "$LAST" = "$TODAY" ]; then
+            echo "Edition for $TODAY already published; skipping."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
+            echo "No edition yet for $TODAY; proceeding."
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
