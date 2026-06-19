@@ -2,29 +2,47 @@ name: Notify The Daily
 
 on:
   workflow_dispatch: {}
-  schedule:
-    # 07:00 ET, two crons for DST; gate accepts 07–10 ET to absorb runner lag.
-    - cron: "0 11 * * *"   # 07:00 EDT (summer, UTC-4)
-    - cron: "0 12 * * *"   # 07:00 EST (winter, UTC-5)
+  # Fires automatically after "Build The Daily" finishes, so the push only
+  # goes out once a fresh edition actually exists.
+  workflow_run:
+    workflows: ["Build The Daily"]
+    types:
+      - completed
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Notify gate (skip outside 07:00–10:59 ET delivery window)
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Notify gate (require a fresh edition published today)
         id: gate
         run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then
+          # Manual runs always notify.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual dispatch; notifying."
             echo "skip=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          HOUR=$(TZ=America/Toronto date +%H)
-          echo "Toronto hour: $HOUR"
-          # Window 07–10 absorbs up to ~4h of GitHub Actions scheduling lag.
-          if [ "$HOUR" -ge 7 ] && [ "$HOUR" -le 10 ]; then
+          # Only notify when the triggering build actually succeeded.
+          if [ "${{ github.event.workflow_run.conclusion }}" != "success" ]; then
+            echo "Build did not succeed (conclusion=${{ github.event.workflow_run.conclusion }}); skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Confirm today's edition was actually committed (guards the
+          # build's own "already published, nothing to do" skip path).
+          TODAY=$(TZ=America/Toronto date +%Y-%m-%d)
+          LAST=$(TZ=America/Toronto git log -1 --format=%cd --date=format-local:'%Y-%m-%d' -- docs/index.html 2>/dev/null || echo "")
+          echo "Today (ET): $TODAY  Last edition (ET): ${LAST:-never}"
+          if [ "$LAST" = "$TODAY" ]; then
+            echo "Fresh edition confirmed for $TODAY; notifying."
             echo "skip=false" >> "$GITHUB_OUTPUT"
           else
-            echo "Outside delivery window (hour=$HOUR); skipping."
+            echo "No fresh edition for $TODAY; skipping push."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 
