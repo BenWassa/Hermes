@@ -3,10 +3,16 @@ name: Build The Daily
 on:
   workflow_dispatch: {}
   schedule:
-    # Two crons cover the DST shift. The build gate skips whichever cron runs
-    # second (checking git history), so there is never a double-build.
-    - cron: "0 10 * * *"   # 06:00 EDT (summer, UTC-4)
-    - cron: "0 11 * * *"   # 06:00 EST (winter, UTC-5)
+    # Three morning attempts an hour apart (05:00 / 06:00 / 07:00 ET) so a
+    # dropped GitHub cron self-heals: the build gate checks git history and
+    # skips once today's edition exists, so the first run that lands publishes
+    # and the rest are no-ops. Minutes are offset to :17 to dodge the heavily
+    # throttled top-of-hour slot. Each ET hour needs both UTC offsets to cover
+    # the DST shift (EDT = UTC-4 summer, EST = UTC-5 winter).
+    - cron: "17 9 * * *"    # 05:17 EDT (summer, UTC-4)
+    - cron: "17 10 * * *"   # 05:17 EST (winter) / 06:17 EDT (summer)
+    - cron: "17 11 * * *"   # 06:17 EST (winter) / 07:17 EDT (summer)
+    - cron: "17 12 * * *"   # 07:17 EST (winter)
 
 permissions:
   contents: write
