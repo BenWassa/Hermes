@@ -9,7 +9,8 @@ on:
     # and the rest are no-ops. Minutes are offset to :17 to dodge the heavily
     # throttled top-of-hour slot. Each ET hour needs both UTC offsets to cover
     # the DST shift (EDT = UTC-4 summer, EST = UTC-5 winter).
-    - cron: "17 9 * * *"    # 05:17 EDT (summer, UTC-4)
+    - cron: "17 8 * * *"    # 04:17 EDT (summer, UTC-4)
+    - cron: "17 9 * * *"    # 04:17 EST (winter) / 05:17 EDT (summer)
     - cron: "17 10 * * *"   # 05:17 EST (winter) / 06:17 EDT (summer)
     - cron: "17 11 * * *"   # 06:17 EST (winter) / 07:17 EDT (summer)
     - cron: "17 12 * * *"   # 07:17 EST (winter)
