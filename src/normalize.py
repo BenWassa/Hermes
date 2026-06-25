@@ -65,6 +65,24 @@ def _normalize_nyt(item: dict) -> dict:
     }
 
 
+def _normalize_perigon(item: dict) -> dict:
+    source = item.get("source") or {}
+    # Perigon's article source object carries a domain (e.g. "ft.com"); prefer a
+    # friendly name when present, otherwise show the domain without "www.".
+    name = source.get("name") or source.get("domain") or "Perigon"
+    if name.startswith("www."):
+        name = name[4:]
+    return {
+        "title": _clean(item.get("title")),
+        "description": _clean(item.get("description") or item.get("summary")),
+        "source": name,
+        "section_hint": item.get("_section_hint", "world"),
+        "pub_date": item.get("pubDate", "") or item.get("addDate", ""),
+        "image": item.get("imageUrl") or None,
+        "link": item.get("url", ""),
+    }
+
+
 def _normalize_rss(item: dict) -> dict:
     image = None
     # feedparser exposes media:thumbnail / media:content variously.
@@ -92,6 +110,7 @@ def _normalize_rss(item: dict) -> dict:
 _DISPATCH = {
     "guardian": _normalize_guardian,
     "nyt": _normalize_nyt,
+    "perigon": _normalize_perigon,
     "rss": _normalize_rss,
 }
 
