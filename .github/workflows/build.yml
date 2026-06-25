@@ -66,6 +66,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
           NYT_API_KEY: ${{ secrets.NYT_API_KEY }}
+          PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
           CURATE_MODEL: ${{ vars.CURATE_MODEL }}
           PAGES_URL: ${{ vars.PAGES_URL }}
         run: python -m src.build

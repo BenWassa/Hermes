@@ -2,8 +2,10 @@
 
 An autonomous overnight pipeline that assembles a personalized Toronto morning
 newspaper, renders it as a static web page, and pushes a notification to your
-phone at 7:00 AM. World and national news come from the Guardian and NYT APIs;
-Toronto local news comes from RSS. Google Gemini (`gemini-2.5-flash`, free
+phone at 7:00 AM. World and business news come from the Guardian, NYT, and
+Perigon APIs (Perigon aggregates FT, Reuters, Bloomberg and thousands more, so
+the business desk reads like a professional's, not just one paper); Toronto
+local news comes from RSS. Google Gemini (`gemini-2.5-flash`, free
 tier) dedupes, sections, ranks, and summarizes; a sensitivity rule keeps hard
 news text-only. The result deploys to GitHub Pages and an ntfy.sh push links
 straight to it.
@@ -22,7 +24,7 @@ weather -> fetch -> normalize -> curate (Claude) -> resolve images -> render -> 
 | Module | Role |
 |---|---|
 | [src/weather.py](src/weather.py) | Open-Meteo Toronto forecast (no key) |
-| [src/fetch.py](src/fetch.py) | Guardian + NYT APIs, Toronto RSS (graceful per-source failure) |
+| [src/fetch.py](src/fetch.py) | Guardian + NYT + Perigon APIs, Toronto RSS (graceful per-source failure) |
 | [src/normalize.py](src/normalize.py) | Unify sources into one story schema |
 | [src/curate.py](src/curate.py) | One Gemini call: dedupe, section, rank, summarize, flag |
 | [src/images.py](src/images.py) | Keep source thumbnails; suppress on sensitive stories |
@@ -54,6 +56,7 @@ secrets in CI. See [.env.example](.env.example).
 | `GEMINI_API_KEY` | curation (Google AI Studio, free tier) |
 | `GUARDIAN_API_KEY` | Guardian world/business/sport/opinion |
 | `NYT_API_KEY` | NYT world/business |
+| `PERIGON_API_KEY` | Perigon world/business/markets (optional, free tier; skipped if unset) |
 | `NTFY_TOPIC` | morning push |
 | `PAGES_URL` | cache-buster + notification link (CI: set as a repo **variable**) |
 | `CURATE_MODEL` | optional model override (default `gemini-2.5-flash`) |
@@ -76,9 +79,10 @@ Pages serves `docs/` on `main` at `https://BenWassa.github.io/Hermes/`.
 - [ ] Get a Gemini API key — https://aistudio.google.com/apikey (free tier)
 - [ ] Get a Guardian API key — https://open-platform.theguardian.com/
 - [ ] Get an NYT API key — https://developer.nytimes.com/
+- [ ] (Optional) Get a Perigon API key — https://www.perigon.io/ (free tier; widens business/world coverage)
 - [ ] Pick an ntfy topic (hard to guess), install the ntfy iOS app, subscribe
 - [ ] Add repo **secrets**: `GEMINI_API_KEY`, `GUARDIAN_API_KEY`,
-      `NYT_API_KEY`, `NTFY_TOPIC`
+      `NYT_API_KEY`, `PERIGON_API_KEY` (optional), `NTFY_TOPIC`
 - [ ] Add repo **variable** `PAGES_URL` (e.g. `https://BenWassa.github.io/Hermes/`)
 - [ ] Enable GitHub Pages: Settings → Pages → source = `main`, folder = `/docs`
 - [ ] Verify the Toronto RSS URLs in [src/config.py](src/config.py) still resolve; swap any dead ones

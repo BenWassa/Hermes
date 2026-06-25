@@ -63,6 +63,32 @@ NYT_SECTIONS = {
     "business": "business",
 }
 
+# Perigon News API queries -> our section hint. Each entry is one request to the
+# /v1/all endpoint. Perigon aggregates thousands of outlets (FT, Reuters,
+# Bloomberg, etc.), which broadens the business and world pool well beyond the
+# Guardian/NYT pairing - the point being to actually guide a business reader.
+# Requests are deliberately few (free-tier friendly) and balanced by the curate
+# trimmer, so no single query crowds out the others. "category" accepts Perigon's
+# Google-derived content categories; multiple values OR together. Skipped
+# gracefully when PERIGON_API_KEY is unset.
+PERIGON_QUERIES = [
+    {
+        "label": "world",
+        "hint": "world",
+        "params": {"category": ["Politics", "General"], "country": ["us", "gb", "ca"]},
+    },
+    {
+        "label": "business",
+        "hint": "business",
+        "params": {"category": ["Business", "Finance"]},
+    },
+    {
+        "label": "markets",
+        "hint": "business",
+        "params": {"q": "markets OR economy OR earnings OR central bank", "category": ["Finance"]},
+    },
+]
+
 # Toronto local RSS feeds. A dead feed is skipped gracefully (never crashes the
 # run); verify these resolve and swap any that rot.
 TORONTO_RSS = [
