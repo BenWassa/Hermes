@@ -7,63 +7,124 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <meta name="theme-color" content="#1a2744" />
+  <meta name="theme-color" content="#1a2744" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#101722" media="(prefers-color-scheme: dark)" />
   <meta name="application-name" content="The Daily" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="The Daily" />
   <meta name="mobile-web-app-capable" content="yes" />
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icons/icon-192.svg" />
   <title>The Daily</title>
   <style>
+    /* ---- Design tokens: The Morning Broadsheet ------------------------- */
+    :root {
+      --paper: #faf8f3;        /* the sheet (warm white, never #fff) */
+      --desk: #efece6;         /* the desk beyond the column */
+      --ink: #17130d;          /* headlines / primary text */
+      --ink-sub: #453f38;      /* standfirsts */
+      --ink-muted: #635d54;    /* inactive tabs */
+      --meta: #6c665c;         /* timestamps, dateline, footer (>=AA small) */
+      --rule: #dcd6cc;         /* hairline between cards */
+      --rule-soft: #e3ded4;    /* hairline inside an opened card */
+      --navy: #1a2744;         /* structural ink */
+      --navy-ink: #1a2744;     /* navy used as text (links, active tab) */
+      --red: #8b1a1a;          /* editorial heat */
+      --tint-open: #f2ede4;    /* ground of an expanded card */
+      --tint-analysis: #ece6da;/* ground of the why-it-matters note */
+      --strip-bg: #1a2744;     /* weather strip */
+      --strip-ink: #f7f4ee;
+      --chip-hot: #8b1a1a;     /* DEVELOPING / WAR-class flags */
+      --chip-cool: #1a2744;    /* procedural flags (FINAL, EDITORIAL) */
+      --chip-ink: #faf8f3;
+      --focus: #1a2744;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #151a22;      /* lamplight edition: deep navy-black paper */
+        --desk: #0e1219;
+        --ink: #e9e3d5;        /* cream ink */
+        --ink-sub: #bcb6a8;
+        --ink-muted: #948e82;
+        --meta: #8f897d;
+        --rule: #2a303a;
+        --rule-soft: #2f3540;
+        --navy: #6f82a8;       /* structure lifted so it reads on dark */
+        --navy-ink: #a3b3d2;
+        --red: #d1726b;        /* desaturated heat */
+        --tint-open: #1b212b;
+        --tint-analysis: #20262f;
+        --strip-bg: #1b2334;
+        --strip-ink: #e9e3d5;
+        --chip-hot: #a8443c;
+        --chip-cool: #3b4a6c;
+        --chip-ink: #f0eadc;
+        --focus: #a3b3d2;
+      }
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: #efece6; }
+    html { font-size: 100%; }
+    html, body { background: var(--desk); }
     body {
       font-family: 'Georgia', serif;
-      color: #111;
+      color: var(--ink);
       -webkit-font-smoothing: antialiased;
     }
     #app {
       min-height: 100vh;
-      background: #fff;
+      min-height: 100svh;
+      background: var(--paper);
       max-width: 680px;
       margin: 0 auto;
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
     }
 
     /* Masthead */
     .masthead {
-      border-bottom: 4px solid #1a2744;
-      padding: 18px 20px 14px;
-      background: #fff;
+      border-bottom: 4px solid var(--navy);
+      padding: calc(18px + env(safe-area-inset-top)) 20px 14px;
+      background: var(--paper);
     }
     .masthead .date {
-      font-size: 11px; color: #999; letter-spacing: 0.1em;
+      font-size: 0.6875rem; color: var(--meta); letter-spacing: 0.1em;
       text-transform: uppercase; margin-bottom: 4px;
     }
     .masthead .title {
-      font-size: 38px; font-weight: 700; letter-spacing: -0.01em;
-      color: #1a2744; line-height: 1; margin-bottom: 2px;
+      font-size: 2.375rem; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--navy); line-height: 1; margin-bottom: 2px;
     }
     .masthead .tagline {
-      font-family: 'Arial', sans-serif; font-size: 10px; color: #999;
+      font-family: 'Arial', sans-serif; font-size: 0.625rem; color: var(--meta);
       letter-spacing: 0.18em; text-transform: uppercase;
+    }
+
+    /* Stale-edition ribbon */
+    .stale {
+      background: var(--tint-analysis); color: var(--meta);
+      font-family: 'Arial', sans-serif; font-size: 0.625rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; text-align: center;
+      padding: 7px 20px;
     }
 
     /* Weather strip */
     .weather {
-      background: #1a2744; color: #fff; cursor: pointer; user-select: none;
+      background: var(--strip-bg); color: var(--strip-ink);
+      cursor: pointer; user-select: none;
     }
     .weather .summary {
       display: flex; align-items: center; gap: 16px;
       padding: 10px 20px; overflow-x: auto; scrollbar-width: none;
+      min-height: 44px;
     }
     .weather .summary::-webkit-scrollbar { display: none; }
-    .weather .ico { font-size: 22px; }
-    .weather .city { font-weight: 700; font-size: 15px; }
-    .weather .temp { font-size: 15px; }
-    .weather .muted { opacity: 0.7; font-size: 13px; white-space: nowrap; }
-    .weather .chev { margin-left: auto; opacity: 0.6; font-size: 12px; }
+    .weather .ico { font-size: 1.375rem; }
+    .weather .city { font-weight: 700; font-size: 0.9375rem; }
+    .weather .temp { font-size: 0.9375rem; }
+    .weather .muted { opacity: 0.72; font-size: 0.8125rem; white-space: nowrap; }
+    .weather .chev { margin-left: auto; opacity: 0.6; font-size: 0.75rem; }
     .weather .week {
       display: flex; border-top: 1px solid rgba(255,255,255,0.12);
       padding: 10px 20px; overflow-x: auto; scrollbar-width: none;
@@ -73,82 +134,101 @@
       text-align: center; min-width: 52px; padding: 0 8px;
       border-right: 1px solid rgba(255,255,255,0.1);
     }
-    .weather .day .d { font-size: 11px; opacity: 0.6; margin-bottom: 4px; }
-    .weather .day .i { font-size: 18px; }
-    .weather .day .hi { font-size: 13px; font-weight: 700; margin-top: 4px; }
-    .weather .day .lo { font-size: 11px; opacity: 0.5; }
+    .weather .day .d { font-size: 0.6875rem; opacity: 0.6; margin-bottom: 4px; }
+    .weather .day .i { font-size: 1.125rem; }
+    .weather .day .hi { font-size: 0.8125rem; font-weight: 700; margin-top: 4px; }
+    .weather .day .lo { font-size: 0.6875rem; opacity: 0.5; }
 
     /* Tab nav */
     .tabs {
-      display: flex; overflow-x: auto; border-bottom: 2px solid #1a2744;
-      background: #fff; scrollbar-width: none; position: sticky; top: 0; z-index: 10;
+      display: flex; overflow-x: auto; border-bottom: 2px solid var(--navy);
+      background: var(--paper); scrollbar-width: none;
+      position: sticky; top: 0; z-index: 10;
     }
     .tabs::-webkit-scrollbar { display: none; }
     .tab {
-      flex-shrink: 0; padding: 12px 18px; border: none; background: none;
-      cursor: pointer; font-family: 'Georgia', serif; font-size: 13px;
-      font-weight: 400; color: #666; border-bottom: 3px solid transparent;
-      margin-bottom: -2px; letter-spacing: 0.04em; text-transform: uppercase;
+      flex-shrink: 0; min-height: 44px; display: flex; align-items: center;
+      padding: 0 18px; border: none; background: none; cursor: pointer;
+      font-family: 'Arial', sans-serif; font-size: 0.6875rem; font-weight: 700;
+      color: var(--ink-muted); border-bottom: 3px solid transparent;
+      margin-bottom: -2px; letter-spacing: 0.12em; text-transform: uppercase;
       transition: color 0.15s;
     }
-    .tab.active { font-weight: 700; color: #1a2744; border-bottom-color: #1a2744; }
+    .tab.active { color: var(--navy-ink); border-bottom-color: var(--navy); }
 
     /* Stories */
-    .stories { padding: 0 20px 40px; }
-    .card {
-      border-top: 1px solid #ddd; padding: 14px 0; cursor: pointer;
-      background: #fff; transition: background 0.15s;
+    .stories { padding: 8px 20px 40px; }
+    .empty {
+      padding: 40px 4px; text-align: center; color: var(--meta);
+      font-style: italic; font-size: 0.9375rem;
     }
-    .card.lead { border-top: 3px solid #1a2744; padding: 20px 0 16px; }
-    .card.open { background: #f8f7f4; }
+    .card {
+      border-top: 1px solid var(--rule); padding: 14px 0; cursor: pointer;
+      background: var(--paper); transition: background 0.15s;
+    }
+    .card.lead { border-top: 3px solid var(--navy); padding: 20px 0 16px; }
+    .card.open { background: var(--tint-open); }
+    .card:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
     .card .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .card .row-main { flex: 1; min-width: 0; }
     .card .kicker {
-      font-family: 'Arial', sans-serif; font-size: 10px; font-weight: 700;
-      letter-spacing: 0.12em; color: #8b1a1a; margin-bottom: 6px; text-transform: uppercase;
+      font-family: 'Arial', sans-serif; font-size: 0.625rem; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--red); margin-bottom: 6px; text-transform: uppercase;
     }
     .card .tag {
-      background: #8b1a1a; color: #fff; padding: 1px 6px; margin-right: 8px;
-      font-size: 9px; border-radius: 2px;
+      color: var(--chip-ink); padding: 2px 6px; margin-right: 8px;
+      font-size: 0.5625rem; border-radius: 2px; vertical-align: 1px;
     }
+    .card .tag.hot { background: var(--chip-hot); }
+    .card .tag.cool { background: var(--chip-cool); }
     .card .headline {
-      font-size: 17px; font-weight: 700; line-height: 1.25; color: #111; margin-bottom: 6px;
+      font-size: 1.0625rem; font-weight: 700; line-height: 1.25; color: var(--ink); margin-bottom: 6px;
     }
-    .card.lead .headline { font-size: 22px; }
+    .card.lead .headline { font-size: 1.375rem; }
     .card .sub {
-      font-size: 14px; color: #444; line-height: 1.4; margin-bottom: 4px; font-style: italic;
+      font-size: 0.875rem; color: var(--ink-sub); line-height: 1.4; margin-bottom: 4px; font-style: italic;
     }
-    .card .time { font-family: 'Arial', sans-serif; font-size: 11px; color: #999; margin-top: 4px; }
-    .card .toggle { color: #bbb; font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .card .time { font-family: 'Arial', sans-serif; font-size: 0.6875rem; color: var(--meta); margin-top: 4px; }
+    .card .toggle { color: var(--navy-ink); opacity: 0.5; font-size: 1.125rem; flex-shrink: 0; margin-top: 2px; }
     .card .expand {
-      margin-top: 14px; padding-top: 14px; border-top: 1px solid #e0ddd8;
-      font-size: 15px; color: #333; line-height: 1.7;
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--rule-soft);
+    }
+    .card .expand .sumtext {
+      font-size: 0.9375rem; color: var(--ink-sub); line-height: 1.7;
     }
     .card .expand img {
-      display: block; width: 100%; height: auto; border-radius: 3px; margin-bottom: 12px;
+      display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+      background: var(--tint-open); border-radius: 3px; margin-bottom: 12px;
     }
     .card .analysis {
-      margin-top: 12px; padding: 10px 14px; background: #f1efe9;
-      font-size: 14px; line-height: 1.6; color: #333; font-style: italic;
+      margin-top: 12px; padding: 10px 14px; background: var(--tint-analysis);
+      font-size: 0.875rem; line-height: 1.6; color: var(--ink-sub); font-style: italic;
     }
     .card .analysis .alabel {
       display: block; font-family: 'Arial', sans-serif; font-style: normal;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #1a2744; margin-bottom: 4px;
+      font-size: 0.625rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--navy-ink); margin-bottom: 4px;
     }
     .card .readmore {
-      display: inline-block; margin-top: 12px; font-family: 'Arial', sans-serif;
-      font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: #1a2744;
-      text-decoration: none;
+      display: inline-block; margin-top: 12px; min-height: 44px; line-height: 44px;
+      font-family: 'Arial', sans-serif; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.04em; color: var(--navy-ink); text-decoration: none;
     }
     .card .readmore:hover { text-decoration: underline; }
+    .card .readmore:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
     /* Footer */
     .footer {
-      border-top: 2px solid #1a2744; padding: 16px 20px;
-      font-family: 'Arial', sans-serif; font-size: 11px; color: #aaa;
+      border-top: 2px solid var(--navy);
+      padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+      font-family: 'Arial', sans-serif; font-size: 0.6875rem; color: var(--meta);
       text-align: center; letter-spacing: 0.06em;
     }
-    .notice { padding: 40px 20px; text-align: center; color: #999; font-style: italic; }
+    .notice { padding: 40px 20px; text-align: center; color: var(--meta); font-style: italic; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
@@ -176,6 +256,21 @@
           .replace(/"/g, '&quot;');
       }
 
+      // Editorial heat flags keep the red chip; procedural flags cool to navy,
+      // so a red chip still means something (the Scarce Red Rule).
+      function isHotTag(t) {
+        return /^(DEVELOPING|BREAKING|LIVE|WAR|ALERT|URGENT)$/i.test(t || '');
+      }
+
+      // Tagline reflects the sections the edition actually shipped, not a
+      // hardcoded list that can disagree with the paper.
+      function taglineText() {
+        var labels = data.sections
+          .filter(function (s) { return s.id !== 'front'; })
+          .map(function (s) { return s.label; });
+        return (labels.length ? labels : ['Toronto', 'World', 'Business']).join(' · ');
+      }
+
       function weatherHtml(w) {
         if (!w || !w.icon) return '';
         var week = (w.week || []).map(function (d) {
@@ -184,7 +279,8 @@
             '<div class="hi">' + esc(d.hi) + '°</div>' +
             '<div class="lo">' + esc(d.lo) + '°</div></div>';
         }).join('');
-        return '<div class="weather" id="weather">' +
+        return '<div class="weather" id="weather" role="button" tabindex="0" ' +
+          'aria-expanded="false" aria-label="Toronto weather, tap for the week">' +
           '<div class="summary">' +
             '<span class="ico">' + esc(w.icon) + '</span>' +
             '<span class="city">Toronto</span>' +
@@ -199,87 +295,160 @@
       }
 
       function tabsHtml() {
-        return '<div class="tabs">' + data.sections.map(function (s) {
-          return '<button class="tab' + (s.id === state.active ? ' active' : '') +
-            '" data-tab="' + esc(s.id) + '">' + esc(s.label) + '</button>';
+        return '<div class="tabs" role="tablist">' + data.sections.map(function (s) {
+          var on = s.id === state.active;
+          return '<button class="tab' + (on ? ' active' : '') + '" role="tab" ' +
+            'aria-selected="' + on + '" data-tab="' + esc(s.id) + '">' + esc(s.label) + '</button>';
         }).join('') + '</div>';
       }
 
       function cardHtml(st) {
         var open = st.id === state.openId;
-        var tag = st.tag ? '<span class="tag">' + esc(st.tag) + '</span>' : '';
+        var tag = st.tag
+          ? '<span class="tag ' + (isHotTag(st.tag) ? 'hot' : 'cool') + '">' + esc(st.tag) + '</span>'
+          : '';
         var kicker = st.kicker ? '<div class="kicker">' + tag + esc(st.kicker) + '</div>' : '';
         var sub = st.sub ? '<div class="sub">' + esc(st.sub) + '</div>' : '';
         var expand = '';
         if (open) {
-          var img = st.image ? '<img src="' + esc(st.image) + '" alt="" loading="lazy" />' : '';
+          var img = st.image
+            ? '<img src="' + esc(st.image) + '" alt="' + esc(st.headline) + '" ' +
+              'loading="lazy" onerror="this.remove()" />'
+            : '';
           var analysis = st.analysis
             ? '<div class="analysis"><span class="alabel">Why it matters</span>' + esc(st.analysis) + '</div>'
             : '';
           var link = st.link
             ? '<a class="readmore" href="' + esc(st.link) + '" target="_blank" rel="noopener">Read full story →</a>'
             : '';
-          expand = '<div class="expand">' + img + esc(st.summary) + analysis + '<br>' + link + '</div>';
+          expand = '<div class="expand">' + img +
+            '<p class="sumtext">' + esc(st.summary) + '</p>' + analysis + link + '</div>';
         }
         return '<div class="card' + (st.lead ? ' lead' : '') + (open ? ' open' : '') +
-          '" data-card="' + esc(st.id) + '">' +
-          '<div class="row"><div style="flex:1">' + kicker +
+          '" data-card="' + esc(st.id) + '" role="button" tabindex="0" ' +
+          'aria-expanded="' + open + '">' +
+          '<div class="row"><div class="row-main">' + kicker +
             '<div class="headline">' + esc(st.headline) + '</div>' + sub +
             '<div class="time">' + esc(st.time) + '</div></div>' +
-            '<div class="toggle">' + (open ? '−' : '+') + '</div>' +
+            '<div class="toggle" aria-hidden="true">' + (open ? '−' : '+') + '</div>' +
           '</div>' + expand +
         '</div>';
       }
 
-      function storiesHtml() {
+      function storiesInner() {
         var section = data.sections.filter(function (s) { return s.id === state.active; })[0];
         if (!section) return '';
-        return '<div class="stories">' + section.stories.map(cardHtml).join('') + '</div>';
+        if (!section.stories || !section.stories.length) {
+          return '<div class="empty">Nothing filed for ' + esc(section.label) + ' this morning.</div>';
+        }
+        return section.stories.map(cardHtml).join('');
       }
 
-      function render() {
-        document.getElementById('app').innerHTML =
-          '<div class="masthead">' +
+      // Quietly flag a saved (not-today) edition served from cache/offline.
+      function staleRibbon() {
+        try {
+          var meta = document.querySelector('meta[name=build]');
+          if (!meta) return '';
+          var built = new Date(meta.getAttribute('content'));
+          if (isNaN(built.getTime())) return '';
+          var opt = { timeZone: 'America/Toronto' };
+          if (built.toLocaleDateString('en-CA', opt) < new Date().toLocaleDateString('en-CA', opt)) {
+            return '<div class="stale">Saved edition · ' + esc(data.date) + '</div>';
+          }
+        } catch (e) {}
+        return '';
+      }
+
+      function appHtml() {
+        return '<div class="masthead">' +
             '<div class="date">' + esc(data.date) + '</div>' +
             '<div class="title">THE DAILY</div>' +
-            '<div class="tagline">Toronto · World · Business · Sport</div>' +
+            '<div class="tagline">' + esc(taglineText()) + '</div>' +
           '</div>' +
+          staleRibbon() +
           weatherHtml(data.weather) +
           tabsHtml() +
-          storiesHtml() +
+          '<div class="stories" id="stories">' + storiesInner() + '</div>' +
           '<div class="footer">THE DAILY · TORONTO · Tap any headline to read</div>';
-        bind();
       }
 
-      function bind() {
+      var app = document.getElementById('app');
+
+      // Rebuild only the stories column; masthead, weather, and tab strip (and
+      // their scroll/open state) are left untouched. This is what keeps a tap
+      // from resetting the reader's place.
+      function refreshStories() {
+        document.getElementById('stories').innerHTML = storiesInner();
+        bindCards();
+      }
+
+      function selectTab(id) {
+        if (id === state.active) return;
+        state.active = id;
+        state.openId = null;
+        var tabs = document.querySelectorAll('.tab');
+        Array.prototype.forEach.call(tabs, function (t) {
+          var on = t.getAttribute('data-tab') === id;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on);
+          if (on) t.scrollIntoView({ inline: 'center', block: 'nearest' });
+        });
+        refreshStories();
+        // Start the new section at the top, tab strip stuck under the notch.
+        var tabsEl = document.querySelector('.tabs');
+        if (tabsEl) window.scrollTo(0, tabsEl.offsetTop);
+      }
+
+      function toggleCard(id) {
+        var y = window.scrollY;
+        state.openId = state.openId === id ? null : id;
+        refreshStories();
+        window.scrollTo(0, y);   // grow/collapse in place, never jump
+      }
+
+      function bindWeather() {
         var weather = document.getElementById('weather');
-        if (weather) {
-          weather.addEventListener('click', function () {
-            var week = document.getElementById('wweek');
-            var chev = document.getElementById('wchev');
-            var showing = week.style.display !== 'none';
-            week.style.display = showing ? 'none' : 'flex';
-            chev.textContent = showing ? '▼' : '▲';
-          });
+        if (!weather) return;
+        function toggle() {
+          var week = document.getElementById('wweek');
+          var chev = document.getElementById('wchev');
+          var showing = week.style.display !== 'none';
+          week.style.display = showing ? 'none' : 'flex';
+          chev.textContent = showing ? '▼' : '▲';
+          weather.setAttribute('aria-expanded', String(!showing));
         }
-        Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (btn) {
-          btn.addEventListener('click', function () {
-            state.active = btn.getAttribute('data-tab');
-            state.openId = null;
-            render();
-          });
+        weather.addEventListener('click', toggle);
+        weather.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); }
         });
+      }
+
+      function bindTabs() {
+        Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (btn) {
+          btn.addEventListener('click', function () { selectTab(btn.getAttribute('data-tab')); });
+        });
+      }
+
+      function bindCards() {
         Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
-          card.addEventListener('click', function (ev) {
-            if (ev.target.closest('a')) return; // let the read-more link work
-            var id = card.getAttribute('data-card');
-            state.openId = state.openId === id ? null : id;
-            render();
+          function activate(ev) {
+            if (ev.target.closest('a')) return;                 // let the link work
+            // While open, only the header row collapses it, so reading (and
+            // selecting) the body never closes the story by accident.
+            if (card.classList.contains('open') && !ev.target.closest('.row')) return;
+            toggleCard(card.getAttribute('data-card'));
+          }
+          card.addEventListener('click', activate);
+          card.addEventListener('keydown', function (ev) {
+            if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); activate(ev); }
           });
         });
       }
 
-      render();
+      app.innerHTML = appHtml();
+      bindWeather();
+      bindTabs();
+      bindCards();
     })();
   </script>
 
