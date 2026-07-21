@@ -28,11 +28,12 @@
         "canonical": "#111111",
         "tonalRamp": ["#111111", "#333333", "#444444", "#666666", "#999999", "#bbbbbb", "#dddddd", "#f5f5f5"]
       },
-      "paper-white": { "role": "neutral", "displayName": "Paper White", "canonical": "#ffffff" },
-      "tint-open": { "role": "neutral", "displayName": "Tint Open", "canonical": "#f8f7f4" },
-      "tint-analysis": { "role": "neutral", "displayName": "Tint Analysis", "canonical": "#f1efe9" },
-      "rule-gray": { "role": "neutral", "displayName": "Rule Gray", "canonical": "#dddddd" },
-      "rule-warm": { "role": "neutral", "displayName": "Rule Warm", "canonical": "#e0ddd8" }
+      "paper-warm": { "role": "neutral", "displayName": "Paper Warm", "canonical": "#faf8f3" },
+      "tint-open": { "role": "neutral", "displayName": "Tint Open", "canonical": "#f2ede4" },
+      "tint-analysis": { "role": "neutral", "displayName": "Tint Analysis", "canonical": "#ece6da" },
+      "rule-gray": { "role": "neutral", "displayName": "Rule Gray", "canonical": "#dcd6cc" },
+      "rule-warm": { "role": "neutral", "displayName": "Rule Warm", "canonical": "#e3ded4" },
+      "paper-dark": { "role": "neutral", "displayName": "Lamplight Paper", "canonical": "#151a22", "tonalRamp": ["#0e1219", "#151a22", "#1b212b", "#20262f", "#2a303a", "#3a4250", "#5a6478", "#8f899d"] }
     },
     "typographyMeta": {
       "display": { "displayName": "Display", "purpose": "The masthead title only." },
@@ -111,7 +112,8 @@
     ],
     "rules": [
       { "name": "The Two-Ink Rule", "body": "Press Navy and Masthead Red are the only chromatic colors on the page. Navy structures, red flags. A third color is a defect.", "section": "colors" },
-      { "name": "The Scarce Red Rule", "body": "Masthead Red may only appear in kickers and flag chips. Never backgrounds larger than a chip, never body text, never links.", "section": "colors" },
+      { "name": "The Scarce Red Rule", "body": "Masthead Red carries heat, so it stays rare: kicker labels and hot flag chips only (DEVELOPING, BREAKING, LIVE, WAR, ALERT, URGENT). Procedural flags (FINAL, EDITORIAL) take a Press Navy chip. Never red on backgrounds larger than a chip, never body text, never links.", "section": "colors" },
+      { "name": "The Lamplight Rule", "body": "A dark edition ships via prefers-color-scheme: deep navy-black paper, cream ink, desaturated red. The broadsheet furniture is preserved; only ink and paper invert. Darkness is a lighting change, not a redesign.", "section": "colors" },
       { "name": "The Two-Family Rule", "body": "Georgia for everything readers read; Arial only for uppercase furniture 11px and under. A sans-serif headline or serif label is a typesetting error.", "section": "typography" },
       { "name": "The No-Shadow Rule", "body": "box-shadow is prohibited. If an element needs separation, rule it off with a hairline or tint its ground.", "section": "elevation" }
     ],
@@ -126,6 +128,8 @@
       "Don't introduce news-app engagement slop: infinite scroll, red badges, BREAKING banners, clickbait cards, or any 'for you' energy.",
       "Don't use the generic SaaS/AI aesthetic: rounded card grids, gradient accents, glassmorphism, dashboard vibes.",
       "Don't recreate cluttered legacy news sites: ad-slot density, competing headlines, tiny cramped text.",
+      "Don't use pure #fff or #000; tint every neutral toward the paper in both the light and lamplight editions.",
+      "Don't rebuild the whole page on a tap; preserve the reader's scroll and open state across interactions.",
       "Don't use box-shadows, gradients, or borders thicker than hairlines except the masthead (4px), lead (3px), and active-tab (3px) navy rules.",
       "Don't use border-left or border-right stripes as colored accents on callouts or cards; rule across the top or tint the ground instead.",
       "Don't add a third chromatic color. Two inks, warm grays, nothing else."
