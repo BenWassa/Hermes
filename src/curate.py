@@ -48,10 +48,14 @@ def _gen_config(model: str | None = None) -> types.GenerateContentConfig:
         max_output_tokens=config.CURATE_MAX_TOKENS,
         temperature=0.3,
     )
-    # Disable "thinking" on 2.5-series models so the whole output budget goes to
-    # the JSON (and the free-tier call stays fast). Older models ignore this.
+    # Give 2.5-series models a modest reasoning budget (config.CURATE_THINKING_BUDGET)
+    # so the editor pass actually weighs and synthesizes; thinking tokens come out
+    # of the output budget, which comfortably covers one edition. Older models
+    # ignore this.
     if "2.5" in m:
-        kwargs["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
+        kwargs["thinking_config"] = types.ThinkingConfig(
+            thinking_budget=config.CURATE_THINKING_BUDGET
+        )
     return types.GenerateContentConfig(**kwargs)
 
 
@@ -126,7 +130,8 @@ def _trim_input(stories: list[dict], total: int = config.CURATE_MAX_INPUT) -> li
 
 
 def _normalize_edition(raw: dict) -> list[dict]:
-    """Enforce section order, caps, and exactly one lead per section."""
+    """Enforce section order, caps, exactly one lead per section, and
+    analysis only on leads."""
     by_id = {s.get("id"): s for s in raw.get("sections", [])}
     out: list[dict] = []
     for spec in config.SECTIONS:
@@ -143,6 +148,10 @@ def _normalize_edition(raw: dict) -> list[dict]:
                 story["lead"] = False
         if stories and not seen_lead:
             stories[0]["lead"] = True
+        for story in stories:
+            # "Why it matters" belongs to leads alone; blank strings become null.
+            analysis = (story.get("analysis") or "").strip() if story.get("lead") else ""
+            story["analysis"] = analysis or None
         out.append({"id": spec["id"], "label": spec["label"], "stories": stories})
     return out
 

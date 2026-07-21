@@ -109,6 +109,12 @@ CURATE_MAX_TOKENS = 16000
 # Cap raw stories sent to the model (PRD targets ~40-60), balanced across
 # section hints so Toronto and the wire sections all stay represented.
 CURATE_MAX_INPUT = 60
+# Reasoning budget for the curate call (2.5-series models). A modest budget lets
+# the model actually weigh, dedupe, rank, and synthesize rather than paraphrase,
+# which is what lifts the lead summaries and the "why it matters" analysis. Set
+# to 0 to disable thinking (fastest, cheapest) or -1 for a dynamic budget. One
+# call per day, so the extra latency/tokens are immaterial on the free tier.
+CURATE_THINKING_BUDGET = int(os.environ.get("CURATE_THINKING_BUDGET", "1024"))
 
 
 # --- Weather (Open-Meteo weather_code mapping) ----------------------------
@@ -168,10 +174,25 @@ def weather_condition(code: int) -> str:
 HOUSE_VOICE = """House voice for all summaries:
 - Factual and neutral in news sections. The Opinion section may take a position.
 - Headline-first. State the news directly; never write "the article reports that".
-- 2 to 3 sentences per summary, roughly 40 to 70 words.
 - Signal over noise. No filler, no motivational language, no hedging.
 - No em dashes anywhere. Use commas, periods, or restructure.
-- Plain, confident, concrete."""
+- Plain, confident, concrete. Prefer specifics (numbers, names, stakes) over
+  abstractions. Every sentence should earn its place.
+
+Summary depth by role:
+- LEAD stories: 3 to 4 sentences, roughly 70 to 110 words. Go beyond the
+  what: include the how and the stakes. Weave in context from other raw
+  stories about the same event when it sharpens the picture.
+- Supporting stories: 2 to 3 sentences, roughly 40 to 70 words. Tight and
+  scannable.
+
+Analysis ("why it matters", lead stories only):
+- 1 to 2 sentences, roughly 25 to 50 words, in the "analysis" field.
+- This is synthesis, not summary: connect the story to the larger pattern,
+  what it changes, or what to watch next. Draw on the whole day's raw pool,
+  a market move can explain a political story and vice versa.
+- Never restate the summary. If there is no genuine insight, use null rather
+  than manufacturing one."""
 
 
 def build_curate_system_prompt() -> str:
@@ -187,7 +208,7 @@ Your tasks:
 {section_lines}
 3. RANK: order stories within each section by importance; mark exactly one story per section with "lead": true.
 4. CUT: respect the per-section caps above. Drop low-signal filler.
-5. SUMMARIZE: write a 2 to 3 sentence summary for each surviving story in the house voice below.
+5. SUMMARIZE: write a summary for each surviving story in the house voice below. Lead stories get the deeper treatment and an "analysis" field; supporting stories stay tight and "analysis" is null.
 6. FLAG: set "tag" to a short uppercase label when warranted (e.g. DEVELOPING, FINAL, WAR, EDITORIAL) or null. Set "sensitivity" to true when the story is centrally about war, violent crime, court proceedings on violent crime, death, or disaster; otherwise false. This drives downstream image suppression.
 
 {HOUSE_VOICE}
@@ -206,6 +227,7 @@ Output STRICT JSON only. No preamble, no markdown fences, no commentary. Match t
           "headline": "...",
           "sub": "...",
           "summary": "...",
+          "analysis": "... or null",
           "time": "6:45 AM",
           "tag": "DEVELOPING",
           "sensitivity": false,
@@ -220,6 +242,7 @@ Output STRICT JSON only. No preamble, no markdown fences, no commentary. Match t
 Rules:
 - Include every section id listed above, in that order, each with at least one story when source material allows.
 - "kicker" is a short uppercase topic label derived from the story (e.g. "UKRAINE", "MARKETS").
+- "analysis" is present only on lead stories; null everywhere else.
 - "image" and "link" come from the source story; preserve them. If no image, use null.
 - "time" is a short human time/day string from the story's publish time (e.g. "6:45 AM", "Yesterday").
 - "id" values are short and unique within the edition.

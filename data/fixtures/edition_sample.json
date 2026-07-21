@@ -8,12 +8,42 @@
     "wind": "29 km/h gusts",
     "icon": "⛈",
     "week": [
-      { "day": "Tue", "icon": "⛈", "hi": 24, "lo": 15 },
-      { "day": "Wed", "icon": "🌦", "hi": 23, "lo": 16 },
-      { "day": "Thu", "icon": "🌧", "hi": 24, "lo": 14 },
-      { "day": "Fri", "icon": "🌤", "hi": 25, "lo": 12 },
-      { "day": "Sat", "icon": "🌤", "hi": 24, "lo": 13 },
-      { "day": "Sun", "icon": "⛅", "hi": 24, "lo": 13 }
+      {
+        "day": "Tue",
+        "icon": "⛈",
+        "hi": 24,
+        "lo": 15
+      },
+      {
+        "day": "Wed",
+        "icon": "🌦",
+        "hi": 23,
+        "lo": 16
+      },
+      {
+        "day": "Thu",
+        "icon": "🌧",
+        "hi": 24,
+        "lo": 14
+      },
+      {
+        "day": "Fri",
+        "icon": "🌤",
+        "hi": 25,
+        "lo": 12
+      },
+      {
+        "day": "Sat",
+        "icon": "🌤",
+        "hi": 24,
+        "lo": 13
+      },
+      {
+        "day": "Sun",
+        "icon": "⛅",
+        "hi": 24,
+        "lo": 13
+      }
     ]
   },
   "sections": [
@@ -32,7 +62,8 @@
           "tag": "DEVELOPING",
           "sensitivity": false,
           "image": "https://picsum.photos/seed/hormuz/640/360",
-          "link": "https://example.com/hormuz-deal"
+          "link": "https://example.com/hormuz-deal",
+          "analysis": "A reopened strait removes the biggest supply shock hanging over oil markets, and every central bank waiting on inflation data will feel it. Watch tanker insurance rates for the first real signal the deal holds."
         },
         {
           "id": "f2",
@@ -45,7 +76,8 @@
           "tag": "WAR",
           "sensitivity": true,
           "image": "https://picsum.photos/seed/kyiv/640/360",
-          "link": "https://example.com/kharkiv-strike"
+          "link": "https://example.com/kharkiv-strike",
+          "analysis": null
         },
         {
           "id": "f3",
@@ -58,7 +90,8 @@
           "tag": null,
           "sensitivity": true,
           "image": "https://picsum.photos/seed/oslo/640/360",
-          "link": "https://example.com/norway-verdict"
+          "link": "https://example.com/norway-verdict",
+          "analysis": null
         },
         {
           "id": "f4",
@@ -71,7 +104,8 @@
           "tag": null,
           "sensitivity": false,
           "image": null,
-          "link": "https://example.com/carney-g7"
+          "link": "https://example.com/carney-g7",
+          "analysis": null
         }
       ]
     },
@@ -90,7 +124,8 @@
           "tag": "WORLD CUP",
           "sensitivity": false,
           "image": "https://picsum.photos/seed/drone/640/360",
-          "link": "https://example.com/toronto-drones"
+          "link": "https://example.com/toronto-drones",
+          "analysis": null
         },
         {
           "id": "t2",
@@ -103,7 +138,8 @@
           "tag": null,
           "sensitivity": false,
           "image": null,
-          "link": "https://example.com/ontario-place"
+          "link": "https://example.com/ontario-place",
+          "analysis": null
         },
         {
           "id": "t3",
@@ -116,7 +152,8 @@
           "tag": null,
           "sensitivity": true,
           "image": "https://picsum.photos/seed/court/640/360",
-          "link": "https://example.com/toronto-sentence"
+          "link": "https://example.com/toronto-sentence",
+          "analysis": null
         },
         {
           "id": "t4",
@@ -129,7 +166,8 @@
           "tag": null,
           "sensitivity": false,
           "image": null,
-          "link": "https://example.com/chow-reelection"
+          "link": "https://example.com/chow-reelection",
+          "analysis": null
         }
       ]
     },
@@ -148,7 +186,8 @@
           "tag": "DEVELOPING",
           "sensitivity": false,
           "image": "https://picsum.photos/seed/iran/640/360",
-          "link": "https://example.com/iran-analysis"
+          "link": "https://example.com/iran-analysis",
+          "analysis": null
         },
         {
           "id": "w2",
@@ -161,7 +200,8 @@
           "tag": null,
           "sensitivity": true,
           "image": "https://picsum.photos/seed/lavra/640/360",
-          "link": "https://example.com/lavra-damage"
+          "link": "https://example.com/lavra-damage",
+          "analysis": null
         },
         {
           "id": "w3",
@@ -174,7 +214,8 @@
           "tag": null,
           "sensitivity": false,
           "image": null,
-          "link": "https://example.com/norway-royals"
+          "link": "https://example.com/norway-royals",
+          "analysis": null
         }
       ]
     },
@@ -193,7 +234,8 @@
           "tag": "WORLD CUP",
           "sensitivity": false,
           "image": "https://picsum.photos/seed/capeverde/640/360",
-          "link": "https://example.com/capeverde-spain"
+          "link": "https://example.com/capeverde-spain",
+          "analysis": null
         },
         {
           "id": "s2",
@@ -206,7 +248,8 @@
           "tag": null,
           "sensitivity": false,
           "image": null,
-          "link": "https://example.com/day6-fixtures"
+          "link": "https://example.com/day6-fixtures",
+          "analysis": null
         },
         {
           "id": "s4",
@@ -219,7 +262,8 @@
           "tag": "FINAL",
           "sensitivity": false,
           "image": "https://picsum.photos/seed/canes/640/360",
-          "link": "https://example.com/hurricanes-cup"
+          "link": "https://example.com/hurricanes-cup",
+          "analysis": null
         }
       ]
     },
@@ -238,7 +282,8 @@
           "tag": null,
           "sensitivity": false,
           "image": "https://picsum.photos/seed/anthropic/640/360",
-          "link": "https://example.com/anthropic-pause"
+          "link": "https://example.com/anthropic-pause",
+          "analysis": "Rate-sensitive sectors have priced in cuts three times this year and been wrong twice. The bond market's reaction this week matters more than the announcement itself."
         },
         {
           "id": "b3",
@@ -251,7 +296,8 @@
           "tag": null,
           "sensitivity": false,
           "image": null,
-          "link": "https://example.com/oil-drop"
+          "link": "https://example.com/oil-drop",
+          "analysis": null
         }
       ]
     },
@@ -270,7 +316,8 @@
           "tag": "EDITORIAL",
           "sensitivity": false,
           "image": "https://picsum.photos/seed/editorial/640/360",
-          "link": "https://example.com/hormuz-editorial"
+          "link": "https://example.com/hormuz-editorial",
+          "analysis": null
         },
         {
           "id": "o2",
@@ -283,7 +330,8 @@
           "tag": null,
           "sensitivity": false,
           "image": null,
-          "link": "https://example.com/ontario-place-column"
+          "link": "https://example.com/ontario-place-column",
+          "analysis": null
         }
       ]
     }

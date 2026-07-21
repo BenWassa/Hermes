@@ -126,6 +126,15 @@
     .card .expand img {
       display: block; width: 100%; height: auto; border-radius: 3px; margin-bottom: 12px;
     }
+    .card .analysis {
+      margin-top: 12px; padding: 10px 14px; background: #f1efe9;
+      font-size: 14px; line-height: 1.6; color: #333; font-style: italic;
+    }
+    .card .analysis .alabel {
+      display: block; font-family: 'Arial', sans-serif; font-style: normal;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #1a2744; margin-bottom: 4px;
+    }
     .card .readmore {
       display: inline-block; margin-top: 12px; font-family: 'Arial', sans-serif;
       font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: #1a2744;
@@ -204,10 +213,13 @@
         var expand = '';
         if (open) {
           var img = st.image ? '<img src="' + esc(st.image) + '" alt="" loading="lazy" />' : '';
+          var analysis = st.analysis
+            ? '<div class="analysis"><span class="alabel">Why it matters</span>' + esc(st.analysis) + '</div>'
+            : '';
           var link = st.link
             ? '<a class="readmore" href="' + esc(st.link) + '" target="_blank" rel="noopener">Read full story →</a>'
             : '';
-          expand = '<div class="expand">' + img + esc(st.summary) + '<br>' + link + '</div>';
+          expand = '<div class="expand">' + img + esc(st.summary) + analysis + '<br>' + link + '</div>';
         }
         return '<div class="card' + (st.lead ? ' lead' : '') + (open ? ' open' : '') +
           '" data-card="' + esc(st.id) + '">' +
