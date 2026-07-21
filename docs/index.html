@@ -3,67 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="build" content="2026-07-21T10:36:24Z" />
+  <meta name="build" content="2026-07-21T12:17:06Z" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <meta name="theme-color" content="#1a2744" />
+  <meta name="theme-color" content="#1a2744" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#101722" media="(prefers-color-scheme: dark)" />
   <meta name="application-name" content="The Daily" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="The Daily" />
   <meta name="mobile-web-app-capable" content="yes" />
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icons/icon-192.svg" />
   <title>The Daily</title>
   <style>
+    /* ---- Design tokens: The Morning Broadsheet ------------------------- */
+    :root {
+      --paper: #faf8f3;        /* the sheet (warm white, never #fff) */
+      --desk: #efece6;         /* the desk beyond the column */
+      --ink: #17130d;          /* headlines / primary text */
+      --ink-sub: #453f38;      /* standfirsts */
+      --ink-muted: #635d54;    /* inactive tabs */
+      --meta: #6c665c;         /* timestamps, dateline, footer (>=AA small) */
+      --rule: #dcd6cc;         /* hairline between cards */
+      --rule-soft: #e3ded4;    /* hairline inside an opened card */
+      --navy: #1a2744;         /* structural ink */
+      --navy-ink: #1a2744;     /* navy used as text (links, active tab) */
+      --red: #8b1a1a;          /* editorial heat */
+      --tint-open: #f2ede4;    /* ground of an expanded card */
+      --tint-analysis: #ece6da;/* ground of the why-it-matters note */
+      --strip-bg: #1a2744;     /* weather strip */
+      --strip-ink: #f7f4ee;
+      --chip-hot: #8b1a1a;     /* DEVELOPING / WAR-class flags */
+      --chip-cool: #1a2744;    /* procedural flags (FINAL, EDITORIAL) */
+      --chip-ink: #faf8f3;
+      --focus: #1a2744;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #151a22;      /* lamplight edition: deep navy-black paper */
+        --desk: #0e1219;
+        --ink: #e9e3d5;        /* cream ink */
+        --ink-sub: #bcb6a8;
+        --ink-muted: #948e82;
+        --meta: #8f897d;
+        --rule: #2a303a;
+        --rule-soft: #2f3540;
+        --navy: #6f82a8;       /* structure lifted so it reads on dark */
+        --navy-ink: #a3b3d2;
+        --red: #d1726b;        /* desaturated heat */
+        --tint-open: #1b212b;
+        --tint-analysis: #20262f;
+        --strip-bg: #1b2334;
+        --strip-ink: #e9e3d5;
+        --chip-hot: #a8443c;
+        --chip-cool: #3b4a6c;
+        --chip-ink: #f0eadc;
+        --focus: #a3b3d2;
+      }
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: #efece6; }
+    html { font-size: 100%; }
+    html, body { background: var(--desk); }
     body {
       font-family: 'Georgia', serif;
-      color: #111;
+      color: var(--ink);
       -webkit-font-smoothing: antialiased;
     }
     #app {
       min-height: 100vh;
-      background: #fff;
+      min-height: 100svh;
+      background: var(--paper);
       max-width: 680px;
       margin: 0 auto;
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
     }
 
     /* Masthead */
     .masthead {
-      border-bottom: 4px solid #1a2744;
-      padding: 18px 20px 14px;
-      background: #fff;
+      border-bottom: 4px solid var(--navy);
+      padding: calc(18px + env(safe-area-inset-top)) 20px 14px;
+      background: var(--paper);
     }
     .masthead .date {
-      font-size: 11px; color: #999; letter-spacing: 0.1em;
+      font-size: 0.6875rem; color: var(--meta); letter-spacing: 0.1em;
       text-transform: uppercase; margin-bottom: 4px;
     }
     .masthead .title {
-      font-size: 38px; font-weight: 700; letter-spacing: -0.01em;
-      color: #1a2744; line-height: 1; margin-bottom: 2px;
+      font-size: 2.375rem; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--navy); line-height: 1; margin-bottom: 2px;
     }
     .masthead .tagline {
-      font-family: 'Arial', sans-serif; font-size: 10px; color: #999;
+      font-family: 'Arial', sans-serif; font-size: 0.625rem; color: var(--meta);
       letter-spacing: 0.18em; text-transform: uppercase;
+    }
+
+    /* Stale-edition ribbon */
+    .stale {
+      background: var(--tint-analysis); color: var(--meta);
+      font-family: 'Arial', sans-serif; font-size: 0.625rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; text-align: center;
+      padding: 7px 20px;
     }
 
     /* Weather strip */
     .weather {
-      background: #1a2744; color: #fff; cursor: pointer; user-select: none;
+      background: var(--strip-bg); color: var(--strip-ink);
+      cursor: pointer; user-select: none;
     }
     .weather .summary {
       display: flex; align-items: center; gap: 16px;
       padding: 10px 20px; overflow-x: auto; scrollbar-width: none;
+      min-height: 44px;
     }
     .weather .summary::-webkit-scrollbar { display: none; }
-    .weather .ico { font-size: 22px; }
-    .weather .city { font-weight: 700; font-size: 15px; }
-    .weather .temp { font-size: 15px; }
-    .weather .muted { opacity: 0.7; font-size: 13px; white-space: nowrap; }
-    .weather .chev { margin-left: auto; opacity: 0.6; font-size: 12px; }
+    .weather .ico { font-size: 1.375rem; }
+    .weather .city { font-weight: 700; font-size: 0.9375rem; }
+    .weather .temp { font-size: 0.9375rem; }
+    .weather .muted { opacity: 0.72; font-size: 0.8125rem; white-space: nowrap; }
+    .weather .chev { margin-left: auto; opacity: 0.6; font-size: 0.75rem; }
     .weather .week {
       display: flex; border-top: 1px solid rgba(255,255,255,0.12);
       padding: 10px 20px; overflow-x: auto; scrollbar-width: none;
@@ -73,79 +134,107 @@
       text-align: center; min-width: 52px; padding: 0 8px;
       border-right: 1px solid rgba(255,255,255,0.1);
     }
-    .weather .day .d { font-size: 11px; opacity: 0.6; margin-bottom: 4px; }
-    .weather .day .i { font-size: 18px; }
-    .weather .day .hi { font-size: 13px; font-weight: 700; margin-top: 4px; }
-    .weather .day .lo { font-size: 11px; opacity: 0.5; }
+    .weather .day .d { font-size: 0.6875rem; opacity: 0.6; margin-bottom: 4px; }
+    .weather .day .i { font-size: 1.125rem; }
+    .weather .day .hi { font-size: 0.8125rem; font-weight: 700; margin-top: 4px; }
+    .weather .day .lo { font-size: 0.6875rem; opacity: 0.5; }
 
     /* Tab nav */
     .tabs {
-      display: flex; overflow-x: auto; border-bottom: 2px solid #1a2744;
-      background: #fff; scrollbar-width: none; position: sticky; top: 0; z-index: 10;
+      display: flex; overflow-x: auto; border-bottom: 2px solid var(--navy);
+      background: var(--paper); scrollbar-width: none;
+      position: sticky; top: 0; z-index: 10;
     }
     .tabs::-webkit-scrollbar { display: none; }
     .tab {
-      flex-shrink: 0; padding: 12px 18px; border: none; background: none;
-      cursor: pointer; font-family: 'Georgia', serif; font-size: 13px;
-      font-weight: 400; color: #666; border-bottom: 3px solid transparent;
-      margin-bottom: -2px; letter-spacing: 0.04em; text-transform: uppercase;
+      flex-shrink: 0; min-height: 44px; display: flex; align-items: center;
+      padding: 0 18px; border: none; background: none; cursor: pointer;
+      font-family: 'Arial', sans-serif; font-size: 0.6875rem; font-weight: 700;
+      color: var(--ink-muted); border-bottom: 3px solid transparent;
+      margin-bottom: -2px; letter-spacing: 0.12em; text-transform: uppercase;
       transition: color 0.15s;
     }
-    .tab.active { font-weight: 700; color: #1a2744; border-bottom-color: #1a2744; }
+    .tab.active { color: var(--navy-ink); border-bottom-color: var(--navy); }
 
     /* Stories */
-    .stories { padding: 0 20px 40px; }
-    .card {
-      border-top: 1px solid #ddd; padding: 14px 0; cursor: pointer;
-      background: #fff; transition: background 0.15s;
+    .stories { padding: 8px 20px 40px; }
+    .empty {
+      padding: 40px 4px; text-align: center; color: var(--meta);
+      font-style: italic; font-size: 0.9375rem;
     }
-    .card.lead { border-top: 3px solid #1a2744; padding: 20px 0 16px; }
-    .card.open { background: #f8f7f4; }
+    .card {
+      border-top: 1px solid var(--rule); padding: 14px 0; cursor: pointer;
+      background: var(--paper); transition: background 0.15s;
+    }
+    .card.lead { border-top: 3px solid var(--navy); padding: 20px 0 16px; }
+    .card.open { background: var(--tint-open); }
+    .card:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
     .card .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .card .row-main { flex: 1; min-width: 0; }
     .card .kicker {
-      font-family: 'Arial', sans-serif; font-size: 10px; font-weight: 700;
-      letter-spacing: 0.12em; color: #8b1a1a; margin-bottom: 6px; text-transform: uppercase;
+      font-family: 'Arial', sans-serif; font-size: 0.625rem; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--red); margin-bottom: 6px; text-transform: uppercase;
     }
     .card .tag {
-      background: #8b1a1a; color: #fff; padding: 1px 6px; margin-right: 8px;
-      font-size: 9px; border-radius: 2px;
+      color: var(--chip-ink); padding: 2px 6px; margin-right: 8px;
+      font-size: 0.5625rem; border-radius: 2px; vertical-align: 1px;
     }
+    .card .tag.hot { background: var(--chip-hot); }
+    .card .tag.cool { background: var(--chip-cool); }
     .card .headline {
-      font-size: 17px; font-weight: 700; line-height: 1.25; color: #111; margin-bottom: 6px;
+      font-size: 1.0625rem; font-weight: 700; line-height: 1.25; color: var(--ink); margin-bottom: 6px;
     }
-    .card.lead .headline { font-size: 22px; }
+    .card.lead .headline { font-size: 1.375rem; }
     .card .sub {
-      font-size: 14px; color: #444; line-height: 1.4; margin-bottom: 4px; font-style: italic;
+      font-size: 0.875rem; color: var(--ink-sub); line-height: 1.4; margin-bottom: 4px; font-style: italic;
     }
-    .card .time { font-family: 'Arial', sans-serif; font-size: 11px; color: #999; margin-top: 4px; }
-    .card .toggle { color: #bbb; font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .card .time { font-family: 'Arial', sans-serif; font-size: 0.6875rem; color: var(--meta); margin-top: 4px; }
+    .card .toggle { color: var(--navy-ink); opacity: 0.5; font-size: 1.125rem; flex-shrink: 0; margin-top: 2px; }
     .card .expand {
-      margin-top: 14px; padding-top: 14px; border-top: 1px solid #e0ddd8;
-      font-size: 15px; color: #333; line-height: 1.7;
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--rule-soft);
+    }
+    .card .expand .sumtext {
+      font-size: 0.9375rem; color: var(--ink-sub); line-height: 1.7;
     }
     .card .expand img {
-      display: block; width: 100%; height: auto; border-radius: 3px; margin-bottom: 12px;
+      display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+      background: var(--tint-open); border-radius: 3px; margin-bottom: 12px;
+    }
+    .card .analysis {
+      margin-top: 12px; padding: 10px 14px; background: var(--tint-analysis);
+      font-size: 0.875rem; line-height: 1.6; color: var(--ink-sub); font-style: italic;
+    }
+    .card .analysis .alabel {
+      display: block; font-family: 'Arial', sans-serif; font-style: normal;
+      font-size: 0.625rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--navy-ink); margin-bottom: 4px;
     }
     .card .readmore {
-      display: inline-block; margin-top: 12px; font-family: 'Arial', sans-serif;
-      font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: #1a2744;
-      text-decoration: none;
+      display: inline-block; margin-top: 12px; min-height: 44px; line-height: 44px;
+      font-family: 'Arial', sans-serif; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.04em; color: var(--navy-ink); text-decoration: none;
     }
     .card .readmore:hover { text-decoration: underline; }
+    .card .readmore:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
     /* Footer */
     .footer {
-      border-top: 2px solid #1a2744; padding: 16px 20px;
-      font-family: 'Arial', sans-serif; font-size: 11px; color: #aaa;
+      border-top: 2px solid var(--navy);
+      padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+      font-family: 'Arial', sans-serif; font-size: 0.6875rem; color: var(--meta);
       text-align: center; letter-spacing: 0.06em;
     }
-    .notice { padding: 40px 20px; text-align: center; color: #999; font-style: italic; }
+    .notice { padding: 40px 20px; text-align: center; color: var(--meta); font-style: italic; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
   <div id="app"></div>
 
-  <script id="edition" type="application/json">{"date": "Tuesday, July 21, 2026", "weather": {"condition": "Heavy drizzle", "high": 26, "low": 18, "rain": "56%", "wind": "37 km/h gusts", "icon": "🌦", "week": [{"day": "Tue", "icon": "🌦", "hi": 26, "lo": 18}, {"day": "Wed", "icon": "⛅", "hi": 21, "lo": 15}, {"day": "Thu", "icon": "⛅", "hi": 26, "lo": 14}, {"day": "Fri", "icon": "⛅", "hi": 25, "lo": 18}, {"day": "Sat", "icon": "⛅", "hi": 27, "lo": 19}, {"day": "Sun", "icon": "🌦", "hi": 29, "lo": 20}]}, "sections": [{"id": "front", "label": "Front Page", "stories": [{"id": "f1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Iran claims attacks on Strait of Hormuz ships amid fresh US strikes", "sub": "Revolutionary Guard claims attack on oil tanker and two other ships as US carries out tenth consecutive night of strikes.", "summary": "Iran's Revolutionary Guard has claimed responsibility for attacking an oil tanker and two other ships in the Strait of Hormuz. This comes as the United States has conducted its tenth consecutive night of strikes in the region, escalating tensions in the Middle East.", "time": "10:28 AM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.theguardian.com/world/live/2026/jul/21/us-iran-war-live-updates-strait-of-hormuz-attacks-houthis-blockade-red-sea-middle-east-crisis-latest-news"}, {"id": "f2", "lead": false, "kicker": "UKRAINE", "headline": "Russia attacks Ukraine’s gas facilities as Zelenskyy faces further protests", "sub": "Plants in Kharkiv have faced three days of attacks as anger over the sacking of defence minister continues.", "summary": "Russian forces have attacked gas facilities in Kharkiv for three consecutive days, intensifying the conflict in Ukraine. Meanwhile, President Zelenskyy is facing growing protests following the controversial sacking of the defense minister.", "time": "10:30 AM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.theguardian.com/world/live/2026/jul/21/ukraine-russia-zelenskyy-greece-italy-spain-france-social-media-latest-news-updates"}, {"id": "f3", "lead": false, "kicker": "CANADA-US RELATIONS", "headline": "Trump to impose 50% tariff on many Canadian goods", "sub": "The administration will use an untested legal provision to put significant duties on Canadian exports, reigniting a clash with one of America’s biggest trading partners.", "summary": "Former President Trump plans to impose a 50% tariff on numerous Canadian goods, utilizing an untested legal provision. This move is expected to reignite trade tensions with Canada, one of America's largest trading partners.", "time": "5:00 PM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/07/20/multimedia/20DC-TRUMP-CANADA-01-twqm/20DC-TRUMP-CANADA-01-twqm-superJumbo.jpg", "link": "https://www.nytimes.com/2026/07/20/business/economy/trump-tariffs-canada.html"}, {"id": "f4", "lead": false, "kicker": "TORONTO", "headline": "Can your landlord charge you hundreds of dollars more for using AC? Toronto tenants outraged by extra bills", "sub": "The Ford government's Bill 97 has enabled some landlords to overcharge for air conditioner usage during the summer.", "summary": "Toronto tenants are expressing outrage over hundreds of dollars in extra charges for air conditioner usage. The Ford government's Bill 97 has reportedly enabled some landlords to overcharge, sparking confusion and frustration among residents.", "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/a/32/a329beec-4d06-599e-bc6e-c992599a2cf7/6a58df6dc84b5.image.jpg?resize=300%2C192", "link": "https://www.thestar.com/news/gta/random-charges-for-air-conditioning-use-creates-confusion-for-toronto-tenants/article_3468356e-ce6c-4efd-8af8-1566cd16c7dd.html"}, {"id": "f5", "lead": false, "kicker": "UK POLITICS", "headline": "Burnham promises hope and change. The hurdles are high.", "sub": "Britain’s new prime minister, Andy Burnham, promised policies that would give average Britons financial “breathing space.” His opponents are already doling out criticism.", "summary": "Britain's new Prime Minister, Andy Burnham, has pledged policies aimed at providing financial 'breathing space' for average Britons. However, he faces significant hurdles and immediate criticism from political opponents as he begins his tenure.", "time": "5:50 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/07/21/multimedia/21uk-burnham-assess-01-lbwz/21uk-burnham-assess-01-lbwz-superJumbo.jpg", "link": "https://www.nytimes.com/2026/07/21/world/europe/andy-burnham-new-uk-prime-minister-policies.html"}]}, {"id": "toronto", "label": "Toronto", "stories": [{"id": "t1", "lead": true, "kicker": "CRIME", "headline": "Toronto-area man accused of murdering wife was arrested days earlier for assault against her", "sub": "Martin Ly was arrested for allegedly assaulting his wife, Thi Nguyen, on July 14. He's now accused of murdering her just days later.", "summary": "A Toronto-area man, Martin Ly, is now accused of murdering his wife, Thi Nguyen, just days after being arrested for allegedly assaulting her on July 14. This tragic event raises serious questions about domestic violence and intervention.", "time": "4:15 PM", "tag": "CRIME", "sensitivity": true, "image": null, "link": "https://www.thestar.com/news/gta/toronto-area-man-accused-of-murdering-wife-was-arrested-days-earlier-for-assault-against-her/article_24112103-6b9c-4e2d-aaba-fc46366fb76a.html"}, {"id": "t2", "lead": false, "kicker": "PUBLIC SAFETY", "headline": "TTC launches streetcar camera pilot Monday to catch drivers illegally passing open doors", "sub": "Program will use AI and thermal cameras on five Toronto streetcar routes in a bid to catch dangerous drivers.", "summary": "The TTC has launched a streetcar camera pilot program using AI and thermal cameras on five Toronto routes. This initiative aims to identify and penalize drivers who illegally pass streetcars with open doors, enhancing passenger safety.", "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/4/42/4426035a-d8cb-51c5-9327-b84bb1fea23d/6a5bfe6b4ee8f.image.jpg?resize=300%2C208", "link": "https://www.thestar.com/news/gta/ttc-launches-streetcar-camera-pilot-monday-to-catch-drivers-illegally-passing-open-doors/article_f2c37bc3-7ad4-4117-bfff-c2e76dc2518e.html"}, {"id": "t3", "lead": false, "kicker": "CRIME", "headline": "Durham police arrest suspect wanted for 2023 Pickering casino murder after years-long manhunt", "sub": "Durham police said they located the suspect outside of Ontario, and with help from other authorities, \"successfully\" arrested them.", "summary": "Durham police have successfully arrested a suspect wanted for a 2023 murder at a Pickering casino, concluding a years-long manhunt. The individual was located and apprehended outside of Ontario with the assistance of other law enforcement agencies.", "time": "4:30 PM", "tag": "CRIME", "sensitivity": true, "image": null, "link": "https://www.thestar.com/news/gta/durham-police-arrest-suspect-wanted-for-2023-pickering-casino-murder-after-years-long-manhunt/article_96119c27-8c0c-40b4-a267-d023559e84a0.html"}, {"id": "t4", "lead": false, "kicker": "ARTS & CULTURE", "headline": "McMichael Canadian Art Collection to close for three years for construction", "sub": "The McMichael Canadian Art Collection will close its doors next week for a three-year renovation.", "summary": "The McMichael Canadian Art Collection is set to close its doors next week for an extensive three-year renovation project. This closure will allow for significant construction and upgrades to the gallery's facilities.", "time": "5:07 PM", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/8/c7/8c79dd22-c163-5d4a-adba-7047a01e0b01/6a5eb20d9b9dc.image.jpg?resize=300%2C200", "link": "https://www.thestar.com/news/ontario/mcmichael-canadian-art-collection-to-close-for-three-years-for-construction/article_93ad2ea4-b9bb-5b2a-824f-b0b0c286d5b2.html"}]}, {"id": "world", "label": "World", "stories": [{"id": "w1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Almost 100 troops injured in recent weeks, Pentagon admits, as Iran launches reprisals on US allies", "sub": "Iran has attacked a tanker in the Strait of Hormuz, forcing its crew to abandon the ship, after the US launched a tenth consecutive night of strikes.", "summary": "The Pentagon has admitted that nearly 100 US troops have been injured in recent weeks as Iran escalates reprisals against US allies. This follows Iran's attack on a tanker in the Strait of Hormuz, forcing its crew to abandon ship, after a tenth consecutive night of US strikes.", "time": "4:09 AM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.theguardian.com/world/2026/jul/21/us-troops-injured-killed-iran-war-attacks-pentagon"}, {"id": "w2", "lead": false, "kicker": "ITALY", "headline": "Protests in Italy after Moroccan man dies pleading for help from police", "sub": "Officers use teargas and water cannon on crowds in Bologna after death of Abderrahim Fakir under police restraint.", "summary": "Protests have erupted in Bologna, Italy, after Abderrahim Fakir, a Moroccan man, died while under police restraint, reportedly pleading for help. Officers responded to crowds with teargas and water cannon, escalating tensions over the incident.", "time": "10:09 AM", "tag": "DEVELOPING", "sensitivity": true, "image": null, "link": "https://www.theguardian.com/world/2026/jul/21/protests-italy-bologna-abderrahim-fakir-police"}, {"id": "w3", "lead": false, "kicker": "VENEZUELA", "headline": "Two young brothers and their search for Venezuela’s dead", "sub": "Winder and Deivi Delfín dug every day for 26 days to find the bodies of their mother, brother and grandmother.", "summary": "In Venezuela, brothers Winder and Deivi Delfín spent 26 days tirelessly digging to recover the bodies of their mother, brother, and grandmother. Their poignant search highlights the devastating impact of recent events in the country.", "time": "5:02 AM", "tag": null, "sensitivity": true, "image": null, "link": "https://www.nytimes.com/2026/07/21/world/americas/venezuela-quake-victims-search.html"}, {"id": "w4", "lead": false, "kicker": "EAST ASIA", "headline": "Chinese warship holds live-fire drills inside Japan’s economic waters for first time", "sub": "Exercise took place about 180km from Okinotori, Japan’s southernmost island, and comes as Chinese and Philippine sailors clashed in the South China Sea.", "summary": "A Chinese warship has conducted live-fire drills within Japan's economic waters for the first time, approximately 180km from Okinotori island. This provocative exercise follows recent clashes between Chinese and Philippine sailors in the South China Sea, raising regional tensions.", "time": "4:20 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/159f1bd9b2cbe8963aff8ee1c2498b1a38ef6ab3/0_0_4556_3647/500.jpg", "link": "https://www.theguardian.com/world/2026/jul/21/chinese-ship-opens-fire-japan-economic-zone-south-china-sea"}]}, {"id": "sports", "label": "Sports", "stories": [{"id": "s1", "lead": true, "kicker": "GOLF", "headline": "DeChambeau accused of threatening to call Trump in row over Open penalty", "sub": "Bryson DeChambeau has been accused of threatening to call Donald Trump during a row with senior R&A officials over his two-stroke penalty.", "summary": "Bryson DeChambeau is facing accusations of threatening to contact Donald Trump during a dispute with R&A officials regarding a two-stroke penalty at The Open. This incident adds to the controversy surrounding the golfer's performance and conduct.", "time": "1:14 PM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/cf4f09af279a7f36c210ab42bdb161728922103b/407_0_4370_3496/500.jpg", "link": "https://www.theguardian.com/sport/2026/jul/20/bryson-dechambeau-donald-trump-open-championshiup-penalty-golf-royal-birkdale"}, {"id": "s2", "lead": false, "kicker": "RUGBY", "headline": "England players question ‘brutal’ travel demands in Nations Championship format", "sub": "England’s players have questioned the Nations Championship format after being required to play Test matches on three different continents on successive weekends.", "summary": "England rugby players are questioning the 'brutal' travel demands of the new Nations Championship format. They have been required to play Test matches across three different continents on successive weekends, raising concerns about player welfare and performance.", "time": "5:00 PM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/af2a201bc713de9cc31db5b92044cc35cab9218e/151_0_3718_2974/500.jpg", "link": "https://www.theguardian.com/sport/2026/jul/20/england-rugby-union-argentina-nations-championship-travel-demands"}, {"id": "s3", "lead": false, "kicker": "CYCLING", "headline": "Vingegaard’s and Pogacar’s night-time doping tests authorised by Paris judge", "sub": "The International Testing Agency had petitioned the Paris prosecutor’s office to test the duo outside of the normal 6am to 11pm window before stage 15.", "summary": "A Paris judge has authorized night-time doping tests for cyclists Vingegaard and Pogacar, following a petition from the International Testing Agency. The agency sought to test the duo outside the usual 6 AM to 11 PM window before stage 15 of the race.", "time": "8:24 PM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/9122668ec4b9358b429416e9205753b634527ca1/337_0_3166_2533/500.jpg", "link": "https://www.theguardian.com/sport/2026/jul/20/tadej-pogacar-jonas-vingegaard-night-time-doping-tests-authorised-paris-judge-tour-de-france-cycling"}, {"id": "s4", "lead": false, "kicker": "CRICKET", "headline": "New owners, team names and much bigger budgets: the 2026 Hundred explained", "sub": "Our guide to what’s new with the ECB’s short-format showpiece involving cricket’s power hitters, which starts on Tuesday.", "summary": "The 2026 Hundred cricket tournament is set to feature new owners, team names, and significantly larger budgets. This guide explains the changes to the ECB's short-format showpiece, which begins on Tuesday, promising an exciting season for cricket fans.", "time": "7:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/f0cdb94c2649f95e38488917c2c4d4711ea8ff98/0_0_5000_4000/500.jpg", "link": "https://www.theguardian.com/sport/2026/jul/21/new-owners-team-names-better-pay-the-hundred-explained-cricket"}]}, {"id": "business", "label": "Business", "stories": [{"id": "b1", "lead": true, "kicker": "UK ECONOMY", "headline": "UK borrows less than expected as Healey vows to ‘buffer against uncertainty’", "sub": "Figure of £16bn from ONS comes after Andy Burnham revealed plans to cut VAT on electricity bills.", "summary": "The UK borrowed £16bn, less than expected, according to the ONS, as new Chancellor John Healey pledges to 'buffer against uncertainty.' This announcement follows Prime Minister Andy Burnham's plans to cut VAT on electricity bills, aiming to ease cost of living pressures.", "time": "9:49 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/c5f773c69f0fa7951366455f30ac91a2f0d532e2/252_0_4585_3668/500.jpg", "link": "https://www.theguardian.com/business/2026/jul/21/uk-borrowing-june-andy-burnham-ons-vat-electricity-bills"}, {"id": "b2", "lead": false, "kicker": "UK POLITICS", "headline": "JP Morgan boss warns of ‘consequences’ if Burnham taxes banks", "sub": "Higher taxes on sector could threaten plan for £3bn headquarters in London, says Jamie Dimon.", "summary": "Jamie Dimon, CEO of JP Morgan, has warned of 'consequences' if Prime Minister Burnham implements higher taxes on banks. Dimon stated that such taxes could jeopardize the company's plans for a £3bn headquarters in London, impacting investment in the city.", "time": "7:42 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/2fbee3fe53c7881cc057ed4bf69a296d7c701b14/598_0_4908_3926/500.jpg", "link": "https://www.theguardian.com/business/2026/jul/21/jp-morgan-andy-burnham-tax-banks-jamie-dimon"}, {"id": "b3", "lead": false, "kicker": "RETAIL", "headline": "AliExpress fined record €550m by EU for failing to stop sale of illegal and fake goods", "sub": "Chinese retail platform handed penalty over listings for items such as counterfeit products and unsafe toys.", "summary": "AliExpress has been hit with a record €550m fine by the EU for failing to prevent the sale of illegal and fake goods on its platform. The Chinese retail giant was penalized for listings that included counterfeit products and unsafe toys.", "time": "2:57 PM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/5344c9c343b5df6fa8c61613050d7d72647eaab6/454_0_4560_3648/500.jpg", "link": "https://www.theguardian.com/business/2026/jul/20/aliexpress-fined-by-eu-sale-of-illegal-fake-goods"}, {"id": "b4", "lead": false, "kicker": "ENERGY", "headline": "Why states are making it harder to save money with solar panels", "sub": "The changes are costing homeowners money. But they also reflect a changing grid — and the need for home batteries.", "summary": "States are implementing policy changes that make it harder for homeowners to save money with solar panels, increasing costs for many. These shifts reflect an evolving energy grid and highlight the growing necessity for home battery storage solutions.", "time": "5:02 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/07/20/multimedia/2026-06-25-solar-nm-index/2026-06-25-solar-nm-index-superJumbo-v4.png", "link": "https://www.nytimes.com/2026/07/21/upshot/solar-panels-prices-batteries.html"}]}, {"id": "opinion", "label": "Opinion", "stories": [{"id": "o1", "lead": true, "kicker": "EDITORIAL", "headline": "The Guardian view on Andy Burnham’s first day: the right vision, but time is of the essence", "sub": "Editorial: Outside Downing Street, Britain’s new prime minister struck the right notes. Now he and his cabinet need to be brave.", "summary": "The Guardian believes that new Prime Minister Andy Burnham presented the right vision on his first day outside Downing Street. However, the editorial emphasizes that he and his cabinet must now demonstrate bravery and urgency to deliver on their promises, as time is of the essence.", "time": "6:35 PM", "tag": "EDITORIAL", "sensitivity": false, "image": "https://media.guim.co.uk/17784c1d829fa307144350b76f967503d5a634e9/602_0_4067_3253/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/jul/20/the-guardian-view-on-andy-burnhams-first-day-the-right-vision-but-time-is-of-the-essence"}, {"id": "o2", "lead": false, "kicker": "SOCIAL COMMENTARY", "headline": "Gen Z is living in an intimacy economy, where connection is commodified", "sub": "My generation is struggling to find safety in our human relationships. AI companionship is filling the gap.", "summary": "Alice Lassman argues that Gen Z is navigating an 'intimacy economy' where human connection has become commodified. She suggests that her generation struggles to find secure human relationships, leading to AI companionship filling this emotional void.", "time": "10:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/5bc057e1a4be912cff7e1c860609a7c8d8b2a155/308_0_4999_4000/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/jul/21/gen-z-intimacy-economy-ai-companions"}, {"id": "o3", "lead": false, "kicker": "TECHNOLOGY", "headline": "Meta’s smartglasses mean any child can be covertly filmed. In the age of AI, how do we tackle that risk?", "sub": "The company argues that it’s for individuals to ensure they don’t ‘actively exploit’ this technology. That won’t keep children safe, says Guardian columnist Gaby Hinsliff.", "summary": "Gaby Hinsliff argues that Meta's smartglasses pose a significant risk, enabling covert filming of children, a concern amplified in the age of AI. She contends that Meta's stance, placing responsibility on individuals not to 'actively exploit' the technology, is insufficient to ensure child safety.", "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/67b57494983948c140e7be703392fe6d49cac634/1704_136_5545_4436/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/jul/21/meta-smartglasses-child-filmed-ai-risk-technology"}, {"id": "o4", "lead": false, "kicker": "UK POLITICS", "headline": "Andy Burnham’s plans could bring the UK closer to Europe than he realises", "sub": "The new PM’s priorities are domestic, but he will soon realise that closer engagement with the EU is a no-brainer, says Paul Taylor of the European Policy Centre.", "summary": "Paul Taylor of the European Policy Centre suggests that while new Prime Minister Andy Burnham's priorities are domestic, his plans could inadvertently lead the UK closer to Europe. Taylor believes Burnham will soon recognize that deeper engagement with the EU is a clear strategic advantage.", "time": "4:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/c37500382030b3251ffa5be7a2299716a7660b55/0_10_4000_3198/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/jul/21/andy-burnhams-plans-could-bring-the-uk-closer-to-europe-than-he-realises"}]}]}</script>
+  <script id="edition" type="application/json">{"date": "Tuesday, July 21, 2026", "weather": {"condition": "Rain showers", "high": 23, "low": 18, "rain": "56%", "wind": "36 km/h gusts", "icon": "🌧", "week": [{"day": "Tue", "icon": "🌧", "hi": 23, "lo": 18}, {"day": "Wed", "icon": "⛅", "hi": 21, "lo": 15}, {"day": "Thu", "icon": "⛅", "hi": 26, "lo": 13}, {"day": "Fri", "icon": "☀️", "hi": 26, "lo": 17}, {"day": "Sat", "icon": "⛅", "hi": 27, "lo": 19}, {"day": "Sun", "icon": "🌦", "hi": 27, "lo": 19}]}, "sections": [{"id": "front", "label": "Front Page", "stories": [{"id": "f1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Iran Claims Attacks on Strait of Hormuz Ships Amid Fresh US Strikes; Houthis Threaten Red Sea Blockade", "sub": "Revolutionary Guard reports targeting oil tanker and two other vessels as US carries out tenth consecutive night of strikes, while Yemen's Houthi militia declares a Red Sea blockade on Saudi Arabia.", "summary": "Iran's Revolutionary Guard claims responsibility for attacks on an oil tanker and two other ships in the Strait of Hormuz, coinciding with the tenth consecutive night of US strikes in the region. The escalating tensions are further complicated by Yemen's Iran-backed Houthi militia, which has declared a Red Sea blockade on Saudi Arabia. This move threatens to open a new front in the widening Middle East conflict, potentially disrupting global shipping lanes and energy supplies.", "analysis": "The simultaneous escalation in the Strait of Hormuz and the Red Sea signals a dangerous expansion of the Middle East conflict, directly impacting critical global trade routes. The Houthi declaration, if acted upon, could draw more international actors into the conflict, particularly those reliant on Red Sea shipping, and further destabilize an already volatile region.", "time": "11:58 AM", "tag": "DEVELOPING", "sensitivity": true, "image": null, "link": "https://www.theguardian.com/world/live/2026/jul/21/us-iran-war-live-updates-strait-of-hormuz-attacks-houthis-blockade-red-sea-middle-east-crisis-latest-news"}, {"id": "f2", "lead": false, "kicker": "UK POLITICS", "headline": "Britain’s New Prime Minister Makes Surprise Pick for Top Finance Job", "sub": "Andy Burnham appoints John Healey, former defense secretary, as Chancellor, overseeing fiscal and economic policy.", "summary": "Britain's new Prime Minister, Andy Burnham, has made a surprise appointment, naming John Healey as Chancellor of the Exchequer. Healey, who previously served as defense secretary in the former government, will now take on one of the most consequential posts, responsible for the nation's fiscal and economic policy. The appointment comes as the new government faces immediate challenges, including the cost of living crisis.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/07/20/multimedia/20biz-uk-chancellor-02-gljp/20biz-uk-chancellor-02-gljp-superJumbo.jpg", "link": "https://www.nytimes.com/2026/07/20/business/andy-burnham-john-healey.html"}, {"id": "f3", "lead": false, "kicker": "TRADE", "headline": "Trump to Impose 50% Tariff on Many Canadian Goods", "sub": "The administration will use an untested legal provision to put significant duties on Canadian exports, reigniting a clash with one of America’s biggest trading partners.", "summary": "Former President Trump plans to impose a 50% tariff on numerous Canadian goods, utilizing an untested legal provision. This move is expected to reignite trade tensions with Canada, one of America's largest trading partners. The significant duties on Canadian exports could have substantial economic repercussions for both nations.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/07/20/multimedia/20DC-TRUMP-CANADA-01-twqm/20DC-TRUMP-CANADA-01-twqm-superJumbo.jpg", "link": "https://www.nytimes.com/2026/07/20/business/economy/trump-tariffs-canada.html"}, {"id": "f4", "lead": false, "kicker": "UKRAINE", "headline": "Russia Attacks Ukraine’s Gas Facilities as Zelenskyy Faces Protests", "sub": "Plants in Kharkiv have faced three days of attacks as anger over the sacking of defence minister continues.", "summary": "Russian forces have attacked gas facilities in Ukraine's Kharkiv region for three consecutive days, exacerbating energy concerns. These attacks occur as President Zelenskyy faces ongoing protests and public anger over the recent sacking of the defense minister. The political unrest adds another layer of complexity to Ukraine's wartime challenges.", "analysis": null, "time": "12:08 PM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.theguardian.com/world/live/2026/jul/21/ukraine-russia-zelenskyy-greece-italy-spain-france-social-media-latest-news-updates"}, {"id": "f5", "lead": false, "kicker": "TORONTO", "headline": "Toronto Tenants Outraged by Extra AC Bills Amid Bill 97 Changes", "sub": "The Ford government's Bill 97 has enabled some landlords to overcharge for air conditioner usage during the summer.", "summary": "Toronto tenants are expressing outrage over hundreds of dollars in extra charges for air conditioner usage, a situation enabled by the Ford government's Bill 97. The legislation has allowed some landlords to implement new or increased fees for AC during the summer months. This has created confusion and financial burden for many residents.", "analysis": null, "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/a/32/a329beec-4d06-599e-bc6e-c992599a2cf7/6a58df6dc84b5.image.jpg?resize=300%2C192", "link": "https://www.thestar.com/news/gta/random-charges-for-air-conditioning-use-creates-confusion-for-toronto-tenants/article_3468356e-ce6c-4efd-8af8-1566cd16c7dd.html"}]}, {"id": "toronto", "label": "Toronto", "stories": [{"id": "t1", "lead": true, "kicker": "CRIME", "headline": "Toronto-Area Man Accused of Murdering Wife Was Arrested Days Earlier for Assault Against Her", "sub": "Martin Ly was arrested for allegedly assaulting his wife, Thi Nguyen, on July 14. He's now accused of murdering her just days later.", "summary": "A Toronto-area man, Martin Ly, is now accused of murdering his wife, Thi Nguyen, just days after being arrested for allegedly assaulting her on July 14. Police confirmed Ly's earlier arrest for assault against Nguyen, raising serious questions about the effectiveness of interventions in domestic violence cases. The tragic sequence of events underscores the critical need for robust support systems and protection for victims of domestic abuse.", "analysis": "This case highlights a critical failure in the system designed to protect victims of domestic violence, where an earlier arrest for assault did not prevent a subsequent murder. It prompts urgent scrutiny into police protocols, judicial responses, and community support mechanisms for individuals at high risk, emphasizing the need for more effective preventative measures.", "time": "Yesterday", "tag": "DEVELOPING", "sensitivity": true, "image": null, "link": "https://www.thestar.com/news/gta/toronto-area-man-accused-of-murdering-wife-was-arrested-days-earlier-for-assault-against-her/article_24112103-6b9c-4e2d-aaba-fc46366fb76a.html"}, {"id": "t2", "lead": false, "kicker": "CRIME", "headline": "Durham Police Arrest Suspect Wanted for 2023 Pickering Casino Murder", "sub": "After a years-long manhunt, Durham police located and arrested the suspect outside of Ontario with assistance from other authorities.", "summary": "Durham police have successfully arrested a suspect wanted for a 2023 murder at a Pickering casino, concluding a years-long manhunt. The suspect was located outside of Ontario and apprehended with the assistance of other authorities. This arrest brings a significant development to a high-profile case that has been under investigation for over two years.", "analysis": null, "time": "Yesterday", "tag": "FINAL", "sensitivity": true, "image": null, "link": "https://www.thestar.com/news/gta/durham-police-arrest-suspect-wanted-for-2023-pickering-casino-murder-after-years-long-manhunt/article_96119c27-8c0c-40b4-a267-d023559e84a0.html"}, {"id": "t3", "lead": false, "kicker": "CULTURE", "headline": "McMichael Canadian Art Collection to Close for Three Years for Construction", "sub": "The gallery will close its doors next week for a major renovation project.", "summary": "The McMichael Canadian Art Collection is set to close its doors next week for a three-year renovation project. This extensive construction period will temporarily halt public access to the renowned gallery, which houses significant Canadian art. The closure marks a substantial undertaking to modernize and enhance the facility.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/8/c7/8c79dd22-c163-5d4a-adba-7047a01e0b01/6a5eb20d9b9dc.image.jpg?resize=300%2C200", "link": "https://www.thestar.com/news/ontario/mcmichael-canadian-art-collection-to-close-for-three-years-for-construction/article_93ad2ea4-b9bb-5b2a-824f-b0b0c286d5b2.html"}, {"id": "t4", "lead": false, "kicker": "PUBLIC HEALTH", "headline": "Stay Out of the Water at Multiple GTA Public Beaches", "sub": "Halton, Durham, York, and Niagara regions report unsafe water quality at several beaches as of July 21.", "summary": "Public health authorities in Halton, Durham, York, and Niagara regions have advised residents to stay out of the water at multiple public beaches due to unsafe water quality. Reports issued as of July 21 indicate elevated bacteria levels, posing potential health risks to swimmers. This advisory affects several popular swimming spots across the Greater Toronto Area.", "analysis": null, "time": "4:55 AM", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/a/3e/a3e10de4-76dc-5a07-ae87-fc43a0c1e14e/64b958cf19bc3.image.jpg?resize=300%2C178", "link": "https://www.thestar.com/news/gta/beach-water-quality/stay-out-of-the-water-at-two-halton-public-beaches/article_0fd08ea9-299b-5211-80ef-c679dbbbadf1.html"}]}, {"id": "world", "label": "World", "stories": [{"id": "w1", "lead": true, "kicker": "VENEZUELA", "headline": "Brothers Dug for Dead Relatives With Shovel and Kitchen Knife After Venezuela Earthquakes", "sub": "Winder and Deivi Delfín spent 26 days searching for their mother, brother, and grandmother after devastating earthquakes.", "summary": "Following Venezuela's devastating earthquakes, brothers Winder and Deivi Delfín spent 26 arduous days digging through rubble with only a shovel and a kitchen knife. Their relentless efforts were aimed at finding the bodies of their mother, brother, and grandmother, who were lost in the disaster. This harrowing account highlights the profound human cost and the desperate measures taken by survivors in the aftermath of the catastrophe, as official recovery efforts struggled to meet the scale of the devastation.", "analysis": "The Delfín brothers' story is a stark illustration of the human toll and the often-insufficient official response in the wake of large-scale natural disasters. It underscores the deep personal impact of such events and the resilience, born of desperation, that drives individuals to extraordinary lengths when state support is overwhelmed or absent.", "time": "5:02 AM", "tag": "DISASTER", "sensitivity": true, "image": null, "link": "https://www.nytimes.com/2026/07/21/world/americas/venezuela-quake-victims-search.html"}, {"id": "w2", "lead": false, "kicker": "EAST ASIA", "headline": "Chinese Warship Holds Live-Fire Drills Inside Japan’s Economic Waters for First Time", "sub": "The exercise took place about 180km from Okinotori, Japan’s southernmost island, amid clashes in the South China Sea.", "summary": "A Chinese warship has conducted live-fire drills inside Japan's exclusive economic waters for the first time, approximately 180km from Japan's Okinotori island. This unprecedented military exercise follows recent clashes between Chinese and Philippine sailors in the South China Sea. The incident marks a significant escalation of tensions in the region, raising concerns about maritime security and territorial disputes.", "analysis": null, "time": "4:20 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/159f1bd9b2cbe8963aff8ee1c2498b1a38ef6ab3/0_0_4556_3647/500.jpg", "link": "https://www.theguardian.com/world/2026/jul/21/chinese-ship-opens-fire-japan-economic-zone-south-china-sea"}, {"id": "w3", "lead": false, "kicker": "ISRAEL-PALESTINE", "headline": "IDF Accused of Working With Settlers After Latest Deadly West Bank Raid", "sub": "Residents of Deir Jarir say raids that killed two Palestinians late on Sunday are part of a pattern of violence.", "summary": "The Israel Defense Forces (IDF) are accused of collaborating with settlers following a deadly raid in the West Bank that killed two Palestinians on Sunday. Residents of Deir Jarir claim these raids are part of a broader pattern of violence and harassment. The accusations intensify scrutiny on the relationship between Israeli military operations and settler activities in the occupied territories.", "analysis": null, "time": "10:00 AM", "tag": "CONFLICT", "sensitivity": true, "image": null, "link": "https://www.theguardian.com/world/2026/jul/20/israeli-settlers-partnership-army-palestinians-bury-dead-west-bank"}, {"id": "w4", "lead": false, "kicker": "NORTH KOREA", "headline": "A Family’s Daring Escape From North Korea ‘to Live and Stand Tall’", "sub": "Their resolve for freedom hardened during the pandemic, when they lived through a crippling food shortage and were forced to witness frequent public executions.", "summary": "A family has made a daring escape from North Korea, driven by a desire for freedom after enduring a crippling food shortage during the pandemic and witnessing frequent public executions. Their harrowing journey highlights the extreme conditions and human rights abuses prevalent in the isolated nation. The family's resolve to 'live and stand tall' underscores the desperate circumstances that compel such dangerous defections.", "analysis": null, "time": "6:00 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/07/17/multimedia/00int-nkorea-escape-01-mtzk/00int-nkorea-escape-01-mtzk-superJumbo.jpg", "link": "https://www.nytimes.com/2026/07/21/world/asia/south-korea-family-defection-escape.html"}]}, {"id": "sports", "label": "Sports", "stories": [{"id": "s1", "lead": true, "kicker": "GOLF", "headline": "DeChambeau Accused of Threatening to Call Trump in Row Over Open Penalty", "sub": "Bryson DeChambeau reportedly threatened to contact Donald Trump during a dispute with R&A officials over a two-stroke penalty at the Open.", "summary": "Golfer Bryson DeChambeau has been accused of threatening to call Donald Trump during a heated dispute with senior R&A officials regarding a two-stroke penalty at the Open Championship. The incident reportedly occurred after DeChambeau received a penalty, leading to a petulant reaction that has drawn criticism. This controversy adds to DeChambeau's reputation for on-course theatrics and raises questions about player conduct and the influence of powerful figures in professional sports.", "analysis": "This incident goes beyond a simple rules dispute, touching on issues of player decorum, the perceived influence of powerful individuals, and the integrity of sports governance. DeChambeau's alleged threat, whether serious or not, highlights the tension between athlete personalities and the traditional authority of sporting bodies, potentially setting a precedent for future interactions.", "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/cf4f09af279a7f36c210ab42bdb161728922103b/407_0_4370_3496/500.jpg", "link": "https://www.theguardian.com/sport/2026/jul/20/bryson-dechambeau-donald-trump-open-championshiup-penalty-golf-royal-birkdale"}, {"id": "s2", "lead": false, "kicker": "RUGBY", "headline": "Nations Championship Fails to Solve Rugby’s Consistency Issues", "sub": "Opening rounds provided compelling moments but frustrations over refereeing consistency remain.", "summary": "The inaugural Nations Championship has failed to resolve long-standing frustrations over refereeing consistency in rugby, despite delivering compelling moments in its opening rounds. Players and fans continue to highlight inconsistencies in officiating, detracting from the overall quality of the global competition. This ongoing issue suggests that the new championship format has not yet addressed fundamental problems within the sport's governance.", "analysis": null, "time": "9:28 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/508a461ba7bff6a35bea182265e875571ece2328/364_0_2954_2364/500.jpg", "link": "https://www.theguardian.com/sport/2026/jul/21/nations-championship-rugby-union-the-breakdown"}, {"id": "s3", "lead": false, "kicker": "NBA", "headline": "NBA Summer League Takeaways: Outstanding Top Four, Warriors Gem, Cavaliers Steal", "sub": "The midsummer party in Vegas showcased the next wave of NBA talent, revealing promising prospects.", "summary": "The NBA Summer League in Las Vegas provided a showcase for the next generation of basketball talent, with an outstanding top four prospects emerging. The event also highlighted a 'gem' for the Warriors and a 'steal' for the Cavaliers, indicating successful scouting and development. These early performances offer a glimpse into the future stars of the league.", "analysis": null, "time": "9:15 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/790aa460a39a04418c917827cb0be3b03a2b9e61/884_0_6400_5120/500.jpg", "link": "https://www.theguardian.com/sport/2026/jul/21/nba-summer-league-takeaways-an-outstanding-top-four-a-warriors-gem-and-a-cavaliers-steal"}, {"id": "s4", "lead": false, "kicker": "CYCLING", "headline": "Vingegaard’s and Pogacar’s Night-Time Doping Tests Authorised by Paris Judge", "sub": "The International Testing Agency petitioned the Paris prosecutor’s office to test the duo outside the normal 6am to 11pm window.", "summary": "Night-time doping tests for cyclists Jonas Vingegaard and Tadej Pogacar have been authorized by a Paris judge. The International Testing Agency (ITA) had petitioned the Paris prosecutor's office to conduct these tests outside the standard 6 AM to 11 PM window, prior to stage 15 of a major race. This unusual measure underscores the heightened scrutiny on top athletes in the fight against doping.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/9122668ec4b9358b429416e9205753b634527ca1/337_0_3166_2533/500.jpg", "link": "https://www.theguardian.com/sport/2026/jul/20/tadej-pogacar-jonas-vingegaard-night-time-doping-tests-authorised-paris-judge-tour-de-france-cycling"}]}, {"id": "business", "label": "Business", "stories": [{"id": "b1", "lead": true, "kicker": "UK ECONOMY", "headline": "UK Borrows Less Than Expected as Healey Vows to ‘Buffer Against Uncertainty’", "sub": "The Office for National Statistics reported a £16bn borrowing figure, following Andy Burnham’s plans to cut VAT on electricity bills.", "summary": "The UK borrowed less than expected, with the Office for National Statistics reporting a figure of £16 billion. This news comes as new Chancellor John Healey vows to 'buffer against uncertainty' in the economy. The reduced borrowing provides some fiscal breathing room for the new government, which has already announced plans to cut VAT on electricity bills. However, challenges remain, including rising defense stocks and warnings from financial institutions about potential tax increases.", "analysis": "Lower-than-expected borrowing offers the new UK government a stronger fiscal position as it begins its term, potentially enabling more aggressive spending on promised initiatives like VAT cuts. However, the concurrent rally in defense stocks and warnings from major banks like JP Morgan signal market anxieties about the new administration's broader economic policies and potential shifts in public spending priorities.", "time": "9:49 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/64d3c5a5d45dba75e6c3154bf952de9f1e50a5e1/215_0_5000_4000/500.jpg", "link": "https://www.theguardian.com/business/2026/jul/21/uk-borrowing-june-andy-burnham-ons-vat-electricity-bills"}, {"id": "b2", "lead": false, "kicker": "FINANCE", "headline": "Two in Five Americans Believe Stock Market Only Serves the Top 1%", "sub": "An exclusive Harris poll for The Guardian reveals Americans’ assumptions about the stock market and wider economy.", "summary": "An exclusive Harris poll conducted for The Guardian reveals that two in five Americans believe the stock market primarily serves only the top 1%. The survey highlights widespread public skepticism regarding the equity market's fairness and its broader economic benefits. These findings underscore a significant disconnect between public perception and the financial system, reflecting concerns about wealth inequality.", "analysis": null, "time": "12:00 PM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/62114075a98808b1ae79141481606930a3d9aaad/448_0_4472_3578/500.jpg", "link": "https://www.theguardian.com/business/2026/jul/21/americans-stock-market-poll"}, {"id": "b3", "lead": false, "kicker": "ENERGY", "headline": "States Making It Harder to Save Money With Solar Panels", "sub": "Changes are costing homeowners money, reflecting a changing grid and the need for home batteries.", "summary": "Several states are implementing policy changes that make it harder for homeowners to save money with solar panels, increasing costs for consumers. These shifts reflect an evolving energy grid and the growing need for home battery storage solutions to manage intermittent solar power. The changes are prompting a reevaluation of solar energy's economic viability for individual households.", "analysis": null, "time": "5:02 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/07/20/multimedia/2026-06-25-solar-nm-index/2026-06-25-solar-nm-index-superJumbo-v4.png", "link": "https://www.nytimes.com/2026/07/21/upshot/solar-panels-prices-batteries.html"}, {"id": "b4", "lead": false, "kicker": "UK INFRASTRUCTURE", "headline": "Thames Water Investors Offer ‘Golden Share’ to Head Off Nationalisation", "sub": "The move would give the government veto power over major decisions and hostile takeovers, following calls for greater public control.", "summary": "Investors in Thames Water are offering the UK government a 'golden share' in a bid to avert nationalization of the struggling utility. This proposal would grant the government veto power over significant decisions and hostile takeovers, responding to growing calls for greater public control. The offer reflects the company's precarious financial position and the political pressure to ensure essential services.", "analysis": null, "time": "11:55 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/bd97b9766e0c184acb7c8b9172a13942a901bb56/382_0_4251_3403/500.jpg", "link": "https://www.theguardian.com/business/2026/jul/21/thames-water-investors-golden-share-nationalisation-andy-burnham"}]}, {"id": "opinion", "label": "Opinion", "stories": [{"id": "o1", "lead": true, "kicker": "US POLITICS", "headline": "Alexandria Ocasio-Cortez Should Run for President", "sub": "The congresswoman can run a serious national campaign on the left and pull a movement in behind it. She should get in early.", "summary": "Bhaskar Sunkara argues that Alexandria Ocasio-Cortez should launch an early presidential campaign, asserting she can mount a serious national effort from the left. He believes her candidacy would galvanize a significant movement, pushing progressive policies to the forefront of national discourse. Sunkara suggests that an early entry would allow her to build momentum and define the progressive agenda for the upcoming election cycle, challenging the Democratic establishment.", "analysis": "Sunkara's endorsement of an AOC presidential run reflects a broader desire within the progressive wing of the Democratic party for a more assertive, left-leaning challenge to centrist politics. Such a campaign would not only test the viability of a truly progressive platform on a national stage but also force a re-evaluation of the party's future direction and its appeal to younger, more ideologically driven voters.", "time": "12:00 PM", "tag": "EDITORIAL", "sensitivity": false, "image": "https://media.guim.co.uk/928d15f8e7db21045c95018738589f49dbf3de31/438_0_4384_3507/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/jul/21/alexandria-ocasio-cortez-for-president"}, {"id": "o2", "lead": false, "kicker": "TECHNOLOGY", "headline": "Meta’s Smartglasses Mean Any Child Can Be Covertly Filmed. In the Age of AI, How Do We Tackle That Risk?", "sub": "The company argues that it’s for individuals to ensure they don’t ‘actively exploit’ this technology. That won’t keep children safe.", "summary": "Gaby Hinsliff argues that Meta's smartglasses pose a significant risk, enabling children to be covertly filmed, a concern amplified in the age of AI. She contends that Meta's stance, placing responsibility on individuals not to 'actively exploit' the technology, is insufficient to ensure child safety. Hinsliff calls for more robust measures to protect privacy and prevent misuse of such advanced recording devices.", "analysis": null, "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/67b57494983948c140e7be703392fe6d49cac634/1704_136_5545_4436/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/jul/21/meta-smartglasses-child-filmed-ai-risk-technology"}, {"id": "o3", "lead": false, "kicker": "SOCIETY", "headline": "Gen Z Is Living in an Intimacy Economy, Where Connection Is Commodified", "sub": "My generation is struggling to find safety in our human relationships. AI companionship is filling the gap.", "summary": "Alice Lassman posits that Generation Z is navigating an 'intimacy economy' where human connection has become commodified, leading to struggles in finding genuine safety in relationships. She observes that AI companionship is increasingly filling this void, offering a substitute for authentic human interaction. This trend highlights a profound societal shift in how younger generations seek and experience intimacy.", "analysis": null, "time": "10:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/5bc057e1a4be912cff7e1c860609a7c8d8b2a155/308_0_4999_4000/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/jul/21/gen-z-intimacy-economy-ai-companions"}, {"id": "o4", "lead": false, "kicker": "UK POLITICS", "headline": "The Guardian View on Andy Burnham’s First Day: The Right Vision, But Time Is of the Essence", "sub": "Editorial: Outside Downing Street, Britain’s new prime minister struck the right notes. Now he and his cabinet need to be brave.", "summary": "The Guardian's editorial board comments on Andy Burnham's first day as UK Prime Minister, acknowledging that he struck the right notes with his vision outside Downing Street. However, the editorial emphasizes that time is of the essence and urges Burnham and his cabinet to demonstrate bravery in implementing their agenda. The piece suggests that while the initial rhetoric is promising, decisive action is now required to address the nation's challenges.", "analysis": null, "time": "Yesterday", "tag": "EDITORIAL", "sensitivity": false, "image": "https://media.guim.co.uk/17784c1d829fa307144350b76f967503d5a634e9/602_0_4067_3253/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/jul/20/the-guardian-view-on-andy-burnhams-first-day-the-right-vision-but-time-is-of-the-essence"}]}]}</script>
 
   <script>
     (function () {
@@ -167,6 +256,21 @@
           .replace(/"/g, '&quot;');
       }
 
+      // Editorial heat flags keep the red chip; procedural flags cool to navy,
+      // so a red chip still means something (the Scarce Red Rule).
+      function isHotTag(t) {
+        return /^(DEVELOPING|BREAKING|LIVE|WAR|ALERT|URGENT)$/i.test(t || '');
+      }
+
+      // Tagline reflects the sections the edition actually shipped, not a
+      // hardcoded list that can disagree with the paper.
+      function taglineText() {
+        var labels = data.sections
+          .filter(function (s) { return s.id !== 'front'; })
+          .map(function (s) { return s.label; });
+        return (labels.length ? labels : ['Toronto', 'World', 'Business']).join(' · ');
+      }
+
       function weatherHtml(w) {
         if (!w || !w.icon) return '';
         var week = (w.week || []).map(function (d) {
@@ -175,7 +279,8 @@
             '<div class="hi">' + esc(d.hi) + '°</div>' +
             '<div class="lo">' + esc(d.lo) + '°</div></div>';
         }).join('');
-        return '<div class="weather" id="weather">' +
+        return '<div class="weather" id="weather" role="button" tabindex="0" ' +
+          'aria-expanded="false" aria-label="Toronto weather, tap for the week">' +
           '<div class="summary">' +
             '<span class="ico">' + esc(w.icon) + '</span>' +
             '<span class="city">Toronto</span>' +
@@ -190,84 +295,160 @@
       }
 
       function tabsHtml() {
-        return '<div class="tabs">' + data.sections.map(function (s) {
-          return '<button class="tab' + (s.id === state.active ? ' active' : '') +
-            '" data-tab="' + esc(s.id) + '">' + esc(s.label) + '</button>';
+        return '<div class="tabs" role="tablist">' + data.sections.map(function (s) {
+          var on = s.id === state.active;
+          return '<button class="tab' + (on ? ' active' : '') + '" role="tab" ' +
+            'aria-selected="' + on + '" data-tab="' + esc(s.id) + '">' + esc(s.label) + '</button>';
         }).join('') + '</div>';
       }
 
       function cardHtml(st) {
         var open = st.id === state.openId;
-        var tag = st.tag ? '<span class="tag">' + esc(st.tag) + '</span>' : '';
+        var tag = st.tag
+          ? '<span class="tag ' + (isHotTag(st.tag) ? 'hot' : 'cool') + '">' + esc(st.tag) + '</span>'
+          : '';
         var kicker = st.kicker ? '<div class="kicker">' + tag + esc(st.kicker) + '</div>' : '';
         var sub = st.sub ? '<div class="sub">' + esc(st.sub) + '</div>' : '';
         var expand = '';
         if (open) {
-          var img = st.image ? '<img src="' + esc(st.image) + '" alt="" loading="lazy" />' : '';
+          var img = st.image
+            ? '<img src="' + esc(st.image) + '" alt="' + esc(st.headline) + '" ' +
+              'loading="lazy" onerror="this.remove()" />'
+            : '';
+          var analysis = st.analysis
+            ? '<div class="analysis"><span class="alabel">Why it matters</span>' + esc(st.analysis) + '</div>'
+            : '';
           var link = st.link
             ? '<a class="readmore" href="' + esc(st.link) + '" target="_blank" rel="noopener">Read full story →</a>'
             : '';
-          expand = '<div class="expand">' + img + esc(st.summary) + '<br>' + link + '</div>';
+          expand = '<div class="expand">' + img +
+            '<p class="sumtext">' + esc(st.summary) + '</p>' + analysis + link + '</div>';
         }
         return '<div class="card' + (st.lead ? ' lead' : '') + (open ? ' open' : '') +
-          '" data-card="' + esc(st.id) + '">' +
-          '<div class="row"><div style="flex:1">' + kicker +
+          '" data-card="' + esc(st.id) + '" role="button" tabindex="0" ' +
+          'aria-expanded="' + open + '">' +
+          '<div class="row"><div class="row-main">' + kicker +
             '<div class="headline">' + esc(st.headline) + '</div>' + sub +
             '<div class="time">' + esc(st.time) + '</div></div>' +
-            '<div class="toggle">' + (open ? '−' : '+') + '</div>' +
+            '<div class="toggle" aria-hidden="true">' + (open ? '−' : '+') + '</div>' +
           '</div>' + expand +
         '</div>';
       }
 
-      function storiesHtml() {
+      function storiesInner() {
         var section = data.sections.filter(function (s) { return s.id === state.active; })[0];
         if (!section) return '';
-        return '<div class="stories">' + section.stories.map(cardHtml).join('') + '</div>';
+        if (!section.stories || !section.stories.length) {
+          return '<div class="empty">Nothing filed for ' + esc(section.label) + ' this morning.</div>';
+        }
+        return section.stories.map(cardHtml).join('');
       }
 
-      function render() {
-        document.getElementById('app').innerHTML =
-          '<div class="masthead">' +
+      // Quietly flag a saved (not-today) edition served from cache/offline.
+      function staleRibbon() {
+        try {
+          var meta = document.querySelector('meta[name=build]');
+          if (!meta) return '';
+          var built = new Date(meta.getAttribute('content'));
+          if (isNaN(built.getTime())) return '';
+          var opt = { timeZone: 'America/Toronto' };
+          if (built.toLocaleDateString('en-CA', opt) < new Date().toLocaleDateString('en-CA', opt)) {
+            return '<div class="stale">Saved edition · ' + esc(data.date) + '</div>';
+          }
+        } catch (e) {}
+        return '';
+      }
+
+      function appHtml() {
+        return '<div class="masthead">' +
             '<div class="date">' + esc(data.date) + '</div>' +
             '<div class="title">THE DAILY</div>' +
-            '<div class="tagline">Toronto · World · Business · Sport</div>' +
+            '<div class="tagline">' + esc(taglineText()) + '</div>' +
           '</div>' +
+          staleRibbon() +
           weatherHtml(data.weather) +
           tabsHtml() +
-          storiesHtml() +
+          '<div class="stories" id="stories">' + storiesInner() + '</div>' +
           '<div class="footer">THE DAILY · TORONTO · Tap any headline to read</div>';
-        bind();
       }
 
-      function bind() {
+      var app = document.getElementById('app');
+
+      // Rebuild only the stories column; masthead, weather, and tab strip (and
+      // their scroll/open state) are left untouched. This is what keeps a tap
+      // from resetting the reader's place.
+      function refreshStories() {
+        document.getElementById('stories').innerHTML = storiesInner();
+        bindCards();
+      }
+
+      function selectTab(id) {
+        if (id === state.active) return;
+        state.active = id;
+        state.openId = null;
+        var tabs = document.querySelectorAll('.tab');
+        Array.prototype.forEach.call(tabs, function (t) {
+          var on = t.getAttribute('data-tab') === id;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on);
+          if (on) t.scrollIntoView({ inline: 'center', block: 'nearest' });
+        });
+        refreshStories();
+        // Start the new section at the top, tab strip stuck under the notch.
+        var tabsEl = document.querySelector('.tabs');
+        if (tabsEl) window.scrollTo(0, tabsEl.offsetTop);
+      }
+
+      function toggleCard(id) {
+        var y = window.scrollY;
+        state.openId = state.openId === id ? null : id;
+        refreshStories();
+        window.scrollTo(0, y);   // grow/collapse in place, never jump
+      }
+
+      function bindWeather() {
         var weather = document.getElementById('weather');
-        if (weather) {
-          weather.addEventListener('click', function () {
-            var week = document.getElementById('wweek');
-            var chev = document.getElementById('wchev');
-            var showing = week.style.display !== 'none';
-            week.style.display = showing ? 'none' : 'flex';
-            chev.textContent = showing ? '▼' : '▲';
-          });
+        if (!weather) return;
+        function toggle() {
+          var week = document.getElementById('wweek');
+          var chev = document.getElementById('wchev');
+          var showing = week.style.display !== 'none';
+          week.style.display = showing ? 'none' : 'flex';
+          chev.textContent = showing ? '▼' : '▲';
+          weather.setAttribute('aria-expanded', String(!showing));
         }
-        Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (btn) {
-          btn.addEventListener('click', function () {
-            state.active = btn.getAttribute('data-tab');
-            state.openId = null;
-            render();
-          });
+        weather.addEventListener('click', toggle);
+        weather.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); }
         });
+      }
+
+      function bindTabs() {
+        Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (btn) {
+          btn.addEventListener('click', function () { selectTab(btn.getAttribute('data-tab')); });
+        });
+      }
+
+      function bindCards() {
         Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
-          card.addEventListener('click', function (ev) {
-            if (ev.target.closest('a')) return; // let the read-more link work
-            var id = card.getAttribute('data-card');
-            state.openId = state.openId === id ? null : id;
-            render();
+          function activate(ev) {
+            if (ev.target.closest('a')) return;                 // let the link work
+            // While open, only the header row collapses it, so reading (and
+            // selecting) the body never closes the story by accident.
+            if (card.classList.contains('open') && !ev.target.closest('.row')) return;
+            toggleCard(card.getAttribute('data-card'));
+          }
+          card.addEventListener('click', activate);
+          card.addEventListener('keydown', function (ev) {
+            if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); activate(ev); }
           });
         });
       }
 
-      render();
+      app.innerHTML = appHtml();
+      bindWeather();
+      bindTabs();
+      bindCards();
     })();
   </script>
 
