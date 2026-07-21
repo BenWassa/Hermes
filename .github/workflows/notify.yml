@@ -35,14 +35,27 @@ jobs:
           fi
           # Confirm today's edition was actually committed (guards the
           # build's own "already published, nothing to do" skip path).
+          #
+          # Every scheduled build slot finishes "success" and triggers this
+          # workflow, even the no-op reruns that fire after the day's edition
+          # is already published. Gating on "today's edition exists" alone
+          # therefore fires once per slot -> the duplicate pushes. So require
+          # that *this* build run actually produced the edition: its commit
+          # must be newer than the triggering run's own start time. A no-op
+          # rerun makes no commit, so the latest edition commit predates its
+          # start and it correctly stays silent.
           TODAY=$(TZ=America/Toronto date +%Y-%m-%d)
           LAST=$(TZ=America/Toronto git log -1 --format=%cd --date=format-local:'%Y-%m-%d' -- docs/index.html 2>/dev/null || echo "")
+          COMMIT_EPOCH=$(git log -1 --format=%ct -- docs/index.html 2>/dev/null || echo 0)
+          RUN_STARTED="${{ github.event.workflow_run.run_started_at }}"
+          RUN_STARTED_EPOCH=$(date -u -d "$RUN_STARTED" +%s 2>/dev/null || echo 0)
           echo "Today (ET): $TODAY  Last edition (ET): ${LAST:-never}"
-          if [ "$LAST" = "$TODAY" ]; then
-            echo "Fresh edition confirmed for $TODAY; notifying."
+          echo "Edition commit epoch: $COMMIT_EPOCH  Build run started: $RUN_STARTED ($RUN_STARTED_EPOCH)"
+          if [ "$LAST" = "$TODAY" ] && [ "$COMMIT_EPOCH" -ge "$RUN_STARTED_EPOCH" ]; then
+            echo "Edition was produced by this build run; notifying."
             echo "skip=false" >> "$GITHUB_OUTPUT"
           else
-            echo "No fresh edition for $TODAY; skipping push."
+            echo "Edition not produced by this run (already published earlier, or none today); skipping push."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 
