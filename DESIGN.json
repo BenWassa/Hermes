@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-20T22:55:00-04:00",
+  "title": "Design System: The Daily",
+  "extensions": {
+    "colorMeta": {
+      "press-navy": {
+        "role": "primary",
+        "displayName": "Press Navy",
+        "canonical": "#1a2744",
+        "tonalRamp": ["#0b111e", "#131b30", "#1a2744", "#2c3d63", "#465a86", "#6e7fa5", "#9daac4", "#d3d9e6"]
+      },
+      "masthead-red": {
+        "role": "secondary",
+        "displayName": "Masthead Red",
+        "canonical": "#8b1a1a",
+        "tonalRamp": ["#3d0a0a", "#611111", "#8b1a1a", "#a83a34", "#c05f57", "#d48a83", "#e5b5b0", "#f4dedb"]
+      },
+      "newsprint-cream": {
+        "role": "neutral",
+        "displayName": "Newsprint Cream",
+        "canonical": "#efece6",
+        "tonalRamp": ["#2b2925", "#54514a", "#7d7970", "#a5a096", "#c6c1b7", "#ddd9d0", "#efece6", "#f9f8f4"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#111111",
+        "tonalRamp": ["#111111", "#333333", "#444444", "#666666", "#999999", "#bbbbbb", "#dddddd", "#f5f5f5"]
+      },
+      "paper-white": { "role": "neutral", "displayName": "Paper White", "canonical": "#ffffff" },
+      "tint-open": { "role": "neutral", "displayName": "Tint Open", "canonical": "#f8f7f4" },
+      "tint-analysis": { "role": "neutral", "displayName": "Tint Analysis", "canonical": "#f1efe9" },
+      "rule-gray": { "role": "neutral", "displayName": "Rule Gray", "canonical": "#dddddd" },
+      "rule-warm": { "role": "neutral", "displayName": "Rule Warm", "canonical": "#e0ddd8" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The masthead title only." },
+      "headline": { "displayName": "Headline", "purpose": "Lead story headlines." },
+      "title": { "displayName": "Title", "purpose": "Standard story headlines." },
+      "body": { "displayName": "Body", "purpose": "Summaries and analysis in expanded cards." },
+      "label": { "displayName": "Label", "purpose": "Kickers, tabs, timestamps, read-more, footer. Always uppercase Arial." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "state-fade", "value": "0.15s ease", "purpose": "Color and background transitions on tabs and cards. The only motion in the system." }
+    ],
+    "breakpoints": [
+      { "name": "column-max", "value": "680px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Story Card",
+      "kind": "card",
+      "refersTo": "story-card",
+      "description": "One story in a section list; ruled off above, expands in place on tap.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-row\"><div style=\"flex:1\"><div class=\"ds-kicker\">MARKETS</div><div class=\"ds-headline\">Bank of Canada Holds Rate at 2.75 Percent</div><div class=\"ds-sub\">Council split on timing of first cut as core inflation cools</div><div class=\"ds-time\">7:02 AM</div></div><div class=\"ds-toggle\">+</div></div></div>",
+      "css": ".ds-card { border-top: 1px solid #ddd; padding: 14px 0; cursor: pointer; background: #fff; font-family: Georgia, serif; } .ds-card:hover { background: #f8f7f4; } .ds-card-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; } .ds-kicker { font-family: Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; color: #8b1a1a; margin-bottom: 6px; text-transform: uppercase; } .ds-headline { font-size: 17px; font-weight: 700; line-height: 1.25; color: #111; margin-bottom: 6px; } .ds-sub { font-size: 14px; color: #444; line-height: 1.4; font-style: italic; } .ds-time { font-family: Arial, sans-serif; font-size: 11px; color: #999; margin-top: 4px; } .ds-toggle { color: #bbb; font-size: 18px; flex-shrink: 0; margin-top: 2px; }"
+    },
+    {
+      "name": "Lead Story Card",
+      "kind": "card",
+      "refersTo": "story-card-lead",
+      "description": "The section lead; heavier navy rule and larger headline mark the editor's top pick.",
+      "html": "<div class=\"ds-lead\"><div class=\"ds-kicker\"><span class=\"ds-chip\">DEVELOPING</span>MIDDLE EAST</div><div class=\"ds-lead-headline\">Strait of Hormuz Deal Set to Close This Week</div><div class=\"ds-sub\">Interim agreement would reopen critical shipping lane</div></div>",
+      "css": ".ds-lead { border-top: 3px solid #1a2744; padding: 20px 0 16px; background: #fff; font-family: Georgia, serif; } .ds-lead .ds-kicker { font-family: Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; color: #8b1a1a; margin-bottom: 6px; text-transform: uppercase; } .ds-lead .ds-chip { background: #8b1a1a; color: #fff; padding: 1px 6px; margin-right: 8px; font-size: 9px; border-radius: 2px; } .ds-lead-headline { font-size: 22px; font-weight: 700; line-height: 1.25; color: #111; margin-bottom: 6px; } .ds-lead .ds-sub { font-size: 14px; color: #444; line-height: 1.4; font-style: italic; }"
+    },
+    {
+      "name": "Section Tabs",
+      "kind": "nav",
+      "refersTo": "tab",
+      "description": "Horizontally scrollable section strip, sticky at viewport top; active tab underlined in navy.",
+      "html": "<div class=\"ds-tabs\"><button class=\"ds-tab ds-tab-active\">Front Page</button><button class=\"ds-tab\">Toronto</button><button class=\"ds-tab\">World</button><button class=\"ds-tab\">Business</button></div>",
+      "css": ".ds-tabs { display: flex; overflow-x: auto; border-bottom: 2px solid #1a2744; background: #fff; } .ds-tab { flex-shrink: 0; padding: 12px 18px; border: none; background: none; cursor: pointer; font-family: Georgia, serif; font-size: 13px; color: #666; border-bottom: 3px solid transparent; margin-bottom: -2px; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.15s; } .ds-tab:hover { color: #1a2744; } .ds-tab-active { font-weight: 700; color: #1a2744; border-bottom-color: #1a2744; }"
+    },
+    {
+      "name": "Editor's Note",
+      "kind": "custom",
+      "refersTo": "story-card",
+      "description": "The 'Why it matters' synthesis block inside an expanded lead story; tinted ground, no stripe.",
+      "html": "<div class=\"ds-analysis\"><span class=\"ds-alabel\">Why it matters</span>A reopened strait removes the biggest supply shock hanging over oil markets. Watch tanker insurance rates for the first real signal the deal holds.</div>",
+      "css": ".ds-analysis { padding: 10px 14px; background: #f1efe9; font-family: Georgia, serif; font-size: 14px; line-height: 1.6; color: #333; font-style: italic; } .ds-alabel { display: block; font-family: Arial, sans-serif; font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1a2744; margin-bottom: 4px; }"
+    },
+    {
+      "name": "Flag Chip",
+      "kind": "chip",
+      "refersTo": "tag-chip",
+      "description": "Editorial flag (DEVELOPING, WAR, FINAL) set in Masthead Red before the kicker.",
+      "html": "<span class=\"ds-chip-solo\">DEVELOPING</span>",
+      "css": ".ds-chip-solo { background: #8b1a1a; color: #fff; padding: 1px 6px; font-family: Arial, sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; border-radius: 2px; text-transform: uppercase; }"
+    },
+    {
+      "name": "Read More Link",
+      "kind": "button",
+      "refersTo": "readmore-link",
+      "description": "Outbound link to the source story at the foot of an expanded card.",
+      "html": "<a class=\"ds-readmore\" href=\"#\">Read full story →</a>",
+      "css": ".ds-readmore { display: inline-block; font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: #1a2744; text-decoration: none; } .ds-readmore:hover { text-decoration: underline; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Morning Broadsheet",
+    "overview": "A finished print paper folded onto a phone. Every element answers to one question: would this belong on a well-set front page? The system is built from print furniture, not app chrome: a masthead with presence, hairline rules between stories, uppercase sans kickers against serif headlines, a single navy that does the work of a whole palette. The page is finite, and the design says so; it has a top, sections, and an end.",
+    "keyCharacteristics": [
+      "Paper metaphor carried by warm neutrals: Newsprint Cream ground, Paper White page",
+      "One structural color (Press Navy) plus one editorial accent (Masthead Red)",
+      "Serif-first typography; sans-serif appears only in small uppercase labels",
+      "Ruled, not boxed: hierarchy through hairline borders and weight, never containers",
+      "Flat as newsprint; no shadows anywhere"
+    ],
+    "rules": [
+      { "name": "The Two-Ink Rule", "body": "Press Navy and Masthead Red are the only chromatic colors on the page. Navy structures, red flags. A third color is a defect.", "section": "colors" },
+      { "name": "The Scarce Red Rule", "body": "Masthead Red may only appear in kickers and flag chips. Never backgrounds larger than a chip, never body text, never links.", "section": "colors" },
+      { "name": "The Two-Family Rule", "body": "Georgia for everything readers read; Arial only for uppercase furniture 11px and under. A sans-serif headline or serif label is a typesetting error.", "section": "typography" },
+      { "name": "The No-Shadow Rule", "body": "box-shadow is prohibited. If an element needs separation, rule it off with a hairline or tint its ground.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do separate content with hairline rules (1px Rule Gray) and weight, in the print manner.",
+      "Do keep Press Navy structural and Masthead Red editorial, per the Two-Ink Rule.",
+      "Do keep the page finite: a masthead at the top, a footer colophon at the end.",
+      "Do size touch targets for a sleepy thumb: 44px minimum for tabs, cards, and toggles.",
+      "Do hold body text at 15px/1.7 or better; the reading distance is arm's length in bed."
+    ],
+    "donts": [
+      "Don't introduce news-app engagement slop: infinite scroll, red badges, BREAKING banners, clickbait cards, or any 'for you' energy.",
+      "Don't use the generic SaaS/AI aesthetic: rounded card grids, gradient accents, glassmorphism, dashboard vibes.",
+      "Don't recreate cluttered legacy news sites: ad-slot density, competing headlines, tiny cramped text.",
+      "Don't use box-shadows, gradients, or borders thicker than hairlines except the masthead (4px), lead (3px), and active-tab (3px) navy rules.",
+      "Don't use border-left or border-right stripes as colored accents on callouts or cards; rule across the top or tint the ground instead.",
+      "Don't add a third chromatic color. Two inks, warm grays, nothing else."
+    ]
+  }
+}
