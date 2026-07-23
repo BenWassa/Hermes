@@ -40,10 +40,10 @@ def _client() -> genai.Client:
     return genai.Client(api_key=key)
 
 
-def _gen_config(model: str | None = None) -> types.GenerateContentConfig:
+def _gen_config(today: dt.date, model: str | None = None) -> types.GenerateContentConfig:
     m = model if model is not None else config.CURATE_MODEL
     kwargs: dict = dict(
-        system_instruction=config.build_curate_system_prompt(),
+        system_instruction=config.build_curate_system_prompt(today),
         response_mime_type="application/json",
         max_output_tokens=config.CURATE_MAX_TOKENS,
         temperature=0.3,
@@ -59,7 +59,7 @@ def _gen_config(model: str | None = None) -> types.GenerateContentConfig:
     return types.GenerateContentConfig(**kwargs)
 
 
-def _generate(client: genai.Client, contents: str, retries: int = 3):
+def _generate(client: genai.Client, contents: str, today: dt.date, retries: int = 3):
     """generate_content with backoff on transient errors; falls back to gemini-2.5-flash on quota exhaustion."""
     models_to_try = [config.CURATE_MODEL]
     if config.CURATE_MODEL != _FALLBACK_MODEL:
@@ -67,7 +67,7 @@ def _generate(client: genai.Client, contents: str, retries: int = 3):
 
     last: Exception | None = None
     for model in models_to_try:
-        cfg = _gen_config(model)
+        cfg = _gen_config(today, model)
         for attempt in range(retries + 1):
             try:
                 return client.models.generate_content(
@@ -90,11 +90,11 @@ def _generate(client: genai.Client, contents: str, retries: int = 3):
     raise last  # type: ignore[misc]
 
 
-def _call(client: genai.Client, stories: list[dict], reinforce: bool = False) -> dict:
+def _call(client: genai.Client, stories: list[dict], today: dt.date, reinforce: bool = False) -> dict:
     user_content = json.dumps(stories, ensure_ascii=False)
     if reinforce:
         user_content = "Return ONLY valid JSON matching the schema.\n\n" + user_content
-    resp = _generate(client, user_content)
+    resp = _generate(client, user_content, today)
     text = resp.text
     if not text:
         reason = resp.candidates[0].finish_reason if resp.candidates else None
@@ -158,15 +158,15 @@ def _normalize_edition(raw: dict) -> list[dict]:
 
 def curate(stories: list[dict], weather: dict | None = None, today: dt.date | None = None) -> dict:
     """Raw normalized stories -> finished edition dict (date, weather, sections)."""
+    today = today or dt.date.today()
     client = _client()
     stories = _trim_input(stories)
     try:
-        raw = _call(client, stories)
+        raw = _call(client, stories, today)
     except json.JSONDecodeError:
         log.warning("First curate parse failed; retrying with reinforcement")
-        raw = _call(client, stories, reinforce=True)
+        raw = _call(client, stories, today, reinforce=True)
 
-    today = today or dt.date.today()
     return {
         "date": today.strftime("%A, %B %-d, %Y"),
         "weather": weather or {},

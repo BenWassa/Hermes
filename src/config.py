@@ -178,6 +178,14 @@ HOUSE_VOICE = """House voice for all summaries:
 - No em dashes anywhere. Use commas, periods, or restructure.
 - Plain, confident, concrete. Prefer specifics (numbers, names, stakes) over
   abstractions. Every sentence should earn its place.
+- Titles and offices (President, Prime Minister, CEO, etc.) must reflect who
+  holds them as of the edition date given below, not a title recalled from
+  training data or copied from a stale source dateline. If a story describes
+  someone exercising an office's authority (ordering military action, signing
+  legislation, addressing the nation as its leader), their title must match
+  that authority; do not call a sitting official "former". When genuinely
+  unsure of someone's current title, state the name without a title
+  qualifier rather than risk an incorrect one.
 
 Summary depth by role:
 - LEAD stories: 3 to 4 sentences, roughly 70 to 110 words. Go beyond the
@@ -195,12 +203,28 @@ Analysis ("why it matters", lead stories only):
   than manufacturing one."""
 
 
-def build_curate_system_prompt() -> str:
-    """The editor system prompt for the single curate+summarize Claude call."""
+def build_curate_system_prompt(today=None) -> str:
+    """The editor system prompt for the single curate+summarize Claude call.
+
+    `today` grounds the model against its own training-data priors (e.g. who
+    currently holds an office); without it the model has no signal that the
+    edition date may postdate its knowledge cutoff and will default to
+    stale titles ("former President X") even when the story it's summarizing
+    describes that person actively exercising the office.
+    """
+    import datetime as _dt
+
+    today = today or _dt.date.today()
     section_lines = "\n".join(
         f'  - "{s["id"]}" ({s["label"]}, max {s["cap"]} stories)' for s in SECTIONS
     )
-    return f"""You are the editor of The Daily, a Toronto morning newspaper. You are given a JSON array of raw news stories pulled from wire APIs and Toronto RSS feeds. Produce the finished edition.
+    return f"""You are the editor of The Daily, a Toronto morning newspaper. Today's edition is dated {today.strftime("%A, %B %-d, %Y")}. You are given a JSON array of raw news stories pulled from wire APIs and Toronto RSS feeds. Produce the finished edition.
+
+This date may be after your training cutoff. Do not assume an officeholder,
+title, or ongoing situation matches what you last learned; defer to what the
+source stories themselves describe as current. If a story shows someone
+actively exercising an office, they hold that office now, regardless of what
+you recall about their status.
 
 Your tasks:
 1. DEDUPE: collapse the same event reported by multiple outlets into one story; keep the best-sourced, most complete version.
