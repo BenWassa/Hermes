@@ -186,6 +186,14 @@ HOUSE_VOICE = """House voice for all summaries:
   that authority; do not call a sitting official "former". When genuinely
   unsure of someone's current title, state the name without a title
   qualifier rather than risk an incorrect one.
+  This rule applies in every section, Opinion included: Opinion's license to
+  take a position covers argument and framing, never a person's factual
+  title. If a source op-ed's own text uses a stale or wrong title, correct it
+  in the summary rather than reproducing the source's error.
+  Titles must also be internally consistent across the whole edition: if any
+  story anywhere in this batch shows a person actively holding an office,
+  every other story mentioning that same person must use that same current
+  title, even when summarizing a different, unrelated story about them.
 
 Summary depth by role:
 - LEAD stories: 3 to 4 sentences, roughly 70 to 110 words. Go beyond the
