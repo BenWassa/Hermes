@@ -217,6 +217,27 @@
     .card .readmore:hover { text-decoration: underline; }
     .card .readmore:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
+    /* Ask AI: hand the clipping and a briefing prompt to a model */
+    .card .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; }
+    .card .askai, .card .ask-opt {
+      border: none; background: none; padding: 0; cursor: pointer;
+      min-height: 44px; line-height: 44px; text-decoration: none;
+      font-family: 'Arial', sans-serif; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.04em; color: var(--navy-ink);
+    }
+    .card .askai { margin-top: 12px; }
+    .card .askai:hover, .card .ask-opt:hover { text-decoration: underline; }
+    .card .askai:focus-visible, .card .ask-opt:focus-visible {
+      outline: 2px solid var(--focus); outline-offset: 3px;
+    }
+    .card .ask-panel { display: none; border-top: 1px solid var(--rule-soft); margin-top: 4px; }
+    .card .ask-panel.open { display: block; }
+    .card .ask-row { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; }
+    .card .ask-note {
+      font-family: 'Arial', sans-serif; font-size: 0.6875rem; line-height: 1.55;
+      color: var(--meta); letter-spacing: 0.02em; padding-bottom: 12px;
+    }
+
     /* Footer */
     .footer {
       border-top: 2px solid var(--navy);
@@ -262,6 +283,95 @@
         return /^(DEVELOPING|BREAKING|LIVE|WAR|ALERT|URGENT)$/i.test(t || '');
       }
 
+      // ---- Ask AI ----------------------------------------------------------
+      // The reader taps one story and gets a briefing, not a chat. The prompt
+      // does three jobs: hand over the clipping, name the shape of the answer
+      // (five parts, ~500 words, hard ceiling), and set up the follow-up so the
+      // conversation continues without the reader having to think of a question.
+      // Voice constraints mirror src/config.py HOUSE_VOICE, em dash ban included.
+      function buildPrompt(st, sectionLabel) {
+        var L = [];
+        L.push('I read this in my morning paper and I want to understand it properly.');
+        L.push('');
+        L.push('THE CLIPPING');
+        L.push('Headline: ' + st.headline);
+        if (st.sub) L.push('Standfirst: ' + st.sub);
+        if (st.summary) L.push('Summary: ' + st.summary);
+        if (st.analysis) L.push("My paper's why-it-matters note: " + st.analysis);
+        L.push('Section: ' + sectionLabel + '. Filed ' + (st.time || 'this morning') +
+               ', edition of ' + data.date + '.');
+        if (st.link) L.push('Source: ' + st.link);
+        L.push('');
+        L.push('WHAT I WANT');
+        L.push('A briefing that leaves me genuinely informed, not a restatement of what I just');
+        L.push('pasted. Assume I know nothing beyond the clipping above.');
+        L.push('');
+        L.push('Check current reporting first if you are able to search. My clipping is a');
+        L.push('summary and may be incomplete or already overtaken by events. If you cannot');
+        L.push('search, say so in one line at the top, then separate what you are confident');
+        L.push('about from what you would want verified.');
+        L.push('');
+        L.push('FORMAT');
+        L.push('Five headings, in this order, in flowing prose. Around 500 words. Hard ceiling');
+        L.push('650. Do not pad to reach a length.');
+        L.push('');
+        L.push('1. The state of play: what is actually happening, in three or four sentences.');
+        L.push('   Correct my clipping where it is wrong or out of date.');
+        L.push('2. How we got here: only the background I need to follow this story. Not a');
+        L.push('   history lecture.');
+        L.push('3. Why it matters: the stakes and the second order effects. Be concrete about');
+        L.push('   who gains, who pays, how much, and by when.');
+        L.push('4. Where it is contested: the strongest disagreement among serious people, put');
+        L.push('   fairly. If it is genuinely uncontested, say so in a sentence and move on.');
+        L.push('5. What to watch: three bullets, each a specific checkable marker with a rough');
+        L.push('   timeframe.');
+        L.push('');
+        L.push('Then give me three numbered questions to ask you next, ordered by what would');
+        L.push('teach me the most. I will reply with a digit.');
+        L.push('');
+        L.push('VOICE');
+        L.push('Financial Times, not an encyclopedia and not a chatbot. Plain, confident,');
+        L.push('concrete. Specifics over abstractions: names, numbers, dates, stakes. Every');
+        L.push('sentence earns its place. No preamble, no throat clearing, no restating my');
+        L.push('prompt back to me, no hedging filler, no em dashes. Where you are uncertain,');
+        L.push('mark it in the sentence it applies to rather than in a disclaimer paragraph.');
+        return L.join('\n');
+      }
+
+      function findStory(id) {
+        for (var i = 0; i < data.sections.length; i++) {
+          var list = data.sections[i].stories || [];
+          for (var j = 0; j < list.length; j++) {
+            if (list[j].id === id) {
+              return { story: list[j], label: data.sections[i].label };
+            }
+          }
+        }
+        return null;
+      }
+
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        // Older iOS standalone PWAs land here.
+        return new Promise(function (resolve, reject) {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.top = '0';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          ta.setSelectionRange(0, ta.value.length);
+          var ok = false;
+          try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+          document.body.removeChild(ta);
+          ok ? resolve() : reject(new Error('copy failed'));
+        });
+      }
+
       // Tagline reflects the sections the edition actually shipped, not a
       // hardcoded list that can disagree with the paper.
       function taglineText() {
@@ -302,7 +412,7 @@
         }).join('') + '</div>';
       }
 
-      function cardHtml(st) {
+      function cardHtml(st, sectionLabel) {
         var open = st.id === state.openId;
         var tag = st.tag
           ? '<span class="tag ' + (isHotTag(st.tag) ? 'hot' : 'cool') + '">' + esc(st.tag) + '</span>'
@@ -321,8 +431,31 @@
           var link = st.link
             ? '<a class="readmore" href="' + esc(st.link) + '" target="_blank" rel="noopener">Read full story →</a>'
             : '';
+
+          // Prefill the destinations at render time so a long press ("open in
+          // app") carries the prompt too, instead of us intercepting the tap.
+          var q = encodeURIComponent(buildPrompt(st, sectionLabel));
+          var share = navigator.share
+            ? '<button class="ask-opt" data-ai="share" data-id="' + esc(st.id) + '">Share…</button>'
+            : '';
+          var actions = '<div class="actions">' + link +
+            '<button class="askai" data-ask="' + esc(st.id) + '" aria-expanded="false" ' +
+              'aria-controls="ask-' + esc(st.id) + '">Ask AI ▾</button></div>' +
+            '<div class="ask-panel" id="ask-' + esc(st.id) + '">' +
+              '<div class="ask-row">' +
+                '<a class="ask-opt" href="https://claude.ai/new?q=' + esc(q) + '" ' +
+                  'target="_blank" rel="noopener">Claude</a>' +
+                '<a class="ask-opt" href="https://chatgpt.com/?q=' + esc(q) + '" ' +
+                  'target="_blank" rel="noopener">ChatGPT</a>' +
+                '<button class="ask-opt" data-ai="copy" data-id="' + esc(st.id) + '">Copy prompt</button>' +
+                share +
+              '</div>' +
+              '<div class="ask-note">Sends this clipping with a briefing prompt: five parts, ' +
+                'about 500 words, then three follow-up questions to carry on with.</div>' +
+            '</div>';
+
           expand = '<div class="expand">' + img +
-            '<p class="sumtext">' + esc(st.summary) + '</p>' + analysis + link + '</div>';
+            '<p class="sumtext">' + esc(st.summary) + '</p>' + analysis + actions + '</div>';
         }
         return '<div class="card' + (st.lead ? ' lead' : '') + (open ? ' open' : '') +
           '" data-card="' + esc(st.id) + '" role="button" tabindex="0" ' +
@@ -341,7 +474,9 @@
         if (!section.stories || !section.stories.length) {
           return '<div class="empty">Nothing filed for ' + esc(section.label) + ' this morning.</div>';
         }
-        return section.stories.map(cardHtml).join('');
+        return section.stories.map(function (st) {
+          return cardHtml(st, section.label);
+        }).join('');
       }
 
       // Quietly flag a saved (not-today) edition served from cache/offline.
@@ -432,7 +567,8 @@
       function bindCards() {
         Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
           function activate(ev) {
-            if (ev.target.closest('a')) return;                 // let the link work
+            // Let links and the Ask AI controls handle their own activation.
+            if (ev.target.closest('a, button')) return;
             // While open, only the header row collapses it, so reading (and
             // selecting) the body never closes the story by accident.
             if (card.classList.contains('open') && !ev.target.closest('.row')) return;
@@ -440,7 +576,50 @@
           }
           card.addEventListener('click', activate);
           card.addEventListener('keydown', function (ev) {
-            if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); activate(ev); }
+            if (ev.key !== 'Enter' && ev.key !== ' ') return;
+            // Never swallow the key from a control that acts on it itself.
+            if (ev.target.closest('a, button')) return;
+            ev.preventDefault();
+            activate(ev);
+          });
+          bindAsk(card);
+        });
+      }
+
+      // Panel state is held in the DOM, not in `state`, so opening the
+      // destinations never triggers a stories rebuild and never moves the page.
+      function bindAsk(card) {
+        var toggle = card.querySelector('.askai');
+        if (!toggle) return;
+        var panel = card.querySelector('.ask-panel');
+
+        toggle.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          var open = panel.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', String(open));
+          toggle.textContent = open ? 'Ask AI ▴' : 'Ask AI ▾';
+        });
+
+        Array.prototype.forEach.call(panel.querySelectorAll('[data-ai]'), function (el) {
+          var kind = el.getAttribute('data-ai');
+          el.addEventListener('click', function (ev) {
+            ev.stopPropagation();
+            var found = findStory(el.getAttribute('data-id'));
+            if (!found) return;
+            var prompt = buildPrompt(found.story, found.label);
+
+            if (kind === 'share') {
+              navigator.share({ text: prompt }).catch(function () {});
+              return;
+            }
+            var label = el.textContent;
+            copyText(prompt).then(function () {
+              el.textContent = 'Copied';
+            }).catch(function () {
+              el.textContent = 'Copy failed';
+            }).then(function () {
+              setTimeout(function () { el.textContent = label; }, 1800);
+            });
           });
         });
       }
