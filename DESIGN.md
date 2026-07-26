@@ -241,6 +241,12 @@ images from looking sharp-cornered at small sizes).
 ### Read More Link
 - **Style:** Label type in Press Navy, no underline at rest, underline on hover
 
+### Ask AI
+- **Style:** Label type in Press Navy, sitting beside Read More on the action row; ▾/▴ signals the destination list
+- **Behavior:** tap reveals a hairline-ruled row of destinations (Claude, ChatGPT, Copy prompt, and the native share sheet where the OS offers one), then a caption naming the shape of the answer
+- **Payload:** the clipping (headline, standfirst, summary, why-it-matters, section, dateline, source) plus a briefing prompt, prefilled into the destination URL so a long press carries it too
+- **Rule:** no new ink and no boxes; this is furniture on the page, not a widget. Panel state lives in the DOM so opening it never rebuilds the column or moves the reader's place.
+
 ### Masthead (Signature Component)
 - Dateline (Gray Meta, uppercase, tracked) over "THE DAILY" in Display over
   tagline (Gray Meta label). Ruled off below with 4px Press Navy. This is

@@ -93,6 +93,11 @@ Pages serves `docs/` on `main` at `https://BenWassa.github.io/Hermes/`.
 ## Notes
 
 - House style: factual, headline-first, 2–3 sentence summaries, no em dashes.
+- Every opened story carries an **Ask AI** control that hands the clipping and a
+  briefing prompt to Claude, ChatGPT, the clipboard, or the native share sheet.
+  The prompt asks for a five-part answer of about 500 words in house voice, then
+  three numbered follow-up questions to continue with. It lives in `buildPrompt()`
+  in [template/index.template.html](template/index.template.html); edit it there.
 - Sensitive stories (war, violent crime, court proceedings on violent crime,
   death, disaster) render text-only by design.
 - Source thumbnails are hotlinked; some may rot. Acceptable for v1; caching to
