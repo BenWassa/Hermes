@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="build" content="2026-07-26T01:12:04Z" />
+  <meta name="build" content="2026-07-26T02:06:07Z" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
@@ -311,23 +311,40 @@
         L.push('search, say so in one line at the top, then separate what you are confident');
         L.push('about from what you would want verified.');
         L.push('');
-        L.push('FORMAT');
-        L.push('Five headings, in this order, in flowing prose. Around 500 words. Hard ceiling');
-        L.push('650. Do not pad to reach a length.');
+        L.push('STRUCTURE');
+        L.push('I am reading this on a phone. Build the answer in layers, heaviest first, so');
+        L.push('I can stop at the end of any layer and still have got something whole. Use');
+        L.push('these markdown headings exactly, so they render large on a small screen.');
         L.push('');
-        L.push('1. The state of play: what is actually happening, in three or four sentences.');
-        L.push('   Correct my clipping where it is wrong or out of date.');
-        L.push('2. How we got here: only the background I need to follow this story. Not a');
-        L.push('   history lecture.');
-        L.push('3. Why it matters: the stakes and the second order effects. Be concrete about');
-        L.push('   who gains, who pays, how much, and by when.');
-        L.push('4. Where it is contested: the strongest disagreement among serious people, put');
-        L.push('   fairly. If it is genuinely uncontested, say so in a sentence and move on.');
-        L.push('5. What to watch: three bullets, each a specific checkable marker with a rough');
-        L.push('   timeframe.');
+        L.push('# The gist');
+        L.push('An H1 of six to ten words stating the actual point, not the topic. Then two or');
+        L.push('three short sentences giving me the whole story in plain words. If I read');
+        L.push('nothing else, this is what I walk away knowing. Correct my clipping here if it');
+        L.push('is wrong or out of date.');
         L.push('');
-        L.push('Then give me three numbered questions to ask you next, ordered by what would');
-        L.push('teach me the most. I will reply with a digit.');
+        L.push('## Why it matters');
+        L.push('Two or three short sentences on the stakes and the second order effects. Be');
+        L.push('concrete about who gains, who pays, how much, and by when.');
+        L.push('');
+        L.push('## How we got here');
+        L.push('Only the background I need to follow this story. Not a history lecture.');
+        L.push('');
+        L.push('## Where it is contested');
+        L.push('The strongest disagreement among serious people, put fairly. If it is genuinely');
+        L.push('uncontested, say so in one sentence and move on.');
+        L.push('');
+        L.push('## What to watch');
+        L.push('Three bullets, each a specific checkable marker with a rough timeframe.');
+        L.push('');
+        L.push('## Ask me next');
+        L.push('Three numbered questions, ordered by what would teach me the most. I will reply');
+        L.push('with a digit.');
+        L.push('');
+        L.push('READING ON A PHONE');
+        L.push('Short paragraphs: three sentences at most, none longer than about sixty words,');
+        L.push('with a blank line between them. No tables, no nested bullets, no wall of text.');
+        L.push('Around 500 words in total. Hard ceiling 650. Do not pad to reach a length; the');
+        L.push('gist and why it matters are worth more than the sections under them.');
         L.push('');
         L.push('VOICE');
         L.push('Financial Times, not an encyclopedia and not a chatbot. Plain, confident,');
@@ -435,23 +452,27 @@
           // Prefill the destinations at render time so a long press ("open in
           // app") carries the prompt too, instead of us intercepting the tap.
           var q = encodeURIComponent(buildPrompt(st, sectionLabel));
+          // No target="_blank" on these two. In a standalone PWA a blank target
+          // opens an in-app browser sheet, which iOS will not hand off to an
+          // installed app; a plain top-level tap is what lets the Claude and
+          // ChatGPT apps claim their own domains as Universal Links. "Read full
+          // story" keeps _blank, because a news site does belong in a tab.
           var share = navigator.share
-            ? '<button class="ask-opt" data-ai="share" data-id="' + esc(st.id) + '">Share…</button>'
+            ? '<button class="ask-opt" data-ai="share" data-id="' + esc(st.id) + '">Share to app…</button>'
             : '';
           var actions = '<div class="actions">' + link +
             '<button class="askai" data-ask="' + esc(st.id) + '" aria-expanded="false" ' +
               'aria-controls="ask-' + esc(st.id) + '">Ask AI ▾</button></div>' +
             '<div class="ask-panel" id="ask-' + esc(st.id) + '">' +
               '<div class="ask-row">' +
-                '<a class="ask-opt" href="https://claude.ai/new?q=' + esc(q) + '" ' +
-                  'target="_blank" rel="noopener">Claude</a>' +
-                '<a class="ask-opt" href="https://chatgpt.com/?q=' + esc(q) + '" ' +
-                  'target="_blank" rel="noopener">ChatGPT</a>' +
-                '<button class="ask-opt" data-ai="copy" data-id="' + esc(st.id) + '">Copy prompt</button>' +
+                '<a class="ask-opt" href="https://claude.ai/new?q=' + esc(q) + '">Claude</a>' +
+                '<a class="ask-opt" href="https://chatgpt.com/?q=' + esc(q) + '">ChatGPT</a>' +
                 share +
+                '<button class="ask-opt" data-ai="copy" data-id="' + esc(st.id) + '">Copy</button>' +
               '</div>' +
-              '<div class="ask-note">Sends this clipping with a briefing prompt: five parts, ' +
-                'about 500 words, then three follow-up questions to carry on with.</div>' +
+              '<div class="ask-note">Opens in the app if you have it installed. The reply ' +
+                'starts with the gist in a few lines, then goes deeper, then offers three ' +
+                'follow-up questions.</div>' +
             '</div>';
 
           expand = '<div class="expand">' + img +

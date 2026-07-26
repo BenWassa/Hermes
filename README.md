@@ -94,10 +94,17 @@ Pages serves `docs/` on `main` at `https://BenWassa.github.io/Hermes/`.
 
 - House style: factual, headline-first, 2–3 sentence summaries, no em dashes.
 - Every opened story carries an **Ask AI** control that hands the clipping and a
-  briefing prompt to Claude, ChatGPT, the clipboard, or the native share sheet.
-  The prompt asks for a five-part answer of about 500 words in house voice, then
-  three numbered follow-up questions to continue with. It lives in `buildPrompt()`
-  in [template/index.template.html](template/index.template.html); edit it there.
+  briefing prompt to Claude, ChatGPT, the iOS share sheet, or the clipboard. The
+  prompt asks for a layered answer in house voice, heaviest first: the gist under
+  an H1, then why it matters, then background, contest, and markers to watch, then
+  three numbered follow-up questions. About 500 words, hard ceiling 650, short
+  paragraphs and no tables so it reads on a phone. It lives in `buildPrompt()` in
+  [template/index.template.html](template/index.template.html); edit it there.
+- The Claude and ChatGPT links deliberately carry no `target="_blank"`: a blank
+  target opens an in-app browser sheet that iOS will not hand off to an installed
+  app, so a plain top-level tap is what lets those apps claim their own domains as
+  Universal Links. "Share to app" is the fallback when a link opens in the browser
+  anyway, since both iOS apps accept shared text.
 - Sensitive stories (war, violent crime, court proceedings on violent crime,
   death, disaster) render text-only by design.
 - Source thumbnails are hotlinked; some may rot. Acceptable for v1; caching to

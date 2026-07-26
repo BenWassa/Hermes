@@ -243,8 +243,10 @@ images from looking sharp-cornered at small sizes).
 
 ### Ask AI
 - **Style:** Label type in Press Navy, sitting beside Read More on the action row; ▾/▴ signals the destination list
-- **Behavior:** tap reveals a hairline-ruled row of destinations (Claude, ChatGPT, Copy prompt, and the native share sheet where the OS offers one), then a caption naming the shape of the answer
+- **Behavior:** tap reveals a hairline-ruled row of destinations (Claude, ChatGPT, Share to app where the OS offers a sheet, Copy), then a caption naming the shape of the answer
 - **Payload:** the clipping (headline, standfirst, summary, why-it-matters, section, dateline, source) plus a briefing prompt, prefilled into the destination URL so a long press carries it too
+- **Destination:** the two AI links carry no `target="_blank"`, so iOS can hand a plain tap to an installed app as a Universal Link rather than trapping it in an in-app browser sheet
+- **Answer shape:** layered for a phone, heaviest first. An H1 gist that stands alone, then why it matters, then the deeper sections, then three numbered follow-ups. The reader can stop at any layer and still have something whole.
 - **Rule:** no new ink and no boxes; this is furniture on the page, not a widget. Panel state lives in the DOM so opening it never rebuilds the column or moves the reader's place.
 
 ### Masthead (Signature Component)
