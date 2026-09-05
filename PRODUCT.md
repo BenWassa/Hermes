@@ -27,6 +27,16 @@ edition is fresh every morning, the lead stories carry real synthesis (the
 "why it matters", not just the what), and the whole read fits comfortably in a
 phone-sized morning window.
 
+## Opinion and Voices
+
+Opinion has two legitimate jobs: editorial discovery and deliberate following.
+Hermes may guarantee new work from explicitly chosen **Voices** across
+publications, while still curating a separate ordinary Opinion selection. A
+Voice is a person, not a publisher and not an algorithmic interest profile.
+Following must remain finite and quiet: no `For You` feed, unread-count treadmill,
+social graph, recommendation loop, or infinite archive. See `VOICES.md` for the
+authoritative feature architecture and scope.
+
 ## Brand Personality
 
 Classic broadsheet, refined. Three words: **authoritative, calm, finished**.
