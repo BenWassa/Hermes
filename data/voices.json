@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "_readme": "Followed writers. A Voice is a person, not a publication. This file is the source of truth for V1: adding or removing a Voice is a reviewed config change, not an in-app toggle, because the overnight GitHub Actions build is what reads it. See VOICES.md section 5 for the schema and README.md for how to add a Voice, resolve a provider id, and troubleshoot a source.",
+  "voices": [
+    {
+      "id": "jonathan-haidt",
+      "name": "Jonathan Haidt",
+      "enabled": true,
+      "notify": true,
+      "aliases": ["Jon Haidt", "Jonathan D. Haidt"],
+      "sources": [
+        {
+          "id": "after-babel",
+          "type": "rss",
+          "url": "https://www.afterbabel.com/feed",
+          "publication": "After Babel",
+          "authorship": "byline",
+          "note": "After Babel is multi-author (Haidt, Zach Rausch, Freya India and guests), so the feed URL alone proves nothing: each entry must carry his byline."
+        }
+      ],
+      "note": "Publishes across his own newsletter and third-party outlets. Cross-publication coverage is the job of a Perigon journalist id; resolve one with 'python -m src.voices.audit journalist \"Jonathan Haidt\"' and add it under provider_ids and a perigon_journalist source."
+    },
+    {
+      "id": "jordan-peterson",
+      "name": "Jordan Peterson",
+      "enabled": true,
+      "notify": true,
+      "aliases": ["Jordan B. Peterson", "Jordan B Peterson", "Dr. Jordan B. Peterson"],
+      "sources": [
+        {
+          "id": "jbp-newsletter",
+          "type": "rss",
+          "url": "https://drjordanbpeterson.substack.com/feed",
+          "publication": "Jordan B Peterson",
+          "authorship": "scope",
+          "note": "A personal newsletter: the publication is the person, so the source itself establishes authorship. Substack feeds do not reliably carry dc:creator on single-author publications."
+        }
+      ]
+    },
+    {
+      "id": "conrad-black",
+      "name": "Conrad Black",
+      "enabled": true,
+      "notify": true,
+      "aliases": ["Conrad M. Black"],
+      "sources": [
+        {
+          "id": "nysun-author-archive",
+          "type": "author_page",
+          "url": "https://www.nysun.com/author/conrad-black-2",
+          "publication": "The New York Sun",
+          "link_prefix": "/article/",
+          "structural": true,
+          "paywalled": true,
+          "authorship": "scope",
+          "note": "A publication's own author archive: the page is the publisher stating what this person wrote. Discovery and canonical links only; article bodies are never fetched or stored."
+        }
+      ],
+      "note": "The third-party, partly paywalled case. Hermes keeps the canonical outbound link and public metadata and does not touch subscription content."
+    },
+    {
+      "id": "george-monbiot",
+      "name": "George Monbiot",
+      "enabled": true,
+      "notify": true,
+      "provider_ids": [
+        {"provider": "guardian", "id": "profile/georgemonbiot"}
+      ],
+      "sources": [
+        {
+          "id": "guardian-monbiot",
+          "type": "guardian_contributor",
+          "tag": "profile/georgemonbiot",
+          "authorship": "provider_id"
+        }
+      ],
+      "note": "The canonical-contributor case. The provider id attributes his work wherever it appears, including the ordinary morning Guardian fetch, at no extra request cost; the contributor query then guarantees a new column is seen even when it falls outside the sections Hermes already pulls."
+    },
+    {
+      "id": "david-brooks",
+      "name": "David Brooks",
+      "enabled": true,
+      "notify": true,
+      "byline_publications": ["nytimes.com"],
+      "note": "The zero-request case. The NYT Top Stories opinion stream is already fetched for the Opinion desk, so his byline is matched inside a response Hermes pays for anyway. The alias is trusted only on nytimes.com; the same name on any other host is not this Voice."
+    }
+  ]
+}

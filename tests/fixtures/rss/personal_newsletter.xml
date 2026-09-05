@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Jordan B Peterson</title>
+    <link>https://drjordanbpeterson.substack.com</link>
+    <description>A single-author personal newsletter with no author metadata on entries.</description>
+    <item>
+      <title>On Responsibility and Order</title>
+      <link>https://drjordanbpeterson.substack.com/p/on-responsibility-and-order</link>
+      <guid isPermaLink="false">post-99201</guid>
+      <description>A lecture transcript.</description>
+      <pubDate>Sat, 05 Sep 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Notes From the Tour</title>
+      <link>https://drjordanbpeterson.substack.com/p/notes-from-the-tour</link>
+      <guid isPermaLink="false">post-99180</guid>
+      <description>Travel notes.</description>
+      <pubDate>Fri, 04 Sep 2026 12:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

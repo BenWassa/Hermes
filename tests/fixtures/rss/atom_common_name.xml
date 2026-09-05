@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Municipal Notes</title>
+  <link href="https://municipal-notes.example.org/"/>
+  <updated>2026-09-05T10:00:00Z</updated>
+  <entry>
+    <title>Council approves the transit levy</title>
+    <link href="https://municipal-notes.example.org/2026/09/05/transit-levy"/>
+    <id>tag:municipal-notes.example.org,2026:transit-levy</id>
+    <updated>2026-09-05T10:00:00Z</updated>
+    <published>2026-09-05T10:00:00Z</published>
+    <author><name>John Smith</name></author>
+    <summary>A different John Smith entirely.</summary>
+  </entry>
+</feed>

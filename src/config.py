@@ -57,10 +57,13 @@ GUARDIAN_SECTIONS = {
     "commentisfree": "opinion",
 }
 
-# NYT Top Stories API sections -> our section hint.
+# NYT Top Stories API sections -> our section hint. "opinion" is included so
+# the Opinion desk sees NYT columnists, and so a followed NYT writer is found
+# in a stream Hermes already fetches rather than costing a per-person request.
 NYT_SECTIONS = {
     "world": "world",
     "business": "business",
+    "opinion": "opinion",
 }
 
 # Perigon News API queries -> our section hint. Each entry is one request to the
@@ -98,6 +101,47 @@ TORONTO_RSS = [
         "url": "https://www.thestar.com/search/?f=rss&t=article&c=news/gta*&l=50&s=start_time&sd=desc",
     },
 ]
+
+
+# --- Voices (followed writers) --------------------------------------------
+
+# The followed-Voice registry is repository-backed and reviewed: adding or
+# removing a writer is a config change, not an in-app toggle. See VOICES.md.
+VOICES_REGISTRY_PATH = "data/voices.json"
+
+# How far back a build looks for new work by a followed Voice. Wider than one
+# calendar day so a piece indexed late still lands, and safe to overlap because
+# article identity already prevents a repeat.
+VOICE_LOOKBACK_HOURS = int(os.environ.get("VOICE_LOOKBACK_HOURS", "36"))
+
+# Timestamps beyond this far in the future are treated as invalid rather than
+# as tomorrow's news.
+VOICE_FUTURE_SKEW_MINUTES = 120
+
+# Following stays finite. At most VOICE_FOLLOWING_CAP pieces in the morning
+# block, and at most VOICE_MAX_PER_VOICE from any one writer before the
+# remaining slots are filled by recency, so a prolific writer cannot take the
+# whole block. Lower these if the morning read gets long; do not raise them
+# automatically because a Voice got busy.
+VOICE_FOLLOWING_CAP = 6
+VOICE_MAX_PER_VOICE = 2
+
+# Per-run provider request allowances for Voice discovery. The architecture
+# must not cost "voices x providers x polls": sources are deduplicated and
+# batched (all Guardian contributor tags in one query, all Perigon journalist
+# ids in one query, a shared feed fetched once), so these ceilings are an
+# alarm for a registry mistake rather than a normal limit.
+#
+# Perigon is the binding constraint. Its personal tier is documented in
+# requests per month (150 as of 2026-09-05), so Voice discovery uses it as a
+# once-a-day reconciliation pass, never a poller. Treat live provider limits as
+# authoritative and re-check them when tuning.
+VOICE_REQUEST_BUDGET = {
+    "rss": 24,
+    "guardian": 3,
+    "perigon": 1,
+    "author_page": 8,
+}
 
 
 # --- Gemini (curation model) ----------------------------------------------

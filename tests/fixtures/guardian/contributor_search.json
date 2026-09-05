@@ -1,0 +1,74 @@
+{
+  "response": {
+    "status": "ok",
+    "total": 3,
+    "results": [
+      {
+        "id": "commentisfree/2026/sep/05/rivers-and-the-public-realm",
+        "type": "article",
+        "sectionId": "commentisfree",
+        "sectionName": "Opinion",
+        "webPublicationDate": "2026-09-05T06:00:12Z",
+        "webTitle": "Rivers and the public realm",
+        "webUrl": "https://www.theguardian.com/commentisfree/2026/sep/05/rivers-and-the-public-realm",
+        "apiUrl": "https://content.guardianapis.com/commentisfree/2026/sep/05/rivers-and-the-public-realm",
+        "fields": {
+          "byline": "George Monbiot",
+          "trailText": "<p>The commons were enclosed twice.</p>",
+          "thumbnail": "https://i.guim.co.uk/img/media/river.jpg"
+        },
+        "tags": [
+          {
+            "id": "profile/georgemonbiot",
+            "type": "contributor",
+            "webTitle": "George Monbiot",
+            "firstName": "George",
+            "lastName": "Monbiot"
+          }
+        ]
+      },
+      {
+        "id": "commentisfree/2026/sep/05/two-authors-on-water",
+        "type": "article",
+        "sectionId": "commentisfree",
+        "sectionName": "Opinion",
+        "webPublicationDate": "2026-09-05T05:30:00Z",
+        "webTitle": "Two authors on water",
+        "webUrl": "https://www.theguardian.com/commentisfree/2026/sep/05/two-authors-on-water",
+        "fields": {
+          "byline": "George Monbiot and Amelia Hargreaves",
+          "trailText": "A joint piece.",
+          "thumbnail": null
+        },
+        "tags": [
+          {
+            "id": "profile/georgemonbiot",
+            "type": "contributor",
+            "webTitle": "George Monbiot"
+          },
+          {
+            "id": "profile/ameliahargreaves",
+            "type": "contributor",
+            "webTitle": "Amelia Hargreaves"
+          },
+          {"id": "environment/water", "type": "keyword", "webTitle": "Water"}
+        ]
+      },
+      {
+        "id": "commentisfree/2026/sep/04/a-piece-about-monbiot",
+        "type": "article",
+        "sectionId": "commentisfree",
+        "webPublicationDate": "2026-09-04T09:00:00Z",
+        "webTitle": "What George Monbiot gets wrong about rivers",
+        "webUrl": "https://www.theguardian.com/commentisfree/2026/sep/04/a-piece-about-monbiot",
+        "fields": {
+          "byline": "Rachel Vaughan",
+          "trailText": "A response."
+        },
+        "tags": [
+          {"id": "profile/rachelvaughan", "type": "contributor", "webTitle": "Rachel Vaughan"}
+        ]
+      }
+    ]
+  }
+}

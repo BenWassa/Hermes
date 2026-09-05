@@ -23,6 +23,7 @@ from google.genai import errors as genai_errors
 from google.genai import types
 
 from . import config
+from .normalize import curation_view
 
 log = logging.getLogger("the-daily.curate")
 
@@ -91,7 +92,10 @@ def _generate(client: genai.Client, contents: str, today: dt.date, retries: int 
 
 
 def _call(client: genai.Client, stories: list[dict], today: dt.date, reinforce: bool = False) -> dict:
-    user_content = json.dumps(stories, ensure_ascii=False)
+    # Normalized stories now also carry authorship and provenance for Voices.
+    # The editor prompt keeps receiving exactly the fields it always has, so
+    # neither the prompt size nor the model's contract changes.
+    user_content = json.dumps(curation_view(stories), ensure_ascii=False)
     if reinforce:
         user_content = "Return ONLY valid JSON matching the schema.\n\n" + user_content
     resp = _generate(client, user_content, today)

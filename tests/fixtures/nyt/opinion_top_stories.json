@@ -1,0 +1,56 @@
+{
+  "status": "OK",
+  "section": "opinion",
+  "num_results": 4,
+  "results": [
+    {
+      "section": "Opinion",
+      "subsection": "",
+      "title": "The Quiet Part of the Bargain",
+      "abstract": "What the settlement actually changes.",
+      "url": "https://www.nytimes.com/2026/09/05/opinion/the-quiet-part.html",
+      "uri": "nyt://article/6f4b1a2c-1111-5aaa-9b0e-000000000001",
+      "byline": "By David Brooks",
+      "item_type": "Article",
+      "published_date": "2026-09-05T05:00:00-4:00",
+      "des_facet": ["Politics and Government"],
+      "per_facet": [],
+      "multimedia": [
+        {"url": "https://static01.nyt.com/images/2026/09/05/opinion/quiet.jpg", "format": "Standard Thumbnail"}
+      ]
+    },
+    {
+      "section": "Opinion",
+      "title": "Two Views on the Budget",
+      "abstract": "A joint essay.",
+      "url": "https://www.nytimes.com/2026/09/05/opinion/two-views-budget.html",
+      "uri": "nyt://article/6f4b1a2c-1111-5aaa-9b0e-000000000002",
+      "byline": "By David Brooks and Marisol Vega",
+      "published_date": "2026-09-05T04:00:00-4:00",
+      "per_facet": [],
+      "multimedia": []
+    },
+    {
+      "section": "Opinion",
+      "title": "What Jonathan Haidt Missed About Phones",
+      "abstract": "A critique of the anxious-generation thesis.",
+      "url": "https://www.nytimes.com/2026/09/05/opinion/haidt-phones-critique.html",
+      "uri": "nyt://article/6f4b1a2c-1111-5aaa-9b0e-000000000003",
+      "byline": "By Nadia Okonjo",
+      "published_date": "2026-09-05T03:00:00-4:00",
+      "per_facet": ["Haidt, Jonathan"],
+      "multimedia": []
+    },
+    {
+      "section": "Opinion",
+      "title": "The Editorial Board on Housing",
+      "abstract": "An unsigned editorial.",
+      "url": "https://www.nytimes.com/2026/09/05/opinion/editorial-housing.html",
+      "uri": "nyt://article/6f4b1a2c-1111-5aaa-9b0e-000000000004",
+      "byline": "By The Editorial Board",
+      "published_date": "2026-09-05T02:00:00-4:00",
+      "per_facet": [],
+      "multimedia": []
+    }
+  ]
+}
