@@ -8,8 +8,6 @@ on:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    env:
-      PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -17,38 +15,27 @@ jobs:
           python-version: "3.11"
       - name: Install runtime dependencies
         run: pip install -r requirements.txt
-      - name: Probe Perigon identity on current Conrad article
+      - name: Inspect author index structure
         run: |
           python - <<'PY'
-          import os
+          import re
           import requests
 
-          key = os.environ.get("PERIGON_API_KEY", "")
-          print("PERIGON_API_KEY", "present" if key else "absent")
-          if not key:
-              raise SystemExit(2)
-          response = requests.get(
-              "https://api.goperigon.com/v1/all",
-              params={
-                  "apiKey": key,
-                  "url": '"nationalpost.com/opinion/conrad-black-mark-carney-puts-it-all-on-the-line"',
-                  "size": 10,
-                  "showReprints": "true",
-              },
-              timeout=20,
-          )
+          url = "https://www.nationalnewswatch.com/author/conrad-black"
+          response = requests.get(url, timeout=20, headers={"User-Agent": "Hermes/2 voice-source-audit"})
           print("status", response.status_code)
+          print("content_type", response.headers.get("content-type"))
           response.raise_for_status()
-          payload = response.json()
-          rows = payload.get("articles") or payload.get("results") or payload.get("data") or []
-          print("keys", sorted(payload.keys()))
-          print("count", len(rows))
-          for row in rows:
-              print("url", row.get("url"))
-              print("authorsByline", row.get("authorsByline"))
-              print("matchedAuthors", [
-                  {"id": a.get("id"), "name": a.get("name")}
-                  for a in (row.get("matchedAuthors") or row.get("journalists") or [])
-                  if isinstance(a, dict)
-              ])
+          html = response.text
+          needle = "Mark Carney puts it all on the line"
+          idx = html.find(needle)
+          print("headline_index", idx)
+          print("author_identity_occurrences", html.count('href="/author/conrad-black"'))
+          if idx < 0:
+              raise SystemExit("current Conrad article not found")
+          start = max(0, idx - 1800)
+          snippet = html[start:idx + 6500]
+          print("classes", sorted(set(re.findall(r'class=[\"\']([^\"\']+)', snippet))))
+          print("--- snippet ---")
+          print(re.sub(r"\s+", " ", snippet)[:8200])
           PY
