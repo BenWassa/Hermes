@@ -18,36 +18,24 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install requests feedparser
-      - name: Probe candidate first-party endpoints
+      - name: Inspect official Jordan Peterson RSS authorship metadata
         run: |
           python - <<'PY'
           import requests, feedparser
 
-          candidates = [
-              "https://www.jordanbpeterson.com/feed/",
-              "https://www.jordanbpeterson.com/category/blog/feed/",
-              "https://drjordanbpeterson.substack.com/feed",
-              "https://www.nysun.com/rss.xml",
-              "https://www.nysun.com/feed",
-              "https://www.nysun.com/author/conrad-black-2/feed",
-              "https://www.nysun.com/author/conrad-black-2",
-          ]
           headers = {
               "User-Agent": "TheDaily/2.0 (+https://github.com/BenWassa/Hermes)",
-              "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.8, */*;q=0.5",
+              "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*;q=0.5",
           }
-          browser_headers = {
-              **headers,
-              "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/151 Safari/537.36 Hermes/2.0",
-          }
-          for url in candidates:
-              for label, hs in (("hermes", headers), ("browser", browser_headers)):
-                  try:
-                      r = requests.get(url, headers=hs, timeout=20, allow_redirects=True)
-                      parsed = feedparser.parse(r.content) if r.ok else None
-                      entries = len(parsed.entries) if parsed is not None else 0
-                      final = r.url
-                      print(f"{r.status_code:3} {label:7} entries={entries:2} type={r.headers.get('content-type','')[:45]:45} final={final} source={url}")
-                  except Exception as exc:
-                      print(f"ERR {label:7} {type(exc).__name__}: {exc} source={url}")
+          for url in (
+              "https://www.jordanbpeterson.com/feed/",
+              "https://www.jordanbpeterson.com/category/blog/feed/",
+          ):
+              r = requests.get(url, headers=headers, timeout=20)
+              r.raise_for_status()
+              feed = feedparser.parse(r.content)
+              print(f"source={url} feed={feed.feed.get('title','')} entries={len(feed.entries)}")
+              for e in feed.entries[:10]:
+                  authors = [a.get('name','') for a in e.get('authors', [])]
+                  print(f"  title={e.get('title','')!r} author={e.get('author','')!r} authors={authors!r} link={e.get('link','')}")
           PY
