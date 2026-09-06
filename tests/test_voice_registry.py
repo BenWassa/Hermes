@@ -153,6 +153,18 @@ def test_shipped_production_registry_is_valid(production_registry):
         assert voice.alias_keys or voice.provider_id_keys
 
 
+def test_shipped_notified_voices_have_a_watcher_source(production_registry):
+    """Production `notify: true` must mean the watcher can actually discover work.
+
+    A Voice may intentionally be morning-only by using pool attribution such as
+    `byline_publications`, but the release-time watcher does not run the full
+    morning fetch. Keep that distinction explicit in shipped configuration.
+    """
+    for voice in production_registry.active:
+        if voice.notify:
+            assert voice.enabled_sources, f"{voice.id} enables alerts but has no watcher source"
+
+
 def test_shipped_registry_never_polls_a_source_twice(production_registry):
     keys = [source.key for voice in production_registry.active for source in voice.enabled_sources]
     assert len(keys) == len(set(keys))

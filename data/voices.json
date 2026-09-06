@@ -18,7 +18,7 @@
           "note": "After Babel is multi-author (Haidt, Zach Rausch, Freya India and guests), so the feed URL alone proves nothing: each entry must carry his byline."
         }
       ],
-      "note": "Publishes across his own newsletter and third-party outlets. Cross-publication coverage is the job of a Perigon journalist id; resolve one with 'python -m src.voices.audit journalist \"Jonathan Haidt\"' and add it under provider_ids and a perigon_journalist source."
+      "note": "Publishes across his own newsletter and third-party outlets. Cross-publication coverage is the job of a Perigon journalist id; resolve one with 'python -m src.voices.audit journalist \"Jonathan Haidt\"' and add it under provider_ids and a perigon_journalist source when PERIGON_API_KEY is configured."
     },
     {
       "id": "jordan-peterson",
@@ -28,20 +28,20 @@
       "aliases": ["Jordan B. Peterson", "Jordan B Peterson", "Dr. Jordan B. Peterson"],
       "sources": [
         {
-          "id": "jbp-newsletter",
+          "id": "jbp-official-blog",
           "type": "rss",
-          "url": "https://drjordanbpeterson.substack.com/feed",
-          "publication": "Jordan B Peterson",
+          "url": "https://www.jordanbpeterson.com/category/blog/feed/",
+          "publication": "Jordan Peterson",
           "authorship": "scope",
-          "note": "A personal newsletter: the publication is the person, so the source itself establishes authorship. Substack feeds do not reliably carry dc:creator on single-author publications."
+          "note": "Jordan Peterson's first-party Blog category feed. The WordPress feed exposes the generic author 'admin', so the site's person-scoped Blog category, not that byline, establishes authorship. Coauthored Jordan Peterson posts remain qualifying work. Live-audited from GitHub Actions on 2026-09-06; the formerly configured Substack feed returned 403 from the runner."
         }
       ]
     },
     {
       "id": "conrad-black",
       "name": "Conrad Black",
-      "enabled": true,
-      "notify": true,
+      "enabled": false,
+      "notify": false,
       "aliases": ["Conrad M. Black"],
       "sources": [
         {
@@ -53,10 +53,11 @@
           "structural": true,
           "paywalled": true,
           "authorship": "scope",
-          "note": "A publication's own author archive: the page is the publisher stating what this person wrote. Discovery and canonical links only; article bodies are never fetched or stored."
+          "enabled": false,
+          "note": "The New York Sun author archive is a valid first-party authorship surface, but on 2026-09-06 GitHub-hosted runners received HTTP 429 from the author page, its author feed, and the publication's tested general RSS endpoints. Disabled rather than evading publisher controls."
         }
       ],
-      "note": "The third-party, partly paywalled case. Hermes keeps the canonical outbound link and public metadata and does not touch subscription content."
+      "note": "Temporarily not an active Voice. Restore only through a supported source that works from the production runner (for example a stable provider journalist identity after the required provider key is configured). Hermes does not bypass paywalls or bot/rate-limit controls."
     },
     {
       "id": "george-monbiot",
@@ -80,9 +81,9 @@
       "id": "david-brooks",
       "name": "David Brooks",
       "enabled": true,
-      "notify": true,
+      "notify": false,
       "byline_publications": ["nytimes.com"],
-      "note": "The zero-request case. The NYT Top Stories opinion stream is already fetched for the Opinion desk, so his byline is matched inside a response Hermes pays for anyway. The alias is trusted only on nytimes.com; the same name on any other host is not this Voice."
+      "note": "The zero-request morning case. The NYT Top Stories opinion stream is already fetched for the Opinion desk, so his byline is matched inside a response Hermes pays for anyway. The alias is trusted only on nytimes.com; the same name on any other host is not this Voice. Release-time alerts are deliberately disabled because the watcher does not run the full NYT morning pool; set notify true only after adding an active watcher source for this Voice."
     }
   ]
 }

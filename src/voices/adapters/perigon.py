@@ -6,11 +6,12 @@ Hermes has no feed or first-party API for. Articles come back with
 ``authorsByline``, ``matchedAuthors`` and ``journalists``, which is exactly the
 provider-id evidence the resolver wants.
 
-Budget note: this is the scarcest provider Hermes uses. Perigon's personal
-tier is measured in requests per month (150 at the time of writing), so this
-adapter is a once-a-day reconciliation pass, never a poller. ``journalistId``
-accepts repeated values and ORs them, so every Perigon-registered Voice is
-covered by a single request per run. The per-run budget defaults to 1.
+Budget note: this is the scarcest provider Hermes uses. Perigon's Free tier is
+measured in requests per month (150 at the time of writing) and currently caps
+one response at 25 results, so this adapter is a once-a-day reconciliation
+pass, never a poller. ``journalistId`` accepts repeated values and ORs them, so
+every Perigon-registered Voice is covered by a single request per run until the
+25-id batching ceiling is reached. The per-run budget defaults to 1.
 """
 
 from __future__ import annotations
@@ -25,8 +26,10 @@ from .base import AdapterError, FetchWindow, SourceRequest, VoiceSourceAdapter
 
 PERIGON_URL = "https://api.perigon.io/v1/all"
 
-#: journalistId values per request. Perigon ORs repeated values.
+#: journalistId values per request. Perigon ORs repeated values. Keeping this
+#: at the Free plan's current max-results ceiling also bounds the query shape.
 IDS_PER_REQUEST = 25
+PERIGON_MAX_RESULTS = 25
 
 
 def perigon_authors(item: dict) -> tuple[str, tuple[Author, ...]]:
@@ -129,7 +132,10 @@ class PerigonJournalistAdapter(VoiceSourceAdapter):
             # Reprints are handled by Hermes' own syndication grouping, which
             # keeps the provenance; asking Perigon to hide them would lose it.
             "showReprints": "true",
-            "size": min(100, max(10, 10 * len(journalist_ids))),
+            # The Free plan currently permits at most 25 results per request.
+            # Keep batching economically useful without generating a query that
+            # becomes invalid as soon as several journalist ids are configured.
+            "size": min(PERIGON_MAX_RESULTS, max(10, 10 * len(journalist_ids))),
         }
         try:
             response = http.get(PERIGON_URL, provider=self.provider, params=params)

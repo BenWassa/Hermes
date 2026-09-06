@@ -1,9 +1,9 @@
 # Hermes Voices
 
-Status: **design authority for issue #9. Slice A (identity and discovery,
-issue #10) and Slice C (the release-time watcher, issue #12) are implemented;
-slices B and D are not.**  
-Baseline when written: `08e52581e5444a6cb51aca8cb70fa3bd3706df98` (`2026-09-05` edition)
+Status: **design and implementation authority for issue #9. Slice A (#10),
+Slice B (#11), and Slice C (#12) are implemented. Slice D (#13) completed the
+integrated production-hardening audit recorded below.**
+Original design baseline: `08e52581e5444a6cb51aca8cb70fa3bd3706df98` (`2026-09-05` edition)
 
 > **Implementation notes.** This document remains the product authority. Where
 > the built system deliberately differs from a mechanism proposed below, the
@@ -1024,38 +1024,39 @@ Cost is bounded by the same property Slice A established: it scales with
 distinct **sources**, not with Voices, because contributor tags and journalist
 ids batch into one request each and a shared feed is fetched once.
 
-The shipped registry declares no Perigon source yet, so it plans **four**
-requests on both a frequent (hourly) and a reconciliation pass: two feeds, one
-batched Guardian contributor query, one author archive. Adding a Perigon
-journalist id makes the reconciliation pass five and leaves the frequent pass
-at four, which is the whole point of the tiering. Per month, worst case, with
-quiet hours in force (18 runs a day):
+The hardened shipped registry has **three** active source requests on a
+frequent pass: Jonathan Haidt's After Babel feed, Jordan Peterson's first-party
+Blog feed, and one batched Guardian contributor query. David Brooks is attributed
+from the already-fetched NYT Opinion pool and adds no Voice request. Conrad Black
+is temporarily disabled because every tested New York Sun discovery endpoint
+returned HTTP 429 from GitHub-hosted runners; Hermes does not evade publisher
+controls. Adding one or more Perigon journalist ids adds one batched request to a
+reconciliation pass while staying within the adapter's 25-id batch size.
 
-| Provider | Cadence | Requests/month | Documented allowance |
+Worst-case watcher cost with quiet hours in force (18 runs a day):
+
+| Provider | Cadence | Requests/month | Current documented allowance |
 |---|---|---|---|
-| RSS (2 feeds) | hourly | ~1,080 | none; ordinary feed polling |
-| `author_page` (1 page) | hourly | ~540 | none; one public archive page, less than a feed reader |
-| Guardian (all contributors, batched) | hourly | ~540 | 500/day non-commercial (~15,000/month) |
-| Perigon (all journalists, batched) | daily reconciliation | ~30 | 150/month personal tier |
+| RSS (2 feeds) | hourly | ~1,080 | no API quota; ordinary first-party feed polling |
+| Guardian (all contributors, batched) | hourly | ~540 | 500/day non-commercial |
+| Perigon (when configured; all journalists batched) | daily reconciliation | ~30 | Free: 150 requests/month, 1 request/sec, max 25 results/request |
+| `author_page` | none active | 0 | publisher-controlled public metadata only |
 
-Perigon is the reason the cadence is tiered at all: hourly polling would spend
-a month's personal-tier allowance in about five days. `VOICE_WATCH_CADENCE`
-holds the assumption, keyed by provider, and an adapter missing from it is
-treated as reconcile-only so a new source type is conservative with someone
-else's quota by default. `VOICE_WATCH_REQUEST_BUDGET` is a per-run ceiling: it
-is an alarm for a registry mistake, not a normal limit, and exceeding it
-degrades that one provider with a logged error.
+Perigon is the reason the cadence is tiered at all. `VOICE_WATCH_CADENCE` holds
+the assumption, keyed by provider, and an adapter missing from it is treated as
+reconcile-only so a new source type is conservative with somebody else's quota
+by default. `VOICE_WATCH_REQUEST_BUDGET` is a per-run ceiling: it is an alarm for
+a registry mistake, not a normal limit, and exceeding it degrades that one
+provider with a logged error. The Perigon adapter also caps `size` at 25 so the
+Free-tier result ceiling cannot be exceeded merely by adding several journalists.
 
-The morning build now runs its own discovery pass too (#11 wired
-`discover()` into `src/build.py`), on a separate budget. Adding it, total daily
-Voice cost is about 19 Guardian requests and at most 2 Perigon requests, or
-roughly 60 Perigon requests a month against a documented 150. Perigon stays the
-provider to watch when a Voice is added: one more journalist id costs nothing
-extra (they batch into the same request), but a second Perigon *source type*
-would not.
-
-Treat every allowance above as external and current. They were read from
-provider documentation, not measured.
+The morning build runs its own discovery pass too (#11 wired `discover()` into
+`src/build.py`) on a separate budget. With the current active registry it adds two
+RSS requests and one Guardian request per morning. If Perigon-backed Voices are
+enabled later, the morning pass plus daily watcher reconciliation can spend at
+most about two Perigon requests/day (~60/month), still below the current 150/month
+Free allowance. Re-check provider terms before changing cadence; these are
+external contracts, not Hermes guarantees.
 
 ### 20.6 Durable state
 
@@ -1100,57 +1101,68 @@ alternative considered (an Actions cache, a repo variable, an issue body, a
 Firestore document) was either not durable, not atomic, or a general backend
 this product does not want.
 
-### 20.7 What was validated, and what was not
+### 20.7 Production validation and remaining provider limits
 
 The deterministic suite covers first discovery, immediate rerun, ten reruns,
 retry after a partial execution, duplicate discovery through two adapters,
 several new pieces, the per-run cap, a co-authored piece, same-run and
 cross-run syndication, partial provider failure, total provider failure,
 malformed state, state that breaks mid-run, cold start, notification failure,
-persistence failure, two overlapping runs racing the same article and racing
-different articles, pruning, bounded growth across twenty simulated days,
-budget and cadence, quiet hours, and the workflow contract between the build
-and the watcher. `tests/test_voice_watch_state.py` exercises the git store
-against real repositories, including a real rejected push and a real edition
-commit landing on the branch mid-run. Nothing in the suite touches the
-network.
+persistence failure, overlapping runs, pruning, bounded growth, budgets,
+cadence, quiet hours, build/watcher concurrency, Following selection and the
+rendered Opinion states. The suite remains network-free and fixture-backed.
 
-Beyond the suite, the whole production path was exercised once against local
-stand-ins, because several of its parts only exist when they are wired
-together:
+Issue #13 then exercised the real production environment from GitHub-hosted
+Actions on 2026-09-06 with bounded calls rather than turning live providers
+into CI dependencies:
 
-- a shallow clone (what `fetch-depth: 1` produces) **can** push a fast-forward
-  to a remote that already has history, which is the one assumption the
-  watcher workflow's cheap checkout rests on;
-- a real run over a real HTTP feed produced the intended sequence: claim
-  commit pushed, one alert delivered as JSON, outcome commit pushed, and a
-  rerun that alerted nothing and committed nothing;
-- a cold start adopted silently and left a valid baseline;
-- `build.yml`'s push step, run verbatim from a stale checkout after a watcher
-  state commit had landed, was rejected, rebased, and republished, leaving
-  both the edition and the watcher's claim on the branch.
+- **ntfy:** one deliberately labelled `The Daily — Voice watcher check` JSON
+  notification was accepted successfully. No article was claimed and the smoke
+  path wrote no watcher state. Repeat source diagnostics use `--no-notify` so
+  they cannot create noisy test pushes.
+- **Guardian:** the batched contributor request completed successfully from the
+  production runner. A zero-item result for the audit window was a valid
+  response, not a provider error.
+- **Jonathan Haidt / After Babel:** the live multi-author RSS feed returned 20
+  entries. Production still requires each entry's own byline to match Haidt;
+  the feed URL alone grants no authorship.
+- **Jordan Peterson:** the formerly configured Substack feed returned HTTP 403
+  from the production runner, including with a browser-like User-Agent. His
+  first-party `jordanbpeterson.com/category/blog/feed/` returned RSS 200 with 10
+  entries. WordPress labels those entries `admin`, so the registry uses the
+  first-party person-scoped Blog category as `scope` evidence rather than
+  pretending the generic feed byline is useful.
+- **Conrad Black / New York Sun:** the current first-party author archive is a
+  valid authorship surface, but GitHub-hosted runners received HTTP 429 from
+  the author page, its author-feed form, and the tested publication RSS
+  endpoints, with both Hermes and browser-like User-Agents. The Voice and that
+  source are therefore disabled in shipped config instead of bypassing the
+  publisher's rate/bot controls. Restoring this acceptance case requires a
+  supported production-reachable source such as a stable provider journalist
+  identity.
+- **Perigon:** provider documentation and deterministic fixtures were rechecked,
+  including the current Free-tier 150-request/month and 25-result/request
+  constraints, and the adapter query is capped accordingly. The repository did
+  **not** have `PERIGON_API_KEY` configured during the live audit, so no live
+  Perigon discovery or journalist-directory success is claimed.
 
-**Not validated against the real internet.** The implementation environment's
-egress policy blocks every provider, publisher and ntfy host, exactly as it
-did for Slice A. Specifically unverified:
+Provider failure remains local: one failed adapter contributes no observations
+and cannot collapse the morning edition or another Voice. A 401, 403 or 429 is
+an operational signal to fix credentials, disable the source, or choose a
+supported source—not an invitation to add crawling or evasion.
 
-- that `https://ntfy.sh` accepts this JSON publish payload as sent, and that
-  the alert renders as intended on a phone;
-- that the shipped `data/voices.json` source URLs resolve;
-- real provider response shapes beyond the recorded fixtures and the official
-  documentation Slice A worked from;
-- GitHub's own push-rejection behaviour (the store was exercised against real
-  local git remotes, which use the same ref-update semantics).
-
-The executable check for all of it, and the audit path #13 should run:
+The repeatable operator paths are:
 
 ```bash
-python -m src.voice_watch --smoke        # every adapter live + one test alert
-python -m src.voice_watch --dry-run      # what a real run would send, writing nothing
-python -m src.voices.audit --live        # Slice A's per-source audit
+python -m src.voices.audit                    # deterministic registry + request plan
+python -m src.voices.audit --live             # bounded live source audit
+python -m src.voices.audit --live --voice ID  # isolate one Voice
+python -m src.voice_watch --smoke --no-notify # live watcher sources, no push
+python -m src.voice_watch --smoke             # same + exactly one labelled ntfy test
+python -m src.voice_watch --state-report      # inspect durable claim state
 ```
 
-`--smoke` writes no state and claims no article, so it can be run repeatedly
-without producing a duplicate alert for real work. The first real scheduled
-run adopts silently and alerts nothing; the second is the first that can
-alert.
+`--smoke` claims no real article and writes no watcher state. The first trusted
+run after missing/corrupt state adopts current discoveries silently. See the
+README operator runbook for adding/disabling sources, quota ownership, generic
+adapter requirements and safe state recovery.
