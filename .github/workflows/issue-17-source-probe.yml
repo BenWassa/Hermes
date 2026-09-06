@@ -15,27 +15,5 @@ jobs:
           python-version: "3.11"
       - name: Install runtime dependencies
         run: pip install -r requirements.txt
-      - name: Inspect author index structure
-        run: |
-          python - <<'PY'
-          import re
-          import requests
-
-          url = "https://www.nationalnewswatch.com/author/conrad-black"
-          response = requests.get(url, timeout=20, headers={"User-Agent": "Hermes/2 voice-source-audit"})
-          print("status", response.status_code)
-          print("content_type", response.headers.get("content-type"))
-          response.raise_for_status()
-          html = response.text
-          needle = "Mark Carney puts it all on the line"
-          idx = html.find(needle)
-          print("headline_index", idx)
-          print("author_identity_occurrences", html.count('href="/author/conrad-black"'))
-          if idx < 0:
-              raise SystemExit("current Conrad article not found")
-          start = max(0, idx - 1800)
-          snippet = html[start:idx + 6500]
-          print("classes", sorted(set(re.findall(r'class=[\"\']([^\"\']+)', snippet))))
-          print("--- snippet ---")
-          print(re.sub(r"\s+", " ", snippet)[:8200])
-          PY
+      - name: Run bounded live Conrad audit
+        run: python -m src.voices.audit --live --voice conrad-black
