@@ -17,7 +17,7 @@ jobs:
           python-version: "3.11"
       - name: Install runtime dependencies
         run: pip install -r requirements.txt
-      - name: Probe current Perigon journalist endpoint
+      - name: Probe Perigon identity on current Conrad article
         run: |
           python - <<'PY'
           import os
@@ -28,25 +28,27 @@ jobs:
           if not key:
               raise SystemExit(2)
           response = requests.get(
-              "https://api.goperigon.com/v1/journalists",
-              params={"apiKey": key, "name": "Conrad Black"},
+              "https://api.goperigon.com/v1/all",
+              params={
+                  "apiKey": key,
+                  "url": '"nationalpost.com/opinion/conrad-black-mark-carney-puts-it-all-on-the-line"',
+                  "size": 10,
+                  "showReprints": "true",
+              },
               timeout=20,
           )
           print("status", response.status_code)
           response.raise_for_status()
           payload = response.json()
-          print("shape", type(payload).__name__)
-          if isinstance(payload, dict):
-              print("keys", sorted(payload.keys()))
-              rows = payload.get("results") or payload.get("journalists") or payload.get("data") or []
-          else:
-              rows = payload
+          rows = payload.get("articles") or payload.get("results") or payload.get("data") or []
+          print("keys", sorted(payload.keys()))
           print("count", len(rows))
-          for row in rows[:10]:
-              print({
-                  "id": row.get("id"),
-                  "name": row.get("name") or row.get("fullName"),
-                  "title": row.get("title"),
-                  "sources": [s.get("name") if isinstance(s, dict) else s for s in (row.get("sources") or row.get("topSources") or [])[:5]],
-              })
+          for row in rows:
+              print("url", row.get("url"))
+              print("authorsByline", row.get("authorsByline"))
+              print("matchedAuthors", [
+                  {"id": a.get("id"), "name": a.get("name")}
+                  for a in (row.get("matchedAuthors") or row.get("journalists") or [])
+                  if isinstance(a, dict)
+              ])
           PY
