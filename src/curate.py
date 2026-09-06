@@ -220,6 +220,35 @@ def _normalize_edition(raw: dict) -> list[dict]:
     return out
 
 
+def _ensure_opinion_section(sections: list[dict]) -> list[dict]:
+    """Keep deterministic Following reachable even if editorial Opinion is empty.
+
+    The normal edition omits empty model sections. Once Following exists,
+    however, Opinion is also the navigation home of deterministic reader-picked
+    work and may no longer disappear because the editorial half happened to
+    return zero stories. Insert an empty ordinary Opinion section in canonical
+    section order so the renderer can show Following plus a quiet empty
+    Today's Opinion state.
+    """
+    if any(section.get("id") == "opinion" for section in sections):
+        return sections
+
+    spec_by_id = {spec["id"]: spec for spec in config.SECTIONS}
+    opinion_spec = spec_by_id["opinion"]
+    order = {spec["id"]: index for index, spec in enumerate(config.SECTIONS)}
+    opinion_rank = order["opinion"]
+    insert_at = len(sections)
+    for index, section in enumerate(sections):
+        if order.get(section.get("id"), len(order)) > opinion_rank:
+            insert_at = index
+            break
+    sections.insert(
+        insert_at,
+        {"id": "opinion", "label": opinion_spec["label"], "stories": []},
+    )
+    return sections
+
+
 def curate(
     stories: list[dict],
     weather: dict | None = None,
@@ -238,10 +267,14 @@ def curate(
         log.warning("First curate parse failed; retrying with reinforcement")
         raw = _call(client, stories, today, reinforce=True, following=following)
 
+    sections = _normalize_edition(raw)
+    if following:
+        _ensure_opinion_section(sections)
+
     edition = {
         "date": today.strftime("%A, %B %-d, %Y"),
         "weather": weather or {},
-        "sections": _normalize_edition(raw),
+        "sections": sections,
     }
 
     if following:
