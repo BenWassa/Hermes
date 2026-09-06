@@ -8,11 +8,14 @@ from src import config
 from src.voices.adapters import FetchWindow, get_adapter
 from src.voices.discover import discover
 from src.voices.following import select_following
-from src.voices.model import Author, Observation
+from src.voices.model import Author, Observation, VoiceArticle
 from src.voices.resolve import VoiceResolver
 from src.voices.watch import MODE_FREQUENT, discover_for_watch, notifiable_voice_ids, plan_for_mode
-from src.voices.window import EditionWindow, WindowVerdict
-from tests.conftest import NOW, FakeHttp, FakeResponse, fixture_text, registry_from
+from src.voices.window import EditionWindow, WindowVerdict, classify_article
+from tests.conftest import FakeHttp, FakeResponse, fixture_text, registry_from
+
+UTC = dt.timezone.utc
+AUDIT_NOW = dt.datetime(2026, 9, 6, 16, 36, 0, tzinfo=UTC)
 
 
 CONRAD_VOICE = {
@@ -54,11 +57,15 @@ def http():
 
 
 def fetch_window():
-    return FetchWindow(since=NOW - dt.timedelta(hours=36), until=NOW)
+    return FetchWindow(since=AUDIT_NOW - dt.timedelta(hours=36), until=AUDIT_NOW)
 
 
 def edition_window():
-    return EditionWindow(since=NOW - dt.timedelta(hours=36), until=NOW)
+    return EditionWindow(since=AUDIT_NOW - dt.timedelta(hours=36), until=AUDIT_NOW)
+
+
+def watcher_window():
+    return EditionWindow(since=AUDIT_NOW - dt.timedelta(hours=24), until=AUDIT_NOW)
 
 
 def test_external_author_index_uses_stable_author_identity_not_name_matching():
@@ -93,7 +100,7 @@ def test_wrong_author_block_and_name_only_pool_record_do_not_attribute():
         canonical_url="https://example.com/opinion/name-only",
         byline="Conrad Black",
         authors=(Author(name="Conrad Black"),),
-        published_at=NOW,
+        published_at=AUDIT_NOW,
     )
 
     attributions, rejections = resolver.attribute(name_only)
@@ -102,12 +109,46 @@ def test_wrong_author_block_and_name_only_pool_record_do_not_attribute():
     assert [r.reason for r in rejections] == ["requires_provider_id"]
 
 
-def test_conrad_source_flows_through_window_following_and_watcher_contracts():
+def test_date_only_publication_intersects_window_without_inventing_midnight():
     reg = registry()
-    window = edition_window()
-    client = http()
+    result = discover(reg, window=edition_window(), http=http())
 
-    result = discover(reg, window=window, http=client)
+    current = next(a for a in result.articles if "example-one" in a.canonical_url)
+    assert current.published_at == dt.datetime(2026, 9, 5, 0, 0, tzinfo=UTC)
+    assert current.observations[0].raw_published == "2026-09-05"
+    assert classify_article(current, edition_window()) is WindowVerdict.FRESH
+    assert current in result.fresh
+
+    older = next(a for a in result.articles if "older-column" in a.canonical_url)
+    assert classify_article(older, edition_window()) is WindowVerdict.STALE
+
+
+def test_exact_midnight_timestamp_keeps_exact_precision():
+    exact = dt.datetime(2026, 9, 5, 0, 0, tzinfo=UTC)
+    observation = Observation(
+        adapter="pool",
+        source_key="pool:test",
+        provider="test",
+        title="Exact midnight publication",
+        url="https://example.com/exact-midnight",
+        canonical_url="https://example.com/exact-midnight",
+        published_at=exact,
+        raw_published="2026-09-05T00:00:00Z",
+    )
+    article = VoiceArticle(
+        key="url:https://example.com/exact-midnight",
+        title=observation.title,
+        canonical_url=observation.canonical_url,
+        published_at=exact,
+        observations=[observation],
+    )
+
+    assert classify_article(article, edition_window()) is WindowVerdict.STALE
+
+
+def test_conrad_source_flows_through_following_and_watcher_contracts():
+    reg = registry()
+    result = discover(reg, window=edition_window(), http=http())
 
     assert result.budget == {"author_page": 1}
     assert len(result.articles) == 2
@@ -115,9 +156,6 @@ def test_conrad_source_flows_through_window_following_and_watcher_contracts():
     assert current.voice_ids == ["conrad-black"]
     assert current.evidence_for("conrad-black").evidence == "provider_author_id"
     assert current.syndication_group == "" and current.syndication_primary is True
-    assert current in result.buckets[WindowVerdict.FRESH.value]
-    older = next(a for a in result.articles if "older-column" in a.canonical_url)
-    assert older not in result.fresh
 
     chosen = select_following(
         result.fresh,
@@ -133,7 +171,7 @@ def test_conrad_source_flows_through_window_following_and_watcher_contracts():
 
     watch_result, planned_count = discover_for_watch(
         reg,
-        window=window,
+        window=watcher_window(),
         mode=MODE_FREQUENT,
         http=http(),
     )
