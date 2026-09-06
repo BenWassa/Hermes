@@ -1107,19 +1107,32 @@ against real repositories, including a real rejected push and a real edition
 commit landing on the branch mid-run. Nothing in the suite touches the
 network.
 
-**Not validated live.** The implementation environment's egress policy blocks
-every provider, publisher and ntfy host, exactly as it did for Slice A, so no
-real feed was fetched and no real notification was delivered. Specifically
-unverified:
+Beyond the suite, the whole production path was exercised once against local
+stand-ins, because several of its parts only exist when they are wired
+together:
 
-- that `https://ntfy.sh` accepts the JSON publish payload as sent, and that
+- a shallow clone (what `fetch-depth: 1` produces) **can** push a fast-forward
+  to a remote that already has history, which is the one assumption the
+  watcher workflow's cheap checkout rests on;
+- a real run over a real HTTP feed produced the intended sequence: claim
+  commit pushed, one alert delivered as JSON, outcome commit pushed, and a
+  rerun that alerted nothing and committed nothing;
+- a cold start adopted silently and left a valid baseline;
+- `build.yml`'s push step, run verbatim from a stale checkout after a watcher
+  state commit had landed, was rejected, rebased, and republished, leaving
+  both the edition and the watcher's claim on the branch.
+
+**Not validated against the real internet.** The implementation environment's
+egress policy blocks every provider, publisher and ntfy host, exactly as it
+did for Slice A. Specifically unverified:
+
+- that `https://ntfy.sh` accepts this JSON publish payload as sent, and that
   the alert renders as intended on a phone;
 - that the shipped `data/voices.json` source URLs resolve;
 - real provider response shapes beyond the recorded fixtures and the official
   documentation Slice A worked from;
-- the shape of a real `git push` rejection on GitHub's servers (the store's
-  handling is exercised against a real local git remote, which uses the same
-  ref-update semantics).
+- GitHub's own push-rejection behaviour (the store was exercised against real
+  local git remotes, which use the same ref-update semantics).
 
 The executable check for all of it, and the audit path #13 should run:
 
