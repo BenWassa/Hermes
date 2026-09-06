@@ -80,9 +80,9 @@
       "id": "david-brooks",
       "name": "David Brooks",
       "enabled": true,
-      "notify": true,
+      "notify": false,
       "byline_publications": ["nytimes.com"],
-      "note": "The zero-request case. The NYT Top Stories opinion stream is already fetched for the Opinion desk, so his byline is matched inside a response Hermes pays for anyway. The alias is trusted only on nytimes.com; the same name on any other host is not this Voice."
+      "note": "The zero-request morning case. The NYT Top Stories opinion stream is already fetched for the Opinion desk, so his byline is matched inside a response Hermes pays for anyway. The alias is trusted only on nytimes.com; the same name on any other host is not this Voice. Release-time alerts are deliberately disabled because the watcher does not run the full NYT morning pool; set notify true only after adding an active watcher source for this Voice."
     }
   ]
 }
