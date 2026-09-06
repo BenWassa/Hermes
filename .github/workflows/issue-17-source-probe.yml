@@ -1,0 +1,54 @@
+name: Issue 17 source probe
+
+on:
+  push:
+    branches: ["issue-17-conrad-black-source"]
+  workflow_dispatch: {}
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install runtime dependencies
+        run: pip install -r requirements.txt
+      - name: Check Perigon credential and Conrad identity
+        shell: bash
+        run: |
+          if [ -z "${PERIGON_API_KEY:-}" ]; then
+            echo "PERIGON_API_KEY=absent"
+          else
+            echo "PERIGON_API_KEY=present"
+            python -m src.voices.audit journalist "Conrad Black"
+          fi
+      - name: Probe National Newswatch author index
+        run: |
+          python - <<'PY'
+          import re
+          import requests
+
+          url = "https://www.nationalnewswatch.com/author/conrad-black"
+          response = requests.get(
+              url,
+              timeout=20,
+              headers={"User-Agent": "Hermes/2 voice-source-audit"},
+          )
+          print("status", response.status_code)
+          print("content_type", response.headers.get("content-type"))
+          print("bytes", len(response.content))
+          response.raise_for_status()
+          html = response.text
+          print("article_tags", len(re.findall(r"<article\\b", html, re.I)))
+          print("list_items", len(re.findall(r"<li\\b", html, re.I)))
+          for needle in ("Mark Carney puts it all on the line", "Conrad Black"):
+              idx = html.find(needle)
+              print("needle", repr(needle), "index", idx)
+              if idx >= 0:
+                  snippet = html[max(0, idx - 1000): idx + 1400]
+                  print(snippet.replace("\n", " ")[:2400])
+          PY
