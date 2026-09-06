@@ -1046,6 +1046,14 @@ else's quota by default. `VOICE_WATCH_REQUEST_BUDGET` is a per-run ceiling: it
 is an alarm for a registry mistake, not a normal limit, and exceeding it
 degrades that one provider with a logged error.
 
+The morning build now runs its own discovery pass too (#11 wired
+`discover()` into `src/build.py`), on a separate budget. Adding it, total daily
+Voice cost is about 19 Guardian requests and at most 2 Perigon requests, or
+roughly 60 Perigon requests a month against a documented 150. Perigon stays the
+provider to watch when a Voice is added: one more journalist id costs nothing
+extra (they batch into the same request), but a second Perigon *source type*
+would not.
+
 Treat every allowance above as external and current. They were read from
 provider documentation, not measured.
 
