@@ -158,6 +158,24 @@
 
     /* Stories */
     .stories { padding: 8px 20px 40px; }
+    .opinion-desk + .opinion-desk { margin-top: 24px; }
+    .desk-head {
+      border-top: 2px solid var(--navy); padding: 12px 0 8px; margin-top: 2px;
+    }
+    .desk-title {
+      font-family: 'Arial', sans-serif; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy-ink);
+    }
+    .desk-dek {
+      font-family: 'Arial', sans-serif; font-size: 0.6875rem; line-height: 1.45;
+      color: var(--meta); margin-top: 3px;
+    }
+    .following-block .card { padding-top: 12px; padding-bottom: 12px; }
+    .follow-meta {
+      font-family: 'Arial', sans-serif; font-size: 0.6875rem; line-height: 1.45;
+      color: var(--meta); margin-top: 5px;
+    }
+    .opinion-desk .empty { padding: 24px 4px; }
     .empty {
       padding: 40px 4px; text-align: center; color: var(--meta);
       font-style: italic; font-size: 0.9375rem;
@@ -295,6 +313,8 @@
         L.push('');
         L.push('THE CLIPPING');
         L.push('Headline: ' + st.headline);
+        if (st.author) L.push('Author: ' + st.author);
+        if (st.publication) L.push('Publication: ' + st.publication);
         if (st.sub) L.push('Standfirst: ' + st.sub);
         if (st.summary) L.push('Summary: ' + st.summary);
         if (st.analysis) L.push("My paper's why-it-matters note: " + st.analysis);
@@ -356,6 +376,12 @@
       }
 
       function findStory(id) {
+        var followed = data.following || [];
+        for (var f = 0; f < followed.length; f++) {
+          if (followed[f].id === id) {
+            return { story: followed[f], label: 'Opinion · Following' };
+          }
+        }
         for (var i = 0; i < data.sections.length; i++) {
           var list = data.sections[i].stories || [];
           for (var j = 0; j < list.length; j++) {
@@ -436,6 +462,15 @@
           : '';
         var kicker = st.kicker ? '<div class="kicker">' + tag + esc(st.kicker) + '</div>' : '';
         var sub = st.sub ? '<div class="sub">' + esc(st.sub) + '</div>' : '';
+        var followMeta = '';
+        var filed = '<div class="time">' + esc(st.time) + '</div>';
+        if (st.following) {
+          var metaParts = [st.author, st.publication, st.time].filter(function (part) { return !!part; });
+          followMeta = metaParts.length
+            ? '<div class="follow-meta">' + metaParts.map(esc).join(' · ') + '</div>'
+            : '';
+          filed = '';
+        }
         var expand = '';
         if (open) {
           var img = st.image
@@ -482,9 +517,8 @@
           '" data-card="' + esc(st.id) + '" role="button" tabindex="0" ' +
           'aria-expanded="' + open + '">' +
           '<div class="row"><div class="row-main">' + kicker +
-            '<div class="headline">' + esc(st.headline) + '</div>' + sub +
-            '<div class="time">' + esc(st.time) + '</div></div>' +
-            '<div class="toggle" aria-hidden="true">' + (open ? '−' : '+') + '</div>' +
+            '<div class="headline">' + esc(st.headline) + '</div>' + sub + followMeta + filed +
+            '</div><div class="toggle" aria-hidden="true">' + (open ? '−' : '+') + '</div>' +
           '</div>' + expand +
         '</div>';
       }
@@ -492,10 +526,32 @@
       function storiesInner() {
         var section = data.sections.filter(function (s) { return s.id === state.active; })[0];
         if (!section) return '';
-        if (!section.stories || !section.stories.length) {
+
+        var sectionStories = section.stories || [];
+        var following = data.following || [];
+        if (section.id === 'opinion' && following.length) {
+          var followedHtml = following.map(function (st) {
+            return cardHtml(st, 'Opinion · Following');
+          }).join('');
+          var ordinaryHtml = sectionStories.length
+            ? sectionStories.map(function (st) { return cardHtml(st, section.label); }).join('')
+            : '<div class="empty">Nothing else filed for Opinion this morning.</div>';
+          return '<section class="opinion-desk following-block" aria-labelledby="following-title">' +
+              '<div class="desk-head"><h2 class="desk-title" id="following-title">Following</h2>' +
+                '<div class="desk-dek">New writing from voices you follow</div></div>' +
+              followedHtml +
+            '</section>' +
+            '<section class="opinion-desk today-opinion" aria-labelledby="today-opinion-title">' +
+              '<div class="desk-head"><h2 class="desk-title" id="today-opinion-title">Today’s Opinion</h2>' +
+                '<div class="desk-dek">Selected independently by the morning desk</div></div>' +
+              ordinaryHtml +
+            '</section>';
+        }
+
+        if (!sectionStories.length) {
           return '<div class="empty">Nothing filed for ' + esc(section.label) + ' this morning.</div>';
         }
-        return section.stories.map(function (st) {
+        return sectionStories.map(function (st) {
           return cardHtml(st, section.label);
         }).join('');
       }

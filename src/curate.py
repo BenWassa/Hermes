@@ -4,10 +4,11 @@ One Gemini API call turns the normalized raw-story array into the final
 structured edition: dedupe, section, rank, cap, summarize (house voice), and
 flag tag + sensitivity.
 
-Gemini's free tier (Google AI Studio key) comfortably covers one run per day.
-`response_mime_type="application/json"` forces valid JSON; the detailed system
-prompt carries the exact schema, and a post-pass (exactly one lead per section,
-caps) plus a single retry keep the result well formed.
+When deterministic Following seeds are supplied, the same call also writes a
+summary for each *already selected* followed article.  The model never chooses,
+ranks, removes, relinks, or reorders that set; authoritative Voice/article
+metadata is joined back after the call and missing model prose degrades to
+source metadata rather than dropping the item.
 """
 
 from __future__ import annotations
@@ -24,14 +25,51 @@ from google.genai import types
 
 from . import config
 from .normalize import curation_view
+from .opinion import (
+    build_following_cards,
+    curation_following_view,
+    suppress_opinion_duplicates,
+)
 
 log = logging.getLogger("the-daily.curate")
 
-# Transient Gemini errors worth retrying (free tier can briefly 503/429).
 _RETRY_CODES = {429, 500, 503}
-
-# If the configured model hits quota exhaustion, fall back to this.
 _FALLBACK_MODEL = "gemini-2.5-flash"
+
+_FOLLOWING_INSTRUCTION = """
+
+FOLLOWING OVERRIDE FOR THIS REQUEST
+The user content is an object with two arrays: `stories` and `following`.
+
+- `stories` is the ordinary editorial pool. Apply all normal dedupe, section,
+  ranking, caps, summarization and sensitivity rules to this array only.
+- `following` is NOT an editorial candidate pool. Every item has already been
+  deterministically selected because the reader explicitly follows its author.
+  You have no authority to drop, rank, reorder, substitute, merge, relink or
+  move these records into an ordinary section.
+- Write prose only from the metadata supplied. Do not invent an argument that
+  the headline/description does not support. Summarize the writer's argument as
+  their argument, not as the newspaper's own position.
+- Return exactly one top-level `following` result for every input Following key.
+  Preserve each `key` byte-for-byte. The build will restore all authoritative
+  author, publication, image, URL, paywall and identity metadata itself.
+- A Following summary should normally be 2 to 3 concise sentences, roughly
+  40 to 70 words. `sub` is an optional one-sentence standfirst or null.
+- Set `sensitivity` true when the piece is centrally about war, violent crime,
+  court proceedings on violent crime, death, or disaster; otherwise false.
+
+For this request the output schema is the ordinary `sections` object plus:
+"following": [
+  {
+    "key": "exact input key",
+    "sub": "optional standfirst or null",
+    "summary": "faithful concise summary",
+    "sensitivity": false
+  }
+]
+
+Return ONLY the JSON object.
+"""
 
 
 def _client() -> genai.Client:
@@ -41,18 +79,19 @@ def _client() -> genai.Client:
     return genai.Client(api_key=key)
 
 
-def _gen_config(today: dt.date, model: str | None = None) -> types.GenerateContentConfig:
+def _gen_config(
+    today: dt.date, model: str | None = None, *, include_following: bool = False
+) -> types.GenerateContentConfig:
     m = model if model is not None else config.CURATE_MODEL
+    system_instruction = config.build_curate_system_prompt(today)
+    if include_following:
+        system_instruction += _FOLLOWING_INSTRUCTION
     kwargs: dict = dict(
-        system_instruction=config.build_curate_system_prompt(today),
+        system_instruction=system_instruction,
         response_mime_type="application/json",
         max_output_tokens=config.CURATE_MAX_TOKENS,
         temperature=0.3,
     )
-    # Give 2.5-series models a modest reasoning budget (config.CURATE_THINKING_BUDGET)
-    # so the editor pass actually weighs and synthesizes; thinking tokens come out
-    # of the output budget, which comfortably covers one edition. Older models
-    # ignore this.
     if "2.5" in m:
         kwargs["thinking_config"] = types.ThinkingConfig(
             thinking_budget=config.CURATE_THINKING_BUDGET
@@ -60,15 +99,22 @@ def _gen_config(today: dt.date, model: str | None = None) -> types.GenerateConte
     return types.GenerateContentConfig(**kwargs)
 
 
-def _generate(client: genai.Client, contents: str, today: dt.date, retries: int = 3):
-    """generate_content with backoff on transient errors; falls back to gemini-2.5-flash on quota exhaustion."""
+def _generate(
+    client: genai.Client,
+    contents: str,
+    today: dt.date,
+    retries: int = 3,
+    *,
+    include_following: bool = False,
+):
+    """generate_content with transient backoff and quota-model fallback."""
     models_to_try = [config.CURATE_MODEL]
     if config.CURATE_MODEL != _FALLBACK_MODEL:
         models_to_try.append(_FALLBACK_MODEL)
 
     last: Exception | None = None
     for model in models_to_try:
-        cfg = _gen_config(today, model)
+        cfg = _gen_config(today, model, include_following=include_following)
         for attempt in range(retries + 1):
             try:
                 return client.models.generate_content(
@@ -77,28 +123,48 @@ def _generate(client: genai.Client, contents: str, today: dt.date, retries: int 
             except genai_errors.APIError as exc:
                 code = getattr(exc, "code", None)
                 if code in _RETRY_CODES and attempt < retries:
-                    # Use longer waits: Gemini free-tier often needs 30-60s to recover.
-                    wait = min(60, 5 * (2 ** attempt))  # 5, 10, 20 … capped at 60s
+                    wait = min(60, 5 * (2 ** attempt))
                     log.warning("Gemini %s on %s; retrying in %ss", code, model, wait)
                     time.sleep(wait)
                     last = exc
                     continue
                 last = exc
                 if code == 429 and model != models_to_try[-1]:
-                    log.warning("Quota exhausted on %s; switching to fallback %s", model, models_to_try[-1])
-                break  # move to next model in list
+                    log.warning(
+                        "Quota exhausted on %s; switching to fallback %s",
+                        model,
+                        models_to_try[-1],
+                    )
+                break
 
     raise last  # type: ignore[misc]
 
 
-def _call(client: genai.Client, stories: list[dict], today: dt.date, reinforce: bool = False) -> dict:
-    # Normalized stories now also carry authorship and provenance for Voices.
-    # The editor prompt keeps receiving exactly the fields it always has, so
-    # neither the prompt size nor the model's contract changes.
-    user_content = json.dumps(curation_view(stories), ensure_ascii=False)
+def _call(
+    client: genai.Client,
+    stories: list[dict],
+    today: dt.date,
+    reinforce: bool = False,
+    *,
+    following: list[dict] | None = None,
+) -> dict:
+    editorial = curation_view(stories)
+    if following:
+        payload: object = {
+            "stories": editorial,
+            "following": curation_following_view(following),
+        }
+    else:
+        payload = editorial
+    user_content = json.dumps(payload, ensure_ascii=False)
     if reinforce:
         user_content = "Return ONLY valid JSON matching the schema.\n\n" + user_content
-    resp = _generate(client, user_content, today)
+    resp = _generate(
+        client,
+        user_content,
+        today,
+        include_following=bool(following),
+    )
     text = resp.text
     if not text:
         reason = resp.candidates[0].finish_reason if resp.candidates else None
@@ -107,11 +173,7 @@ def _call(client: genai.Client, stories: list[dict], today: dt.date, reinforce: 
 
 
 def _trim_input(stories: list[dict], total: int = config.CURATE_MAX_INPUT) -> list[dict]:
-    """Balance the raw stories across section hints, round-robin, up to `total`.
-
-    Keeps Toronto and each wire section represented rather than letting one
-    prolific feed crowd out the rest, and keeps the prompt (and output) small.
-    """
+    """Balance raw stories across section hints, round-robin, up to ``total``."""
     from collections import defaultdict
 
     buckets: dict[str, list[dict]] = defaultdict(list)
@@ -134,8 +196,7 @@ def _trim_input(stories: list[dict], total: int = config.CURATE_MAX_INPUT) -> li
 
 
 def _normalize_edition(raw: dict) -> list[dict]:
-    """Enforce section order, caps, exactly one lead per section, and
-    analysis only on leads."""
+    """Enforce section order, caps, exactly one lead, and lead-only analysis."""
     by_id = {s.get("id"): s for s in raw.get("sections", [])}
     out: list[dict] = []
     for spec in config.SECTIONS:
@@ -153,29 +214,80 @@ def _normalize_edition(raw: dict) -> list[dict]:
         if stories and not seen_lead:
             stories[0]["lead"] = True
         for story in stories:
-            # "Why it matters" belongs to leads alone; blank strings become null.
             analysis = (story.get("analysis") or "").strip() if story.get("lead") else ""
             story["analysis"] = analysis or None
         out.append({"id": spec["id"], "label": spec["label"], "stories": stories})
     return out
 
 
-def curate(stories: list[dict], weather: dict | None = None, today: dt.date | None = None) -> dict:
-    """Raw normalized stories -> finished edition dict (date, weather, sections)."""
+def _ensure_opinion_section(sections: list[dict]) -> list[dict]:
+    """Keep deterministic Following reachable even if editorial Opinion is empty.
+
+    The normal edition omits empty model sections. Once Following exists,
+    however, Opinion is also the navigation home of deterministic reader-picked
+    work and may no longer disappear because the editorial half happened to
+    return zero stories. Insert an empty ordinary Opinion section in canonical
+    section order so the renderer can show Following plus a quiet empty
+    Today's Opinion state.
+    """
+    if any(section.get("id") == "opinion" for section in sections):
+        return sections
+
+    spec_by_id = {spec["id"]: spec for spec in config.SECTIONS}
+    opinion_spec = spec_by_id["opinion"]
+    order = {spec["id"]: index for index, spec in enumerate(config.SECTIONS)}
+    opinion_rank = order["opinion"]
+    insert_at = len(sections)
+    for index, section in enumerate(sections):
+        if order.get(section.get("id"), len(order)) > opinion_rank:
+            insert_at = index
+            break
+    sections.insert(
+        insert_at,
+        {"id": "opinion", "label": opinion_spec["label"], "stories": []},
+    )
+    return sections
+
+
+def curate(
+    stories: list[dict],
+    weather: dict | None = None,
+    today: dt.date | None = None,
+    *,
+    following: list[dict] | None = None,
+) -> dict:
+    """Raw normalized stories -> finished edition, optionally with Following."""
     today = today or dt.date.today()
     client = _client()
     stories = _trim_input(stories)
+    following = list(following or [])
     try:
-        raw = _call(client, stories, today)
+        raw = _call(client, stories, today, following=following)
     except json.JSONDecodeError:
         log.warning("First curate parse failed; retrying with reinforcement")
-        raw = _call(client, stories, today, reinforce=True)
+        raw = _call(client, stories, today, reinforce=True, following=following)
 
-    return {
+    sections = _normalize_edition(raw)
+    if following:
+        _ensure_opinion_section(sections)
+
+    edition = {
         "date": today.strftime("%A, %B %-d, %Y"),
         "weather": weather or {},
-        "sections": _normalize_edition(raw),
+        "sections": sections,
     }
+
+    if following:
+        edition["following"] = build_following_cards(
+            following, raw.get("following"), today=today
+        )
+        removed = suppress_opinion_duplicates(edition, following)
+        if removed:
+            log.info(
+                "following: suppressed %d duplicate ordinary Opinion card(s) after curation",
+                removed,
+            )
+    return edition
 
 
 if __name__ == "__main__":
@@ -208,6 +320,8 @@ if __name__ == "__main__":
     Path("data/fixtures/edition_sample.json").write_text(
         json.dumps(edition, indent=2, ensure_ascii=False)
     )
-    print(f"OK: {len(sections)} sections, "
-          f"{sum(len(s['stories']) for s in sections)} stories")
+    print(
+        f"OK: {len(sections)} sections, "
+        f"{sum(len(s['stories']) for s in sections)} stories"
+    )
     sys.exit(0)

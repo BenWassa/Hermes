@@ -19,6 +19,7 @@ dist/
 coverage/
 .firebase/
 firebase-debug.log
+test-artifacts/
 
 # Environment
 .env
