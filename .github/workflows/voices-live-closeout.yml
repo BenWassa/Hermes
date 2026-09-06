@@ -1,0 +1,100 @@
+name: Voices live closeout audit
+
+on:
+  push:
+    branches: ["issue-13-voices-production-hardening"]
+    paths:
+      - ".github/workflows/voices-live-closeout.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  live-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Audit real Voice sources and ntfy once
+        env:
+          GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
+          PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        run: python -m src.voice_watch --smoke
+
+      - name: Resolve Jonathan Haidt in real Perigon directory
+        env:
+          PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
+        run: python -m src.voices.audit journalist "Jonathan Haidt"
+
+      - name: Build exact production artifact through normal path
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
+          NYT_API_KEY: ${{ secrets.NYT_API_KEY }}
+          PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        run: python -m src.build
+
+      - name: Inspect exact production artifact in Chromium
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+
+          artifact = Path("docs/index.html").resolve()
+          out = Path("live-audit")
+          out.mkdir(exist_ok=True)
+          with sync_playwright() as p:
+              browser = p.chromium.launch()
+              for width, height in ((390, 844), (320, 568), (844, 390)):
+                  context = browser.new_context(
+                      viewport={"width": width, "height": height},
+                      has_touch=True,
+                      is_mobile=True,
+                  )
+                  page = context.new_page()
+                  page.goto(artifact.as_uri())
+                  tabs = page.locator("[data-tab]")
+                  names = [tabs.nth(i).get_attribute("data-tab") for i in range(tabs.count())]
+                  required = {"front", "toronto", "world", "sports", "business", "opinion"}
+                  assert required.issubset(set(names)), names
+                  page.locator('[data-tab="opinion"]').click()
+                  overflow = page.evaluate(
+                      "document.documentElement.scrollWidth - document.documentElement.clientWidth"
+                  )
+                  assert overflow <= 1, (width, height, overflow)
+                  following = page.locator(".following-block .card").count()
+                  ordinary = page.locator(".today-opinion .card, #section-opinion .stories .card").count()
+                  print(f"viewport {width}x{height}: tabs=ok overflow={overflow} following={following} ordinary_opinion={ordinary}")
+                  page.screenshot(path=str(out / f"production-opinion-{width}x{height}.png"))
+                  context.close()
+              browser.close()
+          print(f"artifact bytes={artifact.stat().st_size}")
+          PY
+
+      - name: Preserve live closeout artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: voices-live-closeout
+          path: |
+            docs/index.html
+            live-audit/
+          if-no-files-found: warn
+          retention-days: 7
