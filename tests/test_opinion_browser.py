@@ -109,8 +109,11 @@ def test_following_is_compact_distinct_and_interactive_on_mobile_shapes(
         _open_opinion(page)
 
         assert page.locator(".following-block .card").count() == 2
-        assert page.locator("#following-title").inner_text() == "Following"
-        assert page.locator("#today-opinion-title").inner_text() == "Today’s Opinion"
+        # `text-transform: uppercase` is intentional visual styling. Use
+        # text_content() to assert the semantic/authored labels rather than the
+        # browser's transformed presentation returned by inner_text().
+        assert page.locator("#following-title").text_content() == "Following"
+        assert page.locator("#today-opinion-title").text_content() == "Today’s Opinion"
         assert "Jonathan Haidt · After Babel · 7:15 AM" in page.locator(
             '[data-card="follow-1"] .follow-meta'
         ).inner_text()
