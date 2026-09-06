@@ -213,6 +213,25 @@ def _syndication_author_key(article: VoiceArticle) -> str:
     return ""
 
 
+def syndication_keys_for(article: VoiceArticle) -> set[str]:
+    """The grouping keys one article carries, computed outside a run.
+
+    ``group_syndication`` only links copies that are present in the *same*
+    run. The release-time watcher needs the same link across runs: a column
+    alerted on Monday must not alert again when a second publisher's reprint
+    is discovered on Tuesday. Recording these keys in durable state alongside
+    the article's identity keys gives that, using exactly the semantics
+    ``group_syndication`` already applies rather than a second, looser rule.
+    """
+    keys = {f"reprint:{o.reprint_group_id}" for o in article.observations if o.reprint_group_id}
+    soft = syndication_key(
+        article.title, _syndication_author_key(article), day_key(article.published_at)
+    )
+    if soft:
+        keys.add(soft)
+    return keys
+
+
 def group_syndication(articles: list[VoiceArticle]) -> list[VoiceArticle]:
     """Group cross-publisher copies of one piece without merging them.
 

@@ -144,6 +144,85 @@ VOICE_REQUEST_BUDGET = {
 }
 
 
+# --- Release-time Voice watcher -------------------------------------------
+#
+# The watcher (src/voice_watch.py) is a small, separate job: it looks for new
+# work by a followed Voice and sends one quiet ntfy alert for it. It never
+# rebuilds the edition. Everything below is operational tuning; the watcher's
+# correctness does not depend on any of it. See VOICES.md section 20.
+
+# Durable seen state. Repository-backed, because a git push is a
+# compare-and-swap on a ref, which is exactly the primitive at-most-once
+# alerting needs, and because this one-reader product already keeps its
+# configuration in the repo. Never contains article bodies.
+VOICE_WATCH_STATE_PATH = "data/voice_watch_state.json"
+
+# How far back a watcher run will alert. Shorter than the morning edition's
+# window: a piece older than this is the morning paper's job, not an alert's.
+VOICE_WATCH_LOOKBACK_HOURS = int(os.environ.get("VOICE_WATCH_LOOKBACK_HOURS", "24"))
+
+# Seen state is bounded twice over: entries older than the retention window are
+# dropped, and the newest MAX_ENTRIES survive whatever happens. Retention must
+# stay comfortably longer than the lookback window, or a still-alertable
+# article could be forgotten and alerted twice; a test asserts the margin.
+VOICE_WATCH_RETENTION_DAYS = 14
+VOICE_WATCH_MAX_ENTRIES = 500
+
+# A finished paper does not buzz six times. Anything beyond this many new
+# pieces in one run is recorded as seen and left for the morning edition
+# rather than sent, so a feed that dumps its backlog cannot become a burst.
+VOICE_WATCH_MAX_ALERTS_PER_RUN = 5
+
+# Quiet hours, in TIMEZONE, as [start, end). Runs inside this range do nothing
+# at all: no provider requests, no state writes, no alerts. Work published
+# overnight is picked up by the first run after the window closes. Set to None
+# to alert around the clock.
+VOICE_WATCH_QUIET_HOURS = (23, 6)
+
+# Which providers a frequent (hourly) run may poll, and which are held for the
+# once-a-day reconciliation pass. This is the request-budget control that
+# matters: Perigon's personal tier is measured in requests per month, so
+# polling it hourly would spend a month's allowance in a week. RSS and a
+# batched Guardian contributor query are cheap enough to run every hour.
+#
+# Keys are provider names (adapter.provider), values "frequent" or
+# "reconcile". An adapter missing from this map is treated as "reconcile",
+# so a new adapter is conservative until someone decides otherwise.
+VOICE_WATCH_CADENCE = {
+    "rss": "frequent",
+    "guardian": "frequent",
+    "author_page": "frequent",
+    "perigon": "reconcile",
+}
+
+# How stale the last reconciliation pass may get before the next run includes
+# the reconcile-tier providers. Driven by durable state rather than by a
+# second cron entry, so a missed run self-heals instead of skipping a day.
+VOICE_WATCH_RECONCILE_HOURS = int(os.environ.get("VOICE_WATCH_RECONCILE_HOURS", "24"))
+
+# Per-run provider allowances for a watcher run. Tighter than the build's,
+# because a watcher runs many times a day: the ceiling exists so a registry
+# mistake shows up as a logged budget error instead of a quota incident.
+VOICE_WATCH_REQUEST_BUDGET = {
+    "rss": 24,
+    "guardian": 2,
+    "author_page": 8,
+    "perigon": 1,
+}
+
+# Bounded git push retries when the watcher's state commit races the morning
+# build's edition commit. Each attempt re-reads state from the remote and
+# re-checks what is still unclaimed, so a lost race can never re-alert.
+VOICE_WATCH_PUSH_ATTEMPTS = 5
+
+
+# --- ntfy (the one push channel) ------------------------------------------
+
+# The morning edition push and the Voice watcher share this channel. Override
+# the base URL only for a self-hosted ntfy or a test double.
+NTFY_BASE_URL = os.environ.get("NTFY_BASE_URL", "https://ntfy.sh").rstrip("/")
+
+
 # --- Gemini (curation model) ----------------------------------------------
 
 # Google Gemini, free tier via an AI Studio key. Override with CURATE_MODEL

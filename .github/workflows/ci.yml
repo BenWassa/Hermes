@@ -12,6 +12,9 @@ on:
     paths-ignore:
       - "docs/index.html"
       - "data/latest.json"
+      # The Voice watcher commits this hourly when it finds new work. It is
+      # generated operational state, never reviewed code.
+      - "data/voice_watch_state.json"
   pull_request:
   workflow_dispatch: {}
 

@@ -16,34 +16,53 @@ Reading order:
 * ``window``    - what counts as new this morning
 * ``following`` - the deterministic, finite Following selection
 * ``discover``  - orchestration, request budgets, and diagnostics
+* ``state``     - the watcher's durable, bounded seen state
+* ``notify``    - restrained release-time alerts over the existing ntfy topic
+* ``watch``     - the release-time watcher's claim-then-alert run
 
-Downstream slices (the Opinion treatment in #11, the release-time watcher in
-#12) consume ``discover`` and ``following``; nothing else should need to know
-how attribution works.
+The Opinion treatment in #11 consumes ``discover`` and ``following``; the
+release-time watcher entrypoint is ``src.voice_watch``. Nothing else should
+need to know how attribution works.
 """
 
 from .discover import DiscoveryResult, discover, observations_from_pool, resolve_observations
 from .following import select_following, suppress_duplicates
 from .model import Attribution, Author, Observation, VoiceArticle
+from .notify import Alert, NotifyError, Notifier, NtfyNotifier, build_alert
 from .registry import Registry, RegistryError, Voice, VoiceSource, load_registry, validate
+from .state import FileStateStore, GitStateStore, SeenEntry, StateStore, WatchState, load_state
+from .watch import WatchOutcome, run_watch
 from .window import EditionWindow, WindowVerdict
 
 __all__ = [
+    "Alert",
     "Attribution",
     "Author",
     "DiscoveryResult",
     "EditionWindow",
+    "FileStateStore",
+    "GitStateStore",
+    "NotifyError",
+    "Notifier",
+    "NtfyNotifier",
     "Observation",
     "Registry",
     "RegistryError",
+    "SeenEntry",
+    "StateStore",
     "Voice",
     "VoiceArticle",
     "VoiceSource",
+    "WatchOutcome",
+    "WatchState",
     "WindowVerdict",
+    "build_alert",
     "discover",
     "load_registry",
+    "load_state",
     "observations_from_pool",
     "resolve_observations",
+    "run_watch",
     "select_following",
     "suppress_duplicates",
     "validate",

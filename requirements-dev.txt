@@ -1,2 +1,6 @@
 -r requirements.txt
 pytest>=8.0
+# Test-only: lets the suite assert the workflow contract (concurrency
+# groups, disjoint write paths, safe-push retries) instead of trusting YAML
+# by eye. Nothing in src/ imports it.
+pyyaml>=6.0
