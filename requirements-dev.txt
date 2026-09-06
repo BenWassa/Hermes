@@ -1,5 +1,7 @@
 -r requirements.txt
 pytest>=8.0
+# Exact rendered-browser acceptance for the Opinion desk (#11).
+playwright>=1.50
 # Test-only: lets the suite assert the workflow contract (concurrency
 # groups, disjoint write paths, safe-push retries) instead of trusting YAML
 # by eye. Nothing in src/ imports it.

@@ -1,9 +1,9 @@
 name: CI
 
-# The production v2 pipeline had no automatic tests. This runs the
-# deterministic suite on every push and pull request. Nothing here touches the
-# network or a provider key: adapters are exercised against recorded fixtures.
-# Live source checks are a separate, deliberate operator command
+# Deterministic provider coverage plus exact rendered-browser acceptance.
+# Test execution never calls live news providers or uses provider keys: adapters
+# run against recorded fixtures and Chromium opens a locally rendered artifact.
+# Live source checks remain a separate deliberate operator command
 # (`python -m src.voices.audit --live`).
 
 on:
@@ -38,8 +38,20 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements-dev.txt
 
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
+
       - name: Validate the voice registry
         run: python -m src.voices.audit
 
-      - name: Run the deterministic suite
+      - name: Run the deterministic and rendered-browser suite
         run: python -m pytest
+
+      - name: Preserve rendered Opinion inspection artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: following-opinion-artifacts
+          path: test-artifacts/
+          if-no-files-found: ignore
+          retention-days: 7
