@@ -43,6 +43,10 @@ def fetch_guardian(page_size: int = 10) -> list[dict]:
                 params={
                     "section": section,
                     "show-fields": "thumbnail,trailText,byline",
+                    # Contributor tags are the Guardian's stable per-writer
+                    # identity, and they ride along on the same request, so
+                    # followed-Voice attribution costs nothing extra here.
+                    "show-tags": "contributor",
                     "order-by": "newest",
                     "page-size": page_size,
                     "api-key": key,

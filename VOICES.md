@@ -1,7 +1,14 @@
 # Hermes Voices
 
-Status: **design authority for issue #9; not yet implemented**  
+Status: **design authority for issue #9. Slice A (the identity and discovery
+foundation, issue #10) is implemented; slices B, C and D are not.**  
 Baseline when written: `08e52581e5444a6cb51aca8cb70fa3bd3706df98` (`2026-09-05` edition)
+
+> **Implementation notes.** This document remains the product authority. Where
+> the built system deliberately differs from a mechanism proposed below, the
+> difference and its reason are recorded in
+> [§19 Slice A: what was built, and where it differs](#19-slice-a-what-was-built-and-where-it-differs).
+> Product intent, invariants and boundaries in §1 to §5 are unchanged.
 
 This document defines how Hermes should follow named writers across publications and surface their new work inside Opinion without turning The Daily into a feed, adding a general backend, or weakening source/provenance discipline.
 
@@ -732,3 +739,147 @@ Issue #9 is complete only when:
 13. Generated exact production output is inspected on representative phone portrait/landscape sizes.
 14. README/config documentation explains how to add, disable, and troubleshoot a Voice.
 15. No multi-user backend, engagement feed, or fake local-only Follow semantics have leaked into V1.
+
+
+## 19. Slice A: what was built, and where it differs
+
+Issue #10 built the foundation: `src/voices/`, authorship preservation in the
+existing normalizers, and the deterministic test suite. The Opinion treatment
+(#11), the release-time watcher (#12) and broad hardening (#13) are not built.
+
+### 19.1 What is in place
+
+| Area | Module |
+|---|---|
+| Registry schema and validation | `src/voices/registry.py`, `data/voices.json` |
+| Person-name normalization and byline parsing | `src/voices/names.py` |
+| Canonical URLs and article identity keys | `src/voices/urls.py` |
+| Adapter contract | `src/voices/adapters/base.py` |
+| RSS/Atom, Guardian contributor, Perigon journalist, structured author page | `src/voices/adapters/` |
+| Evidence-based attribution | `src/voices/resolve.py` |
+| Cross-adapter merging and syndication grouping | `src/voices/dedupe.py` |
+| Edition window and staleness | `src/voices/window.py` |
+| Deterministic Following selection | `src/voices/following.py` |
+| Orchestration, request budgets, diagnostics | `src/voices/discover.py` |
+| Bounded live audit | `src/voices/audit.py` |
+| Authorship preserved through the pipeline | `src/normalize.py`, `src/fetch.py` |
+| Deterministic tests and fixtures | `tests/`, `.github/workflows/ci.yml` |
+
+Nothing in `src/build.py`, `src/render.py` or the template changed. Slice B
+consumes `discover()` and `select_following()`; the record shape it receives is
+pinned by a test.
+
+### 19.2 Deviations from the proposal, and why
+
+**Identity and discovery are separate fields, not one `sources` list.**
+§5.1 sketched a Voice as a name plus a list of sources, with attribution
+implied by the source that found the item. The built registry splits them:
+`provider_ids` and `aliases`/`byline_publications` decide *whether an article
+is this person's*, while `sources` decide *where Hermes goes looking*. Two
+things fall out that the single list could not give. The ordinary morning fetch
+now attributes followed writers for **zero** additional provider requests,
+which is the single largest budget saving in the design. And registering a
+multi-author feed no longer implies that everything on it is the Voice's work,
+which closes the most likely false-attribution path.
+
+**Byline matching is scoped, not global.** A bare name is never matched against
+the open world. An alias is accepted only on a source the Voice registered, or
+on a host listed in `byline_publications`. §4.2 asked that a bare string not be
+authoritative *when a stronger identity is available*; scoping is stricter and
+does not depend on a stronger identity existing. The common-name case is then
+structural rather than a special case, with `require_evidence: "provider_id"`
+available for a name ambiguous enough to refuse byline evidence entirely.
+
+**Article identity is a set of keys, not a single preferred identifier.**
+§5.3 proposed a preference ladder: provider id, then canonical URL, then
+normalized URL, then a fingerprint. A ladder cannot merge a Guardian record
+with a Perigon record, because their provider ids are not comparable and the
+top rung would be chosen for both. The built model instead gives every
+observation *all* the keys it may legitimately be recognised by and merges any
+two that share one. The canonical URL is the cross-provider join; provider ids
+rejoin two sightings from the same provider whose URL moved; a host-scoped
+fingerprint (host + title slug + publication day) is the last resort. The
+outcome the ladder wanted is preserved, and cross-provider duplicates actually
+collapse.
+
+**Syndication groups rather than merges.** §5.3 left this open. Two publishers'
+runs of one column keep their own canonical URLs and stay two articles, because
+collapsing them would discard a true fact; they are linked by a group with one
+elected primary, so Following shows one entry and #12 will notify once. A group
+needs the same title, the same author, and dates within three days, or an
+explicit provider reprint id.
+
+**The curate prompt is projected, not extended.** Normalized stories gained
+authorship and provenance fields. Sending them to Gemini would enlarge every
+call for no editorial benefit and would change a contract that works, so
+`normalize.curation_view()` projects stories back to exactly the seven fields
+the editor has always received. Pinned by a test.
+
+**No new dependency for the author-page adapter.** §6.4 anticipated a parser.
+The adapter reads `schema.org` JSON-LD with the standard library, and falls
+back to a declared `<article>` structure only when a source opts in. It fails
+closed: a redesigned page raises rather than inventing links. `requirements.txt`
+is unchanged.
+
+**NYT Opinion is now part of the ordinary fetch.** The Top Stories API takes
+one request per section, and Hermes was not fetching `opinion`. Adding it gives
+the Opinion desk NYT columnists and gives every followed NYT writer a discovery
+path at no marginal cost, which is what §12 asked for. This is the one change
+in this slice that alters the daily edition's content mix.
+
+**Following selection is round-robin.** §8.2 proposed "at most 2 per Voice
+before filling remaining slots by recency". Taken literally, that lets one
+Voice take two slots while another who also published gets none. The built
+policy runs `per_voice` round-robin passes across Voices, newest Voice first,
+then fills the remainder by recency. The cap and the anti-domination intent are
+unchanged; breadth simply comes before depth.
+
+**An undated item is not treated as new.** Feeds that stop emitting dates would
+otherwise republish a back catalogue every morning. Undated items are excluded
+from Following and reported in diagnostics.
+
+### 19.3 Provider findings
+
+Verified against provider documentation and the official Perigon SDK schema at
+implementation time. Treat live provider policy as authoritative.
+
+- **Guardian.** The tag filter treats `|` as OR, so every registered
+  contributor rides in one query; `show-tags=contributor` returns the stable
+  `profile/...` id on each result, and it is now requested on the ordinary
+  section fetch too. Non-commercial developer access is documented at 500
+  calls/day and 1 call/second.
+- **NYT.** Top Stories exposes authorship only as a displayed byline, with no
+  stable author id, so NYT Voices use scoped byline matching. `uri`
+  (`nyt://article/...`) is a stable article id. `per_facet` lists people the
+  story is *about* and is never read as authorship. Documented at 1,000
+  requests/day. Note the single-digit UTC offset in `published_date`
+  (`...T00:00:00-5:00`), which `datetime.fromisoformat` rejects.
+- **Perigon.** `/v1/all` accepts repeated `journalistId` values and ORs them,
+  so every registered journalist rides in one request. Articles carry
+  `authorsByline`, `matchedAuthors`, `journalists`, `articleId`, `clusterId`,
+  `reprint`, `reprintGroupId` and `source.paywall`. The personal tier is
+  documented in requests per *month*, so Voice discovery budgets one request
+  per run and treats Perigon as reconciliation, never as a poller.
+- **RSS/Atom.** feedparser folds `dc:creator`, RSS `<author>` and Atom
+  `<author><name>` into one place. A feed `guid` identifies an item only inside
+  its own feed, so it is used as an article id only when it is a real URL.
+
+### 19.4 Request cost
+
+The shipped registry of five Voices across four sources plans **four** provider
+requests per run, and the seven-Voice acceptance registry across six sources
+plans **six**. Cost scales with distinct *sources*, not with Voices: contributor
+tags and journalist ids batch into one request each, a feed two Voices share is
+fetched once, and the morning pool is attributed for free. `python -m
+src.voices.audit` prints the plan and the per-provider budget without fetching.
+
+### 19.5 What was validated live, and what was not
+
+Provider contracts were verified from official documentation and the published
+Perigon SDK schema. The bounded live audit against real endpoints could **not**
+be run from the implementation environment, whose egress policy blocks every
+provider and publisher host. `python -m src.voices.audit --live` exists for
+exactly that check and should be run once with real keys before the Following
+UI in #11 depends on a source. Until then, treat the shipped `data/voices.json`
+source URLs as unverified: a wrong URL degrades that one source with a logged
+warning and changes nothing else.

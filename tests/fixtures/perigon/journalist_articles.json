@@ -1,0 +1,49 @@
+{
+  "status": 200,
+  "numResults": 3,
+  "articles": [
+    {
+      "url": "https://www.theatlantic.com/ideas/archive/2026/09/attention-and-the-commons/687001/",
+      "authorsByline": "Jonathan Haidt",
+      "articleId": "0a1b2c3d4e5f60718293a4b5c6d7e8f9",
+      "clusterId": "cluster-attention-commons",
+      "source": {"domain": "theatlantic.com", "name": "The Atlantic", "paywall": true},
+      "imageUrl": "https://cdn.theatlantic.com/thumb/attention.jpg",
+      "pubDate": "2026-09-05T10:15:00Z",
+      "addDate": "2026-09-05T10:20:00Z",
+      "title": "Attention and the Commons",
+      "description": "A long argument about shared attention.",
+      "language": "en",
+      "reprint": false,
+      "matchedAuthors": [{"id": "perigon-jhaidt-001", "name": "Jonathan Haidt"}],
+      "journalists": [{"id": "perigon-jhaidt-001", "name": "Jonathan Haidt", "fullName": "Jonathan Haidt"}],
+      "people": [{"name": "Jean Twenge"}]
+    },
+    {
+      "url": "https://nationalpost.com/opinion/attention-and-the-commons-reprint",
+      "authorsByline": "Jonathan Haidt",
+      "articleId": "1b2c3d4e5f60718293a4b5c6d7e8f90a",
+      "clusterId": "cluster-attention-commons",
+      "source": {"domain": "nationalpost.com", "name": "National Post", "paywall": false},
+      "pubDate": "2026-09-05T14:40:00Z",
+      "title": "Attention and the Commons",
+      "description": "A long argument about shared attention.",
+      "reprint": true,
+      "reprintGroupId": "reprint-group-attention-commons",
+      "matchedAuthors": [{"id": "perigon-jhaidt-001", "name": "Jonathan Haidt"}],
+      "journalists": [{"id": "perigon-jhaidt-001", "name": "Jonathan Haidt"}]
+    },
+    {
+      "url": "https://www.example-news.com/2026/09/05/a-piece-mentioning-haidt",
+      "authorsByline": "Priya Raman",
+      "articleId": "2c3d4e5f60718293a4b5c6d7e8f90a1b",
+      "source": {"domain": "example-news.com", "name": "Example News"},
+      "pubDate": "2026-09-05T11:00:00Z",
+      "title": "Schools debate the Haidt thesis",
+      "description": "Jonathan Haidt is cited throughout.",
+      "reprint": false,
+      "matchedAuthors": [{"id": "perigon-praman-009", "name": "Priya Raman"}],
+      "people": [{"name": "Jonathan Haidt"}]
+    }
+  ]
+}

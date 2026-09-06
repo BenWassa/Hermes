@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "_readme": "The representative acceptance set for issue #10. Every case named in the issue is expressed as data, so no acceptance name appears anywhere in fetch or resolution control flow.",
+  "voices": [
+    {
+      "id": "jonathan-haidt",
+      "name": "Jonathan Haidt",
+      "aliases": ["Jon Haidt"],
+      "provider_ids": [{"provider": "perigon", "id": "perigon-jhaidt-001"}],
+      "sources": [
+        {
+          "id": "after-babel",
+          "type": "rss",
+          "url": "https://www.afterbabel.com/feed",
+          "publication": "After Babel",
+          "authorship": "byline"
+        },
+        {
+          "id": "perigon-haidt",
+          "type": "perigon_journalist",
+          "journalist_id": "perigon-jhaidt-001",
+          "authorship": "provider_id"
+        }
+      ]
+    },
+    {
+      "id": "jordan-peterson",
+      "name": "Jordan Peterson",
+      "aliases": ["Jordan B. Peterson"],
+      "sources": [
+        {
+          "id": "jbp-newsletter",
+          "type": "rss",
+          "url": "https://drjordanbpeterson.substack.com/feed",
+          "publication": "Jordan B Peterson",
+          "authorship": "scope"
+        }
+      ]
+    },
+    {
+      "id": "conrad-black",
+      "name": "Conrad Black",
+      "sources": [
+        {
+          "id": "nysun-author-archive",
+          "type": "author_page",
+          "url": "https://www.nysun.com/author/conrad-black-2",
+          "publication": "The New York Sun",
+          "link_prefix": "/article/",
+          "paywalled": true,
+          "authorship": "scope"
+        }
+      ]
+    },
+    {
+      "id": "george-monbiot",
+      "name": "George Monbiot",
+      "provider_ids": [{"provider": "guardian", "id": "profile/georgemonbiot"}],
+      "sources": [
+        {
+          "id": "guardian-monbiot",
+          "type": "guardian_contributor",
+          "tag": "profile/georgemonbiot",
+          "authorship": "provider_id"
+        }
+      ]
+    },
+    {
+      "id": "amelia-hargreaves",
+      "name": "Amelia Hargreaves",
+      "provider_ids": [{"provider": "guardian", "id": "profile/ameliahargreaves"}],
+      "sources": [
+        {
+          "id": "herald-author-archive",
+          "type": "author_page",
+          "url": "https://www.example-herald.com/authors/amelia-hargreaves",
+          "publication": "The Example Herald",
+          "link_prefix": "/article/",
+          "structural": true,
+          "authorship": "scope"
+        }
+      ]
+    },
+    {
+      "id": "david-brooks",
+      "name": "David Brooks",
+      "byline_publications": ["nytimes.com"]
+    },
+    {
+      "id": "john-smith",
+      "name": "John Smith",
+      "require_evidence": "provider_id",
+      "provider_ids": [{"provider": "guardian", "id": "profile/johnsmith-economics"}],
+      "note": "The ambiguous-name case. A very common name, so a byline alone never attributes: only the registered contributor id does."
+    }
+  ]
+}

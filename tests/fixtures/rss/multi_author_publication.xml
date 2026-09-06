@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>After Babel</title>
+    <link>https://www.afterbabel.com</link>
+    <description>A multi-author publication.</description>
+    <item>
+      <title>Treasure Your Attention</title>
+      <link>https://www.afterbabel.com/p/treasure-your-attention?utm_source=substack&amp;utm_medium=email</link>
+      <guid isPermaLink="false">https://www.afterbabel.com/p/treasure-your-attention</guid>
+      <description>&lt;p&gt;An essay on attention.&lt;/p&gt;</description>
+      <pubDate>Sat, 05 Sep 2026 11:02:00 GMT</pubDate>
+      <dc:creator>Jonathan Haidt</dc:creator>
+      <enclosure url="https://substack-post-media.s3.amazonaws.com/attention.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>The Phone-Based Childhood, Two Years On</title>
+      <link>https://www.afterbabel.com/p/phone-based-childhood-two-years-on</link>
+      <guid isPermaLink="false">https://www.afterbabel.com/p/phone-based-childhood-two-years-on</guid>
+      <description>A follow-up.</description>
+      <pubDate>Sat, 05 Sep 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Zach Rausch and Jonathan Haidt</dc:creator>
+    </item>
+    <item>
+      <title>Girls, Friendship, and the Feed</title>
+      <link>https://www.afterbabel.com/p/girls-friendship-and-the-feed</link>
+      <guid isPermaLink="false">https://www.afterbabel.com/p/girls-friendship-and-the-feed</guid>
+      <description>A guest essay.</description>
+      <pubDate>Fri, 04 Sep 2026 08:00:00 GMT</pubDate>
+      <dc:creator>Freya India</dc:creator>
+    </item>
+    <item>
+      <title>An Untitled Draft With No Author</title>
+      <link>https://www.afterbabel.com/p/untitled-draft</link>
+      <guid isPermaLink="false">https://www.afterbabel.com/p/untitled-draft</guid>
+      <description>No creator element at all.</description>
+      <pubDate>Fri, 04 Sep 2026 07:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>An Archive Piece From 2019</title>
+      <link>https://www.afterbabel.com/p/archive-2019</link>
+      <guid isPermaLink="false">https://www.afterbabel.com/p/archive-2019</guid>
+      <description>Old material re-emitted by the feed.</description>
+      <pubDate>Tue, 12 Mar 2019 08:00:00 GMT</pubDate>
+      <dc:creator>Jonathan Haidt</dc:creator>
+    </item>
+    <item>
+      <title>A Post Dated Next Year</title>
+      <link>https://www.afterbabel.com/p/dated-next-year</link>
+      <guid isPermaLink="false">https://www.afterbabel.com/p/dated-next-year</guid>
+      <description>A broken publication timestamp.</description>
+      <pubDate>Mon, 05 Sep 2028 08:00:00 GMT</pubDate>
+      <dc:creator>Jonathan Haidt</dc:creator>
+    </item>
+    <item>
+      <title>A Post With An Unparseable Date</title>
+      <link>https://www.afterbabel.com/p/bad-date</link>
+      <guid isPermaLink="false">https://www.afterbabel.com/p/bad-date</guid>
+      <description>The date is nonsense.</description>
+      <pubDate>sometime last week</pubDate>
+      <dc:creator>Jonathan Haidt</dc:creator>
+    </item>
+  </channel>
+</rss>

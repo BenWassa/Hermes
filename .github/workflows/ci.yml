@@ -1,0 +1,42 @@
+name: CI
+
+# The production v2 pipeline had no automatic tests. This runs the
+# deterministic suite on every push and pull request. Nothing here touches the
+# network or a provider key: adapters are exercised against recorded fixtures.
+# Live source checks are a separate, deliberate operator command
+# (`python -m src.voices.audit --live`).
+
+on:
+  push:
+    branches: ["**"]
+    paths-ignore:
+      - "docs/index.html"
+      - "data/latest.json"
+  pull_request:
+  workflow_dispatch: {}
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Validate the voice registry
+        run: python -m src.voices.audit
+
+      - name: Run the deterministic suite
+        run: python -m pytest

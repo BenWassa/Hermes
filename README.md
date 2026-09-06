@@ -30,7 +30,120 @@ weather -> fetch -> normalize -> curate (Claude) -> resolve images -> render -> 
 | [src/images.py](src/images.py) | Keep source thumbnails; suppress on sensitive stories |
 | [src/render.py](src/render.py) | Inject edition JSON into the HTML template |
 | [src/build.py](src/build.py) | Orchestrator (single entrypoint) |
+| [src/voices/](src/voices/) | Followed writers: registry, source adapters, authorship resolution, article identity |
 | [template/index.template.html](template/index.template.html) | The newspaper UI (vanilla HTML/CSS/JS) |
+
+## Voices (followed writers)
+
+A **Voice** is a person, not a publication. Hermes can follow a writer and find
+their new work wherever they publish, across a personal newsletter, a
+publication author archive, the Guardian's contributor API, an aggregator's
+journalist identity, or the ordinary morning fetch. The design authority is
+[VOICES.md](VOICES.md).
+
+The registry in [data/voices.json](data/voices.json) is the source of truth.
+For this one-reader product, following someone is a reviewed config change: the
+overnight GitHub Actions build is what does the fetching, and a browser toggle
+could not tell it anything.
+
+### Adding a Voice
+
+```jsonc
+{
+  "id": "jane-doe",                 // lowercase, hyphenated, stable forever
+  "name": "Jane Doe",
+  "enabled": true,
+  "notify": true,
+  "aliases": ["J. A. Doe"],         // other spellings of the same person
+  "provider_ids": [                 // stable per-writer ids, strongest evidence
+    {"provider": "guardian", "id": "profile/janedoe"}
+  ],
+  "byline_publications": ["nytimes.com"],   // hosts where her byline alone is trusted
+  "sources": [                      // where to actively go looking
+    {
+      "id": "jane-newsletter",
+      "type": "rss",
+      "url": "https://janedoe.substack.com/feed",
+      "publication": "Jane Doe",
+      "authorship": "scope"
+    }
+  ]
+}
+```
+
+Then check it before committing:
+
+```bash
+python -m src.voices.audit                    # validate + show the request plan
+python -m src.voices.audit --live             # fetch every source once, for real
+python -m src.voices.audit --live --voice jane-doe
+```
+
+### The two halves of a Voice
+
+**Identity** decides whether an article is hers. **Sources** decide where
+Hermes looks. They are separate so the ordinary morning fetch can attribute her
+work at no extra request cost, and so registering a feed does not blanket-grant
+authorship to everything on it.
+
+| Field | Evidence it grants | Use it when |
+|---|---|---|
+| `provider_ids` | strongest; valid anywhere | the provider has a stable contributor/journalist id |
+| `sources[].authorship: "scope"` | the source itself is the proof | a personal newsletter, or a publication's own author archive |
+| `sources[].authorship: "byline"` | the entry's byline must match | a multi-author publication feed |
+| `byline_publications` | byline match on those hosts only | she writes for an outlet Hermes already fetches |
+
+A name is only ever matched against an item's **byline**, never its title,
+description, or a provider's "people mentioned" list. A byline match is only
+accepted inside a declared scope, so a common name cannot collect strangers'
+articles. Set `"require_evidence": "provider_id"` on a genuinely ambiguous name
+to refuse byline evidence altogether.
+
+### Source types
+
+| `type` | Needs | Requests per run |
+|---|---|---|
+| `rss` | `url` | one per distinct feed, shared across Voices |
+| `guardian_contributor` | `tag` (e.g. `profile/janedoe`) | one for **all** contributors combined |
+| `perigon_journalist` | `journalist_id` | one for **all** journalists combined |
+| `author_page` | `url` (+ optional `link_prefix`, `structural`) | one per distinct page |
+
+Resolve a Perigon journalist id once, by hand, and paste it in:
+
+```bash
+python -m src.voices.audit journalist "Jane Doe"
+```
+
+### Troubleshooting
+
+- **A Voice went quiet.** Run `python -m src.voices.audit --live --voice <id>`.
+  Each source reports `ok` with an item count, or `FAIL` with the reason.
+- **A source broke.** Set `"enabled": false` on that source. The Voice stays
+  registered and its other sources keep working. A failing source already
+  degrades on its own and logs a warning; disabling it just stops the noise.
+- **An article was found but not shown.** The audit prints what fell outside
+  the edition window (`stale`, `future`, `undated`) and every rejected
+  near-miss attribution with its reason.
+- **A wrong article was attributed.** Every article records why: the audit
+  prints `evidence: <voice> <- <evidence class> (<detail>)` for each one.
+
+Request budgets live in `VOICE_REQUEST_BUDGET` in
+[src/config.py](src/config.py). Perigon is the binding constraint (a personal
+tier measured in requests per *month*), so Voice discovery treats it as a
+once-a-day reconciliation pass and defaults to one request per run.
+
+## Tests
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest
+```
+
+The suite is fully deterministic and never touches the network: adapters run
+against recorded provider fixtures in `tests/fixtures/`. It runs automatically
+on every push and pull request via
+[.github/workflows/ci.yml](.github/workflows/ci.yml). Live source checking is
+the separate `python -m src.voices.audit --live` command.
 
 ## Local development
 
@@ -60,6 +173,7 @@ secrets in CI. See [.env.example](.env.example).
 | `NTFY_TOPIC` | morning push |
 | `PAGES_URL` | cache-buster + notification link (CI: set as a repo **variable**) |
 | `CURATE_MODEL` | optional model override (default `gemini-2.5-flash`) |
+| `VOICE_LOOKBACK_HOURS` | optional Voice discovery window (default 36) |
 
 Open-Meteo and the Toronto RSS feeds need no keys. Tunables (location, sections,
 caps, feed list, model, house voice) live in [src/config.py](src/config.py).
