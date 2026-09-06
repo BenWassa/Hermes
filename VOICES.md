@@ -1,13 +1,15 @@
 # Hermes Voices
 
-Status: **design authority for issue #9. Slice A (the identity and discovery
-foundation, issue #10) is implemented; slices B, C and D are not.**  
+Status: **design authority for issue #9. Slice A (identity and discovery,
+issue #10) and Slice C (the release-time watcher, issue #12) are implemented;
+slices B and D are not.**  
 Baseline when written: `08e52581e5444a6cb51aca8cb70fa3bd3706df98` (`2026-09-05` edition)
 
 > **Implementation notes.** This document remains the product authority. Where
 > the built system deliberately differs from a mechanism proposed below, the
 > difference and its reason are recorded in
-> [§19 Slice A: what was built, and where it differs](#19-slice-a-what-was-built-and-where-it-differs).
+> [§19 Slice A: what was built, and where it differs](#19-slice-a-what-was-built-and-where-it-differs)
+> and [§20 Slice C: the release-time watcher](#20-slice-c-the-release-time-watcher).
 > Product intent, invariants and boundaries in §1 to §5 are unchanged.
 
 This document defines how Hermes should follow named writers across publications and surface their new work inside Opinion without turning The Daily into a feed, adding a general backend, or weakening source/provenance discipline.
@@ -883,3 +885,272 @@ exactly that check and should be run once with real keys before the Following
 UI in #11 depends on a source. Until then, treat the shipped `data/voices.json`
 source URLs as unverified: a wrong URL degrades that one source with a logged
 warning and changes nothing else.
+
+## 20. Slice C: the release-time watcher
+
+Issue #12 built `src/voice_watch.py`, `src/voices/{state,notify,watch}.py` and
+`.github/workflows/voice-watch.yml` on top of Slice A's identity model. The
+Opinion treatment (#11) and broad hardening (#13) remain unbuilt; nothing in
+this slice touches `src/build.py`, `src/render.py`, `src/curate.py` or the
+template.
+
+### 20.1 What is in place
+
+| Area | Module |
+|---|---|
+| Durable seen state, recovery, pruning, git-backed store | `src/voices/state.py` |
+| Restrained ntfy alert copy and delivery | `src/voices/notify.py` |
+| Claim-then-alert run, cadence, budgets | `src/voices/watch.py` |
+| Operator entrypoint and live smoke path | `src/voice_watch.py` |
+| Hourly schedule and safe-push contract | `.github/workflows/voice-watch.yml`, `.github/workflows/build.yml` |
+| Operational tuning | `src/config.py` (`VOICE_WATCH_*`, `NTFY_BASE_URL`) |
+| Deterministic coverage | `tests/test_voice_watch.py`, `tests/test_voice_watch_state.py`, `tests/test_workflows.py` |
+
+### 20.2 The delivery guarantee, stated exactly
+
+**At-most-once.** One qualifying publication produces at most one alert, under
+reruns, retries, cancelled runners, overlapping schedules, and discovery
+through any number of adapters.
+
+It is **not** exactly-once, and pretending otherwise would be the dishonest
+version of this design. GitHub Actions can cancel a runner at any instruction
+boundary and ntfy can accept a request whose response never arrives, so no
+combination of the available primitives gives exactly-once. Two cases lose an
+alert on purpose:
+
+- the runner dies after the claim is committed and before the notification is
+  sent;
+- the notification is attempted and fails, and is deliberately not retried,
+  because a failed request may still have been delivered.
+
+Both are recoverable in the product rather than in the protocol: the piece
+appears in the next morning edition's Following block, and the failure is
+visible in state as a `pending` or `failed` entry. A duplicate alert has no
+such fallback, which is why the design spends its reliability budget on the
+other side of the trade.
+
+Nothing in the product promises latency. A cron can be delayed or dropped
+entirely, so the copy is "eventually soon" everywhere and nowhere claims a
+delivery window.
+
+### 20.3 Where the failure points actually are
+
+The run is `load state -> fetch -> resolve -> claim -> push -> notify ->
+record`. Each boundary was designed rather than discovered:
+
+| Failure point | Behaviour | Why |
+|---|---|---|
+| Crash before the claim | Nothing happened | Discovery is pure; the next run repeats it |
+| Push rejected (raced) | Re-read state, re-decide, retry up to 5 times | The winner's claims are visible before anything is sent |
+| Push rejected every time | **Send nothing**, exit 1 | Notifying against a claim that did not save is precisely how retries duplicate |
+| Crash between push and send | Entry stays `pending`, never re-alerted | Lost alert, never a duplicate |
+| Notification fails | Entry marked `failed`, never retried | The request may have arrived before the error surfaced |
+| Crash after send, before the outcome write | Entry stays `pending` | Same claim, same protection; only the record is less informative |
+| Outcome write rejected | Logged, run succeeds | The claim is already durable, which is the part that matters |
+| State unreadable | Adopt findings silently, rewrite the file clean | Reading a broken file as "nothing alerted yet" would announce a back catalogue |
+| State unreadable mid-run | Stand down without alerting | Same reason, applied to the retry path |
+| Cold start | Adopt silently, always write the baseline | A fresh install should not buzz nine times; the baseline write is what stops every later run also being a cold start |
+
+The claim is written **before** the notification, and this is the ordering the
+whole guarantee rests on. `git push` is a compare-and-swap on a ref: it is
+rejected when the branch moved, and that rejection is the concurrency
+primitive. Two overlapping runs that both discover the same article cannot
+both push; the loser re-reads, sees the claim, and drops the article. This is
+stronger than a workflow-level lock, because it holds for runs that were never
+in the same concurrency group at all, including a manual dispatch during a
+scheduled run.
+
+### 20.4 Deviations from §11, and why
+
+**Duplicate discovery is handled by recording every identity key, not the
+canonical URL alone.** §11.3 sketched state keyed by one canonical key. A
+state entry instead records the article's full identity key set from #10
+(canonical URL, provider article ids, host fingerprint) plus its syndication
+and reprint-group keys, and an entry is matched by *any* of them. That is what
+makes Perigon's daily reconciliation pass silent about a piece the hourly RSS
+pass already announced, and what makes a reprint discovered tomorrow match a
+column alerted today. `group_syndication` only links copies present in the
+same run, so `dedupe.syndication_keys_for` was added to compute the same keys
+for durable storage using the same semantics rather than a second, looser
+rule.
+
+**The build and the watcher deliberately do *not* share a concurrency group.**
+§11.3 proposed one shared group. GitHub cancels a *pending* run when a newer
+one queues on the same group, so a shared group would let an hourly watcher
+cancel a queued morning edition, and the build's five-slot self-healing
+schedule would be papering over a hazard this design introduced. The two are
+kept apart at the git layer instead: disjoint write paths (`docs/index.html`
+versus `data/voice_watch_state.json`) and fetch-and-retry pushes on both
+sides. The watcher keeps its own group so watcher runs do not overlap each
+other and waste provider requests. `build.yml`'s push, previously a bare `git
+push`, now rebases and retries; that hardening is part of this slice because
+this slice is what introduced a second writer. `tests/test_workflows.py`
+asserts all of it.
+
+**The reconciliation cadence is driven by state, not by a second cron.** The
+watcher runs hourly and polls only the providers cheap enough for that. The
+scarce providers are included when `last_reconcile_at` is more than
+`VOICE_WATCH_RECONCILE_HOURS` old, so a throttled or dropped run delays
+reconciliation by an hour instead of skipping a day. A second cron entry could
+not self-heal that way.
+
+**Alerts are capped per run.** §11 did not consider a feed emitting its
+backlog. Beyond `VOICE_WATCH_MAX_ALERTS_PER_RUN` (5), new pieces are recorded
+as `suppressed`: seen, never alerted, and carried by the morning edition. A
+finished paper does not buzz nine times, and this is the one place where "the
+edition is the fallback" is used by design rather than as a failure path.
+
+**Quiet hours.** Runs between 23:00 and 06:00 America/Toronto stop before
+spending a provider request. This is an addition, not something §11 asked for,
+and it is here because "keep alerts quiet" is a product requirement that a 4am
+buzz violates more thoroughly than any wording could. Overnight work is
+alerted by the first run after the window closes. Set
+`VOICE_WATCH_QUIET_HOURS = None` to disable.
+
+**Delivery uses ntfy's JSON publish endpoint.** The morning workflow sends
+`X-Title` headers. ntfy's header parsing is ASCII-oriented and headlines
+routinely carry em dashes, curly quotes and accented names, so alert copy is
+sent as a UTF-8 JSON body. Same service, same topic, same secret: this is not
+a second push stack.
+
+**The alert links to the publisher's URL as stated, not the canonical form.**
+Canonicalisation drops `www.` and other addressing detail in order to
+*compare*; a few hosts still need it to *resolve*. The tap target is
+`article.url`, which is what the edition renders too.
+
+### 20.5 Request economics
+
+Cost is bounded by the same property Slice A established: it scales with
+distinct **sources**, not with Voices, because contributor tags and journalist
+ids batch into one request each and a shared feed is fetched once.
+
+The shipped registry declares no Perigon source yet, so it plans **four**
+requests on both a frequent (hourly) and a reconciliation pass: two feeds, one
+batched Guardian contributor query, one author archive. Adding a Perigon
+journalist id makes the reconciliation pass five and leaves the frequent pass
+at four, which is the whole point of the tiering. Per month, worst case, with
+quiet hours in force (18 runs a day):
+
+| Provider | Cadence | Requests/month | Documented allowance |
+|---|---|---|---|
+| RSS (2 feeds) | hourly | ~1,080 | none; ordinary feed polling |
+| `author_page` (1 page) | hourly | ~540 | none; one public archive page, less than a feed reader |
+| Guardian (all contributors, batched) | hourly | ~540 | 500/day non-commercial (~15,000/month) |
+| Perigon (all journalists, batched) | daily reconciliation | ~30 | 150/month personal tier |
+
+Perigon is the reason the cadence is tiered at all: hourly polling would spend
+a month's personal-tier allowance in about five days. `VOICE_WATCH_CADENCE`
+holds the assumption, keyed by provider, and an adapter missing from it is
+treated as reconcile-only so a new source type is conservative with someone
+else's quota by default. `VOICE_WATCH_REQUEST_BUDGET` is a per-run ceiling: it
+is an alarm for a registry mistake, not a normal limit, and exceeding it
+degrades that one provider with a logged error.
+
+The morning build now runs its own discovery pass too (#11 wired
+`discover()` into `src/build.py`), on a separate budget. Adding it, total daily
+Voice cost is about 19 Guardian requests and at most 2 Perigon requests, or
+roughly 60 Perigon requests a month against a documented 150. Perigon stays the
+provider to watch when a Voice is added: one more journalist id costs nothing
+extra (they batch into the same request), but a second Perigon *source type*
+would not.
+
+Treat every allowance above as external and current. They were read from
+provider documentation, not measured.
+
+### 20.6 Durable state
+
+`data/voice_watch_state.json`, committed by the watcher:
+
+```json
+{
+  "version": 1,
+  "updated_at": "2026-09-06T14:37:00Z",
+  "last_reconcile_at": "2026-09-06T13:37:00Z",
+  "seen": {
+    "url:https://afterbabel.com/p/attention": {
+      "keys": ["fp:afterbabel.com|treasure-your-attention|2026-09-06",
+               "syn:treasure-your-attention|voice:jonathan-haidt|2026-09-06",
+               "url:https://afterbabel.com/p/attention"],
+      "voice_ids": ["jonathan-haidt"],
+      "first_seen": "2026-09-06T14:37:00Z",
+      "published_at": "2026-09-06T14:02:00Z",
+      "status": "notified"
+    }
+  }
+}
+```
+
+Statuses are `pending` (claimed, delivery unconfirmed), `notified`, `failed`,
+`suppressed` (over the per-run cap) and `adopted` (learned at a cold start or
+a recovery). Every one of them means "already accounted for"; none is ever
+re-alerted.
+
+It holds identities, attributions and timestamps. No headline, no description,
+no body, no paywalled content. Growth is bounded twice: entries older than
+`VOICE_WATCH_RETENTION_DAYS` (14) are dropped, and the newest
+`VOICE_WATCH_MAX_ENTRIES` (500) survive regardless. Retention must stay
+comfortably longer than `VOICE_WATCH_LOOKBACK_HOURS` (24) or an article could
+be forgotten while still inside the window that alerts on it; a test asserts
+the margin. Serialisation is deterministic and `updated_at` is excluded from
+the change check, so a run that finds nothing leaves no commit at all.
+
+Repository state was kept rather than replaced. A git push already gives the
+compare-and-swap this design needs, the file is reviewable, and every
+alternative considered (an Actions cache, a repo variable, an issue body, a
+Firestore document) was either not durable, not atomic, or a general backend
+this product does not want.
+
+### 20.7 What was validated, and what was not
+
+The deterministic suite covers first discovery, immediate rerun, ten reruns,
+retry after a partial execution, duplicate discovery through two adapters,
+several new pieces, the per-run cap, a co-authored piece, same-run and
+cross-run syndication, partial provider failure, total provider failure,
+malformed state, state that breaks mid-run, cold start, notification failure,
+persistence failure, two overlapping runs racing the same article and racing
+different articles, pruning, bounded growth across twenty simulated days,
+budget and cadence, quiet hours, and the workflow contract between the build
+and the watcher. `tests/test_voice_watch_state.py` exercises the git store
+against real repositories, including a real rejected push and a real edition
+commit landing on the branch mid-run. Nothing in the suite touches the
+network.
+
+Beyond the suite, the whole production path was exercised once against local
+stand-ins, because several of its parts only exist when they are wired
+together:
+
+- a shallow clone (what `fetch-depth: 1` produces) **can** push a fast-forward
+  to a remote that already has history, which is the one assumption the
+  watcher workflow's cheap checkout rests on;
+- a real run over a real HTTP feed produced the intended sequence: claim
+  commit pushed, one alert delivered as JSON, outcome commit pushed, and a
+  rerun that alerted nothing and committed nothing;
+- a cold start adopted silently and left a valid baseline;
+- `build.yml`'s push step, run verbatim from a stale checkout after a watcher
+  state commit had landed, was rejected, rebased, and republished, leaving
+  both the edition and the watcher's claim on the branch.
+
+**Not validated against the real internet.** The implementation environment's
+egress policy blocks every provider, publisher and ntfy host, exactly as it
+did for Slice A. Specifically unverified:
+
+- that `https://ntfy.sh` accepts this JSON publish payload as sent, and that
+  the alert renders as intended on a phone;
+- that the shipped `data/voices.json` source URLs resolve;
+- real provider response shapes beyond the recorded fixtures and the official
+  documentation Slice A worked from;
+- GitHub's own push-rejection behaviour (the store was exercised against real
+  local git remotes, which use the same ref-update semantics).
+
+The executable check for all of it, and the audit path #13 should run:
+
+```bash
+python -m src.voice_watch --smoke        # every adapter live + one test alert
+python -m src.voice_watch --dry-run      # what a real run would send, writing nothing
+python -m src.voices.audit --live        # Slice A's per-source audit
+```
+
+`--smoke` writes no state and claims no article, so it can be run repeatedly
+without producing a duplicate alert for real work. The first real scheduled
+run adopts silently and alerts nothing; the second is the first that can
+alert.

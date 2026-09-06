@@ -31,6 +31,7 @@ weather -> fetch -> normalize -> curate (Claude) -> resolve images -> render -> 
 | [src/render.py](src/render.py) | Inject edition JSON into the HTML template |
 | [src/build.py](src/build.py) | Orchestrator (single entrypoint) |
 | [src/voices/](src/voices/) | Followed writers: registry, source adapters, authorship resolution, article identity |
+| [src/voice_watch.py](src/voice_watch.py) | Release-time alerts for followed writers (separate hourly job, never rebuilds the edition) |
 | [template/index.template.html](template/index.template.html) | The newspaper UI (vanilla HTML/CSS/JS) |
 
 ## Voices (followed writers)
@@ -132,6 +133,60 @@ Request budgets live in `VOICE_REQUEST_BUDGET` in
 tier measured in requests per *month*), so Voice discovery treats it as a
 once-a-day reconciliation pass and defaults to one request per run.
 
+### Release-time alerts
+
+The morning edition is where a followed piece is read. The watcher only
+shortens the wait: when a Voice publishes, it sends one quiet ntfy message on
+the same topic as the morning push.
+
+```text
+Jonathan Haidt — After Babel
+Treasure Your Attention
+```
+
+Tapping it opens the publisher's article. There is no BREAKING language, no
+urgency priority, no badge and no unread count, and the morning push is
+unchanged, so a piece alerted at noon is not announced a second time when it
+appears in tomorrow's paper.
+
+[.github/workflows/voice-watch.yml](.github/workflows/voice-watch.yml) runs it
+hourly. GitHub's scheduler is **eventually soon, not realtime**: a cron can be
+delayed or dropped, so no delivery time is promised. Cheap sources (feeds, a
+batched Guardian query, an author archive) are polled every run; Perigon is
+held for a once-a-day reconciliation pass the watcher schedules itself, because
+its personal tier is measured in requests per month. Nothing runs between 23:00
+and 06:00 Toronto time.
+
+**One publication produces at most one alert.** The watcher commits its claim
+to `data/voice_watch_state.json` *before* sending anything, and a `git push` is
+a compare-and-swap: two overlapping runs cannot both claim the same piece, and
+a run that cannot save its claim sends nothing at all. Reruns, retries and
+discovery through several adapters are all silent. The trade is deliberate: a
+runner killed mid-send loses that alert rather than duplicating it, and the
+piece still arrives in the morning edition. See
+[VOICES.md §20](VOICES.md#20-slice-c-the-release-time-watcher).
+
+The first scheduled run adopts what it finds without alerting, so installing
+the watcher never announces a back catalogue. The same happens if the state
+file is ever damaged.
+
+Operator commands:
+
+```bash
+python -m src.voice_watch --dry-run       # what a real run would send; writes nothing
+python -m src.voice_watch --smoke         # live: every source + one test notification
+python -m src.voice_watch --state-report  # what durable state currently holds
+python -m src.voice_watch --no-push       # a real run against the local state file
+```
+
+`--smoke` claims nothing and writes nothing, so it can be run as often as you
+like without producing a duplicate alert for real work.
+
+Tuning lives in `VOICE_WATCH_*` in [src/config.py](src/config.py): the
+alerting window, retention and size bounds for state, the per-run alert cap,
+quiet hours, which providers may be polled hourly, and the per-run request
+ceiling.
+
 ## Tests
 
 ```bash
@@ -174,6 +229,9 @@ secrets in CI. See [.env.example](.env.example).
 | `PAGES_URL` | cache-buster + notification link (CI: set as a repo **variable**) |
 | `CURATE_MODEL` | optional model override (default `gemini-2.5-flash`) |
 | `VOICE_LOOKBACK_HOURS` | optional Voice discovery window (default 36) |
+| `VOICE_WATCH_LOOKBACK_HOURS` | optional release-alert window (default 24) |
+| `VOICE_WATCH_RECONCILE_HOURS` | optional gap between reconciliation passes (default 24) |
+| `NTFY_BASE_URL` | optional ntfy host override (default `https://ntfy.sh`) |
 
 Open-Meteo and the Toronto RSS feeds need no keys. Tunables (location, sections,
 caps, feed list, model, house voice) live in [src/config.py](src/config.py).
@@ -185,6 +243,15 @@ caps, feed list, model, house voice) live in [src/config.py](src/config.py).
   `workflow_dispatch`).
 - [.github/workflows/notify.yml](.github/workflows/notify.yml) — sends the
   ntfy.sh push at ~7 AM ET.
+- [.github/workflows/voice-watch.yml](.github/workflows/voice-watch.yml) —
+  hourly release-time alerts for followed Voices; commits
+  `data/voice_watch_state.json` only when it changes.
+
+The build and the watcher both commit to `main`, to different paths, and both
+push with fetch-and-retry. They are deliberately in **separate** concurrency
+groups: GitHub cancels a *pending* run when a newer one queues on the same
+group, so sharing one would let the hourly watcher cancel a queued morning
+edition. [tests/test_workflows.py](tests/test_workflows.py) asserts this.
 
 Pages serves `docs/` on `main` at `https://BenWassa.github.io/Hermes/`.
 

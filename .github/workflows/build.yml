@@ -73,13 +73,34 @@ jobs:
 
       - name: Commit and push docs/
         if: steps.gate.outputs.skip != 'true'
+        # The Voice watcher ("Watch Voices") also commits to this branch, to a
+        # different path (data/voice_watch_state.json). The two workflows are
+        # deliberately not in one concurrency group: GitHub cancels a *pending*
+        # run when a newer one queues on the same group, so sharing would let
+        # an hourly watcher cancel a queued morning edition. They are kept from
+        # overwriting each other here instead, by rebasing onto whatever landed
+        # and retrying the push. Because the paths are disjoint the rebase is
+        # always clean; a conflict would mean something unexpected, so it fails
+        # loudly rather than forcing.
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/index.html
           if git diff --cached --quiet; then
             echo "No changes to publish."
-          else
-            git commit -m "chore(edition): publish $(TZ=America/Toronto date +'%Y-%m-%d') edition"
-            git push
+            exit 0
           fi
+          git commit -m "chore(edition): publish $(TZ=America/Toronto date +'%Y-%m-%d') edition"
+          for attempt in 1 2 3 4 5; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              echo "Published on attempt $attempt."
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt); another job moved ${GITHUB_REF_NAME}. Rebasing."
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase "origin/${GITHUB_REF_NAME}"
+            sleep $((attempt * 2))
+          done
+          echo "Could not publish after 5 attempts." >&2
+          exit 1
