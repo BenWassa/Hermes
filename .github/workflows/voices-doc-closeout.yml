@@ -18,7 +18,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Reconcile VOICES.md
-        run: python scripts/closeout_voices_docs.py
+        run: |
+          python scripts/closeout_voices_docs.py
+          sed -i '5s/[[:space:]]*$//' VOICES.md
       - name: Validate diff
         run: git diff --check
       - name: Commit documentation
