@@ -11,7 +11,7 @@ from .voices.model import VoiceArticle
 from .voices.names import clean_text
 from .voices.registry import Registry
 from .voices.timeparse import parse_timestamp, to_iso
-from .voices.urls import canonical_url, url_key
+from .voices.urls import url_key
 
 _TORONTO = ZoneInfo("America/Toronto")
 _BY_PREFIX = re.compile(r"^\s*by\s+", re.IGNORECASE)
@@ -53,7 +53,11 @@ def _author_line(article: VoiceArticle, registry: Registry) -> str:
 
 
 def following_seed(article: VoiceArticle, registry: Registry) -> dict:
-    link = canonical_url(article.canonical_url or article.url) or article.canonical_url or article.url
+    # `VoiceArticle.url` is the display link selected by the #10 canonicalizer;
+    # `canonical_url` is the normalized comparison form. Preserve the former
+    # for the reader rather than rewriting a publisher destination just because
+    # Hermes can compare it more conveniently in the identity layer.
+    link = article.url or article.canonical_url
     return {
         "key": article.key,
         "identity_keys": sorted(article.identity_keys),
