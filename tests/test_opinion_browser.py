@@ -3,8 +3,8 @@
 These tests intentionally render `template/index.template.html` through
 `src.render.render`, then open that generated static artifact in Chromium. They
 exercise the real card/tabs/Ask-AI JavaScript instead of asserting markup only.
-Screenshots and the rendered HTML are retained under `test-artifacts/` for CI
-inspection.
+Viewport screenshots and the rendered HTML are retained under `test-artifacts/`
+for CI inspection.
 """
 
 from __future__ import annotations
@@ -128,9 +128,24 @@ def test_following_is_compact_distinct_and_interactive_on_mobile_shapes(
         )
         assert overflow <= 1
 
-        page.screenshot(
-            path=str(ARTIFACTS / f"opinion-{width}x{height}.png"), full_page=True
-        )
+        # Full-page screenshots composite sticky elements at their current
+        # scroll position and can falsely look overlapped. Assert actual viewport
+        # geometry instead: Following must start below the sticky tab strip, and
+        # Today's Opinion must start after the complete Following block.
+        tabs_box = page.locator(".tabs").bounding_box()
+        following_title_box = page.locator("#following-title").bounding_box()
+        following_block_box = page.locator(".following-block").bounding_box()
+        today_box = page.locator(".today-opinion").bounding_box()
+        assert tabs_box is not None
+        assert following_title_box is not None
+        assert following_block_box is not None
+        assert today_box is not None
+        assert following_title_box["y"] >= tabs_box["y"] + tabs_box["height"] - 1
+        assert today_box["y"] >= following_block_box["y"] + following_block_box["height"] - 1
+
+        # Save what a reader actually sees at the requested viewport, not a
+        # browser-composited full-document representation of sticky controls.
+        page.screenshot(path=str(ARTIFACTS / f"opinion-{width}x{height}.png"))
 
         first = page.locator('[data-card="follow-1"]')
         first.tap()
