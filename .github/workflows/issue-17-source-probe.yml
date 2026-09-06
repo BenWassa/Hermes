@@ -33,22 +33,19 @@ jobs:
           import requests
 
           url = "https://www.nationalnewswatch.com/author/conrad-black"
-          response = requests.get(
-              url,
-              timeout=20,
-              headers={"User-Agent": "Hermes/2 voice-source-audit"},
-          )
+          response = requests.get(url, timeout=20, headers={"User-Agent": "Hermes/2 voice-source-audit"})
           print("status", response.status_code)
           print("content_type", response.headers.get("content-type"))
           print("bytes", len(response.content))
           response.raise_for_status()
           html = response.text
-          print("article_tags", len(re.findall(r"<article\\b", html, re.I)))
-          print("list_items", len(re.findall(r"<li\\b", html, re.I)))
-          for needle in ("Mark Carney puts it all on the line", "Conrad Black"):
-              idx = html.find(needle)
-              print("needle", repr(needle), "index", idx)
-              if idx >= 0:
-                  snippet = html[max(0, idx - 1000): idx + 1400]
-                  print(snippet.replace("\n", " ")[:2400])
+          needle = "Mark Carney puts it all on the line"
+          idx = html.find(needle)
+          print("headline_index", idx)
+          if idx >= 0:
+              snippet = html[max(0, idx - 1600): idx + 5000]
+              print(snippet.replace("\n", " ")[:6600])
+              print("classes", sorted(set(re.findall(r'class=[\"\']([^\"\']+)', snippet))))
+          print("author_identity_occurrences", html.count('href="/author/conrad-black"'))
+          print("nationalpost_occurrences", html.count("nationalpost.com/opinion/conrad-black"))
           PY
