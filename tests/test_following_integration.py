@@ -34,6 +34,7 @@ def article(
     voice_id: str = "haidt",
     *,
     url: str | None = None,
+    canonical_url: str | None = None,
     title: str = "A new argument",
     publication: str = "After Babel",
     description: str = "A concise source description of the argument.",
@@ -44,8 +45,8 @@ def article(
     hours_ago: int = 2,
     extra_voices: tuple[str, ...] = (),
 ) -> VoiceArticle:
-    link = url or f"https://example.com/opinion/{key}?utm_source=test"
-    canonical = link.split("?", 1)[0]
+    link = url or f"https://example.com/opinion/{key}"
+    canonical = canonical_url or link.split("?", 1)[0]
     observation = Observation(
         adapter="pool",
         source_key="pool:test",
@@ -83,10 +84,11 @@ def test_no_followed_work_leaves_the_editorial_pool_unchanged():
     assert editorial_without_following(stories, []) == stories
 
 
-def test_following_seed_preserves_coauthors_publication_and_canonical_paywall_destination():
+def test_following_seed_preserves_coauthors_publication_and_publisher_destination():
     item = article(
         "coauthored",
-        url="https://www.example.com/essay?utm_campaign=x",
+        url="https://www.example.com/essay?gift=reader-copy",
+        canonical_url="https://example.com/essay",
         publication="Example Review",
         paywalled=True,
         byline="By Jonathan Haidt and Jean Twenge",
@@ -97,7 +99,9 @@ def test_following_seed_preserves_coauthors_publication_and_canonical_paywall_de
     assert seed["author"] == "Jonathan Haidt, Jean Twenge"
     assert seed["publication"] == "Example Review"
     assert seed["paywalled"] is True
-    assert seed["link"] == "https://example.com/essay"
+    # The normalized canonical URL is for identity comparison. Following keeps
+    # the publisher link selected by #10, including meaningful query state.
+    assert seed["link"] == "https://www.example.com/essay?gift=reader-copy"
 
 
 def test_duplicate_is_removed_from_ordinary_opinion_but_not_another_news_desk():
