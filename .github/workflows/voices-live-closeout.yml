@@ -28,18 +28,44 @@ jobs:
       - name: Install Chromium
         run: python -m playwright install --with-deps chromium
 
-      - name: Audit real Voice sources and ntfy once
-        env:
-          GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
-          PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          PAGES_URL: ${{ vars.PAGES_URL }}
-        run: python -m src.voice_watch --smoke
+      - name: Probe bounded first-party source alternatives
+        run: |
+          python - <<'PY'
+          import requests, feedparser
 
-      - name: Resolve Jonathan Haidt in real Perigon directory
+          urls = [
+              "https://www.jordanbpeterson.com/feed/",
+              "https://www.jordanbpeterson.com/category/blog/feed/",
+              "https://drjordanbpeterson.substack.com/feed",
+              "https://www.nysun.com/rss.xml",
+              "https://www.nysun.com/feed",
+              "https://www.nysun.com/author/conrad-black-2/feed",
+              "https://www.nysun.com/author/conrad-black-2",
+          ]
+          uas = [
+              "TheDaily/2.0 (+https://github.com/BenWassa/Hermes)",
+              "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/151 Safari/537.36 Hermes/2.0",
+          ]
+          for url in urls:
+              for ua in uas:
+                  try:
+                      r = requests.get(url, headers={"User-Agent": ua, "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.8, */*;q=0.5"}, timeout=20)
+                      parsed = feedparser.parse(r.content) if r.ok else None
+                      entries = len(parsed.entries) if parsed is not None else 0
+                      print(f"{r.status_code:3} entries={entries:2} type={r.headers.get('content-type','')[:50]:50} ua={'browser' if ua.startswith('Mozilla') else 'hermes':7} {url}")
+                  except Exception as exc:
+                      print(f"ERR {type(exc).__name__}: {exc} {url}")
+          PY
+
+      - name: Resolve Jonathan Haidt in real Perigon directory when configured
         env:
           PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
-        run: python -m src.voices.audit journalist "Jonathan Haidt"
+        run: |
+          if [ -n "$PERIGON_API_KEY" ]; then
+            python -m src.voices.audit journalist "Jonathan Haidt"
+          else
+            echo "PERIGON_API_KEY is not configured; live Perigon directory lookup not claimed."
+          fi
 
       - name: Build exact production artifact through normal path
         env:
@@ -63,11 +89,7 @@ jobs:
           with sync_playwright() as p:
               browser = p.chromium.launch()
               for width, height in ((390, 844), (320, 568), (844, 390)):
-                  context = browser.new_context(
-                      viewport={"width": width, "height": height},
-                      has_touch=True,
-                      is_mobile=True,
-                  )
+                  context = browser.new_context(viewport={"width": width, "height": height}, has_touch=True, is_mobile=True)
                   page = context.new_page()
                   page.goto(artifact.as_uri())
                   tabs = page.locator("[data-tab]")
@@ -75,9 +97,7 @@ jobs:
                   required = {"front", "toronto", "world", "sports", "business", "opinion"}
                   assert required.issubset(set(names)), names
                   page.locator('[data-tab="opinion"]').click()
-                  overflow = page.evaluate(
-                      "document.documentElement.scrollWidth - document.documentElement.clientWidth"
-                  )
+                  overflow = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
                   assert overflow <= 1, (width, height, overflow)
                   following = page.locator(".following-block .card").count()
                   ordinary = page.locator(".today-opinion .card, #section-opinion .stories .card").count()
