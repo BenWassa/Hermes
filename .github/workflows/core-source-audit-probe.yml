@@ -16,44 +16,20 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - name: Exercise candidate sources through Hermes adapters
+      - name: Exercise final candidates through Hermes adapters
         run: |
           cat > /tmp/core-audit.json <<'JSON'
           {
             "version": 1,
             "voices": [
-              {"id":"andrew-coyne","name":"Andrew Coyne","provider_ids":[{"provider":"nationalnewswatch.com","id":"/author/andrew-coyne"}],"require_evidence":"provider_id","sources":[{"type":"author_page","url":"https://www.nationalnewswatch.com/author/andrew-coyne","publication":"National Newswatch","structural":true,"item_tag":"div","item_class":"article","author_path":"/author/andrew-coyne","allow_external_links":true,"authorship":"provider_id"}]},
-              {"id":"paul-wells","name":"Paul Wells","provider_ids":[{"provider":"nationalnewswatch.com","id":"/author/paul-wells"}],"require_evidence":"provider_id","sources":[{"type":"author_page","url":"https://www.nationalnewswatch.com/author/paul-wells","publication":"National Newswatch","structural":true,"item_tag":"div","item_class":"article","author_path":"/author/paul-wells","allow_external_links":true,"authorship":"provider_id"}]},
-              {"id":"david-brooks","name":"David Brooks","sources":[{"type":"author_page","url":"https://www.theatlantic.com/author/david-brooks/","publication":"The Atlantic","structural":true,"authorship":"scope"}]},
-              {"id":"fareed-zakaria","name":"Fareed Zakaria","sources":[{"type":"author_page","url":"https://www.washingtonpost.com/people/fareed-zakaria/","publication":"The Washington Post","structural":true,"authorship":"scope"}]},
-              {"id":"adam-tooze","name":"Adam Tooze","sources":[{"type":"author_page","url":"https://foreignpolicy.com/author/adam-tooze/","publication":"Foreign Policy","structural":true,"authorship":"scope"}]},
-              {"id":"helen-thompson","name":"Helen Thompson","sources":[{"type":"author_page","url":"https://www.newstatesman.com/author/helen-thompson","publication":"New Statesman","structural":true,"authorship":"scope"}]},
-              {"id":"steven-pinker","name":"Steven Pinker","sources":[{"type":"author_page","url":"https://stevenpinker.com/publications","publication":"StevenPinker.com","structural":true,"authorship":"scope"}]},
-              {"id":"francis-fukuyama","name":"Francis Fukuyama","aliases":["Frank Fukuyama"],"sources":[{"type":"rss","url":"https://www.persuasion.community/feed","publication":"Persuasion","authorship":"byline"}]},
-              {"id":"arthur-c-brooks","name":"Arthur C. Brooks","aliases":["Arthur Brooks"],"sources":[{"type":"rss","url":"https://www.thefp.com/feed","publication":"The Free Press","authorship":"byline"}]},
-              {"id":"zeynep-tufekci","name":"Zeynep Tufekci","sources":[{"type":"rss","url":"https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/zeynep-tufekci/rss.xml","publication":"The New York Times","authorship":"byline"}]},
-              {"id":"dan-wang","name":"Dan Wang","sources":[{"type":"rss","url":"https://danwang.co/feed/","publication":"Dan Wang","authorship":"byline"}]}
+              {"id":"ezra-klein","name":"Ezra Klein","sources":[{"type":"rss","url":"https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/ezra-klein/rss.xml","publication":"The New York Times","authorship":"byline"}]},
+              {"id":"david-brooks","name":"David Brooks","sources":[{"type":"rss","url":"https://www.theatlantic.com/feed/author/david-brooks/","publication":"The Atlantic","authorship":"byline"}]},
+              {"id":"adam-tooze","name":"Adam Tooze","sources":[{"type":"rss","url":"https://foreignpolicy.com/author/adam-tooze/feed/","publication":"Foreign Policy","authorship":"byline"}]},
+              {"id":"jonathan-haidt","name":"Jonathan Haidt","aliases":["Jon Haidt"],"sources":[{"type":"rss","url":"https://www.afterbabel.com/feed","publication":"After Babel","authorship":"byline"}]},
+              {"id":"tyler-cowen","name":"Tyler Cowen","sources":[{"type":"rss","url":"https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed","publication":"Marginal Revolution","authorship":"byline"}]},
+              {"id":"dan-wang","name":"Dan Wang","sources":[{"type":"author_page","url":"https://danwang.co/","publication":"Dan Wang","structural":true,"authorship":"scope"}]},
+              {"id":"fareed-zakaria","name":"Fareed Zakaria","sources":[{"type":"author_page","url":"https://www.washingtonpost.com/people/fareed-zakaria/","publication":"The Washington Post","structural":true,"authorship":"scope"}]}
             ]
           }
           JSON
           python -m src.voices.audit --live --registry /tmp/core-audit.json || true
-      - name: Probe remaining candidate feeds
-        run: |
-          python - <<'PY'
-          import json, requests, feedparser
-          UA={'User-Agent':'TheDaily/2.0 (+https://github.com/BenWassa/Hermes)'}
-          for label,url in [
-            ('tufekci-insight','https://www.theinsight.org/feed'),
-            ('brooks-atlantic-feed','https://www.theatlantic.com/feed/author/david-brooks/'),
-            ('tooze-fp-feed','https://foreignpolicy.com/author/adam-tooze/feed/'),
-            ('thompson-ns-feed','https://www.newstatesman.com/author/helen-thompson/feed'),
-            ('fukuyama-writer','https://www.persuasion.community/w/francis-fukuyama')
-          ]:
-            try:
-              r=requests.get(url,headers=UA,timeout=20,allow_redirects=True)
-              p=feedparser.parse(r.content)
-              es=p.entries[:25]
-              print('PROBE '+json.dumps({'label':label,'status':r.status_code,'final':r.url,'ctype':r.headers.get('content-type',''),'count':len(es),'title':str(p.feed.get('title',''))[:100],'newest':str((es[0].get('published') or es[0].get('updated') or '') if es else '')[:100],'authors':[str(e.get('author') or '')[:80] for e in es[:8]]},ensure_ascii=False))
-            except Exception as e:
-              print('PROBE '+json.dumps({'label':label,'error':type(e).__name__+': '+str(e)[:180]}))
-          PY
