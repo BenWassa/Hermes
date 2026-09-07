@@ -16,20 +16,40 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - name: Exercise final candidates through Hermes adapters
+      - name: Exercise blocked candidates with the declared Hermes user agent
         run: |
-          cat > /tmp/core-audit.json <<'JSON'
-          {
+          python - <<'PY'
+          import datetime as dt
+          import json
+          import requests
+          from pathlib import Path
+          from src.voices.discover import discover
+          from src.voices.http import VoiceHttp, default_budget if False else USER_AGENT
+          from src.voices.http import RequestBudget
+          from src.voices.registry import load_registry
+          from src.voices.window import EditionWindow
+
+          data = {
             "version": 1,
             "voices": [
-              {"id":"ezra-klein","name":"Ezra Klein","sources":[{"type":"rss","url":"https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/ezra-klein/rss.xml","publication":"The New York Times","authorship":"byline"}]},
-              {"id":"david-brooks","name":"David Brooks","sources":[{"type":"rss","url":"https://www.theatlantic.com/feed/author/david-brooks/","publication":"The Atlantic","authorship":"byline"}]},
               {"id":"adam-tooze","name":"Adam Tooze","sources":[{"type":"rss","url":"https://foreignpolicy.com/author/adam-tooze/feed/","publication":"Foreign Policy","authorship":"byline"}]},
-              {"id":"jonathan-haidt","name":"Jonathan Haidt","aliases":["Jon Haidt"],"sources":[{"type":"rss","url":"https://www.afterbabel.com/feed","publication":"After Babel","authorship":"byline"}]},
               {"id":"tyler-cowen","name":"Tyler Cowen","sources":[{"type":"rss","url":"https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed","publication":"Marginal Revolution","authorship":"byline"}]},
-              {"id":"dan-wang","name":"Dan Wang","sources":[{"type":"author_page","url":"https://danwang.co/","publication":"Dan Wang","structural":true,"authorship":"scope"}]},
+              {"id":"dan-wang","name":"Dan Wang","sources":[{"type":"rss","url":"https://danwang.co/feed/","publication":"Dan Wang","authorship":"byline"}]},
               {"id":"fareed-zakaria","name":"Fareed Zakaria","sources":[{"type":"author_page","url":"https://www.washingtonpost.com/people/fareed-zakaria/","publication":"The Washington Post","structural":true,"authorship":"scope"}]}
             ]
           }
-          JSON
-          python -m src.voices.audit --live --registry /tmp/core-audit.json || true
+          p=Path('/tmp/core-audit.json'); p.write_text(json.dumps(data))
+          registry=load_registry(p)
+          session=requests.Session()
+          before=session.headers.get('User-Agent')
+          session.headers['User-Agent']=USER_AGENT
+          print('UA '+json.dumps({'before':before,'after':session.headers.get('User-Agent')}))
+          http=VoiceHttp(session=session,budget=RequestBudget(limits={'rss':24,'author_page':8}))
+          window=EditionWindow.ending_now(lookback=dt.timedelta(days=180),future_skew=dt.timedelta(minutes=10))
+          result=discover(registry,window=window,http=http)
+          print('STATUS '+json.dumps([s.as_dict() for s in result.statuses],ensure_ascii=False))
+          print('ARTICLES '+json.dumps([
+            {'title':a.title,'voices':list(a.voice_ids),'published':a.published_at.isoformat() if a.published_at else None,'url':a.canonical_url}
+            for a in result.articles[:12]
+          ],ensure_ascii=False))
+          PY
