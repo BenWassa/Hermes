@@ -16,81 +16,44 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - name: Probe bounded public candidate sources
+      - name: Exercise candidate sources through Hermes adapters
+        run: |
+          cat > /tmp/core-audit.json <<'JSON'
+          {
+            "version": 1,
+            "voices": [
+              {"id":"andrew-coyne","name":"Andrew Coyne","provider_ids":[{"provider":"nationalnewswatch.com","id":"/author/andrew-coyne"}],"require_evidence":"provider_id","sources":[{"type":"author_page","url":"https://www.nationalnewswatch.com/author/andrew-coyne","publication":"National Newswatch","structural":true,"item_tag":"div","item_class":"article","author_path":"/author/andrew-coyne","allow_external_links":true,"authorship":"provider_id"}]},
+              {"id":"paul-wells","name":"Paul Wells","provider_ids":[{"provider":"nationalnewswatch.com","id":"/author/paul-wells"}],"require_evidence":"provider_id","sources":[{"type":"author_page","url":"https://www.nationalnewswatch.com/author/paul-wells","publication":"National Newswatch","structural":true,"item_tag":"div","item_class":"article","author_path":"/author/paul-wells","allow_external_links":true,"authorship":"provider_id"}]},
+              {"id":"david-brooks","name":"David Brooks","sources":[{"type":"author_page","url":"https://www.theatlantic.com/author/david-brooks/","publication":"The Atlantic","structural":true,"authorship":"scope"}]},
+              {"id":"fareed-zakaria","name":"Fareed Zakaria","sources":[{"type":"author_page","url":"https://www.washingtonpost.com/people/fareed-zakaria/","publication":"The Washington Post","structural":true,"authorship":"scope"}]},
+              {"id":"adam-tooze","name":"Adam Tooze","sources":[{"type":"author_page","url":"https://foreignpolicy.com/author/adam-tooze/","publication":"Foreign Policy","structural":true,"authorship":"scope"}]},
+              {"id":"helen-thompson","name":"Helen Thompson","sources":[{"type":"author_page","url":"https://www.newstatesman.com/author/helen-thompson","publication":"New Statesman","structural":true,"authorship":"scope"}]},
+              {"id":"steven-pinker","name":"Steven Pinker","sources":[{"type":"author_page","url":"https://stevenpinker.com/publications","publication":"StevenPinker.com","structural":true,"authorship":"scope"}]},
+              {"id":"francis-fukuyama","name":"Francis Fukuyama","aliases":["Frank Fukuyama"],"sources":[{"type":"rss","url":"https://www.persuasion.community/feed","publication":"Persuasion","authorship":"byline"}]},
+              {"id":"arthur-c-brooks","name":"Arthur C. Brooks","aliases":["Arthur Brooks"],"sources":[{"type":"rss","url":"https://www.thefp.com/feed","publication":"The Free Press","authorship":"byline"}]},
+              {"id":"zeynep-tufekci","name":"Zeynep Tufekci","sources":[{"type":"rss","url":"https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/zeynep-tufekci/rss.xml","publication":"The New York Times","authorship":"byline"}]},
+              {"id":"dan-wang","name":"Dan Wang","sources":[{"type":"rss","url":"https://danwang.co/feed/","publication":"Dan Wang","authorship":"byline"}]}
+            ]
+          }
+          JSON
+          python -m src.voices.audit --live --registry /tmp/core-audit.json || true
+      - name: Probe remaining candidate feeds
         run: |
           python - <<'PY'
-          import json, re
-          import requests, feedparser
-          from html.parser import HTMLParser
-
-          UA = {'User-Agent':'TheDaily/2.0 (+https://github.com/BenWassa/Hermes)'}
-          urls = [
-            ('conrad-nnw','html','https://www.nationalnewswatch.com/author/conrad-black'),
-            ('andrew-nnw','html','https://www.nationalnewswatch.com/author/andrew-coyne'),
-            ('paul-wells','feed','https://paulwells.substack.com/feed'),
-            ('ezra-nyt-by','feed','https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/ezra-klein/rss.xml'),
-            ('ezra-nyt-column','feed','https://www.nytimes.com/svc/collections/v1/publish/www.nytimes.com/column/ezra-klein/rss.xml'),
-            ('brooks-nyt-column','feed','https://www.nytimes.com/svc/collections/v1/publish/www.nytimes.com/column/david-brooks/rss.xml'),
-            ('brooks-nyt-by','feed','https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/david-brooks/rss.xml'),
-            ('fukuyama-persuasion-section','feed','https://www.persuasion.community/s/francis-fukuyama/feed'),
-            ('fukuyama-persuasion-main','feed','https://www.persuasion.community/feed'),
-            ('zakaria-wapo','feed','https://www.washingtonpost.com/arcio/rss/author/Fareed-Zakaria'),
-            ('tooze-chartbook','feed','https://adamtooze.substack.com/feed'),
-            ('thompson-newstatesman','html','https://www.newstatesman.com/writers/324788'),
-            ('thompson-unherd','html','https://unherd.com/author/helen-thompson/'),
-            ('haidt-afterbabel','feed','https://www.afterbabel.com/feed'),
-            ('pinker-rssxml','feed','https://stevenpinker.com/rss.xml'),
-            ('pinker-feed','feed','https://stevenpinker.com/feed'),
-            ('pinker-publications','html','https://stevenpinker.com/publications'),
-            ('arthur-freepress-main','feed','https://www.thefp.com/feed'),
-            ('arthur-freepress-writer','html','https://www.thefp.com/w/arthur-brooks'),
-            ('arthur-pursuit-feed','feed','https://www.thefp.com/s/the-pursuit-of-happiness-with-arthur/feed'),
-            ('cowen-mr-main','feed','https://marginalrevolution.com/feed'),
-            ('cowen-mr-author','feed','https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed'),
-            ('cowen-freepress-writer','html','https://www.thefp.com/w/tyler-cowen'),
-            ('tufekci-nyt-by','feed','https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/zeynep-tufekci/rss.xml'),
-            ('tufekci-site','html','https://zeynep.me/'),
-            ('dan-feed-query','feed','https://danwang.co/?feed=rss'),
-            ('dan-feed','feed','https://danwang.co/feed'),
-            ('dan-rss','feed','https://danwang.co/rss'),
-          ]
-
-          class H(HTMLParser):
-            def __init__(self):
-              super().__init__(); self.articles=0; self.ld=[]; self.in_ld=False; self.buf=[]
-            def handle_starttag(self,t,a):
-              d=dict(a)
-              if t=='article': self.articles += 1
-              if t=='script' and d.get('type','').lower()=='application/ld+json': self.in_ld=True; self.buf=[]
-            def handle_data(self,d):
-              if self.in_ld:self.buf.append(d)
-            def handle_endtag(self,t):
-              if t=='script' and self.in_ld:self.in_ld=False; self.ld.append(''.join(self.buf))
-
-          for label, kind, url in urls:
-            out={'label':label,'url':url}
+          import json, requests, feedparser
+          UA={'User-Agent':'TheDaily/2.0 (+https://github.com/BenWassa/Hermes)'}
+          for label,url in [
+            ('tufekci-insight','https://www.theinsight.org/feed'),
+            ('brooks-atlantic-feed','https://www.theatlantic.com/feed/author/david-brooks/'),
+            ('tooze-fp-feed','https://foreignpolicy.com/author/adam-tooze/feed/'),
+            ('thompson-ns-feed','https://www.newstatesman.com/author/helen-thompson/feed'),
+            ('fukuyama-writer','https://www.persuasion.community/w/francis-fukuyama')
+          ]:
             try:
               r=requests.get(url,headers=UA,timeout=20,allow_redirects=True)
-              out.update(status=r.status_code, final=r.url, ctype=r.headers.get('content-type','')[:80], bytes=len(r.content))
-              if kind=='feed' and r.ok:
-                p=feedparser.parse(r.content)
-                entries=p.entries[:25]
-                out['feed_count']=len(entries)
-                out['feed_title']=str(p.feed.get('title',''))[:100]
-                out['newest']=str((entries[0].get('published') or entries[0].get('updated') or '') if entries else '')[:120]
-                out['authors']=[str(e.get('author') or e.get('dc_creator') or '')[:80] for e in entries[:8]]
-                out['titles']=[str(e.get('title',''))[:100] for e in entries[:3]]
-                out['bozo']=bool(p.bozo)
-              elif kind=='html' and r.ok:
-                h=H(); h.feed(r.text)
-                ld_articles=0
-                for b in h.ld:
-                  try:
-                    s=json.dumps(json.loads(b)).lower()
-                    ld_articles += len(re.findall(r'"@type"\s*:\s*"(?:article|newsarticle|opinionnewsarticle|blogposting)"',s))
-                  except Exception: pass
-                out['semantic_articles']=h.articles; out['jsonld_article_markers']=ld_articles
+              p=feedparser.parse(r.content)
+              es=p.entries[:25]
+              print('PROBE '+json.dumps({'label':label,'status':r.status_code,'final':r.url,'ctype':r.headers.get('content-type',''),'count':len(es),'title':str(p.feed.get('title',''))[:100],'newest':str((es[0].get('published') or es[0].get('updated') or '') if es else '')[:100],'authors':[str(e.get('author') or '')[:80] for e in es[:8]]},ensure_ascii=False))
             except Exception as e:
-              out['error']=type(e).__name__+': '+str(e)[:180]
-            print('PROBE '+json.dumps(out,ensure_ascii=False))
+              print('PROBE '+json.dumps({'label':label,'error':type(e).__name__+': '+str(e)[:180]}))
           PY
