@@ -1,9 +1,9 @@
 """Structured author-archive adapter.
 
-Some writers have a durable public author page at a publication that offers
-neither a per-author feed nor an API. This adapter reads such a page, and it
-is a *site-pattern* adapter, not a person adapter: the registry supplies the
-archive URL and the structural hints, so any writer on a supporting site can
+Some writers have a durable public author page at a publication or index that
+offers neither a per-author feed nor an API. This adapter reads such a page,
+and it is a *site-pattern* adapter, not a person adapter: the registry supplies
+the archive URL and structural hints, so any writer on a supporting site can
 use it and no code path mentions a person.
 
 Two strategies, in order:
@@ -11,20 +11,24 @@ Two strategies, in order:
 1. **JSON-LD.** ``schema.org`` ``ItemList`` / ``Article`` blocks on the page.
    Machine-readable, published by the site for exactly this purpose, and
    stable across visual redesigns.
-2. **Declared structure.** Repeated ``<article>`` elements, each contributing
-   its first titled link and its first ``<time datetime>``. Only used when the
-   source opts in with ``"structural": true``.
+2. **Declared structure.** Repeated item elements, each contributing its first
+   titled link plus optional date/publication metadata. Only used when the
+   source opts in with ``"structural": true``. ``item_class`` may further
+   constrain the repeated item when a site uses ``<div>`` rather than
+   ``<article>``.
 
 Both fail *closed*. If the expected structure is not there, the adapter raises
 ``AdapterError`` and contributes nothing. It never falls back to scraping
-text, and it never reads article bodies: an author archive is a discovery
-surface for metadata and canonical links, not something to mirror.
+article bodies: an author archive is a discovery surface for metadata and
+canonical links, not something to mirror.
 
-Attribution from an author archive is ``scope`` evidence: the page is the
-publication's own statement of what this person wrote. The adapter therefore
-enforces that extracted links stay on the archive's own host (and under an
-optional path prefix), so a stray "related reading" link to another site
-cannot enter as the Voice's work.
+By default extracted article links must stay on the archive's own host, which
+keeps publication author pages safe for ``scope`` attribution. An index that
+intentionally links to external publishers may opt in with
+``allow_external_links``. Such a source can additionally require an exact
+``author_path`` inside every repeated item. When configured, that stable author
+path is emitted as a source-native provider id so the normal resolver can use
+``provider_id`` evidence rather than a name match.
 """
 
 from __future__ import annotations
@@ -34,7 +38,7 @@ import json
 from html.parser import HTMLParser
 from urllib.parse import urljoin, urlsplit
 
-from ..model import Observation
+from ..model import Author, Observation
 from ..names import clean_text
 from ..timeparse import parse_timestamp
 from ..urls import canonical_url, url_host
@@ -74,26 +78,44 @@ class _LdJsonCollector(HTMLParser):
 
 
 class _ArticleBlockCollector(HTMLParser):
-    """Collects (href, link text, datetime) from repeated ``<article>`` blocks."""
+    """Collect metadata from repeated structural author-index items."""
 
-    def __init__(self, item_tag: str = "article") -> None:
+    def __init__(self, item_tag: str = "article", item_class: str = "", author_path: str = "") -> None:
         super().__init__(convert_charrefs=True)
         self.item_tag = item_tag
+        self.item_class = item_class.strip()
+        self.author_path = author_path.strip()
         self.items: list[dict] = []
-        self._depth = 0
+        self._item_depth = 0
         self._current: dict | None = None
         self._link_depth = 0
         self._link_text: list[str] = []
+        self._pending_href = ""
+        self._field_tag = ""
+        self._field_name = ""
+        self._field_text: list[str] = []
+
+    def _matches_item(self, tag: str, attrs_map: dict[str, str]) -> bool:
+        if tag != self.item_tag:
+            return False
+        if not self.item_class:
+            return True
+        return self.item_class in set(attrs_map.get("class", "").split())
 
     def handle_starttag(self, tag, attrs):
         attrs_map = {k.lower(): (v or "") for k, v in attrs}
-        if tag == self.item_tag:
-            self._depth += 1
-            if self._depth == 1:
-                self._current = {"href": "", "title": "", "datetime": ""}
-            return
         if self._current is None:
+            if self._matches_item(tag, attrs_map):
+                self._current = {
+                    "href": "", "title": "", "datetime": "", "author_href": "",
+                    "author_name": "", "publication": "", "description": "",
+                }
+                self._item_depth = 1
             return
+
+        if tag == self.item_tag:
+            self._item_depth += 1
+
         if tag == "a" and attrs_map.get("href") and self._link_depth == 0:
             self._pending_href = attrs_map["href"]
             self._link_depth = 1
@@ -101,26 +123,49 @@ class _ArticleBlockCollector(HTMLParser):
         elif tag == "time" and attrs_map.get("datetime") and not self._current["datetime"]:
             self._current["datetime"] = attrs_map["datetime"]
 
+        classes = set(attrs_map.get("class", "").split())
+        if not self._field_name:
+            if "date" in classes and not self._current["datetime"]:
+                self._field_tag, self._field_name, self._field_text = tag, "datetime", []
+            elif "source" in classes and not self._current["publication"]:
+                self._field_tag, self._field_name, self._field_text = tag, "publication", []
+            elif "lead" in classes and not self._current["description"]:
+                self._field_tag, self._field_name, self._field_text = tag, "description", []
+
     def handle_endtag(self, tag):
         if tag == "a" and self._link_depth and self._current is not None:
             self._link_depth = 0
             text = clean_text("".join(self._link_text))
-            # The first link with real anchor text is the headline link;
-            # navigation chrome ("Read more", an image link) is skipped.
-            if text and len(text) > 12 and not self._current["href"]:
-                self._current["href"] = getattr(self, "_pending_href", "")
+            href = self._pending_href
+            path = urlsplit(href).path
+            if self.author_path and path == self.author_path:
+                self._current["author_href"] = href
+                self._current["author_name"] = text
+            elif text and len(text) > 12 and not self._current["href"]:
+                self._current["href"] = href
                 self._current["title"] = text
             self._link_text = []
-            return
-        if tag == self.item_tag and self._depth:
-            self._depth -= 1
-            if self._depth == 0 and self._current is not None:
+            self._pending_href = ""
+
+        if self._field_name and tag == self._field_tag and self._current is not None:
+            value = clean_text("".join(self._field_text))
+            if self._field_name == "publication":
+                value = value.lstrip("—- ")
+            self._current[self._field_name] = value
+            self._field_tag = self._field_name = ""
+            self._field_text = []
+
+        if tag == self.item_tag and self._current is not None:
+            self._item_depth -= 1
+            if self._item_depth == 0:
                 self.items.append(self._current)
                 self._current = None
 
     def handle_data(self, data):
         if self._link_depth:
             self._link_text.append(data)
+        if self._field_name:
+            self._field_text.append(data)
 
 
 def _walk_jsonld(node, out: list[dict]) -> None:
@@ -144,7 +189,7 @@ def _jsonld_items(html: str) -> list[dict]:
     collector = _LdJsonCollector()
     try:
         collector.feed(html)
-    except Exception:  # malformed markup: treat as no JSON-LD
+    except Exception:
         return []
     found: list[dict] = []
     for block in collector.blocks:
@@ -204,6 +249,9 @@ class AuthorPageAdapter(VoiceSourceAdapter):
                         "link_prefix": source.params.get("link_prefix", ""),
                         "structural": bool(source.params.get("structural", False)),
                         "item_tag": source.params.get("item_tag", "article"),
+                        "item_class": source.params.get("item_class", ""),
+                        "author_path": source.params.get("author_path", ""),
+                        "allow_external_links": bool(source.params.get("allow_external_links", False)),
                         "max_items": int(source.params.get("max_items", 20)),
                         "paywalled": source.params.get("paywalled"),
                     },
@@ -226,6 +274,8 @@ class AuthorPageAdapter(VoiceSourceAdapter):
         host = url_host(base_url)
         publication = payload.get("publication") or host
         prefix = payload.get("link_prefix") or ""
+        author_path = str(payload.get("author_path") or "").strip()
+        allow_external = bool(payload.get("allow_external_links"))
         now = dt.datetime.now(dt.timezone.utc)
         paywalled = payload.get("paywalled")
 
@@ -240,18 +290,26 @@ class AuthorPageAdapter(VoiceSourceAdapter):
                 "title": title,
                 "datetime": _jsonld_field(node, "datePublished", "dateCreated", "dateModified"),
                 "byline": _jsonld_byline(node),
+                "author_href": "",
+                "author_name": "",
+                "publication": "",
+                "description": "",
                 "strategy": "jsonld",
             })
 
         if not raw_items and payload.get("structural"):
-            collector = _ArticleBlockCollector(item_tag=payload.get("item_tag", "article"))
+            collector = _ArticleBlockCollector(
+                item_tag=payload.get("item_tag", "article"),
+                item_class=payload.get("item_class", ""),
+                author_path=author_path,
+            )
             try:
                 collector.feed(html)
             except Exception as exc:
                 raise AdapterError(f"author page {base_url} markup did not parse: {exc}") from exc
             for item in collector.items:
                 if item["href"] and item["title"]:
-                    raw_items.append({**item, "byline": "", "strategy": "structural"})
+                    raw_items.append({**item, "byline": item.get("author_name", ""), "strategy": "structural"})
 
         if not raw_items:
             raise AdapterError(
@@ -266,17 +324,25 @@ class AuthorPageAdapter(VoiceSourceAdapter):
             canonical = canonical_url(link)
             if not canonical:
                 continue
-            # Stay on the archive's own site, and under the configured path
-            # prefix when one is given. An off-site link on an author page is
-            # not that author's work.
-            if url_host(link) != host:
+            if not allow_external and url_host(link) != host:
                 continue
             if prefix and not urlsplit(canonical).path.startswith(prefix):
                 continue
+            if author_path:
+                observed_author_path = urlsplit(item.get("author_href") or "").path
+                if observed_author_path != author_path:
+                    continue
             if canonical in seen:
                 continue
             seen.add(canonical)
             published = parse_timestamp(item.get("datetime"))
+            authors: tuple[Author, ...] = ()
+            if author_path:
+                authors = (Author(
+                    name=clean_text(item.get("author_name", "")),
+                    provider=host,
+                    provider_id=author_path,
+                ),)
             observations.append(
                 Observation(
                     adapter=self.type,
@@ -285,11 +351,12 @@ class AuthorPageAdapter(VoiceSourceAdapter):
                     title=clean_text(item["title"]),
                     url=link,
                     canonical_url=canonical,
-                    publication=publication,
+                    publication=clean_text(item.get("publication") or "") or publication or url_host(link),
                     paywalled=paywalled,
                     published_at=published,
                     raw_published=str(item.get("datetime") or ""),
                     byline=clean_text(item.get("byline", "")),
+                    authors=authors,
                     author_scoped=True,
                     fetched_at=now,
                 )
@@ -297,7 +364,6 @@ class AuthorPageAdapter(VoiceSourceAdapter):
             if len(observations) >= payload["max_items"]:
                 break
         if not observations:
-            raise AdapterError(
-                f"author page {base_url} yielded no usable on-site article links"
-            )
+            qualifier = "matching the configured author identity" if author_path else "usable"
+            raise AdapterError(f"author page {base_url} yielded no {qualifier} article links")
         return observations

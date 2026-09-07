@@ -40,10 +40,26 @@
     {
       "id": "conrad-black",
       "name": "Conrad Black",
-      "enabled": false,
-      "notify": false,
+      "enabled": true,
+      "notify": true,
+      "require_evidence": "provider_id",
       "aliases": ["Conrad M. Black"],
+      "provider_ids": [
+        {"provider": "nationalnewswatch.com", "id": "/author/conrad-black"}
+      ],
       "sources": [
+        {
+          "id": "national-newswatch-conrad",
+          "type": "author_page",
+          "url": "https://www.nationalnewswatch.com/author/conrad-black",
+          "structural": true,
+          "item_tag": "div",
+          "item_class": "article",
+          "author_path": "/author/conrad-black",
+          "allow_external_links": true,
+          "authorship": "provider_id",
+          "note": "National Newswatch's public contributor index repeats the stable /author/conrad-black identity inside each article block and links to the publisher's canonical article URL. GitHub-hosted Actions returned HTTP 200 on 2026-09-06. Hermes reads only index metadata and does not fetch protected article bodies."
+        },
         {
           "id": "nysun-author-archive",
           "type": "author_page",
@@ -54,10 +70,10 @@
           "paywalled": true,
           "authorship": "scope",
           "enabled": false,
-          "note": "The New York Sun author archive is a valid first-party authorship surface, but on 2026-09-06 GitHub-hosted runners received HTTP 429 from the author page, its author feed, and the publication's tested general RSS endpoints. Disabled rather than evading publisher controls."
+          "note": "The New York Sun author archive remains a legitimate first-party authorship surface, but GitHub-hosted runners received HTTP 429 from the author page, its author feed, and tested general RSS endpoints on 2026-09-06. It stays disabled rather than evading publisher controls."
         }
       ],
-      "note": "Temporarily not an active Voice. Restore only through a supported source that works from the production runner (for example a stable provider journalist identity after the required provider key is configured). Hermes does not bypass paywalls or bot/rate-limit controls."
+      "note": "Active through National Newswatch's contributor-scoped external-article index. Perigon was checked sparingly from Actions on 2026-09-06: the credential is configured and a current National Post Conrad Black article is indexed, but Perigon exposes no stable journalist id for him, so Hermes does not use name-only Perigon attribution."
     },
     {
       "id": "george-monbiot",

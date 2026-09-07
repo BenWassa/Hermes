@@ -33,7 +33,10 @@ from .window import EditionWindow
 
 log = logging.getLogger("the-daily.voices.audit")
 
-PERIGON_JOURNALISTS_URL = "https://api.perigon.io/v1/journalists/all"
+# Perigon retired the old /v1/journalists/all route. Keep this operator lookup
+# on the documented collection endpoint so a failed match means "no indexed
+# identity", not "Hermes called a stale contract".
+PERIGON_JOURNALISTS_URL = "https://api.goperigon.com/v1/journalists"
 
 
 def _window() -> EditionWindow:
@@ -116,7 +119,8 @@ def _resolve_journalist(name: str) -> int:
         response = http.get(
             PERIGON_JOURNALISTS_URL, provider="perigon", params={"apiKey": key, "name": name, "size": 10}
         )
-        results = response.json().get("results") or response.json().get("journalists") or []
+        payload = response.json()
+        results = payload.get("results") or payload.get("journalists") or []
     except Exception as exc:  # noqa: BLE001 - operator command, report and stop
         print(f"perigon journalist lookup failed: {exc}", file=sys.stderr)
         return 1
