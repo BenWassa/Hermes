@@ -43,6 +43,7 @@ from src.voices.roundup_state import (
 UTC = dt.timezone.utc
 PUBLISH_NOW = dt.datetime(2026, 9, 13, 22, 0, tzinfo=UTC)
 PERIOD = period_for_id("2026-09-13")
+DEFAULT_PUBLISHED = PERIOD.cutoff - dt.timedelta(hours=2)
 
 
 def registry() -> Registry:
@@ -73,7 +74,7 @@ def article(
     key: str,
     voice_ids=("core-a",),
     *,
-    when=PUBLISH_NOW - dt.timedelta(hours=2),
+    when=DEFAULT_PUBLISHED,
     title=None,
     url=None,
     publication="Example",
@@ -103,7 +104,7 @@ def add_item(
     key: str,
     voice_ids=("core-a",),
     *,
-    published=PUBLISH_NOW - dt.timedelta(hours=2),
+    published=DEFAULT_PUBLISHED,
     surfaced=None,
     title=None,
     publication="Example",
@@ -139,7 +140,6 @@ def test_core_tier_is_the_only_roundup_membership_authority():
     add_item(state, "discovery", ("discovery",))
 
     keys = {item.key for item in eligible_items(state, reg, PERIOD)}
-
     assert "url:https://example.com/core" in keys
     assert "url:https://example.com/disabled-core" in keys
     assert "url:https://example.com/selective" not in keys
@@ -156,7 +156,6 @@ def test_shared_results_retain_only_core_attributions():
     )
 
     observations = _valid_observations(result, reg)
-
     assert len(observations) == 1
     assert observations[0][1] == ("core-a",)
 
@@ -164,14 +163,13 @@ def test_shared_results_retain_only_core_attributions():
 def test_selection_is_breadth_first_and_never_exceeds_two_per_voice():
     state = trusted_state()
     reg = registry()
-    add_item(state, "a1", ("core-a",), published=PUBLISH_NOW - dt.timedelta(minutes=10))
-    add_item(state, "a2", ("core-a",), published=PUBLISH_NOW - dt.timedelta(minutes=20))
-    add_item(state, "a3", ("core-a",), published=PUBLISH_NOW - dt.timedelta(minutes=30))
-    add_item(state, "b1", ("core-b",), published=PUBLISH_NOW - dt.timedelta(hours=4))
-    add_item(state, "c1", ("core-c",), published=PUBLISH_NOW - dt.timedelta(hours=5))
+    add_item(state, "a1", ("core-a",), published=PERIOD.cutoff - dt.timedelta(minutes=10))
+    add_item(state, "a2", ("core-a",), published=PERIOD.cutoff - dt.timedelta(minutes=20))
+    add_item(state, "a3", ("core-a",), published=PERIOD.cutoff - dt.timedelta(minutes=30))
+    add_item(state, "b1", ("core-b",), published=PERIOD.cutoff - dt.timedelta(hours=4))
+    add_item(state, "c1", ("core-c",), published=PERIOD.cutoff - dt.timedelta(hours=5))
 
     selected = select_weekly(state, reg, PERIOD)
-
     keys = {item.key.rsplit("/", 1)[-1] for item in selected}
     assert keys == {"a1", "a2", "b1", "c1"}
     assert "a3" not in keys
@@ -189,11 +187,10 @@ def test_selection_caps_at_six_distinct_voices_before_depth():
             state,
             f"v{i}",
             (f"core-{i}",),
-            published=PUBLISH_NOW - dt.timedelta(minutes=i),
+            published=PERIOD.cutoff - dt.timedelta(minutes=i + 1),
         )
 
     selected = select_weekly(state, reg, PERIOD)
-
     assert len(selected) == 6
     assert len({item.voice_ids[0] for item in selected}) == 6
 
@@ -205,18 +202,17 @@ def test_unsurfaced_work_is_preferred_within_a_voice_before_freshness():
         state,
         "new-surfaced",
         ("core-a",),
-        published=PUBLISH_NOW - dt.timedelta(minutes=5),
-        surfaced=PUBLISH_NOW - dt.timedelta(minutes=2),
+        published=PERIOD.cutoff - dt.timedelta(minutes=5),
+        surfaced=PERIOD.cutoff - dt.timedelta(minutes=2),
     )
     missed = add_item(
         state,
         "older-missed",
         ("core-a",),
-        published=PUBLISH_NOW - dt.timedelta(hours=3),
+        published=PERIOD.cutoff - dt.timedelta(hours=3),
     )
 
     selected = select_weekly(state, reg, PERIOD, cap=1, max_per_voice=1)
-
     assert selected == [missed]
     assert surfaced not in selected
 
@@ -225,13 +221,12 @@ def test_multi_author_piece_counts_toward_each_core_voice_cap():
     state = trusted_state()
     reg = registry()
     shared = add_item(state, "shared", ("core-a", "core-b"))
-    add_item(state, "a2", ("core-a",), published=PUBLISH_NOW - dt.timedelta(hours=1))
-    add_item(state, "b2", ("core-b",), published=PUBLISH_NOW - dt.timedelta(hours=2))
-    add_item(state, "a3", ("core-a",), published=PUBLISH_NOW - dt.timedelta(hours=3))
-    add_item(state, "b3", ("core-b",), published=PUBLISH_NOW - dt.timedelta(hours=4))
+    add_item(state, "a2", ("core-a",), published=PERIOD.cutoff - dt.timedelta(hours=1))
+    add_item(state, "b2", ("core-b",), published=PERIOD.cutoff - dt.timedelta(hours=2))
+    add_item(state, "a3", ("core-a",), published=PERIOD.cutoff - dt.timedelta(hours=3))
+    add_item(state, "b3", ("core-b",), published=PERIOD.cutoff - dt.timedelta(hours=4))
 
     selected = select_weekly(state, reg, PERIOD)
-
     assert shared in selected
     counts = {"core-a": 0, "core-b": 0}
     for item in selected:
@@ -249,7 +244,6 @@ def test_period_uses_toronto_calendar_boundaries_across_dst():
     assert fall.cutoff == dt.datetime(2026, 11, 1, 22, 0, tzinfo=UTC)
     assert fall.start == dt.datetime(2026, 10, 25, 21, 0, tzinfo=UTC)
     assert fall.cutoff - fall.start == dt.timedelta(hours=169)
-
     assert spring.cutoff == dt.datetime(2026, 3, 8, 21, 0, tzinfo=UTC)
     assert spring.start == dt.datetime(2026, 3, 1, 22, 0, tzinfo=UTC)
     assert spring.cutoff - spring.start == dt.timedelta(hours=167)
@@ -274,7 +268,6 @@ def test_out_of_period_and_pre_baseline_items_are_ineligible():
     add_item(state, "new", published=PERIOD.cutoff + dt.timedelta(minutes=1))
     add_item(state, "inside", published=PERIOD.start + dt.timedelta(hours=2))
     state.collecting_since = PERIOD.start + dt.timedelta(hours=3)
-
     assert eligible_items(state, reg, PERIOD) == []
 
 
@@ -287,12 +280,9 @@ def test_morning_edition_signal_reads_only_current_committed_artifact(tmp_path):
     }
     path = tmp_path / "index.html"
     path.write_text(
-        '<script id="edition" type="application/json">'
-        + json.dumps(edition)
-        + "</script>",
+        '<script id="edition" type="application/json">' + json.dumps(edition) + "</script>",
         encoding="utf-8",
     )
-
     assert morning_edition_urls(path, now=now) == {
         "https://example.com/follow",
         "https://example.com/front",
@@ -300,9 +290,7 @@ def test_morning_edition_signal_reads_only_current_committed_artifact(tmp_path):
 
     edition["date"] = "Tuesday, September 8, 2026"
     path.write_text(
-        '<script id="edition" type="application/json">'
-        + json.dumps(edition)
-        + "</script>",
+        '<script id="edition" type="application/json">' + json.dumps(edition) + "</script>",
         encoding="utf-8",
     )
     assert morning_edition_urls(path, now=now) is None
@@ -321,10 +309,10 @@ def test_daily_overlap_upserts_without_duplicate_state(monkeypatch, tmp_path):
         statuses=[SourceStatus("rss", "core feed", ("rss:key",), True, items=1)],
     )
 
-    def fake_discover(*args, **kwargs):
-        return result, 1, MODE_FREQUENT
-
-    monkeypatch.setattr("src.voices.roundup.discover_core", fake_discover)
+    monkeypatch.setattr(
+        "src.voices.roundup.discover_core",
+        lambda *args, **kwargs: (result, 1, MODE_FREQUENT),
+    )
     state_path = tmp_path / "state.json"
     store = FileRoundupStore(state_path)
 
@@ -336,10 +324,8 @@ def test_daily_overlap_upserts_without_duplicate_state(monkeypatch, tmp_path):
         edition_path=tmp_path / "none",
     )
 
-    assert first.baseline
-    assert first.observed == 1
-    assert second.observed == 1
-    assert second.changed == 0
+    assert first.baseline and first.observed == 1
+    assert second.observed == 1 and second.changed == 0
     assert len(state_from_text(state_path.read_text(encoding="utf-8")).items) == 1
 
 
@@ -347,11 +333,10 @@ def test_all_source_failure_does_not_establish_false_baseline(monkeypatch, tmp_p
     result = DiscoveryResult(
         statuses=[SourceStatus("rss", "dead feed", ("rss:key",), False, error="down")]
     )
-
-    def fake_discover(*args, **kwargs):
-        return result, 1, MODE_FREQUENT
-
-    monkeypatch.setattr("src.voices.roundup.discover_core", fake_discover)
+    monkeypatch.setattr(
+        "src.voices.roundup.discover_core",
+        lambda *args, **kwargs: (result, 1, MODE_FREQUENT),
+    )
     state_path = tmp_path / "state.json"
 
     outcome = collect_daily(
@@ -360,7 +345,6 @@ def test_all_source_failure_does_not_establish_false_baseline(monkeypatch, tmp_p
         now=PUBLISH_NOW,
         edition_path=tmp_path / "none",
     )
-
     assert outcome.exit_code == 1
     assert not state_path.exists()
 
@@ -372,7 +356,6 @@ def test_rendered_page_is_restrained_and_contains_direct_links():
     second = add_item(state, "two", ("core-b",), publication="Another Review")
 
     page = render_roundup(PERIOD, [first, second], reg)
-
     assert "Voices this week" in page
     assert "A few pieces worth catching up on." in page
     assert "https://example.com/one" in page
@@ -394,7 +377,6 @@ def test_notification_is_one_compact_roundup_link(monkeypatch):
 
     alert = build_roundup_alert(items, reg)
     payload = alert.as_payload("topic")
-
     assert alert.title == "Voices this week"
     assert alert.click == "https://example.test/Hermes/voices/"
     assert "3 pieces from" in alert.message
@@ -431,8 +413,7 @@ def test_first_weekly_run_publishes_then_notifies_once(tmp_path):
         fetch=False,
     )
 
-    assert first.published and first.notified
-    assert page_path.exists()
+    assert first.published and first.notified and page_path.exists()
     assert len(notifier.sent) == 1
     assert second.skipped == SKIP_ALREADY_CLAIMED
     assert len(notifier.sent) == 1
@@ -513,7 +494,6 @@ def test_lost_publish_race_sends_nothing():
         fetch=False,
         push_attempts=2,
     )
-
     assert not outcome.published
     assert store.publish_calls == 2
     assert not notifier.sent
@@ -549,7 +529,6 @@ def test_overlapping_winner_claim_stops_loser_before_notification():
         fetch=False,
         push_attempts=3,
     )
-
     assert outcome.skipped == SKIP_ALREADY_CLAIMED
     assert not notifier.sent
 
@@ -586,8 +565,7 @@ def test_delivery_outcome_write_failure_cannot_reopen_period():
         fetch=False,
     )
 
-    assert first.notified
-    assert len(notifier.sent) == 1
+    assert first.notified and len(notifier.sent) == 1
     assert second.skipped == SKIP_ALREADY_CLAIMED
     assert len(notifier.sent) == 1
 
@@ -642,5 +620,4 @@ def test_automatic_weekly_run_outside_grace_stops_before_store_or_network():
         notifier=RecordingNotifier(),
         now=dt.datetime(2026, 9, 16, 20, 0, tzinfo=UTC),
     )
-
     assert outcome.skipped == SKIP_OUTSIDE_GRACE
