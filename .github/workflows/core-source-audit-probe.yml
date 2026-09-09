@@ -16,40 +16,90 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - name: Exercise blocked candidates with the declared Hermes user agent
+      - name: Prepare bounded probe harness
         run: |
-          python - <<'PY'
+          cat > /tmp/probe.py <<'PY'
           import datetime as dt
           import json
           import requests
+          import sys
           from pathlib import Path
+
           from src.voices.discover import discover
-          from src.voices.http import VoiceHttp, default_budget if False else USER_AGENT
-          from src.voices.http import RequestBudget
+          from src.voices.http import RequestBudget, USER_AGENT, VoiceHttp
           from src.voices.registry import load_registry
           from src.voices.window import EditionWindow
 
-          data = {
-            "version": 1,
-            "voices": [
-              {"id":"adam-tooze","name":"Adam Tooze","sources":[{"type":"rss","url":"https://foreignpolicy.com/author/adam-tooze/feed/","publication":"Foreign Policy","authorship":"byline"}]},
-              {"id":"tyler-cowen","name":"Tyler Cowen","sources":[{"type":"rss","url":"https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed","publication":"Marginal Revolution","authorship":"byline"}]},
-              {"id":"dan-wang","name":"Dan Wang","sources":[{"type":"rss","url":"https://danwang.co/feed/","publication":"Dan Wang","authorship":"byline"}]},
-              {"id":"fareed-zakaria","name":"Fareed Zakaria","sources":[{"type":"author_page","url":"https://www.washingtonpost.com/people/fareed-zakaria/","publication":"The Washington Post","structural":true,"authorship":"scope"}]}
-            ]
-          }
-          p=Path('/tmp/core-audit.json'); p.write_text(json.dumps(data))
-          registry=load_registry(p)
-          session=requests.Session()
-          before=session.headers.get('User-Agent')
-          session.headers['User-Agent']=USER_AGENT
-          print('UA '+json.dumps({'before':before,'after':session.headers.get('User-Agent')}))
-          http=VoiceHttp(session=session,budget=RequestBudget(limits={'rss':24,'author_page':8}))
-          window=EditionWindow.ending_now(lookback=dt.timedelta(days=180),future_skew=dt.timedelta(minutes=10))
-          result=discover(registry,window=window,http=http)
-          print('STATUS '+json.dumps([s.as_dict() for s in result.statuses],ensure_ascii=False))
-          print('ARTICLES '+json.dumps([
-            {'title':a.title,'voices':list(a.voice_ids),'published':a.published_at.isoformat() if a.published_at else None,'url':a.canonical_url}
-            for a in result.articles[:12]
-          ],ensure_ascii=False))
+          mode, path = sys.argv[1], Path(sys.argv[2])
+          registry = load_registry(path)
+          session = requests.Session()
+          before = session.headers.get('User-Agent')
+          if mode == 'declared':
+              session.headers['User-Agent'] = USER_AGENT
+          http = VoiceHttp(
+              session=session,
+              budget=RequestBudget(limits={'rss': 4, 'author_page': 4}),
+          )
+          window = EditionWindow.ending_now(
+              lookback=dt.timedelta(days=365),
+              future_skew=dt.timedelta(minutes=10),
+          )
+          result = discover(registry, window=window, http=http)
+          print('HTTP ' + json.dumps({
+              'mode': mode,
+              'before': before,
+              'effective': session.headers.get('User-Agent'),
+          }))
+          print('STATUS ' + json.dumps([s.as_dict() for s in result.statuses], ensure_ascii=False))
+          print('ARTICLES ' + json.dumps([
+              {
+                  'title': a.title,
+                  'voices': list(a.voice_ids),
+                  'published': a.published_at.isoformat() if a.published_at else None,
+                  'url': a.canonical_url,
+              }
+              for a in result.articles[:8]
+          ], ensure_ascii=False))
+          if result.failures:
+              raise SystemExit(1)
+          if not result.articles:
+              raise SystemExit(2)
           PY
+
+          cat > /tmp/adam.json <<'JSON'
+          {"version":1,"voices":[{"id":"adam-tooze","name":"Adam Tooze","sources":[{"type":"rss","url":"https://foreignpolicy.com/author/adam-tooze/feed/","publication":"Foreign Policy","authorship":"byline"}]}]}
+          JSON
+          cat > /tmp/tyler.json <<'JSON'
+          {"version":1,"voices":[{"id":"tyler-cowen","name":"Tyler Cowen","sources":[{"type":"rss","url":"https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed","publication":"Marginal Revolution","authorship":"byline"}]}]}
+          JSON
+          cat > /tmp/dan.json <<'JSON'
+          {"version":1,"voices":[{"id":"dan-wang","name":"Dan Wang","sources":[{"type":"rss","url":"https://danwang.co/feed/","publication":"Dan Wang","authorship":"byline"}]}]}
+          JSON
+          cat > /tmp/fareed.json <<'JSON'
+          {"version":1,"voices":[{"id":"fareed-zakaria","name":"Fareed Zakaria","sources":[{"type":"author_page","url":"https://www.washingtonpost.com/people/fareed-zakaria/","publication":"The Washington Post","structural":true,"authorship":"scope"}]}]}
+          JSON
+
+      - name: CURRENT Adam Tooze — Foreign Policy RSS
+        continue-on-error: true
+        run: python /tmp/probe.py current /tmp/adam.json
+      - name: DECLARED-UA Adam Tooze — Foreign Policy RSS
+        continue-on-error: true
+        run: python /tmp/probe.py declared /tmp/adam.json
+      - name: CURRENT Tyler Cowen — Marginal Revolution RSS
+        continue-on-error: true
+        run: python /tmp/probe.py current /tmp/tyler.json
+      - name: DECLARED-UA Tyler Cowen — Marginal Revolution RSS
+        continue-on-error: true
+        run: python /tmp/probe.py declared /tmp/tyler.json
+      - name: CURRENT Dan Wang — personal RSS
+        continue-on-error: true
+        run: python /tmp/probe.py current /tmp/dan.json
+      - name: DECLARED-UA Dan Wang — personal RSS
+        continue-on-error: true
+        run: python /tmp/probe.py declared /tmp/dan.json
+      - name: CURRENT Fareed Zakaria — Washington Post author page
+        continue-on-error: true
+        run: python /tmp/probe.py current /tmp/fareed.json
+      - name: DECLARED-UA Fareed Zakaria — Washington Post author page
+        continue-on-error: true
+        run: python /tmp/probe.py declared /tmp/fareed.json
