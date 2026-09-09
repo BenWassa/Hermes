@@ -5,7 +5,10 @@ from __future__ import annotations
 import datetime as dt
 import json
 
+import requests
+
 from src.voices.following import qualifies_selective, select_following
+from src.voices.http import USER_AGENT, VoiceHttp
 from src.voices.model import Attribution, EVIDENCE_SOURCE_SCOPE, VoiceArticle
 from src.voices.registry import (
     Registry,
@@ -38,19 +41,18 @@ CORE_IDS = [
     "dan-wang",
 ]
 
-PRIMARY_URLS = {
+REACHABLE_PRIMARY_URLS = {
     "conrad-black": "https://www.nationalnewswatch.com/author/conrad-black",
     "andrew-coyne": "https://www.nationalnewswatch.com/author/andrew-coyne",
-    "paul-wells": "https://paulwells.substack.com/feed",
+    "paul-wells": "https://www.nationalnewswatch.com/author/paul-wells",
     "ezra-klein": "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/ezra-klein/rss.xml",
     "david-brooks": "https://www.theatlantic.com/feed/author/david-brooks/",
-    "francis-fukuyama": "https://www.persuasion.community/s/francis-fukuyama/feed",
-    "fareed-zakaria": "https://www.washingtonpost.com/people/fareed-zakaria/",
+    "francis-fukuyama": "https://www.persuasion.community/feed",
     "adam-tooze": "https://foreignpolicy.com/author/adam-tooze/feed/",
     "helen-thompson": "https://www.newstatesman.com/author/helen-thompson",
     "jonathan-haidt": "https://www.afterbabel.com/feed",
     "steven-pinker": "https://stevenpinker.com/publications",
-    "arthur-c-brooks": "https://www.thefp.com/s/the-pursuit-of-happiness-with-arthur/feed",
+    "arthur-c-brooks": "https://www.thefp.com/feed",
     "tyler-cowen": "https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed",
     "zeynep-tufekci": "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/zeynep-tufekci/rss.xml",
     "dan-wang": "https://danwang.co/feed/",
@@ -102,13 +104,27 @@ def test_production_registry_has_exact_locked_tiers_and_explicit_tier_fields():
     assert [voice.id for voice in reg.voices if voice.tier == TIER_DISCOVERY] == ["george-monbiot"]
 
 
-def test_production_core_primaries_match_the_audit_selection():
+def test_production_core_primaries_match_live_corrected_source_contract():
     reg = load_registry("data/voices.json")
-    for voice_id, expected_url in PRIMARY_URLS.items():
+    for voice_id, expected_url in REACHABLE_PRIMARY_URLS.items():
         voice = reg.get(voice_id)
         assert voice is not None
-        primary = voice.enabled_sources[0]
-        assert primary.params.get("url") == expected_url
+        assert len(voice.enabled_sources) >= 1
+        assert voice.enabled_sources[0].params.get("url") == expected_url
+
+    fareed = reg.get("fareed-zakaria")
+    assert fareed is not None
+    assert fareed.tier == TIER_CORE
+    assert fareed.enabled_sources == ()
+    assert fareed.byline_publications == ("washingtonpost.com",)
+    assert any(source.id == "washington-post-zakaria" and not source.enabled for source in fareed.sources)
+
+
+def test_voice_http_uses_declared_application_user_agent_not_requests_default():
+    session = requests.Session()
+    assert session.headers["User-Agent"] != USER_AGENT
+    VoiceHttp(session=session)
+    assert session.headers["User-Agent"] == USER_AGENT
 
 
 def test_legacy_notify_is_operational_state_not_tier_authority():
