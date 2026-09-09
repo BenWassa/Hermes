@@ -1,4 +1,10 @@
-"""Workflow contract for the V2 weekly Core Voices roundup."""
+"""Workflow contract during the V1-to-V2 Voices notification migration.
+
+The morning build, legacy release-alert watcher, and V2 roundup all write to
+``main`` during the evidence window. They remain independent products with
+separate concurrency groups and disjoint paths; git compare-and-swap/rebase
+logic prevents one writer from overwriting another.
+"""
 
 from __future__ import annotations
 
@@ -10,12 +16,15 @@ yaml = pytest.importorskip("yaml")
 
 WORKFLOWS = Path(__file__).resolve().parents[1] / ".github" / "workflows"
 BUILD = "build.yml"
-ROUNDUP = "voice-watch.yml"
+WATCH = "voice-watch.yml"
+ROUNDUP = "voice-roundup.yml"
 NOTIFY = "notify.yml"
 CI = "ci.yml"
 
-STATE_PATH = "data/voice_roundup_state.json"
-PAGE_PATH = "docs/voices/index.html"
+WATCH_STATE_PATH = "data/voice_watch_state.json"
+ROUNDUP_STATE_PATH = "data/voice_roundup_state.json"
+EDITION_PATH = "docs/index.html"
+ROUNDUP_PAGE_PATH = "docs/voices/index.html"
 DAILY_CRON = "37 15 * * *"
 WEEKLY_CRONS = {
     "43 22 * * 0",
@@ -37,6 +46,10 @@ def script_for(job: dict) -> str:
     )
 
 
+def script(workflow: dict) -> str:
+    return "\n".join(script_for(job) for job in workflow.get("jobs", {}).values())
+
+
 def env_for(job: dict) -> dict:
     env: dict = {}
     for step in job.get("steps", []):
@@ -50,9 +63,30 @@ def triggers(workflow: dict) -> dict:
     return workflow.get("on", workflow.get(True))
 
 
-def test_roundup_replaces_hourly_release_watcher_with_daily_and_weekly_slots():
-    workflow = load(ROUNDUP)
-    crons = {entry["cron"] for entry in triggers(workflow)["schedule"]}
+def test_legacy_release_watcher_remains_scheduled_during_evidence_window():
+    watch = load(WATCH)
+    crons = [entry["cron"] for entry in triggers(watch)["schedule"]]
+
+    assert crons == ["37 * * * *"]
+    assert "src.voice_watch" in script(watch)
+    assert "src.voice_roundup" not in script(watch)
+
+
+def test_legacy_watcher_remains_bounded_and_model_free():
+    watch = load(WATCH)
+    env: dict = {}
+    for job in watch["jobs"].values():
+        env.update(env_for(job))
+
+    assert "GEMINI_API_KEY" not in env
+    assert "NYT_API_KEY" not in env
+    assert "NTFY_TOPIC" in env
+    assert "src.build" not in script(watch)
+
+
+def test_roundup_has_daily_collection_and_bounded_weekly_slots():
+    roundup = load(ROUNDUP)
+    crons = {entry["cron"] for entry in triggers(roundup)["schedule"]}
 
     assert crons == {DAILY_CRON, *WEEKLY_CRONS}
     assert "37 * * * *" not in crons
@@ -70,7 +104,7 @@ def test_daily_collection_has_no_notification_or_gemini_secret():
     assert "src.build" not in script_for(collect)
 
 
-def test_weekly_job_alone_receives_ntfy_and_never_gemini():
+def test_weekly_roundup_job_alone_receives_ntfy_and_never_gemini():
     weekly = load(ROUNDUP)["jobs"]["weekly"]
     env = env_for(weekly)
 
@@ -81,44 +115,68 @@ def test_weekly_job_alone_receives_ntfy_and_never_gemini():
     assert "src.voice_watch" not in script_for(weekly)
 
 
-def test_roundup_and_morning_build_remain_independent():
+def test_all_three_writers_have_independent_non_cancelling_concurrency_groups():
     build = load(BUILD)
+    watch = load(WATCH)
     roundup = load(ROUNDUP)
+    groups = {
+        build["concurrency"]["group"],
+        watch["concurrency"]["group"],
+        roundup["concurrency"]["group"],
+    }
 
-    assert build["concurrency"]["group"] != roundup["concurrency"]["group"]
+    assert len(groups) == 3
     assert build["concurrency"]["cancel-in-progress"] is False
+    assert watch["concurrency"]["cancel-in-progress"] is False
     assert roundup["concurrency"]["cancel-in-progress"] is False
 
-    build_script = "\n".join(script_for(job) for job in build["jobs"].values())
-    assert STATE_PATH not in build_script
-    assert PAGE_PATH not in build_script
+
+def test_morning_build_does_not_own_voice_operational_paths():
+    build_script = script(load(BUILD))
+
+    assert EDITION_PATH in build_script
+    assert WATCH_STATE_PATH not in build_script
+    assert ROUNDUP_STATE_PATH not in build_script
+    assert ROUNDUP_PAGE_PATH not in build_script
+    assert "src.voice_watch" not in build_script
     assert "src.voice_roundup" not in build_script
 
 
-def test_roundup_writer_uses_git_compare_and_swap_for_state_and_page():
-    from src.voices.roundup_state import GitRoundupStore
+def test_all_repository_writers_use_safe_retry_or_compare_and_swap():
+    build_script = script(load(BUILD))
 
+    assert "git fetch origin" in build_script
+    assert "git rebase" in build_script
+    assert "for attempt in" in build_script
+
+    from src.voices.roundup_state import GitRoundupStore
+    from src.voices.state import GitStateStore
+
+    assert hasattr(GitStateStore, "load") and hasattr(GitStateStore, "save")
     assert hasattr(GitRoundupStore, "load")
     assert hasattr(GitRoundupStore, "save_state")
     assert hasattr(GitRoundupStore, "publish")
 
 
-def test_roundup_operational_commits_do_not_burn_ci():
+def test_operational_voice_commits_do_not_burn_ci():
     ignored = set(triggers(load(CI))["push"]["paths-ignore"])
 
-    assert STATE_PATH in ignored
-    assert PAGE_PATH in ignored
+    assert WATCH_STATE_PATH in ignored
+    assert ROUNDUP_STATE_PATH in ignored
+    assert ROUNDUP_PAGE_PATH in ignored
 
 
-def test_configured_paths_match_workflow_contract():
+def test_configured_state_paths_match_workflow_contract():
+    from src import config
     from src.voices import roundup_settings as settings
 
-    assert settings.STATE_PATH == STATE_PATH
-    assert settings.PAGE_PATH == PAGE_PATH
+    assert config.VOICE_WATCH_STATE_PATH == WATCH_STATE_PATH
+    assert settings.STATE_PATH == ROUNDUP_STATE_PATH
+    assert settings.PAGE_PATH == ROUNDUP_PAGE_PATH
 
 
 def test_morning_push_remains_one_plain_edition_notification():
-    notify_script = "\n".join(script_for(job) for job in load(NOTIFY)["jobs"].values())
+    notify_script = script(load(NOTIFY))
 
     assert "Today's edition is ready." in notify_script
     assert "voice" not in notify_script.lower()
