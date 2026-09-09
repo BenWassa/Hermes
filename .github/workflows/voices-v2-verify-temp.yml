@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  corrected-source-audit:
+  core-source-audit:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
@@ -24,103 +24,21 @@ jobs:
       - name: Install runtime dependencies
         run: pip install -r requirements.txt
 
-      - name: Build bounded corrected-source registry
+      - name: Build exact Core-only registry from production config
         shell: bash
         run: |
-          cat > /tmp/corrected-sources.json <<'JSON'
-          {
-            "version": 1,
-            "voices": [
-              {
-                "id": "paul-wells",
-                "name": "Paul Wells",
-                "tier": "core",
-                "notify": false,
-                "require_evidence": "provider_id",
-                "provider_ids": [{"provider": "nationalnewswatch.com", "id": "/author/paul-wells"}],
-                "sources": [{
-                  "id": "national-newswatch-paul-wells",
-                  "type": "author_page",
-                  "url": "https://www.nationalnewswatch.com/author/paul-wells",
-                  "publication": "National Newswatch",
-                  "structural": true,
-                  "item_tag": "div",
-                  "item_class": "article",
-                  "author_path": "/author/paul-wells",
-                  "allow_external_links": true,
-                  "authorship": "provider_id"
-                }]
-              },
-              {
-                "id": "francis-fukuyama",
-                "name": "Francis Fukuyama",
-                "tier": "core",
-                "notify": false,
-                "aliases": ["Frank Fukuyama"],
-                "sources": [{
-                  "id": "persuasion-main-fukuyama",
-                  "type": "rss",
-                  "url": "https://www.persuasion.community/feed",
-                  "publication": "Persuasion",
-                  "authorship": "byline"
-                }]
-              },
-              {
-                "id": "arthur-c-brooks",
-                "name": "Arthur C. Brooks",
-                "tier": "core",
-                "notify": false,
-                "aliases": ["Arthur Brooks"],
-                "sources": [{
-                  "id": "free-press-main-arthur-brooks",
-                  "type": "rss",
-                  "url": "https://www.thefp.com/feed",
-                  "publication": "The Free Press",
-                  "authorship": "byline"
-                }]
-              },
-              {
-                "id": "dan-wang",
-                "name": "Dan Wang",
-                "tier": "core",
-                "notify": false,
-                "sources": [{
-                  "id": "dan-wang-first-party",
-                  "type": "rss",
-                  "url": "https://danwang.co/feed/",
-                  "publication": "Dan Wang",
-                  "authorship": "byline"
-                }]
-              },
-              {
-                "id": "adam-tooze",
-                "name": "Adam Tooze",
-                "tier": "core",
-                "notify": false,
-                "sources": [{
-                  "id": "foreign-policy-tooze",
-                  "type": "rss",
-                  "url": "https://foreignpolicy.com/author/adam-tooze/feed/",
-                  "publication": "Foreign Policy",
-                  "authorship": "byline"
-                }]
-              },
-              {
-                "id": "tyler-cowen",
-                "name": "Tyler Cowen",
-                "tier": "core",
-                "notify": false,
-                "sources": [{
-                  "id": "marginal-revolution-tyler-cowen",
-                  "type": "rss",
-                  "url": "https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed",
-                  "publication": "Marginal Revolution",
-                  "authorship": "byline"
-                }]
-              }
-            ]
-          }
-          JSON
+          python - <<'PY'
+          import json
+          from pathlib import Path
 
-      - name: Audit corrected six-source subset through production adapters
-        run: python -m src.voices.audit --live --registry /tmp/corrected-sources.json
+          data = json.loads(Path('data/voices.json').read_text(encoding='utf-8'))
+          core = [voice for voice in data['voices'] if voice.get('tier') == 'core']
+          assert len(core) == 15, f'expected 15 Core Voices, got {len(core)}'
+          Path('/tmp/core-voices.json').write_text(
+              json.dumps({'version': data['version'], 'voices': core}, indent=2),
+              encoding='utf-8',
+          )
+          PY
+
+      - name: Audit final Core production sources through production adapters
+        run: python -m src.voices.audit --live --registry /tmp/core-voices.json
