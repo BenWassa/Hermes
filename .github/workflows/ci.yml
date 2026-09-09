@@ -2,9 +2,8 @@ name: CI
 
 # Deterministic provider coverage plus exact rendered-browser acceptance.
 # Test execution never calls live news providers or uses provider keys: adapters
-# run against recorded fixtures and Chromium opens a locally rendered artifact.
-# Live source checks remain a separate deliberate operator command
-# (`python -m src.voices.audit --live`).
+# run against recorded fixtures and Chromium opens locally rendered artifacts.
+# Live source checks remain separate deliberate operator commands.
 
 on:
   push:
@@ -12,9 +11,11 @@ on:
     paths-ignore:
       - "docs/index.html"
       - "data/latest.json"
-      # The Voice watcher commits this hourly when it finds new work. It is
-      # generated operational state, never reviewed code.
+      # Generated operational state/artifacts are exercised before deployment
+      # in deterministic CI; their routine production commits do not rerun CI.
       - "data/voice_watch_state.json"
+      - "data/voice_roundup_state.json"
+      - "docs/voices/index.html"
   pull_request:
   workflow_dispatch: {}
 
@@ -47,11 +48,11 @@ jobs:
       - name: Run the deterministic and rendered-browser suite
         run: python -m pytest
 
-      - name: Preserve rendered Opinion inspection artifacts
+      - name: Preserve rendered inspection artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: following-opinion-artifacts
+          name: rendered-artifacts
           path: test-artifacts/
           if-no-files-found: ignore
           retention-days: 7
