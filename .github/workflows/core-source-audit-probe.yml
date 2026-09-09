@@ -21,35 +21,21 @@ jobs:
           cat > /tmp/probe.py <<'PY'
           import datetime as dt
           import json
-          import requests
           import sys
           from pathlib import Path
 
           from src.voices.discover import discover
-          from src.voices.http import RequestBudget, USER_AGENT, VoiceHttp
+          from src.voices.http import RequestBudget, VoiceHttp
           from src.voices.registry import load_registry
           from src.voices.window import EditionWindow
 
-          mode, path = sys.argv[1], Path(sys.argv[2])
-          registry = load_registry(path)
-          session = requests.Session()
-          before = session.headers.get('User-Agent')
-          if mode == 'declared':
-              session.headers['User-Agent'] = USER_AGENT
-          http = VoiceHttp(
-              session=session,
-              budget=RequestBudget(limits={'rss': 4, 'author_page': 4}),
-          )
+          registry = load_registry(Path(sys.argv[1]))
+          http = VoiceHttp(budget=RequestBudget(limits={'rss': 4, 'author_page': 4}))
           window = EditionWindow.ending_now(
               lookback=dt.timedelta(days=365),
               future_skew=dt.timedelta(minutes=10),
           )
           result = discover(registry, window=window, http=http)
-          print('HTTP ' + json.dumps({
-              'mode': mode,
-              'before': before,
-              'effective': session.headers.get('User-Agent'),
-          }))
           print('STATUS ' + json.dumps([s.as_dict() for s in result.statuses], ensure_ascii=False))
           print('ARTICLES ' + json.dumps([
               {
@@ -66,40 +52,76 @@ jobs:
               raise SystemExit(2)
           PY
 
-          cat > /tmp/adam.json <<'JSON'
-          {"version":1,"voices":[{"id":"adam-tooze","name":"Adam Tooze","sources":[{"type":"rss","url":"https://foreignpolicy.com/author/adam-tooze/feed/","publication":"Foreign Policy","authorship":"byline"}]}]}
+          cat > /tmp/andrew.json <<'JSON'
+          {"version":1,"voices":[{"id":"andrew-coyne","name":"Andrew Coyne","provider_ids":[{"provider":"nationalnewswatch.com","id":"/author/andrew-coyne"}],"require_evidence":"provider_id","sources":[{"type":"author_page","url":"https://www.nationalnewswatch.com/author/andrew-coyne","publication":"National Newswatch","structural":true,"item_tag":"div","item_class":"article","author_path":"/author/andrew-coyne","allow_external_links":true,"authorship":"provider_id"}]}]}
           JSON
-          cat > /tmp/tyler.json <<'JSON'
-          {"version":1,"voices":[{"id":"tyler-cowen","name":"Tyler Cowen","sources":[{"type":"rss","url":"https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed","publication":"Marginal Revolution","authorship":"byline"}]}]}
+          cat > /tmp/paul-nnw.json <<'JSON'
+          {"version":1,"voices":[{"id":"paul-wells","name":"Paul Wells","provider_ids":[{"provider":"nationalnewswatch.com","id":"/author/paul-wells"}],"require_evidence":"provider_id","sources":[{"type":"author_page","url":"https://www.nationalnewswatch.com/author/paul-wells","publication":"National Newswatch","structural":true,"item_tag":"div","item_class":"article","author_path":"/author/paul-wells","allow_external_links":true,"authorship":"provider_id"}]}]}
           JSON
-          cat > /tmp/dan.json <<'JSON'
-          {"version":1,"voices":[{"id":"dan-wang","name":"Dan Wang","sources":[{"type":"rss","url":"https://danwang.co/feed/","publication":"Dan Wang","authorship":"byline"}]}]}
+          cat > /tmp/paul-substack.json <<'JSON'
+          {"version":1,"voices":[{"id":"paul-wells","name":"Paul Wells","sources":[{"type":"rss","url":"https://paulwells.substack.com/feed","publication":"Paul Wells Newsletter","authorship":"scope"}]}]}
           JSON
-          cat > /tmp/fareed.json <<'JSON'
-          {"version":1,"voices":[{"id":"fareed-zakaria","name":"Fareed Zakaria","sources":[{"type":"author_page","url":"https://www.washingtonpost.com/people/fareed-zakaria/","publication":"The Washington Post","structural":true,"authorship":"scope"}]}]}
+          cat > /tmp/fukuyama-section.json <<'JSON'
+          {"version":1,"voices":[{"id":"francis-fukuyama","name":"Francis Fukuyama","aliases":["Frank Fukuyama"],"sources":[{"type":"rss","url":"https://www.persuasion.community/s/francis-fukuyama/feed","publication":"Persuasion","authorship":"scope"}]}]}
+          JSON
+          cat > /tmp/fukuyama-main.json <<'JSON'
+          {"version":1,"voices":[{"id":"francis-fukuyama","name":"Francis Fukuyama","aliases":["Frank Fukuyama"],"sources":[{"type":"rss","url":"https://www.persuasion.community/feed","publication":"Persuasion","authorship":"byline"}]}]}
+          JSON
+          cat > /tmp/helen-unherd.json <<'JSON'
+          {"version":1,"voices":[{"id":"helen-thompson","name":"Helen Thompson","sources":[{"type":"author_page","url":"https://unherd.com/author/helen-thompson/","publication":"UnHerd","structural":true,"authorship":"scope"}]}]}
+          JSON
+          cat > /tmp/helen-newstatesman.json <<'JSON'
+          {"version":1,"voices":[{"id":"helen-thompson","name":"Helen Thompson","sources":[{"type":"author_page","url":"https://www.newstatesman.com/author/helen-thompson","publication":"New Statesman","structural":true,"authorship":"scope"}]}]}
+          JSON
+          cat > /tmp/pinker.json <<'JSON'
+          {"version":1,"voices":[{"id":"steven-pinker","name":"Steven Pinker","sources":[{"type":"author_page","url":"https://stevenpinker.com/publications","publication":"StevenPinker.com","structural":true,"allow_external_links":true,"authorship":"scope"}]}]}
+          JSON
+          cat > /tmp/arthur-section.json <<'JSON'
+          {"version":1,"voices":[{"id":"arthur-c-brooks","name":"Arthur C. Brooks","aliases":["Arthur Brooks"],"sources":[{"type":"rss","url":"https://www.thefp.com/s/the-pursuit-of-happiness-with-arthur/feed","publication":"The Free Press","authorship":"scope"}]}]}
+          JSON
+          cat > /tmp/arthur-main.json <<'JSON'
+          {"version":1,"voices":[{"id":"arthur-c-brooks","name":"Arthur C. Brooks","aliases":["Arthur Brooks"],"sources":[{"type":"rss","url":"https://www.thefp.com/feed","publication":"The Free Press","authorship":"byline"}]}]}
+          JSON
+          cat > /tmp/zeynep-nyt.json <<'JSON'
+          {"version":1,"voices":[{"id":"zeynep-tufekci","name":"Zeynep Tufekci","sources":[{"type":"rss","url":"https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/zeynep-tufekci/rss.xml","publication":"The New York Times","authorship":"byline"}]}]}
+          JSON
+          cat > /tmp/zeynep-insight.json <<'JSON'
+          {"version":1,"voices":[{"id":"zeynep-tufekci","name":"Zeynep Tufekci","sources":[{"type":"rss","url":"https://www.theinsight.org/feed","publication":"The Insight","authorship":"byline"}]}]}
           JSON
 
-      - name: CURRENT Adam Tooze — Foreign Policy RSS
+      - name: Andrew Coyne — National Newswatch author index
         continue-on-error: true
-        run: python /tmp/probe.py current /tmp/adam.json
-      - name: DECLARED-UA Adam Tooze — Foreign Policy RSS
+        run: python /tmp/probe.py /tmp/andrew.json
+      - name: Paul Wells — National Newswatch author index
         continue-on-error: true
-        run: python /tmp/probe.py declared /tmp/adam.json
-      - name: CURRENT Tyler Cowen — Marginal Revolution RSS
+        run: python /tmp/probe.py /tmp/paul-nnw.json
+      - name: Paul Wells — direct Substack RSS
         continue-on-error: true
-        run: python /tmp/probe.py current /tmp/tyler.json
-      - name: DECLARED-UA Tyler Cowen — Marginal Revolution RSS
+        run: python /tmp/probe.py /tmp/paul-substack.json
+      - name: Francis Fukuyama — Persuasion column RSS
         continue-on-error: true
-        run: python /tmp/probe.py declared /tmp/tyler.json
-      - name: CURRENT Dan Wang — personal RSS
+        run: python /tmp/probe.py /tmp/fukuyama-section.json
+      - name: Francis Fukuyama — Persuasion main RSS byline
         continue-on-error: true
-        run: python /tmp/probe.py current /tmp/dan.json
-      - name: DECLARED-UA Dan Wang — personal RSS
+        run: python /tmp/probe.py /tmp/fukuyama-main.json
+      - name: Helen Thompson — UnHerd author page
         continue-on-error: true
-        run: python /tmp/probe.py declared /tmp/dan.json
-      - name: CURRENT Fareed Zakaria — Washington Post author page
+        run: python /tmp/probe.py /tmp/helen-unherd.json
+      - name: Helen Thompson — New Statesman author page
         continue-on-error: true
-        run: python /tmp/probe.py current /tmp/fareed.json
-      - name: DECLARED-UA Fareed Zakaria — Washington Post author page
+        run: python /tmp/probe.py /tmp/helen-newstatesman.json
+      - name: Steven Pinker — first-party publications page
         continue-on-error: true
-        run: python /tmp/probe.py declared /tmp/fareed.json
+        run: python /tmp/probe.py /tmp/pinker.json
+      - name: Arthur C. Brooks — Free Press column RSS
+        continue-on-error: true
+        run: python /tmp/probe.py /tmp/arthur-section.json
+      - name: Arthur C. Brooks — Free Press main RSS byline
+        continue-on-error: true
+        run: python /tmp/probe.py /tmp/arthur-main.json
+      - name: Zeynep Tufekci — NYT author RSS
+        continue-on-error: true
+        run: python /tmp/probe.py /tmp/zeynep-nyt.json
+      - name: Zeynep Tufekci — The Insight RSS
+        continue-on-error: true
+        run: python /tmp/probe.py /tmp/zeynep-insight.json
