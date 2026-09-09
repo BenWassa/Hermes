@@ -1,0 +1,108 @@
+name: Core Voices Roundup
+
+# Voices V2 notification product:
+# - one silent Core-only collection after the morning edition each day;
+# - bounded Sunday attempts plus one Monday recovery attempt;
+# - no Gemini work anywhere;
+# - only the weekly publisher receives the ntfy topic.
+#
+# During the migration window this runs alongside the legacy V1 release-alert
+# watcher. The V1 workflow is retired only after the weekly product has enough
+# production evidence to justify cutover.
+#
+# The morning edition remains a separate workflow and a separate writer. This
+# workflow synchronises through git compare-and-swap so a morning build moving
+# main can delay, but never overwrite, roundup state/page publication.
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "Operation to run"
+        type: choice
+        options:
+          - collect
+          - weekly
+        default: collect
+      dry_run:
+        description: "Fetch and report only; write nothing and send nothing"
+        type: boolean
+        default: true
+  schedule:
+    # Daily silent collection: 11:37 EDT / 10:37 EST, comfortably after build recovery.
+    - cron: "37 15 * * *"
+    # Sunday delivery attempts around 17:43-20:43 Toronto across DST.
+    - cron: "43 22 * * 0"
+    - cron: "43 23 * * 0"
+    - cron: "43 0 * * 1"
+    # Monday recovery for the same fixed Sunday period.
+    - cron: "43 22 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-roundup
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '37 15 * * *') ||
+      (github.event_name == 'workflow_dispatch' && inputs.operation == 'collect')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Collect Core Voices silently
+        env:
+          GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
+          PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        run: |
+          ARGS=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python -m src.voice_roundup collect $ARGS
+
+  weekly:
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule != '37 15 * * *') ||
+      (github.event_name == 'workflow_dispatch' && inputs.operation == 'weekly')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Publish weekly Core Voices roundup
+        env:
+          GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
+          PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        run: |
+          ARGS=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python -m src.voice_roundup weekly $ARGS
