@@ -73,12 +73,12 @@ jobs:
 
       - name: Commit and push docs/
         if: steps.gate.outputs.skip != 'true'
-        # The V2 roundup is a separate writer: daily collection commits only
-        # data/voice_roundup_state.json, while weekly publication atomically
-        # commits that state plus docs/voices/index.html. It deliberately does
-        # not share this concurrency group, so neither product can cancel a
-        # queued run of the other. This morning writer rebases and retries when
-        # the roundup moves main first; the paths are disjoint from docs/index.html.
+        # During the migration window there are two independent Voice writers:
+        # the legacy watcher commits data/voice_watch_state.json, while the V2
+        # roundup commits data/voice_roundup_state.json and, weekly,
+        # docs/voices/index.html. None shares this concurrency group. This
+        # morning writer rebases and retries if either Voice workflow moves main
+        # first; all write paths are disjoint from docs/index.html.
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
