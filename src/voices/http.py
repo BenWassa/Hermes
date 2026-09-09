@@ -54,7 +54,10 @@ class VoiceHttp:
         self.budget = budget or RequestBudget()
         self.timeout = timeout
         self._session = session or requests.Session()
-        self._session.headers.setdefault("User-Agent", USER_AGENT)
+        # requests.Session already installs its own generic User-Agent, so
+        # setdefault() never applied Hermes's declared identity. Use the
+        # explicit application User-Agent for every generic Voice request.
+        self._session.headers["User-Agent"] = USER_AGENT
 
     def get(self, url: str, *, provider: str, params: dict | None = None,
             headers: dict | None = None) -> requests.Response:
