@@ -9,9 +9,9 @@ permissions:
   contents: read
 
 jobs:
-  source-diagnostics:
+  corrected-source-audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,69 +24,103 @@ jobs:
       - name: Install runtime dependencies
         run: pip install -r requirements.txt
 
-      - name: Build contradicted-source registry
+      - name: Build bounded corrected-source registry
         shell: bash
         run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-
-          failed = {
-              'paul-wells',
-              'francis-fukuyama',
-              'fareed-zakaria',
-              'adam-tooze',
-              'arthur-c-brooks',
-              'tyler-cowen',
-              'dan-wang',
+          cat > /tmp/corrected-sources.json <<'JSON'
+          {
+            "version": 1,
+            "voices": [
+              {
+                "id": "paul-wells",
+                "name": "Paul Wells",
+                "tier": "core",
+                "notify": false,
+                "require_evidence": "provider_id",
+                "provider_ids": [{"provider": "nationalnewswatch.com", "id": "/author/paul-wells"}],
+                "sources": [{
+                  "id": "national-newswatch-paul-wells",
+                  "type": "author_page",
+                  "url": "https://www.nationalnewswatch.com/author/paul-wells",
+                  "publication": "National Newswatch",
+                  "structural": true,
+                  "item_tag": "div",
+                  "item_class": "article",
+                  "author_path": "/author/paul-wells",
+                  "allow_external_links": true,
+                  "authorship": "provider_id"
+                }]
+              },
+              {
+                "id": "francis-fukuyama",
+                "name": "Francis Fukuyama",
+                "tier": "core",
+                "notify": false,
+                "aliases": ["Frank Fukuyama"],
+                "sources": [{
+                  "id": "persuasion-main-fukuyama",
+                  "type": "rss",
+                  "url": "https://www.persuasion.community/feed",
+                  "publication": "Persuasion",
+                  "authorship": "byline"
+                }]
+              },
+              {
+                "id": "arthur-c-brooks",
+                "name": "Arthur C. Brooks",
+                "tier": "core",
+                "notify": false,
+                "aliases": ["Arthur Brooks"],
+                "sources": [{
+                  "id": "free-press-main-arthur-brooks",
+                  "type": "rss",
+                  "url": "https://www.thefp.com/feed",
+                  "publication": "The Free Press",
+                  "authorship": "byline"
+                }]
+              },
+              {
+                "id": "dan-wang",
+                "name": "Dan Wang",
+                "tier": "core",
+                "notify": false,
+                "sources": [{
+                  "id": "dan-wang-first-party",
+                  "type": "rss",
+                  "url": "https://danwang.co/feed/",
+                  "publication": "Dan Wang",
+                  "authorship": "byline"
+                }]
+              },
+              {
+                "id": "adam-tooze",
+                "name": "Adam Tooze",
+                "tier": "core",
+                "notify": false,
+                "sources": [{
+                  "id": "foreign-policy-tooze",
+                  "type": "rss",
+                  "url": "https://foreignpolicy.com/author/adam-tooze/feed/",
+                  "publication": "Foreign Policy",
+                  "authorship": "byline"
+                }]
+              },
+              {
+                "id": "tyler-cowen",
+                "name": "Tyler Cowen",
+                "tier": "core",
+                "notify": false,
+                "sources": [{
+                  "id": "marginal-revolution-tyler-cowen",
+                  "type": "rss",
+                  "url": "https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed",
+                  "publication": "Marginal Revolution",
+                  "authorship": "byline"
+                }]
+              }
+            ]
           }
-          data = json.loads(Path('data/voices.json').read_text(encoding='utf-8'))
-          voices = [voice for voice in data['voices'] if voice['id'] in failed]
-          assert len(voices) == 7
-          Path('/tmp/failed-primary.json').write_text(
-              json.dumps({'version': data['version'], 'voices': voices}, indent=2),
-              encoding='utf-8',
-          )
-          PY
+          JSON
 
-      - name: Re-run seven primaries with intended Hermes User-Agent forced
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          path = Path('src/voices/http.py')
-          text = path.read_text(encoding='utf-8')
-          old = 'self._session.headers.setdefault("User-Agent", USER_AGENT)'
-          new = 'self._session.headers["User-Agent"] = USER_AGENT'
-          assert old in text
-          path.write_text(text.replace(old, new), encoding='utf-8')
-          PY
-          set +e
-          python -m src.voices.audit --live --registry /tmp/failed-primary.json
-          echo "AUDIT_EXIT=$?"
-          exit 0
-
-      - name: Probe documented and natural generic fallbacks
-        shell: bash
-        run: |
-          python - <<'PY'
-          import requests
-          from src.voices.http import USER_AGENT
-
-          urls = {
-              'paul-wells-nnw': 'https://www.nationalnewswatch.com/author/paul-wells',
-              'fukuyama-main-feed': 'https://www.persuasion.community/feed',
-              'arthur-main-feed': 'https://www.thefp.com/feed',
-              'dan-homepage': 'https://danwang.co/',
-              'tyler-author-page': 'https://marginalrevolution.com/marginalrevolution/author/tyler-cowen',
-              'tooze-author-page': 'https://foreignpolicy.com/author/adam-tooze/',
-              'zakaria-author-page': 'https://www.washingtonpost.com/people/fareed-zakaria/',
-          }
-          headers = {'User-Agent': USER_AGENT}
-          for name, url in urls.items():
-              try:
-                  response = requests.get(url, headers=headers, timeout=20, allow_redirects=True)
-                  print(f'{name}: {response.status_code} final={response.url} bytes={len(response.content)} type={response.headers.get("content-type", "")}')
-              except Exception as exc:
-                  print(f'{name}: ERROR {type(exc).__name__}: {exc}')
-          PY
+      - name: Audit corrected six-source subset through production adapters
+        run: python -m src.voices.audit --live --registry /tmp/corrected-sources.json
