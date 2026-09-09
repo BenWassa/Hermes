@@ -16,112 +16,31 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - name: Prepare bounded probe harness
+      - name: Adam Tooze — Chartbook direct RSS through Hermes
         run: |
-          cat > /tmp/probe.py <<'PY'
+          cat > /tmp/adam-chartbook.json <<'JSON'
+          {"version":1,"voices":[{"id":"adam-tooze","name":"Adam Tooze","sources":[{"type":"rss","url":"https://adamtooze.substack.com/feed","publication":"Chartbook","authorship":"scope"}]}]}
+          JSON
+          python - <<'PY'
           import datetime as dt
-          import json
-          import sys
-          from pathlib import Path
-
           from src.voices.discover import discover
           from src.voices.http import RequestBudget, VoiceHttp
           from src.voices.registry import load_registry
           from src.voices.window import EditionWindow
 
-          registry = load_registry(Path(sys.argv[1]))
-          http = VoiceHttp(budget=RequestBudget(limits={'rss': 4, 'author_page': 4}))
-          window = EditionWindow.ending_now(
-              lookback=dt.timedelta(days=365),
-              future_skew=dt.timedelta(minutes=10),
+          registry = load_registry('/tmp/adam-chartbook.json')
+          result = discover(
+              registry,
+              window=EditionWindow.ending_now(
+                  lookback=dt.timedelta(days=365),
+                  future_skew=dt.timedelta(minutes=10),
+              ),
+              http=VoiceHttp(budget=RequestBudget(limits={'rss': 2})),
           )
-          result = discover(registry, window=window, http=http)
-          print('STATUS ' + json.dumps([s.as_dict() for s in result.statuses], ensure_ascii=False))
-          print('ARTICLES ' + json.dumps([
-              {
-                  'title': a.title,
-                  'voices': list(a.voice_ids),
-                  'published': a.published_at.isoformat() if a.published_at else None,
-                  'url': a.canonical_url,
-              }
-              for a in result.articles[:8]
-          ], ensure_ascii=False))
-          if result.failures:
+          for status in result.statuses:
+              print(status.as_dict())
+          for article in result.articles[:8]:
+              print(article.published_at, article.title, article.canonical_url)
+          if result.failures or not result.articles:
               raise SystemExit(1)
-          if not result.articles:
-              raise SystemExit(2)
           PY
-
-          cat > /tmp/andrew.json <<'JSON'
-          {"version":1,"voices":[{"id":"andrew-coyne","name":"Andrew Coyne","provider_ids":[{"provider":"nationalnewswatch.com","id":"/author/andrew-coyne"}],"require_evidence":"provider_id","sources":[{"type":"author_page","url":"https://www.nationalnewswatch.com/author/andrew-coyne","publication":"National Newswatch","structural":true,"item_tag":"div","item_class":"article","author_path":"/author/andrew-coyne","allow_external_links":true,"authorship":"provider_id"}]}]}
-          JSON
-          cat > /tmp/paul-nnw.json <<'JSON'
-          {"version":1,"voices":[{"id":"paul-wells","name":"Paul Wells","provider_ids":[{"provider":"nationalnewswatch.com","id":"/author/paul-wells"}],"require_evidence":"provider_id","sources":[{"type":"author_page","url":"https://www.nationalnewswatch.com/author/paul-wells","publication":"National Newswatch","structural":true,"item_tag":"div","item_class":"article","author_path":"/author/paul-wells","allow_external_links":true,"authorship":"provider_id"}]}]}
-          JSON
-          cat > /tmp/paul-substack.json <<'JSON'
-          {"version":1,"voices":[{"id":"paul-wells","name":"Paul Wells","sources":[{"type":"rss","url":"https://paulwells.substack.com/feed","publication":"Paul Wells Newsletter","authorship":"scope"}]}]}
-          JSON
-          cat > /tmp/fukuyama-section.json <<'JSON'
-          {"version":1,"voices":[{"id":"francis-fukuyama","name":"Francis Fukuyama","aliases":["Frank Fukuyama"],"sources":[{"type":"rss","url":"https://www.persuasion.community/s/francis-fukuyama/feed","publication":"Persuasion","authorship":"scope"}]}]}
-          JSON
-          cat > /tmp/fukuyama-main.json <<'JSON'
-          {"version":1,"voices":[{"id":"francis-fukuyama","name":"Francis Fukuyama","aliases":["Frank Fukuyama"],"sources":[{"type":"rss","url":"https://www.persuasion.community/feed","publication":"Persuasion","authorship":"byline"}]}]}
-          JSON
-          cat > /tmp/helen-unherd.json <<'JSON'
-          {"version":1,"voices":[{"id":"helen-thompson","name":"Helen Thompson","sources":[{"type":"author_page","url":"https://unherd.com/author/helen-thompson/","publication":"UnHerd","structural":true,"authorship":"scope"}]}]}
-          JSON
-          cat > /tmp/helen-newstatesman.json <<'JSON'
-          {"version":1,"voices":[{"id":"helen-thompson","name":"Helen Thompson","sources":[{"type":"author_page","url":"https://www.newstatesman.com/author/helen-thompson","publication":"New Statesman","structural":true,"authorship":"scope"}]}]}
-          JSON
-          cat > /tmp/pinker.json <<'JSON'
-          {"version":1,"voices":[{"id":"steven-pinker","name":"Steven Pinker","sources":[{"type":"author_page","url":"https://stevenpinker.com/publications","publication":"StevenPinker.com","structural":true,"allow_external_links":true,"authorship":"scope"}]}]}
-          JSON
-          cat > /tmp/arthur-section.json <<'JSON'
-          {"version":1,"voices":[{"id":"arthur-c-brooks","name":"Arthur C. Brooks","aliases":["Arthur Brooks"],"sources":[{"type":"rss","url":"https://www.thefp.com/s/the-pursuit-of-happiness-with-arthur/feed","publication":"The Free Press","authorship":"scope"}]}]}
-          JSON
-          cat > /tmp/arthur-main.json <<'JSON'
-          {"version":1,"voices":[{"id":"arthur-c-brooks","name":"Arthur C. Brooks","aliases":["Arthur Brooks"],"sources":[{"type":"rss","url":"https://www.thefp.com/feed","publication":"The Free Press","authorship":"byline"}]}]}
-          JSON
-          cat > /tmp/zeynep-nyt.json <<'JSON'
-          {"version":1,"voices":[{"id":"zeynep-tufekci","name":"Zeynep Tufekci","sources":[{"type":"rss","url":"https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/zeynep-tufekci/rss.xml","publication":"The New York Times","authorship":"byline"}]}]}
-          JSON
-          cat > /tmp/zeynep-insight.json <<'JSON'
-          {"version":1,"voices":[{"id":"zeynep-tufekci","name":"Zeynep Tufekci","sources":[{"type":"rss","url":"https://www.theinsight.org/feed","publication":"The Insight","authorship":"byline"}]}]}
-          JSON
-
-      - name: Andrew Coyne — National Newswatch author index
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/andrew.json
-      - name: Paul Wells — National Newswatch author index
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/paul-nnw.json
-      - name: Paul Wells — direct Substack RSS
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/paul-substack.json
-      - name: Francis Fukuyama — Persuasion column RSS
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/fukuyama-section.json
-      - name: Francis Fukuyama — Persuasion main RSS byline
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/fukuyama-main.json
-      - name: Helen Thompson — UnHerd author page
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/helen-unherd.json
-      - name: Helen Thompson — New Statesman author page
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/helen-newstatesman.json
-      - name: Steven Pinker — first-party publications page
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/pinker.json
-      - name: Arthur C. Brooks — Free Press column RSS
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/arthur-section.json
-      - name: Arthur C. Brooks — Free Press main RSS byline
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/arthur-main.json
-      - name: Zeynep Tufekci — NYT author RSS
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/zeynep-nyt.json
-      - name: Zeynep Tufekci — The Insight RSS
-        continue-on-error: true
-        run: python /tmp/probe.py /tmp/zeynep-insight.json
