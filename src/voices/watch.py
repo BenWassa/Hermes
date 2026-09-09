@@ -229,7 +229,11 @@ def plan_for_mode(registry: Registry, window: FetchWindow, mode: str, cadence=No
     after #10 has already collapsed every source into as few requests as the
     providers allow, so nothing here can turn one Voice into one request.
     """
-    planned = plan_requests(registry, window)
+    # V2 product membership must not enlarge the still-live V1 release watcher.
+    # During migration, `notify` keeps only its legacy operational meaning, so
+    # plan requests from that bounded set even when callers pass the full V2 registry.
+    watcher_registry = registry.for_legacy_watcher()
+    planned = plan_requests(watcher_registry, window)
     if mode == MODE_RECONCILE:
         return planned
     return [
