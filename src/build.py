@@ -48,16 +48,24 @@ def main() -> int:
 
         stage = "voices"
         registry = load_registry(config.VOICES_REGISTRY_PATH)
-        discovery = discover(registry, pool=stories)
+        # Discovery is a product action in the morning paper. Core and
+        # Selective have a tier-based Following path; Discovery does not, so a
+        # Discovery source must not add morning polling merely because its
+        # identity remains in the registry for ordinary Opinion/V1 operation.
+        morning_registry = registry.for_tiers({"core", "selective"})
+        discovery = discover(morning_registry, pool=stories)
         followed = select_following(
             discovery.fresh,
             cap=config.VOICE_FOLLOWING_CAP,
             per_voice=config.VOICE_MAX_PER_VOICE,
+            registry=registry,
+            overflow_cap=8,
         )
         following = following_seeds(followed, registry)
         editorial_stories = editorial_without_following(stories, following)
         log.info(
-            "following: %d qualifying, %d selected, %d ordinary Opinion duplicate(s) withheld",
+            "following: %d attributed Core/Selective candidates, %d selected, "
+            "%d ordinary Opinion duplicate(s) withheld",
             len(discovery.fresh),
             len(following),
             len(stories) - len(editorial_stories),

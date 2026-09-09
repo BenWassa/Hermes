@@ -1,45 +1,11 @@
 {
   "version": 1,
-  "_readme": "Followed writers. A Voice is a person, not a publication. This file is the source of truth for V1: adding or removing a Voice is a reviewed config change, not an in-app toggle, because the overnight GitHub Actions build is what reads it. See VOICES.md section 5 for the schema and README.md for how to add a Voice, resolve a provider id, and troubleshoot a source.",
+  "_readme": "Voices V2 production registry. `tier` is product authority: core, selective, or discovery. `enabled`, source `enabled`, `dormant`, and legacy `notify` remain operational state and must not be used to infer tier. `notify` is retained only for the V1 release-time watcher until the weekly Core roundup replaces it. See VOICES_V2.md for product semantics and VOICES.md for identity/source rules.",
   "voices": [
-    {
-      "id": "jonathan-haidt",
-      "name": "Jonathan Haidt",
-      "enabled": true,
-      "notify": true,
-      "aliases": ["Jon Haidt", "Jonathan D. Haidt"],
-      "sources": [
-        {
-          "id": "after-babel",
-          "type": "rss",
-          "url": "https://www.afterbabel.com/feed",
-          "publication": "After Babel",
-          "authorship": "byline",
-          "note": "After Babel is multi-author (Haidt, Zach Rausch, Freya India and guests), so the feed URL alone proves nothing: each entry must carry his byline."
-        }
-      ],
-      "note": "Publishes across his own newsletter and third-party outlets. Cross-publication coverage is the job of a Perigon journalist id; resolve one with 'python -m src.voices.audit journalist \"Jonathan Haidt\"' and add it under provider_ids and a perigon_journalist source when PERIGON_API_KEY is configured."
-    },
-    {
-      "id": "jordan-peterson",
-      "name": "Jordan Peterson",
-      "enabled": true,
-      "notify": true,
-      "aliases": ["Jordan B. Peterson", "Jordan B Peterson", "Dr. Jordan B. Peterson"],
-      "sources": [
-        {
-          "id": "jbp-official-blog",
-          "type": "rss",
-          "url": "https://www.jordanbpeterson.com/category/blog/feed/",
-          "publication": "Jordan Peterson",
-          "authorship": "scope",
-          "note": "Jordan Peterson's first-party Blog category feed. The WordPress feed exposes the generic author 'admin', so the site's person-scoped Blog category, not that byline, establishes authorship. Coauthored Jordan Peterson posts remain qualifying work. Live-audited from GitHub Actions on 2026-09-06; the formerly configured Substack feed returned 403 from the runner."
-        }
-      ]
-    },
     {
       "id": "conrad-black",
       "name": "Conrad Black",
+      "tier": "core",
       "enabled": true,
       "notify": true,
       "require_evidence": "provider_id",
@@ -52,13 +18,14 @@
           "id": "national-newswatch-conrad",
           "type": "author_page",
           "url": "https://www.nationalnewswatch.com/author/conrad-black",
+          "publication": "National Newswatch",
           "structural": true,
           "item_tag": "div",
           "item_class": "article",
           "author_path": "/author/conrad-black",
           "allow_external_links": true,
           "authorship": "provider_id",
-          "note": "National Newswatch's public contributor index repeats the stable /author/conrad-black identity inside each article block and links to the publisher's canonical article URL. GitHub-hosted Actions returned HTTP 200 on 2026-09-06. Hermes reads only index metadata and does not fetch protected article bodies."
+          "note": "National Newswatch's contributor index repeats the stable /author/conrad-black identity inside each article block and links to the publisher's canonical article URL. Hermes reads index metadata only."
         },
         {
           "id": "nysun-author-archive",
@@ -70,14 +37,296 @@
           "paywalled": true,
           "authorship": "scope",
           "enabled": false,
-          "note": "The New York Sun author archive remains a legitimate first-party authorship surface, but GitHub-hosted runners received HTTP 429 from the author page, its author feed, and tested general RSS endpoints on 2026-09-06. It stays disabled rather than evading publisher controls."
+          "note": "Legitimate first-party archive, but GitHub-hosted runners returned HTTP 429 in the V1 source investigation. Disabled rather than evading publisher controls."
+        }
+      ]
+    },
+    {
+      "id": "andrew-coyne",
+      "name": "Andrew Coyne",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "require_evidence": "provider_id",
+      "provider_ids": [
+        {"provider": "nationalnewswatch.com", "id": "/author/andrew-coyne"}
+      ],
+      "sources": [
+        {
+          "id": "national-newswatch-coyne",
+          "type": "author_page",
+          "url": "https://www.nationalnewswatch.com/author/andrew-coyne",
+          "publication": "National Newswatch",
+          "structural": true,
+          "item_tag": "div",
+          "item_class": "article",
+          "author_path": "/author/andrew-coyne",
+          "allow_external_links": true,
+          "authorship": "provider_id"
+        }
+      ]
+    },
+    {
+      "id": "paul-wells",
+      "name": "Paul Wells",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "require_evidence": "provider_id",
+      "provider_ids": [
+        {"provider": "nationalnewswatch.com", "id": "/author/paul-wells"}
+      ],
+      "sources": [
+        {
+          "id": "national-newswatch-paul-wells",
+          "type": "author_page",
+          "url": "https://www.nationalnewswatch.com/author/paul-wells",
+          "publication": "National Newswatch",
+          "structural": true,
+          "item_tag": "div",
+          "item_class": "article",
+          "author_path": "/author/paul-wells",
+          "allow_external_links": true,
+          "authorship": "provider_id",
+          "note": "The audit-selected Substack feed returned HTTP 403 from GitHub Actions during implementation revalidation. The audit-documented National Newswatch fallback resolved successfully through the existing author-page adapter."
+        }
+      ]
+    },
+    {
+      "id": "ezra-klein",
+      "name": "Ezra Klein",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "byline_publications": ["nytimes.com"],
+      "sources": [
+        {
+          "id": "nyt-ezra-klein",
+          "type": "rss",
+          "url": "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/ezra-klein/rss.xml",
+          "publication": "The New York Times",
+          "authorship": "byline"
+        }
+      ]
+    },
+    {
+      "id": "david-brooks",
+      "name": "David Brooks",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "byline_publications": ["nytimes.com"],
+      "sources": [
+        {
+          "id": "atlantic-david-brooks",
+          "type": "rss",
+          "url": "https://www.theatlantic.com/feed/author/david-brooks/",
+          "publication": "The Atlantic",
+          "authorship": "byline"
         }
       ],
-      "note": "Active through National Newswatch's contributor-scoped external-article index. Perigon was checked sparingly from Actions on 2026-09-06: the credential is configured and a current National Post Conrad Black article is indexed, but Perigon exposes no stable journalist id for him, so Hermes does not use name-only Perigon attribution."
+      "note": "The dedicated Atlantic author feed is the V2 primary source. NYT Opinion items already present in the ordinary morning pool retain zero-request byline attribution. Legacy per-article alerts remain disabled."
+    },
+    {
+      "id": "francis-fukuyama",
+      "name": "Francis Fukuyama",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "aliases": ["Frank Fukuyama"],
+      "sources": [
+        {
+          "id": "persuasion-main-fukuyama",
+          "type": "rss",
+          "url": "https://www.persuasion.community/feed",
+          "publication": "Persuasion",
+          "authorship": "byline",
+          "note": "The audit-selected section feed now returns HTTP 404. The audit-documented main-feed fallback is GitHub-Actions reachable and attributes Fukuyama by the existing byline resolver."
+        }
+      ]
+    },
+    {
+      "id": "fareed-zakaria",
+      "name": "Fareed Zakaria",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "byline_publications": ["washingtonpost.com"],
+      "sources": [
+        {
+          "id": "washington-post-zakaria",
+          "type": "author_page",
+          "url": "https://www.washingtonpost.com/people/fareed-zakaria/",
+          "publication": "The Washington Post",
+          "structural": true,
+          "authorship": "scope",
+          "enabled": false,
+          "note": "Disabled after repeated GitHub Actions read timeouts during implementation revalidation. Core membership remains authoritative; ordinary-pool Washington Post byline attribution is retained without dedicated polling."
+        }
+      ]
+    },
+    {
+      "id": "adam-tooze",
+      "name": "Adam Tooze",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "sources": [
+        {
+          "id": "foreign-policy-tooze",
+          "type": "rss",
+          "url": "https://foreignpolicy.com/author/adam-tooze/feed/",
+          "publication": "Foreign Policy",
+          "authorship": "byline",
+          "note": "Selected production path from the V2 audit. It resolves from GitHub Actions when the shared Voice HTTP client sends Hermes's declared User-Agent."
+        }
+      ]
+    },
+    {
+      "id": "helen-thompson",
+      "name": "Helen Thompson",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "sources": [
+        {
+          "id": "new-statesman-helen-thompson",
+          "type": "author_page",
+          "url": "https://www.newstatesman.com/author/helen-thompson",
+          "publication": "New Statesman",
+          "structural": true,
+          "authorship": "scope"
+        }
+      ]
+    },
+    {
+      "id": "jonathan-haidt",
+      "name": "Jonathan Haidt",
+      "tier": "core",
+      "enabled": true,
+      "notify": true,
+      "aliases": ["Jon Haidt", "Jonathan D. Haidt"],
+      "sources": [
+        {
+          "id": "after-babel",
+          "type": "rss",
+          "url": "https://www.afterbabel.com/feed",
+          "publication": "After Babel",
+          "authorship": "byline",
+          "note": "After Babel is multi-author, so each entry must carry Haidt's byline; the feed URL alone does not establish authorship."
+        }
+      ]
+    },
+    {
+      "id": "steven-pinker",
+      "name": "Steven Pinker",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "sources": [
+        {
+          "id": "steven-pinker-publications",
+          "type": "author_page",
+          "url": "https://stevenpinker.com/publications",
+          "publication": "StevenPinker.com",
+          "structural": true,
+          "allow_external_links": true,
+          "authorship": "scope",
+          "note": "Person-scoped first-party publications bibliography; external article links are allowed because the page itself is explicitly Pinker's authored publications list."
+        }
+      ]
+    },
+    {
+      "id": "arthur-c-brooks",
+      "name": "Arthur C. Brooks",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "aliases": ["Arthur Brooks"],
+      "sources": [
+        {
+          "id": "free-press-main-arthur-brooks",
+          "type": "rss",
+          "url": "https://www.thefp.com/feed",
+          "publication": "The Free Press",
+          "authorship": "byline",
+          "note": "The audit-selected section feed now returns HTTP 404. The audit-documented main-feed fallback is GitHub-Actions reachable and attributes Arthur Brooks by the existing byline resolver."
+        }
+      ]
+    },
+    {
+      "id": "tyler-cowen",
+      "name": "Tyler Cowen",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "sources": [
+        {
+          "id": "marginal-revolution-tyler-cowen",
+          "type": "rss",
+          "url": "https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed",
+          "publication": "Marginal Revolution",
+          "authorship": "byline",
+          "note": "Selected production path from the V2 audit. It resolves from GitHub Actions when the shared Voice HTTP client sends Hermes's declared User-Agent."
+        }
+      ]
+    },
+    {
+      "id": "zeynep-tufekci",
+      "name": "Zeynep Tufekci",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "byline_publications": ["nytimes.com"],
+      "sources": [
+        {
+          "id": "nyt-zeynep-tufekci",
+          "type": "rss",
+          "url": "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/by/zeynep-tufekci/rss.xml",
+          "publication": "The New York Times",
+          "authorship": "byline"
+        }
+      ]
+    },
+    {
+      "id": "dan-wang",
+      "name": "Dan Wang",
+      "tier": "core",
+      "enabled": true,
+      "notify": false,
+      "sources": [
+        {
+          "id": "dan-wang-first-party",
+          "type": "rss",
+          "url": "https://danwang.co/feed/",
+          "publication": "Dan Wang",
+          "authorship": "byline",
+          "note": "Selected production path from the V2 audit. It resolves from GitHub Actions when the shared Voice HTTP client sends Hermes's declared User-Agent."
+        }
+      ]
+    },
+    {
+      "id": "jordan-peterson",
+      "name": "Jordan Peterson",
+      "tier": "selective",
+      "enabled": true,
+      "notify": true,
+      "aliases": ["Jordan B. Peterson", "Jordan B Peterson", "Dr. Jordan B. Peterson"],
+      "sources": [
+        {
+          "id": "jbp-official-blog",
+          "type": "rss",
+          "url": "https://www.jordanbpeterson.com/category/blog/feed/",
+          "publication": "Jordan Peterson",
+          "authorship": "scope",
+          "note": "First-party Blog category feed. The generic WordPress author is not used as identity; the person-scoped Blog category establishes authorship. The legacy V1 watcher remains enabled during migration."
+        }
+      ]
     },
     {
       "id": "george-monbiot",
       "name": "George Monbiot",
+      "tier": "discovery",
       "enabled": true,
       "notify": true,
       "provider_ids": [
@@ -91,15 +340,7 @@
           "authorship": "provider_id"
         }
       ],
-      "note": "The canonical-contributor case. The provider id attributes his work wherever it appears, including the ordinary morning Guardian fetch, at no extra request cost; the contributor query then guarantees a new column is seen even when it falls outside the sections Hermes already pulls."
-    },
-    {
-      "id": "david-brooks",
-      "name": "David Brooks",
-      "enabled": true,
-      "notify": false,
-      "byline_publications": ["nytimes.com"],
-      "note": "The zero-request morning case. The NYT Top Stories opinion stream is already fetched for the Opinion desk, so his byline is matched inside a response Hermes pays for anyway. The alias is trusted only on nytimes.com; the same name on any other host is not this Voice. Release-time alerts are deliberately disabled because the watcher does not run the full NYT morning pool; set notify true only after adding an active watcher source for this Voice."
+      "note": "Discovery means no tier-based morning Following eligibility. The existing V1 watcher switch and source remain unchanged until the weekly Core roundup replacement is ready."
     }
   ]
 }

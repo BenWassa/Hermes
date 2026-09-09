@@ -1,6 +1,10 @@
-"""The followed-Voice registry: schema, validation, and identity indexing.
+"""The Voice registry: product membership, schema, validation, and identity indexing.
 
-A Voice is a person. It owns three separable things:
+A Voice is a person. V2 keeps product membership separate from technical
+availability: ``tier`` says why Hermes tracks the person, while ``enabled``,
+``dormant``, ``notify`` and ``sources`` remain operational facts.
+
+Identity owns three separable things:
 
 ``provider_ids``
     Stable source-native contributor/journalist identifiers. These attribute
@@ -47,6 +51,11 @@ log = logging.getLogger("the-daily.voices.registry")
 
 REGISTRY_PATH = Path("data/voices.json")
 SCHEMA_VERSION = 1
+
+TIER_CORE = "core"
+TIER_SELECTIVE = "selective"
+TIER_DISCOVERY = "discovery"
+VOICE_TIERS = {TIER_CORE, TIER_SELECTIVE, TIER_DISCOVERY}
 
 AUTHORSHIP_SCOPE = "scope"
 AUTHORSHIP_BYLINE = "byline"
@@ -99,10 +108,11 @@ class VoiceSource:
 
 @dataclass(frozen=True)
 class Voice:
-    """A followed person."""
+    """A tracked person with independent product and operational state."""
 
     id: str
     name: str
+    tier: str = TIER_CORE
     enabled: bool = True
     notify: bool = True
     dormant: bool = False
@@ -143,6 +153,22 @@ class Registry:
     @property
     def active(self) -> tuple[Voice, ...]:
         return tuple(v for v in self.voices if v.enabled)
+
+    @property
+    def notifiable(self) -> tuple[Voice, ...]:
+        """Voices retaining the legacy V1 per-article watcher switch."""
+        return tuple(v for v in self.active if v.notify)
+
+    def for_tiers(self, tiers: set[str] | frozenset[str]) -> "Registry":
+        """Return the same registry narrowed by product tier, not operation flags."""
+        return Registry(
+            voices=tuple(v for v in self.voices if v.tier in tiers),
+            version=self.version,
+        )
+
+    def for_legacy_watcher(self) -> "Registry":
+        """Keep V1 watcher polling bounded to the Voices whose V1 notify switch is on."""
+        return Registry(voices=self.notifiable, version=self.version)
 
     def get(self, voice_id: str) -> Voice | None:
         for voice in self.voices:
@@ -244,6 +270,11 @@ def _parse_voice(raw, index: int, problems: list[str]) -> Voice | None:
         )
         return None
 
+    tier = raw.get("tier", TIER_CORE)
+    if tier not in VOICE_TIERS:
+        problems.append(f"voice '{voice_id}'.tier '{tier}' must be one of {sorted(VOICE_TIERS)}")
+        tier = TIER_CORE
+
     require_evidence = raw.get("require_evidence", EVIDENCE_ANY)
     if require_evidence not in REQUIRE_EVIDENCE:
         problems.append(
@@ -307,6 +338,7 @@ def _parse_voice(raw, index: int, problems: list[str]) -> Voice | None:
     voice = Voice(
         id=voice_id,
         name=name,
+        tier=tier,
         enabled=bool(raw.get("enabled", True)),
         notify=bool(raw.get("notify", True)),
         dormant=bool(raw.get("dormant", False)),

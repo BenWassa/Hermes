@@ -226,6 +226,8 @@ def main(argv: list[str] | None = None) -> int:
         return EXIT_CONFIG
 
     if args.smoke:
+        # Smoke/audit deliberately sees the full registry so operators can
+        # validate new V2 morning sources without changing watcher state.
         return smoke(args, registry)
 
     notifier = build_notifier(args)
@@ -236,8 +238,13 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         store = build_store(args)
+        # `notify` retains only its V1 operational meaning during the V2
+        # migration. New Core/Selective sources must not silently increase the
+        # release-alert watcher's polling surface before the weekly replacement
+        # is ready.
+        watcher_registry = registry.for_legacy_watcher()
         outcome = run_watch(
-            registry,
+            watcher_registry,
             store=store,
             notifier=notifier,
             fetch=not args.offline,
