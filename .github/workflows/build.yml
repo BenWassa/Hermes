@@ -73,15 +73,12 @@ jobs:
 
       - name: Commit and push docs/
         if: steps.gate.outputs.skip != 'true'
-        # The Voice watcher ("Watch Voices") also commits to this branch, to a
-        # different path (data/voice_watch_state.json). The two workflows are
-        # deliberately not in one concurrency group: GitHub cancels a *pending*
-        # run when a newer one queues on the same group, so sharing would let
-        # an hourly watcher cancel a queued morning edition. They are kept from
-        # overwriting each other here instead, by rebasing onto whatever landed
-        # and retrying the push. Because the paths are disjoint the rebase is
-        # always clean; a conflict would mean something unexpected, so it fails
-        # loudly rather than forcing.
+        # During the migration window there are two independent Voice writers:
+        # the legacy watcher commits data/voice_watch_state.json, while the V2
+        # roundup commits data/voice_roundup_state.json and, weekly,
+        # docs/voices/index.html. None shares this concurrency group. This
+        # morning writer rebases and retries if either Voice workflow moves main
+        # first; all write paths are disjoint from docs/index.html.
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
