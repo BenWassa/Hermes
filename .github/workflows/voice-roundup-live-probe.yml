@@ -1,0 +1,26 @@
+name: Voice Roundup Live Probe
+
+on:
+  push:
+    branches:
+      - voices-v2-weekly-core-roundup
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Core-only live collection dry run
+        env:
+          GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
+          PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        run: python -m src.voice_roundup collect --dry-run --json
