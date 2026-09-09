@@ -72,13 +72,23 @@
       "tier": "core",
       "enabled": true,
       "notify": false,
+      "require_evidence": "provider_id",
+      "provider_ids": [
+        {"provider": "nationalnewswatch.com", "id": "/author/paul-wells"}
+      ],
       "sources": [
         {
-          "id": "paul-wells-newsletter",
-          "type": "rss",
-          "url": "https://paulwells.substack.com/feed",
-          "publication": "Paul Wells Newsletter",
-          "authorship": "scope"
+          "id": "national-newswatch-paul-wells",
+          "type": "author_page",
+          "url": "https://www.nationalnewswatch.com/author/paul-wells",
+          "publication": "National Newswatch",
+          "structural": true,
+          "item_tag": "div",
+          "item_class": "article",
+          "author_path": "/author/paul-wells",
+          "allow_external_links": true,
+          "authorship": "provider_id",
+          "note": "The audit-selected Substack feed returned HTTP 403 from GitHub Actions during implementation revalidation. The audit-documented National Newswatch fallback resolved successfully through the existing author-page adapter."
         }
       ]
     },
@@ -126,11 +136,12 @@
       "aliases": ["Frank Fukuyama"],
       "sources": [
         {
-          "id": "persuasion-fukuyama",
+          "id": "persuasion-main-fukuyama",
           "type": "rss",
-          "url": "https://www.persuasion.community/s/francis-fukuyama/feed",
+          "url": "https://www.persuasion.community/feed",
           "publication": "Persuasion",
-          "authorship": "scope"
+          "authorship": "byline",
+          "note": "The audit-selected section feed now returns HTTP 404. The audit-documented main-feed fallback is GitHub-Actions reachable and attributes Fukuyama by the existing byline resolver."
         }
       ]
     },
@@ -140,6 +151,7 @@
       "tier": "core",
       "enabled": true,
       "notify": false,
+      "byline_publications": ["washingtonpost.com"],
       "sources": [
         {
           "id": "washington-post-zakaria",
@@ -147,7 +159,9 @@
           "url": "https://www.washingtonpost.com/people/fareed-zakaria/",
           "publication": "The Washington Post",
           "structural": true,
-          "authorship": "scope"
+          "authorship": "scope",
+          "enabled": false,
+          "note": "Disabled after repeated GitHub Actions read timeouts during implementation revalidation. Core membership remains authoritative; ordinary-pool Washington Post byline attribution is retained without dedicated polling."
         }
       ]
     },
@@ -164,7 +178,7 @@
           "url": "https://foreignpolicy.com/author/adam-tooze/feed/",
           "publication": "Foreign Policy",
           "authorship": "byline",
-          "note": "Selected production path from the V2 audit. Chartbook/Substack is intentionally not configured as a fallback because the direct feed failed from GitHub Actions during the audit."
+          "note": "Selected production path from the V2 audit. It resolves from GitHub Actions when the shared Voice HTTP client sends Hermes's declared User-Agent."
         }
       ]
     },
@@ -231,11 +245,12 @@
       "aliases": ["Arthur Brooks"],
       "sources": [
         {
-          "id": "free-press-arthur-brooks",
+          "id": "free-press-main-arthur-brooks",
           "type": "rss",
-          "url": "https://www.thefp.com/s/the-pursuit-of-happiness-with-arthur/feed",
+          "url": "https://www.thefp.com/feed",
           "publication": "The Free Press",
-          "authorship": "scope"
+          "authorship": "byline",
+          "note": "The audit-selected section feed now returns HTTP 404. The audit-documented main-feed fallback is GitHub-Actions reachable and attributes Arthur Brooks by the existing byline resolver."
         }
       ]
     },
@@ -251,7 +266,8 @@
           "type": "rss",
           "url": "https://marginalrevolution.com/marginalrevolution/author/tyler-cowen/feed",
           "publication": "Marginal Revolution",
-          "authorship": "byline"
+          "authorship": "byline",
+          "note": "Selected production path from the V2 audit. It resolves from GitHub Actions when the shared Voice HTTP client sends Hermes's declared User-Agent."
         }
       ]
     },
@@ -284,7 +300,8 @@
           "type": "rss",
           "url": "https://danwang.co/feed/",
           "publication": "Dan Wang",
-          "authorship": "byline"
+          "authorship": "byline",
+          "note": "Selected production path from the V2 audit. It resolves from GitHub Actions when the shared Voice HTTP client sends Hermes's declared User-Agent."
         }
       ]
     },
