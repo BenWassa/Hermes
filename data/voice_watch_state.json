@@ -15,7 +15,8 @@
       ],
       "first_seen": "2026-09-10T11:42:48Z",
       "published_at": "2026-09-10T05:00:16Z",
-      "status": "pending"
+      "status": "notified",
+      "attempts": 1
     }
   }
 }
