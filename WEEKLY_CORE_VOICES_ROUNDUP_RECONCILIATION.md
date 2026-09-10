@@ -1,24 +1,22 @@
 # Weekly Core Voices Roundup — V2 authority reconciliation
 
-Status: **current reconciliation note for the shipped weekly Core roundup.**
+Status: **current reconciliation note for the shipped weekly Core digest.**
 
 `WEEKLY_CORE_VOICES_ROUNDUP.md` began as the Wave 1C design for replacing
-routine per-article Voice alerts. That replacement decision is now superseded
-by owner feedback from **2026-09-10** and the current authority in
-`PRODUCT.md` / `VOICES_V2.md`.
+routine per-article Voice alerts. A later 2026-09-10 correction briefly restored
+Core release alerts in #26 / PR #28. Production use the same day showed that
+policy created too much interruption when several Core writers published.
 
-The weekly architecture itself remains valid and implemented. What changes is
-its product role: **the weekly roundup is a finite catch-up layer, not a
-replacement for useful Core release alerts.**
+The final owner decision is now authoritative in `PRODUCT.md` and
+`VOICES_V2.md`:
 
-Issue #26 owns the retained release-alert path and Hermes article summaries.
+> **The weekly Core digest is the sole proactive Voice notification.**
+
+Issue #29 owns this correction.
 
 ## Authority consumed
 
-`VOICES_V2.md` is the product authority. The roundup implementation consumes
-its explicit `tier` semantics directly.
-
-The locked Core roster is exactly:
+`VOICES_V2.md` remains product authority. The locked Core roster is exactly:
 
 1. Conrad Black
 2. Andrew Coyne
@@ -36,143 +34,119 @@ The locked Core roster is exactly:
 14. Zeynep Tufekci
 15. Dan Wang
 
-Jordan Peterson is Selective. George Monbiot is Discovery. Neither tier
-participates in the weekly roundup product or creates roundup-specific polling
-pressure.
+Jordan Peterson is Selective. George Monbiot is Discovery. Neither participates
+in the Core weekly product or creates Core-collection/notification pressure.
 
 ## Current product shape
 
-Hermes now has three complementary Voice surfaces:
+Hermes has three Voice surfaces:
 
 ```text
 Morning Following
     finite Voice material inside The Daily
 
-Core release alerts
-    new qualifying Core article
-    -> compact Hermes summary
-    -> restrained ntfy notification
+Recent Core writing
+    silent bounded collection
+    -> quiet /voices/recent/ shelf
+    -> no notification, no unread obligation
 
-Weekly Core roundup
-    finite catch-up across the Core roster
+Weekly Core digest
+    screen the week's Core writing for attention-worthiness
+    -> deliberately small shortlist, max 3
+    -> one compact /voices/ summary
+    -> one restrained weekly ntfy notification
 ```
 
-The three products share identity, authorship, canonicalization, dedupe,
-syndication and source machinery where appropriate, but they remain operationally
-independent. One failing path must not block the others.
+The morning Daily notification is a separate Daily product and is unaffected.
 
-## Corrections to the original architecture note
+## Reconciliation rules
 
-### 1. Core membership, not `notify`, is the boundary
+### 1. Core membership, not `notify`, is the collection boundary
 
-Collection and weekly eligibility derive from authoritative `tier == core`
-membership. Legacy V1 `notify` is not a Core proxy.
+Silent Core collection and weekly eligibility derive from authoritative
+`tier == core` membership. Legacy V1 `notify` is not a Core proxy.
 
 Operational source availability remains separate. A Core Voice remains Core
-when technically dormant, blocked or source-disabled. The collector may only
-issue requests through production-enabled/reachable generic sources, but
-source state does not define membership.
+when technically dormant, blocked or source-disabled. The collector may issue
+requests only through production-enabled/reachable generic sources, but source
+state never defines intellectual membership.
 
-For weekly selection, the rule is:
+### 2. Publication does not equal interruption
 
-> At selection time, at least one attributed `voice_id` resolves to a Voice
-> whose authoritative V2 tier is `core`. The article must come from trusted
-> roundup observations established through the existing authorship and source
-> contracts. Current source reachability does not retroactively change Core
-> membership.
+A qualifying Core byline is enough to collect an article. It is **not** enough
+to notify the reader and is not enough to guarantee a weekly slot.
 
-### 2. Selective and Discovery create zero roundup pressure
+The weekly screen should prefer material likely to add substantive explanatory
+value, relevance, novelty and non-redundant breadth. Routine publication churn,
+minor reactions and repetitive pieces remain browseable but should not occupy
+the weekly shortlist.
 
-Before source planning, filter roundup participation to Core membership.
-Selective and Discovery must not add requests, retention obligations, selection
-slots or notifications merely because they exist in the registry.
+### 3. Weekly selection is deliberately smaller
 
-A shared provider request legitimately needed for one or more Core Voices may
-return other authors. Only Core-attributed items are retained in roundup state.
+The previous deterministic `max 6 / max 2 per Voice` selection was too generous
+for the reader's available attention.
 
-### 3. Weekly ntfy remains one finite catch-up notification
+Current target:
 
-The weekly notification remains one message per non-empty weekly period and
-links to the current `/voices/` roundup.
+- maximum **3** selected pieces;
+- fewer is better when the week is weak;
+- useful breadth across writers when quality is comparable;
+- de-prioritize work already surfaced in the morning Daily unless exceptional;
+- one bounded weekly relevance-screening/synthesis model call;
+- deterministic conservative max-3 fallback if that call fails.
 
-Example shape:
+The daily collector itself remains model-free.
 
-```json
-{
-  "title": "Voices this week",
-  "message": "5 pieces from Jonathan Haidt, Conrad Black, David Brooks +2.",
-  "priority": 3,
-  "tags": ["memo"],
-  "click": "<PAGES_URL>/voices/"
-}
-```
+### 4. Exactly one proactive Voice notification path
 
-Notification composition derives names only from the selected Core roundup set.
+Only the weekly publisher receives ntfy capability.
 
-The existence of release-time Core alerts does not turn the weekly message into
-an unread digest or suppress it automatically. The roundup remains a separate
-editorial catch-up product.
+- scheduled release-time/per-article Voice notifications are retired;
+- manual release-watch inspection is read-only/dry-run and receives no Gemini
+  or ntfy secret;
+- daily collection receives neither Gemini nor ntfy capability;
+- one non-empty trusted weekly period may send at most one Voice notification;
+- empty, suppressed, failed-to-publish or already-claimed periods send none.
 
-### 4. Morning Opinion remains independent
+The weekly notification links to `/voices/` and acts only as a pointer to the
+single weekly brief.
 
-The roundup collector must not become part of the morning build and the morning
-build must not become a writer of roundup operational state.
+### 5. Recent writing remains available without pressure
 
-Reading the already-committed morning edition to mark
-`first_morning_surfaced_at` remains an optional deterministic ranking signal
-only. It never gates collection or changes morning publication behavior.
+The Core accumulator remains bounded and continues using the proven identity,
+authorship, canonicalization, exact dedupe and syndication machinery.
 
-### 5. Release-alert state and roundup state remain separate
+A finite `/voices/recent/` surface exposes recent Core writing for optional
+browsing. It must not add unread counters, badges, recommendations, streaks,
+backlog framing or separate notifications.
 
-Keep separate bounded state:
+### 6. State and failure boundaries remain safe
 
-- `data/voice_watch_state.json` — release-alert claim/idempotency state while
-  that implementation remains in service;
-- `data/voice_roundup_state.json` — weekly accumulator and period state.
+Retain:
 
-Do not import or reinterpret release-alert claims as weekly candidates. Likewise,
-weekly state must not suppress a legitimate Core release alert merely because
-the article has been accumulated for Sunday.
+- `data/voice_roundup_state.json` as the weekly accumulator/period authority;
+- claim-before-notify ordering for the weekly period;
+- bounded git compare-and-swap/retry behavior;
+- graceful local source failure;
+- no paywall circumvention;
+- no per-person fetch/summarization branches.
 
-When #26 migrates release alerts from legacy `notify` semantics to
-`tier == core`, it should preserve at-most-once claim safety without coupling
-that state to the weekly accumulator.
-
-### 6. Preferred weekly architecture remains unchanged
-
-The weekly design remains:
-
-```text
-daily silent Core collection
--> bounded separate roundup state
--> deterministic weekly selection, max 6
--> breadth across distinct Core Voices, max 2 per Voice
--> one overwrite-only current /voices/ roundup
--> one restrained weekly ntfy notification
-```
-
-Retain the existing identity, authorship-evidence, canonical article identity,
-exact dedupe, syndication/reprint grouping, generic adapters, provider
-batching/budgets, graceful source failure and git compare-and-swap machinery.
-
-The daily collector still makes **zero Gemini calls**. The new model work in
-#26 belongs only to articles that have already qualified for a real Core
-release alert; it does not scale with weekly collection or every watcher
-observation.
+The old `data/voice_watch_state.json` and #26 stable article pages may remain for
+historical compatibility, but they no longer drive a scheduled notification
+product.
 
 ## Closeout decision
 
-The shipped weekly Core roundup remains valid. Only its earlier role as a
-replacement for routine release alerts is retired.
+The intended V2 product is now simple:
 
-Current authority is therefore:
+```text
+Core publication
+-> collect silently
+-> make it optionally browseable
+-> once a week screen hard
+-> summarize the best few once
+-> notify once
+```
 
-- Morning Following remains finite and independent.
-- Core release alerts remain useful and are upgraded by #26 to open Hermes
-  summaries.
-- Weekly Core roundup remains the bounded catch-up product.
-- `tier == core` is the product authority for both routine Core alerts and the
-  weekly roundup.
-- Selective and Discovery create no routine alert or weekly-roundup pressure.
-- Legacy `notify` may survive temporarily only as implementation baggage and
-  must not define V2 product membership.
+This note supersedes the earlier reconciliation language that described weekly
+catch-up as complementary to release-time Core alerts.
