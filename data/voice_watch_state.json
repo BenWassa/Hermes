@@ -15,7 +15,8 @@
       ],
       "first_seen": "2026-09-10T19:59:01Z",
       "published_at": "2026-09-10T08:39:10Z",
-      "status": "pending"
+      "status": "notified",
+      "attempts": 1
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-short-interview-with-julia-willemyns.html": {
       "keys": [
@@ -29,7 +30,8 @@
       ],
       "first_seen": "2026-09-10T19:59:01Z",
       "published_at": "2026-09-10T18:43:36Z",
-      "status": "pending"
+      "status": "notified",
+      "attempts": 1
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-very-interesting-conversation-with-jared-diamond.html": {
       "keys": [
@@ -43,7 +45,8 @@
       ],
       "first_seen": "2026-09-10T19:59:01Z",
       "published_at": "2026-09-10T04:36:50Z",
-      "status": "pending"
+      "status": "notified",
+      "attempts": 1
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/ricardo-reis-and-the-imf.html": {
       "keys": [
@@ -57,7 +60,8 @@
       ],
       "first_seen": "2026-09-10T19:59:01Z",
       "published_at": "2026-09-10T06:25:27Z",
-      "status": "pending"
+      "status": "notified",
+      "attempts": 1
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-569.html": {
       "keys": [
@@ -71,7 +75,8 @@
       ],
       "first_seen": "2026-09-10T19:59:01Z",
       "published_at": "2026-09-10T15:47:02Z",
-      "status": "pending"
+      "status": "notified",
+      "attempts": 1
     },
     "url:https://theglobeandmail.com/opinion/article-its-not-disloyal-to-criticize-the-governments-handling-of-a-trade-war": {
       "keys": [
