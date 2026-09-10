@@ -4,21 +4,19 @@ An autonomous overnight pipeline that assembles a personalized Toronto morning
 newspaper, renders it as a static web page, and pushes a notification after a
 successful publication. The primary build targets 05:17 America/Toronto, with
 bounded same-morning recovery attempts if GitHub's scheduler is delayed or drops
-a run. World and business news come from the Guardian, NYT, and Perigon APIs
-(Perigon aggregates FT, Reuters, Bloomberg and thousands more, so the business
-desk reads like a professional's, not just one paper); Toronto local news comes
-from RSS. Google Gemini (`gemini-2.5-flash`, free tier) dedupes, sections, ranks,
-and summarizes; a sensitivity rule keeps hard news text-only. The result deploys
-to GitHub Pages and an ntfy.sh push links straight to it.
+a run. World and business news come from the Guardian, NYT, and Perigon APIs;
+Toronto local news comes from RSS. Google Gemini dedupes, sections, ranks, and
+summarizes. The result deploys to GitHub Pages and an ntfy.sh push links straight
+to it.
 
 > v2 of this repo. The previous React/Firebase intelligence dashboard ("Hermes
 > v1") is preserved under [archive/v1-hermes/](archive/v1-hermes/) and tagged
-> `v1-final`. Product spec: [PRD_daily_newspaper.md](PRD_daily_newspaper.md);
-> task-level build spec: [BUILD_INSTRUCTIONS.md](BUILD_INSTRUCTIONS.md).
+> `v1-final`. Product authority: [PRODUCT.md](PRODUCT.md). Voices V2 authority:
+> [VOICES_V2.md](VOICES_V2.md).
 
 ## Pipeline
 
-```
+```text
 weather -> fetch -> normalize -> discover Voices -> curate (Gemini) -> select Following -> resolve images -> render -> deploy -> notify
 ```
 
@@ -31,40 +29,70 @@ weather -> fetch -> normalize -> discover Voices -> curate (Gemini) -> select Fo
 | [src/opinion.py](src/opinion.py) | Deterministic finite Following selection + dedupe from Today's Opinion |
 | [src/images.py](src/images.py) | Keep source thumbnails; suppress on sensitive stories |
 | [src/render.py](src/render.py) | Inject edition JSON into the HTML template |
-| [src/build.py](src/build.py) | Orchestrator (single entrypoint) |
-| [src/voices/](src/voices/) | Followed writers: registry, source adapters, authorship resolution, article identity, watcher state |
-| [src/voice_watch.py](src/voice_watch.py) | Release-time alerts for followed writers (separate hourly job, never rebuilds the edition) |
+| [src/build.py](src/build.py) | Morning-edition orchestrator |
+| [src/voices/](src/voices/) | Voice registry, adapters, authorship, canonical identity, dedupe/syndication and bounded state |
+| [src/voice_roundup.py](src/voice_roundup.py) | Silent Core collection and durable weekly-period state |
+| [src/voice_digest.py](src/voice_digest.py) | Quiet recent shelf + screened weekly digest; sole proactive Voice notification path |
+| [src/voice_watch.py](src/voice_watch.py) | Legacy release-watch engine retained for manual read-only diagnostics; not scheduled |
 | [template/index.template.html](template/index.template.html) | The newspaper UI (vanilla HTML/CSS/JS) |
 
-## Voices (followed writers)
+## Voices
 
 A **Voice** is a person, not a publication. Hermes can follow a writer and find
 their new work wherever it can establish authorship reliably: a personal feed,
-a publication author archive, the Guardian's contributor API, an aggregator's
-journalist identity, or an outlet already present in the ordinary morning
-fetch. The design and implementation authority is [VOICES.md](VOICES.md).
+a publication author archive, the Guardian contributor API, an aggregator
+journalist identity, or an outlet already present in the morning fetch.
 
-The registry in [data/voices.json](data/voices.json) is the source of truth.
-For this one-reader product, following someone is a reviewed config change: the
-overnight GitHub Actions build is what does the fetching, and a browser toggle
-could not tell it anything.
+[data/voices.json](data/voices.json) holds reviewed registry/source configuration.
+`tier` is the product authority. The current roster and Core / Selective /
+Discovery semantics are locked in [VOICES_V2.md](VOICES_V2.md); [VOICES.md](VOICES.md)
+remains the implementation authority for identity, source, evidence, canonical
+article and state-safety machinery.
+
+### Current notification contract
+
+There are **no routine per-article Voice notifications**.
+
+Core writing is collected silently into bounded state and appears on a finite
+`/voices/recent/` shelf for optional browsing. There are no unread counters,
+badges, streaks, backlog prompts, or article-by-article Gemini calls.
+
+Once per weekly period Hermes screens the collected Core writing for likely
+attention-worthiness. Publication by a Core Voice is only collection
+eligibility; it does not guarantee a roundup slot. Screening favors substantive
+or explanatory value, material relevance, novelty versus the rest of the week,
+non-redundancy, and useful breadth. The digest is deliberately small: at most
+three pieces, and fewer when the week is weak.
+
+The weekly job performs at most one screening/synthesis model call per
+invocation, publishes one compact `/voices/` brief, then may send **one** ntfy
+notification after the weekly period/page claim is durable. If model screening
+fails, Hermes falls back to a conservative deterministic max-three shortlist.
+Only the weekly Voice job receives both Gemini and ntfy capability.
+
+The morning Daily notification is independent and remains once per published
+edition.
 
 ### Adding a Voice
 
+A registry entry separates intellectual membership from technical source
+availability. Example:
+
 ```jsonc
 {
-  "id": "jane-doe",                 // lowercase, hyphenated, stable forever
+  "id": "jane-doe",
   "name": "Jane Doe",
+  "tier": "core",
   "enabled": true,
-  "notify": true,                   // only if at least one watcher source exists
-  "aliases": ["J. A. Doe"],         // other spellings of the same person
-  "provider_ids": [                 // stable per-writer ids, strongest evidence
+  "notify": false,                  // legacy compatibility field; not product authority
+  "aliases": ["J. A. Doe"],
+  "provider_ids": [
     {"provider": "guardian", "id": "profile/janedoe"}
   ],
-  "byline_publications": ["nytimes.com"],   // hosts where her byline alone is trusted
-  "sources": [                      // where discovery actively goes looking
+  "byline_publications": ["nytimes.com"],
+  "sources": [
     {
-      "id": "jane-newsletter",     // stable operator label; do not casually rename
+      "id": "jane-newsletter",
       "type": "rss",
       "url": "https://janedoe.example/feed",
       "publication": "Jane Doe",
@@ -77,49 +105,41 @@ could not tell it anything.
 Then validate before committing:
 
 ```bash
-python -m src.voices.audit                    # schema + request plan, no network
-python -m src.voices.audit --live             # fetch each configured source once
+python -m src.voices.audit
+python -m src.voices.audit --live
 python -m src.voices.audit --live --voice jane-doe
 ```
 
-A Voice may be deliberately **morning-only**. `byline_publications` and provider
-identity found in the ordinary morning pool can attribute a writer without any
-extra watcher source. In that case set `"notify": false`; release alerts are not
-magic and the watcher does not rerun the full morning NYT/Perigon/Guardian pool.
-The shipped registry has a regression test that rejects `notify: true` when an
-enabled production Voice has no active watcher source.
+Changing `notify` must not promote, demote, include, or exclude a Voice from the
+V2 product. `tier` defines product membership; `enabled` and source-level
+`enabled` describe operational reachability.
 
 ### Identity and sources
 
-**Identity** decides whether an article is hers. **Sources** decide where
-Hermes looks. They stay separate so an ordinary morning response can attribute
-work at no extra request cost, and so registering a feed does not accidentally
-blanket-grant authorship to every item on it.
+**Identity** decides whether an article belongs to a Voice. **Sources** decide
+where Hermes looks. They remain separate so a feed cannot accidentally grant
+authorship to every item it returns.
 
 | Field | Evidence it grants | Use it when |
 |---|---|---|
-| `provider_ids` | strongest; valid anywhere for that provider | the provider has a stable contributor/journalist id |
-| `sources[].authorship: "scope"` | the source itself is the proof | a personal feed, or a publication's own author archive |
-| `sources[].authorship: "byline"` | the entry's byline must match | a multi-author publication feed |
-| `byline_publications` | byline match on those hosts only | she writes for an outlet Hermes already fetches |
+| `provider_ids` | strongest; valid anywhere for that provider | provider has a stable contributor/journalist id |
+| `sources[].authorship: "scope"` | the source itself is the proof | personal feed or publication author archive |
+| `sources[].authorship: "byline"` | entry byline must match | multi-author publication feed |
+| `byline_publications` | byline match on those hosts only | writer appears in an outlet Hermes already fetches |
 
-A name is only matched against an item's **byline**, never its title,
-description, or a provider's "people mentioned" field. A byline match is only
-accepted inside a declared scope. Set `"require_evidence": "provider_id"` on a
-genuinely ambiguous name to refuse byline evidence altogether.
-
-Aliases are identity evidence, not search terms. Add only spellings that really
-refer to the same person. Provider IDs and source URLs are stronger and should
-be preferred whenever the source offers them.
+A name is matched against an item's **byline**, never its title, description or
+a provider's "people mentioned" field. Aliases are identity evidence, not
+search terms. Prefer provider IDs and source-scoped structural evidence whenever
+available.
 
 ### Source types and lifecycle
 
 | `type` | Needs | Request shape |
 |---|---|---|
 | `rss` | `url` | one per distinct feed, shared across Voices |
-| `guardian_contributor` | `tag` (for example `profile/janedoe`) | one batched request for all contributors |
-| `perigon_journalist` | `journalist_id` | one batched request for all journalists |
-| `author_page` | `url` (+ optional `link_prefix`, `structural`) | one per distinct first-party archive page |
+| `guardian_contributor` | `tag` | one batched request for contributors |
+| `perigon_journalist` | `journalist_id` | one batched request for journalists |
+| `author_page` | `url` (+ optional structural fields) | one per distinct first-party archive |
 
 Resolve a Perigon journalist id once and store the stable result:
 
@@ -127,152 +147,84 @@ Resolve a Perigon journalist id once and store the stable result:
 python -m src.voices.audit journalist "Jane Doe"
 ```
 
-To **disable a failing source without unfollowing the writer**, set
-`"enabled": false` on that source. To stop following the writer entirely, set
-the Voice's `"enabled": false`. To keep the Voice in the morning paper but stop
-release-time pushes, set `"notify": false`. Remove a source only after its
-replacement is validated; leaving a disabled entry for one review cycle makes
-operator intent easier to audit.
+To disable a failing source without changing intellectual membership, set
+`"enabled": false` on that source. Do not demote a Core Voice because a source
+is blocked, stale or temporarily unreachable. Remove a source only after its
+replacement is validated.
 
 ### Adding a generic adapter
 
-Do not add a writer-specific scraper. A new source family belongs under
-`src/voices/adapters/` and must work for any registry entry that satisfies its
+Do not add writer-specific scrapers. A new source family belongs under
+`src/voices/adapters/` and must work for any registry entry satisfying its
 schema.
 
-1. Implement the `VoiceSourceAdapter` contract: stable `source_key`, bounded
-   request planning, public-metadata fetch, and normalized `Observation`
-   records. Route every network call through `VoiceHttp` so the request budget
-   remains enforceable.
-2. Register the adapter in `src/voices/adapters/__init__.py` and define any
-   required registry fields. Prefer provider IDs or first-party structural
-   metadata; fail closed when authorship cannot be established.
-3. Add its provider to request-budget/cadence policy in `src/config.py`.
-   Unknown watcher providers are deliberately reconciliation-only, never
-   silently hourly.
-4. Add recorded fixtures and deterministic tests covering success, malformed
-   responses, attribution, dedupe and partial failure. Never make CI depend on
-   the live network.
-5. Run the live audit once from the actual GitHub Actions environment before
-   shipping the source family, then update this runbook and `VOICES.md` with
-   the observed limitation if the provider treats hosted runners differently.
+1. Implement stable `source_key`, bounded request planning, public-metadata fetch
+   and normalized `Observation` records. Route network calls through `VoiceHttp`.
+2. Register the adapter and required registry fields. Prefer provider IDs or
+   first-party structural metadata; fail closed when authorship is uncertain.
+3. Add it to the relevant bounded cadence/request policy.
+4. Add recorded fixtures and deterministic tests for success, malformed data,
+   attribution, dedupe and partial failure. CI must not depend on live network.
+5. Run one bounded live audit from the actual GitHub Actions environment before
+   shipping the source family.
 
-### Provider requirements, quotas and boundaries
+### Provider requirements and boundaries
 
-Quotas are external contracts, not constants Hermes controls. Re-check the
-provider before materially changing cadence.
+Quotas are external contracts. Re-check providers before materially changing
+cadence.
 
-- **Guardian Open Platform:** `GUARDIAN_API_KEY` is required. The current
-  non-commercial developer allowance is 500 requests/day with a 1 request/sec
-  rate limit. Voice contributor tags batch into one call.
-- **NYT Top Stories:** `NYT_API_KEY` is required for the morning pool, including
-  Opinion. There is no separate Voice-specific NYT poll in the watcher.
-- **Perigon:** `PERIGON_API_KEY` is optional. The current Free tier is 150 API
-  requests/month for personal/non-commercial use, so Voice reconciliation is
-  daily rather than hourly and journalist IDs batch into one request.
-- **RSS / first-party author pages:** no API key, but they are still somebody
-  else's infrastructure. Poll conservatively; a 403/429 is a source failure,
-  not permission to evade bot controls.
-- **ntfy:** `NTFY_TOPIC` is used for both the morning edition notification and
-  optional Voice alerts. `NTFY_BASE_URL` may point to another ntfy-compatible
-  host.
+- **Guardian Open Platform:** `GUARDIAN_API_KEY` required for Guardian-backed
+  news and contributor discovery.
+- **NYT Top Stories:** `NYT_API_KEY` required for the morning pool.
+- **Perigon:** `PERIGON_API_KEY` is optional and scarce; Voice reconciliation is
+  bounded and batched.
+- **RSS / first-party author pages:** no API key, but poll conservatively. A
+  403/429 is a source failure, not permission to evade access controls.
+- **ntfy:** `NTFY_TOPIC` is used by the morning Daily push and the single weekly
+  Voice digest. Routine Core collection and manual Voice inspection do not
+  receive the topic.
 
 Hermes stores public metadata needed to identify and render an item, then links
-to the publisher's canonical article. It does not fetch or store paywalled
-article bodies and never attempts to bypass a subscription. API use must stay
-within the operator's provider terms and licence.
+to the publisher's article. It does not fetch or store paywalled article bodies
+and never attempts to bypass subscription controls.
 
-Request budgets live in `VOICE_REQUEST_BUDGET` and watcher cadence/bounds in
-`VOICE_WATCH_*` in [src/config.py](src/config.py). The important invariant is
-that request cost scales with **distinct source families/URLs**, not
-`Voice count × providers × hourly polls`.
+The important request invariant is that cost scales with distinct source
+families/URLs, not `Voice count × providers × frequent polls`.
 
-### Troubleshooting discovery
+### Troubleshooting Voice discovery
 
-- **A Voice went quiet.** Run `python -m src.voices.audit --live --voice <id>`.
-  Each source reports `ok` with an item count, or `FAIL` with the reason.
-- **A source returns 401/403/429.** Confirm credentials and current provider
-  policy first. Do not add retry storms or pretend a blocked HTML page is a
-  feed. Disable or replace the source with a supported first-party/API path.
-- **A source broke structurally.** Disable only that source while investigating;
-  other sources and ordinary Opinion continue. Adapters fail closed rather
-  than guessing authorship.
-- **An article was found but not shown.** The audit reports `stale`, `future`,
-  and `undated` window exclusions plus rejected near-miss attribution reasons.
-  Morning Following also has a finite cap and deterministic ordering.
-- **A wrong article was attributed.** The audit prints the evidence class for
-  every accepted Voice match. Tighten the source scope or provider identity;
+- **A Voice went quiet:** `python -m src.voices.audit --live --voice <id>`.
+- **A source returns 401/403/429:** verify credentials/provider policy. Do not
+  add retry storms or scrape around restrictions.
+- **A source broke structurally:** disable only that source while investigating;
+  other sources and ordinary Opinion continue.
+- **An article was found but not shown:** inspect freshness/attribution output and
+  the finite morning/weekly selection rules.
+- **A wrong article was attributed:** tighten source scope/provider identity;
   never compensate with title/description keyword matching.
 
-### Release-time alerts
+### Voice operator commands
 
-The morning edition remains where a followed piece is read. The watcher only
-shortens the wait: when a `notify: true` Voice publishes through an active
-watcher source, it sends one quiet ntfy message on the same topic as the
-morning push.
-
-```text
-Jonathan Haidt — After Babel
-Treasure Your Attention
-```
-
-Tapping it opens the publisher's article. There is no BREAKING language, no
-urgency priority, no badge and no unread count. The morning push is unchanged.
-
-[.github/workflows/voice-watch.yml](.github/workflows/voice-watch.yml) runs
-hourly. GitHub's scheduler is **eventually soon, not realtime**: a cron can be
-delayed or dropped, so no delivery latency is promised. Cheap sources may run
-hourly; scarce providers are held for state-driven reconciliation. Nothing is
-polled during 23:00–06:00 America/Toronto quiet hours.
-
-**One publication produces at most one alert.** The watcher commits its claim
-to `data/voice_watch_state.json` *before* sending. A `git push` acts as the
-compare-and-swap: overlapping runs cannot both claim the same piece. Reruns,
-retries, alternate adapter discovery and syndication aliases are silent. The
-deliberate trade is that a runner killed after claiming but before delivery may
-lose one alert; duplicating a push is considered worse, and the morning edition
-still carries the work.
-
-Operator commands:
+The old release-watch engine remains useful for diagnostics, but its production
+workflow always invokes it in read-only dry-run mode and gives it neither
+Gemini nor ntfy credentials.
 
 ```bash
-python -m src.voice_watch --dry-run       # discover + report; no state writes or pushes
-python -m src.voice_watch --smoke         # every live source + exactly one labeled ntfy test
-python -m src.voice_watch --smoke --no-notify  # live source smoke without a test push
-python -m src.voice_watch --state-report  # inspect durable claim state
-python -m src.voice_watch --no-push       # real logic against local state, no git push
+python -m src.voice_watch --dry-run
+python -m src.voices.audit --live --voice <id>
+python -m src.voice_roundup collect --dry-run
+python -m src.voice_digest recent --dry-run
+python -m src.voice_digest weekly --dry-run --period YYYY-MM-DD
 ```
 
-`--smoke` never claims real articles or writes watcher state. It may still send
-one deliberately labeled test notification unless `--no-notify` is supplied.
-Use the no-notify form for repeated source diagnostics after delivery itself
-has already been verified.
+Do not use the legacy `voice_watch --smoke` command for routine validation: it
+can send a labeled ntfy test when a topic is deliberately supplied locally.
+The shipped GitHub workflow does not expose that capability.
 
-### Watcher state recovery
-
-`data/voice_watch_state.json` is a **claim log**, not an unread list or delivery
-queue. Every stored status (`pending`, `notified`, `failed`, `suppressed`,
-`adopted`) means that article has already been accounted for and must not be
-re-alerted.
-
-Safe procedure:
-
-1. Run `python -m src.voice_watch --state-report` and preserve the current file
-   in git history before editing anything.
-2. If only one entry is wrong, prefer a reviewed minimal edit. Never change a
-   terminal entry back to `pending` expecting a retry; `pending` is already a
-   claim and will not re-alert.
-3. If the file is lost or unusable, deleting/resetting it is safe from **alert
-   bursts**: the next trusted run treats the state as cold/recovered and adopts
-   everything it can currently see without notifying. That costs one silent
-   cycle by design.
-4. Run `--dry-run`/`--state-report` after recovery. Do not fabricate identity
-   keys by hand when a clean cold adoption can rebuild them.
-
-State is bounded by `VOICE_WATCH_RETENTION_DAYS` and
-`VOICE_WATCH_MAX_ENTRIES`; retention must remain longer than the alert lookback
-window. See [VOICES.md §20](VOICES.md#20-slice-c-the-release-time-watcher) for
-the concurrency and failure model.
+`data/voice_watch_state.json` and historical `/voices/articles/...` pages are
+retained for compatibility with #26-era history. They no longer drive a
+scheduled notification product. Current weekly collection/period authority is
+`data/voice_roundup_state.json`.
 
 ## Tests
 
@@ -282,100 +234,78 @@ python -m pytest
 ```
 
 The suite is deterministic and never touches the network: adapters run against
-recorded provider fixtures in `tests/fixtures/`, and Chromium tests render the
-exact production template. It runs automatically on every push and pull
-request via [.github/workflows/ci.yml](.github/workflows/ci.yml). Live source
-checking is deliberately separate: `python -m src.voices.audit --live` and the
-watcher's smoke commands above.
+recorded fixtures and Chromium tests render local artifacts. CI runs on pushes
+and pull requests via [.github/workflows/ci.yml](.github/workflows/ci.yml).
+Live source checking is deliberately separate.
 
 ## Local development
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env          # fill in your keys
-python -m src.build           # builds docs/index.html
+cp .env.example .env
+python -m src.build
 open docs/index.html
 ```
 
-Individual stages are runnable for debugging: `python -m src.weather`,
-`python -m src.fetch`, `python -m src.render` (the last renders the bundled
-fixture at `data/fixtures/edition_sample.json`, so it works with no API keys).
-
 ## Configuration
 
-Secrets come from the environment (local `.env`, gitignored) or GitHub repo
-secrets in CI. See [.env.example](.env.example).
+Secrets come from the environment or GitHub repository secrets; `PAGES_URL` is
+a repository variable.
 
 | Var | Needed for |
 |---|---|
-| `GEMINI_API_KEY` | curation (Google AI Studio) |
-| `GUARDIAN_API_KEY` | Guardian world/business/sport/opinion + Guardian Voice contributors |
-| `NYT_API_KEY` | NYT world/business/opinion morning pool |
-| `PERIGON_API_KEY` | optional Perigon world/business/markets + configured Perigon Voice reconciliation |
-| `NTFY_TOPIC` | morning push + optional Voice release alerts |
-| `PAGES_URL` | cache-buster + morning notification link (CI: repo **variable**) |
-| `CURATE_MODEL` | optional model override (default `gemini-2.5-flash`) |
-| `VOICE_LOOKBACK_HOURS` | optional morning Voice discovery window (default 36) |
-| `VOICE_WATCH_LOOKBACK_HOURS` | optional release-alert window (default 24) |
-| `VOICE_WATCH_RECONCILE_HOURS` | optional gap between reconciliation passes (default 24) |
-| `NTFY_BASE_URL` | optional ntfy host override (default `https://ntfy.sh`) |
+| `GEMINI_API_KEY` | morning curation + weekly Voice screening/synthesis |
+| `GUARDIAN_API_KEY` | Guardian news + Core Voice contributor collection |
+| `NYT_API_KEY` | NYT morning pool |
+| `PERIGON_API_KEY` | optional Perigon news + bounded Voice reconciliation |
+| `NTFY_TOPIC` | morning Daily push + one weekly Voice digest |
+| `PAGES_URL` | published-site links/cache busting |
+| `CURATE_MODEL` | optional Gemini model override |
+| `VOICE_LOOKBACK_HOURS` | morning Voice discovery window |
+| `NTFY_BASE_URL` | optional ntfy-compatible host override |
 
-Open-Meteo and the Toronto RSS feeds need no keys. Tunables (location, sections,
-caps, feeds, model, house voice, Voice request budgets and watcher policy) live
-in [src/config.py](src/config.py).
+Legacy `VOICE_WATCH_*` tunables remain only for manual release-watch diagnostics
+and compatibility tests; they do not configure a scheduled per-article alert
+product.
 
 ## Deployment (GitHub Pages + Actions)
 
 - [.github/workflows/build.yml](.github/workflows/build.yml) — targets 05:17
-  America/Toronto every day, retries at 05:37, 06:17 and 07:17 if needed, and
-  no-ops before source/model work once that Toronto-calendar edition exists.
-  Manual `workflow_dispatch` uses the same idempotency gate.
-- [.github/workflows/notify.yml](.github/workflows/notify.yml) — follows a
-  successful `Build The Daily` run and sends the ntfy.sh morning push only when
-  that run actually published today's edition.
-- [.github/workflows/voice-watch.yml](.github/workflows/voice-watch.yml) —
-  hourly release-time checks for followed Voices; commits
-  `data/voice_watch_state.json` only when substantive state changes.
+  America/Toronto, with 05:37, 06:17 and 07:17 bounded recoveries. It no-ops
+  before source/model work once that Toronto-calendar edition exists.
+- [.github/workflows/notify.yml](.github/workflows/notify.yml) — sends the one
+  morning Daily push only after a run actually publishes today's edition.
+- [.github/workflows/voice-roundup.yml](.github/workflows/voice-roundup.yml) —
+  daily silent Core collection + quiet recent-shelf refresh; weekly screened
+  digest publication and the sole proactive Voice push.
+- [.github/workflows/voice-watch.yml](.github/workflows/voice-watch.yml) — manual
+  read-only Core-source/identity inspection only. No schedule, Gemini secret or
+  ntfy topic.
 
-The build and watcher both write to `main`, to different paths, and both push
-with fetch-and-retry. They deliberately use **separate** concurrency groups:
-sharing one would let an hourly watcher cancel a queued morning edition.
-[tests/test_workflows.py](tests/test_workflows.py) asserts this contract.
+The Daily and Voice roundup use independent non-cancelling concurrency groups
+and disjoint write paths, with bounded git retry/compare-and-swap behavior.
+[tests/test_workflows.py](tests/test_workflows.py) locks the credential and
+notification boundaries.
 
 Pages serves `docs/` on `main` at `https://BenWassa.github.io/Hermes/`.
 
-## First-run checklist (one-time, manual)
+## First-run checklist
 
-- [ ] Get a Gemini API key — https://aistudio.google.com/apikey
-- [ ] Get a Guardian API key — https://open-platform.theguardian.com/
-- [ ] Get an NYT API key — https://developer.nytimes.com/
-- [ ] (Optional) Get a Perigon API key — https://www.perigon.io/; required only if using Perigon-backed discovery/coverage
-- [ ] Pick a hard-to-guess ntfy topic, subscribe a client, and keep the topic as a secret
-- [ ] Add repo **secrets**: `GEMINI_API_KEY`, `GUARDIAN_API_KEY`, `NYT_API_KEY`, `NTFY_TOPIC`; add `PERIGON_API_KEY` only when used
-- [ ] Add repo **variable** `PAGES_URL` (for example `https://BenWassa.github.io/Hermes/`)
-- [ ] Enable GitHub Pages: Settings → Pages → source = `main`, folder = `/docs`
-- [ ] Run `python -m src.voices.audit` and a bounded live Voice audit from Actions
-- [ ] Trigger `Build The Daily`; confirm the exact generated edition publishes and one morning push arrives
-- [ ] Run one `voice_watch --smoke` when Voice alerts are enabled; use `--no-notify` for repeat diagnostics
-- [ ] Confirm cron/quiet-hour behavior against America/Toronto DST
+- Get Gemini, Guardian and NYT API keys; add Perigon only when used.
+- Pick a hard-to-guess ntfy topic and subscribe the intended client.
+- Add repository secrets and the `PAGES_URL` repository variable.
+- Enable GitHub Pages from `main` / `docs`.
+- Run `python -m src.voices.audit` and one bounded live Voice audit.
+- Trigger `Build The Daily`; confirm one edition and one morning push.
+- Use `voice_watch --dry-run`, not a notification smoke, for routine Voice
+  inspection.
+- Inspect a weekly digest with `voice_digest weekly --dry-run --period ...`
+  before deliberately testing live weekly delivery.
 
 ## Notes
 
 - House style: factual, headline-first, 2–3 sentence summaries, no em dashes.
-- Every opened story carries an **Ask AI** control that hands the clipping and a
-  briefing prompt to Claude, ChatGPT, the iOS share sheet, or the clipboard. The
-  prompt asks for a layered answer in house voice, heaviest first: the gist under
-  an H1, then why it matters, then background, contest, and markers to watch, then
-  three numbered follow-up questions. About 500 words, hard ceiling 650, short
-  paragraphs and no tables so it reads on a phone. It lives in `buildPrompt()` in
-  [template/index.template.html](template/index.template.html); edit it there.
-- The Claude and ChatGPT links deliberately carry no `target="_blank"`: a blank
-  target opens an in-app browser sheet that iOS will not hand off to an installed
-  app, so a plain top-level tap is what lets those apps claim their own domains as
-  Universal Links. "Share to app" is the fallback when a link opens in the browser
-  anyway, since both iOS apps accept shared text.
-- Sensitive stories (war, violent crime, court proceedings on violent crime,
-  death, disaster) render text-only by design.
-- Source thumbnails are hotlinked; some may rot. Acceptable for v1; caching to
-  the repo is a phase-2 item (see the PRD).
+- Every opened morning story carries an **Ask AI** control for deeper briefing.
+- Sensitive stories render text-only by design.
+- Source thumbnails are hotlinked; some may rot. Caching remains a later item.
