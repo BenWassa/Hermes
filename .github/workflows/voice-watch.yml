@@ -1,44 +1,24 @@
-name: Watch Voices
+name: Inspect Core Voices
 
-# Release-time alerts for authoritative Core Voices. This remains deliberately
-# separate from the morning newspaper build: it makes only Voice-source requests,
-# reuses the bounded claim state, and invokes Gemini only after a genuinely new
-# Core article has been durably claimed for an alert. The resulting static page
-# lives at a stable /voices/articles/... URL; Selective and Discovery never enter
-# this job's production registry.
+# Release-time Voice notifications are retired. The only proactive Voices
+# notification is the screened weekly digest in voice-roundup.yml.
 #
-# Cadence. GitHub's scheduled Actions are eventually-soon, not realtime. Hourly
-# at :37 avoids the most congested top-of-hour slot. Scarce providers remain on
-# the durable once-a-day reconciliation cadence enforced by watcher code, and
-# quiet hours remain a code-level product rule.
+# This workflow remains as a manual, read-only source/identity diagnostic. It
+# always runs the existing watcher in --dry-run mode: no durable claim writes,
+# no Gemini work, no article-page publication, and no ntfy capability.
 
 on:
-  workflow_dispatch:
-    inputs:
-      dry_run:
-        description: "Report what would be sent; write nothing, model nothing, send nothing"
-        type: boolean
-        default: false
-      ignore_quiet_hours:
-        description: "Run even inside the configured quiet window"
-        type: boolean
-        default: false
-  schedule:
-    - cron: "37 * * * *"
+  workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: read
 
-# Watcher runs never overlap each other. They deliberately do NOT share a
-# group with Build The Daily or the weekly roundup. The git layer coordinates
-# their disjoint writes: a Core release first commits its claim, then publishes
-# one content-addressed article page, and only then attempts ntfy delivery.
 concurrency:
-  group: voice-watch
+  group: voice-watch-inspect
   cancel-in-progress: false
 
 jobs:
-  watch:
+  inspect:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -55,15 +35,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Watch Core voices
+      - name: Inspect Core voices without side effects
         env:
           GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
           PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           PAGES_URL: ${{ vars.PAGES_URL }}
-        run: |
-          ARGS=""
-          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
-          if [ "${{ inputs.ignore_quiet_hours }}" = "true" ]; then ARGS="$ARGS --ignore-quiet-hours"; fi
-          python -m src.voice_watch $ARGS
+        run: python -m src.voice_watch --dry-run
