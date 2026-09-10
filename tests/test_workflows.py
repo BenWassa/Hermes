@@ -1,10 +1,4 @@
-"""Workflow contract during the V1-to-V2 Voices notification migration.
-
-The morning build, legacy release-alert watcher, and V2 roundup all write to
-``main`` during the evidence window. They remain independent products with
-separate concurrency groups and disjoint paths; git compare-and-swap/rebase
-logic prevents one writer from overwriting another.
-"""
+"""Workflow contracts for the independent Hermes Voice products."""
 
 from __future__ import annotations
 
@@ -25,6 +19,7 @@ WATCH_STATE_PATH = "data/voice_watch_state.json"
 ROUNDUP_STATE_PATH = "data/voice_roundup_state.json"
 EDITION_PATH = "docs/index.html"
 ROUNDUP_PAGE_PATH = "docs/voices/index.html"
+RELEASE_PAGE_GLOB = "docs/voices/articles/**"
 DAILY_CRON = "37 15 * * *"
 WEEKLY_CRONS = {
     "43 22 * * 0",
@@ -63,7 +58,7 @@ def triggers(workflow: dict) -> dict:
     return workflow.get("on", workflow.get(True))
 
 
-def test_legacy_release_watcher_remains_scheduled_during_evidence_window():
+def test_core_release_watcher_remains_hourly_and_separate_from_roundup():
     watch = load(WATCH)
     crons = [entry["cron"] for entry in triggers(watch)["schedule"]]
 
@@ -72,13 +67,13 @@ def test_legacy_release_watcher_remains_scheduled_during_evidence_window():
     assert "src.voice_roundup" not in script(watch)
 
 
-def test_legacy_watcher_remains_bounded_and_model_free():
+def test_core_release_watcher_gets_gemini_but_never_rebuilds_daily():
     watch = load(WATCH)
     env: dict = {}
     for job in watch["jobs"].values():
         env.update(env_for(job))
 
-    assert "GEMINI_API_KEY" not in env
+    assert "GEMINI_API_KEY" in env
     assert "NYT_API_KEY" not in env
     assert "NTFY_TOPIC" in env
     assert "src.build" not in script(watch)
@@ -149,10 +144,12 @@ def test_all_repository_writers_use_safe_retry_or_compare_and_swap():
     assert "git rebase" in build_script
     assert "for attempt in" in build_script
 
+    from src.voices.release import GitArticlePagePublisher
     from src.voices.roundup_state import GitRoundupStore
     from src.voices.state import GitStateStore
 
     assert hasattr(GitStateStore, "load") and hasattr(GitStateStore, "save")
+    assert hasattr(GitArticlePagePublisher, "publish")
     assert hasattr(GitRoundupStore, "load")
     assert hasattr(GitRoundupStore, "save_state")
     assert hasattr(GitRoundupStore, "publish")
@@ -164,6 +161,7 @@ def test_operational_voice_commits_do_not_burn_ci():
     assert WATCH_STATE_PATH in ignored
     assert ROUNDUP_STATE_PATH in ignored
     assert ROUNDUP_PAGE_PATH in ignored
+    assert RELEASE_PAGE_GLOB in ignored
 
 
 def test_configured_state_paths_match_workflow_contract():
