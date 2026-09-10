@@ -26,6 +26,12 @@ ROUNDUP_STATE_PATH = "data/voice_roundup_state.json"
 EDITION_PATH = "docs/index.html"
 ROUNDUP_PAGE_PATH = "docs/voices/index.html"
 DAILY_CRON = "37 15 * * *"
+DAILY_BUILD_SCHEDULE = [
+    {"cron": "17 5 * * *", "timezone": "America/Toronto"},
+    {"cron": "37 5 * * *", "timezone": "America/Toronto"},
+    {"cron": "17 6 * * *", "timezone": "America/Toronto"},
+    {"cron": "17 7 * * *", "timezone": "America/Toronto"},
+]
 WEEKLY_CRONS = {
     "43 22 * * 0",
     "43 23 * * 0",
@@ -173,6 +179,53 @@ def test_configured_state_paths_match_workflow_contract():
     assert config.VOICE_WATCH_STATE_PATH == WATCH_STATE_PATH
     assert settings.STATE_PATH == ROUNDUP_STATE_PATH
     assert settings.PAGE_PATH == ROUNDUP_PAGE_PATH
+
+
+def test_morning_build_targets_toronto_five_am_with_bounded_recovery():
+    build = load(BUILD)
+    build_triggers = triggers(build)
+
+    assert "workflow_dispatch" in build_triggers
+    assert build_triggers["schedule"] == DAILY_BUILD_SCHEDULE
+    assert all(
+        entry["timezone"] == "America/Toronto"
+        for entry in build_triggers["schedule"]
+    )
+
+
+def test_morning_build_gates_every_attempt_before_provider_or_gemini_work():
+    steps = load(BUILD)["jobs"]["build"]["steps"]
+    gate_index = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("name") == "Check whether today's edition already exists"
+    )
+    gate_script = steps[gate_index]["run"]
+
+    assert "TZ=America/Toronto date +%Y-%m-%d" in gate_script
+    assert "chore(edition): publish ${TODAY} edition" in gate_script
+    assert "github.event_name" not in gate_script
+
+    for step_name in ("Set up Python", "Install dependencies", "Build edition", "Commit and push"):
+        index = next(
+            index for index, step in enumerate(steps) if step.get("name") == step_name
+        )
+        assert index > gate_index
+        assert steps[index]["if"] == "steps.gate.outputs.skip != 'true'"
+
+
+def test_morning_notification_has_no_duplicate_manual_bypass():
+    notify = load(NOTIFY)
+    notify_triggers = triggers(notify)
+    notify_script = script(notify)
+
+    assert "workflow_dispatch" not in notify_triggers
+    assert notify_triggers["workflow_run"]["workflows"] == ["Build The Daily"]
+    assert notify_triggers["workflow_run"]["types"] == ["completed"]
+    assert "github.event.workflow_run.conclusion" in notify_script
+    assert "COMMIT_EPOCH" in notify_script
+    assert "RUN_STARTED_EPOCH" in notify_script
+    assert '"$COMMIT_EPOCH" -ge "$RUN_STARTED_EPOCH"' in notify_script
 
 
 def test_morning_push_remains_one_plain_edition_notification():
