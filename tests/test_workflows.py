@@ -1,9 +1,9 @@
 """Workflow contract during the V1-to-V2 Voices notification migration.
 
-The morning build, legacy release-alert watcher, and V2 roundup all write to
-``main`` during the evidence window. They remain independent products with
-separate concurrency groups and disjoint paths; git compare-and-swap/rebase
-logic prevents one writer from overwriting another.
+The morning build, release-alert watcher, and V2 roundup all write to ``main``.
+They remain independent products with separate concurrency groups and disjoint
+paths; git compare-and-swap/rebase logic prevents one writer from overwriting
+another.
 """
 
 from __future__ import annotations
@@ -63,7 +63,7 @@ def triggers(workflow: dict) -> dict:
     return workflow.get("on", workflow.get(True))
 
 
-def test_legacy_release_watcher_remains_scheduled_during_evidence_window():
+def test_release_watcher_remains_scheduled_and_separate_from_roundup():
     watch = load(WATCH)
     crons = [entry["cron"] for entry in triggers(watch)["schedule"]]
 
@@ -72,13 +72,13 @@ def test_legacy_release_watcher_remains_scheduled_during_evidence_window():
     assert "src.voice_roundup" not in script(watch)
 
 
-def test_legacy_watcher_remains_bounded_and_model_free():
+def test_release_watcher_is_bounded_and_only_gets_post_claim_model_secret():
     watch = load(WATCH)
     env: dict = {}
     for job in watch["jobs"].values():
         env.update(env_for(job))
 
-    assert "GEMINI_API_KEY" not in env
+    assert "GEMINI_API_KEY" in env
     assert "NYT_API_KEY" not in env
     assert "NTFY_TOPIC" in env
     assert "src.build" not in script(watch)
