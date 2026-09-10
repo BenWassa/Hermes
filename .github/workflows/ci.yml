@@ -16,6 +16,7 @@ on:
       - "data/voice_watch_state.json"
       - "data/voice_roundup_state.json"
       - "docs/voices/index.html"
+      - "docs/voices/recent/**"
       - "docs/voices/articles/**"
   pull_request:
   workflow_dispatch: {}
