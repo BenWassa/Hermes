@@ -104,7 +104,7 @@ def test_daily_collection_is_silent_and_refreshes_quiet_recent_shelf():
     assert "NYT_API_KEY" not in env
     assert "src.voice_roundup collect" in text
     assert "src.voice_digest recent" in text
-    assert "src.voice_digest weekly" not in text
+    assert "src.voice_weekly weekly" not in text
     assert "src.build" not in text
 
 
@@ -116,7 +116,8 @@ def test_weekly_digest_job_is_the_only_voice_job_with_ntfy_and_gemini():
     assert "NTFY_TOPIC" in env
     assert "GEMINI_API_KEY" in env
     assert "NYT_API_KEY" not in env
-    assert "src.voice_digest weekly" in script_for(weekly)
+    assert "src.voice_weekly weekly" in script_for(weekly)
+    assert "src.voice_digest weekly" not in script_for(weekly)
     assert "src.voice_watch" not in script_for(weekly)
 
     watch_env: dict = {}
@@ -155,6 +156,7 @@ def test_morning_build_does_not_own_voice_operational_paths():
     assert "src.voice_watch" not in build_script
     assert "src.voice_roundup" not in build_script
     assert "src.voice_digest" not in build_script
+    assert "src.voice_weekly" not in build_script
 
 
 def test_repository_writers_keep_safe_retry_or_compare_and_swap():
