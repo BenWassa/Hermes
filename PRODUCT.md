@@ -9,9 +9,12 @@ product
 
 ## Users
 
-One reader: Ben, in Toronto. Opens The Daily on a phone at 7:00 AM from a push
-notification, often before getting out of bed or over coffee. The session is
-short and finite: skim the front page, dip into two or three sections, expand a
+One reader: Ben, in Toronto. Opens The Daily on a phone around 7:00 AM from a
+push notification, often before getting out of bed or over coffee. The edition
+should already be there: the primary build target is the **05:00
+America/Toronto hour**, with bounded recovery if GitHub scheduling is delayed
+or dropped, and normal publication by **06:00 local time**. The session is short
+and finite: skim the front page, dip into two or three sections, expand a
 handful of stories, done in five to ten minutes. Reads like a business
 professional: wants the world, the markets, and the city, synthesized, not
 aggregated. There is no second user, no growth funnel, no engagement metric.
@@ -23,9 +26,16 @@ An autonomous overnight pipeline that assembles a personalized Toronto morning
 newspaper: wire APIs and local RSS in, one curated edition out, rendered as a
 single static page and pushed once per day. It exists to replace doomscrolling
 three news apps with one finite, finished paper. Success looks like: the
-edition is fresh every morning, the lead stories carry real synthesis (the
-"why it matters", not just the what), and the whole read fits comfortably in a
-phone-sized morning window.
+edition is fresh and waiting every morning, the lead stories carry real
+synthesis (the "why it matters", not just the what), and the whole read fits
+comfortably in a phone-sized morning window.
+
+The morning operating contract is deliberately local-time based. The Daily
+starts around 05:00 `America/Toronto`; a small minute offset is acceptable to
+avoid GitHub Actions congestion. Recovery attempts may follow, but once the
+Toronto-calendar edition exists they must become no-ops before expensive source
+or Gemini work. Issue #25 owns implementation and production reliability for
+this contract.
 
 ## Opinion and Voices
 
@@ -33,9 +43,29 @@ Opinion has two legitimate jobs: editorial discovery and deliberate following.
 Hermes may guarantee new work from explicitly chosen **Voices** across
 publications, while still curating a separate ordinary Opinion selection. A
 Voice is a person, not a publisher and not an algorithmic interest profile.
-Following must remain finite and quiet: no `For You` feed, unread-count treadmill,
-social graph, recommendation loop, or infinite archive. See `VOICES.md` for the
-authoritative feature architecture and scope.
+Following must remain finite and quiet: no `For You` feed, unread-count
+treadmill, social graph, recommendation loop, or infinite archive.
+
+Voices has three complementary reader surfaces:
+
+1. **Morning Following** — qualifying Voice work inside the finite Daily.
+2. **Core release alerts** — when a qualifying Core Voice publishes, Hermes may
+   send one restrained notification after preparing a compact Hermes summary.
+   The normal notification target is that Hermes summary page, with the
+   publisher's canonical article available as `Read original`.
+3. **Weekly Core roundup** — a finite catch-up across Core Voices, not a
+   replacement for useful release-time alerts.
+
+For routine release alerts, `tier == core` is product authority. Selective and
+Discovery do not create routine release-alert polling, summarization, or
+notification pressure unless a later explicit owner decision changes that.
+Summary generation should happen only after an article qualifies for a real
+Core alert; roster growth must not create model work for every watcher
+candidate. Paywalls and publisher access controls are never bypassed.
+
+See `VOICES.md` for the proven identity/source architecture and `VOICES_V2.md`
+for current tier and notification semantics. Issue #26 owns the Hermes article
+summary and Core release-alert implementation.
 
 ## Brand Personality
 
