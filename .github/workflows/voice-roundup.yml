@@ -1,18 +1,14 @@
 name: Core Voices Roundup
 
-# Voices V2 notification product:
+# Voices notification product:
 # - one silent Core-only collection after the morning edition each day;
-# - bounded Sunday attempts plus one Monday recovery attempt;
-# - no Gemini work anywhere;
-# - only the weekly publisher receives the ntfy topic.
+# - a quiet bounded /voices/recent/ shelf for optional browsing;
+# - one screened Sunday digest with bounded recovery attempts;
+# - one weekly screening/synthesis model call at most per invocation;
+# - only the weekly publisher receives Gemini and ntfy capability.
 #
-# During the migration window this runs alongside the legacy V1 release-alert
-# watcher. The V1 workflow is retired only after the weekly product has enough
-# production evidence to justify cutover.
-#
-# The morning edition remains a separate workflow and a separate writer. This
-# workflow synchronises through git compare-and-swap so a morning build moving
-# main can delay, but never overwrite, roundup state/page publication.
+# Release-time/per-article Voice pushes are retired. The morning edition remains
+# independent and continues to own its separate once-per-edition notification.
 
 on:
   workflow_dispatch:
@@ -25,13 +21,13 @@ on:
           - weekly
         default: collect
       dry_run:
-        description: "Fetch and report only; write nothing and send nothing"
+        description: "Fetch/report only; write nothing, model nothing, send nothing"
         type: boolean
         default: true
   schedule:
     # Daily silent collection: 11:37 EDT / 10:37 EST, comfortably after build recovery.
     - cron: "37 15 * * *"
-    # Sunday delivery attempts around 17:43-20:43 Toronto across DST.
+    # Sunday digest attempts around 17:43-20:43 Toronto across DST.
     - cron: "43 22 * * 0"
     - cron: "43 23 * * 0"
     - cron: "43 0 * * 1"
@@ -75,6 +71,7 @@ jobs:
           ARGS=""
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           python -m src.voice_roundup collect $ARGS
+          python -m src.voice_digest recent $ARGS
 
   weekly:
     if: >-
@@ -96,13 +93,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Publish weekly Core Voices roundup
+      - name: Publish one screened weekly Voice digest
         env:
           GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
           PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           PAGES_URL: ${{ vars.PAGES_URL }}
         run: |
           ARGS=""
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
-          python -m src.voice_roundup weekly $ARGS
+          python -m src.voice_digest weekly $ARGS
