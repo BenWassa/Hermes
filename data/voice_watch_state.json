@@ -1,6 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-09-09T16:50:35Z",
+  "updated_at": "2026-09-10T11:42:48Z",
   "last_reconcile_at": "2026-09-09T16:50:35Z",
-  "seen": {}
+  "seen": {
+    "url:https://theguardian.com/commentisfree/2026/sep/10/andy-burnham-north-sea-oil-plans-labour-climate-drilling-trump-reform": {
+      "keys": [
+        "fp:theguardian.com|is-burnham-trying-to-appease-trump-or-reform-what-other-reason-is|2026-09-10",
+        "pid:guardian:commentisfree/2026/sep/10/andy-burnham-north-sea-oil-plans-labour-climate-drilling-trump-reform",
+        "syn:is-burnham-trying-to-appease-trump-or-reform-what-other-reason-is|voice:george-monbiot|2026-09-10",
+        "url:https://theguardian.com/commentisfree/2026/sep/10/andy-burnham-north-sea-oil-plans-labour-climate-drilling-trump-reform"
+      ],
+      "voice_ids": [
+        "george-monbiot"
+      ],
+      "first_seen": "2026-09-10T11:42:48Z",
+      "published_at": "2026-09-10T05:00:16Z",
+      "status": "pending"
+    }
+  }
 }
