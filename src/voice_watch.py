@@ -1,17 +1,17 @@
-"""Release-time Voice watcher: the operator entrypoint.
+"""Core Voice release-alert operator entrypoint.
 
-    python -m src.voice_watch                 # the scheduled run (git state + ntfy)
-    python -m src.voice_watch --dry-run       # fetch and report; write nothing, send nothing
-    python -m src.voice_watch --no-push       # real run against a local state file
-    python -m src.voice_watch --offline       # no provider requests at all
-    python -m src.voice_watch --smoke         # bounded live check of sources and ntfy
-    python -m src.voice_watch --state-report  # what durable state currently holds
+    python -m src.voice_watch                 # scheduled Core release alerts
+    python -m src.voice_watch --dry-run       # fetch/report; no writes/model/ntfy
+    python -m src.voice_watch --no-push       # real run with local state/pages
+    python -m src.voice_watch --offline       # no provider requests
+    python -m src.voice_watch --smoke         # bounded live Core-source + ntfy check
+    python -m src.voice_watch --state-report  # inspect durable claim state
 
-The scheduled form is the only one that writes state or sends a real alert.
-``--smoke`` is the live validation path: it exercises every adapter against the
-real sources, sends exactly one clearly-labelled test notification, and writes
-nothing, so it can be run before or after a deploy without creating a duplicate
-alert for a real article.
+Production eligibility is authoritative ``tier == core``.  The existing
+watcher claim/CAS machinery is retained, but the notification stage now prepares
+one stable Hermes article-summary page after the claim is durable and before
+ntfy is attempted.  Summary/page failure degrades to the original publisher
+link without reopening the claim.
 """
 
 from __future__ import annotations
@@ -26,6 +26,15 @@ import sys
 from . import config
 from .voices.notify import Alert, NotifyError, NtfyNotifier, RecordingNotifier
 from .voices.registry import RegistryError, load_registry
+from .voices.release import (
+    DryRunArticlePagePublisher,
+    FileArticlePagePublisher,
+    GeminiSummaryProvider,
+    GitArticlePagePublisher,
+    MetadataSummaryProvider,
+    ReleasePreparer,
+)
+from .voices.release_runtime import ReleaseNotifier, core_alert_registry
 from .voices.state import FileStateStore, GitError, GitStateStore, StateStore, load_state
 from .voices.watch import (
     MODE_RECONCILE,
@@ -37,7 +46,6 @@ from .voices.watch import (
 from .voices.window import EditionWindow
 
 log = logging.getLogger("the-daily.voices.watch")
-
 UTC = dt.timezone.utc
 
 EXIT_OK = 0
@@ -46,12 +54,7 @@ EXIT_CONFIG = 2
 
 
 class ReadOnlyStore(StateStore):
-    """Reads real state, refuses to write. Backs ``--dry-run``.
-
-    ``save`` reports success so the run continues exactly as it would in
-    production, which is the point: a dry run should show the alerts a real
-    run would send, not a run that aborted on a failed write.
-    """
+    """Reads real state and records would-be writes without changing it."""
 
     def __init__(self, inner: StateStore):
         self.inner = inner
@@ -66,28 +69,51 @@ class ReadOnlyStore(StateStore):
 
 
 def build_store(args) -> StateStore:
-    path = args.state
     if args.dry_run:
-        return ReadOnlyStore(FileStateStore(path))
+        return ReadOnlyStore(FileStateStore(args.state))
     if args.no_push:
-        return FileStateStore(path)
-    return GitStateStore(path, branch=args.branch, remote=args.remote)
+        return FileStateStore(args.state)
+    return GitStateStore(args.state, branch=args.branch, remote=args.remote)
 
 
-def build_notifier(args):
+def build_release_notifier(args, registry):
+    """Build the post-claim summary/page/notifier chain.
+
+    Dry runs intentionally use metadata-only summary preparation and a no-op
+    page publisher, so inspection spends no Gemini quota and writes nothing.
+    """
     if args.dry_run:
-        return RecordingNotifier()
-    topic = os.environ.get("NTFY_TOPIC", "").strip()
-    if not topic:
-        return None
-    return NtfyNotifier(topic, base_url=config.NTFY_BASE_URL)
+        delegate = RecordingNotifier()
+        summarizer = MetadataSummaryProvider()
+        publisher = DryRunArticlePagePublisher()
+    else:
+        topic = os.environ.get("NTFY_TOPIC", "").strip()
+        if not topic:
+            return None
+        delegate = NtfyNotifier(topic, base_url=config.NTFY_BASE_URL)
+        summarizer = GeminiSummaryProvider()
+        publisher = (
+            FileArticlePagePublisher()
+            if args.no_push
+            else GitArticlePagePublisher(branch=args.branch, remote=args.remote)
+        )
+
+    return ReleaseNotifier(
+        delegate=delegate,
+        preparer=ReleasePreparer(summarizer=summarizer, publisher=publisher),
+        registry=registry,
+    )
 
 
 # --- reporting ------------------------------------------------------------
 
-def report(outcome: WatchOutcome, *, as_json: bool) -> None:
+def report(outcome: WatchOutcome, *, as_json: bool, alerts: list[Alert] | None = None) -> None:
     if as_json:
-        print(json.dumps(outcome.diagnostics(), indent=2))
+        payload = outcome.diagnostics()
+        if alerts is not None:
+            payload["release_pages"] = sum("/voices/articles/" in alert.click for alert in alerts)
+            payload["release_fallbacks"] = sum("/voices/articles/" not in alert.click for alert in alerts)
+        print(json.dumps(payload, indent=2))
         return
     if outcome.skipped:
         print(f"skipped: {outcome.skipped}")
@@ -107,7 +133,7 @@ def report(outcome: WatchOutcome, *, as_json: bool) -> None:
         print(f"pruned:     {outcome.pruned} old entr(ies)")
     if not outcome.persisted:
         print("state:      NOT PERSISTED; no alerts were sent")
-    for alert in outcome.alerts:
+    for alert in alerts if alerts is not None else outcome.alerts:
         print(f"\n  {alert.title}\n  {alert.message}\n  {alert.click}")
 
 
@@ -130,23 +156,17 @@ def state_report(path: str) -> int:
 # --- live smoke -----------------------------------------------------------
 
 def smoke(args, registry) -> int:
-    """Bounded live validation. Writes nothing; sends one labelled test alert.
-
-    This is the check the deterministic suite deliberately cannot do. It
-    proves the two things only the network can prove: that the configured
-    source URLs and keys actually answer, and that the ntfy topic actually
-    delivers. It never claims or alerts a real article, so running it twice
-    costs two obvious test messages and no duplicate release alert.
-    """
+    """Bounded Core-source validation plus one labelled test notification."""
     now = dt.datetime.now(UTC)
+    core = core_alert_registry(registry)
     window = EditionWindow(
         since=now - dt.timedelta(hours=config.VOICE_WATCH_LOOKBACK_HOURS),
         until=now,
         future_skew=dt.timedelta(minutes=config.VOICE_FUTURE_SKEW_MINUTES),
     )
-    print("== sources (live, reconcile pass: every adapter) ==")
+    print("== Core sources (live, reconcile pass: every adapter) ==")
     result, planned = discover_for_watch(
-        registry, window=window, mode=MODE_RECONCILE, budget=watch_budget()
+        core, window=window, mode=MODE_RECONCILE, budget=watch_budget()
     )
     print(f"planned:  {planned} provider request(s)")
     print(f"spent:    {result.budget or '{}'}")
@@ -159,8 +179,7 @@ def smoke(args, registry) -> int:
         print(f"  {', '.join(article.voice_ids)}: {article.title[:70]}")
         print(f"    {article.canonical_url}")
 
-    failures = [s for s in result.statuses if not s.ok]
-
+    failures = [status for status in result.statuses if not status.ok]
     print("\n== ntfy ==")
     topic = os.environ.get("NTFY_TOPIC", "").strip()
     if not topic:
@@ -188,20 +207,20 @@ def smoke(args, registry) -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="python -m src.voice_watch",
-        description="Release-time alerts for followed Voices.",
+        description="Release-time Hermes summaries and alerts for Core Voices.",
     )
     parser.add_argument("--registry", default=config.VOICES_REGISTRY_PATH)
     parser.add_argument("--state", default=config.VOICE_WATCH_STATE_PATH)
     parser.add_argument("--branch", default=os.environ.get("VOICE_WATCH_BRANCH", "main"))
     parser.add_argument("--remote", default="origin")
     parser.add_argument("--dry-run", action="store_true",
-                        help="report what a real run would do; write nothing, send nothing")
+                        help="report a metadata-only preview; write nothing, send nothing")
     parser.add_argument("--no-push", action="store_true",
-                        help="write state to the local file only, never commit or push")
+                        help="write state/pages locally only, never commit or push")
     parser.add_argument("--offline", action="store_true",
-                        help="make no provider requests (exercises state and delivery paths)")
+                        help="make no provider requests")
     parser.add_argument("--smoke", action="store_true",
-                        help="bounded live check of every source plus one test notification")
+                        help="bounded live check of Core sources plus one test notification")
     parser.add_argument("--no-notify", action="store_true",
                         help="with --smoke, check sources but do not send the test notification")
     parser.add_argument("--ignore-quiet-hours", action="store_true")
@@ -226,26 +245,19 @@ def main(argv: list[str] | None = None) -> int:
         return EXIT_CONFIG
 
     if args.smoke:
-        # Smoke/audit deliberately sees the full registry so operators can
-        # validate new V2 morning sources without changing watcher state.
         return smoke(args, registry)
 
-    notifier = build_notifier(args)
+    watcher_registry = core_alert_registry(registry)
+    notifier = build_release_notifier(args, watcher_registry)
     if notifier is None:
         print("NTFY_TOPIC is not set; refusing to run without a delivery channel "
               "(use --dry-run to inspect what would be sent)", file=sys.stderr)
         return EXIT_CONFIG
 
     try:
-        store = build_store(args)
-        # `notify` retains only its V1 operational meaning during the V2
-        # migration. New Core/Selective sources must not silently increase the
-        # release-alert watcher's polling surface before the weekly replacement
-        # is ready.
-        watcher_registry = registry.for_legacy_watcher()
         outcome = run_watch(
             watcher_registry,
-            store=store,
+            store=build_store(args),
             notifier=notifier,
             fetch=not args.offline,
             quiet_hours=None if args.ignore_quiet_hours else (),
@@ -254,7 +266,8 @@ def main(argv: list[str] | None = None) -> int:
         print(str(exc), file=sys.stderr)
         return EXIT_CONFIG
 
-    report(outcome, as_json=args.json)
+    prepared_alerts = [prepared.alert for prepared in notifier.prepared]
+    report(outcome, as_json=args.json, alerts=prepared_alerts)
     return outcome.exit_code
 
 
