@@ -1,4 +1,4 @@
-"""#26 production wiring without coupling to Daily schedule tests."""
+"""Historical #26 release machinery and the #29 production cutover boundary."""
 
 from __future__ import annotations
 
@@ -42,22 +42,24 @@ def triggers(workflow: dict) -> dict:
     return workflow.get("on", workflow.get(True))
 
 
-def test_release_alert_workflow_is_hourly_core_summary_job_not_daily_build():
+def test_release_alert_workflow_is_retired_to_manual_dry_run_inspection():
     watch = load(WATCH)
-    cron = [entry["cron"] for entry in triggers(watch)["schedule"]]
+    watch_triggers = triggers(watch)
     variables = env(watch)
     commands = script(watch)
 
-    assert cron == ["37 * * * *"]
-    assert "GEMINI_API_KEY" in variables
-    assert "NTFY_TOPIC" in variables
-    assert "NYT_API_KEY" not in variables
-    assert "src.voice_watch" in commands
+    assert set(watch_triggers) == {"workflow_dispatch"}
+    assert "schedule" not in watch_triggers
+    assert watch["permissions"]["contents"] == "read"
+    assert "GEMINI_API_KEY" not in variables
+    assert "NTFY_TOPIC" not in variables
+    assert "src.voice_watch --dry-run" in commands
     assert "src.voice_roundup" not in commands
+    assert "src.voice_digest" not in commands
     assert "src.build" not in commands
 
 
-def test_release_alert_daily_and_roundup_writers_remain_independent():
+def test_manual_inspection_daily_and_roundup_jobs_remain_independent():
     watch = load(WATCH)
     roundup = load(ROUNDUP)
     build = load(BUILD)
@@ -78,12 +80,12 @@ def test_release_alert_daily_and_roundup_writers_remain_independent():
     assert "src.voice_watch" not in build_commands
 
 
-def test_generated_stable_article_pages_do_not_recursively_trigger_ci():
+def test_generated_stable_article_pages_remain_historical_non_ci_artifacts():
     ignored = set(triggers(load(CI))["push"]["paths-ignore"])
     assert RELEASE_PAGE_GLOB in ignored
 
 
-def test_article_page_publisher_is_a_bounded_repo_writer():
+def test_article_page_publisher_remains_available_for_historical_compatibility():
     from src.voices.release import GitArticlePagePublisher
 
     publisher = GitArticlePagePublisher(attempts=3)

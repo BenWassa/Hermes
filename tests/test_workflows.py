@@ -1,9 +1,8 @@
 """Workflow contract for the independent Daily and Voices products.
 
-The morning build, Core release-alert watcher, and V2 roundup all write to
-``main``. They remain independent products with separate concurrency groups and
-disjoint paths; git compare-and-swap/rebase logic prevents one writer from
-overwriting another.
+The morning build, silent Core collection, manual Voice inspection, and screened
+weekly digest remain separate. Only the weekly Voice job receives ntfy/Gemini
+capability; release-time article notifications are retired.
 """
 
 from __future__ import annotations
@@ -25,6 +24,7 @@ WATCH_STATE_PATH = "data/voice_watch_state.json"
 ROUNDUP_STATE_PATH = "data/voice_roundup_state.json"
 EDITION_PATH = "docs/index.html"
 ROUNDUP_PAGE_PATH = "docs/voices/index.html"
+RECENT_PAGE_PATH = "docs/voices/recent/**"
 DAILY_CRON = "37 15 * * *"
 DAILY_BUILD_SCHEDULE = [
     {"cron": "17 5 * * *", "timezone": "America/Toronto"},
@@ -69,25 +69,20 @@ def triggers(workflow: dict) -> dict:
     return workflow.get("on", workflow.get(True))
 
 
-def test_release_watcher_remains_scheduled_and_separate_from_roundup():
+def test_release_watcher_is_manual_read_only_inspection_only():
     watch = load(WATCH)
-    crons = [entry["cron"] for entry in triggers(watch)["schedule"]]
-
-    assert crons == ["37 * * * *"]
-    assert "src.voice_watch" in script(watch)
-    assert "src.voice_roundup" not in script(watch)
-
-
-def test_release_watcher_is_bounded_and_only_gets_post_claim_model_secret():
-    watch = load(WATCH)
+    watch_triggers = triggers(watch)
     env: dict = {}
     for job in watch["jobs"].values():
         env.update(env_for(job))
 
-    assert "GEMINI_API_KEY" in env
-    assert "NYT_API_KEY" not in env
-    assert "NTFY_TOPIC" in env
-    assert "src.build" not in script(watch)
+    assert set(watch_triggers) == {"workflow_dispatch"}
+    assert "schedule" not in watch_triggers
+    assert watch["permissions"]["contents"] == "read"
+    assert "src.voice_watch --dry-run" in script(watch)
+    assert "GEMINI_API_KEY" not in env
+    assert "NTFY_TOPIC" not in env
+    assert "src.voice_digest" not in script(watch)
 
 
 def test_roundup_has_daily_collection_and_bounded_weekly_slots():
@@ -99,29 +94,42 @@ def test_roundup_has_daily_collection_and_bounded_weekly_slots():
     assert all(cron.split()[0] not in {"0", "*"} for cron in crons)
 
 
-def test_daily_collection_has_no_notification_or_gemini_secret():
+def test_daily_collection_is_silent_and_refreshes_quiet_recent_shelf():
     collect = load(ROUNDUP)["jobs"]["collect"]
     env = env_for(collect)
+    text = script_for(collect)
 
     assert "NTFY_TOPIC" not in env
     assert "GEMINI_API_KEY" not in env
     assert "NYT_API_KEY" not in env
-    assert "src.voice_roundup collect" in script_for(collect)
-    assert "src.build" not in script_for(collect)
+    assert "src.voice_roundup collect" in text
+    assert "src.voice_digest recent" in text
+    assert "src.voice_digest weekly" not in text
+    assert "src.build" not in text
 
 
-def test_weekly_roundup_job_alone_receives_ntfy_and_never_gemini():
-    weekly = load(ROUNDUP)["jobs"]["weekly"]
+def test_weekly_digest_job_is_the_only_voice_job_with_ntfy_and_gemini():
+    roundup = load(ROUNDUP)
+    weekly = roundup["jobs"]["weekly"]
     env = env_for(weekly)
 
     assert "NTFY_TOPIC" in env
-    assert "GEMINI_API_KEY" not in env
+    assert "GEMINI_API_KEY" in env
     assert "NYT_API_KEY" not in env
-    assert "src.voice_roundup weekly" in script_for(weekly)
+    assert "src.voice_digest weekly" in script_for(weekly)
     assert "src.voice_watch" not in script_for(weekly)
 
+    watch_env: dict = {}
+    for job in load(WATCH)["jobs"].values():
+        watch_env.update(env_for(job))
+    collect_env = env_for(roundup["jobs"]["collect"])
+    assert "NTFY_TOPIC" not in watch_env
+    assert "NTFY_TOPIC" not in collect_env
+    assert "GEMINI_API_KEY" not in watch_env
+    assert "GEMINI_API_KEY" not in collect_env
 
-def test_all_three_writers_have_independent_non_cancelling_concurrency_groups():
+
+def test_daily_weekly_and_manual_inspection_have_independent_non_cancelling_groups():
     build = load(BUILD)
     watch = load(WATCH)
     roundup = load(ROUNDUP)
@@ -146,9 +154,10 @@ def test_morning_build_does_not_own_voice_operational_paths():
     assert ROUNDUP_PAGE_PATH not in build_script
     assert "src.voice_watch" not in build_script
     assert "src.voice_roundup" not in build_script
+    assert "src.voice_digest" not in build_script
 
 
-def test_all_repository_writers_use_safe_retry_or_compare_and_swap():
+def test_repository_writers_keep_safe_retry_or_compare_and_swap():
     build_script = script(load(BUILD))
 
     assert "git fetch origin" in build_script
@@ -170,6 +179,7 @@ def test_operational_voice_commits_do_not_burn_ci():
     assert WATCH_STATE_PATH in ignored
     assert ROUNDUP_STATE_PATH in ignored
     assert ROUNDUP_PAGE_PATH in ignored
+    assert RECENT_PAGE_PATH in ignored
     assert "docs/voices/articles/**" in ignored
 
 

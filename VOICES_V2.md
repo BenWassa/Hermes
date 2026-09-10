@@ -3,15 +3,17 @@
 Status: **authoritative product contract for Voices V2**.
 
 This document locks the owner-decided Voices V2 roster, tier semantics,
-morning-Opinion participation, Core release-alert product, weekly catch-up
-product, and separation of product membership from source availability.
+morning-Opinion participation, silent Core collection, weekly screening and
+notification policy, and separation of product membership from source
+availability.
 
-> **2026-09-10 owner correction.** Real production use showed that the first
-> release-time article alert was useful. The earlier V2 decision that the
-> weekly roundup should replace routine per-article Voice alerts is superseded.
-> Core release alerts remain a product. Issue #26 upgrades them so the normal
-> destination is a compact Hermes article summary rather than only the
-> publisher link. The weekly roundup remains a separate catch-up layer.
+> **2026-09-10 final owner correction.** Production release-time alerts proved
+> too interruptive when several Core writers published on the same day. The
+> release-alert notification policy introduced by #26 / PR #28 is superseded.
+> Hermes keeps the useful collection, identity, dedupe and rendering machinery,
+> but routine per-article Voice pushes are retired. The **weekly Core digest is
+> the sole proactive Voice notification product**. Issue #29 owns this
+> correction.
 
 ## 1. Precedence and preserved authority
 
@@ -20,8 +22,9 @@ For Voices V2, this document is authoritative for:
 - intellectual roster membership;
 - Core / Selective / Discovery semantics;
 - morning `Following` eligibility and finite-selection policy;
-- routine Core release-alert eligibility;
-- the weekly Core roundup;
+- silent Core collection and optional browsing;
+- weekly screening and notification semantics;
+- retirement of routine release-time Voice notifications;
 - retirement of legacy overloaded `notify` semantics;
 - separation of product membership from technical source availability.
 
@@ -72,41 +75,36 @@ A Core Voice:
 - is eligible for morning `Following` consideration when qualifying new
   writing is available;
 - remains Core even when Hermes currently lacks a production-reachable source;
-- is the **only** tier eligible for routine release alerts;
-- is the **only** tier eligible for the weekly Core roundup.
+- is the only tier included in the silent Core collection used by the weekly
+  digest;
+- is the only tier eligible for the weekly Core digest.
 
-Core membership does not mean that every discovered item must generate a push.
-The article must still satisfy authorship, freshness, duplicate/syndication,
-source and operational qualification rules. But product eligibility derives
-from `tier == core`, not from legacy `notify`.
+Core membership does **not** mean every article deserves the reader's
+attention. Publication by a Core Voice establishes collection eligibility, not
+roundup-worthiness and never an automatic push.
 
 ### 3.2 Selective
-
-Selective is deliberately tracked but does not receive the automatic Core
-guarantee.
 
 A Selective Voice:
 
 - may enter morning `Following` only after the stronger generic substantive
   qualification rule;
-- does not create routine release-alert polling, article-summary generation or
-  notification pressure;
-- does not participate in the weekly Core roundup.
+- does not create routine Core-collection, weekly-screening or notification
+  pressure;
+- does not participate in the weekly Core digest.
 
 Selective is not a waiting room for Core and is not a source-quality
 classification.
 
 ### 3.3 Discovery
 
-Discovery is not explicitly followed.
-
 A Discovery Voice:
 
 - has no tier-based `Following` guarantee;
 - may appear through ordinary `Today's Opinion` editorial curation;
-- does not create routine release-alert polling, article-summary generation or
-  notification pressure;
-- does not participate in the weekly Core roundup.
+- does not create routine Core-collection, weekly-screening or notification
+  pressure;
+- does not participate in the weekly Core digest.
 
 ## 4. Morning Opinion contract
 
@@ -129,7 +127,7 @@ The morning paper remains finite:
 
 - do not force-fill `Following`;
 - normal ceiling is **6** items;
-- breadth across distinct Core Voices comes before depth from one Voice;
+- breadth across distinct Core Voices comes before depth;
 - use freshness and deterministic tie-breaks after breadth;
 - a modest overflow to **7 or 8** is allowed only to admit additional distinct
   Core Voices;
@@ -138,86 +136,93 @@ The morning paper remains finite:
 The existing canonical identity/dedupe and syndication rules determine whether
 multiple observations represent the same article.
 
-## 5. Core release-alert product
+## 5. Silent Core collection and optional browsing
 
-Routine release alerts are a retained V2 product for Core Voices.
+During the week Hermes collects qualifying Core writing silently.
 
-The target path is:
+The collection path is:
 
 ```text
 discover Core article
 -> establish authorship
 -> canonicalize + dedupe + collapse syndication
--> durably claim once
--> prepare compact Hermes article-summary page
--> send one restrained ntfy notification linking to Hermes
+-> add/update bounded Core roundup state
+-> expose recent writing on a quiet finite Hermes shelf
 ```
 
-### 5.1 Alert eligibility
+Rules:
 
-- `tier == core` is the product boundary.
-- Selective and Discovery create no routine alert obligation.
-- Source reachability remains an operational constraint and does not change
-  membership.
-- One intellectual article must produce at most one alert across retries,
-  reruns, alternate adapters and syndicated/reprinted URLs.
-- No BREAKING language, urgency framing, unread badge, queue or engagement
-  mechanic.
+- no per-article ntfy notification;
+- no per-article Gemini summary merely because a piece appeared;
+- no unread counters, badges, streaks or backlog pressure;
+- the reader may browse recent Core writing or ignore it;
+- the shelf remains finite and bounded;
+- publisher access controls are never bypassed.
 
-### 5.2 Hermes summary destination
+The retired #26 stable article-summary machinery may remain in the repository
+for historical links or future reuse, but it is not a production notification
+path.
 
-Issue #26 owns implementation of the summary surface.
+## 6. Weekly Core digest — sole Voice notification
 
-For a normal successful alert, tapping the notification should open a stable
-Hermes page containing:
+The weekly Core digest is the **only proactive Voice notification product**.
 
-- Voice name, publication and publication date;
-- original headline;
-- concise thesis/summary;
-- roughly 3–5 key arguments or takeaways when source material supports them;
-- a short `Why it matters` treatment when useful;
-- a prominent `Read original` link to the canonical publisher URL.
-
-The notification itself should carry writer + headline + a short takeaway, but
-must remain restrained enough to function as a pointer rather than a miniature
-feed.
-
-### 5.3 Summarization boundaries
-
-- Generate model output only after an article has qualified for a real Core
-  alert. Do not run Gemini for every watcher observation or every hourly pass.
-- Reuse Hermes summarization machinery where sensible, but do not rebuild the
-  whole Daily for one Voice article.
-- Use only legitimately accessible source text/metadata.
-- Never bypass paywalls or reproduce protected full text.
-- If source access is insufficient for a high-confidence full summary, degrade
-  to the trustworthy material available and preserve the canonical original
-  link.
-- Summary/render failure must not corrupt durable claim state or create
-  duplicate pushes.
-
-## 6. Weekly Core roundup
-
-The weekly roundup remains a separate **catch-up** product.
-
-Its architecture stays:
+Target architecture:
 
 ```text
 daily silent Core collection
 -> bounded separate roundup state
--> deterministic weekly selection, max 6
--> breadth across distinct Core Voices, max 2 per Voice
--> one current /voices/ roundup
+-> one weekly relevance/substance screen
+-> deliberately small shortlist, maximum 3
+-> one compact weekly summary at /voices/
 -> one restrained weekly ntfy notification
 ```
 
-This product does **not** replace Core release alerts. Its job is to provide a
-finite weekly view of worthwhile Core writing the reader may have missed.
+### 6.1 Screening contract
 
-Roundup collection remains Core-only, makes no Gemini calls merely to collect,
-and is independent of the morning edition and release-alert claim state.
-`WEEKLY_CORE_VOICES_ROUNDUP_RECONCILIATION.md` records the current reconciliation
-of that design.
+A Core byline alone is insufficient. The screen should prefer:
+
+- substantive or explanatory work likely to add a useful model or argument;
+- material relevance to Hermes's editorial interests: world affairs,
+  economics/markets, technology/AI, institutions, politics and consequential
+  social/cultural questions;
+- novelty versus the other candidates that week;
+- useful breadth across writers where quality is comparable;
+- pieces the morning Daily did not already surface, unless an already-surfaced
+  piece is clearly exceptional.
+
+The screen should de-prioritize routine publication churn, minor reactions,
+promotional/administrative posts, and redundant pieces on the same apparent
+subject.
+
+**Fewer is better when the week is weak.** The digest must never fill a quota
+merely because material exists.
+
+### 6.2 Model boundary
+
+Prefer one bounded weekly screening/synthesis model call rather than one call
+per article.
+
+- Daily collection has no Gemini capability.
+- Manual release-watch inspection has no Gemini or ntfy capability.
+- The weekly job alone may receive Gemini and ntfy credentials.
+- Model screening uses only legitimately available metadata/source material.
+- The model must not invent article arguments when only metadata is available.
+- If the weekly model call fails or is unavailable, degrade to a conservative
+  deterministic shortlist of at most 3, favoring breadth and work not already
+  surfaced in the Daily.
+
+### 6.3 Notification contract
+
+For a non-empty trusted weekly period:
+
+- claim/publish the weekly period durably before notification;
+- send at most **one** Voice notification for that period;
+- notification is a restrained pointer to `/voices/`;
+- retry/race behavior must never create duplicate Voice notifications.
+
+An empty, suppressed or already-claimed period sends no Voice notification.
+The morning Daily push is a separate product and is unaffected.
 
 ## 7. Product membership is independent of source availability
 
@@ -235,29 +240,24 @@ Consequences:
 - source-specific `enabled` state is operational, not intellectual;
 - a provider or adapter must never become roster authority.
 
-## 8. Retire overloaded `notify` semantics
+## 8. Retire overloaded `notify` and release-alert semantics
 
-The V1 `notify` boolean is a legacy watcher switch. It must not remain product
+The V1 `notify` boolean is legacy implementation baggage and must not be product
 authority.
 
 V2 semantics are:
 
-- **`tier`** defines durable product membership;
+- `tier` defines durable product membership;
 - morning participation derives from tier plus the Selective qualification
   rule;
-- routine release-alert eligibility derives from `tier == core`;
-- weekly roundup eligibility derives from `tier == core`;
+- silent weekly-collection eligibility derives from `tier == core`;
+- weekly-digest eligibility derives from `tier == core`;
+- **no tier has routine per-article Voice notification semantics**;
 - source reachability/technical activation remains separate operational state.
 
-Migration rule:
-
-- while legacy watcher code still depends on `notify`, it may retain that
-  temporary operational meaning;
-- no V2 code may interpret `notify: true` as Core or `notify: false` as not
-  Core;
-- #26 should remove or clearly retire `notify` as product semantics when the
-  Core alert path is migrated;
-- removing legacy `notify` must not remove the release-alert product itself.
+Any remaining release-watcher code may be retained only as read-only/manual
+inspection or dead-compatible machinery. Shipped workflows must not give it an
+ntfy topic or model secret.
 
 ## 9. Preserved implementation boundaries
 
@@ -271,11 +271,11 @@ Downstream work must preserve:
 6. bounded request budgets and no linear per-Voice/per-source model scaling;
 7. no paywall circumvention;
 8. repository-backed product authority for this one-reader static product;
-9. independent morning, release-alert and weekly-roundup state/write paths;
-10. at-most-once notification behavior under retry and git races.
+9. independent morning and weekly-roundup state/write paths;
+10. at-most-once weekly notification behavior under retry and git races.
 
-Current follow-on implementation issues:
+Current follow-on implementation issue:
 
-- **#25** — make the Daily's 05:00 Toronto operating target reliable.
-- **#26** — migrate retained Core release alerts to Hermes summary pages and
-  tier-based eligibility.
+- **#29** — weekly-only Voice notification, relevance screening and quiet recent
+  Core-writing shelf. This supersedes only the release-alert notification policy
+  introduced by #26/PR #28.
