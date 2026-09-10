@@ -1,31 +1,17 @@
 """Release-time alerts over the existing ntfy channel.
 
-Hermes already has one push channel: an ntfy topic that carries the single
-"today's edition is ready" message each morning. A followed writer publishing
-is the only other thing worth a buzz, so it rides the same channel rather than
-introducing a second push stack.
-
-The copy is deliberately flat:
-
-    Jonathan Haidt — After Babel
-    Treasure Your Attention
-
-Writer and publication in the title, headline in the body, the publisher's own
-canonical URL as the tap target. No BREAKING, no urgency priority, no badge or
-unread count, no engagement copy. The morning edition's push is unchanged and
-says nothing about individual pieces, so a piece alerted at noon and printed in
-tomorrow's paper is announced exactly once either way.
-
-Delivery uses ntfy's JSON publish endpoint rather than the ``X-Title`` header
-form the morning workflow uses. Headlines routinely contain em dashes, curly
-quotes and accented names, and ntfy's header parsing is ASCII-oriented; a JSON
-body is UTF-8 clean. Same service, same topic, same secret.
+The watcher creates an :class:`Alert` only after an article claim is durable.
+For Core release alerts that object may also carry the in-memory canonical
+article and Voice ids to the release-summary notifier.  Those fields are never
+serialized to ntfy or durable watcher state; they simply preserve the safe
+claim-before-send ordering while allowing #26 to prepare a Hermes destination
+before the actual push.
 """
 
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .. import config
 from .model import VoiceArticle
@@ -35,7 +21,6 @@ log = logging.getLogger("the-daily.voices.notify")
 
 #: Writers listed by name in one alert before the rest become "& others".
 MAX_NAMED_VOICES = 2
-
 DEFAULT_TIMEOUT = 15
 
 
@@ -45,12 +30,19 @@ class NotifyError(RuntimeError):
 
 @dataclass(frozen=True)
 class Alert:
-    """One release-time notification, ready to send."""
+    """One release-time notification, ready to send.
+
+    ``source_article`` and ``source_voice_ids`` are process-local preparation
+    context.  They deliberately do not appear in :meth:`as_payload` and are
+    not written to watcher state.
+    """
 
     title: str
     message: str
     click: str
     article_key: str = ""
+    source_article: VoiceArticle | None = field(default=None, repr=False, compare=False)
+    source_voice_ids: tuple[str, ...] = field(default=(), repr=False, compare=False)
 
     def as_payload(self, topic: str) -> dict:
         payload = {
@@ -83,23 +75,24 @@ def voice_names(article: VoiceArticle, registry, *, voice_ids=None) -> str:
 
 
 def build_alert(article: VoiceArticle, registry, *, voice_ids=None) -> Alert:
-    """Compose the alert for one newly discovered article.
+    """Compose the post-claim candidate alert for one canonical article.
 
-    A co-authored piece by two followed writers is one alert naming both, not
-    one alert per writer: the reader gained one article to read.
+    The direct publisher URL remains a safe fallback.  The #26 release notifier
+    replaces the visible copy and tap target with the stable Hermes summary
+    page when that page can be prepared successfully.
     """
-    writers = voice_names(article, registry, voice_ids=voice_ids)
+    ids = tuple(voice_ids if voice_ids is not None else article.voice_ids)
+    writers = voice_names(article, registry, voice_ids=ids)
     publication = article.publication or url_host(article.canonical_url or article.url)
     title = " — ".join(part for part in (writers, publication) if part)
-    # The tap target is the publisher's own URL as the source stated it, not
-    # the canonical form. Canonicalisation exists to compare and to key on:
-    # it drops "www." and other addressing detail that some hosts still need.
     link = article.url or article.canonical_url
     return Alert(
         title=title or "A followed writer",
         message=article.title or link,
         click=link,
         article_key=article.key,
+        source_article=article,
+        source_voice_ids=ids,
     )
 
 

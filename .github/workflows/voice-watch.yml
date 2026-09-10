@@ -1,26 +1,22 @@
 name: Watch Voices
 
-# Release-time alerts for followed writers. This is deliberately not a second
-# newspaper build: it makes a handful of provider requests, compares what it
-# finds against a small committed state file, and sends at most a few quiet
-# ntfy notifications. It never runs the curation model and never touches
-# docs/.
+# Release-time alerts for authoritative Core Voices. This remains deliberately
+# separate from the morning newspaper build: it makes only Voice-source requests,
+# reuses the bounded claim state, and invokes Gemini only after a genuinely new
+# Core article has been durably claimed for an alert. The resulting static page
+# lives at a stable /voices/articles/... URL; Selective and Discovery never enter
+# this job's production registry.
 #
-# Cadence. GitHub's scheduled Actions are eventually-soon, not realtime: a
-# cron can be delayed or dropped entirely under load, so no delivery latency
-# is promised anywhere in the product. Hourly at :37 rather than :00, because
-# the top of the hour is the most heavily throttled slot. The scarce providers
-# (Perigon, whose personal tier is measured in requests per month) are held
-# back for a once-a-day reconciliation pass that the watcher schedules itself
-# from durable state, so a missed run delays reconciliation rather than
-# skipping a day. Quiet hours are enforced in code, not here, so a manual
-# dispatch can override them.
+# Cadence. GitHub's scheduled Actions are eventually-soon, not realtime. Hourly
+# at :37 avoids the most congested top-of-hour slot. Scarce providers remain on
+# the durable once-a-day reconciliation cadence enforced by watcher code, and
+# quiet hours remain a code-level product rule.
 
 on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Report what would be sent; write nothing, send nothing"
+        description: "Report what would be sent; write nothing, model nothing, send nothing"
         type: boolean
         default: false
       ignore_quiet_hours:
@@ -34,15 +30,9 @@ permissions:
   contents: write
 
 # Watcher runs never overlap each other. They deliberately do NOT share a
-# group with "Build The Daily": GitHub cancels a *pending* run when a newer
-# one queues on the same group, so a shared group would let an hourly watcher
-# cancel a queued morning edition. The two jobs are kept apart from each other
-# by the git layer instead, which is stronger than a workflow lock: the
-# watcher writes only data/voice_watch_state.json, the build writes only
-# docs/index.html, and each pushes with fetch-and-retry so neither can
-# overwrite the other's commit. The watcher additionally re-reads state and
-# re-decides what is unclaimed after every lost race, so a lost push can never
-# turn into a duplicate alert.
+# group with Build The Daily or the weekly roundup. The git layer coordinates
+# their disjoint writes: a Core release first commits its claim, then publishes
+# one content-addressed article page, and only then attempts ntfy delivery.
 concurrency:
   group: voice-watch
   cancel-in-progress: false
@@ -53,8 +43,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        # Shallow is enough: the watcher reads one file and re-fetches the
-        # branch itself before every claim attempt.
         with:
           fetch-depth: 1
 
@@ -67,10 +55,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Watch followed voices
+      - name: Watch Core voices
         env:
           GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
           PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           PAGES_URL: ${{ vars.PAGES_URL }}
         run: |
