@@ -1,8 +1,17 @@
 # Hermes Voices V2 — Product Authority
 
-Status: **authoritative product contract for Voices V2 implementation**.
+Status: **authoritative product contract for Voices V2**.
 
-This document locks the owner-decided Voices V2 roster, tier semantics, morning-Opinion participation, future Voice notification scope, and V1 → V2 migration boundaries. It is intentionally an authority change only: it does not change current production Voice behavior, source configuration, watcher behavior, schedules, or rendering.
+This document locks the owner-decided Voices V2 roster, tier semantics,
+morning-Opinion participation, Core release-alert product, weekly catch-up
+product, and separation of product membership from source availability.
+
+> **2026-09-10 owner correction.** Real production use showed that the first
+> release-time article alert was useful. The earlier V2 decision that the
+> weekly roundup should replace routine per-article Voice alerts is superseded.
+> Core release alerts remain a product. Issue #26 upgrades them so the normal
+> destination is a compact Hermes article summary rather than only the
+> publisher link. The weekly roundup remains a separate catch-up layer.
 
 ## 1. Precedence and preserved authority
 
@@ -11,16 +20,17 @@ For Voices V2, this document is authoritative for:
 - intellectual roster membership;
 - Core / Selective / Discovery semantics;
 - morning `Following` eligibility and finite-selection policy;
-- the future weekly Voice notification product;
-- the meaning and retirement path of legacy `notify`;
-- separation of product membership from technical source availability;
-- V1 → V2 migration boundaries.
+- routine Core release-alert eligibility;
+- the weekly Core roundup;
+- retirement of legacy overloaded `notify` semantics;
+- separation of product membership from technical source availability.
 
-`VOICES.md` remains authoritative for the proven V1 identity, authorship-evidence, source-adapter, canonical-article, dedupe/syndication, provenance, paywall, and graceful-failure architecture except where this document explicitly changes product semantics.
+`VOICES.md` remains authoritative for the proven identity,
+authorship-evidence, source-adapter, canonical-article, dedupe/syndication,
+provenance, paywall, state-safety and graceful-failure architecture except where
+this document explicitly changes product semantics.
 
-`PRODUCT.md` remains authoritative for Hermes-wide product principles. If a global product principle conflicts with an implementation detail here, the global principle wins unless this document explicitly narrows it.
-
-Do not infer V2 product semantics from the current contents of `data/voices.json`; that file remains V1 production configuration until a later implementation change deliberately migrates it.
+`PRODUCT.md` remains authoritative for Hermes-wide product principles.
 
 ## 2. Locked intellectual roster
 
@@ -47,7 +57,9 @@ Additional locked classifications:
 - **Jordan Peterson — Selective**
 - **George Monbiot — Discovery**
 
-This is an intellectual/product classification. Do **not** add, remove, promote, demote, or disable a person because a source is easy, difficult, expensive, blocked, stale, temporarily unreachable, or not yet implemented.
+This is an intellectual/product classification. Do **not** add, remove,
+promote, demote, or disable a person because a source is easy, difficult,
+expensive, blocked, stale, temporarily unreachable, or not yet implemented.
 
 ## 3. Tier semantics
 
@@ -57,25 +69,32 @@ Core is the deliberate high-priority intellectual roster.
 
 A Core Voice:
 
-- is actively eligible for morning `Following` consideration when qualifying new writing is available;
+- is eligible for morning `Following` consideration when qualifying new
+  writing is available;
 - remains Core even when Hermes currently lacks a production-reachable source;
-- may therefore be technically dormant without losing Core membership;
-- is the **only** tier eligible for the future weekly Voice roundup / Voice notification product.
+- is the **only** tier eligible for routine release alerts;
+- is the **only** tier eligible for the weekly Core roundup.
 
-Core membership does not mean “send a notification for every article.” It is not a synonym for source reachability or watcher eligibility.
+Core membership does not mean that every discovered item must generate a push.
+The article must still satisfy authorship, freshness, duplicate/syndication,
+source and operational qualification rules. But product eligibility derives
+from `tier == core`, not from legacy `notify`.
 
 ### 3.2 Selective
 
-Selective is deliberately tracked but does not receive the automatic Core guarantee.
+Selective is deliberately tracked but does not receive the automatic Core
+guarantee.
 
 A Selective Voice:
 
-- may enter morning `Following` only after a stronger, generic, substantive qualification rule is satisfied;
-- should be filtered deterministically first;
-- may use Gemini for qualification only if deterministic qualification is proven inadequate, and must not create linear per-Voice/per-source LLM work;
-- is not eligible for the weekly Voice notification product.
+- may enter morning `Following` only after the stronger generic substantive
+  qualification rule;
+- does not create routine release-alert polling, article-summary generation or
+  notification pressure;
+- does not participate in the weekly Core roundup.
 
-Selective is not a waiting room for Core and is not a source-quality classification.
+Selective is not a waiting room for Core and is not a source-quality
+classification.
 
 ### 3.3 Discovery
 
@@ -83,133 +102,180 @@ Discovery is not explicitly followed.
 
 A Discovery Voice:
 
-- does not enter the deterministic `Following` set by virtue of tier membership;
-- may still appear through ordinary `Today's Opinion` editorial curation when the article is independently selected;
-- is not eligible for the weekly Voice notification product.
-
-Discovery therefore preserves ordinary editorial serendipity without turning every interesting writer into a followed Voice.
+- has no tier-based `Following` guarantee;
+- may appear through ordinary `Today's Opinion` editorial curation;
+- does not create routine release-alert polling, article-summary generation or
+  notification pressure;
+- does not participate in the weekly Core roundup.
 
 ## 4. Morning Opinion contract
 
 The Opinion desk remains two separate surfaces:
 
-1. **Following** — deterministic reader-priority handling under the tier rules above.
+1. **Following** — deterministic reader-priority handling under the tier rules.
 2. **Today's Opinion** — ordinary Hermes editorial selection.
 
-### 4.1 Participation
+Participation:
 
 - **Core:** qualifying new writing is considered for `Following`.
-- **Selective:** writing may be considered for `Following` only after the stronger generic substantive qualification rule.
-- **Discovery:** no tier-based `Following` eligibility; ordinary Opinion only.
+- **Selective:** may be considered only after the stronger generic substantive
+  qualification rule.
+- **Discovery:** ordinary Opinion only.
 
-Gemini must not be able to silently discard a qualifying Core follow merely because unrelated Opinion items rank higher.
+Gemini must not be able to silently discard a qualifying Core follow merely
+because unrelated Opinion items rank higher.
 
-### 4.2 Finite selection
+The morning paper remains finite:
 
-The morning paper remains finite.
+- do not force-fill `Following`;
+- normal ceiling is **6** items;
+- breadth across distinct Core Voices comes before depth from one Voice;
+- use freshness and deterministic tie-breaks after breadth;
+- a modest overflow to **7 or 8** is allowed only to admit additional distinct
+  Core Voices;
+- Selective items never create that overflow.
 
-- Do not force-fill `Following`.
-- Normal ceiling: **6** items.
-- Breadth across distinct Core Voices comes before depth from one Voice.
-- Use freshness and deterministic tie-breaks after breadth.
-- Do not use ideology, popularity, engagement, or fabricated “quality scores” as tie-breaks.
-- A modest overflow to **7 or 8** is allowed only when needed to admit additional distinct Core Voices that would otherwise be excluded by the normal six-item ceiling.
-- Selective items never create the 7–8 overflow; they must fit within the normal finite treatment after satisfying their stronger qualification rule.
+The existing canonical identity/dedupe and syndication rules determine whether
+multiple observations represent the same article.
 
-The existing canonical identity/dedupe and syndication rules continue to determine whether multiple observations represent the same article.
+## 5. Core release-alert product
 
-## 5. Voice notification product
+Routine release alerts are a retained V2 product for Core Voices.
 
-Routine per-article Voice alerts are **not** the V2 product.
+The target path is:
 
-The target V2 notification product is one finite **weekly Core Voices catch-up / roundup**.
+```text
+discover Core article
+-> establish authorship
+-> canonicalize + dedupe + collapse syndication
+-> durably claim once
+-> prepare compact Hermes article-summary page
+-> send one restrained ntfy notification linking to Hermes
+```
 
-Locked scope:
+### 5.1 Alert eligibility
 
-- **Core only** participates.
-- Selective and Discovery create no weekly polling or notification obligation.
-- No routine instant/ad-hoc notification for every newly published Voice article.
-- Selection should be deterministic-first.
-- Do not add Gemini calls merely because the roster grows; use model work only if later evidence demonstrates a specific need.
+- `tier == core` is the product boundary.
+- Selective and Discovery create no routine alert obligation.
+- Source reachability remains an operational constraint and does not change
+  membership.
+- One intellectual article must produce at most one alert across retries,
+  reruns, alternate adapters and syndicated/reprinted URLs.
+- No BREAKING language, urgency framing, unread badge, queue or engagement
+  mechanic.
 
-The design/research work for the weekly roundup may define implementation details, but it must consume this product authority rather than inventing roster or eligibility semantics.
+### 5.2 Hermes summary destination
 
-## 6. Product membership is independent of source availability
+Issue #26 owns implementation of the summary surface.
 
-A Voice has at least two conceptually separate dimensions:
+For a normal successful alert, tapping the notification should open a stable
+Hermes page containing:
+
+- Voice name, publication and publication date;
+- original headline;
+- concise thesis/summary;
+- roughly 3–5 key arguments or takeaways when source material supports them;
+- a short `Why it matters` treatment when useful;
+- a prominent `Read original` link to the canonical publisher URL.
+
+The notification itself should carry writer + headline + a short takeaway, but
+must remain restrained enough to function as a pointer rather than a miniature
+feed.
+
+### 5.3 Summarization boundaries
+
+- Generate model output only after an article has qualified for a real Core
+  alert. Do not run Gemini for every watcher observation or every hourly pass.
+- Reuse Hermes summarization machinery where sensible, but do not rebuild the
+  whole Daily for one Voice article.
+- Use only legitimately accessible source text/metadata.
+- Never bypass paywalls or reproduce protected full text.
+- If source access is insufficient for a high-confidence full summary, degrade
+  to the trustworthy material available and preserve the canonical original
+  link.
+- Summary/render failure must not corrupt durable claim state or create
+  duplicate pushes.
+
+## 6. Weekly Core roundup
+
+The weekly roundup remains a separate **catch-up** product.
+
+Its architecture stays:
+
+```text
+daily silent Core collection
+-> bounded separate roundup state
+-> deterministic weekly selection, max 6
+-> breadth across distinct Core Voices, max 2 per Voice
+-> one current /voices/ roundup
+-> one restrained weekly ntfy notification
+```
+
+This product does **not** replace Core release alerts. Its job is to provide a
+finite weekly view of worthwhile Core writing the reader may have missed.
+
+Roundup collection remains Core-only, makes no Gemini calls merely to collect,
+and is independent of the morning edition and release-alert claim state.
+`WEEKLY_CORE_VOICES_ROUNDUP_RECONCILIATION.md` records the current reconciliation
+of that design.
+
+## 7. Product membership is independent of source availability
+
+A Voice has separate dimensions:
 
 1. **Product membership** — `Core`, `Selective`, or `Discovery`.
-2. **Technical availability** — whether Hermes currently has one or more enabled, production-reachable sources that can establish authorship under the existing evidence rules.
-
-They must not be collapsed.
+2. **Technical availability** — whether Hermes has one or more enabled,
+   production-reachable sources that can establish authorship.
 
 Consequences:
 
 - a Core Voice with no working source remains Core;
-- a source audit may classify a Core Voice as dormant/unavailable without changing tier;
-- adding a better source does not promote a Voice;
 - a blocked publisher does not demote a Voice;
-- source-specific `enabled` state remains an operational fact, not an intellectual judgment;
-- a provider or adapter must never become the authority for roster membership.
+- adding a better source does not promote a Voice;
+- source-specific `enabled` state is operational, not intellectual;
+- a provider or adapter must never become roster authority.
 
-## 7. Replace overloaded `notify` semantics
+## 8. Retire overloaded `notify` semantics
 
-The current V1 `notify` boolean is a legacy **per-article watcher switch**. It must not be reused as V2 product authority.
+The V1 `notify` boolean is a legacy watcher switch. It must not remain product
+authority.
 
-V2 semantics are separated as follows:
+V2 semantics are:
 
-- **`tier`** is the durable product-membership concept: `core`, `selective`, or `discovery`.
-- Morning participation is derived from `tier` plus the generic qualification policy in §4; it is not represented by `notify`.
-- Weekly Voice-roundup eligibility is derived from `tier == core`; it is not represented by `notify`.
-- Source reachability/technical activation remains represented by Voice/source operational configuration; it is not represented by `tier`.
+- **`tier`** defines durable product membership;
+- morning participation derives from tier plus the Selective qualification
+  rule;
+- routine release-alert eligibility derives from `tier == core`;
+- weekly roundup eligibility derives from `tier == core`;
+- source reachability/technical activation remains separate operational state.
 
-Migration rule for `notify`:
+Migration rule:
 
-- while the V1 release-alert watcher still exists, `notify` keeps only its existing V1 operational meaning;
-- no V2 code may interpret `notify: true` as “Core” or `notify: false` as “not Core”;
-- when the weekly roundup replaces routine release alerts, retire the legacy per-Voice `notify` field rather than assigning it a second meaning;
-- any later workflow-level enable/disable switch for the roundup is operational configuration and must not alter Core membership.
+- while legacy watcher code still depends on `notify`, it may retain that
+  temporary operational meaning;
+- no V2 code may interpret `notify: true` as Core or `notify: false` as not
+  Core;
+- #26 should remove or clearly retire `notify` as product semantics when the
+  Core alert path is migrated;
+- removing legacy `notify` must not remove the release-alert product itself.
 
-The same separation applies to top-level V1 `enabled`: during migration it may continue to gate technical discovery, but it must not define whether someone belongs to Core, Selective, or Discovery.
+## 9. Preserved implementation boundaries
 
-## 8. Safe V1 → V2 migration boundary
+Downstream work must preserve:
 
-This authority change deliberately does **not** migrate production behavior.
+1. canonical Voice identity and explicit tier migration;
+2. evidence-based authorship rather than mention/name inference;
+3. generic adapters, never per-person fetch functions;
+4. canonical article identity, exact dedupe and syndication grouping;
+5. graceful local source failure;
+6. bounded request budgets and no linear per-Voice/per-source model scaling;
+7. no paywall circumvention;
+8. repository-backed product authority for this one-reader static product;
+9. independent morning, release-alert and weekly-roundup state/write paths;
+10. at-most-once notification behavior under retry and git races.
 
-A later implementation PR may add the V2 tier schema and roster, but it must preserve these boundaries:
+Current follow-on implementation issues:
 
-1. **Preserve proven architecture.** Keep the canonical Voice identity, authorship evidence, generic adapter interface, canonical article identity, exact dedupe, syndication grouping, provenance, source-failure isolation, and paywall boundaries established by #9–#13 and #17 / PRs #14–#19.
-2. **Do not infer tiers from V1 flags.** Migrate the locked classifications explicitly.
-3. **Preserve current V1 operation until cutover.** Existing `enabled` / `notify` behavior may continue unchanged until the specific downstream feature that replaces it is ready.
-4. **Allow dormant membership.** The V2 registry/schema must be able to represent a Core Voice even when zero production sources are currently usable.
-5. **Source expansion is separate work.** Adding the remaining Core sources must not be bundled into the product-authority change merely to make the roster look operationally complete.
-6. **Weekly roundup is separate work.** Do not change watcher cadence, state, ntfy delivery, or schedule in the authority migration.
-7. **Morning-policy implementation is separate from authority.** Do not silently change the shipped V1 `Following` behavior before the tier-aware selection code and its deterministic tests are ready.
-8. **No per-person hacks.** New roster members must use generic adapters and the existing evidence model.
-9. **No linear LLM scaling.** Roster growth must not create one model call per Voice, source, or article.
-10. **Repository-backed authority remains deliberate.** This is still a one-reader static product; do not add a semantically false local-only Follow control.
-
-For the five Voices already present in the V1 production registry, the explicit V2 classifications are:
-
-- Jonathan Haidt — Core
-- Conrad Black — Core
-- David Brooks — Core
-- Jordan Peterson — Selective
-- George Monbiot — Discovery
-
-That mapping is deliberate and must not be derived from their current `enabled`, `notify`, or source state.
-
-## 9. Non-goals of this authority change
-
-Do not implement here:
-
-- weekly roundup collection, state, rendering, schedules, or ntfy delivery;
-- new Core Voice source adapters or source configuration;
-- source-audit conclusions as production config;
-- per-person fetching logic;
-- changes to current morning `Following` output;
-- changes to the release-time watcher;
-- a new backend or preference store;
-- a redesign of the Opinion UI.
-
-The purpose of this document is to make downstream implementation choices mechanically checkable without reopening product decisions.
+- **#25** — make the Daily's 05:00 Toronto operating target reliable.
+- **#26** — migrate retained Core release alerts to Hermes summary pages and
+  tier-based eligibility.
