@@ -46,26 +46,37 @@ Voice is a person, not a publisher and not an algorithmic interest profile.
 Following must remain finite and quiet: no `For You` feed, unread-count
 treadmill, social graph, recommendation loop, or infinite archive.
 
-Voices has three complementary reader surfaces:
+Voices has three reader surfaces, but only one proactive Voice interruption:
 
 1. **Morning Following** — qualifying Voice work inside the finite Daily.
-2. **Core release alerts** — when a qualifying Core Voice publishes, Hermes may
-   send one restrained notification after preparing a compact Hermes summary.
-   The normal notification target is that Hermes summary page, with the
-   publisher's canonical article available as `Read original`.
-3. **Weekly Core roundup** — a finite catch-up across Core Voices, not a
-   replacement for useful release-time alerts.
+2. **Recent Core writing** — a bounded, quiet in-app shelf. Core articles are
+   collected and deduplicated silently and remain available for optional
+   browsing. The user may check it or ignore it; nothing there creates an
+   unread obligation or notification.
+3. **Weekly Core digest** — Hermes screens the week's Core writing for actual
+   attention-worthiness, keeps the shortlist deliberately small, produces one
+   compact weekly summary, and may send **one** restrained weekly ntfy
+   notification linking to it.
 
-For routine release alerts, `tier == core` is product authority. Selective and
-Discovery do not create routine release-alert polling, summarization, or
-notification pressure unless a later explicit owner decision changes that.
-Summary generation should happen only after an article qualifies for a real
-Core alert; roster growth must not create model work for every watcher
-candidate. Paywalls and publisher access controls are never bypassed.
+Publication by a Core Voice is collection eligibility, not evidence that a
+piece deserves interruption or inclusion in the weekly digest. Weekly screening
+should prefer substantive/new explanatory value, material relevance to Hermes's
+editorial interests, novelty versus the other candidates, and useful breadth.
+Routine churn, minor reactions and redundant pieces should remain browseable
+without occupying the digest.
 
+There are **no routine per-article Voice notifications** and no per-article
+Gemini calls merely because a Core Voice published. The weekly digest is the
+sole proactive Voice notification product. Prefer one bounded weekly
+screening/synthesis model call; if it fails, degrade to a conservative small
+deterministic selection. Paywalls and publisher access controls are never
+bypassed.
+
+Morning Daily notification remains a separate Daily product and is unaffected.
 See `VOICES.md` for the proven identity/source architecture and `VOICES_V2.md`
-for current tier and notification semantics. Issue #26 owns the Hermes article
-summary and Core release-alert implementation.
+for current tier and weekly-notification semantics. Issue #29 owns the
+weekly-only notification and relevance-screening correction; it supersedes only
+the release-alert policy introduced by #26/PR #28.
 
 ## Brand Personality
 
