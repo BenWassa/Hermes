@@ -1,14 +1,15 @@
 # The Daily
 
 An autonomous overnight pipeline that assembles a personalized Toronto morning
-newspaper, renders it as a static web page, and pushes a notification to your
-phone at 7:00 AM. World and business news come from the Guardian, NYT, and
-Perigon APIs (Perigon aggregates FT, Reuters, Bloomberg and thousands more, so
-the business desk reads like a professional's, not just one paper); Toronto
-local news comes from RSS. Google Gemini (`gemini-2.5-flash`, free
-tier) dedupes, sections, ranks, and summarizes; a sensitivity rule keeps hard
-news text-only. The result deploys to GitHub Pages and an ntfy.sh push links
-straight to it.
+newspaper, renders it as a static web page, and pushes a notification after a
+successful publication. The primary build targets 05:17 America/Toronto, with
+bounded same-morning recovery attempts if GitHub's scheduler is delayed or drops
+a run. World and business news come from the Guardian, NYT, and Perigon APIs
+(Perigon aggregates FT, Reuters, Bloomberg and thousands more, so the business
+desk reads like a professional's, not just one paper); Toronto local news comes
+from RSS. Google Gemini (`gemini-2.5-flash`, free tier) dedupes, sections, ranks,
+and summarizes; a sensitivity rule keeps hard news text-only. The result deploys
+to GitHub Pages and an ntfy.sh push links straight to it.
 
 > v2 of this repo. The previous React/Firebase intelligence dashboard ("Hermes
 > v1") is preserved under [archive/v1-hermes/](archive/v1-hermes/) and tagged
@@ -326,11 +327,13 @@ in [src/config.py](src/config.py).
 
 ## Deployment (GitHub Pages + Actions)
 
-- [.github/workflows/build.yml](.github/workflows/build.yml) — builds and
-  commits `docs/index.html` on a DST-aware ~6 AM ET schedule (plus manual
-  `workflow_dispatch`).
-- [.github/workflows/notify.yml](.github/workflows/notify.yml) — sends the
-  ntfy.sh morning push at ~7 AM ET.
+- [.github/workflows/build.yml](.github/workflows/build.yml) — targets 05:17
+  America/Toronto every day, retries at 05:37, 06:17 and 07:17 if needed, and
+  no-ops before source/model work once that Toronto-calendar edition exists.
+  Manual `workflow_dispatch` uses the same idempotency gate.
+- [.github/workflows/notify.yml](.github/workflows/notify.yml) — follows a
+  successful `Build The Daily` run and sends the ntfy.sh morning push only when
+  that run actually published today's edition.
 - [.github/workflows/voice-watch.yml](.github/workflows/voice-watch.yml) —
   hourly release-time checks for followed Voices; commits
   `data/voice_watch_state.json` only when substantive state changes.
@@ -353,8 +356,7 @@ Pages serves `docs/` on `main` at `https://BenWassa.github.io/Hermes/`.
 - [ ] Add repo **variable** `PAGES_URL` (for example `https://BenWassa.github.io/Hermes/`)
 - [ ] Enable GitHub Pages: Settings → Pages → source = `main`, folder = `/docs`
 - [ ] Run `python -m src.voices.audit` and a bounded live Voice audit from Actions
-- [ ] Trigger `Build The Daily`; confirm the exact generated edition publishes
-- [ ] Trigger `Notify The Daily`; confirm the morning push and link
+- [ ] Trigger `Build The Daily`; confirm the exact generated edition publishes and one morning push arrives
 - [ ] Run one `voice_watch --smoke` when Voice alerts are enabled; use `--no-notify` for repeat diagnostics
 - [ ] Confirm cron/quiet-hour behavior against America/Toronto DST
 

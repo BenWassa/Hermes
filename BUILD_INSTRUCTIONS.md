@@ -19,7 +19,7 @@ Each task in §3 is self-contained: goal, files touched, implementation notes, a
 
 ## 1. Kickoff prompt
 
-> Build **The Daily**, an autonomous morning newspaper pipeline, per `PRD_daily_newspaper.md` in this repo. It fetches world news (Guardian + NYT APIs) and Toronto news (RSS), uses the Anthropic API to dedupe/section/rank/summarize, resolves images with a sensitivity-based suppression rule, renders a static HTML newspaper, deploys to GitHub Pages, and pushes an ntfy.sh notification at 7 AM.
+> Build **The Daily**, an autonomous morning newspaper pipeline, per `PRD_daily_newspaper.md` in this repo. It fetches world news (Guardian + NYT APIs) and Toronto news (RSS), uses the Anthropic API to dedupe/section/rank/summarize, resolves images with a sensitivity-based suppression rule, renders a static HTML newspaper, deploys to GitHub Pages, and pushes an ntfy.sh notification after the day's successful publication. The current production timing authority targets the 05:00 America/Toronto hour, normally complete by 06:00, with bounded idempotent recovery attempts.
 >
 > Stack: **Python 3.11**, `requests`, `feedparser`, `anthropic`, `jinja2`. Deploy via GitHub Actions to GitHub Pages.
 >
@@ -186,29 +186,31 @@ weather → fetch → normalize → curate → resolve_images → render
 
 ### Task 8 — GitHub Action (`.github/workflows/build.yml`)
 
-**Goal:** Scheduled build + Pages deploy.
+**Goal:** Reliable scheduled publication + Pages deploy.
 
 **Implementation:**
-- Triggers: `schedule` cron + `workflow_dispatch` (manual).
-- **DST-aware timing:** run two crons and gate inside the job, OR run at a fixed UTC and accept a 1-hour seasonal shift. Recommended: two crons —
-  - `0 10 * * *` (covers EDT, summer, UTC-4 → 6 AM)
-  - `0 11 * * *` (covers EST, winter, UTC-5 → 6 AM)
-  - First step checks current ET; if it isn't ~6 AM ET, exit early. (Prevents double-build in shoulder weeks.)
-- Steps: checkout → setup-python → pip install → `python -m src.build` → commit `docs/` + `data/` → push (Pages serves `docs/`).
-- Secrets: `ANTHROPIC_API_KEY`, `GUARDIAN_API_KEY`, `NYT_API_KEY` via `env:`.
-- Enable GitHub Pages on the repo, source = `docs/` on main (one-time manual setting, note in README).
+- Triggers: native timezone-aware `schedule` entries plus `workflow_dispatch` for manual recovery.
+- Primary target: `17 5 * * *` with `timezone: "America/Toronto"`. The :17 offset avoids the scheduler's busiest top-of-hour window while keeping publication in the 05:00 local hour in both EDT and EST.
+- Bounded recovery: retry at 05:37, 06:17, and 07:17 America/Toronto. These are recovery opportunities, not extra editions.
+- Immediately after checkout, compute the Toronto calendar date and check git history for the exact `chore(edition): publish YYYY-MM-DD edition` commit touching `docs/index.html`.
+- If today's edition already exists, no-op **before** Python setup, dependency installation, provider fetches, or model work. The same gate applies to scheduled and manually dispatched builds.
+- Steps after the gate: setup-python → pip install → `python -m src.build` → commit `docs/index.html` → push.
+- Keep the dedicated non-cancelling Daily concurrency group and bounded fetch/rebase/push retry so Voice and roundup writers remain independent.
+- Secrets remain provided through environment variables; never hardcode credentials.
+- GitHub Pages remains source = `docs/` on `main`.
 
-**Test gate:** `workflow_dispatch` manual run completes green; Pages URL shows the fresh edition.
+**Test gate:** deterministic workflow tests prove exact timezone/schedule entries, early all-attempt idempotency, independent concurrency, and safe git retry. A `workflow_dispatch` when today's edition already exists must complete as a no-op without provider/model work.
 
 ---
 
-### Task 9 — Notification (add to workflow)
+### Task 9 — Notification (`.github/workflows/notify.yml`)
 
-**Goal:** ntfy.sh push at 7 AM with link.
+**Goal:** Send exactly one morning ntfy.sh push for the edition that was actually published.
 
 **Implementation:**
-- Simplest: a second workflow `notify.yml` on a 7 AM ET cron (same DST handling) that sends the curl push.
-- Or: append to `build.yml` a step that sends an ntfy message with a scheduled delivery header (`At: 7am`) so build and notify live in one run.
+- Trigger from successful completion of `Build The Daily`, not a second clock schedule.
+- Require evidence that the triggering build produced today's Toronto-calendar edition; scheduled recovery runs that no-op after publication must remain silent.
+- Do not expose a direct notification `workflow_dispatch` bypass. Manual recovery is performed by dispatching `Build The Daily`, which automatically triggers notification only if it creates the edition.
 - Push includes Title (`The Daily — <Mon D>`), Click (Pages URL), Tags (`newspaper`).
 - Topic from `NTFY_TOPIC` secret.
 
@@ -221,7 +223,7 @@ curl \
   "ntfy.sh/${NTFY_TOPIC}"
 ```
 
-**Test gate:** Manual trigger sends a push; it arrives on the phone; tapping opens the live edition.
+**Test gate:** Workflow contract tests prove no direct duplicate-notification bypass and that no-op recovery builds cannot send another push.
 
 ---
 
@@ -229,11 +231,12 @@ curl \
 
 **Goal:** Prove the autonomous loop.
 
-- Trigger the full build manually in the evening.
-- Confirm: edition builds, deploys, push arrives, link renders correctly on phone, sensitive stories are text-only, weather is right.
-- Let it run on the real cron one morning. Verify hands-off.
+- Trigger the full build manually when no edition exists for the current Toronto calendar date.
+- Confirm: edition builds, deploys, one push arrives, link renders correctly on phone, sensitive stories are text-only, weather is right.
+- Dispatch again after publication and confirm it no-ops before provider/model work and sends no second push.
+- Let it run on the real timezone-aware schedule one morning. Verify hands-off publication behavior.
 
-**Test gate:** A real scheduled run lands a correct edition + push with zero manual steps.
+**Test gate:** A real scheduled run lands a correct edition + push with zero manual steps; later same-day recovery attempts are cheap no-ops.
 
 ---
 
@@ -271,5 +274,6 @@ Bake these into the system prompt verbatim:
 - [ ] Add 4 repo secrets.
 - [ ] Enable Pages (source `docs/`).
 - [ ] Verify Toronto RSS URLs resolve; swap any dead ones.
-- [ ] Manual `workflow_dispatch`, confirm edition + push.
-- [ ] Confirm cron times against current DST.
+- [ ] Manual `workflow_dispatch` of `Build The Daily`, confirm edition + one push.
+- [ ] Re-dispatch after publication and confirm the early no-op/no-second-push behavior.
+- [ ] Confirm the timezone-aware schedule against current Toronto DST.
