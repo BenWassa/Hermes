@@ -17,60 +17,24 @@ jobs:
           python-version: "3.11"
       - name: Install runtime dependencies
         run: pip install -r requirements.txt
-      - name: Inspect ESPN major-event contracts
+      - name: Build live major-event desk
         run: |
           python - <<'PY'
+          import datetime as dt
           import json
-          import requests
 
-          for league in ("uefa.champions", "fifa.world"):
-              scoreboard = requests.get(
-                  f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/scoreboard",
-                  params={"dates": "20260910-20260930"},
-                  timeout=15,
-              )
-              print("SCOREBOARD", league, scoreboard.status_code)
-              scoreboard.raise_for_status()
-              payload = scoreboard.json()
-              events = payload.get("events") or []
-              print("EVENT_COUNT", len(events))
-              for event in events[:2]:
-                  comp = (event.get("competitions") or [{}])[0]
-                  print("EVENT", json.dumps({
-                      "id": event.get("id"),
-                      "date": event.get("date"),
-                      "season": event.get("season"),
-                      "seasonType": event.get("seasonType"),
-                      "league": (event.get("league") or {}).get("slug"),
-                      "status": event.get("status"),
-                      "competition_type": comp.get("type"),
-                      "competitors": [
-                          {
-                              "homeAway": c.get("homeAway"),
-                              "score": c.get("score"),
-                              "winner": c.get("winner"),
-                              "team": {k: (c.get("team") or {}).get(k) for k in ("id", "displayName", "abbreviation")},
-                          }
-                          for c in (comp.get("competitors") or [])
-                      ],
-                      "notes": comp.get("notes"),
-                  }, ensure_ascii=False, default=str))
+          from src.sports import build_major_events
 
-              standings = requests.get(
-                  f"https://site.api.espn.com/apis/v2/sports/soccer/{league}/standings",
-                  timeout=15,
-              )
-              print("STANDINGS", league, standings.status_code)
-              standings.raise_for_status()
-              root = standings.json()
-              groups = root.get("children") or []
-              print("GROUP_COUNT", len(groups))
-              for group in groups[:1]:
-                  table = ((group.get("standings") or {}).get("entries") or [])
-                  print("GROUP", group.get("name"), group.get("abbreviation"), "ROWS", len(table))
-                  for row in table[:2]:
-                      print("ROW", json.dumps({
-                          "team": row.get("team"),
-                          "stats": row.get("stats"),
-                      }, ensure_ascii=False, default=str)[:2500])
+          now = dt.datetime.now(dt.timezone.utc)
+          desk = build_major_events(now=now)
+          payload = desk.to_dict()
+          print(json.dumps(payload, indent=2, ensure_ascii=False))
+          keys = [event["key"] for event in payload["events"]]
+          assert "champions-league" in keys, payload
+          champions = next(event for event in payload["events"] if event["key"] == "champions-league")
+          assert champions["available"], payload
+          assert champions["source"] == "ESPN"
+          assert payload["event_mode"] is False
+          assert payload["max_items"] == 6
+          assert len(champions["matches"]) <= 6
           PY
