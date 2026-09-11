@@ -49,7 +49,7 @@ Only registry entries can enter the Major Events desk.
 |---|---|---|---|---|
 | FIFA World Cup 2030 | 8 Jun–21 Jul 2030 | Event mode | ESPN `fifa.world` | targeted World Cup / Canada only |
 | Los Angeles 2028 Olympics | 14–30 Jul 2028 | Event mode | event-window seam | Canada medals/results, finals, records |
-| UEFA Champions League | active competition months, excluding Jul–Aug | High | ESPN `uefa.champions` | structured state is primary |
+| UEFA Champions League | Sep–May main competition | High | ESPN `uefa.champions` | structured state is primary |
 | Rugby World Cup 2027 | 1 Oct–13 Nov 2027 | Selective | headline-only | knockout/final exceptions |
 | NFL postseason | Jan–Feb | Selective | headline-only | conference championships / Super Bowl / advancement |
 
@@ -103,4 +103,4 @@ The deterministic trigger layer rejects generic previews, pool-table updates and
 - Headline-only events never become persistent scoreboards.
 - Off-window dates perform zero structured-event requests.
 
-The branch-only probe workflow is evidence only and must be removed before merge.
+The branch-only probe workflow was removed before merge.
