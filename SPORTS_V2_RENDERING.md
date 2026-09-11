@@ -3,7 +3,7 @@
 **Status:** issue #38 implementation authority  
 **Date:** 2026-09-11  
 **Parent:** #33  
-**Related:** `SPORTS_V2.md`, `SPORTS_V2_SOURCE_AUDIT.md`, `SPORTS_V2_MAJOR_EVENTS.md`, `DESIGN.md`
+**Related:** `SPORTS_V2.md`, `SPORTS_V2_SOURCE_AUDIT.md`, `SPORTS_V2_MAJOR_EVENTS.md`, `SPORTS_V2_PERFORMANCE.md`, `DESIGN.md`
 
 ## Purpose
 
@@ -47,9 +47,13 @@ The team remains in its permanent position with a restrained unavailable line. O
 
 ## Team identity
 
-The baseline deliberately uses Hermes-authored text identity (`LEAFS`, `RAPTORS`, `BLUE JAYS`) plus the existing Press Navy/Masthead Red system.
+The #38 production baseline deliberately uses Hermes-authored text identity (`LEAFS`, `RAPTORS`, `BLUE JAYS`) plus the existing Press Navy/Masthead Red system.
 
-No official league/team logo, traced mark, official colour palette, downloaded brand asset or remote team image is part of #38. The source audit's permission decision remains authoritative. A licensed mark can be added later without changing the row contract.
+No official league/team logo, traced mark, official colour palette, downloaded brand asset or remote team image was part of #38. The source audit's original permission decision therefore remains the authority for the #38 baseline.
+
+During #39 branch acceptance, remote official/league-hosted Toronto marks and ESPN-hosted Champions League club crests were explored successfully without copying those assets into Hermes. That experiment is **not** production authority. Issue #55 / `SPORTS_V2_PERFORMANCE.md` owns any promotion of remote marks, including loading priority, skeleton/fallback behavior, URL allowlisting, cache policy, request-budget preservation and performance acceptance.
+
+Until #55 is complete, visible text identity remains mandatory and sufficient when any remote mark is absent.
 
 ## Major Events
 
@@ -83,6 +87,8 @@ Sports remains part of The Morning Broadsheet:
 - interactive headline links maintain a 44px minimum target;
 - static score rows do not pretend to be buttons.
 
+If #55 promotes remote identity, loading states must preserve these rules: fixed quiet mark slots, no full-card skeletons, no spinner wall, no layout shift and reduced-motion-safe behavior.
+
 ## Rendering seam
 
 `src.sports.presentation.build_sports_payload()` is the only new composition layer. It:
@@ -92,7 +98,7 @@ Sports remains part of The Morning Broadsheet:
 - attaches each favourite-team headline once;
 - carries the existing `MajorEventsDesk` serialization;
 - caps global Major Headlines at four;
-- contains no logo/palette contract.
+- contains no #38 logo/palette contract.
 
 `src.render` inlines `template/sports.css` and `template/sports.js` only when the edition has a top-level `sports` payload. Editions without that payload use the existing renderer without loading or executing Sports-specific presentation code.
 
@@ -110,3 +116,19 @@ The Sports script takes over the stories column only while the existing Sports t
 - claim live production/device acceptance.
 
 #39 must assemble the production `sports` payload, make Sports V2 the sole production Sports authority, retire generic Sport curation, and run end-to-end live/mobile verification.
+
+## #55 performance boundary
+
+#55 is a focused follow-on rather than an excuse to keep adding preview code to #39. It owns:
+
+- productionizing optional remote Toronto/Champions League identity if retained;
+- zero-extra-provider-request crest extraction;
+- native image lazy loading / decoding / intrinsic geometry;
+- restrained mark skeletons and deterministic fallback;
+- Sports first-frame interaction/rendering performance;
+- third-party connection strategy;
+- service-worker cache narrowing for remote assets;
+- performance/Web Vitals regression evidence;
+- deletion of the branch-only decorators and duplicate crest-fetch experiment.
+
+The Sports V2 parent should remain open through #55 even if #39 production integration lands first.
