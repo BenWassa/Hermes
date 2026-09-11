@@ -1,0 +1,31 @@
+name: Sports team state live check
+
+on:
+  push:
+    branches:
+      - sports-35-toronto-team-state
+  workflow_dispatch: {}
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install runtime dependencies
+        run: pip install -r requirements.txt
+      - name: Build live Toronto snapshots
+        run: |
+          python - <<'PY'
+          import json
+          from src.sports import build_toronto_snapshots
+
+          snapshots = build_toronto_snapshots()
+          payload = [snapshot.to_dict() for snapshot in snapshots]
+          print(json.dumps(payload, indent=2, ensure_ascii=False))
+          assert [item["team"]["key"] for item in payload] == ["leafs", "raptors", "blue-jays"]
+          assert all(item["available"] for item in payload), payload
+          PY
