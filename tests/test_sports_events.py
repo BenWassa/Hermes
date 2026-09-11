@@ -33,9 +33,11 @@ def match(identifier, when, *, status=EventMatchStatus.SCHEDULED, canada=False):
     )
 
 
-def test_champions_league_is_seasonal_and_not_year_round():
+def test_champions_league_is_main_season_not_year_round():
     assert "champions-league" in {s.key for s in active_event_specs(dt.date(2026, 9, 11))}
+    assert "champions-league" not in {s.key for s in active_event_specs(dt.date(2026, 6, 11))}
     assert "champions-league" not in {s.key for s in active_event_specs(dt.date(2026, 7, 11))}
+    assert "champions-league" not in {s.key for s in active_event_specs(dt.date(2026, 8, 11))}
 
 
 def test_world_cup_and_olympics_activate_only_in_pinned_windows():
@@ -117,9 +119,8 @@ def test_olympics_prioritizes_canada_then_records_and_finals():
     assert [item.label for item in selected] == ["canada", "record", "final"]
 
 
-def test_event_mode_expands_global_cap_but_remains_bounded():
+def test_event_mode_expands_global_cap_but_stays_finite():
     world = spec("fifa-world-cup-2030")
-    cl = spec("champions-league")
     fetched = dt.datetime(2030, 6, 20, 12, tzinfo=UTC)
     world_snapshot = EventSnapshot(
         spec=world,
@@ -127,17 +128,33 @@ def test_event_mode_expands_global_cap_but_remains_bounded():
         source="fixture",
         highlights=tuple(EventHighlight(f"w{i}", "x") for i in range(8)),
     )
+    desk = build_major_events_desk([world_snapshot], on_date=dt.date(2030, 6, 20))
+    assert desk.event_mode is True
+    assert desk.max_items == 12
+    assert desk.snapshots[0].spec.key == "fifa-world-cup-2030"
+    assert sum(len(s.matches) + len(s.highlights) for s in desk.snapshots) == 8
+
+
+def test_ordinary_priority_conflict_keeps_champions_league_inside_six_item_cap():
+    cl = spec("champions-league")
+    nfl = spec("nfl-postseason")
+    fetched = dt.datetime(2027, 1, 20, 12, tzinfo=UTC)
     cl_snapshot = EventSnapshot(
         spec=cl,
         fetched_at=fetched,
         source="fixture",
         highlights=tuple(EventHighlight(f"c{i}", "x") for i in range(6)),
     )
-    desk = build_major_events_desk([cl_snapshot, world_snapshot], on_date=dt.date(2030, 6, 20))
-    assert desk.event_mode is True
-    assert desk.max_items == 12
-    assert desk.snapshots[0].spec.key == "fifa-world-cup-2030"
-    assert sum(len(s.matches) + len(s.highlights) for s in desk.snapshots) == 12
+    nfl_snapshot = EventSnapshot(
+        spec=nfl,
+        fetched_at=fetched,
+        source="fixture",
+        highlights=tuple(EventHighlight(f"n{i}", "x") for i in range(2)),
+    )
+    desk = build_major_events_desk([nfl_snapshot, cl_snapshot], on_date=dt.date(2027, 1, 20))
+    assert desk.event_mode is False
+    assert desk.max_items == 6
+    assert [snapshot.spec.key for snapshot in desk.snapshots] == ["champions-league"]
 
 
 class _NoNetwork:
