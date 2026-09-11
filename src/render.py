@@ -12,11 +12,23 @@ import json
 from pathlib import Path
 
 TEMPLATE = Path("template/index.template.html")
+SPORTS_CSS = Path("template/sports.css")
+SPORTS_JS = Path("template/sports.js")
 OUTPUT = Path("docs/index.html")
 LATEST = Path("data/latest.json")
 
 _JSON_PLACEHOLDER = "/*__EDITION_JSON__*/"
 _BUILD_PLACEHOLDER = "__BUILD_TS__"
+
+
+def _inject_sports_renderer(html: str) -> str:
+    """Inline the modular Sports V2 presentation assets into one static page."""
+    css = SPORTS_CSS.read_text(encoding="utf-8")
+    js = SPORTS_JS.read_text(encoding="utf-8")
+    if "</style>" not in html or "</body>" not in html:
+        raise ValueError("edition template is missing Sports renderer injection anchors")
+    html = html.replace("</style>", f"\n{css}\n  </style>", 1)
+    return html.replace("</body>", f"  <script>\n{js}\n  </script>\n</body>", 1)
 
 
 def render(edition: dict, template_path: Path = TEMPLATE, output_path: Path = OUTPUT) -> Path:
@@ -30,6 +42,8 @@ def render(edition: dict, template_path: Path = TEMPLATE, output_path: Path = OU
     build_ts = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     html = template.replace(_JSON_PLACEHOLDER, edition_json).replace(_BUILD_PLACEHOLDER, build_ts)
+    if edition.get("sports") is not None:
+        html = _inject_sports_renderer(html)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(html, encoding="utf-8")
