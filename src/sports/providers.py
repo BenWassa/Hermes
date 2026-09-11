@@ -1,7 +1,7 @@
 """Small provider adapters for Toronto favourite-team state.
 
-Provider JSON is parsed here and nowhere else.  The rest of Hermes sees only
-``TeamSnapshot`` domain objects.  These functions never call Gemini and never
+Provider JSON is parsed here and nowhere else. The rest of Hermes sees only
+``TeamSnapshot`` domain objects. These functions never call Gemini and never
 reuse the ordinary news-story schema.
 """
 
@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import datetime as dt
 import re
-from collections.abc import Iterable
 
 import requests
 
@@ -21,6 +20,7 @@ from .models import (
     StandingSummary,
     TeamRef,
     TeamSnapshot,
+    TORONTO,
     UTC,
 )
 
@@ -67,11 +67,17 @@ def _integer(value) -> int | None:
 def _ordinal(value: int | None) -> str:
     if value is None:
         return ""
-    suffix = "th" if 10 <= value % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(value % 10, "th")
+    suffix = (
+        "th"
+        if 10 <= value % 100 <= 20
+        else {1: "st", 2: "nd", 3: "rd"}.get(value % 10, "th")
+    )
     return f"{value}{suffix}"
 
 
-def _result(team_score: int | None, opponent_score: int | None, status: GameStatus) -> str | None:
+def _result(
+    team_score: int | None, opponent_score: int | None, status: GameStatus
+) -> str | None:
     if status != GameStatus.FINAL or team_score is None or opponent_score is None:
         return None
     if team_score > opponent_score:
@@ -106,10 +112,10 @@ def _phase_from_type(value, *, provider: str) -> SeasonPhase:
 def _infer_phase(games: list[GameSummary], now: dt.datetime) -> SeasonPhase:
     """Infer reader-facing phase without carrying stale prior-season state.
 
-    A currently live game wins.  An imminent later phase (regular after
+    A currently live game wins. An imminent later phase (regular after
     preseason or playoffs after regular season) activates up to a week early.
     Otherwise a just-completed game represents the current phase, then an
-    upcoming game within 45 days.  Farther-away fixtures remain useful as the
+    upcoming game within 45 days. Farther-away fixtures remain useful as the
     next meaningful date while the team stays labelled offseason.
     """
     now = now.astimezone(UTC)
@@ -118,7 +124,11 @@ def _infer_phase(games: list[GameSummary], now: dt.datetime) -> SeasonPhase:
         return max(live, key=lambda game: _PHASE_ORDER[game.phase]).phase
 
     finals = sorted(
-        (game for game in games if game.status == GameStatus.FINAL and game.start_time_utc <= now),
+        (
+            game
+            for game in games
+            if game.status == GameStatus.FINAL and game.start_time_utc <= now
+        ),
         key=lambda game: game.start_time_utc,
     )
     upcoming = sorted(
@@ -165,7 +175,9 @@ def _select_games(
     return last, nxt
 
 
-def _get_json(session: requests.Session, url: str, *, params: dict | None = None) -> dict:
+def _get_json(
+    session: requests.Session, url: str, *, params: dict | None = None
+) -> dict:
     response = session.get(
         url,
         params=params,
@@ -192,7 +204,11 @@ def _nhl_name(team: dict) -> str:
 def _nhl_status(game: dict) -> GameStatus:
     state = str(game.get("gameState") or "").upper()
     schedule = str(game.get("gameScheduleState") or "").upper()
-    if schedule in {"CNCL", "CANCELLED", "CANCELED"} or state in {"CNCL", "CANCELLED", "CANCELED"}:
+    if schedule in {"CNCL", "CANCELLED", "CANCELED"} or state in {
+        "CNCL",
+        "CANCELLED",
+        "CANCELED",
+    }:
         return GameStatus.CANCELLED
     if schedule in {"PPD", "POSTPONED"} or state in {"PPD", "POSTPONED"}:
         return GameStatus.POSTPONED
@@ -236,12 +252,15 @@ def _parse_nhl_games(schedule: dict) -> list[GameSummary]:
     return out
 
 
-def _parse_nhl_record_and_standing(standings: dict) -> tuple[RecordSummary | None, StandingSummary | None]:
+def _parse_nhl_record_and_standing(
+    standings: dict,
+) -> tuple[RecordSummary | None, StandingSummary | None]:
     row = next(
         (
             item
             for item in standings.get("standings") or []
-            if ((item.get("teamAbbrev") or {}).get("default") or "").upper() == "TOR"
+            if ((item.get("teamAbbrev") or {}).get("default") or "").upper()
+            == "TOR"
         ),
         None,
     )
@@ -256,11 +275,15 @@ def _parse_nhl_record_and_standing(standings: dict) -> tuple[RecordSummary | Non
         record = RecordSummary(wins, losses, display, otl)
     rank = _integer(row.get("divisionSequence"))
     division = (row.get("divisionName") or {}).get("default") or "Division"
-    standing = StandingSummary(
-        label=f"{_ordinal(rank)} {division}".strip(),
-        rank=rank,
-        scope=division,
-    ) if rank is not None else None
+    standing = (
+        StandingSummary(
+            label=f"{_ordinal(rank)} {division}".strip(),
+            rank=rank,
+            scope=division,
+        )
+        if rank is not None
+        else None
+    )
     return record, standing
 
 
@@ -292,9 +315,12 @@ def parse_leafs_snapshot(
 def fetch_leafs_snapshot(
     *, now: dt.datetime, fetched_at: dt.datetime, session: requests.Session
 ) -> TeamSnapshot:
-    season_start = now.year if now.month >= 7 else now.year - 1
+    local_now = now.astimezone(TORONTO)
+    season_start = local_now.year if local_now.month >= 7 else local_now.year - 1
     season = f"{season_start}{season_start + 1}"
-    schedule = _get_json(session, f"{_NHL_BASE}/club-schedule-season/TOR/{season}")
+    schedule = _get_json(
+        session, f"{_NHL_BASE}/club-schedule-season/TOR/{season}"
+    )
     standings = _get_json(session, f"{_NHL_BASE}/standings/now")
     return parse_leafs_snapshot(schedule, standings, now=now, fetched_at=fetched_at)
 
@@ -306,8 +332,12 @@ def _espn_status(event: dict, competition: dict) -> GameStatus:
     status = competition.get("status") or event.get("status") or {}
     kind = status.get("type") or {}
     description = " ".join(
-        str(value or "") for value in (
-            kind.get("name"), kind.get("description"), kind.get("detail"), kind.get("shortDetail")
+        str(value or "")
+        for value in (
+            kind.get("name"),
+            kind.get("description"),
+            kind.get("detail"),
+            kind.get("shortDetail"),
         )
     ).lower()
     if "cancel" in description:
@@ -323,7 +353,13 @@ def _espn_status(event: dict, competition: dict) -> GameStatus:
 
 def _espn_team_name(competitor: dict) -> str:
     team = competitor.get("team") or {}
-    return team.get("displayName") or team.get("shortDisplayName") or team.get("name") or team.get("abbreviation") or "Opponent"
+    return (
+        team.get("displayName")
+        or team.get("shortDisplayName")
+        or team.get("name")
+        or team.get("abbreviation")
+        or "Opponent"
+    )
 
 
 def _parse_espn_games(schedule: dict) -> list[GameSummary]:
@@ -334,11 +370,17 @@ def _parse_espn_games(schedule: dict) -> list[GameSummary]:
         competition = next(iter(event.get("competitions") or []), None)
         if not isinstance(competition, dict):
             continue
-        competitors = [item for item in competition.get("competitors") or [] if isinstance(item, dict)]
+        competitors = [
+            item
+            for item in competition.get("competitors") or []
+            if isinstance(item, dict)
+        ]
         team_side = next(
             (
-                item for item in competitors
-                if str((item.get("team") or {}).get("abbreviation") or "").upper() == "TOR"
+                item
+                for item in competitors
+                if str((item.get("team") or {}).get("abbreviation") or "").upper()
+                == "TOR"
             ),
             None,
         )
@@ -360,7 +402,9 @@ def _parse_espn_games(schedule: dict) -> list[GameSummary]:
                 provider_game_id=str(event.get("id") or competition.get("id") or ""),
                 start_time_utc=start,
                 opponent=_espn_team_name(opponent),
-                opponent_abbreviation=str((opponent.get("team") or {}).get("abbreviation") or ""),
+                opponent_abbreviation=str(
+                    (opponent.get("team") or {}).get("abbreviation") or ""
+                ),
                 home_away=str(team_side.get("homeAway") or "").lower() or "unknown",
                 status=status,
                 phase=_phase_from_type(season.get("type"), provider="espn"),
@@ -382,7 +426,10 @@ def _espn_record(team_payload: dict) -> RecordSummary | None:
     for item in record.get("items") or []:
         if not isinstance(item, dict):
             continue
-        if str(item.get("name") or "").lower() in {"overall", "total", ""} and item.get("summary"):
+        if (
+            str(item.get("name") or "").lower() in {"overall", "total", ""}
+            and item.get("summary")
+        ):
             summaries.insert(0, str(item["summary"]))
     for summary in summaries:
         match = re.search(r"(\d+)\s*-\s*(\d+)", summary)
@@ -498,7 +545,9 @@ def _parse_mlb_games(schedule: dict) -> list[GameSummary]:
     return out
 
 
-def _parse_mlb_record_and_standing(standings: dict) -> tuple[RecordSummary | None, StandingSummary | None]:
+def _parse_mlb_record_and_standing(
+    standings: dict,
+) -> tuple[RecordSummary | None, StandingSummary | None]:
     division_name = "AL East"
     team_row = None
     for block in standings.get("records") or []:
@@ -523,7 +572,11 @@ def _parse_mlb_record_and_standing(standings: dict) -> tuple[RecordSummary | Non
         record = RecordSummary(wins, losses, f"{wins}-{losses}")
 
     rank = _integer(team_row.get("divisionRank"))
-    games_back = str(team_row.get("gamesBack")) if team_row.get("gamesBack") not in (None, "") else None
+    games_back = (
+        str(team_row.get("gamesBack"))
+        if team_row.get("gamesBack") not in (None, "")
+        else None
+    )
     standing = None
     if rank is not None:
         standing = StandingSummary(
@@ -563,7 +616,7 @@ def parse_blue_jays_snapshot(
 def fetch_blue_jays_snapshot(
     *, now: dt.datetime, fetched_at: dt.datetime, session: requests.Session
 ) -> TeamSnapshot:
-    local_date = now.date()
+    local_date = now.astimezone(TORONTO).date()
     schedule = _get_json(
         session,
         f"{_MLB_BASE}/schedule",
@@ -585,4 +638,6 @@ def fetch_blue_jays_snapshot(
             "hydrate": "division",
         },
     )
-    return parse_blue_jays_snapshot(schedule, standings, now=now, fetched_at=fetched_at)
+    return parse_blue_jays_snapshot(
+        schedule, standings, now=now, fetched_at=fetched_at
+    )
