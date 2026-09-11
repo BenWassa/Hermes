@@ -1,13 +1,12 @@
-"""One-shot live probe for Sports V2 source audit (#34).
+"""Deliberate live probes for Sports V2 source audit (#34).
 
-This script is intentionally separate from deterministic CI. It proves that the
-candidate public endpoints are reachable from GitHub Actions and that the
-minimum response contracts needed by Sports V2 still exist. It must not become
-a production dependency or a routine poller.
+This is an operator/audit tool, not production code and not deterministic CI.
+Pass probe names to test only selected sources; without names every probe runs.
 """
 
 from __future__ import annotations
 
+import argparse
 import datetime as dt
 import json
 import sys
@@ -17,7 +16,7 @@ from typing import Callable
 import feedparser
 import requests
 
-TIMEOUT = 20
+TIMEOUT = 12
 UA = "Hermes-Sports-Audit/1.0 (+https://github.com/BenWassa/Hermes)"
 NBA_HEADERS = {
     "User-Agent": (
@@ -48,16 +47,14 @@ def _json(response: requests.Response) -> dict:
 
 
 def nhl_schedule(response: requests.Response) -> str:
-    data = _json(response)
-    games = data.get("games")
+    games = _json(response).get("games")
     if not isinstance(games, list):
         raise AssertionError("NHL schedule missing games[]")
     return f"games={len(games)}"
 
 
 def nhl_standings(response: requests.Response) -> str:
-    data = _json(response)
-    standings = data.get("standings")
+    standings = _json(response).get("standings")
     if not isinstance(standings, list) or not standings:
         raise AssertionError("NHL standings missing standings[]")
     tor = [row for row in standings if (row.get("teamAbbrev") or {}).get("default") == "TOR"]
@@ -74,8 +71,7 @@ def mlb_schedule(response: requests.Response) -> str:
 
 
 def mlb_standings(response: requests.Response) -> str:
-    data = _json(response)
-    records = data.get("records")
+    records = _json(response).get("records")
     if not isinstance(records, list) or not records:
         raise AssertionError("MLB standings missing records[]")
     teams = [tr for record in records for tr in record.get("teamRecords", [])]
@@ -86,17 +82,15 @@ def mlb_standings(response: requests.Response) -> str:
 
 
 def nba_schedule(response: requests.Response) -> str:
-    data = _json(response)
-    league = data.get("leagueSchedule")
+    league = _json(response).get("leagueSchedule")
     if not isinstance(league, dict):
         raise AssertionError("NBA schedule missing leagueSchedule")
     dates = league.get("gameDates")
-    if not isinstance(dates, list) or not dates:
+    if not isinstance(dates, list):
         raise AssertionError("NBA schedule missing gameDates[]")
     games = [g for day in dates for g in day.get("games", [])]
     tor = [
-        g
-        for g in games
+        g for g in games
         if g.get("homeTeam", {}).get("teamId") == 1610612761
         or g.get("awayTeam", {}).get("teamId") == 1610612761
     ]
@@ -106,11 +100,27 @@ def nba_schedule(response: requests.Response) -> str:
 
 
 def nba_scoreboard(response: requests.Response) -> str:
-    data = _json(response)
-    board = data.get("scoreboard")
+    board = _json(response).get("scoreboard")
     if not isinstance(board, dict) or not isinstance(board.get("games"), list):
         raise AssertionError("NBA scoreboard missing scoreboard.games[]")
     return f"games={len(board['games'])}"
+
+
+def espn_team_schedule(response: requests.Response) -> str:
+    data = _json(response)
+    events = data.get("events")
+    if not isinstance(events, list):
+        raise AssertionError("ESPN team schedule missing events[]")
+    team = data.get("team") or {}
+    label = team.get("displayName") or team.get("name") or "unknown"
+    return f"team={label}; events={len(events)}"
+
+
+def espn_scoreboard(response: requests.Response) -> str:
+    events = _json(response).get("events")
+    if not isinstance(events, list):
+        raise AssertionError("ESPN scoreboard missing events[]")
+    return f"events={len(events)}"
 
 
 def rss(response: requests.Response) -> str:
@@ -129,26 +139,19 @@ def asset(response: requests.Response) -> str:
     return f"bytes={len(response.content)}"
 
 
-def main() -> int:
-    today = dt.date.today()
+def probes_for_today(today: dt.date) -> dict[str, Probe]:
     season = today.year if today.month >= 3 else today.year - 1
     nhl_start = today.year if today.month >= 7 else today.year - 1
     nhl_season = f"{nhl_start}{nhl_start + 1}"
     start = today - dt.timedelta(days=21)
     end = today + dt.timedelta(days=21)
-
     probes = [
-        Probe(
-            "nhl_schedule",
-            f"https://api-web.nhle.com/v1/club-schedule-season/TOR/{nhl_season}",
-            nhl_schedule,
-        ),
+        Probe("nhl_schedule", f"https://api-web.nhle.com/v1/club-schedule-season/TOR/{nhl_season}", nhl_schedule),
         Probe("nhl_standings", "https://api-web.nhle.com/v1/standings/now", nhl_standings),
         Probe(
             "mlb_schedule",
             "https://statsapi.mlb.com/api/v1/schedule"
-            f"?sportId=1&teamId=141&startDate={start.isoformat()}&endDate={end.isoformat()}"
-            "&hydrate=team",
+            f"?sportId=1&teamId=141&startDate={start.isoformat()}&endDate={end.isoformat()}&hydrate=team",
             mlb_schedule,
         ),
         Probe(
@@ -157,18 +160,10 @@ def main() -> int:
             f"?leagueId=103&season={season}&standingsTypes=regularSeason&hydrate=division",
             mlb_standings,
         ),
-        Probe(
-            "nba_schedule",
-            "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
-            nba_schedule,
-            NBA_HEADERS,
-        ),
-        Probe(
-            "nba_scoreboard",
-            "https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json",
-            nba_scoreboard,
-            NBA_HEADERS,
-        ),
+        Probe("nba_schedule", "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json", nba_schedule, NBA_HEADERS),
+        Probe("nba_scoreboard", "https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json", nba_scoreboard, NBA_HEADERS),
+        Probe("espn_nba_schedule", "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/tor/schedule", espn_team_schedule),
+        Probe("espn_nba_scoreboard", "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard", espn_scoreboard),
         Probe("cbc_nhl", "https://www.cbc.ca/webfeed/rss/rss-sports-nhl", rss),
         Probe("cbc_nba", "https://www.cbc.ca/webfeed/rss/rss-sports-nba", rss),
         Probe("cbc_mlb", "https://www.cbc.ca/webfeed/rss/rss-sports-mlb", rss),
@@ -178,30 +173,34 @@ def main() -> int:
         Probe("nhl_leafs_logo", "https://assets.nhle.com/logos/nhl/svg/TOR_light.svg", asset),
         Probe("mlb_jays_logo", "https://www.mlbstatic.com/team-logos/141.svg", asset),
     ]
+    return {probe.name: probe for probe in probes}
 
-    failed: list[str] = []
-    evidence: list[dict[str, object]] = []
-    for probe in probes:
-        headers = probe.headers or {"User-Agent": UA}
-        try:
-            response = requests.get(probe.url, headers=headers, timeout=TIMEOUT)
-            detail = probe.check(response)
-            evidence.append(
-                {
-                    "name": probe.name,
-                    "ok": True,
-                    "status": response.status_code,
-                    "detail": detail,
-                }
-            )
-            print(f"PASS {probe.name}: HTTP {response.status_code}; {detail}")
-        except Exception as exc:
-            failed.append(probe.name)
-            evidence.append({"name": probe.name, "ok": False, "error": str(exc)})
-            print(f"FAIL {probe.name}: {exc}", file=sys.stderr)
 
+def run(probe: Probe) -> dict[str, object]:
+    headers = probe.headers or {"User-Agent": UA}
+    try:
+        response = requests.get(probe.url, headers=headers, timeout=TIMEOUT)
+        detail = probe.check(response)
+        print(f"PASS {probe.name}: HTTP {response.status_code}; {detail}")
+        return {"name": probe.name, "ok": True, "status": response.status_code, "detail": detail}
+    except Exception as exc:
+        print(f"FAIL {probe.name}: {exc}", file=sys.stderr)
+        return {"name": probe.name, "ok": False, "error": str(exc)}
+
+
+def main() -> int:
+    available = probes_for_today(dt.date.today())
+    parser = argparse.ArgumentParser()
+    parser.add_argument("names", nargs="*", help="probe names; omit for all")
+    args = parser.parse_args()
+    names = args.names or list(available)
+    unknown = [name for name in names if name not in available]
+    if unknown:
+        parser.error("unknown probes: " + ", ".join(unknown))
+
+    evidence = [run(available[name]) for name in names]
     print("EVIDENCE_JSON=" + json.dumps(evidence, separators=(",", ":")))
-    return 1 if failed else 0
+    return 1 if any(not item["ok"] for item in evidence) else 0
 
 
 if __name__ == "__main__":
