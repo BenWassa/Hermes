@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-10T18:38:50Z",
-  "last_reconcile_at": "2026-09-10T18:38:50Z",
+  "updated_at": "2026-09-11T18:43:29Z",
+  "last_reconcile_at": "2026-09-11T18:43:29Z",
   "last_roundup": null,
   "items": {
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/economic-scenarios-for-transformative-ai.html": {
@@ -21,6 +21,91 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/economic-scenarios-for-transformative-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=economic-scenarios-for-transformative-ai",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-10T18:38:50Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-590.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-590.html",
+        "pid:rss:https://marginalrevolution.com/?p=93781",
+        "syn:friday-assorted-links|voice:tyler-cowen|2026-09-11",
+        "fp:marginalrevolution.com|friday-assorted-links|2026-09-11"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-11T18:43:29Z",
+      "published_at": "2026-09-11T15:56:12Z",
+      "title": "Friday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-590.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-590",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/is-there-now-a-better-trend-in-youth-mental-health.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/is-there-now-a-better-trend-in-youth-mental-health.html",
+        "pid:rss:https://marginalrevolution.com/?p=93753",
+        "syn:is-there-now-a-better-trend-in-youth-mental-health|voice:tyler-cowen|2026-09-11",
+        "fp:marginalrevolution.com|is-there-now-a-better-trend-in-youth-mental-health|2026-09-11"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-11T18:43:29Z",
+      "published_at": "2026-09-11T04:34:45Z",
+      "title": "Is there now a better trend in youth mental health?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/is-there-now-a-better-trend-in-youth-mental-health.html?utm_source=rss&utm_medium=rss&utm_campaign=is-there-now-a-better-trend-in-youth-mental-health",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/markets-do-respond-to-agi-news.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/markets-do-respond-to-agi-news.html",
+        "pid:rss:https://marginalrevolution.com/?p=93786",
+        "syn:markets-do-respond-to-agi-news|voice:tyler-cowen|2026-09-11",
+        "fp:marginalrevolution.com|markets-do-respond-to-agi-news|2026-09-11"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-11T18:43:29Z",
+      "published_at": "2026-09-11T04:47:44Z",
+      "title": "Markets do respond to AGI news",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/markets-do-respond-to-agi-news.html?utm_source=rss&utm_medium=rss&utm_campaign=markets-do-respond-to-agi-news",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html",
+        "pid:rss:https://marginalrevolution.com/?p=93785",
+        "syn:my-ai-podcast-with-james-pethokoukis|voice:tyler-cowen|2026-09-11",
+        "fp:marginalrevolution.com|my-ai-podcast-with-james-pethokoukis|2026-09-11"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-11T18:43:29Z",
+      "published_at": "2026-09-11T06:34:26Z",
+      "title": "My AI podcast with James Pethokoukis",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html?utm_source=rss&utm_medium=rss&utm_campaign=my-ai-podcast-with-james-pethokoukis",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-short-interview-with-julia-willemyns.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-short-interview-with-julia-willemyns.html",
+        "pid:rss:https://marginalrevolution.com/?p=93779",
+        "syn:my-short-interview-with-julia-willemyns|voice:tyler-cowen|2026-09-10",
+        "fp:marginalrevolution.com|my-short-interview-with-julia-willemyns|2026-09-10"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-11T18:43:29Z",
+      "published_at": "2026-09-10T18:43:36Z",
+      "title": "My short interview with Julia Willemyns",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-short-interview-with-julia-willemyns.html?utm_source=rss&utm_medium=rss&utm_campaign=my-short-interview-with-julia-willemyns",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-very-interesting-conversation-with-jared-diamond.html": {
       "keys": [
@@ -87,6 +172,23 @@
       "published_at": "2026-09-09T07:06:06Z",
       "title": "Reading sentences to ponder",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/sentences-to-ponder-141.html?utm_source=rss&utm_medium=rss&utm_campaign=sentences-to-ponder-141",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-allocative-cost-of-war.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-allocative-cost-of-war.html",
+        "pid:rss:https://marginalrevolution.com/?p=93760",
+        "syn:the-allocative-cost-of-war|voice:tyler-cowen|2026-09-11",
+        "fp:marginalrevolution.com|the-allocative-cost-of-war|2026-09-11"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-11T18:43:29Z",
+      "published_at": "2026-09-11T18:08:46Z",
+      "title": "The Allocative Cost of War",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-allocative-cost-of-war.html?utm_source=rss&utm_medium=rss&utm_campaign=the-allocative-cost-of-war",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -158,6 +260,40 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": null
     },
+    "url:https://nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html",
+        "pid:rss:https://www.nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html",
+        "syn:was-francis-fukuyama-right-all-along|voice:ezra-klein|2026-09-11",
+        "fp:nytimes.com|was-francis-fukuyama-right-all-along|2026-09-11"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-09-11T18:43:29Z",
+      "published_at": "2026-09-11T10:15:57Z",
+      "title": "Was Francis Fukuyama Right All Along?",
+      "url": "https://www.nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
+    "url:https://nytimes.com/2026/09/11/podcasts/hardfork-ezra-klein-jasmine-sun.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/09/11/podcasts/hardfork-ezra-klein-jasmine-sun.html",
+        "pid:rss:https://www.nytimes.com/2026/09/11/podcasts/hardfork-ezra-klein-jasmine-sun.html",
+        "syn:the-ezra-klein-show-the-a-i-revolt-is-here|voice:ezra-klein|2026-09-11",
+        "fp:nytimes.com|the-ezra-klein-show-the-a-i-revolt-is-here|2026-09-11"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-09-11T18:43:29Z",
+      "published_at": "2026-09-11T08:00:02Z",
+      "title": "The Ezra Klein Show: The A.I. Revolt Is Here",
+      "url": "https://www.nytimes.com/2026/09/11/podcasts/hardfork-ezra-klein-jasmine-sun.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
     "url:https://persuasion.community/p/the-beginning-of-the-end-of-history": {
       "keys": [
         "url:https://persuasion.community/p/the-beginning-of-the-end-of-history",
@@ -190,6 +326,22 @@
       "url": "https://www.theglobeandmail.com/opinion/article-its-not-disloyal-to-criticize-the-governments-handling-of-a-trade-war/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-09-10T18:38:50Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-the-populist-right-is-rising-around-the-world-why-not-in-canada": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-the-populist-right-is-rising-around-the-world-why-not-in-canada",
+        "syn:the-populist-right-is-rising-around-the-world-why-not-in-canada|voice:andrew-coyne|2026-09-11",
+        "fp:theglobeandmail.com|the-populist-right-is-rising-around-the-world-why-not-in-canada|2026-09-11"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-09-11T18:43:29Z",
+      "published_at": "2026-09-11T00:00:00Z",
+      "title": "The populist right is rising around the world. Why not in Canada?",
+      "url": "https://www.theglobeandmail.com/opinion/article-the-populist-right-is-rising-around-the-world-why-not-in-canada/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
     }
   }
 }
