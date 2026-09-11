@@ -1,0 +1,47 @@
+name: Sports major-event live check
+
+on:
+  push:
+    branches:
+      - sports-37-major-events
+  workflow_dispatch: {}
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+      FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Probe football-data competition contracts
+        run: |
+          python - <<'PY'
+          import os
+          import requests
+
+          token = os.environ.get("FOOTBALL_DATA_API_KEY") or os.environ.get("FOOTBALL_DATA_TOKEN")
+          print("token_configured", bool(token))
+          headers = {"X-Auth-Token": token} if token else {}
+          for code in ("CL", "WC"):
+              for suffix in ("", "/matches", "/standings"):
+                  url = f"https://api.football-data.org/v4/competitions/{code}{suffix}"
+                  response = requests.get(url, headers=headers, timeout=15)
+                  print(code, suffix or "/competition", response.status_code, response.headers.get("X-Requests-Available-Minute"))
+                  try:
+                      payload = response.json()
+                      if suffix == "":
+                          season = payload.get("currentSeason") or {}
+                          print("  competition", payload.get("name"), season.get("startDate"), season.get("endDate"), season.get("currentMatchday"), season.get("stages"))
+                      elif suffix == "/matches":
+                          rows = payload.get("matches") or []
+                          print("  matches", len(rows), [(m.get("id"), m.get("utcDate"), m.get("status"), m.get("stage")) for m in rows[:2]])
+                      else:
+                          print("  standings", len(payload.get("standings") or []), [s.get("type") for s in (payload.get("standings") or [])[:3]])
+                  except Exception:
+                      print("  body", response.text[:160])
+          PY
