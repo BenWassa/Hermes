@@ -1,0 +1,21 @@
+name: Sports source probe
+
+on:
+  push:
+    branches:
+      - sports-34-source-audit
+  workflow_dispatch: {}
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install probe dependencies
+        run: pip install requests feedparser
+      - name: Probe Sports V2 public sources
+        run: python scripts/probe_sports_sources.py
