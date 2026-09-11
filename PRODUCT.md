@@ -37,6 +37,48 @@ Toronto-calendar edition exists they must become no-ops before expensive source
 or Gemini work. Issue #25 owns implementation and production reliability for
 this contract.
 
+## Sports
+
+Sports is a personalized Toronto-first morning desk, not a generic sports-news
+feed. Its first job is structured state: what happened, how the favourite teams
+are doing, and what comes next. Routine scores, schedules, records and standings
+should be derived deterministically from sports data rather than summarized by
+Gemini.
+
+The permanent favourite-team order is:
+
+1. **Toronto Maple Leafs**;
+2. **Toronto Raptors**;
+3. **Toronto Blue Jays**.
+
+All three remain visible year-round. In season they show compact useful state
+such as the previous result, record/standing context and next game. Inactive or
+offseason teams collapse to a quiet status line and the next meaningful known
+date rather than disappearing or showing stale statistics.
+
+Articles are secondary. A favourite team may receive **at most one** major
+headline in an edition, and zero is normal. Routine recaps should not repeat a
+result already communicated structurally. Targeted sports-news inputs must be
+filtered, classified, deduplicated and ranked deterministically before any model
+boundary. Gemini must never be used to decide whether there is a Sports story
+worth showing. The default Sports-news rendering path is source headline plus
+public source description/excerpt, so a normal Sports section should add **zero
+Gemini tokens**. If later evidence proves model prose materially useful, only an
+already-qualified winner may be attached to the existing once-daily curation
+request; the model has no authority over Sports membership or ranking.
+
+Beyond Toronto, priority is explicit: FIFA World Cup and Olympics are very high
+priority event windows; UEFA Champions League is high priority; other major
+soccer is selective; NFL is limited mainly to playoffs/Super Bowl and genuinely
+major developments; rugby is limited to major tournaments/finals/deciders;
+cricket is off by default. Major events may temporarily expand Sports within a
+hard finite cap.
+
+Sports remains part of the newspaper, not a dashboard: no live-score treadmill,
+betting surface, fantasy statistics, alerts or comprehensive league coverage.
+See `SPORTS_V2.md` for the source, cost, event, schema, visual and acceptance
+authority. Issue #33 is the parent implementation programme.
+
 ## Opinion and Voices
 
 Opinion has two legitimate jobs: editorial discovery and deliberate following.
