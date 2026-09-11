@@ -171,7 +171,13 @@ def _open_sports(page) -> None:
 
 @pytest.mark.parametrize(
     "width,height,color_scheme",
-    [(390, 844, "light"), (320, 568, "light"), (844, 390, "light"), (390, 844, "dark")],
+    [
+        (412, 915, "light"),
+        (390, 844, "light"),
+        (320, 568, "light"),
+        (844, 390, "light"),
+        (390, 844, "dark"),
+    ],
 )
 def test_sports_is_broadsheet_ordered_and_responsive(
     monkeypatch: pytest.MonkeyPatch, width: int, height: int, color_scheme: str
@@ -199,8 +205,8 @@ def test_sports_is_broadsheet_ordered_and_responsive(
         assert page.locator('[data-sports-team="leafs"] .sports-score').inner_text() == "4–2"
         assert "52–24–6" in page.locator('[data-sports-team="leafs"]').inner_text()
         assert "Montréal Canadiens" in page.locator('[data-sports-team="leafs"]').inner_text()
-        assert "Unavailable" in page.locator('[data-sports-team="raptors"]').inner_text()
-        assert "Offseason" in page.locator('[data-sports-team="blue-jays"]').inner_text()
+        assert page.locator('[data-sports-team="raptors"] .sports-status-line strong').text_content() == "Unavailable"
+        assert page.locator('[data-sports-team="blue-jays"] .sports-status-line strong').text_content() == "Offseason"
         assert page.locator('[data-sports-team="blue-jays"] .sports-scoreline').count() == 0
         assert page.locator("#sports-events-title").is_visible()
         assert page.locator('[data-sports-event="fifa-world-cup-2030"]').is_visible()
