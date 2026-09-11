@@ -41,9 +41,9 @@ def test_champions_league_is_seasonal_and_not_year_round():
 def test_world_cup_and_olympics_activate_only_in_pinned_windows():
     world = spec("fifa-world-cup-2030")
     olympics = spec("summer-olympics-2028")
-    assert world.active_on(dt.date(2030, 6, 13))
+    assert world.active_on(dt.date(2030, 6, 8))
     assert world.active_on(dt.date(2030, 7, 21))
-    assert not world.active_on(dt.date(2030, 6, 12))
+    assert not world.active_on(dt.date(2030, 6, 7))
     assert not world.active_on(dt.date(2030, 7, 22))
     assert olympics.active_on(dt.date(2028, 7, 14))
     assert olympics.active_on(dt.date(2028, 7, 30))
