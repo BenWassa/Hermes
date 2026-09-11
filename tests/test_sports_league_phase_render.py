@@ -115,22 +115,25 @@ def test_champions_league_compact_table_explains_omissions_and_cut(monkeypatch):
         root = page.locator('[data-sports-event="champions-league"]')
         root.wait_for(state="visible")
 
-        assert page.locator("#sports-toronto-title").inner_text() == "Toronto"
-        assert page.locator(".sports-toronto .sports-section-kicker").inner_text() == "Home teams"
-        assert page.locator("#sports-events-title").inner_text() == "Major Events"
-        assert page.locator(".sports-events .sports-section-kicker").inner_text() == "Global board"
+        assert page.locator("#sports-toronto-title").text_content() == "Toronto"
+        assert page.locator(".sports-toronto .sports-section-kicker").text_content() == "Home teams"
+        assert page.locator("#sports-events-title").text_content() == "Major Events"
+        assert page.locator(".sports-events .sports-section-kicker").text_content() == "Global board"
 
-        assert root.locator(".sports-event-stage").inner_text() == "League Phase"
-        assert all("League Phase" not in text for text in root.locator(".sports-match-meta").all_inner_texts())
+        assert root.locator(".sports-event-stage").text_content() == "League Phase"
+        assert all(
+            "league phase" not in (text or "").lower()
+            for text in root.locator(".sports-match-meta").all_text_contents()
+        )
 
-        label = root.locator(".sports-table-label").inner_text()
+        label = root.locator(".sports-table-label").text_content() or ""
         assert "League Phase" in label
         assert "qualification cut" in label.lower()
-        assert "Positions 4–7 omitted" in root.locator(".sports-table-gap").inner_text()
-        assert "Top 8" in root.locator(".sports-table-note").inner_text()
-        assert "9–24" in root.locator(".sports-table-note").inner_text()
+        assert "Positions 4–7 omitted" in root.locator(".sports-table-gap").text_content()
+        assert "Top 8" in root.locator(".sports-table-note").text_content()
+        assert "9–24" in root.locator(".sports-table-note").text_content()
 
-        positions = root.locator(".sports-table tbody tr:not(.sports-table-gap) td:first-child").all_inner_texts()
+        positions = root.locator(".sports-table tbody tr:not(.sports-table-gap) td:first-child").all_text_contents()
         assert positions == ["1", "2", "3", "8", "9"]
         assert root.locator(".sports-qualification-cut").count() == 1
 
