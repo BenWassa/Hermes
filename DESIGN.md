@@ -223,6 +223,14 @@ images from looking sharp-cornered at small sizes).
 - **Internal Padding:** 14px vertical (20px top for leads), no horizontal (column gutter handles it)
 - **Behavior:** whole card toggles expansion; +/− glyph at top right signals state
 
+### Opinion Desk
+- **Two groups, one system:** `Following` and `Today’s Opinion` may both appear inside the Opinion tab, but their article rows use the same Story Card component and the same expansion/action machinery.
+- **Semantic distinction:** the group headings remain because they describe different authority: Following is deterministic reader-selected Voice work; Today’s Opinion is editorially curated. Visual reuse must not collapse that data/product distinction.
+- **Following treatment:** followed articles use the normal **non-lead** Story Card treatment. Do not create a compact Following variant and do not promote the first followed article to lead merely for visual symmetry.
+- **Metadata placement:** followed writer uses the standard kicker position; publication and filing time use the normal quiet metadata/time position. Do not add a separate Following-only byline/meta row.
+- **Implementation rule:** one card renderer serves both groups. Following-specific card padding, typography, or expansion variants are defects unless this design authority is explicitly changed.
+- **Empty state:** when there is no qualifying Following material, omit the Following group entirely and leave the ordinary Opinion treatment unchanged.
+
 ### Kicker + Flag Chip
 - **Kicker:** Label type in Masthead Red, above the headline
 - **Hot chip:** Masthead Red ground, Strip Ink text, ~9px, 2px radius; DEVELOPING/BREAKING/LIVE/WAR/ALERT/URGENT only
