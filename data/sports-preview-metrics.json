@@ -1,0 +1,25 @@
+{
+  "built_at": "2026-09-11T20:16:29.862373Z",
+  "toronto_date": "2026-09-11",
+  "raw_candidates": 0,
+  "qualified_candidates": 0,
+  "winners": 0,
+  "model_records": 0,
+  "model_chars": 0,
+  "approx_model_tokens": 0,
+  "team_news_rejected": 0,
+  "event_news_selected": 0,
+  "structured_requests": 8,
+  "news_requests": 3,
+  "structured_requests_by_provider": {
+    "espn": 4,
+    "mlb": 2,
+    "nhl": 2
+  },
+  "news_requests_by_provider": {
+    "guardian": 3
+  },
+  "teams_available": 3,
+  "active_structured_events": 1,
+  "event_mode": 0
+}
