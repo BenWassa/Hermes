@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="build" content="2026-09-11T20:16:33Z" />
+  <meta name="build" content="2026-09-11T20:32:57Z" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
@@ -269,15 +269,47 @@
       * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
     }
   
-/* Sports V2: newspaper furniture, never a dashboard. */
-.sports-desk + .sports-desk { margin-top: 24px; }
+/* Sports V2: a compact broadsheet sports page, never a dashboard. */
+.sports-desk + .sports-desk { margin-top: 32px; }
 .sports-desk .desk-head { margin-top: 0; }
+.sports-toronto .desk-head { padding-bottom: 4px; }
 
+/* Toronto clubs --------------------------------------------------------- */
 .sports-team {
+  position: relative;
   border-top: 1px solid var(--rule);
-  padding: 14px 0 12px;
+  padding: 18px 0 17px 46px;
 }
-.sports-team:first-of-type { border-top-color: var(--navy); }
+.sports-team:first-of-type { border-top: 3px solid var(--navy); }
+
+/* Text-only editorial marks. They deliberately evoke a newspaper club mark
+   without reproducing protected team logos or introducing new colours. */
+.sports-team::before {
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 32px;
+  min-height: 31px;
+  padding: 4px 0 3px;
+  border-top: 2px solid var(--navy);
+  border-bottom: 1px solid var(--navy);
+  font-family: 'Georgia', serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+  text-align: center;
+  color: var(--navy-ink);
+}
+.sports-team[data-sports-team='leafs']::before { content: 'ML'; }
+.sports-team[data-sports-team='raptors']::before {
+  content: 'R';
+  color: var(--red);
+  border-top-color: var(--red);
+  border-bottom-color: var(--red);
+}
+.sports-team[data-sports-team='blue-jays']::before { content: 'BJ'; }
+
 .sports-team-head {
   display: flex;
   align-items: baseline;
@@ -287,10 +319,10 @@
 .sports-team-name {
   min-width: 0;
   font-family: 'Arial', sans-serif;
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   font-weight: 800;
-  letter-spacing: 0.13em;
-  line-height: 1.25;
+  letter-spacing: 0.105em;
+  line-height: 1.2;
   text-transform: uppercase;
   color: var(--navy-ink);
 }
@@ -298,7 +330,7 @@
   margin-left: 7px;
   font-size: 0.5625rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   color: var(--meta);
   white-space: nowrap;
 }
@@ -314,11 +346,11 @@
 .sports-phase.postseason { color: var(--red); }
 
 .sports-scoreline {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
   align-items: baseline;
-  gap: 4px 8px;
-  margin-top: 8px;
+  gap: 5px 9px;
+  margin-top: 11px;
   min-width: 0;
 }
 .sports-result {
@@ -330,9 +362,11 @@
   color: var(--meta);
 }
 .sports-score {
-  font-size: 1.25rem;
-  line-height: 1;
+  font-family: 'Georgia', serif;
+  font-size: 1.625rem;
+  line-height: 0.95;
   font-weight: 700;
+  letter-spacing: -0.035em;
   font-variant-numeric: tabular-nums;
   color: var(--ink);
   white-space: nowrap;
@@ -340,13 +374,14 @@
 .sports-opponent {
   min-width: 0;
   font-size: 0.9375rem;
-  line-height: 1.35;
+  line-height: 1.3;
   color: var(--ink-sub);
+  overflow-wrap: anywhere;
 }
 .sports-status-line {
-  margin-top: 8px;
+  margin-top: 11px;
   font-size: 0.9375rem;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--ink-sub);
 }
 .sports-status-line strong {
@@ -357,27 +392,32 @@
   color: var(--meta);
 }
 
+/* Record / standing / next fixture read as a single line of scorebook
+   furniture rather than three dashboard cells. */
 .sports-facts {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 8px 16px;
-  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 18px;
+  margin-top: 11px;
+  padding-top: 9px;
+  border-top: 1px solid var(--rule-soft);
 }
 .sports-fact { min-width: 0; }
 .sports-fact-label {
-  display: block;
+  display: inline;
   font-family: 'Arial', sans-serif;
   font-size: 0.5625rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--meta);
-  margin-bottom: 2px;
+  margin-right: 5px;
 }
 .sports-fact-value {
-  display: block;
+  display: inline;
   font-size: 0.8125rem;
-  line-height: 1.4;
+  line-height: 1.45;
   color: var(--ink-sub);
   font-variant-numeric: tabular-nums;
   overflow-wrap: anywhere;
@@ -388,8 +428,8 @@
 .sports-major-story {
   display: block;
   min-height: 44px;
-  margin-top: 11px;
-  padding: 10px 0 2px;
+  margin-top: 13px;
+  padding: 11px 0 2px;
   border-top: 1px solid var(--rule-soft);
   color: inherit;
   text-decoration: none;
@@ -409,46 +449,50 @@
   letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--red);
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 .sports-story-title {
   display: block;
-  font-size: 0.9375rem;
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.3;
   color: var(--ink);
 }
 .sports-story-dek {
   display: block;
-  margin-top: 3px;
+  margin-top: 4px;
   font-size: 0.8125rem;
-  line-height: 1.4;
+  line-height: 1.45;
   color: var(--ink-sub);
 }
 .sports-story-meta {
   display: block;
-  margin-top: 4px;
+  margin-top: 5px;
   font-family: 'Arial', sans-serif;
   font-size: 0.625rem;
   color: var(--meta);
 }
 
+/* Major events ---------------------------------------------------------- */
 .sports-event {
   border-top: 1px solid var(--rule);
-  padding: 13px 0 10px;
+  padding: 17px 0 12px;
 }
-.sports-event:first-of-type { border-top-color: var(--navy); }
+.sports-event:first-of-type { border-top: 3px solid var(--navy); }
 .sports-event-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .sports-event-name {
-  font-size: 1rem;
-  line-height: 1.3;
+  font-family: 'Georgia', serif;
+  font-size: 1.1875rem;
+  line-height: 1.2;
   font-weight: 700;
+  letter-spacing: -0.012em;
   color: var(--ink);
 }
 .sports-event-mode {
@@ -461,13 +505,15 @@
   color: var(--red);
 }
 .sports-event-source {
+  padding-bottom: 8px;
   font-family: 'Arial', sans-serif;
   font-size: 0.5625rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
   color: var(--meta);
 }
 .sports-event-unavailable {
-  padding: 8px 0 3px;
+  padding: 9px 0 3px;
   font-size: 0.8125rem;
   font-style: italic;
   line-height: 1.45;
@@ -476,12 +522,12 @@
 .sports-match {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 4px 12px;
+  gap: 2px 14px;
   align-items: baseline;
   border-top: 1px solid var(--rule-soft);
-  padding: 9px 0;
+  padding: 9px 0 8px;
 }
-.sports-match:first-of-type { margin-top: 7px; }
+.sports-match:first-of-type { border-top-color: var(--rule); }
 .sports-match-teams {
   min-width: 0;
   font-size: 0.875rem;
@@ -490,8 +536,10 @@
   overflow-wrap: anywhere;
 }
 .sports-match-score {
-  font-size: 1rem;
+  font-family: 'Georgia', serif;
+  font-size: 1.125rem;
   font-weight: 700;
+  letter-spacing: -0.025em;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--ink);
@@ -499,21 +547,27 @@
 .sports-match-meta {
   grid-column: 1 / -1;
   font-family: 'Arial', sans-serif;
-  font-size: 0.625rem;
-  line-height: 1.35;
+  font-size: 0.5625rem;
+  line-height: 1.3;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
   color: var(--meta);
 }
 .sports-canada { font-weight: 700; color: var(--ink); }
 
-.sports-table-wrap { margin-top: 9px; }
+.sports-table-wrap {
+  margin-top: 13px;
+  border-top: 2px solid var(--navy);
+  padding-top: 9px;
+}
 .sports-table-label {
   font-family: 'Arial', sans-serif;
-  font-size: 0.5625rem;
+  font-size: 0.625rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.105em;
   text-transform: uppercase;
   color: var(--navy-ink);
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 .sports-table {
   width: 100%;
@@ -545,10 +599,10 @@
 .sports-table td:not(:nth-child(2)) { width: 38px; }
 .sports-table tr.canada td { font-weight: 700; color: var(--ink); }
 
-.sports-highlights { margin-top: 7px; }
+.sports-highlights { margin-top: 8px; }
 .sports-highlight {
   border-top: 1px solid var(--rule-soft);
-  padding: 8px 0;
+  padding: 9px 0;
 }
 .sports-highlight-title {
   font-size: 0.875rem;
@@ -563,18 +617,24 @@
   color: var(--ink-sub);
 }
 
-.sports-major-story { margin-top: 0; padding: 11px 0 9px; }
+.sports-major-story { margin-top: 0; padding: 12px 0 9px; }
 .sports-major-story + .sports-major-story { border-top-color: var(--rule); }
 
 @media (max-width: 380px) {
-  .sports-facts { grid-template-columns: 1fr; gap: 7px; }
+  .sports-team { padding-left: 42px; }
+  .sports-team::before { width: 29px; font-size: 0.9375rem; }
+  .sports-team-name { font-size: 0.875rem; letter-spacing: 0.085em; }
+  .sports-scoreline { grid-template-columns: auto auto; }
+  .sports-opponent { grid-column: 1 / -1; }
+  .sports-facts { gap: 5px 13px; }
   .sports-table .sports-gd { display: none; }
   .sports-event-head { align-items: flex-start; }
 }
 
 @media (min-width: 540px) {
-  .sports-team { padding-top: 16px; padding-bottom: 14px; }
-  .sports-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .sports-team { padding-top: 19px; padding-bottom: 18px; }
+  .sports-team::before { top: 17px; }
+  .sports-score { font-size: 1.75rem; }
 }
 
   </style>
@@ -582,7 +642,7 @@
 <body>
   <div id="app"></div>
 
-  <script id="edition" type="application/json">{"date": "Friday, September 11, 2026", "weather": {"condition": "Thunderstorms, then clearing", "high": 24, "low": 15, "rain": "40%", "wind": "29 km/h gusts", "icon": "⛈", "week": [{"day": "Tue", "icon": "⛈", "hi": 24, "lo": 15}, {"day": "Wed", "icon": "🌦", "hi": 23, "lo": 16}, {"day": "Thu", "icon": "🌧", "hi": 24, "lo": 14}, {"day": "Fri", "icon": "🌤", "hi": 25, "lo": 12}, {"day": "Sat", "icon": "🌤", "hi": 24, "lo": 13}, {"day": "Sun", "icon": "⛅", "hi": 24, "lo": 13}]}, "sections": [{"id": "front", "label": "Front Page", "stories": [{"id": "f1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Strait of Hormuz Deal Set to Close This Week", "sub": "Interim agreement would reopen critical shipping lane after months of Iranian blockade", "summary": "An interim accord to reopen the Strait of Hormuz is expected to be signed by week's end. The deal follows months of escalating tensions that sent oil prices surging. President Trump publicly claimed credit for brokering the agreement at a celebratory White House event.", "time": "6:45 AM", "tag": "DEVELOPING", "sensitivity": false, "image": "https://picsum.photos/seed/hormuz/640/360", "link": "https://example.com/hormuz-deal", "analysis": "A reopened strait removes the biggest supply shock hanging over oil markets, and every central bank waiting on inflation data will feel it. Watch tanker insurance rates for the first real signal the deal holds."}, {"id": "f2", "lead": false, "kicker": "UKRAINE", "headline": "Russia Strikes Kyiv Monastery, Kills 5 Rescue Workers in Kharkiv", "sub": "Landmark Kyiv Pechersk Lavra monastery set ablaze in overnight bombardment", "summary": "A large-scale Russian assault overnight killed five rescue workers in Kharkiv and wounded 20 in Kyiv. The strike sparked a fire at the Monastery of Caves, one of Ukraine's most significant religious and cultural landmarks. Apartment buildings across both cities were also set ablaze.", "time": "4:15 AM", "tag": "WAR", "sensitivity": true, "image": "https://picsum.photos/seed/kyiv/640/360", "link": "https://example.com/kharkiv-strike", "analysis": null}, {"id": "f3", "lead": false, "kicker": "NORWAY", "headline": "Crown Princess's Son Gets 4 Years for Sexual Assault", "sub": "Marius Borg Hoiby convicted on two of four rape charges in Oslo court", "summary": "Marius Borg Hoiby, son of Crown Princess Mette-Marit of Norway, was sentenced to four years in prison after being found guilty on two counts of rape. The ruling follows a prolonged trial that drew intense public attention in Norway.", "time": "5:20 AM", "tag": null, "sensitivity": true, "image": "https://picsum.photos/seed/oslo/640/360", "link": "https://example.com/norway-verdict", "analysis": null}, {"id": "f4", "lead": false, "kicker": "CANADA", "headline": "Carney Heads to France for G7 as Iran Deal Dominates Agenda", "sub": "PM to meet allies as Ottawa also tables privacy and clean water legislation this week", "summary": "Prime Minister Carney is travelling to the G7 summit in France as the Iran interim deal reshapes alliance dynamics. Back home, the government is introducing privacy reform and clean drinking water legislation.", "time": "7:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/carney-g7", "analysis": null}]}, {"id": "toronto", "label": "Toronto", "stories": [{"id": "t1", "lead": true, "kicker": "WORLD CUP", "headline": "Drone Seizures Near World Cup Venues as Security Tightens Across City", "sub": "Toronto Police confirm multiple unauthorized drones intercepted since festivities began", "summary": "Toronto Police have seized several unauthorized drones near World Cup venues since the tournament's opening events began last week. Officers are expected to brief media Tuesday on arrests tied to multiple investigations in the city.", "time": "8:30 AM", "tag": "WORLD CUP", "sensitivity": false, "image": "https://picsum.photos/seed/drone/640/360", "link": "https://example.com/toronto-drones", "analysis": null}, {"id": "t2", "lead": false, "kicker": "TRANSIT", "headline": "Province Commits $198M to Ontario Place Parking Garage", "sub": "Critics question spending priority as transit gaps persist across the city", "summary": "The provincial government announced $198 million for a new parking facility at Ontario Place, drawing immediate criticism from transit advocates who argue the funds should address chronic gaps in the TTC and regional transit network.", "time": "6:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/ontario-place", "analysis": null}, {"id": "t3", "lead": false, "kicker": "COURTS", "headline": "Man Sentenced to 4.5 Years for 2023 East End Shooting Death", "sub": "Sentence handed down Monday in city's east end killing", "summary": "A Toronto man received a four-and-a-half-year prison sentence for his role in the 2023 fatal shooting in the city's east end. The case was among several high-profile Toronto violence cases to move through the courts this spring.", "time": "9:15 AM", "tag": null, "sensitivity": true, "image": "https://picsum.photos/seed/court/640/360", "link": "https://example.com/toronto-sentence", "analysis": null}, {"id": "t4", "lead": false, "kicker": "POLITICS", "headline": "Olivia Chow Declares Re-election Bid; Bradford Mounts Challenge", "sub": "October 26 municipal vote shaping up as two-horse race for mayor", "summary": "Mayor Olivia Chow formally declared her candidacy for the October 26 municipal election. City Councillor Brad Bradford has registered as a challenger. The nomination period runs until August 21.", "time": "Yesterday", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/chow-reelection", "analysis": null}]}, {"id": "world", "label": "World", "stories": [{"id": "w1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Iran Deal: What's in the Interim Agreement and What Comes Next", "sub": "Analysts say temporary Hormuz reopening leaves core nuclear disputes unresolved", "summary": "The emerging interim deal to reopen the Strait of Hormuz would allow commercial shipping to resume while broader negotiations continue. Experts caution the arrangement is fragile and no framework has been established for permanent resolution.", "time": "7:30 AM", "tag": "DEVELOPING", "sensitivity": false, "image": "https://picsum.photos/seed/iran/640/360", "link": "https://example.com/iran-analysis", "analysis": null}, {"id": "w2", "lead": false, "kicker": "UKRAINE", "headline": "Kyiv Pechersk Lavra Fire: What Was Damaged at the Thousand-Year-Old Site", "sub": "UNESCO-listed monastery has survived wars and Soviet-era suppression", "summary": "The overnight fire at the Monastery of Caves, a UNESCO World Heritage site dating to 1051, destroyed portions of the historic Dormition Cathedral. Church officials and Ukrainian cultural authorities have begun assessing damage.", "time": "5:00 AM", "tag": null, "sensitivity": true, "image": "https://picsum.photos/seed/lavra/640/360", "link": "https://example.com/lavra-damage", "analysis": null}, {"id": "w3", "lead": false, "kicker": "NORWAY", "headline": "Royal Family in Crisis After Conviction of Crown Princess's Son", "sub": "Four-year sentence follows trial that transfixed Norway for months", "summary": "The Norwegian royal family faces sustained public scrutiny following the conviction of Marius Borg Hoiby. Crown Princess Mette-Marit issued a brief statement expressing sorrow. Commentators note the monarchy's approval ratings have fallen.", "time": "6:10 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/norway-royals", "analysis": null}]}, {"id": "sports", "label": "Sports", "stories": []}, {"id": "business", "label": "Business", "stories": [{"id": "b1", "lead": true, "kicker": "AI INDUSTRY", "headline": "Anthropic Proposes Global AI Pause as Compute Costs Drive IPO Talk", "sub": "President Daniela Amodei says rising infrastructure costs make public offering increasingly likely", "summary": "Anthropic published what it called its most significant safety paper of the year: a proposal for a coordinated global AI development pause. Separately, president Daniela Amodei explained that surging compute costs are pushing the company toward an IPO.", "time": "6:00 AM", "tag": null, "sensitivity": false, "image": "https://picsum.photos/seed/anthropic/640/360", "link": "https://example.com/anthropic-pause", "analysis": "Rate-sensitive sectors have priced in cuts three times this year and been wrong twice. The bond market's reaction this week matters more than the announcement itself."}, {"id": "b3", "lead": false, "kicker": "MARKETS", "headline": "Hormuz Deal Drives Oil Price Drop in Early Trading", "sub": "Brent crude falls sharply on news of interim agreement", "summary": "Oil markets moved decisively on news of the Hormuz interim deal, with Brent crude falling in early European trading. Traders caution the move may reverse if the agreement fails to materialize.", "time": "7:45 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/oil-drop", "analysis": null}]}, {"id": "opinion", "label": "Opinion", "stories": [{"id": "o1", "lead": true, "kicker": "EDITORIAL", "headline": "The Hormuz Deal Is Good News. Don't Let Trump Own the Narrative.", "sub": "Credit where it's due, but the hard work of durable peace in the Gulf is still ahead", "summary": "An interim deal to reopen the Strait of Hormuz is genuinely welcome. But framing it as a Trump diplomatic triumph misreads the underlying dynamics. Iran's economic pain and regional exhaustion drove this agreement as much as any White House positioning.", "time": "6:30 AM", "tag": "EDITORIAL", "sensitivity": false, "image": "https://picsum.photos/seed/editorial/640/360", "link": "https://example.com/hormuz-editorial", "analysis": null}, {"id": "o2", "lead": false, "kicker": "COLUMN", "headline": "Ontario Place Parking Garage Is Everything Wrong With Ontario's Priority List", "sub": "$198 million for a parking lot while transit crumbles is not a vision", "summary": "The province's commitment of $198 million to a parking garage at Ontario Place encapsulates a governing philosophy that consistently prioritizes automobiles over infrastructure that actually serves people. In a city strained by a global mega-event, this is a remarkable misalignment.", "time": "7:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/ontario-place-column", "analysis": null}]}], "sports": {"version": 1, "toronto": [{"snapshot": {"team": {"key": "leafs", "name": "Toronto Maple Leafs", "league": "NHL", "abbreviation": "TOR"}, "phase": "preseason", "available": true, "error": null, "source": "NHL", "fetched_at": "2026-09-11T20:16:29.862689Z", "last_game": null, "record": null, "standing": null, "next_game": {"id": "2026010006", "start_time_utc": "2026-09-19T23:00:00Z", "start_time_toronto": "2026-09-19T19:00:00-04:00", "opponent": "Montréal Canadiens", "opponent_abbreviation": "MTL", "home_away": "home", "status": "scheduled", "phase": "preseason", "team_score": null, "opponent_score": null, "result": null}}, "headline": null}, {"snapshot": {"team": {"key": "raptors", "name": "Toronto Raptors", "league": "NBA", "abbreviation": "TOR"}, "phase": "preseason", "available": true, "error": null, "source": "ESPN", "fetched_at": "2026-09-11T20:16:29.862689Z", "last_game": null, "record": null, "standing": null, "next_game": {"id": "401902644", "start_time_utc": "2026-10-03T23:00:00Z", "start_time_toronto": "2026-10-03T19:00:00-04:00", "opponent": "Miami Heat", "opponent_abbreviation": "MIA", "home_away": "home", "status": "scheduled", "phase": "preseason", "team_score": null, "opponent_score": null, "result": null}}, "headline": null}, {"snapshot": {"team": {"key": "blue-jays", "name": "Toronto Blue Jays", "league": "MLB", "abbreviation": "TOR"}, "phase": "regular", "available": true, "error": null, "source": "MLB Stats API", "fetched_at": "2026-09-11T20:16:29.862689Z", "last_game": {"id": "824956", "start_time_utc": "2026-09-09T19:05:00Z", "start_time_toronto": "2026-09-09T15:05:00-04:00", "opponent": "Athletics", "opponent_abbreviation": "ATH", "home_away": "away", "status": "final", "phase": "regular", "team_score": 0, "opponent_score": 2, "result": "L"}, "record": {"wins": 73, "losses": 74, "overtime_losses": null, "display": "73-74"}, "standing": {"label": "4th AL East", "rank": 4, "scope": "AL East", "games_back": "14.5"}, "next_game": {"id": "822767", "start_time_utc": "2026-09-11T23:07:00Z", "start_time_toronto": "2026-09-11T19:07:00-04:00", "opponent": "Baltimore Orioles", "opponent_abbreviation": "BAL", "home_away": "home", "status": "scheduled", "phase": "regular", "team_score": null, "opponent_score": null, "result": null}}, "headline": null}], "major_events": {"event_mode": false, "max_items": 6, "events": [{"key": "champions-league", "label": "UEFA Champions League", "priority": 80, "event_mode": false, "available": true, "error": null, "source": "ESPN", "fetched_at": "2026-09-11T20:16:29.862373Z", "matches": [{"id": "401915443", "start_time_utc": "2026-09-10T19:00:00Z", "start_time_toronto": "2026-09-10T15:00:00-04:00", "home_team": "Bayern Munich", "away_team": "Bodo/Glimt", "status": "final", "stage": "league-phase", "home_score": 5, "away_score": 0, "detail": "FT", "canada_involved": false}, {"id": "401915441", "start_time_utc": "2026-09-10T19:00:00Z", "start_time_toronto": "2026-09-10T15:00:00-04:00", "home_team": "Como", "away_team": "RB Leipzig", "status": "final", "stage": "league-phase", "home_score": 4, "away_score": 1, "detail": "FT", "canada_involved": false}, {"id": "401915442", "start_time_utc": "2026-09-10T19:00:00Z", "start_time_toronto": "2026-09-10T15:00:00-04:00", "home_team": "Manchester United", "away_team": "Sabah FK", "status": "final", "stage": "league-phase", "home_score": 4, "away_score": 0, "detail": "FT", "canada_involved": false}, {"id": "401915440", "start_time_utc": "2026-09-10T19:00:00Z", "start_time_toronto": "2026-09-10T15:00:00-04:00", "home_team": "Slavia Prague", "away_team": "Lens", "status": "final", "stage": "league-phase", "home_score": 2, "away_score": 3, "detail": "FT", "canada_involved": false}, {"id": "401915444", "start_time_utc": "2026-09-10T16:45:00Z", "start_time_toronto": "2026-09-10T12:45:00-04:00", "home_team": "Fenerbahce", "away_team": "AS Roma", "status": "final", "stage": "league-phase", "home_score": 1, "away_score": 1, "detail": "FT", "canada_involved": false}, {"id": "401915422", "start_time_utc": "2026-09-10T16:45:00Z", "start_time_toronto": "2026-09-10T12:45:00-04:00", "home_team": "PSV Eindhoven", "away_team": "Shakhtar Donetsk", "status": "final", "stage": "league-phase", "home_score": 1, "away_score": 1, "detail": "FT", "canada_involved": false}], "standings": {"label": "League Phase", "rows": [{"position": 1, "team": "Paris Saint-Germain", "played": 1, "points": 3, "goal_difference": 5, "canada": false}, {"position": 2, "team": "Bayern Munich", "played": 1, "points": 3, "goal_difference": 5, "canada": false}, {"position": 3, "team": "Barcelona", "played": 1, "points": 3, "goal_difference": 4, "canada": false}, {"position": 8, "team": "Manchester City", "played": 1, "points": 3, "goal_difference": 2, "canada": false}, {"position": 9, "team": "Aston Villa", "played": 1, "points": 3, "goal_difference": 1, "canada": false}]}, "highlights": []}]}, "major_headlines": []}}</script>
+  <script id="edition" type="application/json">{"date": "Friday, September 11, 2026", "weather": {"condition": "Thunderstorms, then clearing", "high": 24, "low": 15, "rain": "40%", "wind": "29 km/h gusts", "icon": "⛈", "week": [{"day": "Tue", "icon": "⛈", "hi": 24, "lo": 15}, {"day": "Wed", "icon": "🌦", "hi": 23, "lo": 16}, {"day": "Thu", "icon": "🌧", "hi": 24, "lo": 14}, {"day": "Fri", "icon": "🌤", "hi": 25, "lo": 12}, {"day": "Sat", "icon": "🌤", "hi": 24, "lo": 13}, {"day": "Sun", "icon": "⛅", "hi": 24, "lo": 13}]}, "sections": [{"id": "front", "label": "Front Page", "stories": [{"id": "f1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Strait of Hormuz Deal Set to Close This Week", "sub": "Interim agreement would reopen critical shipping lane after months of Iranian blockade", "summary": "An interim accord to reopen the Strait of Hormuz is expected to be signed by week's end. The deal follows months of escalating tensions that sent oil prices surging. President Trump publicly claimed credit for brokering the agreement at a celebratory White House event.", "time": "6:45 AM", "tag": "DEVELOPING", "sensitivity": false, "image": "https://picsum.photos/seed/hormuz/640/360", "link": "https://example.com/hormuz-deal", "analysis": "A reopened strait removes the biggest supply shock hanging over oil markets, and every central bank waiting on inflation data will feel it. Watch tanker insurance rates for the first real signal the deal holds."}, {"id": "f2", "lead": false, "kicker": "UKRAINE", "headline": "Russia Strikes Kyiv Monastery, Kills 5 Rescue Workers in Kharkiv", "sub": "Landmark Kyiv Pechersk Lavra monastery set ablaze in overnight bombardment", "summary": "A large-scale Russian assault overnight killed five rescue workers in Kharkiv and wounded 20 in Kyiv. The strike sparked a fire at the Monastery of Caves, one of Ukraine's most significant religious and cultural landmarks. Apartment buildings across both cities were also set ablaze.", "time": "4:15 AM", "tag": "WAR", "sensitivity": true, "image": "https://picsum.photos/seed/kyiv/640/360", "link": "https://example.com/kharkiv-strike", "analysis": null}, {"id": "f3", "lead": false, "kicker": "NORWAY", "headline": "Crown Princess's Son Gets 4 Years for Sexual Assault", "sub": "Marius Borg Hoiby convicted on two of four rape charges in Oslo court", "summary": "Marius Borg Hoiby, son of Crown Princess Mette-Marit of Norway, was sentenced to four years in prison after being found guilty on two counts of rape. The ruling follows a prolonged trial that drew intense public attention in Norway.", "time": "5:20 AM", "tag": null, "sensitivity": true, "image": "https://picsum.photos/seed/oslo/640/360", "link": "https://example.com/norway-verdict", "analysis": null}, {"id": "f4", "lead": false, "kicker": "CANADA", "headline": "Carney Heads to France for G7 as Iran Deal Dominates Agenda", "sub": "PM to meet allies as Ottawa also tables privacy and clean water legislation this week", "summary": "Prime Minister Carney is travelling to the G7 summit in France as the Iran interim deal reshapes alliance dynamics. Back home, the government is introducing privacy reform and clean drinking water legislation.", "time": "7:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/carney-g7", "analysis": null}]}, {"id": "toronto", "label": "Toronto", "stories": [{"id": "t1", "lead": true, "kicker": "WORLD CUP", "headline": "Drone Seizures Near World Cup Venues as Security Tightens Across City", "sub": "Toronto Police confirm multiple unauthorized drones intercepted since festivities began", "summary": "Toronto Police have seized several unauthorized drones near World Cup venues since the tournament's opening events began last week. Officers are expected to brief media Tuesday on arrests tied to multiple investigations in the city.", "time": "8:30 AM", "tag": "WORLD CUP", "sensitivity": false, "image": "https://picsum.photos/seed/drone/640/360", "link": "https://example.com/toronto-drones", "analysis": null}, {"id": "t2", "lead": false, "kicker": "TRANSIT", "headline": "Province Commits $198M to Ontario Place Parking Garage", "sub": "Critics question spending priority as transit gaps persist across the city", "summary": "The provincial government announced $198 million for a new parking facility at Ontario Place, drawing immediate criticism from transit advocates who argue the funds should address chronic gaps in the TTC and regional transit network.", "time": "6:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/ontario-place", "analysis": null}, {"id": "t3", "lead": false, "kicker": "COURTS", "headline": "Man Sentenced to 4.5 Years for 2023 East End Shooting Death", "sub": "Sentence handed down Monday in city's east end killing", "summary": "A Toronto man received a four-and-a-half-year prison sentence for his role in the 2023 fatal shooting in the city's east end. The case was among several high-profile Toronto violence cases to move through the courts this spring.", "time": "9:15 AM", "tag": null, "sensitivity": true, "image": "https://picsum.photos/seed/court/640/360", "link": "https://example.com/toronto-sentence", "analysis": null}, {"id": "t4", "lead": false, "kicker": "POLITICS", "headline": "Olivia Chow Declares Re-election Bid; Bradford Mounts Challenge", "sub": "October 26 municipal vote shaping up as two-horse race for mayor", "summary": "Mayor Olivia Chow formally declared her candidacy for the October 26 municipal election. City Councillor Brad Bradford has registered as a challenger. The nomination period runs until August 21.", "time": "Yesterday", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/chow-reelection", "analysis": null}]}, {"id": "world", "label": "World", "stories": [{"id": "w1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Iran Deal: What's in the Interim Agreement and What Comes Next", "sub": "Analysts say temporary Hormuz reopening leaves core nuclear disputes unresolved", "summary": "The emerging interim deal to reopen the Strait of Hormuz would allow commercial shipping to resume while broader negotiations continue. Experts caution the arrangement is fragile and no framework has been established for permanent resolution.", "time": "7:30 AM", "tag": "DEVELOPING", "sensitivity": false, "image": "https://picsum.photos/seed/iran/640/360", "link": "https://example.com/iran-analysis", "analysis": null}, {"id": "w2", "lead": false, "kicker": "UKRAINE", "headline": "Kyiv Pechersk Lavra Fire: What Was Damaged at the Thousand-Year-Old Site", "sub": "UNESCO-listed monastery has survived wars and Soviet-era suppression", "summary": "The overnight fire at the Monastery of Caves, a UNESCO World Heritage site dating to 1051, destroyed portions of the historic Dormition Cathedral. Church officials and Ukrainian cultural authorities have begun assessing damage.", "time": "5:00 AM", "tag": null, "sensitivity": true, "image": "https://picsum.photos/seed/lavra/640/360", "link": "https://example.com/lavra-damage", "analysis": null}, {"id": "w3", "lead": false, "kicker": "NORWAY", "headline": "Royal Family in Crisis After Conviction of Crown Princess's Son", "sub": "Four-year sentence follows trial that transfixed Norway for months", "summary": "The Norwegian royal family faces sustained public scrutiny following the conviction of Marius Borg Hoiby. Crown Princess Mette-Marit issued a brief statement expressing sorrow. Commentators note the monarchy's approval ratings have fallen.", "time": "6:10 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/norway-royals", "analysis": null}]}, {"id": "sports", "label": "Sports", "stories": []}, {"id": "business", "label": "Business", "stories": [{"id": "b1", "lead": true, "kicker": "AI INDUSTRY", "headline": "Anthropic Proposes Global AI Pause as Compute Costs Drive IPO Talk", "sub": "President Daniela Amodei says rising infrastructure costs make public offering increasingly likely", "summary": "Anthropic published what it called its most significant safety paper of the year: a proposal for a coordinated global AI development pause. Separately, president Daniela Amodei explained that surging compute costs are pushing the company toward an IPO.", "time": "6:00 AM", "tag": null, "sensitivity": false, "image": "https://picsum.photos/seed/anthropic/640/360", "link": "https://example.com/anthropic-pause", "analysis": "Rate-sensitive sectors have priced in cuts three times this year and been wrong twice. The bond market's reaction this week matters more than the announcement itself."}, {"id": "b3", "lead": false, "kicker": "MARKETS", "headline": "Hormuz Deal Drives Oil Price Drop in Early Trading", "sub": "Brent crude falls sharply on news of interim agreement", "summary": "Oil markets moved decisively on news of the Hormuz interim deal, with Brent crude falling in early European trading. Traders caution the move may reverse if the agreement fails to materialize.", "time": "7:45 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/oil-drop", "analysis": null}]}, {"id": "opinion", "label": "Opinion", "stories": [{"id": "o1", "lead": true, "kicker": "EDITORIAL", "headline": "The Hormuz Deal Is Good News. Don't Let Trump Own the Narrative.", "sub": "Credit where it's due, but the hard work of durable peace in the Gulf is still ahead", "summary": "An interim deal to reopen the Strait of Hormuz is genuinely welcome. But framing it as a Trump diplomatic triumph misreads the underlying dynamics. Iran's economic pain and regional exhaustion drove this agreement as much as any White House positioning.", "time": "6:30 AM", "tag": "EDITORIAL", "sensitivity": false, "image": "https://picsum.photos/seed/editorial/640/360", "link": "https://example.com/hormuz-editorial", "analysis": null}, {"id": "o2", "lead": false, "kicker": "COLUMN", "headline": "Ontario Place Parking Garage Is Everything Wrong With Ontario's Priority List", "sub": "$198 million for a parking lot while transit crumbles is not a vision", "summary": "The province's commitment of $198 million to a parking garage at Ontario Place encapsulates a governing philosophy that consistently prioritizes automobiles over infrastructure that actually serves people. In a city strained by a global mega-event, this is a remarkable misalignment.", "time": "7:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://example.com/ontario-place-column", "analysis": null}]}], "sports": {"version": 1, "toronto": [{"snapshot": {"team": {"key": "leafs", "name": "Toronto Maple Leafs", "league": "NHL", "abbreviation": "TOR"}, "phase": "preseason", "available": true, "error": null, "source": "NHL", "fetched_at": "2026-09-11T20:32:55.097826Z", "last_game": null, "record": null, "standing": null, "next_game": {"id": "2026010006", "start_time_utc": "2026-09-19T23:00:00Z", "start_time_toronto": "2026-09-19T19:00:00-04:00", "opponent": "Montréal Canadiens", "opponent_abbreviation": "MTL", "home_away": "home", "status": "scheduled", "phase": "preseason", "team_score": null, "opponent_score": null, "result": null}}, "headline": null}, {"snapshot": {"team": {"key": "raptors", "name": "Toronto Raptors", "league": "NBA", "abbreviation": "TOR"}, "phase": "preseason", "available": true, "error": null, "source": "ESPN", "fetched_at": "2026-09-11T20:32:55.097826Z", "last_game": null, "record": null, "standing": null, "next_game": {"id": "401902644", "start_time_utc": "2026-10-03T23:00:00Z", "start_time_toronto": "2026-10-03T19:00:00-04:00", "opponent": "Miami Heat", "opponent_abbreviation": "MIA", "home_away": "home", "status": "scheduled", "phase": "preseason", "team_score": null, "opponent_score": null, "result": null}}, "headline": null}, {"snapshot": {"team": {"key": "blue-jays", "name": "Toronto Blue Jays", "league": "MLB", "abbreviation": "TOR"}, "phase": "regular", "available": true, "error": null, "source": "MLB Stats API", "fetched_at": "2026-09-11T20:32:55.097826Z", "last_game": {"id": "824956", "start_time_utc": "2026-09-09T19:05:00Z", "start_time_toronto": "2026-09-09T15:05:00-04:00", "opponent": "Athletics", "opponent_abbreviation": "ATH", "home_away": "away", "status": "final", "phase": "regular", "team_score": 0, "opponent_score": 2, "result": "L"}, "record": {"wins": 73, "losses": 74, "overtime_losses": null, "display": "73-74"}, "standing": {"label": "4th AL East", "rank": 4, "scope": "AL East", "games_back": "14.5"}, "next_game": {"id": "822767", "start_time_utc": "2026-09-11T23:07:00Z", "start_time_toronto": "2026-09-11T19:07:00-04:00", "opponent": "Baltimore Orioles", "opponent_abbreviation": "BAL", "home_away": "home", "status": "scheduled", "phase": "regular", "team_score": null, "opponent_score": null, "result": null}}, "headline": null}], "major_events": {"event_mode": false, "max_items": 6, "events": [{"key": "champions-league", "label": "UEFA Champions League", "priority": 80, "event_mode": false, "available": true, "error": null, "source": "ESPN", "fetched_at": "2026-09-11T20:32:55.097492Z", "matches": [{"id": "401915443", "start_time_utc": "2026-09-10T19:00:00Z", "start_time_toronto": "2026-09-10T15:00:00-04:00", "home_team": "Bayern Munich", "away_team": "Bodo/Glimt", "status": "final", "stage": "league-phase", "home_score": 5, "away_score": 0, "detail": "FT", "canada_involved": false}, {"id": "401915441", "start_time_utc": "2026-09-10T19:00:00Z", "start_time_toronto": "2026-09-10T15:00:00-04:00", "home_team": "Como", "away_team": "RB Leipzig", "status": "final", "stage": "league-phase", "home_score": 4, "away_score": 1, "detail": "FT", "canada_involved": false}, {"id": "401915442", "start_time_utc": "2026-09-10T19:00:00Z", "start_time_toronto": "2026-09-10T15:00:00-04:00", "home_team": "Manchester United", "away_team": "Sabah FK", "status": "final", "stage": "league-phase", "home_score": 4, "away_score": 0, "detail": "FT", "canada_involved": false}, {"id": "401915440", "start_time_utc": "2026-09-10T19:00:00Z", "start_time_toronto": "2026-09-10T15:00:00-04:00", "home_team": "Slavia Prague", "away_team": "Lens", "status": "final", "stage": "league-phase", "home_score": 2, "away_score": 3, "detail": "FT", "canada_involved": false}, {"id": "401915444", "start_time_utc": "2026-09-10T16:45:00Z", "start_time_toronto": "2026-09-10T12:45:00-04:00", "home_team": "Fenerbahce", "away_team": "AS Roma", "status": "final", "stage": "league-phase", "home_score": 1, "away_score": 1, "detail": "FT", "canada_involved": false}, {"id": "401915422", "start_time_utc": "2026-09-10T16:45:00Z", "start_time_toronto": "2026-09-10T12:45:00-04:00", "home_team": "PSV Eindhoven", "away_team": "Shakhtar Donetsk", "status": "final", "stage": "league-phase", "home_score": 1, "away_score": 1, "detail": "FT", "canada_involved": false}], "standings": {"label": "League Phase", "rows": [{"position": 1, "team": "Paris Saint-Germain", "played": 1, "points": 3, "goal_difference": 5, "canada": false}, {"position": 2, "team": "Bayern Munich", "played": 1, "points": 3, "goal_difference": 5, "canada": false}, {"position": 3, "team": "Barcelona", "played": 1, "points": 3, "goal_difference": 4, "canada": false}, {"position": 8, "team": "Manchester City", "played": 1, "points": 3, "goal_difference": 2, "canada": false}, {"position": 9, "team": "Aston Villa", "played": 1, "points": 3, "goal_difference": 1, "canada": false}]}, "highlights": []}]}, "major_headlines": []}}</script>
 
   <script>
     (function () {
