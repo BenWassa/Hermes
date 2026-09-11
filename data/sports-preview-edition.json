@@ -308,7 +308,7 @@
           "available": true,
           "error": null,
           "source": "NHL",
-          "fetched_at": "2026-09-11T22:37:32.094226Z",
+          "fetched_at": "2026-09-11T23:16:54.257547Z",
           "last_game": null,
           "record": null,
           "standing": null,
@@ -340,7 +340,7 @@
           "available": true,
           "error": null,
           "source": "ESPN",
-          "fetched_at": "2026-09-11T22:37:32.094226Z",
+          "fetched_at": "2026-09-11T23:16:54.257547Z",
           "last_game": null,
           "record": null,
           "standing": null,
@@ -372,7 +372,7 @@
           "available": true,
           "error": null,
           "source": "MLB Stats API",
-          "fetched_at": "2026-09-11T22:37:32.094226Z",
+          "fetched_at": "2026-09-11T23:16:54.257547Z",
           "last_game": {
             "id": "824956",
             "start_time_utc": "2026-09-09T19:05:00Z",
@@ -399,16 +399,16 @@
             "games_back": "14.5"
           },
           "next_game": {
-            "id": "822767",
-            "start_time_utc": "2026-09-11T23:07:00Z",
-            "start_time_toronto": "2026-09-11T19:07:00-04:00",
+            "id": "822768",
+            "start_time_utc": "2026-09-12T19:07:00Z",
+            "start_time_toronto": "2026-09-12T15:07:00-04:00",
             "opponent": "Baltimore Orioles",
             "opponent_abbreviation": "BAL",
             "home_away": "home",
             "status": "scheduled",
             "phase": "regular",
-            "team_score": 0,
-            "opponent_score": 0,
+            "team_score": null,
+            "opponent_score": null,
             "result": null
           }
         },
@@ -427,7 +427,7 @@
           "available": true,
           "error": null,
           "source": "ESPN",
-          "fetched_at": "2026-09-11T22:37:32.093875Z",
+          "fetched_at": "2026-09-11T23:16:54.257250Z",
           "matches": [
             {
               "id": "401915443",
