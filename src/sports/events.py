@@ -57,9 +57,10 @@ class EventSpec:
         return any(window.contains(date) for window in self.windows) or date.month in self.active_months
 
 
-# Official known tournament windows are pinned rather than guessed. Seasonal
-# Champions League activation is deliberately broad; the provider still
-# determines whether relevant fixtures exist on a given morning.
+# Official known tournament windows are pinned rather than guessed. Champions
+# League activation covers the main September-May competition rather than
+# summer qualification, keeping the morning product focused on the high-value
+# competition phase.
 EVENT_REGISTRY: tuple[EventSpec, ...] = (
     EventSpec(
         key="fifa-world-cup-2030",
@@ -97,7 +98,7 @@ EVENT_REGISTRY: tuple[EventSpec, ...] = (
         priority=EventPriority.HIGH,
         provider=EventProvider.ESPN_SOCCER,
         provider_code="uefa.champions",
-        active_months=frozenset({1, 2, 3, 4, 5, 6, 9, 10, 11, 12}),
+        active_months=frozenset({1, 2, 3, 4, 5, 9, 10, 11, 12}),
         max_items=6,
         include_standings=True,
         article_discovery=False,
