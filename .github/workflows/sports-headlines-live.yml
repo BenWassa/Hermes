@@ -1,0 +1,51 @@
+name: Sports headline discovery live check
+
+on:
+  push:
+    branches:
+      - sports-36-major-headlines
+  workflow_dispatch: {}
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install runtime dependencies
+        run: pip install -r requirements.txt
+      - name: Probe targeted Guardian team searches
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          import os
+          import requests
+          from src.sports.headlines import GUARDIAN_SEARCH_URL, GUARDIAN_TEAM_QUERIES, fetch_guardian_team_candidates
+
+          key = os.environ.get("GUARDIAN_API_KEY")
+          assert key, "GUARDIAN_API_KEY is not configured"
+          for team, query in GUARDIAN_TEAM_QUERIES.items():
+              response = requests.get(
+                  GUARDIAN_SEARCH_URL,
+                  params={
+                      "q": query,
+                      "section": "sport",
+                      "order-by": "newest",
+                      "page-size": 3,
+                      "show-fields": "trailText",
+                      "api-key": key,
+                  },
+                  timeout=15,
+              )
+              print(team, response.status_code, len(response.json().get("response", {}).get("results", [])))
+              response.raise_for_status()
+
+          now = dt.datetime.now(dt.timezone.utc)
+          candidates = fetch_guardian_team_candidates(since=now-dt.timedelta(days=7), until=now)
+          print("normalized candidates", len(candidates), [(c.team_key, c.title[:60]) for c in candidates[:10]])
+          PY
