@@ -89,11 +89,7 @@ def nba_schedule(response: requests.Response) -> str:
     if not isinstance(dates, list):
         raise AssertionError("NBA schedule missing gameDates[]")
     games = [g for day in dates for g in day.get("games", [])]
-    tor = [
-        g for g in games
-        if g.get("homeTeam", {}).get("teamId") == 1610612761
-        or g.get("awayTeam", {}).get("teamId") == 1610612761
-    ]
+    tor = [g for g in games if g.get("homeTeam", {}).get("teamId") == 1610612761 or g.get("awayTeam", {}).get("teamId") == 1610612761]
     if not tor:
         raise AssertionError("NBA schedule missing Raptors")
     return f"games={len(games)} raptors={len(tor)}"
@@ -114,6 +110,18 @@ def espn_team_schedule(response: requests.Response) -> str:
     team = data.get("team") or {}
     label = team.get("displayName") or team.get("name") or "unknown"
     return f"team={label}; events={len(events)}"
+
+
+def espn_team_detail(response: requests.Response) -> str:
+    team = _json(response).get("team")
+    if not isinstance(team, dict):
+        raise AssertionError("ESPN team detail missing team")
+    record = team.get("record")
+    if not isinstance(record, dict):
+        raise AssertionError("ESPN team detail missing record")
+    summary = record.get("summary") or record.get("displayValue") or "present"
+    standing = team.get("standingSummary") or "none"
+    return f"record={summary}; standing={standing}"
 
 
 def espn_scoreboard(response: requests.Response) -> str:
@@ -148,21 +156,12 @@ def probes_for_today(today: dt.date) -> dict[str, Probe]:
     probes = [
         Probe("nhl_schedule", f"https://api-web.nhle.com/v1/club-schedule-season/TOR/{nhl_season}", nhl_schedule),
         Probe("nhl_standings", "https://api-web.nhle.com/v1/standings/now", nhl_standings),
-        Probe(
-            "mlb_schedule",
-            "https://statsapi.mlb.com/api/v1/schedule"
-            f"?sportId=1&teamId=141&startDate={start.isoformat()}&endDate={end.isoformat()}&hydrate=team",
-            mlb_schedule,
-        ),
-        Probe(
-            "mlb_standings",
-            "https://statsapi.mlb.com/api/v1/standings"
-            f"?leagueId=103&season={season}&standingsTypes=regularSeason&hydrate=division",
-            mlb_standings,
-        ),
+        Probe("mlb_schedule", "https://statsapi.mlb.com/api/v1/schedule" f"?sportId=1&teamId=141&startDate={start.isoformat()}&endDate={end.isoformat()}&hydrate=team", mlb_schedule),
+        Probe("mlb_standings", "https://statsapi.mlb.com/api/v1/standings" f"?leagueId=103&season={season}&standingsTypes=regularSeason&hydrate=division", mlb_standings),
         Probe("nba_schedule", "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json", nba_schedule, NBA_HEADERS),
         Probe("nba_scoreboard", "https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json", nba_scoreboard, NBA_HEADERS),
         Probe("espn_nba_schedule", "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/tor/schedule", espn_team_schedule),
+        Probe("espn_nba_team", "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/tor", espn_team_detail),
         Probe("espn_nba_scoreboard", "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard", espn_scoreboard),
         Probe("cbc_nhl", "https://www.cbc.ca/webfeed/rss/rss-sports-nhl", rss),
         Probe("cbc_nba", "https://www.cbc.ca/webfeed/rss/rss-sports-nba", rss),
@@ -197,7 +196,6 @@ def main() -> int:
     unknown = [name for name in names if name not in available]
     if unknown:
         parser.error("unknown probes: " + ", ".join(unknown))
-
     evidence = [run(available[name]) for name in names]
     print("EVIDENCE_JSON=" + json.dumps(evidence, separators=(",", ":")))
     return 1 if any(not item["ok"] for item in evidence) else 0
