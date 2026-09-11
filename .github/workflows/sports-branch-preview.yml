@@ -37,6 +37,7 @@ jobs:
 
       - name: Build live Sports preview
         env:
+          PYTHONPATH: .
           GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
         run: python scripts/build_sports_branch_preview.py
 
