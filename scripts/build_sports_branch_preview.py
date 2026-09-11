@@ -37,13 +37,13 @@ _TIMEOUT = 15
 _MARK_CSS = r"""
 /* Branch-only experiment: official-hosted marks in normalized optical boxes. */
 .sports-team::before { display: none !important; }
-.sports-team { padding-left: 54px !important; }
+.sports-team { padding-left: 64px !important; min-height: 76px; }
 .sports-preview-mark {
   position: absolute;
   left: 0;
-  top: 13px;
-  width: 40px;
-  height: 40px;
+  top: 11px;
+  width: 48px;
+  height: 48px;
   display: grid;
   place-items: center;
   overflow: visible;
@@ -60,13 +60,13 @@ _MARK_CSS = r"""
 }
 .sports-preview-mark-fallback {
   display: none;
-  width: 32px;
-  min-height: 31px;
-  padding: 4px 0 3px;
+  width: 38px;
+  min-height: 36px;
+  padding: 5px 0 4px;
   border-top: 2px solid var(--navy);
   border-bottom: 1px solid var(--navy);
   font-family: 'Georgia', serif;
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.04em;
@@ -77,18 +77,18 @@ _MARK_CSS = r"""
 .sports-preview-mark.failed img,
 .sports-preview-mark.failed picture { display: none; }
 
-/* Champions League crests stay subordinate to the scoreline. 24px is enough
-   to identify a club without turning the digest into a scores app. */
+/* Club crests get enough visual weight to be identifiable while the team name
+   and score remain the primary information. */
 .sports-preview-club {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   min-width: 0;
 }
 .sports-preview-club-crest {
-  width: 24px;
-  height: 24px;
-  flex: 0 0 24px;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
   object-fit: contain;
   object-position: center;
   vertical-align: middle;
@@ -96,20 +96,20 @@ _MARK_CSS = r"""
 .sports-table-team-preview {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   min-width: 0;
 }
 .sports-table-team-preview .sports-preview-club-crest {
-  width: 20px;
-  height: 20px;
-  flex-basis: 20px;
+  width: 24px;
+  height: 24px;
+  flex-basis: 24px;
 }
 @media (max-width: 380px) {
-  .sports-team { padding-left: 48px !important; }
-  .sports-preview-mark { width: 36px; height: 36px; top: 14px; }
-  .sports-preview-club { gap: 5px; }
-  .sports-preview-club-crest { width: 21px; height: 21px; flex-basis: 21px; }
-  .sports-table-team-preview .sports-preview-club-crest { width: 18px; height: 18px; flex-basis: 18px; }
+  .sports-team { padding-left: 56px !important; min-height: 70px; }
+  .sports-preview-mark { width: 42px; height: 42px; top: 13px; }
+  .sports-preview-club { gap: 6px; }
+  .sports-preview-club-crest { width: 27px; height: 27px; flex-basis: 27px; }
+  .sports-table-team-preview .sports-preview-club-crest { width: 22px; height: 22px; flex-basis: 22px; }
 }
 """
 
@@ -195,7 +195,8 @@ _MARK_JS = r"""
       if (clubs[1]) addClubCrest(clubs[1], match.away_logo_url, false);
     });
 
-    var tableRows = root.querySelectorAll('.sports-table tbody tr');
+    /* Deliberate gap/cut rows are presentation furniture, not standings rows. */
+    var tableRows = root.querySelectorAll('.sports-table tbody tr:not(.sports-table-gap)');
     var standings = event.standings && event.standings.rows;
     (standings || []).forEach(function (rowData, index) {
       var row = tableRows[index];
