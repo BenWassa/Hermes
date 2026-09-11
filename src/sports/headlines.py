@@ -140,7 +140,6 @@ def classify_significance(candidate: SportsHeadlineCandidate) -> Significance | 
     """Conservative significance gate. False negatives are intentional."""
     text = _fold(candidate.text)
 
-    # Explicit routine/noise families win before positive terms.
     routine = (
         r"\bpreview\b", r"\bpractice\b", r"line combinations?", r"\bpostgame\b",
         r"game recap", r"\btakeaways?\b", r"\bgrades?\b", r"trade talk",
@@ -150,14 +149,13 @@ def classify_significance(candidate: SportsHeadlineCandidate) -> Significance | 
     if _contains_any(text, routine):
         return None
 
-    # Generic 'injury update' is not enough. Require severity/action evidence.
     if "injury update" in text and not _contains_any(
         text,
         (r"\bsurgery\b", r"out for (?:the )?season", r"\bmonths?\b", r"long term", r"long-term", r"indefinitely"),
     ):
         return None
 
-    if _contains_any(text, (r"wins? (?:the )?(?:stanley cup|nba finals|world series)", r"champions?\b", r"clinches? (?:a )?playoff", r"eliminated from (?:the )?playoffs")):
+    if _contains_any(text, (r"wins? (?:the )?(?:stanley cup|nba finals|world series)", r"champions?\b", r"clinch(?:es)? (?:a )?playoff", r"eliminated from (?:the )?playoffs")):
         return Significance.CHAMPIONSHIP
     if _contains_any(text, (r"fires? (?:head )?coach", r"hires? (?:new )?(?:head )?coach", r"fires? (?:general manager|gm|president)", r"hires? (?:general manager|gm|president)")):
         return Significance.LEADERSHIP
@@ -201,7 +199,6 @@ def _same_event(a: QualifiedHeadline, b: QualifiedHeadline) -> bool:
 def qualify(candidates: Iterable[SportsHeadlineCandidate]) -> list[QualifiedHeadline]:
     out: list[QualifiedHeadline] = []
     for candidate in candidates:
-        # Cricket is excluded even if a headline also happens to mention Toronto.
         if _contains_any(_fold(candidate.text), (r"\bcricket\b", r"\bipl\b", r"test match")):
             continue
         team = candidate.team_key or detect_team(candidate.text)
@@ -248,11 +245,7 @@ def select_team_winners(candidates: Iterable[SportsHeadlineCandidate], *, now: d
 
 
 def sports_model_payload(winners: dict[str, QualifiedHeadline]) -> list[dict]:
-    """Initial V2 model boundary: always empty.
-
-    Selected Sports headlines render from source headline/description. Keeping
-    this function explicit makes a future budget regression testable.
-    """
+    """Initial V2 model boundary: always empty."""
     return []
 
 
@@ -263,11 +256,7 @@ def fetch_guardian_team_candidates(
     page_size: int = 8,
     session: requests.Session | None = None,
 ) -> list[SportsHeadlineCandidate]:
-    """Fetch narrow Guardian searches for the three favourite teams.
-
-    Missing credentials or one failed team query degrades locally. This never
-    falls back to Guardian's broad sport section.
-    """
+    """Fetch narrow Guardian searches for the three favourite teams."""
     key = os.environ.get("GUARDIAN_API_KEY")
     if not key:
         return []
