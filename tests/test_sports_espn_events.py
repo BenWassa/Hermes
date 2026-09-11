@@ -67,6 +67,18 @@ def test_scoreboard_parses_live_final_scheduled_and_postponed_shapes():
     assert parsed[0].stage == "league-phase"
 
 
+def test_world_cup_stage_transitions_are_preserved():
+    payload = {
+        "events": [
+            event("group", "2030-06-20T18:00Z", "Canada", "Spain", stage="group-stage"),
+            event("round16", "2030-07-02T18:00Z", "Canada", "Japan", stage="round-of-16"),
+            event("final", "2030-07-21T18:00Z", "Argentina", "France", stage="final"),
+        ]
+    }
+    parsed = parse_scoreboard(payload)
+    assert [item.stage for item in parsed] == ["group-stage", "round-of-16", "final"]
+
+
 def test_scoreboard_detects_canada_by_name_or_abbreviation():
     parsed = parse_scoreboard({"events": [event("can", "2030-06-20T18:00Z", "Canada", "Spain")]})
     assert parsed[0].canada_involved is True
@@ -129,7 +141,7 @@ class _Session:
                     "events": [
                         event(
                             f"{league}-match",
-                            "2030-06-20T18:00Z" if league == "fifa.world" else "2030-06-20T20:00Z",
+                            "2030-06-20T18:00Z" if league == "fifa.world" else "2026-09-11T20:00Z",
                             "Canada" if league == "fifa.world" else "PSG",
                             "Spain" if league == "fifa.world" else "Bayern",
                         )
@@ -168,10 +180,11 @@ def test_request_window_uses_toronto_calendar_date_near_utc_midnight():
     assert scoreboard_call[1]["dates"] == "20260910-20260918"
 
 
-def test_world_cup_failure_does_not_suppress_champions_league():
-    now = dt.datetime(2030, 6, 20, 12, tzinfo=UTC)
-    session = _Session(scoreboard_fail_for={"fifa.world"})
-    snapshots = build_major_event_snapshots(now=now, session=session)
+def test_active_olympics_without_source_is_explicitly_unavailable():
+    now = dt.datetime(2028, 7, 20, 12, tzinfo=UTC)
+    snapshots = build_major_event_snapshots(now=now, olympic_highlights=())
     by_key = {snapshot.spec.key: snapshot for snapshot in snapshots}
-    assert by_key["fifa-world-cup-2030"].available is False
-    assert by_key["champions-league"].available is True
+    assert set(by_key) == {"summer-olympics-2028"}
+    assert by_key["summer-olympics-2028"].available is False
+    assert by_key["summer-olympics-2028"].error == "event_source_unavailable"
+    assert by_key["summer-olympics-2028"].source == "unconfigured"
