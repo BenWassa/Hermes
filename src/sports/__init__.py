@@ -34,6 +34,7 @@ from .models import (
     TeamRef,
     TeamSnapshot,
 )
+from .presentation import SPORTS_PAYLOAD_VERSION, TEAM_ORDER, build_sports_payload
 from .providers import BLUE_JAYS, LEAFS, RAPTORS
 from .toronto import build_toronto_snapshots
 
@@ -42,6 +43,8 @@ __all__ = [
     "EVENT_REGISTRY",
     "LEAFS",
     "RAPTORS",
+    "SPORTS_PAYLOAD_VERSION",
+    "TEAM_ORDER",
     "EventArticle",
     "EventHighlight",
     "EventMatch",
@@ -64,6 +67,7 @@ __all__ = [
     "active_event_specs",
     "build_major_event_snapshots",
     "build_major_events",
+    "build_sports_payload",
     "build_toronto_snapshots",
     "event_article_queries",
     "fetch_guardian_event_articles",
