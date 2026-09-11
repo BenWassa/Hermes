@@ -7,9 +7,9 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  probe:
+  probe-raptors-fallback:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 2
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -17,5 +17,5 @@ jobs:
           python-version: "3.11"
       - name: Install probe dependencies
         run: pip install requests feedparser
-      - name: Probe Sports V2 public sources
-        run: python scripts/probe_sports_sources.py
+      - name: Probe ESPN Raptors schedule and NBA scoreboard
+        run: python scripts/probe_sports_sources.py espn_nba_schedule espn_nba_scoreboard
