@@ -1,8 +1,8 @@
 # Following: morning Opinion integration
 
-Status: implementation record for issue #11 (Slice B of `VOICES.md`).
+Status: implementation record for issue #11 (Slice B of `VOICES.md`), with presentation convergence authority added by issue #46.
 
-`VOICES.md`, issue #9 and issue #11 remain the product authority. This note records the concrete Slice B choices where the implementation is narrower or more specific than the design examples.
+`VOICES.md`, issue #9 and issue #11 remain the product authority for Following semantics. Issue #46 and this note govern the Opinion presentation convergence described below. This note records the concrete implementation choices where the shipped architecture is narrower or more specific than the design examples.
 
 ## Authority boundary
 
@@ -62,13 +62,96 @@ This avoids a second model request while making explicit-follow survival structu
 The production template changes only inside Opinion when followed material exists:
 
 - `Following` appears first;
-- author, publication and filing time are one quiet metadata line under the headline;
+- author, publication and filing time remain visible;
 - `Today's Opinion` follows as a separate editorial group;
 - both use the existing card expansion, `Read full story`, Ask AI, keyboard and touch machinery;
 - no avatar, badge, unread count, horizontal feed, history, recommendation language, or browser-only Follow control is added;
 - paywalled work uses the same canonical outbound publisher link and no access-control workaround.
 
 With zero qualifying followed pieces the page uses the previous ordinary Opinion treatment and renders no Following heading.
+
+### Issue #46 presentation convergence
+
+The two Opinion groups are semantically different but must not maintain separate article-component families.
+
+The locked target is:
+
+```text
+Opinion tab
+  -> Following group
+       -> ordinary supporting-story card renderer
+  -> Today's Opinion group
+       -> ordinary story card renderer
+```
+
+`Following` remains a deterministic reader-choice collection. `Today's Opinion` remains a Gemini-curated editorial collection. Their collection boundaries remain separate, while their article presentation converges on the same story-card primitive.
+
+#### Shared card contract
+
+Following cards must use the existing display fields already consumed by the normal story renderer:
+
+- `lead`
+- `kicker`
+- `headline`
+- `sub`
+- `summary`
+- `analysis`
+- `time`
+- `tag`
+- `sensitivity`
+- `image`
+- `link`
+
+Following uses the normal **non-lead** story treatment. The first followed item must not be promoted to a lead merely to imitate Today's Opinion because that would imply editorial ranking that does not exist.
+
+The followed writer should be carried through the standard kicker position. Publication and filing time should be carried through the normal quiet metadata/time position with deterministic fallbacks when either is missing. The card should not gain a Following-only byline row.
+
+Authoritative fields such as `author`, `publication`, `paywalled`, `voice_ids`, and `canonical_key` may remain on the serialized Following record only where a real non-rendering consumer needs them. The issue implementation must audit their usages and remove presentation-only or dead fields instead of preserving them by habit. The `following: true` marker should be removed if that audit shows no remaining consumer.
+
+#### Schema boundary
+
+Do not move Following into `sections[].stories` merely to make rendering convenient. The top-level `edition.following` boundary is intentional because it preserves reader-choice authority separately from ordinary editorial Opinion and is already inspected by Voice/roundup code.
+
+No broad Gemini/output-schema migration is required for issue #46. Do not add author/provenance fields to every ordinary curation record or enlarge the daily model prompt simply to achieve visual parity.
+
+If implementation needs a small render-time adapter, it belongs at the existing Opinion/render boundary and must adapt into the normal story-card contract. Do not introduce a second long-lived `FollowingCard` schema or a new top-level Opinion payload.
+
+#### Renderer consolidation
+
+Following and Today's Opinion should be composed through one small Opinion-group pattern and one `cardHtml`-equivalent story renderer. Exact helper names are not product authority; the constraints are:
+
+- one card renderer;
+- one group-heading composition pattern;
+- separate semantic collections;
+- separate empty-state rules where necessary.
+
+The implementation should delete, not leave dormant:
+
+- `.following-block .card` visual padding overrides;
+- `.follow-meta` CSS and markup;
+- any Following-only article rendering branch replaced by the shared card renderer;
+- stale test assertions that exist only to protect the retired custom treatment;
+- redundant fixture/presentation fields that have no remaining consumer.
+
+Structural classes/selectors may remain only where they still serve accessibility, group identity, layout, or stable behavioral testing.
+
+#### Visual contract
+
+Following and Today's Opinion should therefore share:
+
+- story-rule treatment;
+- headline typography;
+- standfirst placement;
+- quiet metadata treatment;
+- expansion spacing and tint;
+- image handling;
+- Read full story placement;
+- Ask AI behavior;
+- keyboard/touch behavior;
+- reduced-motion behavior;
+- dark/lamplight behavior.
+
+The group headings remain distinct because they communicate different editorial authority. Shared card styling does not erase that distinction.
 
 ## Verification contract
 
@@ -86,6 +169,22 @@ The deterministic suite covers:
 
 The browser suite renders the real production template through `src.render.render()` and exercises the generated static artifact in Chromium at 390x844 portrait, 320x568 short portrait, and 844x390 landscape. It checks real tab/card/touch/keyboard/Ask-AI/link behavior, 44px action targets, reduced motion and horizontal overflow. CI preserves the rendered HTML plus screenshots as a short-lived inspection artifact.
 
+For issue #46, verification must additionally prove:
+
+- Following and Today's Opinion cards share the same story-card renderer/classes/structure;
+- no `.follow-meta` element remains;
+- no Following-specific card-padding override remains;
+- author is visible through the normal kicker position;
+- publication/time render through the normal quiet metadata position with missing-field fallbacks;
+- Following records remain non-lead;
+- Today's Opinion lead behavior is unchanged;
+- zero Following retains the ordinary Opinion state;
+- deterministic membership/order, duplicate suppression, canonical links and sensitivity behavior are unchanged;
+- browser interaction/accessibility acceptance remains green at all existing mobile/landscape viewports;
+- light and dark/lamplight composition remain coherent.
+
+Prefer structural and computed-style assertions over pixel-perfect screenshot comparison. Screenshots remain useful inspection artifacts, not the primary correctness oracle.
+
 ## Scope boundary
 
-Issue #12 is untouched. Slice B does not create watcher state, notification cadence, release-time alerts, workflow concurrency for watcher publishing, or a writable preference backend.
+Issue #12 remains outside this document's original Slice B scope. Issue #46 likewise does not create watcher state, notification cadence, release-time alerts, workflow concurrency for watcher publishing, a writable preference backend, new Voice tier semantics, a new Gemini call, or a new global story-card design.
