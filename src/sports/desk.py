@@ -23,14 +23,13 @@ from src.voices.urls import canonical_url
 from .budget import headline_budget_metrics
 from .event_news import EventArticle, fetch_guardian_event_articles
 from .headlines import (
-    QualifiedHeadline,
     fetch_guardian_team_candidates,
     qualify,
     select_team_winners,
     sports_model_payload,
 )
 from .major_events import build_major_events
-from .models import SeasonPhase, TeamSnapshot, UTC
+from .models import SeasonPhase, TeamSnapshot, TORONTO, UTC
 from .presentation import build_sports_payload
 from .providers import BLUE_JAYS, LEAFS, RAPTORS
 from .toronto import build_toronto_snapshots
@@ -117,7 +116,7 @@ def build_sports_desk(
     team_winners = select_team_winners(raw_team_news, now=now_utc)
 
     event_groups = fetch_guardian_event_articles(
-        on_date=now_utc.astimezone(config.TORONTO_ZONE).date(),
+        on_date=now_utc.astimezone(TORONTO).date(),
         since=since,
         until=now_utc,
         session=news_http,
