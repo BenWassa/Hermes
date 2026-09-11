@@ -2,19 +2,25 @@
 
 Single entrypoint chaining the whole pipeline:
 
-    weather -> fetch -> normalize -> voices -> curate -> resolve_images -> render
+    weather -> ordinary fetch/normalize -> voices -> Sports V2 -> curate -> images -> render
 
-Voice discovery and Following selection happen before Gemini curation.  The
+Voice discovery and Following selection happen before Gemini curation. The
 selected followed set is therefore an input to curation, not a ranking result
 that the editor model can silently discard.
 
-Each stage failure is logged with its stage name and exits non-zero so CI
-surfaces it. Individual Voice-source failures are already isolated inside the
-Voice discovery layer and do not fail the edition.
+Sports is a parallel deterministic editorial path. It is built before curation
+so any selected Sports headline can be removed from the ordinary Gemini pool,
+but Sports records themselves are never attached to Gemini input. Provider
+failures degrade Sports without blocking the Daily.
+
+Each ordinary stage failure is logged with its stage name and exits non-zero so
+CI surfaces it. Individual Voice and Sports provider failures are isolated
+inside their domain layers and do not fail the edition.
 """
 
 from __future__ import annotations
 
+import json
 import logging
 import sys
 
@@ -26,6 +32,12 @@ from .images import resolve_images
 from .normalize import normalize
 from .opinion import editorial_without_following, following_seeds
 from .render import render
+from .sports import (
+    attach_sports_to_edition,
+    build_sports_desk,
+    suppress_sports_editorial_duplicates,
+    unavailable_sports_result,
+)
 from .voices import discover, load_registry, select_following
 
 log = logging.getLogger("the-daily.build")
@@ -71,8 +83,29 @@ def main() -> int:
             len(stories) - len(editorial_stories),
         )
 
+        # Sports V2 is fail-soft by design. Provider failures are already
+        # isolated inside the adapters; this outer guard protects publication
+        # if the Sports assembly itself encounters an unexpected exception.
+        stage = "sports"
+        try:
+            sports_result = build_sports_desk()
+        except Exception as exc:  # noqa: BLE001 - deliberate publication guard
+            log.error("sports desk degraded: %s", exc)
+            sports_result = unavailable_sports_result()
+
+        editorial_stories, sports_duplicates = suppress_sports_editorial_duplicates(
+            editorial_stories,
+            sports_result.payload,
+        )
+        sports_result.metrics["ordinary_duplicates_suppressed"] = sports_duplicates
+        log.info(
+            "sports telemetry %s",
+            json.dumps(sports_result.metrics, sort_keys=True, separators=(",", ":")),
+        )
+
         stage = "curate"
         edition = curate(editorial_stories, weather=weather, following=following)
+        attach_sports_to_edition(edition, sports_result.payload)
 
         stage = "images"
         resolve_images(edition)
