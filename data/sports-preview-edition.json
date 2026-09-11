@@ -308,7 +308,7 @@
           "available": true,
           "error": null,
           "source": "NHL",
-          "fetched_at": "2026-09-11T22:16:04.982045Z",
+          "fetched_at": "2026-09-11T22:37:32.094226Z",
           "last_game": null,
           "record": null,
           "standing": null,
@@ -340,7 +340,7 @@
           "available": true,
           "error": null,
           "source": "ESPN",
-          "fetched_at": "2026-09-11T22:16:04.982045Z",
+          "fetched_at": "2026-09-11T22:37:32.094226Z",
           "last_game": null,
           "record": null,
           "standing": null,
@@ -372,7 +372,7 @@
           "available": true,
           "error": null,
           "source": "MLB Stats API",
-          "fetched_at": "2026-09-11T22:16:04.982045Z",
+          "fetched_at": "2026-09-11T22:37:32.094226Z",
           "last_game": {
             "id": "824956",
             "start_time_utc": "2026-09-09T19:05:00Z",
@@ -427,7 +427,7 @@
           "available": true,
           "error": null,
           "source": "ESPN",
-          "fetched_at": "2026-09-11T22:16:04.981738Z",
+          "fetched_at": "2026-09-11T22:37:32.093875Z",
           "matches": [
             {
               "id": "401915443",
@@ -440,7 +440,9 @@
               "home_score": 5,
               "away_score": 0,
               "detail": "FT",
-              "canada_involved": false
+              "canada_involved": false,
+              "home_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+              "away_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/2980.png"
             },
             {
               "id": "401915441",
@@ -453,7 +455,9 @@
               "home_score": 4,
               "away_score": 1,
               "detail": "FT",
-              "canada_involved": false
+              "canada_involved": false,
+              "home_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+              "away_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png"
             },
             {
               "id": "401915442",
@@ -466,7 +470,9 @@
               "home_score": 4,
               "away_score": 0,
               "detail": "FT",
-              "canada_involved": false
+              "canada_involved": false,
+              "home_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+              "away_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/21922.png"
             },
             {
               "id": "401915440",
@@ -479,7 +485,9 @@
               "home_score": 2,
               "away_score": 3,
               "detail": "FT",
-              "canada_involved": false
+              "canada_involved": false,
+              "home_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/494.png",
+              "away_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/175.png"
             },
             {
               "id": "401915444",
@@ -492,7 +500,9 @@
               "home_score": 1,
               "away_score": 1,
               "detail": "FT",
-              "canada_involved": false
+              "canada_involved": false,
+              "home_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
+              "away_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png"
             },
             {
               "id": "401915422",
@@ -505,7 +515,9 @@
               "home_score": 1,
               "away_score": 1,
               "detail": "FT",
-              "canada_involved": false
+              "canada_involved": false,
+              "home_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png",
+              "away_logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/493.png"
             }
           ],
           "standings": {
@@ -517,7 +529,8 @@
                 "played": 1,
                 "points": 3,
                 "goal_difference": 5,
-                "canada": false
+                "canada": false,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"
               },
               {
                 "position": 2,
@@ -525,7 +538,8 @@
                 "played": 1,
                 "points": 3,
                 "goal_difference": 5,
-                "canada": false
+                "canada": false,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png"
               },
               {
                 "position": 3,
@@ -533,7 +547,8 @@
                 "played": 1,
                 "points": 3,
                 "goal_difference": 4,
-                "canada": false
+                "canada": false,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png"
               },
               {
                 "position": 8,
@@ -541,7 +556,8 @@
                 "played": 1,
                 "points": 3,
                 "goal_difference": 2,
-                "canada": false
+                "canada": false,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png"
               },
               {
                 "position": 9,
@@ -549,7 +565,8 @@
                 "played": 1,
                 "points": 3,
                 "goal_difference": 1,
-                "canada": false
+                "canada": false,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png"
               }
             ]
           },
