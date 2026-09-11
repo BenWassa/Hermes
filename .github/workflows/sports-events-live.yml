@@ -18,30 +18,43 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Probe football-data competition contracts
+      - name: Install runtime dependencies
+        run: pip install -r requirements.txt
+      - name: Probe major-event source contracts
         run: |
           python - <<'PY'
           import os
           import requests
 
           token = os.environ.get("FOOTBALL_DATA_API_KEY") or os.environ.get("FOOTBALL_DATA_TOKEN")
-          print("token_configured", bool(token))
-          headers = {"X-Auth-Token": token} if token else {}
-          for code in ("CL", "WC"):
-              for suffix in ("", "/matches", "/standings"):
-                  url = f"https://api.football-data.org/v4/competitions/{code}{suffix}"
-                  response = requests.get(url, headers=headers, timeout=15)
-                  print(code, suffix or "/competition", response.status_code, response.headers.get("X-Requests-Available-Minute"))
-                  try:
-                      payload = response.json()
-                      if suffix == "":
-                          season = payload.get("currentSeason") or {}
-                          print("  competition", payload.get("name"), season.get("startDate"), season.get("endDate"), season.get("currentMatchday"), season.get("stages"))
-                      elif suffix == "/matches":
-                          rows = payload.get("matches") or []
-                          print("  matches", len(rows), [(m.get("id"), m.get("utcDate"), m.get("status"), m.get("stage")) for m in rows[:2]])
-                      else:
-                          print("  standings", len(payload.get("standings") or []), [s.get("type") for s in (payload.get("standings") or [])[:3]])
-                  except Exception:
-                      print("  body", response.text[:160])
+          print("football_data_token_configured", bool(token))
+          if token:
+              headers = {"X-Auth-Token": token}
+              for code in ("CL", "WC"):
+                  response = requests.get(
+                      f"https://api.football-data.org/v4/competitions/{code}/matches",
+                      headers=headers,
+                      timeout=15,
+                  )
+                  print("football-data", code, response.status_code, response.headers.get("X-Requests-Available-Minute"))
+                  response.raise_for_status()
+
+          for league in ("uefa.champions", "fifa.world"):
+              scoreboard = requests.get(
+                  f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/scoreboard",
+                  timeout=15,
+              )
+              print("espn scoreboard", league, scoreboard.status_code)
+              scoreboard.raise_for_status()
+              payload = scoreboard.json()
+              print("  events", len(payload.get("events") or []), [(e.get("id"), e.get("date"), (e.get("status") or {}).get("type", {}).get("name")) for e in (payload.get("events") or [])[:3]])
+
+              standings = requests.get(
+                  f"https://site.api.espn.com/apis/v2/sports/soccer/{league}/standings",
+                  timeout=15,
+              )
+              print("espn standings", league, standings.status_code)
+              standings.raise_for_status()
+              groups = standings.json().get("children") or []
+              print("  groups", len(groups))
           PY
