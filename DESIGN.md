@@ -238,6 +238,19 @@ images from looking sharp-cornered at small sizes).
 - **Style:** Press Navy ground, white text, single-line summary
 - **Behavior:** tap toggles a 7-day row, ruled with translucent white hairlines
 
+### Sports Desk
+- **Composition:** a `TORONTO` block first, optional `MAJOR EVENTS` second, optional `MAJOR HEADLINES` last. Favourite-team order is Maple Leafs, Raptors, Blue Jays.
+- **Team row:** ruled newspaper furniture, never a rounded card. The row must communicate team name, previous result/status, compact record/standing context and next game without requiring a tap. Offseason rows collapse rather than preserving empty score columns.
+- **Numerals:** compact alignment and `font-variant-numeric: tabular-nums` are allowed for scores/records/times. This is typesetting for scanability, not a dashboard aesthetic.
+- **Team mark:** small and subordinate to the text, typically around 24–32px depending on the proved asset. The team name remains visible, so the mark is never the sole identifier.
+- **Team-mark ink rule:** a logo does not create an exception to the Two-Ink Rule. Marks must resolve into Press Navy, Masthead Red and/or neutral paper inks. Leafs may bias navy, Raptors restrained red/navy, Blue Jays the existing navy/red pair. No new team-specific UI colors.
+- **Asset rule:** use only a source/usage strategy approved by `SPORTS_V2.md` / #34. Prefer stable official/league-hosted assets if local redistribution is unclear; text fallback is mandatory. No third-party logo packs.
+- **Major headline:** editorial copy sits beneath or adjacent to the relevant team row and follows normal headline/link conventions. Do not turn it into a second score tile.
+- **Major Events:** may become more prominent during World Cup/Olympics windows, but still uses rules, labels and typography rather than coloured tournament cards or a full live-score grid.
+- **Interaction:** basic score/state information is static. Do not require expansion to understand it. Article actions may reuse normal Read More / Ask AI furniture.
+- **Responsive:** long opponent names, playoff labels, doubleheaders, postponed games and large text settings must wrap/reflow without horizontal scrolling.
+- **Accessibility:** marks are decorative/redundant to visible team names; missing images must not remove information.
+
 ### Read More Link
 - **Style:** Label type in Press Navy, no underline at rest, underline on hover
 
@@ -264,6 +277,8 @@ images from looking sharp-cornered at small sizes).
 - **Do** hold body text at 0.9375rem/1.7 or better, in rem so iOS text-size preferences carry; the reading distance is arm's length in bed.
 - **Do** pad every screen edge with `env(safe-area-inset-*)`; the paper launches installed from a 7AM push, under the notch and home indicator.
 - **Do** preserve the reader's place: never rebuild the whole page on a tap, and keep scroll and open state across interactions.
+- **Do** let Sports use compact tabular alignment where it improves score/record scanning, while preserving the same paper, rules and type hierarchy.
+- **Do** make Toronto team identity visible through restrained marks only when the mark source and fallback are cleanly established.
 
 ### Don't:
 - **Don't** introduce news-app engagement slop: infinite scroll, red badges, BREAKING banners, clickbait cards, or any "for you" energy (PRODUCT.md anti-reference, verbatim).
@@ -273,3 +288,5 @@ images from looking sharp-cornered at small sizes).
 - **Don't** use box-shadows, gradients, or borders thicker than hairlines except the masthead (4px), lead (3px), and active-tab (3px) navy rules.
 - **Don't** use `border-left` or `border-right` stripes as colored accents on callouts or cards; rule across the top or tint the ground instead.
 - **Don't** add a third chromatic color. Two inks, warm grays, nothing else.
+- **Don't** turn Sports into an ESPN-style dashboard: no coloured team cards, horizontal score carousel, betting/fantasy chrome or dense league-wide scoreboard.
+- **Don't** let a logo become more visually important than the score/state text or survive as the only team identifier.
