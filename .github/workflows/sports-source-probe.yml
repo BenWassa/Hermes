@@ -17,5 +17,5 @@ jobs:
           python-version: "3.11"
       - name: Install probe dependencies
         run: pip install requests feedparser
-      - name: Probe ESPN Raptors schedule and NBA scoreboard
-        run: python scripts/probe_sports_sources.py espn_nba_schedule espn_nba_scoreboard
+      - name: Probe ESPN Raptors state surfaces
+        run: python scripts/probe_sports_sources.py espn_nba_schedule espn_nba_team espn_nba_scoreboard
