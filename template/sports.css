@@ -1,0 +1,307 @@
+/* Sports V2: newspaper furniture, never a dashboard. */
+.sports-desk + .sports-desk { margin-top: 24px; }
+.sports-desk .desk-head { margin-top: 0; }
+
+.sports-team {
+  border-top: 1px solid var(--rule);
+  padding: 14px 0 12px;
+}
+.sports-team:first-of-type { border-top-color: var(--navy); }
+.sports-team-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sports-team-name {
+  min-width: 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--navy-ink);
+}
+.sports-team-league {
+  margin-left: 7px;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--meta);
+  white-space: nowrap;
+}
+.sports-phase {
+  flex-shrink: 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+.sports-phase.postseason { color: var(--red); }
+
+.sports-scoreline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  margin-top: 8px;
+  min-width: 0;
+}
+.sports-result {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+.sports-score {
+  font-size: 1.25rem;
+  line-height: 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.sports-opponent {
+  min-width: 0;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  color: var(--ink-sub);
+}
+.sports-status-line {
+  margin-top: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--ink-sub);
+}
+.sports-status-line strong {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.6875rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+
+.sports-facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px 16px;
+  margin-top: 10px;
+}
+.sports-fact { min-width: 0; }
+.sports-fact-label {
+  display: block;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--meta);
+  margin-bottom: 2px;
+}
+.sports-fact-value {
+  display: block;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-sub);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.sports-next-time { white-space: normal; }
+
+.sports-team-story,
+.sports-major-story {
+  display: block;
+  min-height: 44px;
+  margin-top: 11px;
+  padding: 10px 0 2px;
+  border-top: 1px solid var(--rule-soft);
+  color: inherit;
+  text-decoration: none;
+}
+.sports-team-story:hover .sports-story-title,
+.sports-major-story:hover .sports-story-title { text-decoration: underline; }
+.sports-team-story:focus-visible,
+.sports-major-story:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+.sports-story-label {
+  display: block;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 4px;
+}
+.sports-story-title {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.sports-story-dek {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-sub);
+}
+.sports-story-meta {
+  display: block;
+  margin-top: 4px;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.625rem;
+  color: var(--meta);
+}
+
+.sports-event {
+  border-top: 1px solid var(--rule);
+  padding: 13px 0 10px;
+}
+.sports-event:first-of-type { border-top-color: var(--navy); }
+.sports-event-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.sports-event-name {
+  font-size: 1rem;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--ink);
+}
+.sports-event-mode {
+  flex-shrink: 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.sports-event-source {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  color: var(--meta);
+}
+.sports-event-unavailable {
+  padding: 8px 0 3px;
+  font-size: 0.8125rem;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--meta);
+}
+.sports-match {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  align-items: baseline;
+  border-top: 1px solid var(--rule-soft);
+  padding: 9px 0;
+}
+.sports-match:first-of-type { margin-top: 7px; }
+.sports-match-teams {
+  min-width: 0;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--ink-sub);
+  overflow-wrap: anywhere;
+}
+.sports-match-score {
+  font-size: 1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.sports-match-meta {
+  grid-column: 1 / -1;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.625rem;
+  line-height: 1.35;
+  color: var(--meta);
+}
+.sports-canada { font-weight: 700; color: var(--ink); }
+
+.sports-table-wrap { margin-top: 9px; }
+.sports-table-label {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy-ink);
+  margin-bottom: 4px;
+}
+.sports-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.6875rem;
+  color: var(--ink-sub);
+  font-variant-numeric: tabular-nums;
+}
+.sports-table th,
+.sports-table td {
+  border-top: 1px solid var(--rule-soft);
+  padding: 6px 4px;
+  text-align: right;
+  vertical-align: top;
+}
+.sports-table th {
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+.sports-table th:first-child,
+.sports-table td:first-child { width: 28px; text-align: left; padding-left: 0; }
+.sports-table th:nth-child(2),
+.sports-table td:nth-child(2) { width: auto; text-align: left; overflow-wrap: anywhere; }
+.sports-table th:not(:nth-child(2)),
+.sports-table td:not(:nth-child(2)) { width: 38px; }
+.sports-table tr.canada td { font-weight: 700; color: var(--ink); }
+
+.sports-highlights { margin-top: 7px; }
+.sports-highlight {
+  border-top: 1px solid var(--rule-soft);
+  padding: 8px 0;
+}
+.sports-highlight-title {
+  font-size: 0.875rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--ink);
+}
+.sports-highlight-detail {
+  margin-top: 2px;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-sub);
+}
+
+.sports-major-story { margin-top: 0; padding: 11px 0 9px; }
+.sports-major-story + .sports-major-story { border-top-color: var(--rule); }
+
+@media (max-width: 380px) {
+  .sports-facts { grid-template-columns: 1fr; gap: 7px; }
+  .sports-table .sports-gd { display: none; }
+  .sports-event-head { align-items: flex-start; }
+}
+
+@media (min-width: 540px) {
+  .sports-team { padding-top: 16px; padding-bottom: 14px; }
+  .sports-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
