@@ -66,6 +66,13 @@
     return bits.join(' · ');
   }
 
+  function sectionHeadHtml(kicker, title, deck, id) {
+    return '<div class="desk-head sports-desk-head">' +
+      '<div class="sports-section-kicker">' + esc(kicker) + '</div>' +
+      '<h2 class="desk-title" id="' + esc(id) + '">' + esc(title) + '</h2>' +
+      '<div class="desk-dek">' + esc(deck) + '</div></div>';
+  }
+
   function factHtml(label, value, extraClass) {
     if (!value) return '';
     return '<div class="sports-fact"><span class="sports-fact-label">' + esc(label) + '</span>' +
@@ -148,29 +155,60 @@
     return one(match.home_team) + ' <span aria-hidden="true">v</span> ' + one(match.away_team);
   }
 
-  function eventMatchHtml(match) {
+  function eventMatchHtml(match, commonStage) {
     var status = String(match.status || '').toLowerCase();
     var final = status === 'final';
     var score = final && match.home_score != null && match.away_score != null
       ? esc(match.home_score) + '–' + esc(match.away_score)
       : torontoWhen(match.start_time_toronto || match.start_time_utc);
     if (status === 'postponed' || status === 'cancelled') score = words(status);
-    var meta = [match.stage ? words(match.stage) : '', match.detail || ''].filter(Boolean).join(' · ');
+    var stage = match.stage && match.stage !== commonStage ? words(match.stage) : '';
+    var meta = [stage, match.detail || ''].filter(Boolean).join(' · ');
     return '<div class="sports-match"><div class="sports-match-teams">' + matchTeamsHtml(match) + '</div>' +
       '<div class="sports-match-score">' + esc(score) + '</div>' +
       (meta ? '<div class="sports-match-meta">' + esc(meta) + '</div>' : '') + '</div>';
   }
 
-  function eventTableHtml(table) {
+  function commonEventStage(event) {
+    var stages = (event.matches || []).map(function (match) { return match.stage || ''; }).filter(Boolean);
+    if (!stages.length) return '';
+    return stages.every(function (stage) { return stage === stages[0]; }) ? stages[0] : '';
+  }
+
+  function tableHasPositionGap(rows) {
+    for (var i = 1; i < rows.length; i += 1) {
+      if (Number(rows[i].position) > Number(rows[i - 1].position) + 1) return true;
+    }
+    return false;
+  }
+
+  function eventTableHtml(table, eventKey) {
     if (!table || !(table.rows || []).length) return '';
-    var rows = table.rows.map(function (row) {
-      return '<tr' + (row.canada ? ' class="canada"' : '') + '><td>' + esc(row.position) + '</td>' +
+    var rowsData = table.rows || [];
+    var isChampionsLeague = eventKey === 'champions-league';
+    var hasGap = tableHasPositionGap(rowsData);
+    var previousPosition = null;
+    var rows = rowsData.map(function (row) {
+      var prefix = '';
+      if (previousPosition != null && Number(row.position) > Number(previousPosition) + 1) {
+        prefix = '<tr class="sports-table-gap" aria-hidden="true"><td colspan="5"><span>Positions ' +
+          esc(Number(previousPosition) + 1) + '–' + esc(Number(row.position) - 1) + ' omitted</span></td></tr>';
+      }
+      var rowClass = row.canada ? ' class="canada"' : '';
+      if (isChampionsLeague && Number(row.position) === 9) rowClass = ' class="sports-qualification-cut' + (row.canada ? ' canada' : '') + '"';
+      previousPosition = row.position;
+      return prefix + '<tr' + rowClass + '><td>' + esc(row.position) + '</td>' +
         '<td>' + esc(row.team) + '</td><td>' + esc(row.played == null ? '–' : row.played) + '</td>' +
         '<td>' + esc(row.points == null ? '–' : row.points) + '</td>' +
         '<td class="sports-gd">' + esc(row.goal_difference == null ? '–' : row.goal_difference) + '</td></tr>';
     }).join('');
-    return '<div class="sports-table-wrap"><div class="sports-table-label">' + esc(table.label || 'Table') + '</div>' +
-      '<table class="sports-table"><thead><tr><th>#</th><th>Team</th><th>P</th><th>Pts</th><th class="sports-gd">GD</th></tr></thead>' +
+    var label = table.label || 'Table';
+    if (isChampionsLeague && hasGap) label += ' · leaders + qualification cut';
+    var cutNote = isChampionsLeague && rowsData.some(function (row) { return Number(row.position) === 8; }) && rowsData.some(function (row) { return Number(row.position) === 9; })
+      ? '<div class="sports-table-note"><span>Top 8</span> qualify directly · <span>9–24</span> enter the knockout playoff</div>'
+      : '';
+    return '<div class="sports-table-wrap"><div class="sports-table-label">' + esc(label) + '</div>' +
+      cutNote + '<table class="sports-table"><thead><tr><th>#</th><th>Team</th><th>P</th><th>Pts</th><th class="sports-gd">GD</th></tr></thead>' +
       '<tbody>' + rows + '</tbody></table></div>';
   }
 
@@ -196,16 +234,18 @@
   }
 
   function eventHtml(event) {
+    var commonStage = commonEventStage(event);
     var head = '<div class="sports-event-head"><div class="sports-event-name">' + esc(event.label) + '</div>' +
       (event.event_mode ? '<div class="sports-event-mode">Event edition</div>' : '') + '</div>' +
-      (event.source ? '<div class="sports-event-source">Source: ' + esc(event.source) + '</div>' : '');
+      (event.source ? '<div class="sports-event-source">Source: ' + esc(event.source) + '</div>' : '') +
+      (commonStage ? '<div class="sports-event-stage">' + esc(words(commonStage)) + '</div>' : '');
     if (!event.available) {
       return '<article class="sports-event" data-sports-event="' + esc(event.key) + '">' + head +
         '<div class="sports-event-unavailable">Verified event data is unavailable this morning.</div></article>';
     }
     return '<article class="sports-event" data-sports-event="' + esc(event.key) + '">' + head +
-      (event.matches || []).map(eventMatchHtml).join('') + eventTableHtml(event.standings) +
-      highlightsHtml(event.highlights || []) + '</article>';
+      (event.matches || []).map(function (match) { return eventMatchHtml(match, commonStage); }).join('') +
+      eventTableHtml(event.standings, event.key) + highlightsHtml(event.highlights || []) + '</article>';
   }
 
   function majorEventsHtml(payload) {
@@ -213,8 +253,7 @@
     if (!events.length) return '';
     var eventMode = !!((payload || {}).major_events || {}).event_mode;
     return '<section class="sports-desk sports-events" aria-labelledby="sports-events-title">' +
-      '<div class="desk-head"><h2 class="desk-title" id="sports-events-title">Major Events</h2>' +
-      '<div class="desk-dek">' + (eventMode ? 'Tournament edition · the important state, still bounded' : 'Only competitions with something worth knowing this morning') + '</div></div>' +
+      sectionHeadHtml('Global board', 'Major Events', eventMode ? 'Tournament edition · the important state, still bounded' : 'Only competitions with something worth knowing this morning', 'sports-events-title') +
       events.map(eventHtml).join('') + '</section>';
   }
 
@@ -233,16 +272,14 @@
     var items = (payload || {}).major_headlines || [];
     if (!items.length) return '';
     return '<section class="sports-desk sports-headlines" aria-labelledby="sports-headlines-title">' +
-      '<div class="desk-head"><h2 class="desk-title" id="sports-headlines-title">Major Headlines</h2>' +
-      '<div class="desk-dek">Exceptional developments only</div></div>' +
+      sectionHeadHtml('The read', 'Major Headlines', 'Exceptional developments only', 'sports-headlines-title') +
       items.map(majorHeadlineHtml).join('') + '</section>';
   }
 
   function sportsHtml(payload) {
     var toronto = (payload || {}).toronto || [];
     var torontoHtml = '<section class="sports-desk sports-toronto" aria-labelledby="sports-toronto-title">' +
-      '<div class="desk-head"><h2 class="desk-title" id="sports-toronto-title">Toronto</h2>' +
-      '<div class="desk-dek">Leafs · Raptors · Blue Jays</div></div>' +
+      sectionHeadHtml('Home teams', 'Toronto', 'Leafs · Raptors · Blue Jays', 'sports-toronto-title') +
       toronto.map(teamRowHtml).join('') + '</section>';
     return torontoHtml + majorEventsHtml(payload) + majorHeadlinesHtml(payload);
   }
