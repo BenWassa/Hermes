@@ -12,6 +12,14 @@
     'raptors': 'RAPTORS',
     'blue-jays': 'BLUE JAYS'
   };
+  var TRUSTED_ASSET_HOSTS = {
+    'assets.nhle.com': true,
+    'cdn.nba.com': true,
+    'www.mlbstatic.com': true,
+    'a.espncdn.com': true,
+    'secure.espncdn.com': true
+  };
+  var MARK_TIMEOUT_MS = 3500;
 
   function esc(value) {
     return String(value == null ? '' : value)
@@ -23,6 +31,14 @@
     try {
       var url = new URL(String(value || ''), window.location.href);
       if (url.protocol === 'http:' || url.protocol === 'https:') return url.href;
+    } catch (e) {}
+    return '';
+  }
+
+  function safeAssetUrl(value) {
+    try {
+      var url = new URL(String(value || ''));
+      if (url.protocol === 'https:' && TRUSTED_ASSET_HOSTS[url.hostname]) return url.href;
     } catch (e) {}
     return '';
   }
@@ -73,6 +89,54 @@
       '<div class="desk-dek">' + esc(deck) + '</div></div>';
   }
 
+  function teamMarkHtml(mark) {
+    if (!mark) return '';
+    var light = safeAssetUrl(mark.light);
+    var dark = safeAssetUrl(mark.dark);
+    if (!light) return '';
+    var image = '<img src="' + esc(light) + '" alt="" aria-hidden="true" width="48" height="48" decoding="async" referrerpolicy="no-referrer">';
+    if (dark) {
+      image = '<picture><source media="(prefers-color-scheme: dark)" srcset="' + esc(dark) + '">' + image + '</picture>';
+    }
+    return '<span class="sports-mark sports-mark-loading" data-sports-mark aria-hidden="true">' + image +
+      '<span class="sports-mark-fallback">' + esc(mark.fallback || '') + '</span></span>';
+  }
+
+  function crestHtml(url, tableMode) {
+    var href = safeAssetUrl(url);
+    if (!href) return '';
+    var size = tableMode ? 24 : 30;
+    return '<span class="sports-club-crest sports-mark-loading" data-sports-mark aria-hidden="true">' +
+      '<img src="' + esc(href) + '" alt="" width="' + size + '" height="' + size + '" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer">' +
+      '</span>';
+  }
+
+  function settleMarks(root) {
+    Array.prototype.forEach.call(root.querySelectorAll('[data-sports-mark]'), function (mark) {
+      if (mark.getAttribute('data-wired') === 'true') return;
+      mark.setAttribute('data-wired', 'true');
+      var img = mark.querySelector('img');
+      if (!img) { mark.classList.add('sports-mark-failed'); return; }
+      var timer;
+      function loaded() {
+        window.clearTimeout(timer);
+        mark.classList.remove('sports-mark-loading', 'sports-mark-failed');
+        mark.classList.add('sports-mark-loaded');
+      }
+      function failed() {
+        window.clearTimeout(timer);
+        mark.classList.remove('sports-mark-loading', 'sports-mark-loaded');
+        mark.classList.add('sports-mark-failed');
+      }
+      img.addEventListener('load', loaded, { once: true });
+      img.addEventListener('error', failed, { once: true });
+      timer = window.setTimeout(failed, MARK_TIMEOUT_MS);
+      if (img.complete) {
+        if (img.naturalWidth > 0) loaded(); else failed();
+      }
+    });
+  }
+
   function factHtml(label, value, extraClass) {
     if (!value) return '';
     return '<div class="sports-fact"><span class="sports-fact-label">' + esc(label) + '</span>' +
@@ -89,8 +153,7 @@
       (headline.description ? '<span class="sports-story-dek">' + esc(headline.description) + '</span>' : '') +
       (meta ? '<span class="sports-story-meta">' + esc(meta) + '</span>' : '');
     if (!href) return '<div class="sports-team-story">' + inner + '</div>';
-    return '<a class="sports-team-story" href="' + esc(href) + '" target="_blank" rel="noopener">' +
-      inner + '</a>';
+    return '<a class="sports-team-story" href="' + esc(href) + '" target="_blank" rel="noopener">' + inner + '</a>';
   }
 
   function teamRowHtml(row) {
@@ -138,21 +201,22 @@
         factHtml('Standing', standingText(snapshot.standing)) +
         factHtml('Next', nextText, 'sports-next-time');
       if (facts) body += '<div class="sports-facts">' + facts + '</div>';
-      if (!last && !facts) {
-        body += '<div class="sports-status-line">No current game state is available.</div>';
-      }
+      if (!last && !facts) body += '<div class="sports-status-line">No current game state is available.</div>';
     }
 
-    return '<article class="sports-team" data-sports-team="' + esc(key) + '">' + head + body +
-      teamHeadlineHtml(row && row.headline) + '</article>';
+    return '<article class="sports-team" data-sports-team="' + esc(key) + '">' + teamMarkHtml(row && row.mark) +
+      '<div class="sports-team-copy">' + head + body + teamHeadlineHtml(row && row.headline) + '</div></article>';
+  }
+
+  function clubHtml(name, logoUrl, tableMode) {
+    var cls = String(name || '').toLowerCase() === 'canada' ? ' sports-canada' : '';
+    return '<span class="sports-club' + cls + '">' + crestHtml(logoUrl, tableMode) + '<span>' + esc(name) + '</span></span>';
   }
 
   function matchTeamsHtml(match) {
-    function one(name) {
-      var cls = String(name || '').toLowerCase() === 'canada' ? ' class="sports-canada"' : '';
-      return '<span' + cls + '>' + esc(name) + '</span>';
-    }
-    return one(match.home_team) + ' <span aria-hidden="true">v</span> ' + one(match.away_team);
+    return clubHtml(match.home_team, match.home_logo_url, false) +
+      ' <span class="sports-versus" aria-hidden="true">v</span> ' +
+      clubHtml(match.away_team, match.away_logo_url, false);
   }
 
   function eventMatchHtml(match, commonStage) {
@@ -198,7 +262,7 @@
       if (isChampionsLeague && Number(row.position) === 9) rowClass = ' class="sports-qualification-cut' + (row.canada ? ' canada' : '') + '"';
       previousPosition = row.position;
       return prefix + '<tr' + rowClass + '><td>' + esc(row.position) + '</td>' +
-        '<td>' + esc(row.team) + '</td><td>' + esc(row.played == null ? '–' : row.played) + '</td>' +
+        '<td>' + clubHtml(row.team, row.logo_url, true) + '</td><td>' + esc(row.played == null ? '–' : row.played) + '</td>' +
         '<td>' + esc(row.points == null ? '–' : row.points) + '</td>' +
         '<td class="sports-gd">' + esc(row.goal_difference == null ? '–' : row.goal_difference) + '</td></tr>';
     }).join('');
@@ -284,16 +348,30 @@
     return torontoHtml + majorEventsHtml(payload) + majorHeadlinesHtml(payload);
   }
 
+  function warmCrestOrigin() {
+    if (document.querySelector('link[data-sports-preconnect]')) return;
+    var link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = 'https://a.espncdn.com';
+    link.crossOrigin = 'anonymous';
+    link.setAttribute('data-sports-preconnect', 'true');
+    document.head.appendChild(link);
+  }
+
   function renderIfActive() {
     var tab = document.querySelector('.tab.active[data-tab="sports"]');
     var stories = document.getElementById('stories');
     if (!tab || !stories) return;
     stories.innerHTML = sportsHtml(sports);
     stories.setAttribute('data-sports-rendered', 'true');
+    settleMarks(stories);
   }
 
   var sportsTab = document.querySelector('[data-tab="sports"]');
   if (!sportsTab) return;
+  sportsTab.addEventListener('pointerenter', warmCrestOrigin, { once: true });
+  sportsTab.addEventListener('focus', warmCrestOrigin, { once: true });
+  sportsTab.addEventListener('pointerdown', warmCrestOrigin, { once: true });
   sportsTab.addEventListener('click', function () {
     window.setTimeout(renderIfActive, 0);
   });
