@@ -308,7 +308,7 @@
           "available": true,
           "error": null,
           "source": "NHL",
-          "fetched_at": "2026-09-12T01:02:30.534469Z",
+          "fetched_at": "2026-09-12T01:04:30.491219Z",
           "last_game": null,
           "record": null,
           "standing": null,
@@ -345,7 +345,7 @@
           "available": true,
           "error": null,
           "source": "ESPN",
-          "fetched_at": "2026-09-12T01:02:30.534469Z",
+          "fetched_at": "2026-09-12T01:04:30.491219Z",
           "last_game": null,
           "record": null,
           "standing": null,
@@ -381,7 +381,7 @@
           "available": true,
           "error": null,
           "source": "MLB Stats API",
-          "fetched_at": "2026-09-12T01:02:30.534469Z",
+          "fetched_at": "2026-09-12T01:04:30.491219Z",
           "last_game": {
             "id": "824956",
             "start_time_utc": "2026-09-09T19:05:00Z",
@@ -440,7 +440,7 @@
           "available": true,
           "error": null,
           "source": "ESPN",
-          "fetched_at": "2026-09-12T01:02:30.534124Z",
+          "fetched_at": "2026-09-12T01:04:30.490990Z",
           "matches": [
             {
               "id": "401915443",
