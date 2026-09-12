@@ -57,10 +57,6 @@ class EventSpec:
         return any(window.contains(date) for window in self.windows) or date.month in self.active_months
 
 
-# Official known tournament windows are pinned rather than guessed. Champions
-# League activation covers the main September-May competition rather than
-# summer qualification, keeping the morning product focused on the high-value
-# competition phase.
 EVENT_REGISTRY: tuple[EventSpec, ...] = (
     EventSpec(
         key="fifa-world-cup-2030",
@@ -148,6 +144,8 @@ class EventMatch:
     away_score: int | None = None
     detail: str | None = None
     canada_involved: bool = False
+    home_logo_url: str | None = None
+    away_logo_url: str | None = None
 
     def __post_init__(self) -> None:
         if self.start_time_utc.tzinfo is None:
@@ -170,6 +168,8 @@ class EventMatch:
             "away_score": self.away_score,
             "detail": self.detail,
             "canada_involved": self.canada_involved,
+            "home_logo_url": self.home_logo_url,
+            "away_logo_url": self.away_logo_url,
         }
 
 
@@ -181,6 +181,7 @@ class EventStandingRow:
     points: int | None = None
     goal_difference: int | None = None
     canada: bool = False
+    logo_url: str | None = None
 
     def to_dict(self) -> dict:
         return {
@@ -190,6 +191,7 @@ class EventStandingRow:
             "points": self.points,
             "goal_difference": self.goal_difference,
             "canada": self.canada,
+            "logo_url": self.logo_url,
         }
 
 
@@ -295,11 +297,7 @@ def select_event_matches(
     spec: EventSpec,
     now: dt.datetime,
 ) -> tuple[EventMatch, ...]:
-    """Select previous-day results and next fixtures within the event cap.
-
-    Canada is promoted ahead of otherwise equivalent World Cup matches. The
-    selector retains both result and next-fixture utility where available.
-    """
+    """Select previous-day results and next fixtures within the event cap."""
     now_utc = now.astimezone(UTC)
     toronto_today = now.astimezone(TORONTO).date()
     yesterday = toronto_today - dt.timedelta(days=1)

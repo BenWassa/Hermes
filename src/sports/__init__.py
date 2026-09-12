@@ -1,6 +1,13 @@
 """Deterministic Sports V2 domain API."""
 
 from .budget import headline_budget_metrics
+from .desk import (
+    CountingSession,
+    SportsBuildResult,
+    build_sports_desk,
+    suppress_sports_editorial_duplicates,
+    unavailable_sports_result,
+)
 from .event_news import EventArticle, fetch_guardian_event_articles, select_event_articles
 from .events import (
     EVENT_REGISTRY,
@@ -34,7 +41,12 @@ from .models import (
     TeamRef,
     TeamSnapshot,
 )
-from .presentation import SPORTS_PAYLOAD_VERSION, TEAM_ORDER, build_sports_payload
+from .presentation import (
+    SPORTS_PAYLOAD_VERSION,
+    TEAM_ORDER,
+    attach_sports_to_edition,
+    build_sports_payload,
+)
 from .providers import BLUE_JAYS, LEAFS, RAPTORS
 from .toronto import build_toronto_snapshots
 
@@ -45,6 +57,7 @@ __all__ = [
     "RAPTORS",
     "SPORTS_PAYLOAD_VERSION",
     "TEAM_ORDER",
+    "CountingSession",
     "EventArticle",
     "EventHighlight",
     "EventMatch",
@@ -60,13 +73,16 @@ __all__ = [
     "RecordSummary",
     "SeasonPhase",
     "Significance",
+    "SportsBuildResult",
     "SportsHeadlineCandidate",
     "StandingSummary",
     "TeamRef",
     "TeamSnapshot",
     "active_event_specs",
+    "attach_sports_to_edition",
     "build_major_event_snapshots",
     "build_major_events",
+    "build_sports_desk",
     "build_sports_payload",
     "build_toronto_snapshots",
     "event_article_queries",
@@ -77,4 +93,6 @@ __all__ = [
     "select_event_articles",
     "select_team_winners",
     "sports_model_payload",
+    "suppress_sports_editorial_duplicates",
+    "unavailable_sports_result",
 ]

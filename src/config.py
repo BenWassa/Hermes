@@ -34,6 +34,9 @@ SITE_URL = os.environ.get("PAGES_URL", "https://BenWassa.github.io/Hermes/")
 
 # --- Sections (order, labels, per-section caps) ---------------------------
 
+# SECTIONS is navigation/presentation authority. Sports remains a first-class
+# tab even though its content is now owned by the deterministic Sports V2 desk
+# rather than by Gemini.
 SECTIONS = [
     {"id": "front", "label": "Front Page", "cap": 5},
     {"id": "toronto", "label": "Toronto", "cap": 4},
@@ -43,19 +46,31 @@ SECTIONS = [
     {"id": "opinion", "label": "Opinion", "cap": 4},
 ]
 
+# Gemini editorial authority deliberately excludes Sports. Do not ask the
+# model to emit an empty Sports section; the build injects the navigation shell
+# after curation and attaches the dedicated top-level sports payload.
+CURATION_SECTIONS = [s for s in SECTIONS if s["id"] != "sports"]
+
 # Order of section ids, handy for validation and ranking.
 SECTION_IDS = [s["id"] for s in SECTIONS]
+CURATION_SECTION_IDS = [s["id"] for s in CURATION_SECTIONS]
 
 
 # --- Sources --------------------------------------------------------------
 
-# Guardian Content API sections -> our section hint.
+# Guardian Content API sections -> ordinary Gemini section hint. Sports is
+# intentionally absent: Sports V2 performs only targeted Guardian searches
+# after deterministic significance rules have defined what it is looking for.
 GUARDIAN_SECTIONS = {
     "world": "world",
     "business": "business",
-    "sport": "sports",
     "commentisfree": "opinion",
 }
+
+# How far targeted Sports team/event news may look back in the morning build.
+# Overlap is safe because Sports selection is deterministic and the edition is
+# gated before provider work once today's Toronto-calendar paper exists.
+SPORTS_NEWS_LOOKBACK_HOURS = int(os.environ.get("SPORTS_NEWS_LOOKBACK_HOURS", "36"))
 
 # NYT Top Stories API sections -> our section hint. "opinion" is included so
 # the Opinion desk sees NYT columnists, and so a followed NYT writer is found
@@ -335,7 +350,7 @@ Analysis ("why it matters", lead stories only):
 
 
 def build_curate_system_prompt(today=None) -> str:
-    """The editor system prompt for the single curate+summarize Claude call.
+    """The editor system prompt for the single curate+summarize Gemini call.
 
     `today` grounds the model against its own training-data priors (e.g. who
     currently holds an office); without it the model has no signal that the
@@ -347,7 +362,8 @@ def build_curate_system_prompt(today=None) -> str:
 
     today = today or _dt.date.today()
     section_lines = "\n".join(
-        f'  - "{s["id"]}" ({s["label"]}, max {s["cap"]} stories)' for s in SECTIONS
+        f'  - "{s["id"]}" ({s["label"]}, max {s["cap"]} stories)'
+        for s in CURATION_SECTIONS
     )
     return f"""You are the editor of The Daily, a Toronto morning newspaper. Today's edition is dated {today.strftime("%A, %B %-d, %Y")}. You are given a JSON array of raw news stories pulled from wire APIs and Toronto RSS feeds. Produce the finished edition.
 

@@ -1,5 +1,5 @@
 /* Service Worker for The Daily PWA */
-const CACHE = 'the-daily-v1';
+const CACHE = 'the-daily-v2';
 const SHELL = [
   '/Hermes/',
   '/Hermes/index.html',
@@ -26,29 +26,47 @@ self.addEventListener('activate', function (e) {
   self.clients.claim();
 });
 
-/* Network-first for the main document (always get fresh edition), cache-first for assets. */
+/*
+ * Navigation is network-first so the current paper wins, with the cached paper
+ * as the offline fallback. Same-origin static assets are cache-first. Remote
+ * provider imagery is deliberately left to normal HTTP/browser caching: do not
+ * retain opaque third-party logo responses indefinitely in the PWA shell cache.
+ */
 self.addEventListener('fetch', function (e) {
-  var url = e.request.url;
-  var isDocument = e.request.mode === 'navigate';
+  var request = e.request;
+  var isDocument = request.mode === 'navigate';
+  var requestUrl = new URL(request.url);
+  var sameOrigin = requestUrl.origin === self.location.origin;
 
   if (isDocument) {
     e.respondWith(
-      fetch(e.request).then(function (res) {
-        var clone = res.clone();
-        caches.open(CACHE).then(function (c) { c.put(e.request, clone); });
+      fetch(request).then(function (res) {
+        if (res && res.ok) {
+          var clone = res.clone();
+          caches.open(CACHE).then(function (c) { c.put(request, clone); });
+        }
         return res;
       }).catch(function () {
-        return caches.match(e.request);
+        return caches.match(request).then(function (cached) {
+          return cached || caches.match('/Hermes/index.html');
+        });
       })
     );
     return;
   }
 
+  if (!sameOrigin) {
+    e.respondWith(fetch(request));
+    return;
+  }
+
   e.respondWith(
-    caches.match(e.request).then(function (cached) {
-      return cached || fetch(e.request).then(function (res) {
-        var clone = res.clone();
-        caches.open(CACHE).then(function (c) { c.put(e.request, clone); });
+    caches.match(request).then(function (cached) {
+      return cached || fetch(request).then(function (res) {
+        if (res && res.ok) {
+          var clone = res.clone();
+          caches.open(CACHE).then(function (c) { c.put(request, clone); });
+        }
         return res;
       });
     })

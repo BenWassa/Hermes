@@ -13,6 +13,7 @@ from pathlib import Path
 
 TEMPLATE = Path("template/index.template.html")
 SPORTS_CSS = Path("template/sports.css")
+SPORTS_PERFORMANCE_CSS = Path("template/sports-performance.css")
 SPORTS_JS = Path("template/sports.js")
 OUTPUT = Path("docs/index.html")
 LATEST = Path("data/latest.json")
@@ -24,10 +25,11 @@ _BUILD_PLACEHOLDER = "__BUILD_TS__"
 def _inject_sports_renderer(html: str) -> str:
     """Inline the modular Sports V2 presentation assets into one static page."""
     css = SPORTS_CSS.read_text(encoding="utf-8")
+    performance_css = SPORTS_PERFORMANCE_CSS.read_text(encoding="utf-8")
     js = SPORTS_JS.read_text(encoding="utf-8")
     if "</style>" not in html or "</body>" not in html:
         raise ValueError("edition template is missing Sports renderer injection anchors")
-    html = html.replace("</style>", f"\n{css}\n  </style>", 1)
+    html = html.replace("</style>", f"\n{css}\n{performance_css}\n  </style>", 1)
     return html.replace("</body>", f"  <script>\n{js}\n  </script>\n</body>", 1)
 
 
@@ -36,7 +38,6 @@ def render(edition: dict, template_path: Path = TEMPLATE, output_path: Path = OU
     template = template_path.read_text(encoding="utf-8")
 
     edition_json = json.dumps(edition, ensure_ascii=False)
-    # Keep the embedded JSON from prematurely closing the <script> tag.
     edition_json = edition_json.replace("</", "<\\/")
 
     build_ts = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
