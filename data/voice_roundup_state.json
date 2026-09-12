@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-11T18:43:29Z",
+  "updated_at": "2026-09-12T17:47:52Z",
   "last_reconcile_at": "2026-09-11T18:43:29Z",
   "last_roundup": null,
   "items": {
@@ -55,6 +55,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/is-there-now-a-better-trend-in-youth-mental-health.html?utm_source=rss&utm_medium=rss&utm_campaign=is-there-now-a-better-trend-in-youth-mental-health",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/labor-reallocation-during-the-industrial-revolution.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/labor-reallocation-during-the-industrial-revolution.html",
+        "pid:rss:https://marginalrevolution.com/?p=93754",
+        "syn:labor-reallocation-during-the-industrial-revolution|voice:tyler-cowen|2026-09-12",
+        "fp:marginalrevolution.com|labor-reallocation-during-the-industrial-revolution|2026-09-12"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-12T17:47:52Z",
+      "published_at": "2026-09-12T07:28:51Z",
+      "title": "Labor reallocation during the Industrial Revolution",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/labor-reallocation-during-the-industrial-revolution.html?utm_source=rss&utm_medium=rss&utm_campaign=labor-reallocation-during-the-industrial-revolution",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-12T17:47:52Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/markets-do-respond-to-agi-news.html": {
       "keys": [
@@ -192,6 +209,40 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html",
+        "pid:rss:https://marginalrevolution.com/?p=93787",
+        "syn:the-excess-pessimism-of-early-nuclear-bomb-designers|voice:tyler-cowen|2026-09-12",
+        "fp:marginalrevolution.com|the-excess-pessimism-of-early-nuclear-bomb-designers|2026-09-12"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-12T17:47:52Z",
+      "published_at": "2026-09-12T04:25:50Z",
+      "title": "The excess pessimism of early nuclear bomb designers",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html?utm_source=rss&utm_medium=rss&utm_campaign=the-excess-pessimism-of-early-nuclear-bomb-designers",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-12T17:47:52Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-mathematicians-rebel-against-ai.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-mathematicians-rebel-against-ai.html",
+        "pid:rss:https://marginalrevolution.com/?p=93801",
+        "syn:the-mathematicians-rebel-against-ai|voice:tyler-cowen|2026-09-12",
+        "fp:marginalrevolution.com|the-mathematicians-rebel-against-ai|2026-09-12"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-12T17:47:52Z",
+      "published_at": "2026-09-12T16:49:04Z",
+      "title": "The mathematicians rebel against AI",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-mathematicians-rebel-against-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=the-mathematicians-rebel-against-ai",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-569.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-569.html",
@@ -208,6 +259,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-569.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-569",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/uk-fact-of-the-day-8.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/uk-fact-of-the-day-8.html",
+        "pid:rss:https://marginalrevolution.com/?p=93800",
+        "syn:uk-fact-of-the-day|voice:tyler-cowen|2026-09-12",
+        "fp:marginalrevolution.com|uk-fact-of-the-day|2026-09-12"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-12T17:47:52Z",
+      "published_at": "2026-09-12T11:24:03Z",
+      "title": "UK fact of the day",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/uk-fact-of-the-day-8.html?utm_source=rss&utm_medium=rss&utm_campaign=uk-fact-of-the-day-8",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-12T17:47:52Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-570.html": {
       "keys": [
@@ -265,7 +333,9 @@
         "url:https://nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html",
         "pid:rss:https://www.nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html",
         "syn:was-francis-fukuyama-right-all-along|voice:ezra-klein|2026-09-11",
-        "fp:nytimes.com|was-francis-fukuyama-right-all-along|2026-09-11"
+        "syn:was-francis-fukuyama-right-all-along|voice:ezra-klein|2026-09-12",
+        "fp:nytimes.com|was-francis-fukuyama-right-all-along|2026-09-11",
+        "fp:nytimes.com|was-francis-fukuyama-right-all-along|2026-09-12"
       ],
       "voice_ids": [
         "ezra-klein"
