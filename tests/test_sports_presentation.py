@@ -49,6 +49,7 @@ def test_payload_preserves_permanent_reader_order_and_attaches_team_headline_onc
         team_headlines={"raptors": qualified("raptors")},
     )
 
+    assert payload["version"] == 2
     assert [row["snapshot"]["team"]["key"] for row in payload["toronto"]] == list(TEAM_ORDER)
     assert payload["toronto"][0]["headline"] is None
     assert payload["toronto"][1]["headline"]["team_key"] == "raptors"
@@ -93,9 +94,13 @@ def test_global_major_headlines_are_recent_first_and_hard_capped():
     assert payload["major_headlines"][-1]["headline"] == "Major event headline 3"
 
 
-def test_payload_contains_no_logo_or_team_palette_contract():
+def test_payload_carries_only_trusted_remote_marks_and_no_team_palette():
     payload = build_sports_payload([snapshot(LEAFS), snapshot(RAPTORS), snapshot(BLUE_JAYS)])
+    marks = {row["snapshot"]["team"]["key"]: row["mark"] for row in payload["toronto"]}
+    assert marks["leafs"]["light"].startswith("https://assets.nhle.com/")
+    assert marks["leafs"]["dark"].startswith("https://assets.nhle.com/")
+    assert marks["raptors"]["light"].startswith("https://cdn.nba.com/")
+    assert marks["blue-jays"]["light"].startswith("https://www.mlbstatic.com/")
     text = repr(payload).lower()
-    assert "logo" not in text
     assert "team_color" not in text
     assert "team_colour" not in text
