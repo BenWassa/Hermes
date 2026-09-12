@@ -17,7 +17,7 @@ from .headlines import QualifiedHeadline
 from .identity import TORONTO_TEAM_MARKS, trusted_asset_url
 from .models import TeamSnapshot
 
-SPORTS_PAYLOAD_VERSION = 2
+SPORTS_PAYLOAD_VERSION = 1
 TEAM_ORDER = ("leafs", "raptors", "blue-jays")
 MAX_MAJOR_HEADLINES = 4
 
