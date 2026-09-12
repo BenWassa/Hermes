@@ -294,7 +294,7 @@
     }
   ],
   "sports": {
-    "version": 1,
+    "version": 2,
     "toronto": [
       {
         "snapshot": {
@@ -308,7 +308,7 @@
           "available": true,
           "error": null,
           "source": "NHL",
-          "fetched_at": "2026-09-12T01:01:44.811335Z",
+          "fetched_at": "2026-09-12T01:02:30.534469Z",
           "last_game": null,
           "record": null,
           "standing": null,
@@ -326,7 +326,12 @@
             "result": null
           }
         },
-        "headline": null
+        "headline": null,
+        "mark": {
+          "light": "https://assets.nhle.com/logos/nhl/svg/TOR_light.svg",
+          "fallback": "ML",
+          "dark": "https://assets.nhle.com/logos/nhl/svg/TOR_dark.svg"
+        }
       },
       {
         "snapshot": {
@@ -340,7 +345,7 @@
           "available": true,
           "error": null,
           "source": "ESPN",
-          "fetched_at": "2026-09-12T01:01:44.811335Z",
+          "fetched_at": "2026-09-12T01:02:30.534469Z",
           "last_game": null,
           "record": null,
           "standing": null,
@@ -358,7 +363,11 @@
             "result": null
           }
         },
-        "headline": null
+        "headline": null,
+        "mark": {
+          "light": "https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg",
+          "fallback": "R"
+        }
       },
       {
         "snapshot": {
@@ -372,7 +381,7 @@
           "available": true,
           "error": null,
           "source": "MLB Stats API",
-          "fetched_at": "2026-09-12T01:01:44.811335Z",
+          "fetched_at": "2026-09-12T01:02:30.534469Z",
           "last_game": {
             "id": "824956",
             "start_time_utc": "2026-09-09T19:05:00Z",
@@ -412,7 +421,11 @@
             "result": null
           }
         },
-        "headline": null
+        "headline": null,
+        "mark": {
+          "light": "https://www.mlbstatic.com/team-logos/141.svg",
+          "fallback": "BJ"
+        }
       }
     ],
     "major_events": {
@@ -427,7 +440,7 @@
           "available": true,
           "error": null,
           "source": "ESPN",
-          "fetched_at": "2026-09-12T01:01:44.810999Z",
+          "fetched_at": "2026-09-12T01:02:30.534124Z",
           "matches": [
             {
               "id": "401915443",
