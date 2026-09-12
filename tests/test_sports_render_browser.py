@@ -210,7 +210,9 @@ def test_sports_is_broadsheet_ordered_and_responsive(
         assert page.locator('[data-sports-team="blue-jays"] .sports-scoreline').count() == 0
         assert page.locator("#sports-events-title").is_visible()
         assert page.locator('[data-sports-event="fifa-world-cup-2030"]').is_visible()
-        assert "Canada" in page.locator(".sports-table tr.canada").inner_text()
+        # Lower event desks may be skipped by content-visibility until scrolled;
+        # verify authored DOM content without forcing below-fold layout/paint.
+        assert "Canada" in (page.locator(".sports-table tr.canada").text_content() or "")
         assert page.locator("#sports-headlines-title").is_visible()
 
         overflow = page.evaluate(
