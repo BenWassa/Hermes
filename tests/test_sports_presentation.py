@@ -49,7 +49,7 @@ def test_payload_preserves_permanent_reader_order_and_attaches_team_headline_onc
         team_headlines={"raptors": qualified("raptors")},
     )
 
-    assert payload["version"] == 2
+    assert payload["version"] == 1
     assert [row["snapshot"]["team"]["key"] for row in payload["toronto"]] == list(TEAM_ORDER)
     assert payload["toronto"][0]["headline"] is None
     assert payload["toronto"][1]["headline"]["team_key"] == "raptors"
