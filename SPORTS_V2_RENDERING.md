@@ -1,134 +1,116 @@
 # Sports V2 — Rendering Contract
 
-**Status:** issue #38 implementation authority  
+**Status:** production authority  
 **Date:** 2026-09-11  
 **Parent:** #33  
-**Related:** `SPORTS_V2.md`, `SPORTS_V2_SOURCE_AUDIT.md`, `SPORTS_V2_MAJOR_EVENTS.md`, `SPORTS_V2_PERFORMANCE.md`, `DESIGN.md`
+**Related:** `SPORTS_V2.md`, `SPORTS_V2_MAJOR_EVENTS.md`, `SPORTS_V2_PERFORMANCE.md`, `DESIGN.md`
 
 ## Purpose
 
-This note defines how the deterministic Sports domain appears inside the existing Sports tab. It does not move production ownership away from the current morning pipeline; #39 owns that final wiring and retirement of generic Sports curation.
+Sports is a dedicated deterministic desk inside the existing Hermes tab system. It consumes normalized Sports state and does not fetch sports data, classify stories or call Gemini in the browser.
 
-The renderer consumes the already-normalized #35/#36/#37 domain contracts. It does not fetch sports data, classify news, rank events, call Gemini, or create a second copy of sports state.
+## Page hierarchy
 
-## Page composition
+The section reads as three editorial chapters:
 
-The Sports tab has up to three editorial layers in this order:
+1. **HOME TEAMS / Toronto** — permanent Leafs, Raptors, Blue Jays rows.
+2. **GLOBAL BOARD / Major Events** — active bounded competitions such as Champions League, World Cup or Olympics.
+3. **THE READ / Major Headlines** — exceptional already-qualified developments only.
 
-1. **Toronto** — always present, with Leafs, Raptors and Blue Jays in that fixed reader order.
-2. **Major Events** — present only when an active event has meaningful structured content, or when an active event-mode tournament must explicitly report that verified event data is unavailable.
-3. **Major Headlines** — optional, for already-qualified exceptional global/event articles.
-
-A qualifying favourite-team headline is attached directly beneath its Toronto team row. It is not repeated in Major Headlines.
+Each chapter begins with a heavy navy rule, small red editorial kicker, larger serif title and short deck. The page remains a broadsheet rather than a dashboard.
 
 ## Toronto rows
 
-### Active team
+Fixed reader order is Leafs → Raptors → Blue Jays.
 
 An active row may contain:
 
-- text identity and league;
-- season phase;
-- last result and opponent when available;
-- current record;
-- compact standing context;
-- next opponent and Toronto-local date/time;
-- at most one already-qualified major team headline.
+- official-hosted decorative mark plus mandatory text name;
+- league and season phase;
+- last result and opponent;
+- current record / compact standing context;
+- next opponent and Toronto-local time;
+- at most one deterministic major team headline.
 
-The row is factual and non-interactive. Only an attached external headline link is interactive.
+Offseason teams collapse quietly; unavailable providers retain the team row with an explicit unavailable state. Stale previous-season record/standing is not used as filler.
 
-### Offseason
+### Identity
 
-Offseason teams collapse to a quiet line and the next known game/date if available. They do not preserve stale records or standings merely to fill space.
+Remote marks are enhancement only. Hermes references official/league-hosted assets but does not copy a logo pack into the repository.
 
-### Provider failure
+- Leafs — NHL-hosted SVG, light/dark variants.
+- Raptors — NBA-hosted SVG.
+- Blue Jays — MLB-hosted SVG.
 
-The team remains in its permanent position with a restrained unavailable line. One provider outage does not visually remove a favourite team or imply that the team has no games.
-
-## Team identity
-
-The #38 production baseline deliberately uses Hermes-authored text identity (`LEAFS`, `RAPTORS`, `BLUE JAYS`) plus the existing Press Navy/Masthead Red system.
-
-No official league/team logo, traced mark, official colour palette, downloaded brand asset or remote team image was part of #38. The source audit's original permission decision therefore remains the authority for the #38 baseline.
-
-During #39 branch acceptance, remote official/league-hosted Toronto marks and ESPN-hosted Champions League club crests were explored successfully without copying those assets into Hermes. That experiment is **not** production authority. Issue #55 / `SPORTS_V2_PERFORMANCE.md` owns any promotion of remote marks, including loading priority, skeleton/fallback behavior, URL allowlisting, cache policy, request-budget preservation and performance acceptance.
-
-Until #55 is complete, visible text identity remains mandatory and sufficient when any remote mark is absent.
+The name remains visible and authoritative. Marks live in a shared optical slot rather than dictating layout from intrinsic logo dimensions.
 
 ## Major Events
 
-Event snapshots retain the priority and hard caps from #37.
+Finished matches show settled scores; upcoming fixtures show Toronto-local times. Canada is emphasized where supplied by the domain. Event mode may expand coverage within the hard caps from `SPORTS_V2_MAJOR_EVENTS.md`.
 
-- Finished matches show settled scores.
-- Upcoming fixtures show Toronto-local date/time.
-- Postponed/cancelled states are labelled rather than rendered as fake scores.
-- Canada receives typographic emphasis where the domain marks `canada_involved` or a standing row as Canadian.
-- Compact tables render only the selected rows supplied by #37; the UI does not reconstruct a full competition table.
-- Olympics-style highlights render as a short ruled list.
-- Event mode may expand the amount of content but remains within #37's finite payload.
+### Champions League
 
-The renderer does not infer tournament significance from names or scores.
+The current league-phase treatment is deliberately compact:
 
-## Major Headlines
+- competition heading;
+- one common `League Phase` stage line when all selected matches share it;
+- bounded recent results/next fixtures;
+- compact standing view showing positions 1, 2, 3, 8 and 9;
+- an explicit `Positions 4–7 omitted` row so the compact selection cannot look like missing data;
+- a visible qualification boundary between 8 and 9;
+- note explaining top 8 direct qualification and positions 9–24 playoff status.
 
-Major Headlines accepts only the already-qualified event/global exceptions supplied by the deterministic Sports layer. It is a conventional editorial list with source and description where available. It does not invoke the ordinary story-card interaction model merely to make the section look busier.
+Club crests are derived from the existing ESPN responses and remain subordinate to names/scores.
 
 ## Visual rules
 
-Sports remains part of The Morning Broadsheet:
+Sports uses the Morning Broadsheet system:
 
-- ruled, never boxed;
-- warm paper / lamplight dark mode from existing design tokens;
-- Press Navy for structure and Masthead Red only for true editorial emphasis;
-- serif reading text with small uppercase sans-serif furniture;
-- no gradients, shadows, score tiles, horizontal carousels, betting treatments or team-colour dashboard chrome;
-- tabular numerals for scores and tables;
-- no horizontal page overflow at phone widths;
-- interactive headline links maintain a 44px minimum target;
-- static score rows do not pretend to be buttons.
+- ruled, not boxed;
+- warm paper / lamplight dark mode;
+- Press Navy for structure, Masthead Red for restrained editorial emphasis;
+- serif reading/display type plus uppercase sans-serif furniture;
+- tabular numerals for scores/tables;
+- no gradients, shadows, betting UI, score carousel or team-colour dashboard chrome;
+- static score rows are not fake buttons;
+- headline targets remain at least 44 px;
+- no horizontal overflow at supported phone widths.
 
-If #55 promotes remote identity, loading states must preserve these rules: fixed quiet mark slots, no full-card skeletons, no spinner wall, no layout shift and reduced-motion-safe behavior.
+Logos have more visual presence than the original #38 text-only baseline, but they do not become the page hierarchy. Production sizes and loading behavior are defined in `SPORTS_V2_PERFORMANCE.md`.
+
+## Loading and fallback
+
+The final renderer directly emits optional identity fields from the Sports payload. There is no preview MutationObserver/decorator layer.
+
+- Toronto marks reserve 48 × 48 optical boxes (42 × 42 narrow phone).
+- Match crests use 30 × 30 boxes; table crests 24 × 24.
+- Text/scores render immediately.
+- Small neutral placeholders occupy only mark geometry while images settle.
+- Failed/slow Toronto marks resolve to typographic initials in the same box.
+- Club crest failure never removes the visible club name.
+- Reduced-motion users get static loading furniture.
 
 ## Rendering seam
 
-`src.sports.presentation.build_sports_payload()` is the only new composition layer. It:
+`src.sports.presentation.build_sports_payload()`:
 
 - requires all three permanent Toronto snapshots;
-- enforces the fixed Leafs → Raptors → Blue Jays order;
+- enforces reader order;
 - attaches each favourite-team headline once;
-- carries the existing `MajorEventsDesk` serialization;
-- caps global Major Headlines at four;
-- contains no #38 logo/palette contract.
+- adds the optional trusted Toronto mark contract;
+- carries serialized Major Events including optional trusted crest URLs;
+- caps Major Headlines at four.
 
-`src.render` inlines `template/sports.css` and `template/sports.js` only when the edition has a top-level `sports` payload. Editions without that payload use the existing renderer without loading or executing Sports-specific presentation code.
+`src.render` inlines:
 
-The Sports script takes over the stories column only while the existing Sports tab is active. Masthead, weather, tab behavior, service worker and every other section remain owned by the existing template.
+- `template/sports.css` — editorial layout;
+- `template/sports-performance.css` — remote identity/performance furniture;
+- `template/sports.js` — deterministic Sports rendering.
 
-## #39 boundary
+These assets are injected only when an edition contains a top-level `sports` payload. Non-Sports editions retain the legacy renderer unchanged.
 
-#38 deliberately does **not**:
+## Production boundary
 
-- fetch live Toronto or event data during render;
-- replace the generic production Sports pipeline;
-- change Gemini curation inputs;
-- remove broad Sport source configuration;
-- add build-time cost telemetry;
-- claim live production/device acceptance.
+Sports V2 is build-owned. Gemini no longer owns the Sports section, broad generic Sport ingestion is retired, and the empty Sports navigation shell is inserted by final edition assembly while the dedicated top-level `sports` payload owns what the reader sees.
 
-#39 must assemble the production `sports` payload, make Sports V2 the sole production Sports authority, retire generic Sport curation, and run end-to-end live/mobile verification.
-
-## #55 performance boundary
-
-#55 is a focused follow-on rather than an excuse to keep adding preview code to #39. It owns:
-
-- productionizing optional remote Toronto/Champions League identity if retained;
-- zero-extra-provider-request crest extraction;
-- native image lazy loading / decoding / intrinsic geometry;
-- restrained mark skeletons and deterministic fallback;
-- Sports first-frame interaction/rendering performance;
-- third-party connection strategy;
-- service-worker cache narrowing for remote assets;
-- performance/Web Vitals regression evidence;
-- deletion of the branch-only decorators and duplicate crest-fetch experiment.
-
-The Sports V2 parent should remain open through #55 even if #39 production integration lands first.
+The initial production Sports path remains zero-Gemini.
