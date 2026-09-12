@@ -22,6 +22,7 @@ from .events import (
     EventTable,
     select_event_matches,
 )
+from .identity import trusted_asset_url
 from .models import TORONTO, UTC
 
 ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/scoreboard"
@@ -66,13 +67,37 @@ def _status(payload: dict) -> EventMatchStatus:
     return EventMatchStatus.SCHEDULED
 
 
+def _team(competitor: dict) -> dict:
+    value = competitor.get("team") or {}
+    return value if isinstance(value, dict) else {}
+
+
 def _team_name(competitor: dict) -> str:
-    team = competitor.get("team") or {}
+    team = _team(competitor)
     return str(team.get("displayName") or team.get("name") or team.get("shortDisplayName") or "Unknown")
 
 
+def _team_logo_from_team(team: dict) -> str | None:
+    direct = trusted_asset_url(team.get("logo"))
+    if direct:
+        return direct
+    for item in team.get("logos") or []:
+        if isinstance(item, dict):
+            href = trusted_asset_url(item.get("href"))
+            if href:
+                return href
+    team_id = str(team.get("id") or "").strip()
+    if team_id:
+        return trusted_asset_url(f"https://a.espncdn.com/i/teamlogos/soccer/500/{team_id}.png")
+    return None
+
+
+def _team_logo(competitor: dict) -> str | None:
+    return _team_logo_from_team(_team(competitor))
+
+
 def _is_canada(competitor: dict) -> bool:
-    team = competitor.get("team") or {}
+    team = _team(competitor)
     name = str(team.get("displayName") or team.get("name") or "").strip().casefold()
     abbrev = str(team.get("abbreviation") or "").strip().upper()
     return name == "canada" or abbrev == "CAN"
@@ -110,6 +135,8 @@ def parse_scoreboard(payload: dict) -> tuple[EventMatch, ...]:
                 away_score=_score(away.get("score")),
                 detail=detail,
                 canada_involved=_is_canada(home) or _is_canada(away),
+                home_logo_url=_team_logo(home),
+                away_logo_url=_team_logo(away),
             )
         )
     return tuple(matches)
@@ -148,6 +175,7 @@ def _table_rows(entries: Iterable[dict]) -> tuple[EventStandingRow, ...]:
                 points=_stat_int(stats, "points"),
                 goal_difference=_stat_int(stats, "pointDifferential"),
                 canada=name.casefold() == "canada" or abbreviation == "CAN",
+                logo_url=_team_logo_from_team(team),
             )
         )
     return tuple(rows)
@@ -173,7 +201,6 @@ def parse_standings(payload: dict, *, spec: EventSpec) -> EventTable | None:
 
     group = groups[0]
     all_rows = _table_rows(((group.get("standings") or {}).get("entries") or []))
-    # Champions League league phase: top three plus the 8/9 qualification cut.
     wanted = [row for row in all_rows if row.position in {1, 2, 3, 8, 9}]
     rows = tuple(wanted or all_rows[:5])
     return EventTable(label=str(group.get("name") or spec.label), rows=rows[:5])
