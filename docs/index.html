@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="build" content="2026-09-11T13:49:48Z" />
+  <meta name="build" content="2026-09-12T12:52:19Z" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
@@ -268,12 +268,614 @@
     @media (prefers-reduced-motion: reduce) {
       * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
     }
+  
+/* Sports V2: a compact broadsheet sports page, never a dashboard. */
+.sports-desk + .sports-desk { margin-top: 44px; }
+.sports-desk .desk-head { margin-top: 0; }
+.sports-toronto .desk-head { padding-bottom: 12px; }
+
+/* Section openings read as editorial chapters, not generic app labels. */
+.sports-desk .sports-desk-head {
+  border-top: 3px solid var(--navy);
+  padding: 10px 0 12px;
+}
+.sports-section-kicker {
+  margin-bottom: 3px;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.145em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.sports-desk .desk-title {
+  font-family: 'Georgia', serif;
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  color: var(--ink);
+}
+.sports-desk .desk-dek {
+  margin-top: 5px;
+  max-width: 38rem;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+}
+
+/* Toronto clubs --------------------------------------------------------- */
+.sports-team {
+  position: relative;
+  border-top: 1px solid var(--rule);
+  padding: 18px 0 17px 46px;
+}
+.sports-team:first-of-type { border-top: 3px solid var(--navy); }
+
+/* Text-only editorial marks. They deliberately evoke a newspaper club mark
+   without reproducing protected team logos or introducing new colours. */
+.sports-team::before {
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 32px;
+  min-height: 31px;
+  padding: 4px 0 3px;
+  border-top: 2px solid var(--navy);
+  border-bottom: 1px solid var(--navy);
+  font-family: 'Georgia', serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+  text-align: center;
+  color: var(--navy-ink);
+}
+.sports-team[data-sports-team='leafs']::before { content: 'ML'; }
+.sports-team[data-sports-team='raptors']::before {
+  content: 'R';
+  color: var(--red);
+  border-top-color: var(--red);
+  border-bottom-color: var(--red);
+}
+.sports-team[data-sports-team='blue-jays']::before { content: 'BJ'; }
+
+.sports-team-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sports-team-name {
+  min-width: 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  letter-spacing: 0.105em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--navy-ink);
+}
+.sports-team-league {
+  margin-left: 7px;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--meta);
+  white-space: nowrap;
+}
+.sports-phase {
+  flex-shrink: 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+.sports-phase.postseason { color: var(--red); }
+
+.sports-scoreline {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 5px 9px;
+  margin-top: 11px;
+  min-width: 0;
+}
+.sports-result {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+.sports-score {
+  font-family: 'Georgia', serif;
+  font-size: 1.625rem;
+  line-height: 0.95;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.sports-opponent {
+  min-width: 0;
+  font-size: 0.9375rem;
+  line-height: 1.3;
+  color: var(--ink-sub);
+  overflow-wrap: anywhere;
+}
+.sports-status-line {
+  margin-top: 11px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-sub);
+}
+.sports-status-line strong {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.6875rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+
+/* Record / standing / next fixture read as a single line of scorebook
+   furniture rather than three dashboard cells. */
+.sports-facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 18px;
+  margin-top: 11px;
+  padding-top: 9px;
+  border-top: 1px solid var(--rule-soft);
+}
+.sports-fact { min-width: 0; }
+.sports-fact-label {
+  display: inline;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--meta);
+  margin-right: 5px;
+}
+.sports-fact-value {
+  display: inline;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-sub);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.sports-next-time { white-space: normal; }
+
+.sports-team-story,
+.sports-major-story {
+  display: block;
+  min-height: 44px;
+  margin-top: 13px;
+  padding: 11px 0 2px;
+  border-top: 1px solid var(--rule-soft);
+  color: inherit;
+  text-decoration: none;
+}
+.sports-team-story:hover .sports-story-title,
+.sports-major-story:hover .sports-story-title { text-decoration: underline; }
+.sports-team-story:focus-visible,
+.sports-major-story:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+.sports-story-label {
+  display: block;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 5px;
+}
+.sports-story-title {
+  display: block;
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.sports-story-dek {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-sub);
+}
+.sports-story-meta {
+  display: block;
+  margin-top: 5px;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.625rem;
+  color: var(--meta);
+}
+
+/* Major events ---------------------------------------------------------- */
+.sports-event {
+  border-top: 1px solid var(--rule);
+  padding: 19px 0 13px;
+}
+.sports-event:first-of-type { border-top: 3px solid var(--navy); }
+.sports-event-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 3px;
+}
+.sports-event-name {
+  font-family: 'Georgia', serif;
+  font-size: 1.3125rem;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.sports-event-mode {
+  flex-shrink: 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.sports-event-source {
+  padding-bottom: 7px;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+.sports-event-stage {
+  margin-top: 3px;
+  padding: 7px 0 6px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule-soft);
+  font-family: 'Arial', sans-serif;
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy-ink);
+}
+.sports-event-stage + .sports-match { border-top: 0; }
+.sports-event-unavailable {
+  padding: 9px 0 3px;
+  font-size: 0.8125rem;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--meta);
+}
+.sports-match {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 14px;
+  align-items: center;
+  border-top: 1px solid var(--rule-soft);
+  padding: 10px 0 9px;
+}
+.sports-match:first-of-type { border-top-color: var(--rule); }
+.sports-match-teams {
+  min-width: 0;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--ink-sub);
+  overflow-wrap: anywhere;
+}
+.sports-match-score {
+  font-family: 'Georgia', serif;
+  font-size: 1.1875rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.sports-match-meta {
+  grid-column: 1 / -1;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  line-height: 1.3;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+.sports-canada { font-weight: 700; color: var(--ink); }
+
+.sports-table-wrap {
+  margin-top: 16px;
+  border-top: 2px solid var(--navy);
+  padding-top: 10px;
+}
+.sports-table-label {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.105em;
+  text-transform: uppercase;
+  color: var(--navy-ink);
+  margin-bottom: 4px;
+}
+.sports-table-note {
+  margin: 0 0 8px;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.625rem;
+  line-height: 1.4;
+  color: var(--meta);
+}
+.sports-table-note span { font-weight: 800; color: var(--ink-sub); }
+.sports-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.6875rem;
+  color: var(--ink-sub);
+  font-variant-numeric: tabular-nums;
+}
+.sports-table th,
+.sports-table td {
+  border-top: 1px solid var(--rule-soft);
+  padding: 7px 4px;
+  text-align: right;
+  vertical-align: middle;
+}
+.sports-table th {
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+.sports-table th:first-child,
+.sports-table td:first-child { width: 28px; text-align: left; padding-left: 0; }
+.sports-table th:nth-child(2),
+.sports-table td:nth-child(2) { width: auto; text-align: left; overflow-wrap: anywhere; }
+.sports-table th:not(:nth-child(2)),
+.sports-table td:not(:nth-child(2)) { width: 38px; }
+.sports-table tr.canada td { font-weight: 700; color: var(--ink); }
+.sports-table-gap td {
+  padding: 4px 0;
+  border-top: 1px solid var(--rule);
+  text-align: center !important;
+  font-size: 0.5625rem;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--meta);
+}
+.sports-table-gap span { opacity: 0.82; }
+.sports-qualification-cut td {
+  border-top: 2px solid var(--red);
+}
+.sports-qualification-cut td:first-child::before {
+  content: '';
+}
+
+.sports-highlights { margin-top: 8px; }
+.sports-highlight {
+  border-top: 1px solid var(--rule-soft);
+  padding: 9px 0;
+}
+.sports-highlight-title {
+  font-size: 0.875rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--ink);
+}
+.sports-highlight-detail {
+  margin-top: 2px;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-sub);
+}
+
+.sports-major-story { margin-top: 0; padding: 12px 0 9px; }
+.sports-major-story + .sports-major-story { border-top-color: var(--rule); }
+
+@media (max-width: 380px) {
+  .sports-desk + .sports-desk { margin-top: 38px; }
+  .sports-desk .desk-title { font-size: 1.25rem; }
+  .sports-team { padding-left: 42px; }
+  .sports-team::before { width: 29px; font-size: 0.9375rem; }
+  .sports-team-name { font-size: 0.875rem; letter-spacing: 0.085em; }
+  .sports-scoreline { grid-template-columns: auto auto; }
+  .sports-opponent { grid-column: 1 / -1; }
+  .sports-facts { gap: 5px 13px; }
+  .sports-table .sports-gd { display: none; }
+  .sports-event-head { align-items: flex-start; }
+  .sports-event-name { font-size: 1.1875rem; }
+}
+
+@media (min-width: 540px) {
+  .sports-team { padding-top: 19px; padding-bottom: 18px; }
+  .sports-team::before { top: 17px; }
+  .sports-score { font-size: 1.75rem; }
+}
+
+/* Sports V2 remote identity/performance contract.
+   Decorative identity may arrive late; score/text geometry must not move. */
+
+.sports-team {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  column-gap: 14px;
+  padding-left: 0;
+}
+.sports-team::before { display: none; }
+.sports-team-copy { min-width: 0; }
+
+.sports-mark {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  align-self: start;
+  overflow: hidden;
+}
+.sports-mark picture,
+.sports-mark img {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+.sports-mark img {
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 140ms ease-out;
+}
+.sports-mark::after,
+.sports-club-crest::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: var(--tint-open);
+  border: 1px solid var(--rule-soft);
+  opacity: 0;
+  pointer-events: none;
+}
+.sports-mark-loading::after {
+  opacity: 0.72;
+  animation: sports-mark-breathe 1.2s ease-in-out infinite alternate;
+}
+.sports-mark-loaded img { opacity: 1; }
+.sports-mark-loaded::after,
+.sports-mark-failed::after { opacity: 0; }
+.sports-mark-failed img,
+.sports-mark-failed picture { display: none; }
+.sports-mark-fallback {
+  display: none;
+  width: 38px;
+  padding: 5px 0 4px;
+  border-top: 2px solid var(--navy);
+  border-bottom: 1px solid var(--navy);
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  text-align: center;
+  color: var(--navy-ink);
+}
+.sports-mark-failed .sports-mark-fallback { display: block; }
+
+.sports-club {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.sports-club > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.sports-club-crest {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: inline-grid;
+  place-items: center;
+}
+.sports-club-crest img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 140ms ease-out;
+}
+.sports-club-crest.sports-mark-loaded img { opacity: 1; }
+.sports-club-crest.sports-mark-failed img { display: none; }
+.sports-table .sports-club-crest {
+  width: 24px;
+  height: 24px;
+  flex-basis: 24px;
+}
+.sports-table .sports-club { gap: 7px; }
+.sports-match-teams {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px 7px;
+}
+.sports-versus {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+
+/* Lower desks are not part of the first visible Toronto frame. Browsers that
+   support content-visibility can defer their layout/paint work until useful. */
+.sports-events,
+.sports-headlines {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 850px;
+}
+
+@keyframes sports-mark-breathe {
+  from { opacity: 0.38; }
+  to { opacity: 0.72; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sports-mark-loading::after { animation: none; opacity: 0.58; }
+  .sports-mark img,
+  .sports-club-crest img { transition: none; }
+}
+
+@media (max-width: 380px) {
+  .sports-team {
+    grid-template-columns: 46px minmax(0, 1fr);
+    column-gap: 11px;
+    padding-left: 0;
+  }
+  .sports-mark,
+  .sports-mark picture,
+  .sports-mark img {
+    width: 42px;
+    height: 42px;
+  }
+  .sports-club { gap: 6px; }
+  .sports-club-crest {
+    width: 27px;
+    height: 27px;
+    flex-basis: 27px;
+  }
+  .sports-table .sports-club-crest {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+}
+
   </style>
 </head>
 <body>
   <div id="app"></div>
 
-  <script id="edition" type="application/json">{"date": "Friday, September 11, 2026", "weather": {"condition": "Clear", "high": 21, "low": 11, "rain": "0%", "wind": "12 km/h gusts", "icon": "☀️", "week": [{"day": "Fri", "icon": "☀️", "hi": 21, "lo": 11}, {"day": "Sat", "icon": "⛅", "hi": 22, "lo": 13}, {"day": "Sun", "icon": "🌦", "hi": 26, "lo": 16}, {"day": "Mon", "icon": "⛅", "hi": 20, "lo": 12}, {"day": "Tue", "icon": "⛅", "hi": 20, "lo": 15}, {"day": "Wed", "icon": "⛅", "hi": 23, "lo": 20}]}, "sections": [{"id": "front", "label": "Front Page", "stories": [{"id": "f1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Houthis Capture Crucial Red Sea Island Off Yemen, Officials Say", "sub": "The Iran-backed militia’s ground offensive has reached the Bab al-Mandab, a Red Sea strait that is a choke point for global trade.", "summary": "Iran-backed Houthi fighters have seized a strategic island in the Bab al-Mandab strait, a critical choke point for global oil shipping. This ground offensive marks a significant escalation, with Saudi Arabia heavily reliant on this route for its oil exports. The capture raises concerns about the security of international maritime trade and regional stability.", "analysis": "The Houthi capture of a key Red Sea island could severely disrupt global oil flows and exacerbate tensions in the Middle East, potentially driving energy prices higher. This move challenges international efforts to secure vital shipping lanes and may prompt a stronger response from regional and international powers.", "time": "7:43 AM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.nytimes.com/2026/09/11/world/middleeast/yemen-houthis-bab-al-mandab.html"}, {"id": "f2", "lead": false, "kicker": "UKRAINE", "headline": "Russia targets Kyiv petrol stations for first time with jet-powered drones", "sub": "Three facilities in two days struck as bombardment of Ukraine’s capital enters new phase of intensity", "summary": "Russia has escalated its bombardment of Kyiv, targeting petrol stations with jet-powered drones for the first time. Three facilities have been struck in two days, signaling a new phase of intensity in attacks on the Ukrainian capital. This development suggests a shift in Russian tactics, aiming to disrupt critical infrastructure and civilian life.", "analysis": null, "time": "12:01 PM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.theguardian.com/world/2026/sep/11/russia-kyiv-petrol-stations-jet-powered-drones-ukraine"}, {"id": "f3", "lead": false, "kicker": "US ECONOMY", "headline": "US consumer prices stayed high in August as Iran war pushed energy costs up", "sub": "Annualized inflation rate was 3.4%, same as July, and core inflation, which omits energy and food prices, was up to 2.4%", "summary": "US consumer prices remained elevated in August, with the annualized inflation rate holding steady at 3.4%, matching July's figure. Energy costs, driven higher by the ongoing conflict in Iran, were a primary factor. Core inflation, excluding volatile food and energy prices, also saw an increase to 2.4%.", "analysis": null, "time": "12:38 PM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/d9e3bf53f312fcfb2605b3930bdd5df613b2b9f3/0_0_4993_3993/500.jpg", "link": "https://www.theguardian.com/business/2026/sep/11/inflation-august-interest-rates"}, {"id": "f4", "lead": false, "kicker": "SWEDEN", "headline": "Sweden’s PM channels Trump saying he wants to ‘make Sweden great again’ ahead of election", "sub": "Ulf Kristersson’s comments come ahead of the parliamentary election taking place this Sunday", "summary": "Swedish Prime Minister Ulf Kristersson has adopted the slogan \"make Sweden great again\" ahead of the parliamentary election this Sunday. The phrase, reminiscent of former US President Donald Trump's campaign, was used by Kristersson in a bid to rally support. His comments come as the country prepares for a closely watched election.", "analysis": null, "time": "1:34 PM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/a67ffb5e87c0dafdab01f4d7889b50154a541bb6/504_0_4796_3838/500.jpg", "link": "https://www.theguardian.com/world/live/2026/sep/11/russia-strikes-ukraine-europe-nato-poland-latest-news-updates"}, {"id": "f5", "lead": false, "kicker": "TORONTO", "headline": "Why Trump's new tariffs pose a significant threat to 250,000 Toronto jobs", "sub": "An updated U of T tool reveals Trump's new tariffs have the potential to impact almost 250,000 Toronto jobs.", "summary": "New tariffs proposed by US President Donald Trump could jeopardize nearly 250,000 jobs in Toronto, according to an updated analysis tool from the University of Toronto. The report highlights the significant economic vulnerability of the city to changes in US trade policy. Local industries and workers face potential widespread disruption if the tariffs are implemented.", "analysis": null, "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/f/8e/f8ef64e3-1500-506f-9a34-8039594aa5f2/6aa2c505b47f1.image.jpg?resize=300%2C225", "link": "https://www.thestar.com/news/gta/why-trump-s-new-tariffs-pose-a-significant-threat-to-250-000-toronto-jobs/article_51a6f91a-2080-46c0-9273-a1b53673a577.html"}]}, {"id": "toronto", "label": "Toronto", "stories": [{"id": "t1", "lead": true, "kicker": "METROLINX", "headline": "Metrolinx report pulls back curtain on what led to GO train derailment outside Union Station", "sub": "Visual inspections, maintenance issues led to poor track conditions near Union Station where a GO train derailed and caused chaos across the GO network.", "summary": "A new Metrolinx report has detailed the causes behind a GO train derailment near Union Station, revealing that poor track conditions stemming from visual inspection failures and maintenance issues were responsible. The incident caused significant disruption across the entire GO network. The findings highlight critical lapses in infrastructure oversight and maintenance protocols.", "analysis": "This report on the GO train derailment underscores ongoing challenges with public transit infrastructure and maintenance in Toronto. The identified issues could lead to increased scrutiny of Metrolinx's operational procedures and calls for greater investment in track upkeep to prevent future incidents and ensure commuter safety.", "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/9/e8/9e80c555-0943-531d-924e-5f145452e0b0/6aa3107a84687.image.jpg?resize=300%2C200", "link": "https://www.thestar.com/news/gta/new-metrolinx-report-details-what-led-to-a-go-train-derailment-in-february/article_c98c0350-1184-40e7-94d5-d8ab9a7f6653.html"}, {"id": "t2", "lead": false, "kicker": "ONTARIO SCIENCE CENTRE", "headline": "Ontario Science Centre will have no science department as layoffs, restructuring announced", "sub": "\"How can you have an Ontario Science Centre with no Science Unit?\" said the head of the union local representing Science Centre workers.", "summary": "The Ontario Science Centre is undergoing a significant restructuring that will eliminate its science department, leading to layoffs. Union representatives expressed dismay, questioning the viability of a science centre without a dedicated science unit. The move is part of broader changes impacting the institution's operational model.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/5/b9/5b92c40f-be3e-516b-ac9b-50a85784e511/6a1449774a9a5.image.jpg?resize=300%2C225", "link": "https://www.thestar.com/news/gta/ontario-science-centre-will-have-no-science-department-as-layoffs-restructuring-announced/article_16217562-2f2c-4653-a0d4-7ae3169f7f2a.html"}, {"id": "t3", "lead": false, "kicker": "BURLINGTON", "headline": "Halton Police investigating homicide after woman found dead in Burlington apartment", "sub": "Residents can expect a large police presence in the area of Guelph Line and Glencrest Road.", "summary": "Halton Police are investigating a homicide after a woman was found dead in a Burlington apartment near Guelph Line and Glencrest Road. A significant police presence is expected in the area as the investigation proceeds. Authorities have not yet released further details regarding the victim or potential suspects.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": true, "image": null, "link": "https://www.thestar.com/news/crime/halton-police-investigating-death-of-woman-in-burlington/article_fde37c36-1036-55f0-b1a6-238463b6c4a2.html"}, {"id": "t4", "lead": false, "kicker": "COMMUNITY", "headline": "Inside Grodzinski's Rosh Hashanah rush, where a Toronto bakery doles out challah around the clock", "sub": "Rows upon rows of challah. Up to 1,600 danishes in one day. And barely any sleep for Jacob Aboudi, who is hard at work making it all go as planned.", "summary": "Grodzinski's bakery in Toronto is experiencing its annual Rosh Hashanah rush, with bakers working around the clock to produce thousands of challah loaves and danishes. Baker Jacob Aboudi describes the intense, sleepless effort required to meet demand for the Jewish New Year. The bakery is a central part of holiday preparations for many in the community.", "analysis": null, "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/a/b7/ab7878c3-b1df-5a27-ac6b-e4ff60b11eb2/6aa326c4946b9.image.jpg?resize=300%2C200", "link": "https://www.thestar.com/news/gta/inside-grodzinski-s-rosh-hashanah-rush-where-a-toronto-bakery-doles-out-challah-around-the-clock/article_1a52db6a-60c8-4406-a554-7ae877805aa3.html"}]}, {"id": "world", "label": "World", "stories": [{"id": "w1", "lead": true, "kicker": "UKRAINE", "headline": "As Russia Again Draws Near, a Frontline City Fears Obliteration This Time", "sub": "The Ukrainian city of Izium still bears the scars of Russian occupation from four years ago. As Moscow’s forces approach, residents are bracing for the worst.", "summary": "The Ukrainian city of Izium, still scarred from a Russian occupation four years ago, is bracing for potential obliteration as Moscow's forces once again draw near. Residents fear a repeat of past devastation, with many preparing for the worst-case scenario. The renewed threat highlights the ongoing fragility and human cost of the conflict in eastern Ukraine.", "analysis": "The impending threat to Izium underscores the persistent and brutal nature of the war in Ukraine, where cities face repeated cycles of destruction. The international community will be watching closely for any Russian advances, which could signal a new offensive and further humanitarian crisis.", "time": "5:00 AM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.nytimes.com/2026/09/11/world/europe/ukraine-russia-izium-donetsk.html"}, {"id": "w2", "lead": false, "kicker": "LEBANON", "headline": "Inside an Ancient Lebanese City Engulfed by War", "sub": "The Lebanese city of Tyre, one of the oldest metropolises in the world, has been left scarred.", "summary": "The ancient Lebanese city of Tyre, a UNESCO World Heritage site and one of the world's oldest continuously inhabited cities, has been severely scarred by ongoing conflict. Reports detail extensive damage to its historic structures and civilian areas. The war continues to take a heavy toll on both cultural heritage and the lives of its residents.", "analysis": null, "time": "5:11 AM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.nytimes.com/2026/09/11/world/middleeast/tyre-engulfed-war-lebanon.html"}, {"id": "w3", "lead": false, "kicker": "ITALY", "headline": "Emma Bonino, radical Italian politician who stood up to Vatican, dies aged 78", "sub": "Militant feminist led campaigns to legalise abortion and divorce and went on to become foreign minister", "summary": "Emma Bonino, the radical Italian politician and militant feminist, has died at the age of 78. Bonino was a prominent figure who championed controversial causes, leading successful campaigns to legalize abortion and divorce in Italy. Her distinguished career also included serving as Italy's Foreign Minister, marking her as a formidable force in Italian politics.", "analysis": null, "time": "9:21 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/89e47d9a34d74dda45d6e3c2bfc124c588655ea5/194_0_3398_2718/500.jpg", "link": "https://www.theguardian.com/world/2026/sep/11/emma-bonino-radical-italian-politician-abortion-divorce-dies"}, {"id": "w4", "lead": false, "kicker": "UGANDA", "headline": "Secret son revelation ignites bitter succession dispute in Ugandan kingdom", "sub": "Family of late King Oyo Nyimba Kabamba Iguru Rukidi IV reject committee’s choice of cousin and TV presenter as new monarch", "summary": "A bitter succession dispute has erupted in a Ugandan kingdom following the revelation of a secret son of the late King Oyo Nyimba Kabamba Iguru Rukidi IV. The royal family has rejected the committee's selection of a cousin and TV presenter as the new monarch. This unexpected development has thrown the kingdom's leadership into turmoil.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/26f6df1db2da6edf8df0cbe6a88cccefcbc59278/551_0_3353_2682/500.jpg", "link": "https://www.theguardian.com/world/2026/sep/10/uganda-king-secret-son-succession-dispute"}]}, {"id": "sports", "label": "Sports", "stories": [{"id": "s1", "lead": true, "kicker": "CRICKET", "headline": "England v Pakistan: third men’s cricket Test, day three – live", "sub": "Over-by-over report: England are closing on victory and a series sweep with Pakistan in deep trouble at Edgbaston. Join our writers", "summary": "England is on the verge of a series sweep against Pakistan, with the third men's cricket Test at Edgbaston entering its third day. Pakistan is in deep trouble, struggling against England's dominant performance. An over-by-over report details the unfolding action as England closes in on victory, aiming to complete a clean sweep.", "analysis": "An England series sweep against Pakistan would solidify their position in international cricket rankings and boost team morale significantly. This dominant performance could set a strong precedent for their upcoming fixtures, showcasing their depth and strategic prowess.", "time": "1:46 PM", "tag": "FINAL", "sensitivity": false, "image": "https://media.guim.co.uk/2efd136d5909d11611783c78ab43bbcf4203a195/367_49_2616_2093/500.jpg", "link": "https://www.theguardian.com/sport/live/2026/sep/11/england-v-pakistan-third-cricket-test-day-three-live"}, {"id": "s2", "lead": false, "kicker": "AFL", "headline": "Fremantle keep AFL premiership dream alive with win against Geelong in finals classic", "sub": "The Dockers hold off determined Cats for a 14-point victory in their semi-final at Optus Stadium to set up a showdown with the Swans", "summary": "The Fremantle Dockers secured a 14-point victory over the Geelong Cats in a thrilling AFL semi-final at Optus Stadium, keeping their premiership hopes alive. Luke Jackson's standout performance helped the Dockers hold off a determined Cats side. Fremantle will now face the Swans in the next round.", "analysis": null, "time": "1:20 PM", "tag": "FINAL", "sensitivity": false, "image": "https://media.guim.co.uk/f66566a931224232d3d8cc74b1a41acb5a331010/610_0_6325_5063/500.jpg", "link": "https://www.theguardian.com/sport/2026/sep/11/afl-finals-fremantle-dockers-geelong-cats-semi-final-report-luke-jackson"}, {"id": "s3", "lead": false, "kicker": "GOLF", "headline": "Solheim Cup golf 2026: Europe v USA finely poised as day one fourballs begin – live", "sub": "Join our writers for the first day as Team Europe host the reigning champions Team USA at Bernardus Golf in the Netherlands", "summary": "The Solheim Cup is underway at Bernardus Golf in the Netherlands, with Team Europe hosting reigning champions Team USA. Day one of the prestigious golf tournament sees the fourball matches beginning, with the competition finely poised. Both teams are vying for an early advantage in what promises to be a closely contested event.", "analysis": null, "time": "1:45 PM", "tag": "DEVELOPING", "sensitivity": false, "image": "https://media.guim.co.uk/8186598e01ca1d49c3ee7ef8d88969c5db15a1d5/470_0_5899_4719/500.jpg", "link": "https://www.theguardian.com/sport/live/2026/sep/11/solheim-cup-golf-2026-day-one-live"}, {"id": "s4", "lead": false, "kicker": "RUGBY", "headline": "Springboks v All Blacks a US World Cup preview in Baltimore as thrilling series goes down to the wire", "sub": "‘Rugby’s Greatest Rivalry’ will culminate on US soil on Saturday, a staging post on the road to America hosting the World Cup in 2031", "summary": "Rugby's greatest rivalry, the Springboks versus the All Blacks, is set to culminate in Baltimore on Saturday, serving as a preview for the 2031 US World Cup. This thrilling series has gone down to the wire, with the final match on US soil marking a significant milestone for American rugby. The event is a key staging post for the sport's growth in the country.", "analysis": null, "time": "9:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/b1ec94e4a17a17a94e16d8964470ade0b90793bd/156_0_2987_2390/500.jpg", "link": "https://www.theguardian.com/sport/2026/sep/11/springboks-all-blacks-rugby-baltimore"}]}, {"id": "business", "label": "Business", "stories": [{"id": "b1", "lead": true, "kicker": "UK ECONOMY", "headline": "UK economy unexpectedly grows 0.4% in July boosted by AI", "sub": "Welcome boost for chancellor with unexpected rise put down to rapid growth of AI in services sector outweighing Iran war fallout", "summary": "The UK economy experienced an unexpected 0.4% growth in July, providing a welcome boost for the Chancellor. This rise is primarily attributed to the rapid expansion of artificial intelligence in the services sector, which managed to outweigh the economic fallout from the ongoing conflict in Iran. The figures defy earlier forecasts, suggesting resilience in certain economic areas.", "analysis": "The surprising UK economic growth, driven by AI, offers a counter-narrative to global inflation concerns and the impact of the Iran war. This highlights the transformative potential of AI in mitigating broader economic headwinds, but also raises questions about the sustainability and breadth of this growth across all sectors.", "time": "8:10 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/9f8f14e2a01ec8c9a4d21b8b65ed45042405e31d/586_0_5859_4690/500.jpg", "link": "https://www.theguardian.com/business/2026/sep/11/uk-economy-defies-forecasts-with-surprise-04-growth-in-july"}, {"id": "b2", "lead": false, "kicker": "BONDS", "headline": "Bessent Takes on the Bond Vigilantes", "sub": "As a rout in the bond market deepens, the pressure grows on Treasury Secretary Scott Bessent to restore calm.", "summary": "Treasury Secretary Scott Bessent is under increasing pressure to stabilize the bond market as a rout deepens. The ongoing sell-off has raised concerns about government borrowing costs and broader financial stability. Bessent faces the challenge of restoring calm amid fears stoked by surging oil prices and inflation.", "analysis": null, "time": "7:41 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/09/11/multimedia/11db-bessent-qktf/11db-bessent-qktf-superJumbo.jpg", "link": "https://www.nytimes.com/2026/09/11/business/dealbook/bessent-bond-vigilantes.html"}, {"id": "b3", "lead": false, "kicker": "ENERGY", "headline": "‘Just worry upon worry’: Europe faces a bleak winter as supply shock pushes factories to the brink", "sub": "From Shropshire to Hamburg, depleting reserves and spiralling costs are spawning a continent-wide energy crisis", "summary": "Europe is bracing for a bleak winter as a continent-wide energy crisis pushes factories to the brink, from Shropshire to Hamburg. Depleting reserves and spiraling costs are fueling widespread concern among businesses and consumers. The supply shock threatens to severely impact industrial output and household budgets across the region.", "analysis": null, "time": "9:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/88cf64587a4d1b20ca8078747b809eee812c4422/0_139_2639_2111/500.jpg", "link": "https://www.theguardian.com/business/2026/sep/11/just-worry-upon-worry-europe-faces-a-bleak-winter-as-supply-shock-pushes-factories-to-the-brink"}, {"id": "b4", "lead": false, "kicker": "UK INFRASTRUCTURE", "headline": "Speed up electricity grid upgrade or else face higher bills, warns UK watchdog", "sub": "National Audit Office says failure to implement £70bn modernisation would also hold back economic growth", "summary": "The UK's National Audit Office has warned that delays in the £70 billion electricity grid upgrade could lead to higher consumer bills and hinder economic growth. The watchdog emphasized the critical need to accelerate the modernization program. Failure to implement the upgrade efficiently poses significant financial and developmental risks for the country.", "analysis": null, "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/ec84aa3de6a6a973af498257a475d74497620129/65_0_3358_2687/500.jpg", "link": "https://www.theguardian.com/business/2026/sep/11/speed-up-electricity-grid-upgrade-or-else-face-higher-bills-warns-uk-watchdog"}]}, {"id": "opinion", "label": "Opinion", "stories": [{"id": "o1", "lead": true, "kicker": "US POLITICS", "headline": "Think Trump Is Going Away? His Message This Week: Not a Chance.", "sub": "A dispatch from Dallas 2026.", "summary": "Despite speculation about his political future, former US President Donald Trump's message this week from Dallas 2026 indicates he is not retreating from the political stage. The dispatch suggests Trump remains a potent force, actively shaping the discourse and maintaining his influence within the Republican party. His continued presence signals ongoing political engagement.", "analysis": "This piece suggests that Donald Trump's enduring influence continues to shape the political landscape, challenging assumptions about his potential withdrawal. His sustained presence could impact upcoming elections and the direction of the Republican party, making his actions a critical factor to watch in US politics.", "time": "5:04 AM", "tag": "EDITORIAL", "sensitivity": false, "image": "https://static01.nyt.com/images/2026/09/11/multimedia/11cottle-blpt/11cottle-blpt-superJumbo.jpg", "link": "https://www.nytimes.com/2026/09/11/opinion/trump-convention-republicans-dallas.html"}, {"id": "o2", "lead": false, "kicker": "9/11 LEGACY", "headline": "9/11 entrenched Islamophobia in US politics. But it doesn’t work the way you think | Moustafa Bayoumi", "sub": "Anti-Muslim sentiment is used as a political weapon. Meanwhile, Muslim American leaders are making a difference for all", "summary": "Moustafa Bayoumi argues that 9/11 entrenched Islamophobia in US politics, but its impact is more nuanced than commonly perceived. He contends that anti-Muslim sentiment is often weaponized politically, while simultaneously, Muslim American leaders are making significant positive contributions across society. The piece explores this complex dynamic, highlighting both challenges and progress.", "analysis": null, "time": "10:00 AM", "tag": "EDITORIAL", "sensitivity": false, "image": "https://media.guim.co.uk/a6a5ff7d9b4ed597ff89c429bcfec75505bc2b29/792_0_7920_6336/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/sep/11/9-11-islamophobia-us-politics"}, {"id": "o3", "lead": false, "kicker": "AI ETHICS", "headline": "Tech whistleblowers warn AI could wipe out humanity. Doomspeak or not, we must take these claims seriously | Gaby Hinsliff", "sub": "AI agents have hacked databases and taken on a life of their own – now is the time to pause risky research before it is too late, says Guardian columnist Gaby Hinsliff", "summary": "Gaby Hinsliff argues that warnings from tech whistleblowers about AI's potential to wipe out humanity, even if considered \"doomspeak,\" must be taken seriously. She cites instances of AI agents hacking databases and developing autonomy, urging a pause on risky research before it's too late. The columnist stresses the urgency of addressing these existential concerns.", "analysis": null, "time": "10:00 AM", "tag": "EDITORIAL", "sensitivity": false, "image": "https://media.guim.co.uk/e1f29ba69cb83f9c58012109653bb0931853e2d2/250_0_2500_2000/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/sep/11/risky-ai-research-pause-humanity"}, {"id": "o4", "lead": false, "kicker": "ROYAL FAMILY", "headline": "Memo to King Charles: you can’t stop the Sussexes’ reality show bandwagon. You only spice up the script | Marina Hyde", "sub": "If the monarch thought his sniffy letter would put Harry and Meghan at a disadvantage, he doesn’t understand how the celebrity world works, says Guardian columnist Marina Hyde", "summary": "Marina Hyde contends that King Charles's attempts to curb the Sussexes' reality show ventures are counterproductive, merely adding drama to their narrative. Hyde argues that the monarch misunderstands the dynamics of celebrity culture, where perceived opposition often fuels public interest. The columnist suggests the royal family's actions inadvertently amplify Harry and Meghan's media presence.", "analysis": null, "time": "12:31 PM", "tag": "EDITORIAL", "sensitivity": false, "image": "https://media.guim.co.uk/b5a30bb5a4b6452d787f2096454bd0898b73af40/244_0_2512_2010/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/sep/11/king-charles-sussexes-reality-tv-harry-meghan-celebrity"}]}], "following": [{"id": "follow-1", "lead": false, "kicker": null, "headline": "Was Francis Fukuyama Right All Along?", "sub": "The political scientist Francis Fukuyama looks back on his 1992 book, “The End of History and the Last Man,” and what it has predicted about the state of liberalism today.", "summary": "Ezra Klein interviews political scientist Francis Fukuyama, reflecting on his 1992 book, \"The End of History and the Last Man.\" The discussion explores how Fukuyama's predictions about liberalism have unfolded and what they reveal about the current global political landscape. They examine the enduring relevance and challenges to his thesis.", "analysis": null, "time": "5:04 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/09/11/opinion/11eks-fukuyama-image-01/11eks-fukuyama-image-01-superJumbo.jpg", "link": "https://www.nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html", "author": "Ezra Klein, Jack McCordick", "publication": "The New York Times", "paywalled": null, "voice_ids": ["ezra-klein"], "canonical_key": "url:https://nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html", "following": true}, {"id": "follow-2", "lead": false, "kicker": null, "headline": "The Ezra Klein Show: The A.I. Revolt Is Here", "sub": "The A.I. giants weren’t prepared for this.", "summary": "Ezra Klein and Jasmine Sun discuss \"The A.I. Revolt Is Here,\" exploring how major artificial intelligence companies were unprepared for recent developments. The podcast delves into the unexpected challenges and rapid evolution within the AI sector. They analyze the implications of these advancements for the industry and beyond.", "analysis": null, "time": "4:00 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://www.nytimes.com/2026/09/11/podcasts/hardfork-ezra-klein-jasmine-sun.html", "author": "Ezra Klein, Rollin Hu", "publication": "The New York Times", "paywalled": null, "voice_ids": ["ezra-klein"], "canonical_key": "url:https://nytimes.com/2026/09/11/podcasts/hardfork-ezra-klein-jasmine-sun.html", "following": true}, {"id": "follow-3", "lead": false, "kicker": null, "headline": "My AI podcast with James Pethokoukis", "sub": null, "summary": "Tyler Cowen shares his AI podcast conversation with James Pethokoukis, providing a link and transcript for listeners. The discussion likely covers various aspects of artificial intelligence, its economic implications, and societal impact. This episode offers insights from both Cowen and Pethokoukis on the evolving AI landscape.", "analysis": null, "time": "2:34 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html?utm_source=rss&utm_medium=rss&utm_campaign=my-ai-podcast-with-james-pethokoukis", "author": "Tyler Cowen", "publication": "Marginal Revolution", "paywalled": null, "voice_ids": ["tyler-cowen"], "canonical_key": "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html", "following": true}, {"id": "follow-4", "lead": false, "kicker": null, "headline": "Markets do respond to AGI news", "sub": null, "summary": "Tyler Cowen observes that markets are indeed responding to news about Artificial General Intelligence (AGI), providing a link to further details. He prompts readers to consider what changes in other market prices might indicate. This piece suggests a direct correlation between AGI developments and market behavior.", "analysis": null, "time": "12:47 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://marginalrevolution.com/marginalrevolution/2026/09/markets-do-respond-to-agi-news.html?utm_source=rss&utm_medium=rss&utm_campaign=markets-do-respond-to-agi-news", "author": "Tyler Cowen", "publication": "Marginal Revolution", "paywalled": null, "voice_ids": ["tyler-cowen"], "canonical_key": "url:https://marginalrevolution.com/marginalrevolution/2026/09/markets-do-respond-to-agi-news.html", "following": true}, {"id": "follow-5", "lead": false, "kicker": null, "headline": "Is there now a better trend in youth mental health?", "sub": null, "summary": "Tyler Cowen discusses whether there is an improving trend in youth mental health, citing a US government report. The report indicates continued improvements in several metrics, particularly among young people. This comes despite previous uncertainties regarding the National Survey on Drug Use and Health, which faced team layoffs by the Trump administration.", "analysis": null, "time": "12:34 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://marginalrevolution.com/marginalrevolution/2026/09/is-there-now-a-better-trend-in-youth-mental-health.html?utm_source=rss&utm_medium=rss&utm_campaign=is-there-now-a-better-trend-in-youth-mental-health", "author": "Tyler Cowen", "publication": "Marginal Revolution", "paywalled": null, "voice_ids": ["tyler-cowen"], "canonical_key": "url:https://marginalrevolution.com/marginalrevolution/2026/09/is-there-now-a-better-trend-in-youth-mental-health.html", "following": true}, {"id": "follow-6", "lead": false, "kicker": null, "headline": "The populist right is rising around the world. Why not in Canada?", "sub": null, "summary": "Andrew Coyne explores why the populist right, a growing force globally, has not seen a similar rise in Canada. He analyzes potential factors contributing to this divergence in political trends. Coyne's piece delves into the unique aspects of Canadian political culture and its resistance to certain populist movements.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": null, "link": "https://www.theglobeandmail.com/opinion/article-the-populist-right-is-rising-around-the-world-why-not-in-canada/", "author": "Andrew Coyne", "publication": "The Globe and Mail", "paywalled": null, "voice_ids": ["andrew-coyne"], "canonical_key": "url:https://theglobeandmail.com/opinion/article-the-populist-right-is-rising-around-the-world-why-not-in-canada", "following": true}]}</script>
+  <script id="edition" type="application/json">{"date": "Saturday, September 12, 2026", "weather": {"condition": "Overcast", "high": 24, "low": 13, "rain": "2%", "wind": "15 km/h gusts", "icon": "⛅", "week": [{"day": "Sat", "icon": "⛅", "hi": 24, "lo": 13}, {"day": "Sun", "icon": "🌦", "hi": 25, "lo": 16}, {"day": "Mon", "icon": "⛅", "hi": 21, "lo": 13}, {"day": "Tue", "icon": "⛅", "hi": 22, "lo": 16}, {"day": "Wed", "icon": "🌦", "hi": 25, "lo": 20}, {"day": "Thu", "icon": "🌦", "hi": 20, "lo": 18}]}, "sections": [{"id": "front", "label": "Front Page", "stories": [{"id": "f1", "lead": true, "kicker": "MIDDLE EAST", "headline": "Yemen Conflict Intensifies as Houthis Seize Strategic Island, Displacing Thousands", "sub": "Iran-backed Houthi fighters capture a key island in the Bab al-Mandab strait, a vital oil shipping route, as nearly 50,000 Yemeni civilians flee escalating violence.", "summary": "Iran-backed Houthi fighters have seized a strategic island in the Bab al-Mandab strait, a narrow waterway crucial for global oil shipping, intensifying the conflict in Yemen. This advance threatens Saudi Arabia's oil export routes and has triggered a new wave of displacement, with nearly 50,000 Yemeni civilians fleeing their homes along the Red Sea coast. The ongoing fighting between the Saudi-backed government and the Houthis is pushing Yemen, already ravaged by hunger and disease, further to the brink of a humanitarian catastrophe.", "analysis": "The Houthi capture of a strategic island marks a significant escalation, threatening global energy markets and deepening a humanitarian crisis that has long been overlooked. The move could draw more regional and international powers into the conflict, further destabilizing the Middle East.", "time": "4:00 AM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.nytimes.com/2026/09/12/world/middleeast/yemen-iran-war-houthis.html"}, {"id": "f2", "lead": false, "kicker": "INTERNATIONAL RELATIONS", "headline": "BRICS Summit Opens with Xi Jinping's Arrival, Iran's Presence Highlights Oil Dynamics", "sub": "Chinese President Xi Jinping receives a red carpet welcome in Delhi, signaling a thaw in India-China relations, as the BRICS summit convenes with Iran's participation underscoring shifting global oil interests.", "summary": "Chinese President Xi Jinping arrived in Delhi for the BRICS summit, receiving a red carpet welcome that suggests a potential reconciliation in India-China relations following a deadly 2020 military clash. The summit's agenda is shaped by rising oil prices and the significant presence of Iran, a new member, highlighting how the loose grouping of emerging economies is navigating complex global energy dynamics amidst the ongoing Middle East conflict.", "analysis": null, "time": "8:02 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/09/12/multimedia/12int-brics-summit-vfmp/12int-brics-summit-vfmp-superJumbo.jpg", "link": "https://www.nytimes.com/2026/09/12/world/asia/brics-summit-china-india-russia-iran.html"}, {"id": "f3", "lead": false, "kicker": "GLOBAL ECONOMY", "headline": "US Inflation Persists in August, Complicating Trump's Midterm Appeal", "sub": "US monthly inflation rose to 0.4% in August, with the annual rate holding at 3.4%, as high gasoline prices and climbing mortgage rates challenge President Trump's efforts to secure a Republican majority.", "summary": "US monthly inflation increased by 0.4% in August, maintaining an annual rate of 3.4%, while core inflation, excluding energy and food, dipped slightly to 2.4%. High gasoline prices and rising mortgage rates are complicating President Trump's midterm election strategy, as economic concerns weigh heavily on voters. The persistent inflation, partly attributed to the Iran war's impact on energy costs, undermines Trump's appeal to save the Republican majority.", "analysis": null, "time": "5:04 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/09/12/multimedia/12DC-TRUMP-ECON-1-zgpl/12DC-TRUMP-ECON-1-zgpl-superJumbo.jpg", "link": "https://www.nytimes.com/2026/09/12/us/politics/trump-inflation-midterms.html"}, {"id": "f4", "lead": false, "kicker": "EUROPE", "headline": "Sweden's Election Nears Close Finish, Far Right Government Possible", "sub": "Sweden's upcoming election is too close to call, with polls showing a mere 0.3-point gap between left and right blocs, raising concerns that the far right could enter government.", "summary": "Sweden is on the verge of an extremely close election, with the latest polls indicating only a 0.3-point difference between the left and right political blocs. This tight race has sparked significant concern that the far-right party could gain a foothold in government, potentially jeopardizing Sweden's long-standing reputation as a global champion of human rights.", "analysis": null, "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/298bc90caaeb6b36a43d571cfccee6292dcaa560/662_0_5000_4000/500.jpg", "link": "https://www.theguardian.com/world/2026/sep/12/sweden-extremely-close-election-could-see-far-right-enter-government"}, {"id": "f5", "lead": false, "kicker": "UKRAINE", "headline": "Russian Developers Used AI for 'Kamikaze' Drone Software, Anthropic Reports", "sub": "Anthropic reveals Russian developers leveraged AI to create software for 'kamikaze' attack drones and used AI in cyberattacks against Ukrainian government, military, and diplomatic targets.", "summary": "Russian developers have utilized artificial intelligence to build software for 'kamikaze' attack drones, according to a report by AI safety company Anthropic. The report also detailed instances where hackers employed AI in cyberattacks targeting various sectors of the Ukrainian government, military, and diplomatic infrastructure. This development highlights the increasing role of AI in modern warfare and cyber espionage.", "analysis": null, "time": "2:12 AM", "tag": "WAR", "sensitivity": true, "image": null, "link": "https://www.theguardian.com/world/2026/sep/12/ukraine-war-briefing-russian-developers-used-ai-to-build-kamikaze-attack-drone-software-anthropic-says"}]}, {"id": "toronto", "label": "Toronto", "stories": [{"id": "t1", "lead": true, "kicker": "CIVIC INFRASTRUCTURE", "headline": "Aging Trees and Derailments: Toronto Grapples with Infrastructure Challenges", "sub": "Toronto residents express concern over the city's aging tree canopy after a storm caused significant damage, while a Metrolinx report details maintenance failures leading to a GO train derailment.", "summary": "Toronto is facing mounting infrastructure challenges, highlighted by resident concerns over the city's aging tree canopy after a recent storm caused extensive damage, including a tree crushing a car. Simultaneously, a Metrolinx report has pulled back the curtain on the GO train derailment outside Union Station, attributing the chaos to poor track conditions stemming from visual inspection and maintenance issues. These incidents underscore the urgent need for investment and improved oversight in maintaining critical urban and transit infrastructure.", "analysis": "These incidents reveal a systemic issue of deferred maintenance across Toronto's infrastructure, from natural assets like trees to vital transit systems. Failure to address these underlying problems could lead to increased public safety risks, service disruptions, and higher long-term costs for the city and its residents.", "time": "7:00 AM", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/6/f4/6f4bc7a5-8133-511b-81b6-25aade8ae686/6aa46362180fc.image.jpg?resize=300%2C225", "link": "https://www.thestar.com/news/gta/as-toronto-cleans-up-tree-damage-from-storm-residents-eye-aging-canopy-nervously/article_c4bdb436-5256-4fd0-97d0-aad70f725091.html"}, {"id": "t2", "lead": false, "kicker": "CITY POLITICS", "headline": "Olivia Chow Proposes Weekly TTC Fare Cap in Re-election Bid", "sub": "Mayor Olivia Chow is campaigning on a promise to implement a 10-ride weekly TTC fare cap if re-elected, sparking debate among rivals about broader transit issues.", "summary": "Mayor Olivia Chow has announced a proposal for a 10-ride weekly TTC fare cap as part of her re-election campaign, alongside a vow to freeze fares again. This initiative aims to make public transit more affordable for Toronto residents. However, her rivals argue that the proposal overlooks other critical issues facing the city's transit system, such as service reliability and expansion.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/6/99/699af111-f43d-5165-86fb-bbf5540af76c/6aa44d1e61f64.image.jpg?resize=300%2C225", "link": "https://www.thestar.com/news/gta/olivia-chow-proposes-new-weekly-ttc-fare-cap-vows-to-freeze-fares-again-in-re-election-bid/article_2aa73e50-8afc-4770-b2e4-b3f503740968.html"}, {"id": "t3", "lead": false, "kicker": "PUBLIC SAFETY", "headline": "TTC Vehicle Stolen, Leading Police on Chase to Etobicoke", "sub": "A TTC pickup truck was stolen near Queen's Park, resulting in a police chase that concluded with the vehicle being stopped in an Etobicoke neighborhood.", "summary": "A TTC pickup truck was stolen near Queen's Park, prompting a police chase that ended in an Etobicoke neighborhood. A homeowner witnessed the police stopping the vehicle, noting that officers quickly brought the situation under control. The incident highlights concerns about vehicle theft and public safety in the city.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/e/c0/ec0b9653-664c-5e25-9a79-23d4c1bad808/6aa43c7bf1252.image.jpg?resize=300%2C225", "link": "https://www.thestar.com/news/gta/ttc-vehicle-stolen-near-queen-s-park-leading-police-on-chase-to-etobicoke/article_e4a4cb50-3737-43eb-a1fc-627890eb0f0a.html"}, {"id": "t4", "lead": false, "kicker": "LOCAL ECONOMY", "headline": "Trump Tariffs Threaten 250,000 Toronto Jobs, U of T Tool Reveals", "sub": "An updated University of Toronto analysis indicates that President Trump's new tariffs could jeopardize nearly a quarter-million jobs in Toronto.", "summary": "An updated tool from the University of Toronto has revealed that President Trump's recently implemented tariffs pose a significant threat to Toronto's economy. The analysis suggests that these tariffs have the potential to impact almost 250,000 jobs across the city. This finding raises concerns about the economic stability and employment prospects for a substantial portion of Toronto's workforce.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://bloximages.chicago2.vip.townnews.com/thestar.com/content/tncms/assets/v3/editorial/f/8e/f8ef64e3-1500-506f-9a34-8039594aa5f2/6aa2c505b47f1.image.jpg?resize=300%2C225", "link": "https://www.thestar.com/news/gta/why-trump-s-new-tariffs-pose-a-significant-threat-to-250-000-toronto-jobs/article_51a6f91a-2080-46c0-9273-a1b53673a577.html"}]}, {"id": "world", "label": "World", "stories": [{"id": "w1", "lead": true, "kicker": "VENEZUELA", "headline": "Delcy Rodríguez: From Socialist Student to Trump Proxy, Venezuela's Interim President Rises", "sub": "Venezuela's interim President Delcy Rodríguez, a figure described in starkly different ways by those who know her, is expected to maintain her grip on power.", "summary": "Delcy Rodríguez, Venezuela's interim President, has completed a 25-year ascent from socialist student activist to a figure now seen by some as a proxy for President Trump. Those who have encountered Rodríguez describe her in vastly different terms, reflecting her complex political journey. Despite varying perceptions, there is a broad consensus that she is likely to remain in power, solidifying her influence in Venezuelan politics.", "analysis": "Rodríguez's political trajectory highlights the shifting alliances and ideological complexities within global politics, particularly how figures once aligned with socialist movements can adapt to new geopolitical realities. Her continued power suggests a consolidation of a specific political direction for Venezuela, with potential implications for regional stability and international relations.", "time": "8:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/98c31e8c1ed327f0971b9c269946ae73a7a8714b/289_0_4160_3328/500.jpg", "link": "https://www.theguardian.com/world/2026/sep/12/venezuela-president-delcy-rodriguez-trump-rise-to-power"}, {"id": "w2", "lead": false, "kicker": "GERMANY", "headline": "Friedrich Merz's Leadership Questioned Amid Far-Right Concerns in Germany", "sub": "Many fear Chancellor Friedrich Merz is the wrong leader for Germany as the country's defenses against the rising far right appear to be crumbling.", "summary": "Chancellor Friedrich Merz is facing growing scrutiny and concern that he may be ill-suited to lead Germany at a critical juncture. Critics fear that the country's traditional defenses against the far right are weakening, and Merz's leadership is being questioned as the far-right Alternative for Germany (AfD) party gains traction. This situation raises significant concerns about the future political landscape of Germany.", "analysis": null, "time": "4:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/77c897b509cf0697ded118227ba6c384383862e2/577_177_4910_3928/500.jpg", "link": "https://www.theguardian.com/world/2026/sep/12/friedrich-merz-far-right-firewall-afd-germany-future"}, {"id": "w3", "lead": false, "kicker": "UK", "headline": "Military Aircraft Blamed for UK Air Traffic Control Outage", "sub": "A report indicates that a 'spurious' flight data entry from a military aircraft caused the UK's recent air traffic control meltdown, grounding thousands of flights.", "summary": "A recent report suggests that a 'spurious' flight data entry originating from a military aircraft was responsible for the widespread meltdown in UK air traffic control. This incident led to the grounding of thousands of flights, causing significant disruption for travelers across the country. The findings highlight potential vulnerabilities in air traffic management systems.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/892fd7e4ecd0577b1cbbeeadcb3bc5d32a9a1c15/553_360_3142_2513/500.jpg", "link": "https://www.theguardian.com/world/2026/sep/12/military-aircraft-reportedly-blamed-for-uk-air-traffic-control-outage"}, {"id": "w4", "lead": false, "kicker": "AFRICA", "headline": "Music Stars Drawn into South Africa's Immigration Controversy", "sub": "Rising anti-immigrant sentiment and violence in South Africa are causing international fans to boycott South African performers.", "summary": "Music stars are increasingly being drawn into South Africa's escalating immigration controversy, as anti-immigrant sentiment and vigilante violence fuel outrage across the continent. This has led to some international fans rejecting South African performers, impacting their global reach and highlighting the cultural ramifications of the country's social tensions. The boycotts underscore a growing continental divide over immigration policies.", "analysis": null, "time": "5:02 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/09/13/multimedia/13int-safrica-concert-boycott-vkpj/13int-safrica-concert-boycott-vkpj-superJumbo.jpg", "link": "https://www.nytimes.com/2026/09/12/world/africa/tyla-south-africa-concert-nigeria-immigration.html"}]}, {"id": "sports", "label": "Sports", "stories": []}, {"id": "business", "label": "Business", "stories": [{"id": "b1", "lead": true, "kicker": "UK ECONOMY", "headline": "UK Watchdog Warns of Higher Bills and Stalled Growth if Grid Upgrade Delays Persist", "sub": "The National Audit Office urges ministers to accelerate the £70bn 'great grid upgrade,' warning that delays will lead to higher electricity bills and hinder economic growth.", "summary": "The National Audit Office (NAO) has issued a stark warning that delays in the UK's £70 billion 'great grid upgrade' program will result in higher electricity bills for consumers and impede economic growth. The watchdog called for greater transparency and urgency from ministers, emphasizing that the modernization project is currently over budget and behind schedule. Failure to implement the necessary upgrades quickly could exacerbate the ongoing energy crisis and stifle the nation's economic recovery.", "analysis": "The NAO's warning highlights a critical bottleneck in the UK's economic future, where infrastructure investment is essential for both energy security and broader growth. Delays not only impact household finances but also signal a potential failure to adapt to future energy demands and climate goals, with long-term consequences for industrial competitiveness.", "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/ec84aa3de6a6a973af498257a475d74497620129/65_0_3358_2687/500.jpg", "link": "https://www.theguardian.com/business/2026/sep/11/speed-up-electricity-grid-upgrade-or-else-face-higher-bills-warns-uk-watchdog"}, {"id": "b2", "lead": false, "kicker": "RETAIL", "headline": "Woolworths Accused of Raising Prices on 'Family Staples' During 'Price Freeze'", "sub": "Exclusive analysis reveals Australian supermarket giant Woolworths increased prices on at least four staple items during its three-month 'Price Freeze' promotion.", "summary": "Exclusive analysis has revealed that Australian supermarket giant Woolworths allegedly increased prices on at least four 'family staples,' including chicken fillets, potatoes, and donuts, during its three-month 'Price Freeze' promotion. This finding has drawn criticism and raises questions about the transparency and effectiveness of such consumer-focused initiatives. The report highlights potential discrepancies between marketing claims and actual pricing practices.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/63932393582e9fa2eb8092b573564d805496d86e/946_158_2459_1968/500.jpg", "link": "https://www.theguardian.com/business/2026/sep/11/woolworths-hike-family-staples-during-price-freeze-promotion"}, {"id": "b3", "lead": false, "kicker": "INSURANCE", "headline": "UK Insurers Face Surge in Subsidence Claims After Record Hot Summers", "sub": "UK homeowners report severe structural damage, including cracks in walls, leading to a surge in subsidence claims for insurers following two consecutive record-hot summers.", "summary": "UK insurers are grappling with a significant surge in subsidence claims, as homeowners report severe structural damage to their properties, including cracks opening up in walls. This increase follows two consecutive record-hot summers, which have stressed foundations and exacerbated ground movement. The phenomenon is posing a substantial challenge for the insurance industry, leading to higher payouts and potential premium increases.", "analysis": null, "time": "6:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/0c6db919e1c68f6cdd8e3675dbfc5e156c52ba2f/0_243_1816_1452/500.jpg", "link": "https://www.theguardian.com/business/2026/sep/12/subsidence-uk-insurers-double-surge-claims-hot-summers"}, {"id": "b4", "lead": false, "kicker": "CORPORATE FINANCE", "headline": "Start-Ups Face Billion-Dollar Bills for Employee Paydays Post-IPO", "sub": "A common compensation strategy at start-ups, which keeps expenses low pre-IPO, can lead to billions in catch-up expenses once companies go public.", "summary": "Start-ups employing a compensation strategy that defers significant employee payouts until after an initial public offering (IPO) are now facing billions of dollars in catch-up expenses. This 'double-trigger' approach, while keeping pre-IPO costs low, creates a substantial financial burden once the company goes public. The strategy can lead to unexpected hits to profitability and investor confidence post-IPO.", "analysis": null, "time": "8:00 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/09/12/multimedia/12DB-EMPLOYEE-STOCK-gpmv/12DB-EMPLOYEE-STOCK-gpmv-superJumbo.jpg", "link": "https://www.nytimes.com/2026/09/12/business/dealbook/double-trigger-rsus.html"}]}, {"id": "opinion", "label": "Opinion", "stories": [{"id": "o1", "lead": true, "kicker": "AI ETHICS", "headline": "Humanity Cannot Outsource Its Survival to AI, Editorial Argues", "sub": "An editorial warns that keeping humans in charge of AI is meaningless if supercomputers dictate the evidence, choices, and timeframes for human decisions.", "summary": "An editorial asserts that humanity cannot outsource its survival to artificial intelligence, arguing that the concept of human control becomes moot if supercomputers are allowed to determine the evidence, available choices, and decision-making timelines. The piece emphasizes that true control requires humans to retain fundamental autonomy over the inputs and context of critical decisions, not just the final approval. It warns against the subtle erosion of human agency as AI systems become more sophisticated and integrated into decision-making processes.", "analysis": "This editorial highlights the critical philosophical and practical challenge of AI governance: how to harness its power without ceding fundamental control over our future. It underscores the need for proactive ethical frameworks and regulatory measures to ensure AI remains a tool, not a master, in shaping societal outcomes.", "time": "Yesterday", "tag": "EDITORIAL", "sensitivity": false, "image": "https://media.guim.co.uk/992e3360e6e2256276022eaf1b117bf684d0b52a/0_0_1509_1207/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/sep/11/the-guardian-view-on-controlling-ai-humanity-cannot-outsource-its-survival"}, {"id": "o2", "lead": false, "kicker": "US POLITICS", "headline": "Trump's $5,000 Election Promise Reveals Insecurity, Columnist Argues", "sub": "A New York Times columnist suggests President Trump's offer of $5,000 to voters if Republicans retain Congress is a sign of his underlying fear and desperation.", "summary": "A New York Times columnist argues that President Trump's recent offer of $5,000 to Americans if Republicans retain control of Congress is a clear indicator of his insecurity and fear. The column suggests that this election promise, framed by some as an 'enticement' rather than a bribe, reveals a desperate attempt to secure votes. This move, the columnist contends, shows that Trump's political act is growing old and less effective.", "analysis": null, "time": "7:00 AM", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/09/12/arts/12opinions-roundtable-cover-image/12opinions-roundtable-cover-image-superJumbo.png", "link": "https://www.nytimes.com/2026/09/12/opinion/trump-insecure-5000-payments-midterms.html"}, {"id": "o3", "lead": false, "kicker": "FOREIGN POLICY", "headline": "Miliband Doctrine: UK's Israeli Settlement Boycott Heralds Ethical Foreign Policy", "sub": "A former Observer international editor praises Britain's bold move to boycott Israeli settlements, suggesting it marks a return to an 'ethical dimension' in UK foreign policy.", "summary": "Steve Bloomfield, former Observer international editor, commends Britain's recent decision to boycott Israeli settlements, labeling it the 'Miliband doctrine.' He argues that this bold move signifies a welcome return to an 'ethical dimension' in UK foreign policy, which he believes is beneficial for global affairs. The boycott suggests a more principled approach to international relations, departing from previous stances.", "analysis": null, "time": "5:00 AM", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/3bbeb2f7ecd8cbf67eebfdb2aa7db76274fc192c/1_0_4999_4000/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/sep/12/miliband-doctrine-israeli-settlement-boycott-uk-foreign-policy"}, {"id": "o4", "lead": false, "kicker": "US CONSTITUTION", "headline": "War on Terror Weakened First Amendment, Consequences Now Felt, Columnist Argues", "sub": "Jameel Jaffer argues that the 'war on terror' eroded First Amendment rights, with the Supreme Court failing to protect them, leading to current societal consequences.", "summary": "Jameel Jaffer contends that the 'war on terror' significantly weakened First Amendment rights over the past quarter-century, with the US Supreme Court repeatedly failing to uphold these protections. He argues that society is now suffering the consequences of this erosion of civil liberties. The piece suggests that the legal and political responses to terrorism created precedents that undermined fundamental freedoms, impacting the current state of American democracy.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://media.guim.co.uk/3e4b71d0e577a31a6b6cd0db98b5218b0d844f41/683_0_6827_5464/500.jpg", "link": "https://www.theguardian.com/commentisfree/2026/sep/11/9-11-war-on-terror-first-amendment"}]}], "following": [{"id": "follow-1", "lead": false, "kicker": null, "headline": "UK fact of the day", "sub": null, "summary": "Tyler Cowen reports that the UK economy grew by 0.4 percent in July, an unexpected boost attributed to the global AI boom. This positive economic news comes as Prime Minister Andy Burnham prepares for a challenging first Budget next month. The figure from the Office for National Statistics surpassed expectations.", "analysis": null, "time": "7:24 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://marginalrevolution.com/marginalrevolution/2026/09/uk-fact-of-the-day-8.html?utm_source=rss&utm_medium=rss&utm_campaign=uk-fact-of-the-day-8", "author": "Tyler Cowen", "publication": "Marginal Revolution", "paywalled": null, "voice_ids": ["tyler-cowen"], "canonical_key": "url:https://marginalrevolution.com/marginalrevolution/2026/09/uk-fact-of-the-day-8.html", "following": true}, {"id": "follow-2", "lead": false, "kicker": null, "headline": "Labor reallocation during the Industrial Revolution", "sub": null, "summary": "Tyler Cowen discusses new research on labor reallocation during Britain's Second Industrial Revolution, using 170 million census observations. The study focuses on English bootmaking, revealing that 153,000 artisanal jobs disappeared due to mechanization, while 140,000 new jobs were created. This data sheds light on how workers adapted to technological changes.", "analysis": null, "time": "3:28 AM", "tag": null, "sensitivity": false, "image": null, "link": "https://marginalrevolution.com/marginalrevolution/2026/09/labor-reallocation-during-the-industrial-revolution.html?utm_source=rss&utm_medium=rss&utm_campaign=labor-reallocation-during-the-industrial-revolution", "author": "Tyler Cowen", "publication": "Marginal Revolution", "paywalled": null, "voice_ids": ["tyler-cowen"], "canonical_key": "url:https://marginalrevolution.com/marginalrevolution/2026/09/labor-reallocation-during-the-industrial-revolution.html", "following": true}, {"id": "follow-3", "lead": false, "kicker": null, "headline": "The excess pessimism of early nuclear bomb designers", "sub": null, "summary": "Tyler Cowen explores the 'excess pessimism' of early nuclear bomb designers, noting their accurate predictions about the arms race and weapon vulnerability. While they foresaw the Soviet bomb and massive arsenals, they erred in assuming that the destructive power of these weapons would inherently prevent their use. This perspective highlights a miscalculation in human behavior despite technological foresight.", "analysis": null, "time": "12:25 AM", "tag": null, "sensitivity": true, "image": null, "link": "https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html?utm_source=rss&utm_medium=rss&utm_campaign=the-excess-pessimism-of-early-nuclear-bomb-designers", "author": "Tyler Cowen", "publication": "Marginal Revolution", "paywalled": null, "voice_ids": ["tyler-cowen"], "canonical_key": "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html", "following": true}, {"id": "follow-4", "lead": false, "kicker": null, "headline": "Was Francis Fukuyama Right All Along?", "sub": "The political scientist Francis Fukuyama looks back on his 1992 book, “The End of History and the Last Man,” and what it has predicted about the state of liberalism today.", "summary": "Ezra Klein and Jack McCordick present an interview with political scientist Francis Fukuyama, reflecting on his influential 1992 book, 'The End of History and the Last Man.' The discussion revisits Fukuyama's predictions regarding the trajectory of liberalism and its contemporary state. This podcast explores whether his theories have accurately foretold current global political developments.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": "https://static01.nyt.com/images/2026/09/11/opinion/11eks-fukuyama-image-01/11eks-fukuyama-image-01-superJumbo.jpg", "link": "https://www.nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html", "author": "Ezra Klein, Jack McCordick", "publication": "The New York Times", "paywalled": null, "voice_ids": ["ezra-klein"], "canonical_key": "url:https://nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html", "following": true}, {"id": "follow-5", "lead": false, "kicker": null, "headline": "The Ezra Klein Show: The A.I. Revolt Is Here", "sub": "The A.I. giants weren’t prepared for this.", "summary": "Ezra Klein and Rollin Hu discuss 'The A.I. Revolt Is Here,' suggesting that major artificial intelligence companies were unprepared for recent developments. The podcast likely delves into unexpected challenges or shifts within the AI landscape. This indicates a significant turning point in the evolution and impact of AI technologies.", "analysis": null, "time": "Yesterday", "tag": null, "sensitivity": false, "image": null, "link": "https://www.nytimes.com/2026/09/11/podcasts/hardfork-ezra-klein-jasmine-sun.html", "author": "Ezra Klein, Rollin Hu", "publication": "The New York Times", "paywalled": null, "voice_ids": ["ezra-klein"], "canonical_key": "url:https://nytimes.com/2026/09/11/podcasts/hardfork-ezra-klein-jasmine-sun.html", "following": true}, {"id": "follow-6", "lead": false, "kicker": null, "headline": "The populist right is rising around the world. Why not in Canada?", "sub": null, "summary": "Andrew Coyne's opinion piece questions why the populist right, which is gaining traction globally, has not seen a similar rise in Canada. He explores potential factors unique to the Canadian political landscape that might explain this divergence. The article prompts reflection on comparative political trends and national specificities.", "analysis": null, "time": "Sep 10", "tag": null, "sensitivity": false, "image": null, "link": "https://www.theglobeandmail.com/opinion/article-the-populist-right-is-rising-around-the-world-why-not-in-canada/", "author": "Andrew Coyne", "publication": "The Globe and Mail", "paywalled": null, "voice_ids": ["andrew-coyne"], "canonical_key": "url:https://theglobeandmail.com/opinion/article-the-populist-right-is-rising-around-the-world-why-not-in-canada", "following": true}], "sports": {"version": 1, "toronto": [{"snapshot": {"team": {"key": "leafs", "name": "Toronto Maple Leafs", "league": "NHL", "abbreviation": "TOR"}, "phase": "preseason", "available": true, "error": null, "source": "NHL", "fetched_at": "2026-09-12T12:51:35.341787Z", "last_game": null, "record": null, "standing": null, "next_game": {"id": "2026010006", "start_time_utc": "2026-09-19T23:00:00Z", "start_time_toronto": "2026-09-19T19:00:00-04:00", "opponent": "Montréal Canadiens", "opponent_abbreviation": "MTL", "home_away": "home", "status": "scheduled", "phase": "preseason", "team_score": null, "opponent_score": null, "result": null}}, "headline": null, "mark": {"light": "https://assets.nhle.com/logos/nhl/svg/TOR_light.svg", "fallback": "ML", "dark": "https://assets.nhle.com/logos/nhl/svg/TOR_dark.svg"}}, {"snapshot": {"team": {"key": "raptors", "name": "Toronto Raptors", "league": "NBA", "abbreviation": "TOR"}, "phase": "preseason", "available": true, "error": null, "source": "ESPN", "fetched_at": "2026-09-12T12:51:35.341787Z", "last_game": null, "record": null, "standing": null, "next_game": {"id": "401902644", "start_time_utc": "2026-10-03T23:00:00Z", "start_time_toronto": "2026-10-03T19:00:00-04:00", "opponent": "Miami Heat", "opponent_abbreviation": "MIA", "home_away": "home", "status": "scheduled", "phase": "preseason", "team_score": null, "opponent_score": null, "result": null}}, "headline": null, "mark": {"light": "https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg", "fallback": "R"}}, {"snapshot": {"team": {"key": "blue-jays", "name": "Toronto Blue Jays", "league": "MLB", "abbreviation": "TOR"}, "phase": "regular", "available": true, "error": null, "source": "MLB Stats API", "fetched_at": "2026-09-12T12:51:35.341787Z", "last_game": {"id": "822767", "start_time_utc": "2026-09-11T23:07:00Z", "start_time_toronto": "2026-09-11T19:07:00-04:00", "opponent": "Baltimore Orioles", "opponent_abbreviation": "BAL", "home_away": "home", "status": "final", "phase": "regular", "team_score": 4, "opponent_score": 7, "result": "L"}, "record": {"wins": 73, "losses": 75, "overtime_losses": null, "display": "73-75"}, "standing": {"label": "4th AL East", "rank": 4, "scope": "AL East", "games_back": "15.5"}, "next_game": {"id": "822768", "start_time_utc": "2026-09-12T19:07:00Z", "start_time_toronto": "2026-09-12T15:07:00-04:00", "opponent": "Baltimore Orioles", "opponent_abbreviation": "BAL", "home_away": "home", "status": "scheduled", "phase": "regular", "team_score": null, "opponent_score": null, "result": null}}, "headline": null, "mark": {"light": "https://www.mlbstatic.com/team-logos/141.svg", "fallback": "BJ"}}], "major_events": {"event_mode": false, "max_items": 6, "events": [{"key": "champions-league", "label": "UEFA Champions League", "priority": 80, "event_mode": false, "available": true, "error": null, "source": "ESPN", "fetched_at": "2026-09-12T12:51:35.341659Z", "matches": [], "standings": {"label": "League Phase", "rows": [{"position": 1, "team": "Paris Saint-Germain", "played": 1, "points": 3, "goal_difference": 5, "canada": false, "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"}, {"position": 2, "team": "Bayern Munich", "played": 1, "points": 3, "goal_difference": 5, "canada": false, "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png"}, {"position": 3, "team": "Barcelona", "played": 1, "points": 3, "goal_difference": 4, "canada": false, "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png"}, {"position": 8, "team": "Manchester City", "played": 1, "points": 3, "goal_difference": 2, "canada": false, "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png"}, {"position": 9, "team": "Aston Villa", "played": 1, "points": 3, "goal_difference": 1, "canada": false, "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png"}]}, "highlights": []}]}, "major_headlines": []}}</script>
 
   <script>
     (function () {
@@ -714,6 +1316,387 @@
         navigator.serviceWorker.register('sw.js');
       });
     }
+  </script>
+  <script>
+(function () {
+  var editionNode = document.getElementById('edition');
+  if (!editionNode) return;
+
+  var edition;
+  try { edition = JSON.parse(editionNode.textContent); } catch (e) { return; }
+  var sports = edition.sports;
+  if (!sports) return;
+
+  var TEAM_WORDMARK = {
+    'leafs': 'LEAFS',
+    'raptors': 'RAPTORS',
+    'blue-jays': 'BLUE JAYS'
+  };
+  var TRUSTED_ASSET_HOSTS = {
+    'assets.nhle.com': true,
+    'cdn.nba.com': true,
+    'www.mlbstatic.com': true,
+    'a.espncdn.com': true,
+    'secure.espncdn.com': true
+  };
+  var MARK_TIMEOUT_MS = 3500;
+
+  function esc(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function safeUrl(value) {
+    try {
+      var url = new URL(String(value || ''), window.location.href);
+      if (url.protocol === 'http:' || url.protocol === 'https:') return url.href;
+    } catch (e) {}
+    return '';
+  }
+
+  function safeAssetUrl(value) {
+    try {
+      var url = new URL(String(value || ''));
+      if (url.protocol === 'https:' && TRUSTED_ASSET_HOSTS[url.hostname]) return url.href;
+    } catch (e) {}
+    return '';
+  }
+
+  function words(value) {
+    return String(value || '').replace(/[-_]+/g, ' ').replace(/\b\w/g, function (c) {
+      return c.toUpperCase();
+    });
+  }
+
+  function torontoWhen(iso) {
+    if (!iso) return '';
+    var value = new Date(iso);
+    if (isNaN(value.getTime())) return '';
+    var date = value.toLocaleDateString('en-CA', {
+      timeZone: 'America/Toronto', weekday: 'short', month: 'short', day: 'numeric'
+    });
+    var time = value.toLocaleTimeString('en-CA', {
+      timeZone: 'America/Toronto', hour: 'numeric', minute: '2-digit'
+    });
+    return date + ' · ' + time;
+  }
+
+  function gamePlace(game) {
+    if (!game) return '';
+    return game.home_away === 'home' ? 'vs' : '@';
+  }
+
+  function gameScore(game) {
+    if (!game || game.team_score == null || game.opponent_score == null) return '';
+    return esc(game.team_score) + '–' + esc(game.opponent_score);
+  }
+
+  function standingText(standing) {
+    if (!standing) return '';
+    if (standing.label) return standing.label;
+    var bits = [];
+    if (standing.rank != null) bits.push('#' + standing.rank);
+    if (standing.scope) bits.push(standing.scope);
+    if (standing.games_back) bits.push(standing.games_back + ' GB');
+    return bits.join(' · ');
+  }
+
+  function sectionHeadHtml(kicker, title, deck, id) {
+    return '<div class="desk-head sports-desk-head">' +
+      '<div class="sports-section-kicker">' + esc(kicker) + '</div>' +
+      '<h2 class="desk-title" id="' + esc(id) + '">' + esc(title) + '</h2>' +
+      '<div class="desk-dek">' + esc(deck) + '</div></div>';
+  }
+
+  function teamMarkHtml(mark) {
+    if (!mark) return '';
+    var light = safeAssetUrl(mark.light);
+    var dark = safeAssetUrl(mark.dark);
+    if (!light) return '';
+    var image = '<img src="' + esc(light) + '" alt="" aria-hidden="true" width="48" height="48" decoding="async" referrerpolicy="no-referrer">';
+    if (dark) {
+      image = '<picture><source media="(prefers-color-scheme: dark)" srcset="' + esc(dark) + '">' + image + '</picture>';
+    }
+    return '<span class="sports-mark sports-mark-loading" data-sports-mark aria-hidden="true">' + image +
+      '<span class="sports-mark-fallback">' + esc(mark.fallback || '') + '</span></span>';
+  }
+
+  function crestHtml(url, tableMode) {
+    var href = safeAssetUrl(url);
+    if (!href) return '';
+    var size = tableMode ? 24 : 30;
+    return '<span class="sports-club-crest sports-mark-loading" data-sports-mark aria-hidden="true">' +
+      '<img src="' + esc(href) + '" alt="" width="' + size + '" height="' + size + '" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer">' +
+      '</span>';
+  }
+
+  function settleMarks(root) {
+    Array.prototype.forEach.call(root.querySelectorAll('[data-sports-mark]'), function (mark) {
+      if (mark.getAttribute('data-wired') === 'true') return;
+      mark.setAttribute('data-wired', 'true');
+      var img = mark.querySelector('img');
+      if (!img) { mark.classList.add('sports-mark-failed'); return; }
+      var timer;
+      function loaded() {
+        window.clearTimeout(timer);
+        mark.classList.remove('sports-mark-loading', 'sports-mark-failed');
+        mark.classList.add('sports-mark-loaded');
+      }
+      function failed() {
+        window.clearTimeout(timer);
+        mark.classList.remove('sports-mark-loading', 'sports-mark-loaded');
+        mark.classList.add('sports-mark-failed');
+      }
+      img.addEventListener('load', loaded, { once: true });
+      img.addEventListener('error', failed, { once: true });
+      timer = window.setTimeout(failed, MARK_TIMEOUT_MS);
+      if (img.complete) {
+        if (img.naturalWidth > 0) loaded(); else failed();
+      }
+    });
+  }
+
+  function factHtml(label, value, extraClass) {
+    if (!value) return '';
+    return '<div class="sports-fact"><span class="sports-fact-label">' + esc(label) + '</span>' +
+      '<span class="sports-fact-value' + (extraClass ? ' ' + extraClass : '') + '">' +
+      esc(value) + '</span></div>';
+  }
+
+  function teamHeadlineHtml(headline) {
+    if (!headline || !headline.headline) return '';
+    var href = safeUrl(headline.url);
+    var meta = [headline.source, words(headline.significance)].filter(Boolean).join(' · ');
+    var inner = '<span class="sports-story-label">Major update</span>' +
+      '<span class="sports-story-title">' + esc(headline.headline) + '</span>' +
+      (headline.description ? '<span class="sports-story-dek">' + esc(headline.description) + '</span>' : '') +
+      (meta ? '<span class="sports-story-meta">' + esc(meta) + '</span>' : '');
+    if (!href) return '<div class="sports-team-story">' + inner + '</div>';
+    return '<a class="sports-team-story" href="' + esc(href) + '" target="_blank" rel="noopener">' + inner + '</a>';
+  }
+
+  function teamRowHtml(row) {
+    var snapshot = (row || {}).snapshot || {};
+    var team = snapshot.team || {};
+    var phase = snapshot.phase || 'offseason';
+    var key = team.key || '';
+    var name = TEAM_WORDMARK[key] || team.name || key;
+    var league = team.league || '';
+    var phaseClass = phase === 'postseason' ? ' postseason' : '';
+    var head = '<div class="sports-team-head"><div class="sports-team-name">' + esc(name) +
+      (league ? '<span class="sports-team-league">' + esc(league) + '</span>' : '') +
+      '</div><div class="sports-phase' + phaseClass + '">' + esc(words(phase)) + '</div></div>';
+
+    var body = '';
+    if (!snapshot.available) {
+      body = '<div class="sports-status-line"><strong>Unavailable</strong> · Score data could not be verified this morning.</div>';
+    } else if (phase === 'offseason') {
+      var offNext = snapshot.next_game;
+      body = '<div class="sports-status-line"><strong>Offseason</strong>' +
+        (offNext ? ' · Next: ' + esc(gamePlace(offNext) + ' ' + offNext.opponent + ' · ' + torontoWhen(offNext.start_time_toronto || offNext.start_time_utc)) : '') +
+        '</div>';
+    } else {
+      var last = snapshot.last_game;
+      if (last) {
+        var resultLabel = last.result || words(last.status || 'Final');
+        var score = gameScore(last);
+        var opponent = gamePlace(last) + ' ' + (last.opponent || 'Opponent');
+        body += '<div class="sports-scoreline"><span class="sports-result">' + esc(resultLabel) + '</span>' +
+          (score ? '<span class="sports-score">' + score + '</span>' : '') +
+          '<span class="sports-opponent">' + esc(opponent) + '</span></div>';
+      }
+
+      var next = snapshot.next_game;
+      var nextText = '';
+      if (next) {
+        var nextStatus = String(next.status || '').toLowerCase();
+        if (nextStatus === 'postponed' || nextStatus === 'cancelled') {
+          nextText = words(nextStatus) + ' · ' + gamePlace(next) + ' ' + next.opponent;
+        } else {
+          nextText = gamePlace(next) + ' ' + next.opponent + ' · ' + torontoWhen(next.start_time_toronto || next.start_time_utc);
+        }
+      }
+      var facts = factHtml('Record', snapshot.record && snapshot.record.display) +
+        factHtml('Standing', standingText(snapshot.standing)) +
+        factHtml('Next', nextText, 'sports-next-time');
+      if (facts) body += '<div class="sports-facts">' + facts + '</div>';
+      if (!last && !facts) body += '<div class="sports-status-line">No current game state is available.</div>';
+    }
+
+    return '<article class="sports-team" data-sports-team="' + esc(key) + '">' + teamMarkHtml(row && row.mark) +
+      '<div class="sports-team-copy">' + head + body + teamHeadlineHtml(row && row.headline) + '</div></article>';
+  }
+
+  function clubHtml(name, logoUrl, tableMode) {
+    var cls = String(name || '').toLowerCase() === 'canada' ? ' sports-canada' : '';
+    return '<span class="sports-club' + cls + '">' + crestHtml(logoUrl, tableMode) + '<span>' + esc(name) + '</span></span>';
+  }
+
+  function matchTeamsHtml(match) {
+    return clubHtml(match.home_team, match.home_logo_url, false) +
+      ' <span class="sports-versus" aria-hidden="true">v</span> ' +
+      clubHtml(match.away_team, match.away_logo_url, false);
+  }
+
+  function eventMatchHtml(match, commonStage) {
+    var status = String(match.status || '').toLowerCase();
+    var final = status === 'final';
+    var score = final && match.home_score != null && match.away_score != null
+      ? esc(match.home_score) + '–' + esc(match.away_score)
+      : torontoWhen(match.start_time_toronto || match.start_time_utc);
+    if (status === 'postponed' || status === 'cancelled') score = words(status);
+    var stage = match.stage && match.stage !== commonStage ? words(match.stage) : '';
+    var meta = [stage, match.detail || ''].filter(Boolean).join(' · ');
+    return '<div class="sports-match"><div class="sports-match-teams">' + matchTeamsHtml(match) + '</div>' +
+      '<div class="sports-match-score">' + esc(score) + '</div>' +
+      (meta ? '<div class="sports-match-meta">' + esc(meta) + '</div>' : '') + '</div>';
+  }
+
+  function commonEventStage(event) {
+    var stages = (event.matches || []).map(function (match) { return match.stage || ''; }).filter(Boolean);
+    if (!stages.length) return '';
+    return stages.every(function (stage) { return stage === stages[0]; }) ? stages[0] : '';
+  }
+
+  function tableHasPositionGap(rows) {
+    for (var i = 1; i < rows.length; i += 1) {
+      if (Number(rows[i].position) > Number(rows[i - 1].position) + 1) return true;
+    }
+    return false;
+  }
+
+  function eventTableHtml(table, eventKey) {
+    if (!table || !(table.rows || []).length) return '';
+    var rowsData = table.rows || [];
+    var isChampionsLeague = eventKey === 'champions-league';
+    var hasGap = tableHasPositionGap(rowsData);
+    var previousPosition = null;
+    var rows = rowsData.map(function (row) {
+      var prefix = '';
+      if (previousPosition != null && Number(row.position) > Number(previousPosition) + 1) {
+        prefix = '<tr class="sports-table-gap" aria-hidden="true"><td colspan="5"><span>Positions ' +
+          esc(Number(previousPosition) + 1) + '–' + esc(Number(row.position) - 1) + ' omitted</span></td></tr>';
+      }
+      var rowClass = row.canada ? ' class="canada"' : '';
+      if (isChampionsLeague && Number(row.position) === 9) rowClass = ' class="sports-qualification-cut' + (row.canada ? ' canada' : '') + '"';
+      previousPosition = row.position;
+      return prefix + '<tr' + rowClass + '><td>' + esc(row.position) + '</td>' +
+        '<td>' + clubHtml(row.team, row.logo_url, true) + '</td><td>' + esc(row.played == null ? '–' : row.played) + '</td>' +
+        '<td>' + esc(row.points == null ? '–' : row.points) + '</td>' +
+        '<td class="sports-gd">' + esc(row.goal_difference == null ? '–' : row.goal_difference) + '</td></tr>';
+    }).join('');
+    var label = table.label || 'Table';
+    if (isChampionsLeague && hasGap) label += ' · leaders + qualification cut';
+    var cutNote = isChampionsLeague && rowsData.some(function (row) { return Number(row.position) === 8; }) && rowsData.some(function (row) { return Number(row.position) === 9; })
+      ? '<div class="sports-table-note"><span>Top 8</span> qualify directly · <span>9–24</span> enter the knockout playoff</div>'
+      : '';
+    return '<div class="sports-table-wrap"><div class="sports-table-label">' + esc(label) + '</div>' +
+      cutNote + '<table class="sports-table"><thead><tr><th>#</th><th>Team</th><th>P</th><th>Pts</th><th class="sports-gd">GD</th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table></div>';
+  }
+
+  function highlightsHtml(items) {
+    if (!(items || []).length) return '';
+    return '<div class="sports-highlights">' + items.map(function (item) {
+      var flags = [];
+      if (item.canada) flags.push('Canada');
+      if (item.world_record) flags.push('Record');
+      if (item.final) flags.push('Final');
+      return '<div class="sports-highlight"><div class="sports-highlight-title">' + esc(item.label) + '</div>' +
+        '<div class="sports-highlight-detail">' + esc(item.detail) +
+        (flags.length ? ' · ' + esc(flags.join(' · ')) : '') + '</div></div>';
+    }).join('') + '</div>';
+  }
+
+  function eventHasContent(event) {
+    if (!event) return false;
+    if (!event.available) return !!event.event_mode;
+    return (event.matches || []).length > 0 ||
+      (event.highlights || []).length > 0 ||
+      !!(event.standings && (event.standings.rows || []).length);
+  }
+
+  function eventHtml(event) {
+    var commonStage = commonEventStage(event);
+    var head = '<div class="sports-event-head"><div class="sports-event-name">' + esc(event.label) + '</div>' +
+      (event.event_mode ? '<div class="sports-event-mode">Event edition</div>' : '') + '</div>' +
+      (event.source ? '<div class="sports-event-source">Source: ' + esc(event.source) + '</div>' : '') +
+      (commonStage ? '<div class="sports-event-stage">' + esc(words(commonStage)) + '</div>' : '');
+    if (!event.available) {
+      return '<article class="sports-event" data-sports-event="' + esc(event.key) + '">' + head +
+        '<div class="sports-event-unavailable">Verified event data is unavailable this morning.</div></article>';
+    }
+    return '<article class="sports-event" data-sports-event="' + esc(event.key) + '">' + head +
+      (event.matches || []).map(function (match) { return eventMatchHtml(match, commonStage); }).join('') +
+      eventTableHtml(event.standings, event.key) + highlightsHtml(event.highlights || []) + '</article>';
+  }
+
+  function majorEventsHtml(payload) {
+    var events = (((payload || {}).major_events || {}).events || []).filter(eventHasContent);
+    if (!events.length) return '';
+    var eventMode = !!((payload || {}).major_events || {}).event_mode;
+    return '<section class="sports-desk sports-events" aria-labelledby="sports-events-title">' +
+      sectionHeadHtml('Global board', 'Major Events', eventMode ? 'Tournament edition · the important state, still bounded' : 'Only competitions with something worth knowing this morning', 'sports-events-title') +
+      events.map(eventHtml).join('') + '</section>';
+  }
+
+  function majorHeadlineHtml(item) {
+    var href = safeUrl(item.url);
+    var eventLabel = item.event_key ? words(item.event_key.replace(/-20\d\d$/, '')) : 'Major sport';
+    var inner = '<span class="sports-story-label">' + esc(eventLabel) + '</span>' +
+      '<span class="sports-story-title">' + esc(item.headline) + '</span>' +
+      (item.description ? '<span class="sports-story-dek">' + esc(item.description) + '</span>' : '') +
+      (item.source ? '<span class="sports-story-meta">' + esc(item.source) + '</span>' : '');
+    if (!href) return '<div class="sports-major-story">' + inner + '</div>';
+    return '<a class="sports-major-story" href="' + esc(href) + '" target="_blank" rel="noopener">' + inner + '</a>';
+  }
+
+  function majorHeadlinesHtml(payload) {
+    var items = (payload || {}).major_headlines || [];
+    if (!items.length) return '';
+    return '<section class="sports-desk sports-headlines" aria-labelledby="sports-headlines-title">' +
+      sectionHeadHtml('The read', 'Major Headlines', 'Exceptional developments only', 'sports-headlines-title') +
+      items.map(majorHeadlineHtml).join('') + '</section>';
+  }
+
+  function sportsHtml(payload) {
+    var toronto = (payload || {}).toronto || [];
+    var torontoHtml = '<section class="sports-desk sports-toronto" aria-labelledby="sports-toronto-title">' +
+      sectionHeadHtml('Home teams', 'Toronto', 'Leafs · Raptors · Blue Jays', 'sports-toronto-title') +
+      toronto.map(teamRowHtml).join('') + '</section>';
+    return torontoHtml + majorEventsHtml(payload) + majorHeadlinesHtml(payload);
+  }
+
+  function warmCrestOrigin() {
+    if (document.querySelector('link[data-sports-preconnect]')) return;
+    var link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = 'https://a.espncdn.com';
+    link.crossOrigin = 'anonymous';
+    link.setAttribute('data-sports-preconnect', 'true');
+    document.head.appendChild(link);
+  }
+
+  function renderIfActive() {
+    var tab = document.querySelector('.tab.active[data-tab="sports"]');
+    var stories = document.getElementById('stories');
+    if (!tab || !stories) return;
+    stories.innerHTML = sportsHtml(sports);
+    stories.setAttribute('data-sports-rendered', 'true');
+    settleMarks(stories);
+  }
+
+  var sportsTab = document.querySelector('[data-tab="sports"]');
+  if (!sportsTab) return;
+  sportsTab.addEventListener('pointerenter', warmCrestOrigin, { once: true });
+  sportsTab.addEventListener('focus', warmCrestOrigin, { once: true });
+  sportsTab.addEventListener('pointerdown', warmCrestOrigin, { once: true });
+  sportsTab.addEventListener('click', function () {
+    window.setTimeout(renderIfActive, 0);
+  });
+  renderIfActive();
+})();
   </script>
 </body>
 </html>
