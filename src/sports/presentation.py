@@ -14,9 +14,10 @@ from src import config
 from .event_news import EventArticle
 from .events import MajorEventsDesk
 from .headlines import QualifiedHeadline
+from .identity import TORONTO_TEAM_MARKS, trusted_asset_url
 from .models import TeamSnapshot
 
-SPORTS_PAYLOAD_VERSION = 1
+SPORTS_PAYLOAD_VERSION = 2
 TEAM_ORDER = ("leafs", "raptors", "blue-jays")
 MAX_MAJOR_HEADLINES = 4
 
@@ -33,6 +34,20 @@ def _event_article_dict(value: EventArticle | Mapping[str, object]) -> dict:
     return dict(value)
 
 
+def _team_mark(key: str) -> dict | None:
+    raw = TORONTO_TEAM_MARKS.get(key)
+    if not raw:
+        return None
+    light = trusted_asset_url(raw.get("light"))
+    dark = trusted_asset_url(raw.get("dark"))
+    if not light:
+        return None
+    mark = {"light": light, "fallback": str(raw.get("fallback") or "")}
+    if dark:
+        mark["dark"] = dark
+    return mark
+
+
 def build_sports_payload(
     team_snapshots: Iterable[TeamSnapshot],
     *,
@@ -40,13 +55,7 @@ def build_sports_payload(
     major_events: MajorEventsDesk | None = None,
     major_headlines: Iterable[EventArticle | Mapping[str, object]] = (),
 ) -> dict:
-    """Build the finite UI payload without duplicating domain state.
-
-    The three Toronto teams are required and always emitted in reader-priority
-    order. A provider outage is represented by an unavailable TeamSnapshot, not
-    by omitting the team. Qualified team headlines stay attached to their team;
-    event/global exceptions live in the separate Major Headlines layer.
-    """
+    """Build the finite UI payload without duplicating domain state."""
     snapshots = list(team_snapshots)
     by_key: dict[str, TeamSnapshot] = {}
     for snapshot in snapshots:
@@ -71,7 +80,11 @@ def build_sports_payload(
 
     toronto = []
     for key in TEAM_ORDER:
-        row = {"snapshot": by_key[key].to_dict(), "headline": None}
+        row = {
+            "snapshot": by_key[key].to_dict(),
+            "headline": None,
+            "mark": _team_mark(key),
+        }
         headline = headline_map.get(key)
         if headline is not None:
             payload = _headline_dict(headline)
@@ -102,13 +115,7 @@ def build_sports_payload(
 
 
 def attach_sports_to_edition(edition: dict, sports_payload: dict) -> dict:
-    """Attach Sports V2 while keeping Sports as a build-owned navigation tab.
-
-    Gemini is not asked to emit Sports. Any unexpected model-produced Sports
-    section is discarded, and a clean empty navigation shell is inserted in
-    canonical section order. The dedicated renderer reads ``edition['sports']``
-    instead of treating scores/standings as ordinary stories.
-    """
+    """Attach Sports V2 while keeping Sports as a build-owned navigation tab."""
     by_id = {
         section.get("id"): section
         for section in edition.get("sections", [])
