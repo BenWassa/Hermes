@@ -39,9 +39,18 @@ def test_perigon_canada_lane_replaces_redundant_markets_without_more_requests():
     queries = canada.perigon_queries(base)
 
     assert len(queries) == len(base)
-    assert [query["label"] for query in queries] == ["world", "business", "canada"]
-    assert queries[-1]["params"]["country"] == ["ca"]
-    assert queries[-1]["coverage_lane"] == canada.CANADA_COVERAGE_LANE
+    assert [query["label"] for query in queries] == ["canada", "world", "business"]
+    assert queries[0]["params"]["country"] == ["ca"]
+    assert queries[0]["coverage_lane"] == canada.CANADA_COVERAGE_LANE
+
+
+def test_perigon_query_shape_never_adds_a_request_when_replaceable_lane_is_absent():
+    base = [
+        {"label": "world", "hint": "world", "params": {}},
+        {"label": "business", "hint": "business", "params": {}},
+    ]
+
+    assert canada.perigon_queries(base) == base
 
 
 def test_cbc_national_feed_is_single_bounded_journalism_source():
