@@ -1,12 +1,13 @@
 """Task 2 (part 1) - Fetch.
 
 Pull raw stories from the Guardian API, the NYT Top Stories API, the Perigon
-News API, and Toronto RSS feeds. Each source is wrapped so a failure (missing
+News API, and bounded RSS feeds. Each source is wrapped so a failure (missing
 key, dead feed, network error) logs a warning and returns an empty list rather
 than crashing the run.
 
-Each returned item is a source-native-ish dict carrying two helper keys the
-normalizer relies on: ``_src`` (guardian|nyt|perigon|rss) and ``_section_hint``.
+Each returned item is a source-native-ish dict carrying helper keys the
+normalizer relies on: ``_src`` (guardian|nyt|perigon|rss), ``_section_hint``
+and, for national Canadian intake, optional ``_coverage_lane``.
 """
 
 from __future__ import annotations
@@ -17,7 +18,7 @@ import os
 import feedparser
 import requests
 
-from . import config
+from . import canada, config
 
 log = logging.getLogger("the-daily.fetch")
 
@@ -91,13 +92,12 @@ def fetch_nyt() -> list[dict]:
 
 
 def fetch_perigon(size: int = 10) -> list[dict]:
-    """Perigon News API across the configured queries.
+    """Perigon News API across the bounded ordinary-news queries.
 
-    Perigon aggregates a much wider outlet set (FT, Reuters, Bloomberg, etc.)
-    than the Guardian/NYT pair, so it deepens the world and business pools.
-    Each configured query is one ``/v1/all`` request; a per-query failure logs a
-    warning and is skipped. Skipped entirely (with a warning) when the key is
-    missing, exactly like the other keyed sources.
+    The legacy mixed US/GB/CA world query is replaced at runtime by one
+    dedicated Canada query, keeping the total Perigon request count unchanged.
+    Guardian and NYT remain the broad world inputs while Perigon guarantees a
+    small national Canadian candidate lane.
     """
     key = os.environ.get("PERIGON_API_KEY")
     if not key:
@@ -105,7 +105,7 @@ def fetch_perigon(size: int = 10) -> list[dict]:
         return []
 
     items: list[dict] = []
-    for query in config.PERIGON_QUERIES:
+    for query in canada.perigon_queries(config.PERIGON_QUERIES):
         try:
             params: dict = {
                 "apiKey": key,
@@ -121,6 +121,8 @@ def fetch_perigon(size: int = 10) -> list[dict]:
             for r in results:
                 r["_src"] = "perigon"
                 r["_section_hint"] = query["hint"]
+                if query.get("coverage_lane"):
+                    r["_coverage_lane"] = query["coverage_lane"]
             items.extend(results)
         except Exception as exc:  # graceful per-query
             log.warning("Perigon query %s failed: %s", query.get("label"), exc)
@@ -130,15 +132,12 @@ def fetch_perigon(size: int = 10) -> list[dict]:
 _RSS_HEADERS = {"User-Agent": "TheDaily/2.0 (+https://github.com/BenWassa/Hermes)"}
 
 
-def fetch_toronto_rss() -> list[dict]:
-    """Toronto local RSS feeds. A dead feed is skipped with a warning.
-
-    The feed bytes are fetched with ``requests`` (with a timeout) and handed to
-    feedparser, because ``feedparser.parse(url)`` has no timeout and can hang on
-    a slow or unreachable host.
-    """
+def _fetch_rss_feeds(
+    feeds: list[dict], *, default_hint: str, default_coverage_lane: str | None = None
+) -> list[dict]:
+    """Fetch a bounded set of RSS feeds with shared timeout/failure behavior."""
     items: list[dict] = []
-    for feed in config.TORONTO_RSS:
+    for feed in feeds:
         try:
             resp = requests.get(feed["url"], headers=_RSS_HEADERS, timeout=_TIMEOUT)
             resp.raise_for_status()
@@ -148,17 +147,40 @@ def fetch_toronto_rss() -> list[dict]:
                 continue
             for entry in parsed.entries:
                 entry["_src"] = "rss"
-                entry["_section_hint"] = "toronto"
+                entry["_section_hint"] = feed.get("hint", default_hint)
                 entry["_source_name"] = feed["name"]
+                lane = feed.get("coverage_lane", default_coverage_lane)
+                if lane:
+                    entry["_coverage_lane"] = lane
             items.extend(parsed.entries)
         except Exception as exc:
             log.warning("RSS feed %s failed: %s", feed["name"], exc)
     return items
 
 
+def fetch_canada_rss() -> list[dict]:
+    """High-signal national Canadian journalism, independent of Toronto-local RSS."""
+    return _fetch_rss_feeds(
+        canada.CANADA_RSS,
+        default_hint="world",
+        default_coverage_lane=canada.CANADA_COVERAGE_LANE,
+    )
+
+
+def fetch_toronto_rss() -> list[dict]:
+    """Toronto local RSS feeds; failures remain local to the affected feed."""
+    return _fetch_rss_feeds(config.TORONTO_RSS, default_hint="toronto")
+
+
 def fetch_all() -> list[dict]:
-    """All sources concatenated into one raw list."""
-    return fetch_guardian() + fetch_nyt() + fetch_perigon() + fetch_toronto_rss()
+    """All ordinary-news sources concatenated into one raw list."""
+    return (
+        fetch_guardian()
+        + fetch_nyt()
+        + fetch_perigon()
+        + fetch_canada_rss()
+        + fetch_toronto_rss()
+    )
 
 
 if __name__ == "__main__":
