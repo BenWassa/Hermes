@@ -37,6 +37,33 @@ Toronto-calendar edition exists they must become no-ops before expensive source
 or Gemini work. Issue #25 owns implementation and production reliability for
 this contract.
 
+## Canadian national coverage
+
+Toronto-local coverage is not a substitute for Canadian national coverage. The
+Daily must reliably surface major federal political, economic, investment and
+institutional developments that materially affect Canada, even when they are
+not narrowly local and even when a busy US/UK/global news cycle would otherwise
+crowd them out before curation.
+
+Canada is an **intake priority**, not a new visible section. National stories
+remain eligible for the existing Front Page, Business, World or Toronto desks
+according to the story itself. A major Canadian development may lead the Front
+Page; a quiet day must not manufacture token Canadian representation.
+
+The source contract is deliberately bounded: one dedicated Canada-national
+aggregator lane plus one high-signal national journalism feed, with provider
+failures isolated from publication. A small deterministic reserve protects
+strong Canada-national candidates inside the existing bounded Gemini input;
+the lane marker itself is not sent to the model and does not increase per-story
+token cost.
+
+Exceptional scheduled national events may be seeded from an authoritative
+public schedule and given temporary recall protection during a bounded monitor
+window. The seed only establishes event identity/date. It never becomes a story
+by itself, never guarantees inclusion, and never replaces independent
+journalistic coverage. The Canada Investment Summit 2026 is the regression case
+for this contract. Issue #57 owns the implementation.
+
 ## Sports
 
 Sports is a personalized Toronto-first morning desk, not a generic sports-news
