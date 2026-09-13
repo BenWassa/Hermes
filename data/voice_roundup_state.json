@@ -1,10 +1,27 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-12T17:47:52Z",
-  "last_reconcile_at": "2026-09-11T18:43:29Z",
+  "updated_at": "2026-09-13T18:18:39Z",
+  "last_reconcile_at": "2026-09-13T18:18:39Z",
   "last_roundup": null,
   "items": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/a-simple-model-of-ai-aided-economic-growth.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/a-simple-model-of-ai-aided-economic-growth.html",
+        "pid:rss:https://marginalrevolution.com/?p=93789",
+        "syn:a-simple-model-of-ai-aided-economic-growth|voice:tyler-cowen|2026-09-13",
+        "fp:marginalrevolution.com|a-simple-model-of-ai-aided-economic-growth|2026-09-13"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-13T18:18:39Z",
+      "published_at": "2026-09-13T05:11:51Z",
+      "title": "A simple model of AI-aided economic growth",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/a-simple-model-of-ai-aided-economic-growth.html?utm_source=rss&utm_medium=rss&utm_campaign=a-simple-model-of-ai-aided-economic-growth",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-13T18:18:39Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/economic-scenarios-for-transformative-ai.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/economic-scenarios-for-transformative-ai.html",
@@ -175,6 +192,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-10T18:38:50Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-578.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-578.html",
+        "pid:rss:https://marginalrevolution.com/?p=93784",
+        "syn:sunday-assorted-links|voice:tyler-cowen|2026-09-13",
+        "fp:marginalrevolution.com|sunday-assorted-links|2026-09-13"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-13T18:18:39Z",
+      "published_at": "2026-09-13T16:36:11Z",
+      "title": "Sunday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-578.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-578",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/sentences-to-ponder-141.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/sentences-to-ponder-141.html",
@@ -241,7 +275,7 @@
       "title": "The mathematicians rebel against AI",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-mathematicians-rebel-against-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=the-mathematicians-rebel-against-ai",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-13T18:18:39Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-569.html": {
       "keys": [
@@ -379,6 +413,22 @@
       "title": "The Beginning of the End of History",
       "url": "https://www.persuasion.community/p/the-beginning-of-the-end-of-history",
       "publication": "Persuasion",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://theatlantic.com/podcasts/2026/09/what-is-the-good-life/688591": {
+      "keys": [
+        "url:https://theatlantic.com/podcasts/2026/09/what-is-the-good-life/688591",
+        "syn:what-is-the-good-life|voice:david-brooks|2026-09-13",
+        "fp:theatlantic.com|what-is-the-good-life|2026-09-13"
+      ],
+      "voice_ids": [
+        "david-brooks"
+      ],
+      "first_seen": "2026-09-13T18:18:39Z",
+      "published_at": "2026-09-13T15:00:00Z",
+      "title": "What Is the Good Life?",
+      "url": "https://www.theatlantic.com/podcasts/2026/09/what-is-the-good-life/688591/?utm_source=feed",
+      "publication": "The Atlantic",
       "first_morning_surfaced_at": null
     },
     "url:https://theglobeandmail.com/opinion/article-its-not-disloyal-to-criticize-the-governments-handling-of-a-trade-war": {
