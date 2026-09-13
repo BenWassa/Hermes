@@ -18,9 +18,9 @@ from collections.abc import Iterable
 
 CANADA_COVERAGE_LANE = "canada-national"
 
-# Keep the Perigon request count flat: this query replaces the old mixed
-# US/GB/CA world query. Guardian + NYT remain the broad world inputs while
-# Perigon now contributes a dedicated Canadian national lane.
+# Keep the Perigon request count flat. The generic markets query overlaps the
+# existing Business/Finance query, so Canada replaces that lane while the broad
+# world query remains intact alongside Guardian + NYT world coverage.
 CANADA_PERIGON_QUERY = {
     "label": "canada",
     "hint": "world",
@@ -83,22 +83,22 @@ _SPACE_RE = re.compile(r"\s+")
 
 
 def perigon_queries(base_queries: Iterable[dict]) -> list[dict]:
-    """Replace the legacy mixed world query with the dedicated Canada query.
+    """Replace the generic markets query with the dedicated Canada query.
 
-    The number of Perigon requests is intentionally unchanged. If the legacy
-    query is ever removed, prepend Canada once rather than silently losing the
+    The number of Perigon requests is intentionally unchanged. If the markets
+    query is ever removed, append Canada once rather than silently losing the
     national lane.
     """
     out: list[dict] = []
     replaced = False
     for query in base_queries:
-        if query.get("label") == "world" and not replaced:
+        if query.get("label") == "markets" and not replaced:
             out.append(dict(CANADA_PERIGON_QUERY))
             replaced = True
         else:
             out.append(query)
     if not replaced:
-        out.insert(0, dict(CANADA_PERIGON_QUERY))
+        out.append(dict(CANADA_PERIGON_QUERY))
     return out
 
 
