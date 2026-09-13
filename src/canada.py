@@ -83,23 +83,20 @@ _SPACE_RE = re.compile(r"\s+")
 
 
 def perigon_queries(base_queries: Iterable[dict]) -> list[dict]:
-    """Replace the generic markets query with the dedicated Canada query.
+    """Replace generic markets with Canada while preserving request count.
 
-    The number of Perigon requests is intentionally unchanged. If the markets
-    query is ever removed, append Canada once rather than silently losing the
-    national lane.
+    Canada runs first so if an article also appears in a generic Business query,
+    the first normalized copy carries the national-lane marker before exact
+    canonical dedupe. Broad world and business coverage remain unchanged.
     """
-    out: list[dict] = []
-    replaced = False
-    for query in base_queries:
-        if query.get("label") == "markets" and not replaced:
-            out.append(dict(CANADA_PERIGON_QUERY))
-            replaced = True
-        else:
-            out.append(query)
-    if not replaced:
-        out.append(dict(CANADA_PERIGON_QUERY))
-    return out
+    base = list(base_queries)
+    without_markets = [query for query in base if query.get("label") != "markets"]
+    if len(without_markets) == len(base):
+        # Current config is expected to contain the replaceable markets lane.
+        # Preserve the configured request budget rather than silently adding a
+        # fourth request if that contract changes later.
+        return base
+    return [dict(CANADA_PERIGON_QUERY), *without_markets]
 
 
 def _date(value: str) -> dt.date:
