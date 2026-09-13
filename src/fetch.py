@@ -94,10 +94,9 @@ def fetch_nyt() -> list[dict]:
 def fetch_perigon(size: int = 10) -> list[dict]:
     """Perigon News API across the bounded ordinary-news queries.
 
-    The legacy mixed US/GB/CA world query is replaced at runtime by one
-    dedicated Canada query, keeping the total Perigon request count unchanged.
-    Guardian and NYT remain the broad world inputs while Perigon guarantees a
-    small national Canadian candidate lane.
+    The generic markets query is replaced at runtime by one dedicated Canada
+    query, keeping the total Perigon request count unchanged. The broad Perigon
+    world and business queries remain intact alongside Guardian and NYT.
     """
     key = os.environ.get("PERIGON_API_KEY")
     if not key:
