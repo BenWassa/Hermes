@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-14T05:28:03Z",
-  "last_reconcile_at": "2026-09-13T18:18:39Z",
+  "updated_at": "2026-09-14T19:55:12Z",
+  "last_reconcile_at": "2026-09-14T19:55:12Z",
   "last_roundup": {
     "period_id": "2026-09-13",
     "cutoff": "2026-09-13T21:00:00Z",
@@ -43,7 +43,7 @@
       "title": "Does AI assistance enhance or erode expertise?",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/does-ai-assistance-enhance-or-erode-expertise.html?utm_source=rss&utm_medium=rss&utm_campaign=does-ai-assistance-enhance-or-erode-expertise",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/economic-scenarios-for-transformative-ai.html": {
       "keys": [
@@ -78,6 +78,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-590.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-590",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/is-it-the-screens-or-education-systems.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/is-it-the-screens-or-education-systems.html",
+        "pid:rss:https://marginalrevolution.com/?p=93805",
+        "syn:is-it-the-screens-or-education-systems|voice:tyler-cowen|2026-09-14",
+        "fp:marginalrevolution.com|is-it-the-screens-or-education-systems|2026-09-14"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-14T19:55:12Z",
+      "published_at": "2026-09-14T07:01:27Z",
+      "title": "Is it the screens? Or education systems?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/is-it-the-screens-or-education-systems.html?utm_source=rss&utm_medium=rss&utm_campaign=is-it-the-screens-or-education-systems",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/is-there-now-a-better-trend-in-youth-mental-health.html": {
       "keys": [
@@ -129,6 +146,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/markets-do-respond-to-agi-news.html?utm_source=rss&utm_medium=rss&utm_campaign=markets-do-respond-to-agi-news",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-577.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-577.html",
+        "pid:rss:https://marginalrevolution.com/?p=93790",
+        "syn:monday-assorted-links|voice:tyler-cowen|2026-09-14",
+        "fp:marginalrevolution.com|monday-assorted-links|2026-09-14"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-14T19:55:12Z",
+      "published_at": "2026-09-14T16:53:00Z",
+      "title": "Monday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-577.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-577",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html": {
       "keys": [
@@ -230,7 +264,7 @@
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-578.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-578",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/sentences-to-ponder-141.html": {
       "keys": [
@@ -391,8 +425,10 @@
         "pid:rss:https://www.nytimes.com/2026/09/11/opinion/ezra-klein-podcast-francis-fukuyama.html",
         "syn:was-francis-fukuyama-right-all-along|voice:ezra-klein|2026-09-11",
         "syn:was-francis-fukuyama-right-all-along|voice:ezra-klein|2026-09-12",
+        "syn:was-francis-fukuyama-right-all-along|voice:ezra-klein|2026-09-14",
         "fp:nytimes.com|was-francis-fukuyama-right-all-along|2026-09-11",
-        "fp:nytimes.com|was-francis-fukuyama-right-all-along|2026-09-12"
+        "fp:nytimes.com|was-francis-fukuyama-right-all-along|2026-09-12",
+        "fp:nytimes.com|was-francis-fukuyama-right-all-along|2026-09-14"
       ],
       "voice_ids": [
         "ezra-klein"
@@ -452,7 +488,7 @@
       "title": "What Is the Good Life?",
       "url": "https://www.theatlantic.com/podcasts/2026/09/what-is-the-good-life/688591/?utm_source=feed",
       "publication": "The Atlantic",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
     },
     "url:https://thefp.com/p/arthur-brooks-americans-cant-grieve-911": {
       "keys": [
@@ -469,7 +505,7 @@
       "title": "Arthur Brooks: Why Americans No Longer Grieve Together",
       "url": "https://www.thefp.com/p/arthur-brooks-americans-cant-grieve-911",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
     },
     "url:https://theglobeandmail.com/opinion/article-its-not-disloyal-to-criticize-the-governments-handling-of-a-trade-war": {
       "keys": [
