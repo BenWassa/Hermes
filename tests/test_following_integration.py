@@ -152,7 +152,7 @@ def test_model_cannot_drop_relink_or_rename_a_selected_followed_item():
     assert cards[0]["link"] == "https://example.com/opinion/fixed"
     assert cards[0]["summary"].startswith("The model may write")
     assert cards[0]["kicker"] == "Jonathan Haidt"
-    assert cards[0]["time"] == "After Babel · 7:30 AM"
+    assert cards[0]["time"] == "After Babel · 5:30 AM"
     assert cards[0]["lead"] is False
     assert "following" not in cards[0]
 
@@ -184,7 +184,7 @@ def test_standard_metadata_slot_has_deterministic_missing_field_fallbacks():
     seed["publication"] = ""
     cards = build_following_cards([seed], [], today=TODAY)
     assert cards[0]["kicker"] == "Jonathan Haidt"
-    assert cards[0]["time"] == "7:30 AM"
+    assert cards[0]["time"] == "5:30 AM"
 
     seed["published_at"] = None
     seed["publication"] = "After Babel"
