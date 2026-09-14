@@ -1,4 +1,4 @@
-"""Issue #11: deterministic Following inside the finite Opinion desk."""
+"""Deterministic Following integration inside the finite Opinion desk."""
 
 from __future__ import annotations
 
@@ -151,7 +151,10 @@ def test_model_cannot_drop_relink_or_rename_a_selected_followed_item():
     assert cards[0]["headline"] == "A new argument"
     assert cards[0]["link"] == "https://example.com/opinion/fixed"
     assert cards[0]["summary"].startswith("The model may write")
-    assert cards[0]["following"] is True
+    assert cards[0]["kicker"] == "Jonathan Haidt"
+    assert cards[0]["time"] == "After Babel · 7:30 AM"
+    assert cards[0]["lead"] is False
+    assert "following" not in cards[0]
 
 
 def test_missing_model_result_description_and_image_still_yield_a_coherent_card():
@@ -167,8 +170,30 @@ def test_missing_model_result_description_and_image_still_yield_a_coherent_card(
         "New writing from Jonathan Haidt at The New York Sun. "
         "Open the original piece for the full argument."
     )
-    assert cards[0]["paywalled"] is True
     assert cards[0]["link"] == "https://example.com/opinion/minimal"
+    assert cards[0]["author"] == "Jonathan Haidt"
+    assert cards[0]["publication"] == "The New York Sun"
+    # Card serialization carries only fields with a real renderer/Ask-AI use.
+    assert "paywalled" not in cards[0]
+    assert "voice_ids" not in cards[0]
+    assert "canonical_key" not in cards[0]
+
+
+def test_standard_metadata_slot_has_deterministic_missing_field_fallbacks():
+    seed = following_seed(article("meta"), REGISTRY)
+    seed["publication"] = ""
+    cards = build_following_cards([seed], [], today=TODAY)
+    assert cards[0]["kicker"] == "Jonathan Haidt"
+    assert cards[0]["time"] == "7:30 AM"
+
+    seed["published_at"] = None
+    seed["publication"] = "After Babel"
+    cards = build_following_cards([seed], [], today=TODAY)
+    assert cards[0]["time"] == "After Babel"
+
+    seed["author"] = ""
+    cards = build_following_cards([seed], [], today=TODAY)
+    assert cards[0]["kicker"] is None
 
 
 def test_several_selected_voices_and_items_keep_fixed_finite_order_even_if_model_reorders():
@@ -185,11 +210,12 @@ def test_several_selected_voices_and_items_keep_fixed_finite_order_even_if_model
     ]
 
     cards = build_following_cards(seeds, model, today=TODAY)
-    assert [card["canonical_key"] for card in cards] == [seed["key"] for seed in seeds]
+    assert [card["link"] for card in cards] == [seed["link"] for seed in seeds]
     assert len(cards) == 4
     assert {card["author"] for card in cards} == {
         "Jonathan Haidt", "Conrad Black", "Jordan Peterson"
     }
+    assert all(card["lead"] is False for card in cards)
 
 
 def test_postpass_makes_following_win_if_editor_returns_duplicate_anyway():
