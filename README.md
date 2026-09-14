@@ -2,12 +2,14 @@
 
 An autonomous overnight pipeline that assembles a personalized Toronto morning
 newspaper, renders it as a static web page, and pushes a notification after a
-successful publication. The primary build targets 05:17 America/Toronto, with
-bounded same-morning recovery attempts if GitHub's scheduler is delayed or drops
-a run. World and business news come from the Guardian, NYT, and Perigon APIs;
-Toronto local news comes from RSS. Google Gemini dedupes, sections, ranks, and
-summarizes. The result deploys to GitHub Pages and an ntfy.sh push links straight
-to it.
+successful publication. The publication target remains 05:17 America/Toronto.
+GitHub is scheduled through a bounded UTC cadence that covers both EDT and EST;
+an early Toronto-time gate admits automatic attempts only during the intended
+morning window. A meaningful `main` push can also recover a missed edition later
+that morning, while manual dispatch remains available at any hour. World and
+business news come from the Guardian, NYT, and Perigon APIs; Toronto local news
+comes from RSS. Google Gemini dedupes, sections, ranks, and summarizes. The
+result deploys to GitHub Pages and an ntfy.sh push links straight to it.
 
 > v2 of this repo. The previous React/Firebase intelligence dashboard ("Hermes
 > v1") is preserved under [archive/v1-hermes/](archive/v1-hermes/) and tagged
@@ -32,7 +34,8 @@ weather -> fetch -> normalize -> discover Voices -> curate (Gemini) -> select Fo
 | [src/build.py](src/build.py) | Morning-edition orchestrator |
 | [src/voices/](src/voices/) | Voice registry, adapters, authorship, canonical identity, dedupe/syndication and bounded state |
 | [src/voice_roundup.py](src/voice_roundup.py) | Silent Core collection and durable weekly-period state |
-| [src/voice_digest.py](src/voice_digest.py) | Quiet recent shelf + screened weekly digest; sole proactive Voice notification path |
+| [src/voice_digest.py](src/voice_digest.py) | Quiet recent shelf + weekly digest publishing machinery |
+| [src/voice_weekly.py](src/voice_weekly.py) | Public-excerpt-grounded weekly screening/synthesis entry point |
 | [src/voice_watch.py](src/voice_watch.py) | Legacy release-watch engine retained for manual read-only diagnostics; not scheduled |
 | [template/index.template.html](template/index.template.html) | The newspaper UI (vanilla HTML/CSS/JS) |
 
@@ -61,8 +64,9 @@ Once per weekly period Hermes screens the collected Core writing for likely
 attention-worthiness. Publication by a Core Voice is only collection
 eligibility; it does not guarantee a roundup slot. Screening favors substantive
 or explanatory value, material relevance, novelty versus the rest of the week,
-non-redundancy, and useful breadth. The digest is deliberately small: at most
-three pieces, and fewer when the week is weak.
+non-redundancy, and useful breadth. Public feed/archive descriptions are used
+when available to ground that screen without fetching article bodies. The digest
+is deliberately small: at most three pieces, and fewer when the week is weak.
 
 The weekly job performs at most one screening/synthesis model call per
 invocation, publishes one compact `/voices/` brief, then may send **one** ntfy
@@ -176,8 +180,8 @@ cadence.
 - **Guardian Open Platform:** `GUARDIAN_API_KEY` required for Guardian-backed
   news and contributor discovery.
 - **NYT Top Stories:** `NYT_API_KEY` required for the morning pool.
-- **Perigon:** `PERIGON_API_KEY` is optional and scarce; Voice reconciliation is
-  bounded and batched.
+- **Perigon:** `PERIGON_API_KEY` supplies the bounded morning news/Canada-national
+  lane and scarce Voice reconciliation; requests remain bounded and batched.
 - **RSS / first-party author pages:** no API key, but poll conservatively. A
   403/429 is a source failure, not permission to evade access controls.
 - **ntfy:** `NTFY_TOPIC` is used by the morning Daily push and the single weekly
@@ -214,7 +218,7 @@ python -m src.voice_watch --dry-run
 python -m src.voices.audit --live --voice <id>
 python -m src.voice_roundup collect --dry-run
 python -m src.voice_digest recent --dry-run
-python -m src.voice_digest weekly --dry-run --period YYYY-MM-DD
+python -m src.voice_weekly weekly --dry-run --period YYYY-MM-DD
 ```
 
 Do not use the legacy `voice_watch --smoke` command for routine validation: it
@@ -258,7 +262,7 @@ a repository variable.
 | `GEMINI_API_KEY` | morning curation + weekly Voice screening/synthesis |
 | `GUARDIAN_API_KEY` | Guardian news + Core Voice contributor collection |
 | `NYT_API_KEY` | NYT morning pool |
-| `PERIGON_API_KEY` | optional Perigon news + bounded Voice reconciliation |
+| `PERIGON_API_KEY` | morning Perigon/Canada-national intake + bounded Voice reconciliation |
 | `NTFY_TOPIC` | morning Daily push + one weekly Voice digest |
 | `PAGES_URL` | published-site links/cache busting |
 | `CURATE_MODEL` | optional Gemini model override |
@@ -272,8 +276,12 @@ product.
 ## Deployment (GitHub Pages + Actions)
 
 - [.github/workflows/build.yml](.github/workflows/build.yml) — targets 05:17
-  America/Toronto, with 05:37, 06:17 and 07:17 bounded recoveries. It no-ops
-  before source/model work once that Toronto-calendar edition exists.
+  America/Toronto through ordinary UTC cron slots spanning both EDT and EST.
+  The early gate admits scheduled work only from 05:00–07:59 Toronto, permits a
+  meaningful `main` push to recover a missing edition through 11:59, and leaves
+  manual dispatch unrestricted. Every path no-ops before source/model work once
+  that Toronto-calendar edition exists. Generated Daily/Voice paths are ignored
+  by the push recovery trigger.
 - [.github/workflows/notify.yml](.github/workflows/notify.yml) — sends the one
   morning Daily push only after a run actually publishes today's edition.
 - [.github/workflows/voice-roundup.yml](.github/workflows/voice-roundup.yml) —
@@ -292,7 +300,7 @@ Pages serves `docs/` on `main` at `https://BenWassa.github.io/Hermes/`.
 
 ## First-run checklist
 
-- Get Gemini, Guardian and NYT API keys; add Perigon only when used.
+- Add Gemini, Guardian, NYT and Perigon API keys as repository secrets.
 - Pick a hard-to-guess ntfy topic and subscribe the intended client.
 - Add repository secrets and the `PAGES_URL` repository variable.
 - Enable GitHub Pages from `main` / `docs`.
@@ -300,7 +308,7 @@ Pages serves `docs/` on `main` at `https://BenWassa.github.io/Hermes/`.
 - Trigger `Build The Daily`; confirm one edition and one morning push.
 - Use `voice_watch --dry-run`, not a notification smoke, for routine Voice
   inspection.
-- Inspect a weekly digest with `voice_digest weekly --dry-run --period ...`
+- Inspect a weekly digest with `voice_weekly weekly --dry-run --period ...`
   before deliberately testing live weekly delivery.
 
 ## Notes
