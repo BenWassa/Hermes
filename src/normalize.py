@@ -9,6 +9,9 @@ Convert source-native items from fetch.py into one unified story schema:
       "image": str | None,
       "link": str,
 
+      # intake priority metadata; not sent to the curation model
+      "coverage_lane": str,
+
       # authorship and provenance (added for Voices, see VOICES.md)
       "provider": str,               # guardian|nyt|perigon|rss
       "source_article_id": str,      # provider-native article id, when any
@@ -18,12 +21,9 @@ Convert source-native items from fetch.py into one unified story schema:
       "paywalled": bool | None,
     }
 
-The seven original keys are unchanged, so existing curation and rendering keep
-working untouched. The added keys exist because the pipeline used to throw
-authorship away: the Guardian byline was requested and then dropped, NYT and
-Perigon bylines were never read, and nothing recorded which provider an item
-came from. Followed-Voice resolution needs all of it, and it is the kind of
-metadata a newspaper should not be discarding anyway.
+The original curation keys are unchanged, so existing model cost and rendering
+contracts remain stable. Coverage-lane metadata exists only so deterministic
+pre-model trimming can protect high-signal national Canadian candidates.
 
 Only *stated authorship* is carried. Provider fields listing people a story is
 merely about (NYT ``per_facet``, Perigon ``people``) are deliberately ignored:
@@ -50,6 +50,10 @@ def _clean(text: str | None) -> str:
     text = _TAG_RE.sub(" ", text)
     text = unescape(text)
     return _WS_RE.sub(" ", text).strip()
+
+
+def _coverage_lane(item: dict) -> str:
+    return str(item.get("_coverage_lane") or "").strip()
 
 
 def _authors_from_byline(byline: str) -> list[dict]:
@@ -91,6 +95,7 @@ def _normalize_guardian(item: dict) -> dict:
         "pub_date": item.get("webPublicationDate", ""),
         "image": fields.get("thumbnail") or None,
         "link": link,
+        "coverage_lane": _coverage_lane(item),
         "provider": "guardian",
         "source_article_id": str(item.get("id") or ""),
         "canonical_url": canonical_url(link),
@@ -129,6 +134,7 @@ def _normalize_nyt(item: dict) -> dict:
         "pub_date": item.get("published_date", ""),
         "image": image,
         "link": link,
+        "coverage_lane": _coverage_lane(item),
         "provider": "nyt",
         "source_article_id": str(item.get("uri") or ""),
         "canonical_url": canonical_url(link),
@@ -176,6 +182,7 @@ def _normalize_perigon(item: dict) -> dict:
         "pub_date": item.get("pubDate", "") or item.get("addDate", ""),
         "image": item.get("imageUrl") or None,
         "link": link,
+        "coverage_lane": _coverage_lane(item),
         "provider": "perigon",
         "source_article_id": str(item.get("articleId") or ""),
         "canonical_url": canonical_url(link),
@@ -217,6 +224,7 @@ def _normalize_rss(item: dict) -> dict:
         "pub_date": item.get("published", "") or item.get("updated", ""),
         "image": image or None,
         "link": link,
+        "coverage_lane": _coverage_lane(item),
         "provider": "rss",
         # A feed guid identifies an item only inside its own feed. It is kept
         # for provenance but is only treated as an article id when it is a
@@ -237,7 +245,8 @@ _DISPATCH = {
 }
 
 #: The seven keys the curation model has always received. Kept explicit so the
-#: added authorship fields cannot silently change the prompt or its cost.
+#: added authorship and intake-priority fields cannot silently change the prompt
+#: or its cost.
 CURATION_KEYS = (
     "title", "description", "source", "section_hint", "pub_date", "image", "link",
 )
@@ -246,9 +255,9 @@ CURATION_KEYS = (
 def curation_view(stories: list[dict]) -> list[dict]:
     """Project stories down to the fields the editor model is given.
 
-    Authorship and provenance are for Hermes, not for the prompt: sending them
-    would enlarge every curate call for no editorial benefit and would change
-    a contract that currently works.
+    Authorship, provenance and coverage-lane metadata are for Hermes, not for
+    the prompt: sending them would enlarge every curate call without improving
+    editorial prose.
     """
     return [{key: story.get(key) for key in CURATION_KEYS} for story in stories]
 
