@@ -54,15 +54,27 @@ The source contract is deliberately bounded: one dedicated Canada-national
 aggregator lane plus one high-signal national journalism feed, with provider
 failures isolated from publication. A small deterministic reserve protects
 strong Canada-national candidates inside the existing bounded Gemini input;
-the lane marker itself is not sent to the model and does not increase per-story
-token cost.
+the lane marker itself is not sent to the model and does not increase broad
+per-story prompt metadata.
 
 Exceptional scheduled national events may be seeded from an authoritative
 public schedule and given temporary recall protection during a bounded monitor
 window. The seed only establishes event identity/date. It never becomes a story
-by itself, never guarantees inclusion, and never replaces independent
-journalistic coverage. The Canada Investment Summit 2026 is the regression case
-for this contract. Issue #57 owns the implementation.
+by itself and never replaces independent journalistic coverage.
+
+When a real current article matches an active scheduled event, Hermes may carry
+one transient event-priority marker into the existing bounded Gemini call. This
+is an editorial recall signal, not a guarantee regardless of evidence: stale
+reporting, a stronger included duplicate, insufficient source metadata, or an
+event that materially failed to occur remain valid reasons to omit the marked
+candidate. The finished edition logs whether protected event reporting actually
+survived final selection, so intake recall and editorial omission are separately
+observable.
+
+This mechanism must not add another model call, enlarge the curation-input
+ceiling, create a Canada quota, or inject prose from an event seed or official
+schedule. The Canada Investment Summit 2026 is the regression case for this
+contract. Issues #57 and #62 own the intake-recall and final-selection layers.
 
 ## Sports
 

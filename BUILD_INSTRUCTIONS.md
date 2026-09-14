@@ -132,8 +132,25 @@ The production path uses:
 - deterministic preservation of a small number of strong Canada-national/event
   candidates inside the existing curation-input ceiling.
 
-`coverage_lane` is intake metadata and is not sent to Gemini. There is no new
-Daily model call and no broad provider-page-size expansion.
+`coverage_lane` remains intake-only metadata and is not sent to Gemini. For an
+article that actually matches an **active configured scheduled major event**, the
+curation boundary may add one transient `editorial_priority` field naming that
+event. That field exists only in the already-bounded Gemini payload; it is not a
+normalized-story or final-edition schema field.
+
+The single editor call should normally retain at least one credible current
+treatment of an explicitly marked active event. Stale reporting, a stronger
+included duplicate, insufficient source metadata, or an event that materially
+failed to occur remain valid reasons to omit it. Hermes never manufactures a
+story from the schedule seed itself.
+
+After curation, production logging records each matched active event's input
+candidate count, selected count and selected desk(s). This distinguishes
+pre-model recall failure from final editorial omission without adding another
+model call or deterministic prose fallback.
+
+There is no new Daily model call, no increase to the curation-input ceiling and
+no broad provider-page-size expansion.
 
 ## 7. Sports contract
 

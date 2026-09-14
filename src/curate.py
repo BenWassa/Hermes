@@ -12,7 +12,10 @@ source metadata rather than dropping the item.
 
 Before the model boundary, deterministic recall protection keeps a small number
 of Canada-national and known major-event candidates inside the existing bounded
-input. This changes candidate recall, not the one-call model-cost contract.
+input. Active matched major-event records receive one transient model-only
+priority field so the single editor call can distinguish deliberate recall
+protection from ordinary candidates. The normalized story and final edition
+schemas remain unchanged.
 """
 
 from __future__ import annotations
@@ -88,7 +91,7 @@ def _gen_config(
     today: dt.date, model: str | None = None, *, include_following: bool = False
 ) -> types.GenerateContentConfig:
     m = model if model is not None else config.CURATE_MODEL
-    system_instruction = config.build_curate_system_prompt(today) + canada.EDITORIAL_INSTRUCTION
+    system_instruction = config.build_curate_system_prompt(today) + canada.editorial_instruction(today)
     if include_following:
         system_instruction += _FOLLOWING_INSTRUCTION
     kwargs: dict = dict(
@@ -145,6 +148,16 @@ def _generate(
     raise last  # type: ignore[misc]
 
 
+def _curation_view(stories: list[dict], today: dt.date) -> list[dict]:
+    """Normal seven-field model view plus rare active-event priority markers."""
+    editorial = curation_view(stories)
+    for source, item in zip(stories, editorial):
+        priority = canada.editorial_priority(source, today)
+        if priority:
+            item["editorial_priority"] = priority
+    return editorial
+
+
 def _call(
     client: genai.Client,
     stories: list[dict],
@@ -153,7 +166,7 @@ def _call(
     *,
     following: list[dict] | None = None,
 ) -> dict:
-    editorial = curation_view(stories)
+    editorial = _curation_view(stories, today)
     if following:
         payload: object = {
             "stories": editorial,
@@ -377,6 +390,20 @@ def _ensure_opinion_section(sections: list[dict]) -> list[dict]:
     return sections
 
 
+def _log_major_event_coverage(
+    sections: list[dict], input_stories: list[dict], today: dt.date
+) -> None:
+    for event_id, status in canada.final_event_coverage(sections, input_stories, today).items():
+        sections_text = ",".join(status["sections"]) if status["sections"] else "none"
+        log.info(
+            "major-event final id=%s input=%d selected=%d sections=%s",
+            event_id,
+            status["input"],
+            status["selected"],
+            sections_text,
+        )
+
+
 def curate(
     stories: list[dict],
     weather: dict | None = None,
@@ -396,6 +423,7 @@ def curate(
         raw = _call(client, stories, today, reinforce=True, following=following)
 
     sections = _normalize_edition(raw)
+    _log_major_event_coverage(sections, stories, today)
     if following:
         _ensure_opinion_section(sections)
 
@@ -416,40 +444,3 @@ def curate(
                 removed,
             )
     return edition
-
-
-if __name__ == "__main__":
-    import sys
-    from pathlib import Path
-
-    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
-
-    fixture = Path("data/fixtures/normalized_sample.json")
-    if fixture.exists():
-        stories = json.loads(fixture.read_text())
-    else:
-        from .fetch import fetch_all
-        from .normalize import normalize
-
-        stories = normalize(fetch_all())
-
-    edition = curate(stories)
-
-    sections = edition["sections"]
-    assert 5 <= len(sections) <= 6, f"expected 5-6 sections, got {len(sections)}"
-    for s in sections:
-        leads = [st for st in s["stories"] if st["lead"]]
-        assert s["stories"], f"{s['id']} has no stories"
-        assert len(leads) == 1, f"{s['id']} has {len(leads)} leads"
-        for st in s["stories"]:
-            assert st["summary"].strip(), f"{st['id']} empty summary"
-            assert isinstance(st["sensitivity"], bool)
-
-    Path("data/fixtures/edition_sample.json").write_text(
-        json.dumps(edition, indent=2, ensure_ascii=False)
-    )
-    print(
-        f"OK: {len(sections)} sections, "
-        f"{sum(len(s['stories']) for s in sections)} stories"
-    )
-    sys.exit(0)
