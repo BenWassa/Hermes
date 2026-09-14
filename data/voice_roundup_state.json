@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-14T00:25:42Z",
+  "updated_at": "2026-09-14T05:28:03Z",
   "last_reconcile_at": "2026-09-13T18:18:39Z",
   "last_roundup": {
     "period_id": "2026-09-13",
@@ -27,6 +27,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/a-simple-model-of-ai-aided-economic-growth.html?utm_source=rss&utm_medium=rss&utm_campaign=a-simple-model-of-ai-aided-economic-growth",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-13T18:18:39Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/does-ai-assistance-enhance-or-erode-expertise.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/does-ai-assistance-enhance-or-erode-expertise.html",
+        "pid:rss:https://marginalrevolution.com/?p=93761",
+        "syn:does-ai-assistance-enhance-or-erode-expertise|voice:tyler-cowen|2026-09-14",
+        "fp:marginalrevolution.com|does-ai-assistance-enhance-or-erode-expertise|2026-09-14"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-14T05:28:03Z",
+      "published_at": "2026-09-14T04:14:34Z",
+      "title": "Does AI assistance enhance or erode expertise?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/does-ai-assistance-enhance-or-erode-expertise.html?utm_source=rss&utm_medium=rss&utm_campaign=does-ai-assistance-enhance-or-erode-expertise",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/economic-scenarios-for-transformative-ai.html": {
       "keys": [
