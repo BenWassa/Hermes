@@ -131,6 +131,11 @@ def _format_time(value: str | None, today: dt.date) -> str:
     return local.strftime("%b %-d")
 
 
+def _display_meta(publication: str, filed: str) -> str:
+    """Adapt Following provenance into the standard quiet card metadata slot."""
+    return " · ".join(part for part in (publication, filed) if part)
+
+
 def _fallback_summary(seed: dict) -> str:
     description = clean_text(seed.get("description"))
     if description:
@@ -153,26 +158,28 @@ def build_following_cards(
     for index, seed in enumerate(seeds, start=1):
         model = by_key.get(seed["key"], {})
         sensitivity = bool(model.get("sensitivity", False))
+        author = seed.get("author") or ""
+        publication = seed.get("publication") or ""
+        filed = _format_time(seed.get("published_at"), today)
         cards.append(
             {
                 "id": f"follow-{index}",
                 "lead": False,
-                "kicker": None,
+                # Following is a deterministic reader-choice surface. The writer
+                # occupies the standard kicker slot without implying editorial rank.
+                "kicker": author or None,
                 "headline": seed.get("headline") or "Untitled opinion",
                 "sub": clean_text(model.get("sub")) or None,
                 "summary": clean_text(model.get("summary")) or _fallback_summary(seed),
                 "analysis": None,
-                "time": _format_time(seed.get("published_at"), today),
+                "time": _display_meta(publication, filed),
                 "tag": None,
                 "sensitivity": sensitivity,
                 "image": None if sensitivity else seed.get("image"),
                 "link": seed.get("link") or "",
-                "author": seed.get("author") or "",
-                "publication": seed.get("publication") or "",
-                "paywalled": seed.get("paywalled"),
-                "voice_ids": list(seed.get("voice_ids") or []),
-                "canonical_key": seed.get("key") or "",
-                "following": True,
+                # Retained for Ask AI provenance, not for a Following-only renderer.
+                "author": author,
+                "publication": publication,
             }
         )
     return cards

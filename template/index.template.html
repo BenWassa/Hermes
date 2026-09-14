@@ -20,39 +20,39 @@
   <style>
     /* ---- Design tokens: The Morning Broadsheet ------------------------- */
     :root {
-      --paper: #faf8f3;        /* the sheet (warm white, never #fff) */
-      --desk: #efece6;         /* the desk beyond the column */
-      --ink: #17130d;          /* headlines / primary text */
-      --ink-sub: #453f38;      /* standfirsts */
-      --ink-muted: #635d54;    /* inactive tabs */
-      --meta: #6c665c;         /* timestamps, dateline, footer (>=AA small) */
-      --rule: #dcd6cc;         /* hairline between cards */
-      --rule-soft: #e3ded4;    /* hairline inside an opened card */
-      --navy: #1a2744;         /* structural ink */
-      --navy-ink: #1a2744;     /* navy used as text (links, active tab) */
-      --red: #8b1a1a;          /* editorial heat */
-      --tint-open: #f2ede4;    /* ground of an expanded card */
-      --tint-analysis: #ece6da;/* ground of the why-it-matters note */
-      --strip-bg: #1a2744;     /* weather strip */
+      --paper: #faf8f3;
+      --desk: #efece6;
+      --ink: #17130d;
+      --ink-sub: #453f38;
+      --ink-muted: #635d54;
+      --meta: #6c665c;
+      --rule: #dcd6cc;
+      --rule-soft: #e3ded4;
+      --navy: #1a2744;
+      --navy-ink: #1a2744;
+      --red: #8b1a1a;
+      --tint-open: #f2ede4;
+      --tint-analysis: #ece6da;
+      --strip-bg: #1a2744;
       --strip-ink: #f7f4ee;
-      --chip-hot: #8b1a1a;     /* DEVELOPING / WAR-class flags */
-      --chip-cool: #1a2744;    /* procedural flags (FINAL, EDITORIAL) */
+      --chip-hot: #8b1a1a;
+      --chip-cool: #1a2744;
       --chip-ink: #faf8f3;
       --focus: #1a2744;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --paper: #151a22;      /* lamplight edition: deep navy-black paper */
+        --paper: #151a22;
         --desk: #0e1219;
-        --ink: #e9e3d5;        /* cream ink */
+        --ink: #e9e3d5;
         --ink-sub: #bcb6a8;
         --ink-muted: #948e82;
         --meta: #8f897d;
         --rule: #2a303a;
         --rule-soft: #2f3540;
-        --navy: #6f82a8;       /* structure lifted so it reads on dark */
+        --navy: #6f82a8;
         --navy-ink: #a3b3d2;
-        --red: #d1726b;        /* desaturated heat */
+        --red: #d1726b;
         --tint-open: #1b212b;
         --tint-analysis: #20262f;
         --strip-bg: #1b2334;
@@ -169,11 +169,6 @@
     .desk-dek {
       font-family: 'Arial', sans-serif; font-size: 0.6875rem; line-height: 1.45;
       color: var(--meta); margin-top: 3px;
-    }
-    .following-block .card { padding-top: 12px; padding-bottom: 12px; }
-    .follow-meta {
-      font-family: 'Arial', sans-serif; font-size: 0.6875rem; line-height: 1.45;
-      color: var(--meta); margin-top: 5px;
     }
     .opinion-desk .empty { padding: 24px 4px; }
     .empty {
@@ -295,18 +290,10 @@
           .replace(/"/g, '&quot;');
       }
 
-      // Editorial heat flags keep the red chip; procedural flags cool to navy,
-      // so a red chip still means something (the Scarce Red Rule).
       function isHotTag(t) {
         return /^(DEVELOPING|BREAKING|LIVE|WAR|ALERT|URGENT)$/i.test(t || '');
       }
 
-      // ---- Ask AI ----------------------------------------------------------
-      // The reader taps one story and gets a briefing, not a chat. The prompt
-      // does three jobs: hand over the clipping, name the shape of the answer
-      // (five parts, ~500 words, hard ceiling), and set up the follow-up so the
-      // conversation continues without the reader having to think of a question.
-      // Voice constraints mirror src/config.py HOUSE_VOICE, em dash ban included.
       function buildPrompt(st, sectionLabel) {
         var L = [];
         L.push('I read this in my morning paper and I want to understand it properly.');
@@ -397,7 +384,6 @@
         if (navigator.clipboard && navigator.clipboard.writeText) {
           return navigator.clipboard.writeText(text);
         }
-        // Older iOS standalone PWAs land here.
         return new Promise(function (resolve, reject) {
           var ta = document.createElement('textarea');
           ta.value = text;
@@ -415,8 +401,6 @@
         });
       }
 
-      // Tagline reflects the sections the edition actually shipped, not a
-      // hardcoded list that can disagree with the paper.
       function taglineText() {
         var labels = data.sections
           .filter(function (s) { return s.id !== 'front'; })
@@ -462,15 +446,7 @@
           : '';
         var kicker = st.kicker ? '<div class="kicker">' + tag + esc(st.kicker) + '</div>' : '';
         var sub = st.sub ? '<div class="sub">' + esc(st.sub) + '</div>' : '';
-        var followMeta = '';
-        var filed = '<div class="time">' + esc(st.time) + '</div>';
-        if (st.following) {
-          var metaParts = [st.author, st.publication, st.time].filter(function (part) { return !!part; });
-          followMeta = metaParts.length
-            ? '<div class="follow-meta">' + metaParts.map(esc).join(' · ') + '</div>'
-            : '';
-          filed = '';
-        }
+        var filed = st.time ? '<div class="time">' + esc(st.time) + '</div>' : '';
         var expand = '';
         if (open) {
           var img = st.image
@@ -484,14 +460,7 @@
             ? '<a class="readmore" href="' + esc(st.link) + '" target="_blank" rel="noopener">Read full story →</a>'
             : '';
 
-          // Prefill the destinations at render time so a long press ("open in
-          // app") carries the prompt too, instead of us intercepting the tap.
           var q = encodeURIComponent(buildPrompt(st, sectionLabel));
-          // No target="_blank" on these two. In a standalone PWA a blank target
-          // opens an in-app browser sheet, which iOS will not hand off to an
-          // installed app; a plain top-level tap is what lets the Claude and
-          // ChatGPT apps claim their own domains as Universal Links. "Read full
-          // story" keeps _blank, because a news site does belong in a tab.
           var share = navigator.share
             ? '<button class="ask-opt" data-ai="share" data-id="' + esc(st.id) + '">Share to app…</button>'
             : '';
@@ -517,10 +486,21 @@
           '" data-card="' + esc(st.id) + '" role="button" tabindex="0" ' +
           'aria-expanded="' + open + '">' +
           '<div class="row"><div class="row-main">' + kicker +
-            '<div class="headline">' + esc(st.headline) + '</div>' + sub + followMeta + filed +
+            '<div class="headline">' + esc(st.headline) + '</div>' + sub + filed +
             '</div><div class="toggle" aria-hidden="true">' + (open ? '−' : '+') + '</div>' +
           '</div>' + expand +
         '</div>';
+      }
+
+      function opinionGroupHtml(id, className, title, dek, stories, sectionLabel, emptyText) {
+        var body = stories.length
+          ? stories.map(function (st) { return cardHtml(st, sectionLabel); }).join('')
+          : '<div class="empty">' + esc(emptyText) + '</div>';
+        return '<section class="opinion-desk ' + className + '" aria-labelledby="' + id + '">' +
+            '<div class="desk-head"><h2 class="desk-title" id="' + id + '">' + esc(title) + '</h2>' +
+              '<div class="desk-dek">' + esc(dek) + '</div></div>' +
+            body +
+          '</section>';
       }
 
       function storiesInner() {
@@ -530,22 +510,16 @@
         var sectionStories = section.stories || [];
         var following = data.following || [];
         if (section.id === 'opinion' && following.length) {
-          var followedHtml = following.map(function (st) {
-            return cardHtml(st, 'Opinion · Following');
-          }).join('');
-          var ordinaryHtml = sectionStories.length
-            ? sectionStories.map(function (st) { return cardHtml(st, section.label); }).join('')
-            : '<div class="empty">Nothing else filed for Opinion this morning.</div>';
-          return '<section class="opinion-desk following-block" aria-labelledby="following-title">' +
-              '<div class="desk-head"><h2 class="desk-title" id="following-title">Following</h2>' +
-                '<div class="desk-dek">New writing from voices you follow</div></div>' +
-              followedHtml +
-            '</section>' +
-            '<section class="opinion-desk today-opinion" aria-labelledby="today-opinion-title">' +
-              '<div class="desk-head"><h2 class="desk-title" id="today-opinion-title">Today’s Opinion</h2>' +
-                '<div class="desk-dek">Selected independently by the morning desk</div></div>' +
-              ordinaryHtml +
-            '</section>';
+          return opinionGroupHtml(
+              'following-title', 'following-block', 'Following',
+              'New writing from voices you follow', following, 'Opinion · Following',
+              'Nothing new from followed voices this morning.'
+            ) +
+            opinionGroupHtml(
+              'today-opinion-title', 'today-opinion', 'Today’s Opinion',
+              'Selected independently by the morning desk', sectionStories, section.label,
+              'Nothing else filed for Opinion this morning.'
+            );
         }
 
         if (!sectionStories.length) {
@@ -556,7 +530,6 @@
         }).join('');
       }
 
-      // Quietly flag a saved (not-today) edition served from cache/offline.
       function staleRibbon() {
         try {
           var meta = document.querySelector('meta[name=build]');
@@ -586,9 +559,6 @@
 
       var app = document.getElementById('app');
 
-      // Rebuild only the stories column; masthead, weather, and tab strip (and
-      // their scroll/open state) are left untouched. This is what keeps a tap
-      // from resetting the reader's place.
       function refreshStories() {
         document.getElementById('stories').innerHTML = storiesInner();
         bindCards();
@@ -606,7 +576,6 @@
           if (on) t.scrollIntoView({ inline: 'center', block: 'nearest' });
         });
         refreshStories();
-        // Start the new section at the top, tab strip stuck under the notch.
         var tabsEl = document.querySelector('.tabs');
         if (tabsEl) window.scrollTo(0, tabsEl.offsetTop);
       }
@@ -615,7 +584,7 @@
         var y = window.scrollY;
         state.openId = state.openId === id ? null : id;
         refreshStories();
-        window.scrollTo(0, y);   // grow/collapse in place, never jump
+        window.scrollTo(0, y);
       }
 
       function bindWeather() {
@@ -644,17 +613,13 @@
       function bindCards() {
         Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
           function activate(ev) {
-            // Let links and the Ask AI controls handle their own activation.
             if (ev.target.closest('a, button')) return;
-            // While open, only the header row collapses it, so reading (and
-            // selecting) the body never closes the story by accident.
             if (card.classList.contains('open') && !ev.target.closest('.row')) return;
             toggleCard(card.getAttribute('data-card'));
           }
           card.addEventListener('click', activate);
           card.addEventListener('keydown', function (ev) {
             if (ev.key !== 'Enter' && ev.key !== ' ') return;
-            // Never swallow the key from a control that acts on it itself.
             if (ev.target.closest('a, button')) return;
             ev.preventDefault();
             activate(ev);
@@ -663,8 +628,6 @@
         });
       }
 
-      // Panel state is held in the DOM, not in `state`, so opening the
-      // destinations never triggers a stories rebuild and never moves the page.
       function bindAsk(card) {
         var toggle = card.querySelector('.askai');
         if (!toggle) return;

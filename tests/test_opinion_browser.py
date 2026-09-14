@@ -19,6 +19,7 @@ from src import render as render_mod
 
 ARTIFACTS = Path("test-artifacts")
 FIXTURE = Path("data/fixtures/edition_sample.json")
+TEMPLATE = Path("template/index.template.html")
 
 
 def _edition(*, following: bool = True) -> dict:
@@ -31,7 +32,7 @@ def _edition(*, following: bool = True) -> dict:
         {
             "id": "follow-1",
             "lead": False,
-            "kicker": None,
+            "kicker": "Jonathan Haidt",
             "headline": "Treasure Your Attention",
             "sub": "Why protecting attention is a civic problem as well as a personal one.",
             "summary": (
@@ -40,22 +41,18 @@ def _edition(*, following: bool = True) -> dict:
                 "connects individual habits to wider institutional incentives."
             ),
             "analysis": None,
-            "time": "7:15 AM",
+            "time": "After Babel · 7:15 AM",
             "tag": None,
             "sensitivity": False,
             "image": None,
             "link": "https://www.afterbabel.com/p/treasure-your-attention",
             "author": "Jonathan Haidt",
             "publication": "After Babel",
-            "paywalled": False,
-            "voice_ids": ["jonathan-haidt"],
-            "canonical_key": "url:https://afterbabel.com/p/treasure-your-attention",
-            "following": True,
         },
         {
             "id": "follow-2",
             "lead": False,
-            "kicker": None,
+            "kicker": "Conrad Black, Jane Example",
             "headline": "Institutions and the Long View",
             "sub": None,
             "summary": (
@@ -64,17 +61,13 @@ def _edition(*, following: bool = True) -> dict:
                 "the complete column."
             ),
             "analysis": None,
-            "time": "Yesterday",
+            "time": "The New York Sun · Yesterday",
             "tag": None,
             "sensitivity": False,
             "image": None,
             "link": "https://www.nysun.com/article/institutions-and-the-long-view",
             "author": "Conrad Black, Jane Example",
             "publication": "The New York Sun",
-            "paywalled": True,
-            "voice_ids": ["conrad-black"],
-            "canonical_key": "url:https://nysun.com/article/institutions-and-the-long-view",
-            "following": True,
         },
     ]
     return edition
@@ -91,8 +84,16 @@ def _open_opinion(page) -> None:
     page.locator("#following-title").wait_for(state="visible")
 
 
+def test_template_has_no_following_only_card_renderer_or_css():
+    template = TEMPLATE.read_text(encoding="utf-8")
+    assert ".follow-meta" not in template
+    assert ".following-block .card" not in template
+    assert "st.following" not in template
+    assert "function opinionGroupHtml" in template
+
+
 @pytest.mark.parametrize("width,height", [(390, 844), (320, 568), (844, 390)])
-def test_following_is_compact_distinct_and_interactive_on_mobile_shapes(
+def test_following_and_today_opinion_share_cards_and_interactions_on_mobile_shapes(
     monkeypatch: pytest.MonkeyPatch, width: int, height: int
 ):
     artifact = _render(monkeypatch, _edition())
@@ -109,17 +110,24 @@ def test_following_is_compact_distinct_and_interactive_on_mobile_shapes(
         _open_opinion(page)
 
         assert page.locator(".following-block .card").count() == 2
-        # `text-transform: uppercase` is intentional visual styling. Use
-        # text_content() to assert the semantic/authored labels rather than the
-        # browser's transformed presentation returned by inner_text().
+        assert page.locator(".follow-meta").count() == 0
         assert page.locator("#following-title").text_content() == "Following"
         assert page.locator("#today-opinion-title").text_content() == "Today’s Opinion"
-        assert "Jonathan Haidt · After Babel · 7:15 AM" in page.locator(
-            '[data-card="follow-1"] .follow-meta'
-        ).inner_text()
-        assert "Conrad Black, Jane Example · The New York Sun" in page.locator(
-            '[data-card="follow-2"] .follow-meta'
-        ).inner_text()
+
+        first = page.locator('[data-card="follow-1"]')
+        second = page.locator('[data-card="follow-2"]')
+        assert first.locator(".kicker").text_content() == "Jonathan Haidt"
+        assert first.locator(".time").text_content() == "After Babel · 7:15 AM"
+        assert second.locator(".kicker").text_content() == "Conrad Black, Jane Example"
+        assert second.locator(".time").text_content() == "The New York Sun · Yesterday"
+        assert "lead" not in (first.get_attribute("class") or "").split()
+        assert "lead" not in (second.get_attribute("class") or "").split()
+
+        # Both desks terminate at the exact same card structure and renderer.
+        assert first.locator(":scope > .row > .row-main > .headline").count() == 1
+        ordinary = page.locator(".today-opinion .card").first
+        assert ordinary.locator(":scope > .row > .row-main > .headline").count() == 1
+        assert page.locator(".today-opinion .card.lead").count() >= 1
 
         # The strip may scroll internally, but the paper itself must not widen
         # beyond the phone/landscape viewport.
@@ -143,11 +151,8 @@ def test_following_is_compact_distinct_and_interactive_on_mobile_shapes(
         assert following_title_box["y"] >= tabs_box["y"] + tabs_box["height"] - 1
         assert today_box["y"] >= following_block_box["y"] + following_block_box["height"] - 1
 
-        # Save what a reader actually sees at the requested viewport, not a
-        # browser-composited full-document representation of sticky controls.
         page.screenshot(path=str(ARTIFACTS / f"opinion-{width}x{height}.png"))
 
-        first = page.locator('[data-card="follow-1"]')
         first.tap()
         assert first.get_attribute("aria-expanded") == "true"
         assert first.locator(".sumtext").is_visible()
@@ -160,9 +165,12 @@ def test_following_is_compact_distinct_and_interactive_on_mobile_shapes(
         assert first.locator('a[href^="https://claude.ai/new?q="]').count() == 1
         assert first.locator('a[href^="https://chatgpt.com/?q="]').count() == 1
 
-        # Keyboard activation remains real card behavior after the Following
-        # surface is introduced.
-        second = page.locator('[data-card="follow-2"]')
+        # Ask AI still receives the retained non-rendering provenance fields.
+        claude_href = first.locator('a[href^="https://claude.ai/new?q="]').get_attribute("href")
+        assert claude_href is not None
+        assert "Jonathan%20Haidt" in claude_href
+        assert "After%20Babel" in claude_href
+
         second.focus()
         page.keyboard.press("Enter")
         assert second.get_attribute("aria-expanded") == "true"
