@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-13T18:18:39Z",
+  "updated_at": "2026-09-14T00:25:42Z",
   "last_reconcile_at": "2026-09-13T18:18:39Z",
   "last_roundup": null,
   "items": {
@@ -429,6 +429,23 @@
       "title": "What Is the Good Life?",
       "url": "https://www.theatlantic.com/podcasts/2026/09/what-is-the-good-life/688591/?utm_source=feed",
       "publication": "The Atlantic",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://thefp.com/p/arthur-brooks-americans-cant-grieve-911": {
+      "keys": [
+        "url:https://thefp.com/p/arthur-brooks-americans-cant-grieve-911",
+        "pid:rss:https://www.thefp.com/p/arthur-brooks-americans-cant-grieve-911",
+        "syn:arthur-brooks-why-americans-no-longer-grieve-together|voice:arthur-c-brooks|2026-09-13",
+        "fp:thefp.com|arthur-brooks-why-americans-no-longer-grieve-together|2026-09-13"
+      ],
+      "voice_ids": [
+        "arthur-c-brooks"
+      ],
+      "first_seen": "2026-09-14T00:25:42Z",
+      "published_at": "2026-09-13T22:49:37Z",
+      "title": "Arthur Brooks: Why Americans No Longer Grieve Together",
+      "url": "https://www.thefp.com/p/arthur-brooks-americans-cant-grieve-911",
+      "publication": "The Free Press",
       "first_morning_surfaced_at": null
     },
     "url:https://theglobeandmail.com/opinion/article-its-not-disloyal-to-criticize-the-governments-handling-of-a-trade-war": {
