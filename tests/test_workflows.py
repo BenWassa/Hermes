@@ -26,12 +26,13 @@ EDITION_PATH = "docs/index.html"
 ROUNDUP_PAGE_PATH = "docs/voices/index.html"
 RECENT_PAGE_PATH = "docs/voices/recent/**"
 DAILY_CRON = "37 15 * * *"
-DAILY_BUILD_SCHEDULE = [
-    {"cron": "17 5 * * *", "timezone": "America/Toronto"},
-    {"cron": "37 5 * * *", "timezone": "America/Toronto"},
-    {"cron": "17 6 * * *", "timezone": "America/Toronto"},
-    {"cron": "17 7 * * *", "timezone": "America/Toronto"},
-]
+DAILY_BUILD_SCHEDULE = [{"cron": "17,47 9-12 * * *"}]
+DAILY_PUSH_IGNORES = {
+    EDITION_PATH,
+    WATCH_STATE_PATH,
+    ROUNDUP_STATE_PATH,
+    "docs/voices/**",
+}
 WEEKLY_CRONS = {
     "43 22 * * 0",
     "43 23 * * 0",
@@ -194,16 +195,40 @@ def test_configured_state_paths_match_workflow_contract():
     assert settings.PAGE_PATH == ROUNDUP_PAGE_PATH
 
 
-def test_morning_build_targets_toronto_five_am_with_bounded_recovery():
+def test_morning_build_uses_utc_cadence_with_toronto_window_gate():
     build = load(BUILD)
     build_triggers = triggers(build)
 
     assert "workflow_dispatch" in build_triggers
     assert build_triggers["schedule"] == DAILY_BUILD_SCHEDULE
-    assert all(
-        entry["timezone"] == "America/Toronto"
-        for entry in build_triggers["schedule"]
+    assert all("timezone" not in entry for entry in build_triggers["schedule"])
+
+    gate_script = next(
+        step["run"]
+        for step in build["jobs"]["build"]["steps"]
+        if step.get("name") == "Check whether today's edition already exists"
     )
+    assert "TZ=America/Toronto date +%H" in gate_script
+    assert '"$EVENT" = "schedule"' in gate_script
+    assert '"$LOCAL_HOUR" -lt 5' in gate_script
+    assert '"$LOCAL_HOUR" -gt 7' in gate_script
+
+
+def test_morning_build_push_recovery_is_bounded_and_ignores_generated_paths():
+    build_triggers = triggers(load(BUILD))
+    push = build_triggers["push"]
+
+    assert push["branches"] == ["main"]
+    assert DAILY_PUSH_IGNORES <= set(push["paths-ignore"])
+
+    gate_script = next(
+        step["run"]
+        for step in load(BUILD)["jobs"]["build"]["steps"]
+        if step.get("name") == "Check whether today's edition already exists"
+    )
+    assert '"$EVENT" = "push"' in gate_script
+    assert '"$LOCAL_HOUR" -lt 5' in gate_script
+    assert '"$LOCAL_HOUR" -gt 11' in gate_script
 
 
 def test_morning_build_gates_every_attempt_before_provider_or_gemini_work():
@@ -217,7 +242,8 @@ def test_morning_build_gates_every_attempt_before_provider_or_gemini_work():
 
     assert "TZ=America/Toronto date +%Y-%m-%d" in gate_script
     assert "chore(edition): publish ${TODAY} edition" in gate_script
-    assert "github.event_name" not in gate_script
+    assert "github.event_name" in gate_script
+    assert "workflow_dispatch" not in gate_script
 
     for step_name in ("Set up Python", "Install dependencies", "Build edition", "Commit and push"):
         index = next(
@@ -225,6 +251,15 @@ def test_morning_build_gates_every_attempt_before_provider_or_gemini_work():
         )
         assert index > gate_index
         assert steps[index]["if"] == "steps.gate.outputs.skip != 'true'"
+
+
+def test_morning_build_exposes_required_news_provider_keys():
+    env = env_for(load(BUILD)["jobs"]["build"])
+
+    assert "GEMINI_API_KEY" in env
+    assert "GUARDIAN_API_KEY" in env
+    assert "NYT_API_KEY" in env
+    assert "PERIGON_API_KEY" in env
 
 
 def test_morning_notification_has_no_duplicate_manual_bypass():
