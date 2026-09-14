@@ -2,21 +2,20 @@ name: Build The Daily
 
 on:
   workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/index.html"
+      - "data/voice_watch_state.json"
+      - "data/voice_roundup_state.json"
+      - "docs/voices/**"
   schedule:
-    # Primary publication target: 05:17 America/Toronto. The off-hour minute
-    # avoids GitHub Actions' busiest top-of-hour scheduler window while keeping
-    # the product target inside the 05:00 local hour.
-    - cron: "17 5 * * *"
-      timezone: "America/Toronto"
-    # One same-hour recovery protects the normal by-06:00 target if the primary
-    # scheduled event is delayed or dropped. Later bounded recoveries cover a
-    # wider scheduler outage. Every attempt uses the same early edition gate.
-    - cron: "37 5 * * *"
-      timezone: "America/Toronto"
-    - cron: "17 6 * * *"
-      timezone: "America/Toronto"
-    - cron: "17 7 * * *"
-      timezone: "America/Toronto"
+    # GitHub's timezone-aware Daily schedule was valid but proved unreliable in
+    # production: Sep 13 runs arrived 3.5-4.5h late and all Sep 14 slots were
+    # dropped. Use ordinary UTC scheduling and let the early Toronto-time gate
+    # decide which attempts belong to the 05:00-07:59 local recovery window.
+    # This one cadence covers both EDT and EST without duplicated DST logic.
+    - cron: "17,47 9-12 * * *"
 
 permissions:
   contents: write
@@ -39,6 +38,11 @@ jobs:
         shell: bash
         run: |
           TODAY="$(TZ=America/Toronto date +%Y-%m-%d)"
+          EVENT="${{ github.event_name }}"
+          LOCAL_HOUR="$(TZ=America/Toronto date +%H)"
+          LOCAL_HOUR="${LOCAL_HOUR#0}"
+          if [ -z "$LOCAL_HOUR" ]; then LOCAL_HOUR=0; fi
+
           EDITION_COMMIT="$(
             git log -1 --format=%H \
               --grep="^chore(edition): publish ${TODAY} edition$" \
@@ -48,10 +52,29 @@ jobs:
           if [ -n "$EDITION_COMMIT" ]; then
             echo "Edition ${TODAY} already exists at ${EDITION_COMMIT}; skipping before provider work."
             echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "No ${TODAY} Toronto-calendar edition exists; proceeding."
-            echo "skip=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+
+          # Scheduled UTC slots cover both DST regimes. Only local 05:00-07:59
+          # attempts are real publication/recovery opportunities; the outer UTC
+          # slots exist solely so the same cron works in EDT and EST.
+          if [ "$EVENT" = "schedule" ] && { [ "$LOCAL_HOUR" -lt 5 ] || [ "$LOCAL_HOUR" -gt 7 ]; }; then
+            echo "Scheduled attempt is outside the Toronto 05:00-07:59 recovery window; skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # A meaningful main-branch push can recover a missed edition later in
+          # the same morning. Generated edition/Voice paths are excluded at the
+          # trigger, and this path remains bounded to avoid afternoon rebuilds.
+          if [ "$EVENT" = "push" ] && { [ "$LOCAL_HOUR" -lt 5 ] || [ "$LOCAL_HOUR" -gt 11 ]; }; then
+            echo "Push recovery is outside the Toronto 05:00-11:59 window; skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "No ${TODAY} Toronto-calendar edition exists; proceeding (${EVENT}, Toronto hour ${LOCAL_HOUR})."
+          echo "skip=false" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
         if: steps.gate.outputs.skip != 'true'
@@ -71,6 +94,7 @@ jobs:
           NEWSDATA_API_KEY: ${{ secrets.NEWSDATA_API_KEY }}
           GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
           NYT_API_KEY: ${{ secrets.NYT_API_KEY }}
+          PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
         run: python -m src.build
 
       - name: Commit and push
