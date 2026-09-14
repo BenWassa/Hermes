@@ -5,6 +5,8 @@ name: Core Voices Roundup
 # - a quiet bounded /voices/recent/ shelf for optional browsing;
 # - one screened Sunday digest with bounded recovery attempts;
 # - one weekly screening/synthesis model call at most per invocation;
+# - weekly screening may use public feed/archive descriptions through the same
+#   bounded generic Voice adapters, never article-body scraping;
 # - only the weekly publisher receives Gemini and ntfy capability.
 #
 # Release-time/per-article Voice pushes are retired. The morning edition remains
@@ -93,7 +95,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Publish one screened weekly Voice digest
+      - name: Publish one grounded screened weekly Voice digest
         env:
           GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
           PERIGON_API_KEY: ${{ secrets.PERIGON_API_KEY }}
@@ -103,4 +105,4 @@ jobs:
         run: |
           ARGS=""
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
-          python -m src.voice_digest weekly $ARGS
+          python -m src.voice_weekly weekly $ARGS
