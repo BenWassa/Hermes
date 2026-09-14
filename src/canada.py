@@ -2,12 +2,13 @@
 
 This module is deliberately small and deterministic. It gives the ordinary
 Daily a Canada-national intake lane without creating a new visible section or
-a second model call, and it protects a few known high-significance scheduled
-events from being crowded out of the bounded curation input.
+a second model call. Known high-significance scheduled events are protected
+through both bounded candidate recall and a transient curation-boundary
+priority marker so the editor can distinguish them from ordinary candidates.
 
-Official/public authority is used only to seed an event identity and date.
-Journalistic coverage remains the ordinary editorial material; an event seed
-never forces a story into the finished paper.
+Official/public authority is used only to seed event identity and dates.
+Journalistic coverage remains the editorial material; an event seed by itself
+never becomes a story.
 """
 
 from __future__ import annotations
@@ -79,6 +80,23 @@ on Front Page or Business. Do not force Canadian representation on a quiet day;
 importance still governs the finished paper.
 """
 
+_MAJOR_EVENT_INSTRUCTION = """
+
+ACTIVE SCHEDULED MAJOR EVENTS
+Some input records may carry an `editorial_priority` field naming an active
+scheduled major event that Hermes deliberately protected from candidate
+crowd-out. Treat that marker as a strong editorial recall signal, not as source
+content and not as permission to invent facts.
+
+When credible current journalistic reporting carries this marker, normally
+include at least one distinct treatment of that event in Front Page or the
+appropriate desk. It is reasonable to omit all marked treatments only when the
+reporting is clearly stale, duplicates a stronger included treatment of the
+same event, is too weak to summarize safely, or the event has materially failed
+to occur / ceased to be newsworthy. Do not create a story from the event seed
+itself, and do not manufacture Canadian filler.
+"""
+
 _SPACE_RE = re.compile(r"\s+")
 
 
@@ -112,8 +130,19 @@ def active_major_events(today: dt.date) -> tuple[dict, ...]:
     )
 
 
+def _event_by_id(event_id: str) -> dict | None:
+    return next((event for event in MAJOR_NEWS_EVENTS if event["id"] == event_id), None)
+
+
 def _search_text(story: dict) -> str:
-    text = f"{story.get('title', '')} {story.get('description', '')}".casefold()
+    # Input stories use title/description. Finished model stories use
+    # headline/sub/summary. Supporting both shapes lets final-selection
+    # observability recognize a stronger duplicate treatment even when it comes
+    # from a different source URL.
+    text = " ".join(
+        str(story.get(key, "") or "")
+        for key in ("title", "description", "headline", "sub", "summary")
+    ).casefold()
     text = text.replace("c$", "$")
     return _SPACE_RE.sub(" ", text).strip()
 
@@ -131,6 +160,68 @@ def matching_major_event_ids(story: dict, today: dt.date) -> tuple[str, ...]:
                 matches.append(event["id"])
                 break
     return tuple(matches)
+
+
+def editorial_priority(story: dict, today: dt.date) -> str:
+    """Transient model-only priority for a real article matching an active event."""
+    titles = []
+    for event_id in matching_major_event_ids(story, today):
+        event = _event_by_id(event_id)
+        if event:
+            titles.append(event["title"])
+    if not titles:
+        return ""
+    return "active scheduled major event: " + "; ".join(titles)
+
+
+def editorial_instruction(today: dt.date) -> str:
+    """Single-call editorial contract, with event pressure only while active."""
+    instruction = EDITORIAL_INSTRUCTION
+    if active_major_events(today):
+        instruction += _MAJOR_EVENT_INSTRUCTION
+    return instruction
+
+
+def final_event_coverage(
+    sections: list[dict], input_stories: list[dict], today: dt.date
+) -> dict[str, dict]:
+    """Summarize whether protected event candidates survived final selection.
+
+    Exact input links prove survival directly. Event-text matching on final
+    cards also counts a stronger duplicate treatment from another source, so
+    observability never pressures the editor to publish a second redundant item.
+    """
+    active = active_major_events(today)
+    if not active:
+        return {}
+
+    coverage: dict[str, dict] = {}
+    for event in active:
+        event_id = event["id"]
+        matched_inputs = [
+            story for story in input_stories if event_id in matching_major_event_ids(story, today)
+        ]
+        if not matched_inputs:
+            continue
+        input_links = {str(story.get("link") or "") for story in matched_inputs if story.get("link")}
+        selected_sections: list[str] = []
+        selected_count = 0
+        for section in sections:
+            for story in section.get("stories", []):
+                exact = bool(story.get("link")) and str(story.get("link")) in input_links
+                semantic = event_id in matching_major_event_ids(story, today)
+                if exact or semantic:
+                    selected_count += 1
+                    label = str(section.get("id") or section.get("label") or "unknown")
+                    if label not in selected_sections:
+                        selected_sections.append(label)
+        coverage[event_id] = {
+            "title": event["title"],
+            "input": len(matched_inputs),
+            "selected": selected_count,
+            "sections": selected_sections,
+        }
+    return coverage
 
 
 def is_canada_national(story: dict) -> bool:
