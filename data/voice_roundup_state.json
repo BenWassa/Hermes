@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-14T19:55:12Z",
+  "updated_at": "2026-09-15T19:09:35Z",
   "last_reconcile_at": "2026-09-14T19:55:12Z",
   "last_roundup": {
     "period_id": "2026-09-13",
@@ -27,6 +27,40 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/a-simple-model-of-ai-aided-economic-growth.html?utm_source=rss&utm_medium=rss&utm_campaign=a-simple-model-of-ai-aided-economic-growth",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-13T18:18:39Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/callum-williams-on-cybersecurity-prices.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/callum-williams-on-cybersecurity-prices.html",
+        "pid:rss:https://marginalrevolution.com/?p=93817",
+        "syn:callum-williams-on-cybersecurity-prices|voice:tyler-cowen|2026-09-15",
+        "fp:marginalrevolution.com|callum-williams-on-cybersecurity-prices|2026-09-15"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-15T19:09:35Z",
+      "published_at": "2026-09-15T18:40:18Z",
+      "title": "Callum Williams on cybersecurity prices",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/callum-williams-on-cybersecurity-prices.html?utm_source=rss&utm_medium=rss&utm_campaign=callum-williams-on-cybersecurity-prices",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/did-the-aca-reduce-mortality.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/did-the-aca-reduce-mortality.html",
+        "pid:rss:https://marginalrevolution.com/?p=93807",
+        "syn:did-the-aca-reduce-mortality|voice:tyler-cowen|2026-09-15",
+        "fp:marginalrevolution.com|did-the-aca-reduce-mortality|2026-09-15"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-15T19:09:35Z",
+      "published_at": "2026-09-15T04:30:10Z",
+      "title": "Did the ACA reduce mortality?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/did-the-aca-reduce-mortality.html?utm_source=rss&utm_medium=rss&utm_campaign=did-the-aca-reduce-mortality",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/does-ai-assistance-enhance-or-erode-expertise.html": {
       "keys": [
@@ -334,6 +368,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-13T18:18:39Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/those-new-service-sector-jobs-17.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/those-new-service-sector-jobs-17.html",
+        "pid:rss:https://marginalrevolution.com/?p=93810",
+        "syn:those-new-service-sector-jobs|voice:tyler-cowen|2026-09-15",
+        "fp:marginalrevolution.com|those-new-service-sector-jobs|2026-09-15"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-15T19:09:35Z",
+      "published_at": "2026-09-15T07:33:49Z",
+      "title": "Those new service sector jobs",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/those-new-service-sector-jobs-17.html?utm_source=rss&utm_medium=rss&utm_campaign=those-new-service-sector-jobs-17",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-569.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-569.html",
@@ -348,6 +399,23 @@
       "published_at": "2026-09-10T15:47:02Z",
       "title": "Thursday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-569.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-569",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-586.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-586.html",
+        "pid:rss:https://marginalrevolution.com/?p=93802",
+        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-09-15",
+        "fp:marginalrevolution.com|tuesday-assorted-links|2026-09-15"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-15T19:09:35Z",
+      "published_at": "2026-09-15T16:13:21Z",
+      "title": "Tuesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-586.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-586",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -456,6 +524,23 @@
       "url": "https://www.nytimes.com/2026/09/11/podcasts/hardfork-ezra-klein-jasmine-sun.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
+    "url:https://nytimes.com/2026/09/15/opinion/ezra-klein-podcast-matt-sheehan.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/09/15/opinion/ezra-klein-podcast-matt-sheehan.html",
+        "pid:rss:https://www.nytimes.com/2026/09/15/opinion/ezra-klein-podcast-matt-sheehan.html",
+        "syn:the-but-china-dilemma-driving-the-a-i-race|voice:ezra-klein|2026-09-15",
+        "fp:nytimes.com|the-but-china-dilemma-driving-the-a-i-race|2026-09-15"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-09-15T19:09:35Z",
+      "published_at": "2026-09-15T09:03:09Z",
+      "title": "The ‘But China!’ Dilemma Driving the A.I. Race",
+      "url": "https://www.nytimes.com/2026/09/15/opinion/ezra-klein-podcast-matt-sheehan.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
     },
     "url:https://persuasion.community/p/the-beginning-of-the-end-of-history": {
       "keys": [
