@@ -7,24 +7,48 @@ on:
       - ".github/workflows/recover-2026-09-16.yml"
 
 permissions:
-  actions: write
   contents: read
 
 jobs:
-  dispatch:
+  notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch Build The Daily on main
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify recovered edition
+        id: gate
         shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          curl --fail-with-body --silent --show-error \
-            --request POST \
-            --header "Accept: application/vnd.github+json" \
-            --header "Authorization: Bearer ${GH_TOKEN}" \
-            --header "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/dispatches" \
-            --data '{"ref":"main"}'
-          echo "Dispatched Build The Daily via workflow_dispatch on main."
+          TODAY="$(TZ=America/Toronto date +%Y-%m-%d)"
+          LAST="$(TZ=America/Toronto git log -1 --format=%cd --date=format-local:'%Y-%m-%d' -- docs/index.html 2>/dev/null || true)"
+          SUBJECT="$(git log -1 --format=%s -- docs/index.html 2>/dev/null || true)"
+          if [ "$TODAY" = "2026-09-16" ] && [ "$LAST" = "$TODAY" ] && [ "$SUBJECT" = "chore(edition): publish 2026-09-16 edition" ]; then
+            echo "send=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Recovered edition verification failed: today=$TODAY last=${LAST:-none} subject=${SUBJECT:-none}" >&2
+            exit 1
+          fi
+
+      - name: Send recovered Daily notification
+        if: steps.gate.outputs.send == 'true'
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$NTFY_TOPIC" ]; then
+            echo "NTFY_TOPIC secret not set; no notification sent."
+            exit 0
+          fi
+          URL="${PAGES_URL:-https://BenWassa.github.io/Hermes/}"
+          curl -fsS \
+            -H "Title: The Daily — Sep 16" \
+            -H "Click: ${URL}" \
+            -H "Tags: newspaper" \
+            -d "Today's recovered edition is ready." \
+            "https://ntfy.sh/${NTFY_TOPIC}"
