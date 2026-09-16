@@ -7,7 +7,9 @@ capability; release-time article notifications are retired.
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -32,6 +34,9 @@ DAILY_PUSH_IGNORES = {
     WATCH_STATE_PATH,
     ROUNDUP_STATE_PATH,
     "docs/voices/**",
+    "docs/open/**",
+    "docs/closed/**",
+    "docs/ISSUE_TRACKING.md",
 }
 WEEKLY_CRONS = {
     "43 22 * * 0",
@@ -39,6 +44,7 @@ WEEKLY_CRONS = {
     "43 0 * * 1",
     "43 22 * * 1",
 }
+TORONTO = ZoneInfo("America/Toronto")
 
 
 def load(name: str) -> dict:
@@ -68,6 +74,27 @@ def env_for(job: dict) -> dict:
 def triggers(workflow: dict) -> dict:
     # PyYAML 1.1 interprets bare `on:` as True.
     return workflow.get("on", workflow.get(True))
+
+
+def named_step(workflow: dict, name: str) -> dict:
+    return next(
+        step
+        for step in workflow["jobs"]["build"]["steps"]
+        if step.get("name") == name
+    )
+
+
+def expected_daily_gate_outcome(
+    *, event: str, local_hour: int, edition_exists: bool
+) -> str:
+    """Executable statement of the locked #64 gate policy."""
+    if edition_exists:
+        return "already-published-noop"
+    if event == "schedule" and local_hour < 5:
+        return "pre-05-scheduled-noop"
+    if event == "push" and not 5 <= local_hour <= 11:
+        return "push-window-noop"
+    return "build-required"
 
 
 def test_release_watcher_is_manual_read_only_inspection_only():
@@ -195,7 +222,7 @@ def test_configured_state_paths_match_workflow_contract():
     assert settings.PAGE_PATH == ROUNDUP_PAGE_PATH
 
 
-def test_morning_build_uses_utc_cadence_with_toronto_window_gate():
+def test_morning_build_uses_bounded_utc_cadence_with_toronto_schedule_floor():
     build = load(BUILD)
     build_triggers = triggers(build)
 
@@ -203,32 +230,103 @@ def test_morning_build_uses_utc_cadence_with_toronto_window_gate():
     assert build_triggers["schedule"] == DAILY_BUILD_SCHEDULE
     assert all("timezone" not in entry for entry in build_triggers["schedule"])
 
-    gate_script = next(
-        step["run"]
-        for step in build["jobs"]["build"]["steps"]
-        if step.get("name") == "Check whether today's edition already exists"
-    )
+    gate_script = named_step(build, "Check whether today's edition already exists")["run"]
     assert "TZ=America/Toronto date +%H" in gate_script
     assert '"$EVENT" = "schedule"' in gate_script
     assert '"$LOCAL_HOUR" -lt 5' in gate_script
-    assert '"$LOCAL_HOUR" -gt 7' in gate_script
+    assert '"$LOCAL_HOUR" -gt 7' not in gate_script
+    assert "pre-05-scheduled-noop" in gate_script
 
 
-def test_morning_build_push_recovery_is_bounded_and_ignores_generated_paths():
+@pytest.mark.parametrize(
+    ("event", "local_hour", "edition_exists", "expected"),
+    [
+        ("schedule", 4, False, "pre-05-scheduled-noop"),
+        ("schedule", 5, False, "build-required"),
+        ("schedule", 7, False, "build-required"),
+        ("schedule", 10, False, "build-required"),
+        ("schedule", 14, False, "build-required"),
+        ("schedule", 23, False, "build-required"),
+        ("schedule", 10, True, "already-published-noop"),
+        ("push", 4, False, "push-window-noop"),
+        ("push", 5, False, "build-required"),
+        ("push", 11, False, "build-required"),
+        ("push", 12, False, "push-window-noop"),
+        ("workflow_dispatch", 2, False, "build-required"),
+        ("workflow_dispatch", 22, False, "build-required"),
+        ("workflow_dispatch", 22, True, "already-published-noop"),
+    ],
+)
+def test_daily_gate_policy_matrix(event, local_hour, edition_exists, expected):
+    assert (
+        expected_daily_gate_outcome(
+            event=event,
+            local_hour=local_hour,
+            edition_exists=edition_exists,
+        )
+        == expected
+    )
+
+
+def test_daily_utc_cadence_covers_05_hour_in_edt_and_est():
+    cron_minutes = (17, 47)
+    cron_hours = range(9, 13)
+
+    for day in ((2026, 7, 15), (2026, 12, 15)):
+        local_times = [
+            datetime(*day, hour, minute, tzinfo=timezone.utc).astimezone(TORONTO)
+            for hour in cron_hours
+            for minute in cron_minutes
+        ]
+        assert any(local.hour == 5 for local in local_times)
+
+    winter_times = [
+        datetime(2026, 12, 15, hour, minute, tzinfo=timezone.utc).astimezone(TORONTO)
+        for hour in cron_hours
+        for minute in cron_minutes
+    ]
+    assert any(local.hour < 5 for local in winter_times)
+
+
+def test_daily_gate_uses_current_toronto_date_across_delayed_midnight_delivery():
+    gate_script = named_step(load(BUILD), "Check whether today's edition already exists")["run"]
+    nominal_slot = datetime(2026, 9, 16, 12, 47, tzinfo=timezone.utc).astimezone(TORONTO)
+    delivered_before_05 = datetime(2026, 9, 17, 4, 30, tzinfo=TORONTO)
+    delivered_after_05 = datetime(2026, 9, 17, 10, 20, tzinfo=TORONTO)
+
+    assert nominal_slot.date() != delivered_before_05.date()
+    assert (
+        expected_daily_gate_outcome(
+            event="schedule",
+            local_hour=delivered_before_05.hour,
+            edition_exists=False,
+        )
+        == "pre-05-scheduled-noop"
+    )
+    assert (
+        expected_daily_gate_outcome(
+            event="schedule",
+            local_hour=delivered_after_05.hour,
+            edition_exists=False,
+        )
+        == "build-required"
+    )
+    assert "TZ=America/Toronto date +%Y-%m-%d" in gate_script
+    assert "github.event.schedule" not in gate_script
+
+
+def test_morning_build_push_recovery_is_bounded_and_ignores_operational_paths():
     build_triggers = triggers(load(BUILD))
     push = build_triggers["push"]
 
     assert push["branches"] == ["main"]
     assert DAILY_PUSH_IGNORES <= set(push["paths-ignore"])
 
-    gate_script = next(
-        step["run"]
-        for step in load(BUILD)["jobs"]["build"]["steps"]
-        if step.get("name") == "Check whether today's edition already exists"
-    )
+    gate_script = named_step(load(BUILD), "Check whether today's edition already exists")["run"]
     assert '"$EVENT" = "push"' in gate_script
     assert '"$LOCAL_HOUR" -lt 5' in gate_script
     assert '"$LOCAL_HOUR" -gt 11' in gate_script
+    assert "push-window-noop" in gate_script
 
 
 def test_morning_build_gates_every_attempt_before_provider_or_gemini_work():
@@ -244,6 +342,7 @@ def test_morning_build_gates_every_attempt_before_provider_or_gemini_work():
     assert "chore(edition): publish ${TODAY} edition" in gate_script
     assert "github.event_name" in gate_script
     assert "workflow_dispatch" not in gate_script
+    assert "already-published-noop" in gate_script
 
     for step_name in ("Set up Python", "Install dependencies", "Build edition", "Commit and push"):
         index = next(
@@ -251,6 +350,31 @@ def test_morning_build_gates_every_attempt_before_provider_or_gemini_work():
         )
         assert index > gate_index
         assert steps[index]["if"] == "steps.gate.outputs.skip != 'true'"
+
+
+def test_morning_build_exposes_explicit_publication_and_noop_outcomes():
+    build = load(BUILD)
+    gate_script = named_step(build, "Check whether today's edition already exists")["run"]
+    publish_script = named_step(build, "Commit and push")["run"]
+    report = named_step(build, "Report Daily outcome")
+
+    for outcome in (
+        "already-published-noop",
+        "pre-05-scheduled-noop",
+        "push-window-noop",
+        "build-required",
+    ):
+        assert outcome in gate_script
+
+    assert "outcome=published" in publish_script
+    assert "outcome=build-failure" in publish_script
+    assert "produced no docs/index.html change" in publish_script
+    assert report["if"] == "always()"
+    assert "$GITHUB_STEP_SUMMARY" in report["run"]
+    assert "Daily run outcome" in report["run"]
+    assert "Edition existed at gate" in report["run"]
+    assert "Outcome:" in report["run"]
+    assert "build-failure" in report["run"]
 
 
 def test_morning_build_exposes_required_news_provider_keys():
@@ -273,6 +397,7 @@ def test_morning_notification_has_no_duplicate_manual_bypass():
     assert "github.event.workflow_run.conclusion" in notify_script
     assert "COMMIT_EPOCH" in notify_script
     assert "RUN_STARTED_EPOCH" in notify_script
+    assert '"$LAST" = "$TODAY"' in notify_script
     assert '"$COMMIT_EPOCH" -ge "$RUN_STARTED_EPOCH"' in notify_script
 
 

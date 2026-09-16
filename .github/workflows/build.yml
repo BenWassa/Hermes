@@ -14,10 +14,10 @@ on:
       - "docs/voices/**"
   schedule:
     # GitHub's timezone-aware Daily schedule was valid but proved unreliable in
-    # production: Sep 13 runs arrived 3.5-4.5h late and all Sep 14 slots were
-    # dropped. Use ordinary UTC scheduling and let the early Toronto-time gate
-    # decide which attempts belong to the 05:00-07:59 local recovery window.
-    # This one cadence covers both EDT and EST without duplicated DST logic.
+    # production. Use a bounded ordinary-UTC cadence that covers the intended
+    # 05:00 Toronto hour in both EDT and EST. The gate rejects scheduled work
+    # before 05:00 local, but delayed delivery after 05:00 may recover today's
+    # missing edition regardless of how late GitHub eventually starts the run.
     - cron: "17,47 9-12 * * *"
 
 permissions:
@@ -42,9 +42,15 @@ jobs:
         run: |
           TODAY="$(TZ=America/Toronto date +%Y-%m-%d)"
           EVENT="${{ github.event_name }}"
+          LOCAL_TIME="$(TZ=America/Toronto date +'%H:%M:%S %Z')"
           LOCAL_HOUR="$(TZ=America/Toronto date +%H)"
           LOCAL_HOUR="${LOCAL_HOUR#0}"
           if [ -z "$LOCAL_HOUR" ]; then LOCAL_HOUR=0; fi
+
+          echo "today=${TODAY}" >> "$GITHUB_OUTPUT"
+          echo "event=${EVENT}" >> "$GITHUB_OUTPUT"
+          echo "local_time=${LOCAL_TIME}" >> "$GITHUB_OUTPUT"
+          echo "edition_exists=false" >> "$GITHUB_OUTPUT"
 
           EDITION_COMMIT="$(
             git log -1 --format=%H \
@@ -54,29 +60,35 @@ jobs:
 
           if [ -n "$EDITION_COMMIT" ]; then
             echo "Edition ${TODAY} already exists at ${EDITION_COMMIT}; skipping before provider work."
+            echo "edition_exists=true" >> "$GITHUB_OUTPUT"
+            echo "outcome=already-published-noop" >> "$GITHUB_OUTPUT"
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # Scheduled UTC slots cover both DST regimes. Only local 05:00-07:59
-          # attempts are real publication/recovery opportunities; the outer UTC
-          # slots exist solely so the same cron works in EDT and EST.
-          if [ "$EVENT" = "schedule" ] && { [ "$LOCAL_HOUR" -lt 5 ] || [ "$LOCAL_HOUR" -gt 7 ]; }; then
-            echo "Scheduled attempt is outside the Toronto 05:00-07:59 recovery window; skipping."
+          # Scheduled UTC slots are intentionally bounded, but actual GitHub
+          # delivery can be arbitrarily late. Before 05:00 Toronto the current
+          # day's edition must not publish; at or after 05:00, edition absence is
+          # the authority and there is deliberately no scheduled upper-hour veto.
+          if [ "$EVENT" = "schedule" ] && [ "$LOCAL_HOUR" -lt 5 ]; then
+            echo "Scheduled attempt arrived before Toronto 05:00; skipping."
+            echo "outcome=pre-05-scheduled-noop" >> "$GITHUB_OUTPUT"
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           # A meaningful main-branch push can recover a missed edition later in
-          # the same morning. Generated edition/Voice paths are excluded at the
-          # trigger, and this path remains bounded to avoid afternoon rebuilds.
+          # the same morning. Generated edition/Voice/issue-doc paths are excluded
+          # at the trigger, and this path remains bounded to avoid afternoon rebuilds.
           if [ "$EVENT" = "push" ] && { [ "$LOCAL_HOUR" -lt 5 ] || [ "$LOCAL_HOUR" -gt 11 ]; }; then
             echo "Push recovery is outside the Toronto 05:00-11:59 window; skipping."
+            echo "outcome=push-window-noop" >> "$GITHUB_OUTPUT"
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          echo "No ${TODAY} Toronto-calendar edition exists; proceeding (${EVENT}, Toronto hour ${LOCAL_HOUR})."
+          echo "No ${TODAY} Toronto-calendar edition exists; proceeding (${EVENT}, Toronto ${LOCAL_TIME})."
+          echo "outcome=build-required" >> "$GITHUB_OUTPUT"
           echo "skip=false" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -101,6 +113,7 @@ jobs:
         run: python -m src.build
 
       - name: Commit and push
+        id: publish
         if: steps.gate.outputs.skip != 'true'
         shell: bash
         run: |
@@ -112,8 +125,9 @@ jobs:
           git add docs/index.html
 
           if git diff --cached --quiet; then
-            echo "No changes to commit."
-            exit 0
+            echo "::error::Build completed for a missing Toronto-calendar edition but produced no docs/index.html change."
+            echo "outcome=build-failure" >> "$GITHUB_OUTPUT"
+            exit 1
           fi
 
           TODAY="$(TZ=America/Toronto date +%Y-%m-%d)"
@@ -122,11 +136,13 @@ jobs:
           BRANCH="${GITHUB_REF_NAME:-main}"
           for attempt in 1 2 3 4 5; do
             if git push origin "HEAD:${BRANCH}"; then
+              echo "outcome=published" >> "$GITHUB_OUTPUT"
               exit 0
             fi
 
             if [ "$attempt" -eq 5 ]; then
               echo "Push failed after ${attempt} attempts." >&2
+              echo "outcome=build-failure" >> "$GITHUB_OUTPUT"
               exit 1
             fi
 
@@ -135,3 +151,35 @@ jobs:
             git rebase "origin/${BRANCH}"
             sleep $((attempt * 2))
           done
+
+      - name: Report Daily outcome
+        if: always()
+        shell: bash
+        run: |
+          STATUS="${{ job.status }}"
+          GATE_OUTCOME="${{ steps.gate.outputs.outcome }}"
+          PUBLISH_OUTCOME="${{ steps.publish.outputs.outcome }}"
+          OUTCOME="$GATE_OUTCOME"
+
+          if [ "$STATUS" != "success" ]; then
+            OUTCOME="${PUBLISH_OUTCOME:-build-failure}"
+          elif [ -n "$PUBLISH_OUTCOME" ]; then
+            OUTCOME="$PUBLISH_OUTCOME"
+          fi
+
+          if [ -z "$OUTCOME" ]; then
+            OUTCOME="build-failure"
+          fi
+
+          {
+            echo "## Daily run outcome"
+            echo
+            echo "- Toronto date: ${{ steps.gate.outputs.today || 'unknown' }}"
+            echo "- Trigger: ${{ steps.gate.outputs.event || github.event_name }}"
+            echo "- Toronto gate time: ${{ steps.gate.outputs.local_time || 'unknown' }}"
+            echo "- Edition existed at gate: ${{ steps.gate.outputs.edition_exists || 'unknown' }}"
+            echo "- Outcome: \`${OUTCOME}\`"
+            echo "- Job status: \`${STATUS}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          echo "Daily outcome: ${OUTCOME}"

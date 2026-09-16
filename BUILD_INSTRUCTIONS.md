@@ -13,8 +13,10 @@ Hermes publishes one Toronto-calendar morning newspaper per day to GitHub Pages
 and sends at most one morning ntfy notification after a successful publication.
 
 The normal publication target is the **05:00 America/Toronto hour**, with 05:17
-as the first intended attempt. Normal completion should be before 06:00 local,
-with bounded same-morning recovery if GitHub Actions delays or drops a run.
+as the first intended attempt. Normal completion should be before 06:00 local.
+The scheduled cadence is bounded, but if GitHub delivers one of those scheduled
+runs hours late, it may still recover the current Toronto day's missing edition
+once 05:00 local has passed.
 
 The finished paper retains the existing visible desks and product authorities.
 Sports remains deterministic and outside the ordinary Gemini-owned story pool.
@@ -52,14 +54,20 @@ Use ordinary **UTC cron**, not GitHub's timezone-aware schedule path:
 - cron: "17,47 9-12 * * *"
 ```
 
-This UTC envelope covers the required Toronto morning under both EDT and EST.
-Immediately after checkout, the workflow computes `America/Toronto` local time.
-Only scheduled attempts in **05:00–07:59 Toronto** may proceed. Outer UTC slots
-that exist only for DST coverage stop before Python setup, provider requests or
-Gemini work.
+This bounded UTC envelope covers the required Toronto morning under both EDT and
+EST. Immediately after checkout, the workflow computes the current
+`America/Toronto` calendar date and local time.
 
-The first useful slot is 05:17 local. The half-hour cadence supplies multiple
-bounded recovery opportunities without duplicating editions or model calls.
+Scheduled attempts that actually start **before 05:00 Toronto** stop before
+Python setup, provider requests or Gemini work. At or after 05:00, there is no
+scheduled upper-hour veto: if today's exact Toronto-calendar edition commit is
+still absent, a delayed scheduled run may recover it regardless of how late
+GitHub eventually starts that run.
+
+The first nominal useful slot is 05:17 local. The half-hour cadence supplies a
+bounded set of publication/recovery opportunities; accepting delayed delivery
+does not add new cron slots or create all-day polling. In EST, nominal UTC slots
+that map before 05:00 remain deliberate no-ops.
 
 ### Main-push recovery
 
@@ -68,12 +76,16 @@ A meaningful code/config push to `main` may recover a missing edition during
 trigger, including:
 
 - `docs/index.html`;
+- `docs/open/**`;
+- `docs/closed/**`;
+- `docs/ISSUE_TRACKING.md`;
 - `data/voice_watch_state.json`;
 - `data/voice_roundup_state.json`;
 - `docs/voices/**`.
 
 This makes a real morning merge an opportunistic recovery signal without
-creating recursion from the edition commit or routine Voice-state noise.
+creating recursion from the edition commit, issue-document housekeeping, or
+routine Voice-state noise.
 
 ### Manual recovery
 
@@ -101,6 +113,10 @@ not cause a lost edition.
 
 At most one build should perform provider/model work for a date after the first
 edition has become durable.
+
+A build that passed the missing-edition gate but produced no `docs/index.html`
+change is treated as a build failure rather than a successful no-op. This keeps
+a stale Daily from being hidden behind a green workflow conclusion.
 
 ## 5. Production credentials
 
@@ -187,7 +203,25 @@ It may notify only when:
 
 A later scheduled/push/manual no-op therefore cannot send a second morning push.
 
-## 10. Verification gate
+## 10. Actions outcome observability
+
+Every Daily run writes an explicit summary containing the Toronto date, trigger,
+Toronto gate time, whether the edition already existed, final outcome, and job
+status.
+
+Normal outcomes are:
+
+- `published`;
+- `already-published-noop`;
+- `pre-05-scheduled-noop`;
+- `push-window-noop`;
+- `build-failure`.
+
+A legitimate no-op may still have an overall Actions conclusion of `success`,
+but the summary must state why nothing was published. A missing-edition build
+that fails to produce an edition is not a legitimate no-op and must fail.
+
+## 11. Verification gate
 
 Before merging any Daily workflow/runtime change:
 
@@ -201,10 +235,13 @@ CI must keep the deterministic + rendered-browser suite green.
 
 Workflow tests must explicitly protect:
 
-- UTC schedule shape and Toronto local-time gate;
-- bounded push recovery and generated-path exclusions;
+- bounded UTC schedule shape and the 05:00 Toronto scheduled minimum;
+- delayed scheduled recovery with no post-05 upper-hour veto;
+- Toronto date-boundary and DST semantics;
+- bounded push recovery and generated/issue-doc path exclusions;
 - unrestricted manual recovery;
 - edition-exists gating before providers/Gemini;
+- explicit publication/no-op Actions outcomes;
 - production provider credential wiring, including Perigon;
 - independent non-cancelling Daily/Voice concurrency;
 - bounded git retry/rebase publication;
@@ -212,14 +249,15 @@ Workflow tests must explicitly protect:
 
 Live source probes are deliberate operator actions, not routine CI dependencies.
 
-## 11. Incident procedure
+## 12. Incident procedure
 
 When an edition is missing:
 
 1. Check whether a `Build The Daily` run was instantiated at all.
 2. If no run exists, treat it as scheduler/recovery failure, not a provider or
    Gemini failure.
-3. If a run exists, inspect its gate and failing stage before changing sources.
+3. If a run exists, inspect its **Daily run outcome** summary and failing stage
+   before changing sources.
 4. Use `workflow_dispatch` for immediate recovery when needed.
 5. Confirm the edition commit exists and Pages deployment succeeds.
 6. Confirm only the producing run generated the morning notification.

@@ -4,12 +4,14 @@ An autonomous overnight pipeline that assembles a personalized Toronto morning
 newspaper, renders it as a static web page, and pushes a notification after a
 successful publication. The publication target remains 05:17 America/Toronto.
 GitHub is scheduled through a bounded UTC cadence that covers both EDT and EST;
-an early Toronto-time gate admits automatic attempts only during the intended
-morning window. A meaningful `main` push can also recover a missed edition later
-that morning, while manual dispatch remains available at any hour. World and
-business news come from the Guardian, NYT, and Perigon APIs; Toronto local news
-comes from RSS. Google Gemini dedupes, sections, ranks, and summarizes. The
-result deploys to GitHub Pages and an ntfy.sh push links straight to it.
+a Toronto-time gate blocks scheduled work before 05:00, while a delivered
+scheduled run at or after 05:00 may recover the current day's missing edition
+regardless of how late GitHub starts it. A meaningful `main` push can also
+recover a missed edition through 11:59, while manual dispatch remains available
+at any hour. World and business news come from the Guardian, NYT, and Perigon
+APIs; Toronto local news comes from RSS. Google Gemini dedupes, sections, ranks,
+and summarizes. The result deploys to GitHub Pages and an ntfy.sh push links
+straight to it.
 
 > v2 of this repo. The previous React/Firebase intelligence dashboard ("Hermes
 > v1") is preserved under [archive/v1-hermes/](archive/v1-hermes/) and tagged
@@ -277,11 +279,13 @@ product.
 
 - [.github/workflows/build.yml](.github/workflows/build.yml) — targets 05:17
   America/Toronto through ordinary UTC cron slots spanning both EDT and EST.
-  The early gate admits scheduled work only from 05:00–07:59 Toronto, permits a
-  meaningful `main` push to recover a missing edition through 11:59, and leaves
-  manual dispatch unrestricted. Every path no-ops before source/model work once
-  that Toronto-calendar edition exists. Generated Daily/Voice paths are ignored
-  by the push recovery trigger.
+  Scheduled work before 05:00 Toronto no-ops; once 05:00 has passed, a delivered
+  scheduled run may recover today's missing edition with no upper-hour cutoff.
+  A meaningful `main` push may recover through 11:59, while manual dispatch is
+  unrestricted. Every path no-ops before source/model work once that
+  Toronto-calendar edition exists. Generated Daily/Voice paths and issue-doc
+  housekeeping paths are ignored by the push recovery trigger. The run summary
+  explicitly records publication versus each legitimate no-op.
 - [.github/workflows/notify.yml](.github/workflows/notify.yml) — sends the one
   morning Daily push only after a run actually publishes today's edition.
 - [.github/workflows/voice-roundup.yml](.github/workflows/voice-roundup.yml) —
