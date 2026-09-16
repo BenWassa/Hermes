@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-15T19:09:35Z",
-  "last_reconcile_at": "2026-09-14T19:55:12Z",
+  "updated_at": "2026-09-16T19:02:10Z",
+  "last_reconcile_at": "2026-09-16T19:02:10Z",
   "last_roundup": {
     "period_id": "2026-09-13",
     "cutoff": "2026-09-13T21:00:00Z",
@@ -334,6 +334,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-cyber-risk.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-cyber-risk.html",
+        "pid:rss:https://marginalrevolution.com/?p=93797",
+        "syn:the-economics-of-cyber-risk|voice:tyler-cowen|2026-09-16",
+        "fp:marginalrevolution.com|the-economics-of-cyber-risk|2026-09-16"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-16T19:02:10Z",
+      "published_at": "2026-09-16T07:30:24Z",
+      "title": "The economics of cyber risk",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-cyber-risk.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-cyber-risk",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html",
@@ -436,6 +453,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-12T17:47:52Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/very-good-news.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/very-good-news.html",
+        "pid:rss:https://marginalrevolution.com/?p=93819",
+        "syn:very-good-news|voice:tyler-cowen|2026-09-16",
+        "fp:marginalrevolution.com|very-good-news|2026-09-16"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-16T19:02:10Z",
+      "published_at": "2026-09-16T13:12:00Z",
+      "title": "Very good news",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/very-good-news.html?utm_source=rss&utm_medium=rss&utm_campaign=very-good-news",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-570.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-570.html",
@@ -453,6 +487,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-10T18:38:50Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-571.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-571.html",
+        "pid:rss:https://marginalrevolution.com/?p=93814",
+        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-09-16",
+        "fp:marginalrevolution.com|wednesday-assorted-links|2026-09-16"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-16T19:02:10Z",
+      "published_at": "2026-09-16T16:30:58Z",
+      "title": "Wednesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-571.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-571",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-should-i-ask-kevin-roose.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-should-i-ask-kevin-roose.html",
@@ -469,6 +520,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/what-should-i-ask-kevin-roose.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-kevin-roose",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-10T18:38:50Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/when-discussing-ai-policy-start-with-china.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/when-discussing-ai-policy-start-with-china.html",
+        "pid:rss:https://marginalrevolution.com/?p=93815",
+        "syn:when-discussing-ai-policy-start-with-china|voice:tyler-cowen|2026-09-16",
+        "fp:marginalrevolution.com|when-discussing-ai-policy-start-with-china|2026-09-16"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-16T19:02:10Z",
+      "published_at": "2026-09-16T04:58:51Z",
+      "title": "When discussing AI policy, start with China",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/when-discussing-ai-policy-start-with-china.html?utm_source=rss&utm_medium=rss&utm_campaign=when-discussing-ai-policy-start-with-china",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
     },
     "url:https://nytimes.com/2026/09/08/opinion/ezra-klein-podcast-anton-jager.html": {
       "keys": [
@@ -540,7 +608,7 @@
       "title": "The ‘But China!’ Dilemma Driving the A.I. Race",
       "url": "https://www.nytimes.com/2026/09/15/opinion/ezra-klein-podcast-matt-sheehan.html",
       "publication": "The New York Times",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
     },
     "url:https://persuasion.community/p/the-beginning-of-the-end-of-history": {
       "keys": [
@@ -591,6 +659,22 @@
       "url": "https://www.thefp.com/p/arthur-brooks-americans-cant-grieve-911",
       "publication": "The Free Press",
       "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-canadas-investment-problem-wont-be-solved-in-a-hotel-ballroom": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-canadas-investment-problem-wont-be-solved-in-a-hotel-ballroom",
+        "syn:canada-s-investment-problem-won-t-be-solved-in-a-hotel-ballroom|voice:andrew-coyne|2026-09-16",
+        "fp:theglobeandmail.com|canada-s-investment-problem-won-t-be-solved-in-a-hotel-ballroom|2026-09-16"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-09-16T19:02:10Z",
+      "published_at": "2026-09-16T00:00:00Z",
+      "title": "Canada’s investment problem won’t be solved in a hotel ballroom",
+      "url": "https://www.theglobeandmail.com/opinion/article-canadas-investment-problem-wont-be-solved-in-a-hotel-ballroom/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
     },
     "url:https://theglobeandmail.com/opinion/article-its-not-disloyal-to-criticize-the-governments-handling-of-a-trade-war": {
       "keys": [
