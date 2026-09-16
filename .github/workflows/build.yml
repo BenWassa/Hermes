@@ -6,6 +6,9 @@ on:
     branches: [main]
     paths-ignore:
       - "docs/index.html"
+      - "docs/open/**"
+      - "docs/closed/**"
+      - "docs/ISSUE_TRACKING.md"
       - "data/voice_watch_state.json"
       - "data/voice_roundup_state.json"
       - "docs/voices/**"
