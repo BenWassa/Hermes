@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-16T19:02:10Z",
-  "last_reconcile_at": "2026-09-16T19:02:10Z",
+  "updated_at": "2026-09-17T19:12:56Z",
+  "last_reconcile_at": "2026-09-17T19:12:56Z",
   "last_roundup": {
     "period_id": "2026-09-13",
     "cutoff": "2026-09-13T21:00:00Z",
@@ -181,6 +181,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/metr-ea-and-others-being-attacked.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/metr-ea-and-others-being-attacked.html",
+        "pid:rss:https://marginalrevolution.com/?p=93829",
+        "syn:metr-ea-and-others-being-attacked|voice:tyler-cowen|2026-09-17",
+        "fp:marginalrevolution.com|metr-ea-and-others-being-attacked|2026-09-17"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-17T19:12:56Z",
+      "published_at": "2026-09-17T03:10:53Z",
+      "title": "METR, EA, and others being attacked",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/metr-ea-and-others-being-attacked.html?utm_source=rss&utm_medium=rss&utm_campaign=metr-ea-and-others-being-attacked",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-17T19:12:56Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-577.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-577.html",
@@ -214,6 +231,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html?utm_source=rss&utm_medium=rss&utm_campaign=my-ai-podcast-with-james-pethokoukis",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-excellent-conversation-with-annie-lowrey.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-excellent-conversation-with-annie-lowrey.html",
+        "pid:rss:https://marginalrevolution.com/?p=93826",
+        "syn:my-excellent-conversation-with-annie-lowrey|voice:tyler-cowen|2026-09-17",
+        "fp:marginalrevolution.com|my-excellent-conversation-with-annie-lowrey|2026-09-17"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-17T19:12:56Z",
+      "published_at": "2026-09-17T08:20:16Z",
+      "title": "My excellent Conversation with Annie Lowrey",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-excellent-conversation-with-annie-lowrey.html?utm_source=rss&utm_medium=rss&utm_campaign=my-excellent-conversation-with-annie-lowrey",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-17T19:12:56Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-short-interview-with-julia-willemyns.html": {
       "keys": [
@@ -334,6 +368,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-correct-model-of-ai-ceo-behavior.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-correct-model-of-ai-ceo-behavior.html",
+        "pid:rss:https://marginalrevolution.com/?p=93820",
+        "syn:the-correct-model-of-ai-ceo-behavior|voice:tyler-cowen|2026-09-17",
+        "fp:marginalrevolution.com|the-correct-model-of-ai-ceo-behavior|2026-09-17"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-17T19:12:56Z",
+      "published_at": "2026-09-17T04:19:07Z",
+      "title": "The correct model of AI CEO behavior",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-correct-model-of-ai-ceo-behavior.html?utm_source=rss&utm_medium=rss&utm_campaign=the-correct-model-of-ai-ceo-behavior",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-17T19:12:56Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-cyber-risk.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-cyber-risk.html",
@@ -416,6 +467,23 @@
       "published_at": "2026-09-10T15:47:02Z",
       "title": "Thursday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-569.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-569",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-570.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-570.html",
+        "pid:rss:https://marginalrevolution.com/?p=93818",
+        "syn:thursday-assorted-links|voice:tyler-cowen|2026-09-17",
+        "fp:marginalrevolution.com|thursday-assorted-links|2026-09-17"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-17T19:12:56Z",
+      "published_at": "2026-09-17T15:54:05Z",
+      "title": "Thursday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-570.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-570",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
