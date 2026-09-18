@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-17T19:12:56Z",
+  "updated_at": "2026-09-18T18:37:04Z",
   "last_reconcile_at": "2026-09-17T19:12:56Z",
   "last_roundup": {
     "period_id": "2026-09-13",
@@ -110,6 +110,23 @@
       "published_at": "2026-09-11T15:56:12Z",
       "title": "Friday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-590.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-590",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-591.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-591.html",
+        "pid:rss:https://marginalrevolution.com/?p=93827",
+        "syn:friday-assorted-links|voice:tyler-cowen|2026-09-18",
+        "fp:marginalrevolution.com|friday-assorted-links|2026-09-18"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-18T18:37:04Z",
+      "published_at": "2026-09-18T15:39:23Z",
+      "title": "Friday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-591.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-591",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -300,6 +317,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/reimagining-research-papers-as-interactive-and-reliable-ai-agents.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/reimagining-research-papers-as-interactive-and-reliable-ai-agents.html",
+        "pid:rss:https://marginalrevolution.com/?p=93828",
+        "syn:reimagining-research-papers-as-interactive-and-reliable-ai-agents|voice:tyler-cowen|2026-09-18",
+        "fp:marginalrevolution.com|reimagining-research-papers-as-interactive-and-reliable-ai-agents|2026-09-18"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-18T18:37:04Z",
+      "published_at": "2026-09-18T07:07:11Z",
+      "title": "Reimagining research papers as interactive and reliable AI agents",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/reimagining-research-papers-as-interactive-and-reliable-ai-agents.html?utm_source=rss&utm_medium=rss&utm_campaign=reimagining-research-papers-as-interactive-and-reliable-ai-agents",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-18T18:37:04Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/ricardo-reis-and-the-imf.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/ricardo-reis-and-the-imf.html",
@@ -333,6 +367,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-578.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-578",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/scott-beaulier-interviews-me-in-part-about-wyoming.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/scott-beaulier-interviews-me-in-part-about-wyoming.html",
+        "pid:rss:https://marginalrevolution.com/?p=93832",
+        "syn:scott-beaulier-interviews-me-in-part-about-wyoming|voice:tyler-cowen|2026-09-18",
+        "fp:marginalrevolution.com|scott-beaulier-interviews-me-in-part-about-wyoming|2026-09-18"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-18T18:37:04Z",
+      "published_at": "2026-09-18T18:10:55Z",
+      "title": "Scott Beaulier interviews me, in part about Wyoming",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/scott-beaulier-interviews-me-in-part-about-wyoming.html?utm_source=rss&utm_medium=rss&utm_campaign=scott-beaulier-interviews-me-in-part-about-wyoming",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/sentences-to-ponder-141.html": {
       "keys": [
@@ -485,7 +536,7 @@
       "title": "Thursday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-570.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-570",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-18T18:37:04Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-586.html": {
       "keys": [
@@ -605,6 +656,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/when-discussing-ai-policy-start-with-china.html?utm_source=rss&utm_medium=rss&utm_campaign=when-discussing-ai-policy-start-with-china",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/why-papua-new-guinea-is-so-interesting.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/why-papua-new-guinea-is-so-interesting.html",
+        "pid:rss:https://marginalrevolution.com/?p=93811",
+        "syn:why-papua-new-guinea-is-so-interesting|voice:tyler-cowen|2026-09-18",
+        "fp:marginalrevolution.com|why-papua-new-guinea-is-so-interesting|2026-09-18"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-18T18:37:04Z",
+      "published_at": "2026-09-18T04:50:51Z",
+      "title": "Why Papua New Guinea is so interesting",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/why-papua-new-guinea-is-so-interesting.html?utm_source=rss&utm_medium=rss&utm_campaign=why-papua-new-guinea-is-so-interesting",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-18T18:37:04Z"
     },
     "url:https://nytimes.com/2026/09/08/opinion/ezra-klein-podcast-anton-jager.html": {
       "keys": [
@@ -775,6 +843,22 @@
       "url": "https://www.theglobeandmail.com/opinion/article-the-populist-right-is-rising-around-the-world-why-not-in-canada/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-09-11T18:43:29Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-we-may-look-back-on-this-as-the-week-canada-began-to-take-its-fate": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-we-may-look-back-on-this-as-the-week-canada-began-to-take-its-fate",
+        "syn:we-may-look-back-on-this-as-the-week-canada-began-to|voice:andrew-coyne|2026-09-18",
+        "fp:theglobeandmail.com|we-may-look-back-on-this-as-the-week-canada-began-to|2026-09-18"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-09-18T18:37:04Z",
+      "published_at": "2026-09-18T00:00:00Z",
+      "title": "We may look back on this as the week Canada began to take its fate into its own hands",
+      "url": "https://www.theglobeandmail.com/opinion/article-we-may-look-back-on-this-as-the-week-canada-began-to-take-its-fate/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-09-18T18:37:04Z"
     }
   }
 }
