@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-18T18:37:04Z",
-  "last_reconcile_at": "2026-09-17T19:12:56Z",
+  "updated_at": "2026-09-19T18:10:53Z",
+  "last_reconcile_at": "2026-09-19T18:10:53Z",
   "last_roundup": {
     "period_id": "2026-09-13",
     "cutoff": "2026-09-13T21:00:00Z",
@@ -96,6 +96,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-10T18:38:50Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/emergent-ventures-india-19th-cohort.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/emergent-ventures-india-19th-cohort.html",
+        "pid:rss:https://marginalrevolution.com/?p=93834",
+        "syn:emergent-ventures-india-19th-cohort|voice:tyler-cowen|2026-09-19",
+        "fp:marginalrevolution.com|emergent-ventures-india-19th-cohort|2026-09-19"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-19T18:10:53Z",
+      "published_at": "2026-09-19T04:22:09Z",
+      "title": "Emergent Ventures India, 19th cohort",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/emergent-ventures-india-19th-cohort.html?utm_source=rss&utm_medium=rss&utm_campaign=emergent-ventures-india-19th-cohort",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-590.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-590.html",
@@ -128,7 +145,24 @@
       "title": "Friday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-591.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-591",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html",
+        "pid:rss:https://marginalrevolution.com/?p=93831",
+        "syn:internet-diffusion-and-religious-decline|voice:tyler-cowen|2026-09-19",
+        "fp:marginalrevolution.com|internet-diffusion-and-religious-decline|2026-09-19"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-19T18:10:53Z",
+      "published_at": "2026-09-19T06:22:39Z",
+      "title": "Internet diffusion and religious decline?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html?utm_source=rss&utm_medium=rss&utm_campaign=internet-diffusion-and-religious-decline",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/is-it-the-screens-or-education-systems.html": {
       "keys": [
@@ -368,6 +402,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-579.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-579.html",
+        "pid:rss:https://marginalrevolution.com/?p=93833",
+        "syn:saturday-assorted-links|voice:tyler-cowen|2026-09-19",
+        "fp:marginalrevolution.com|saturday-assorted-links|2026-09-19"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-19T18:10:53Z",
+      "published_at": "2026-09-19T17:04:04Z",
+      "title": "Saturday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-579.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-579",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/scott-beaulier-interviews-me-in-part-about-wyoming.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/scott-beaulier-interviews-me-in-part-about-wyoming.html",
@@ -383,7 +434,7 @@
       "title": "Scott Beaulier interviews me, in part about Wyoming",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/scott-beaulier-interviews-me-in-part-about-wyoming.html?utm_source=rss&utm_medium=rss&utm_campaign=scott-beaulier-interviews-me-in-part-about-wyoming",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/sentences-to-ponder-141.html": {
       "keys": [
