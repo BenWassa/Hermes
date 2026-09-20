@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-19T18:10:53Z",
-  "last_reconcile_at": "2026-09-19T18:10:53Z",
+  "updated_at": "2026-09-20T18:16:49Z",
+  "last_reconcile_at": "2026-09-20T18:16:49Z",
   "last_roundup": {
     "period_id": "2026-09-13",
     "cutoff": "2026-09-13T21:00:00Z",
@@ -112,6 +112,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/emergent-ventures-india-19th-cohort.html?utm_source=rss&utm_medium=rss&utm_campaign=emergent-ventures-india-19th-cohort",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/empathy-gaps.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/empathy-gaps.html",
+        "pid:rss:https://marginalrevolution.com/?p=93836",
+        "syn:empathy-gaps|voice:tyler-cowen|2026-09-20",
+        "fp:marginalrevolution.com|empathy-gaps|2026-09-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-20T18:16:49Z",
+      "published_at": "2026-09-20T06:38:59Z",
+      "title": "Empathy gaps",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/empathy-gaps.html?utm_source=rss&utm_medium=rss&utm_campaign=empathy-gaps",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-590.html": {
       "keys": [
@@ -266,6 +283,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/muse.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/muse.html",
+        "pid:rss:https://marginalrevolution.com/?p=93845",
+        "syn:muse|voice:tyler-cowen|2026-09-20",
+        "fp:marginalrevolution.com|muse|2026-09-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-20T18:16:49Z",
+      "published_at": "2026-09-20T15:46:21Z",
+      "title": "Muse",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/muse.html?utm_source=rss&utm_medium=rss&utm_campaign=muse",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html",
@@ -417,7 +451,7 @@
       "title": "Saturday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-579.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-579",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/scott-beaulier-interviews-me-in-part-about-wyoming.html": {
       "keys": [
@@ -450,6 +484,23 @@
       "published_at": "2026-09-09T07:06:06Z",
       "title": "Reading sentences to ponder",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/sentences-to-ponder-141.html?utm_source=rss&utm_medium=rss&utm_campaign=sentences-to-ponder-141",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/sunday-assorted-links-583.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/sunday-assorted-links-583.html",
+        "pid:rss:https://marginalrevolution.com/?p=93839",
+        "syn:sunday-assorted-links|voice:tyler-cowen|2026-09-20",
+        "fp:marginalrevolution.com|sunday-assorted-links|2026-09-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-20T18:16:49Z",
+      "published_at": "2026-09-20T17:42:50Z",
+      "title": "Sunday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/sunday-assorted-links-583.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-583",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -538,6 +589,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-13T18:18:39Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-2.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-2.html",
+        "pid:rss:https://marginalrevolution.com/?p=93843",
+        "syn:the-polity-that-is-singapore|voice:tyler-cowen|2026-09-20",
+        "fp:marginalrevolution.com|the-polity-that-is-singapore|2026-09-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-20T18:16:49Z",
+      "published_at": "2026-09-20T02:09:48Z",
+      "title": "The polity that is Singapore",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-2.html?utm_source=rss&utm_medium=rss&utm_campaign=the-polity-that-is-singapore-2",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/those-new-service-sector-jobs-17.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/those-new-service-sector-jobs-17.html",
@@ -622,6 +690,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/uk-fact-of-the-day-8.html?utm_source=rss&utm_medium=rss&utm_campaign=uk-fact-of-the-day-8",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-12T17:47:52Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/uk-productivity-higher-than-we-had-thought.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/uk-productivity-higher-than-we-had-thought.html",
+        "pid:rss:https://marginalrevolution.com/?p=93837",
+        "syn:uk-productivity-higher-than-we-had-thought|voice:tyler-cowen|2026-09-20",
+        "fp:marginalrevolution.com|uk-productivity-higher-than-we-had-thought|2026-09-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-20T18:16:49Z",
+      "published_at": "2026-09-20T04:53:01Z",
+      "title": "UK productivity higher than we had thought",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/uk-productivity-higher-than-we-had-thought.html?utm_source=rss&utm_medium=rss&utm_campaign=uk-productivity-higher-than-we-had-thought",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/very-good-news.html": {
       "keys": [
@@ -797,6 +882,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
     },
+    "url:https://nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html",
+        "pid:rss:https://www.nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html",
+        "syn:there-is-something-we-have-to-do-right-now-about-a-i|voice:ezra-klein|2026-09-20",
+        "fp:nytimes.com|there-is-something-we-have-to-do-right-now-about-a-i|2026-09-20"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-09-20T18:16:49Z",
+      "published_at": "2026-09-20T17:55:59Z",
+      "title": "There Is Something We Have to Do Right Now About A.I.",
+      "url": "https://www.nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
+    },
     "url:https://persuasion.community/p/the-beginning-of-the-end-of-history": {
       "keys": [
         "url:https://persuasion.community/p/the-beginning-of-the-end-of-history",
@@ -813,6 +915,22 @@
       "url": "https://www.persuasion.community/p/the-beginning-of-the-end-of-history",
       "publication": "Persuasion",
       "first_morning_surfaced_at": null
+    },
+    "url:https://theatlantic.com/podcasts/2026/09/what-is-humanitys-place-in-the-cosmos/688668": {
+      "keys": [
+        "url:https://theatlantic.com/podcasts/2026/09/what-is-humanitys-place-in-the-cosmos/688668",
+        "syn:what-is-humanity-s-place-in-the-cosmos|voice:david-brooks|2026-09-20",
+        "fp:theatlantic.com|what-is-humanity-s-place-in-the-cosmos|2026-09-20"
+      ],
+      "voice_ids": [
+        "david-brooks"
+      ],
+      "first_seen": "2026-09-20T18:16:49Z",
+      "published_at": "2026-09-20T13:00:00Z",
+      "title": "What Is Humanity’s Place in the Cosmos?",
+      "url": "https://www.theatlantic.com/podcasts/2026/09/what-is-humanitys-place-in-the-cosmos/688668/?utm_source=feed",
+      "publication": "The Atlantic",
+      "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
     },
     "url:https://theatlantic.com/podcasts/2026/09/what-is-the-good-life/688591": {
       "keys": [
