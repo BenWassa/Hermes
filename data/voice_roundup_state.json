@@ -7,7 +7,7 @@
     "period_id": "2026-09-20",
     "cutoff": "2026-09-20T21:00:00Z",
     "claimed_at": "2026-09-21T00:29:29Z",
-    "status": "pending",
+    "status": "notified",
     "selection_keys": [
       "url:https://nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html",
       "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html",
