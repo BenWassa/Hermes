@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-21T05:30:08Z",
-  "last_reconcile_at": "2026-09-20T18:16:49Z",
+  "updated_at": "2026-09-21T20:06:13Z",
+  "last_reconcile_at": "2026-09-21T20:06:13Z",
   "last_roundup": {
     "period_id": "2026-09-20",
     "cutoff": "2026-09-20T21:00:00Z",
@@ -168,6 +168,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/further-results-on-ai-and-labor-market-reallocation.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/further-results-on-ai-and-labor-market-reallocation.html",
+        "pid:rss:https://marginalrevolution.com/?p=93851",
+        "syn:further-results-on-ai-and-labor-market-reallocation|voice:tyler-cowen|2026-09-21",
+        "fp:marginalrevolution.com|further-results-on-ai-and-labor-market-reallocation|2026-09-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-21T20:06:13Z",
+      "published_at": "2026-09-21T18:49:42Z",
+      "title": "Further results on AI and labor market reallocation",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/further-results-on-ai-and-labor-market-reallocation.html?utm_source=rss&utm_medium=rss&utm_campaign=further-results-on-ai-and-labor-market-reallocation",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html",
@@ -287,6 +304,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-578.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-578.html",
+        "pid:rss:https://marginalrevolution.com/?p=93853",
+        "syn:monday-assorted-links|voice:tyler-cowen|2026-09-21",
+        "fp:marginalrevolution.com|monday-assorted-links|2026-09-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-21T20:06:13Z",
+      "published_at": "2026-09-21T17:57:03Z",
+      "title": "Monday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-578.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-578",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/muse.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/muse.html",
@@ -302,7 +336,7 @@
       "title": "Muse",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/muse.html?utm_source=rss&utm_medium=rss&utm_campaign=muse",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-21T20:06:13Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-ai-podcast-with-james-pethokoukis.html": {
       "keys": [
@@ -387,7 +421,7 @@
       "title": "Obama on agentic AI",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/obama-on-agentic-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=obama-on-agentic-ai",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-21T20:06:13Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/reasons-to-go-to-college.html": {
       "keys": [
@@ -523,7 +557,7 @@
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/sunday-assorted-links-583.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-583",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-21T20:06:13Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-allocative-cost-of-war.html": {
       "keys": [
@@ -968,6 +1002,23 @@
       "url": "https://www.theatlantic.com/podcasts/2026/09/what-is-the-good-life/688591/?utm_source=feed",
       "publication": "The Atlantic",
       "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
+    },
+    "url:https://thefp.com/p/arthur-brooks-ai-writing-meaning": {
+      "keys": [
+        "url:https://thefp.com/p/arthur-brooks-ai-writing-meaning",
+        "pid:rss:https://www.thefp.com/p/arthur-brooks-ai-writing-meaning",
+        "syn:arthur-brooks-letting-ai-write-for-you-will-make-you-unhappy|voice:arthur-c-brooks|2026-09-21",
+        "fp:thefp.com|arthur-brooks-letting-ai-write-for-you-will-make-you-unhappy|2026-09-21"
+      ],
+      "voice_ids": [
+        "arthur-c-brooks"
+      ],
+      "first_seen": "2026-09-21T20:06:13Z",
+      "published_at": "2026-09-21T15:03:21Z",
+      "title": "Arthur Brooks: Letting AI Write for You Will Make You Unhappy",
+      "url": "https://www.thefp.com/p/arthur-brooks-ai-writing-meaning",
+      "publication": "The Free Press",
+      "first_morning_surfaced_at": null
     },
     "url:https://thefp.com/p/arthur-brooks-americans-cant-grieve-911": {
       "keys": [
