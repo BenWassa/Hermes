@@ -12,11 +12,13 @@ It is not a historical scaffold or a greenfield implementation sequence.
 Hermes publishes one Toronto-calendar morning newspaper per day to GitHub Pages
 and sends at most one morning ntfy notification after a successful publication.
 
-The normal publication target is the **05:00 America/Toronto hour**, with 05:17
-as the first intended attempt. Normal completion should be before 06:00 local.
-The scheduled cadence is bounded, but if GitHub delivers one of those scheduled
-runs hours late, it may still recover the current Toronto day's missing edition
-once 05:00 local has passed.
+The Daily should normally be **available by approximately 06:00
+America/Toronto**. Automatic publication must not occur before 05:00 local.
+The first on-time useful slot remains 05:17, but the bounded schedule also
+contains earlier nominal hedge slots because GitHub has repeatedly delivered
+scheduled events 3.5–4.5 hours late. Prompt hedge deliveries no-op before
+provider/model work; delayed hedge deliveries may become the 05:00–06:00
+publication attempt.
 
 The finished paper retains the existing visible desks and product authorities.
 Sports remains deterministic and outside the ordinary Gemini-owned story pool.
@@ -51,11 +53,13 @@ Sports source must not prevent publication when the remaining inputs are usable.
 Use ordinary **UTC cron**, not GitHub's timezone-aware schedule path:
 
 ```yaml
-- cron: "17,47 9-12 * * *"
+- cron: "17,47 5-12 * * *"
 ```
 
-This bounded UTC envelope covers the required Toronto morning under both EDT and
-EST. Immediately after checkout, the workflow computes the current
+This bounded UTC envelope starts several hours before the publication floor and
+continues through the existing recovery period under both EDT and EST. In summer
+the first nominal slot is about 01:17 Toronto; in winter it is about 00:17.
+Immediately after checkout, the workflow computes the current
 `America/Toronto` calendar date and local time.
 
 Scheduled attempts that actually start **before 05:00 Toronto** stop before
@@ -64,10 +68,11 @@ scheduled upper-hour veto: if today's exact Toronto-calendar edition commit is
 still absent, a delayed scheduled run may recover it regardless of how late
 GitHub eventually starts that run.
 
-The first nominal useful slot is 05:17 local. The half-hour cadence supplies a
-bounded set of publication/recovery opportunities; accepting delayed delivery
-does not add new cron slots or create all-day polling. In EST, nominal UTC slots
-that map before 05:00 remain deliberate no-ops.
+The first on-time useful slot is 05:17 local. Earlier half-hour slots are
+deliberate delivery hedges: if GitHub starts them promptly they no-op before
+Python/provider/Gemini work, while a multi-hour-delayed hedge may land inside
+the desired 05:00–06:00 publication window. The cadence remains bounded rather
+than becoming an all-day poll.
 
 ### Main-push recovery
 
@@ -235,7 +240,7 @@ CI must keep the deterministic + rendered-browser suite green.
 
 Workflow tests must explicitly protect:
 
-- bounded UTC schedule shape and the 05:00 Toronto scheduled minimum;
+- bounded UTC hedge schedule, including pre-05 nominal slots and the 05:00 Toronto execution floor;
 - delayed scheduled recovery with no post-05 upper-hour veto;
 - Toronto date-boundary and DST semantics;
 - bounded push recovery and generated/issue-doc path exclusions;
