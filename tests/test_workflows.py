@@ -268,9 +268,9 @@ def test_daily_gate_policy_matrix(event, local_hour, edition_exists, expected):
     )
 
 
-def test_daily_utc_cadence_covers_05_hour_in_edt_and_est():
+def test_daily_utc_cadence_hedges_delay_and_covers_05_hour_in_edt_and_est():
     cron_minutes = (17, 47)
-    cron_hours = range(9, 13)
+    cron_hours = range(5, 13)
 
     for day in ((2026, 7, 15), (2026, 12, 15)):
         local_times = [
