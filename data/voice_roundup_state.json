@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-21T00:29:29Z",
+  "updated_at": "2026-09-21T05:30:08Z",
   "last_reconcile_at": "2026-09-20T18:16:49Z",
   "last_roundup": {
     "period_id": "2026-09-20",
@@ -371,6 +371,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-very-interesting-conversation-with-jared-diamond.html?utm_source=rss&utm_medium=rss&utm_campaign=my-very-interesting-conversation-with-jared-diamond",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-10T18:38:50Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/obama-on-agentic-ai.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/obama-on-agentic-ai.html",
+        "pid:rss:https://marginalrevolution.com/?p=93846",
+        "syn:obama-on-agentic-ai|voice:tyler-cowen|2026-09-21",
+        "fp:marginalrevolution.com|obama-on-agentic-ai|2026-09-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-21T05:30:08Z",
+      "published_at": "2026-09-21T04:11:54Z",
+      "title": "Obama on agentic AI",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/obama-on-agentic-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=obama-on-agentic-ai",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/reasons-to-go-to-college.html": {
       "keys": [
