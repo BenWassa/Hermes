@@ -1,14 +1,18 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-20T18:16:49Z",
+  "updated_at": "2026-09-21T00:29:29Z",
   "last_reconcile_at": "2026-09-20T18:16:49Z",
   "last_roundup": {
-    "period_id": "2026-09-13",
-    "cutoff": "2026-09-13T21:00:00Z",
-    "claimed_at": "2026-09-14T00:25:42Z",
-    "status": "suppressed",
-    "selection_keys": []
+    "period_id": "2026-09-20",
+    "cutoff": "2026-09-20T21:00:00Z",
+    "claimed_at": "2026-09-21T00:29:29Z",
+    "status": "pending",
+    "selection_keys": [
+      "url:https://nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html",
+      "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html",
+      "url:https://marginalrevolution.com/marginalrevolution/2026/09/reimagining-research-papers-as-interactive-and-reliable-ai-agents.html"
+    ]
   },
   "items": {
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/a-simple-model-of-ai-aided-economic-growth.html": {
