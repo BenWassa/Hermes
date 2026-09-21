@@ -28,7 +28,7 @@ EDITION_PATH = "docs/index.html"
 ROUNDUP_PAGE_PATH = "docs/voices/index.html"
 RECENT_PAGE_PATH = "docs/voices/recent/**"
 DAILY_CRON = "37 15 * * *"
-DAILY_BUILD_SCHEDULE = [{"cron": "17,47 9-12 * * *"}]
+DAILY_BUILD_SCHEDULE = [{"cron": "17,47 5-12 * * *"}]
 DAILY_PUSH_IGNORES = {
     EDITION_PATH,
     WATCH_STATE_PATH,
@@ -87,7 +87,7 @@ def named_step(workflow: dict, name: str) -> dict:
 def expected_daily_gate_outcome(
     *, event: str, local_hour: int, edition_exists: bool
 ) -> str:
-    """Executable statement of the locked #64 gate policy."""
+    """Executable statement of the locked #64/#68 gate policy."""
     if edition_exists:
         return "already-published-noop"
     if event == "schedule" and local_hour < 5:
@@ -268,9 +268,9 @@ def test_daily_gate_policy_matrix(event, local_hour, edition_exists, expected):
     )
 
 
-def test_daily_utc_cadence_covers_05_hour_in_edt_and_est():
+def test_daily_utc_cadence_hedges_delay_and_covers_05_hour_in_edt_and_est():
     cron_minutes = (17, 47)
-    cron_hours = range(9, 13)
+    cron_hours = range(5, 13)
 
     for day in ((2026, 7, 15), (2026, 12, 15)):
         local_times = [
@@ -280,11 +280,19 @@ def test_daily_utc_cadence_covers_05_hour_in_edt_and_est():
         ]
         assert any(local.hour == 5 for local in local_times)
 
+    summer_times = [
+        datetime(2026, 7, 15, hour, minute, tzinfo=timezone.utc).astimezone(TORONTO)
+        for hour in cron_hours
+        for minute in cron_minutes
+    ]
     winter_times = [
         datetime(2026, 12, 15, hour, minute, tzinfo=timezone.utc).astimezone(TORONTO)
         for hour in cron_hours
         for minute in cron_minutes
     ]
+    assert min(local.hour for local in summer_times) <= 1
+    assert min(local.hour for local in winter_times) <= 1
+    assert any(local.hour < 5 for local in summer_times)
     assert any(local.hour < 5 for local in winter_times)
 
 

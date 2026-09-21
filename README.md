@@ -2,11 +2,12 @@
 
 An autonomous overnight pipeline that assembles a personalized Toronto morning
 newspaper, renders it as a static web page, and pushes a notification after a
-successful publication. The publication target remains 05:17 America/Toronto.
-GitHub is scheduled through a bounded UTC cadence that covers both EDT and EST;
-a Toronto-time gate blocks scheduled work before 05:00, while a delivered
-scheduled run at or after 05:00 may recover the current day's missing edition
-regardless of how late GitHub starts it. A meaningful `main` push can also
+successful publication. The Daily should normally be available by about 06:00
+America/Toronto and must not publish automatically before 05:00. GitHub is
+scheduled through a bounded UTC cadence with several pre-05 hedge slots because
+production has shown multi-hour delivery delays. Prompt hedge deliveries no-op;
+a hedge that GitHub delivers at or after 05:00 may publish the missing current
+day's edition. A meaningful `main` push can also
 recover a missed edition through 11:59, while manual dispatch remains available
 at any hour. World and business news come from the Guardian, NYT, and Perigon
 APIs; Toronto local news comes from RSS. Google Gemini dedupes, sections, ranks,
@@ -277,10 +278,12 @@ product.
 
 ## Deployment (GitHub Pages + Actions)
 
-- [.github/workflows/build.yml](.github/workflows/build.yml) — targets 05:17
-  America/Toronto through ordinary UTC cron slots spanning both EDT and EST.
-  Scheduled work before 05:00 Toronto no-ops; once 05:00 has passed, a delivered
-  scheduled run may recover today's missing edition with no upper-hour cutoff.
+- [.github/workflows/build.yml](.github/workflows/build.yml) — targets a Daily
+  available by about 06:00 America/Toronto. Ordinary UTC cron slots begin several
+  hours early as delivery hedges and continue through the morning in both EDT and
+  EST. Scheduled work that actually starts before 05:00 Toronto no-ops; once
+  05:00 has passed, a delivered scheduled run may recover today's missing edition
+  with no upper-hour cutoff.
   A meaningful `main` push may recover through 11:59, while manual dispatch is
   unrestricted. Every path no-ops before source/model work once that
   Toronto-calendar edition exists. Generated Daily/Voice paths and issue-doc

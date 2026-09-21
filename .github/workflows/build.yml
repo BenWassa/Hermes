@@ -13,12 +13,11 @@ on:
       - "data/voice_roundup_state.json"
       - "docs/voices/**"
   schedule:
-    # GitHub's timezone-aware Daily schedule was valid but proved unreliable in
-    # production. Use a bounded ordinary-UTC cadence that covers the intended
-    # 05:00 Toronto hour in both EDT and EST. The gate rejects scheduled work
-    # before 05:00 local, but delayed delivery after 05:00 may recover today's
-    # missing edition regardless of how late GitHub eventually starts the run.
-    - cron: "17,47 9-12 * * *"
+    # GitHub scheduled delivery has repeatedly arrived 3.5-4.5 hours late.
+    # Start a bounded set of hedge slots several hours early. Prompt deliveries
+    # still no-op before 05:00 Toronto; a hedge delivered late at/after 05:00 can
+    # publish the missing current-day edition. Later slots preserve recovery.
+    - cron: "17,47 5-12 * * *"
 
 permissions:
   contents: write
