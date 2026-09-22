@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-21T20:06:13Z",
+  "updated_at": "2026-09-22T01:10:48Z",
   "last_reconcile_at": "2026-09-21T20:06:13Z",
   "last_roundup": {
     "period_id": "2026-09-20",
@@ -968,6 +968,23 @@
       "published_at": "2026-09-08T22:25:30Z",
       "title": "The Beginning of the End of History",
       "url": "https://www.persuasion.community/p/the-beginning-of-the-end-of-history",
+      "publication": "Persuasion",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://persuasion.community/p/why-i-changed-my-mind-about-ai-risk": {
+      "keys": [
+        "url:https://persuasion.community/p/why-i-changed-my-mind-about-ai-risk",
+        "pid:rss:https://www.persuasion.community/p/why-i-changed-my-mind-about-ai-risk",
+        "syn:why-i-changed-my-mind-about-ai-risk|voice:francis-fukuyama|2026-09-21",
+        "fp:persuasion.community|why-i-changed-my-mind-about-ai-risk|2026-09-21"
+      ],
+      "voice_ids": [
+        "francis-fukuyama"
+      ],
+      "first_seen": "2026-09-22T01:10:48Z",
+      "published_at": "2026-09-21T20:15:56Z",
+      "title": "Why I Changed My Mind About AI Risk",
+      "url": "https://www.persuasion.community/p/why-i-changed-my-mind-about-ai-risk",
       "publication": "Persuasion",
       "first_morning_surfaced_at": null
     },
