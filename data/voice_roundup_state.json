@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-22T01:10:48Z",
+  "updated_at": "2026-09-22T19:03:18Z",
   "last_reconcile_at": "2026-09-21T20:06:13Z",
   "last_roundup": {
     "period_id": "2026-09-20",
@@ -32,6 +32,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-13T18:18:39Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/banning-self-recursive-improvement-in-ai-models.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/banning-self-recursive-improvement-in-ai-models.html",
+        "pid:rss:https://marginalrevolution.com/?p=93857",
+        "syn:banning-self-recursive-improvement-in-ai-models|voice:tyler-cowen|2026-09-22",
+        "fp:marginalrevolution.com|banning-self-recursive-improvement-in-ai-models|2026-09-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-22T19:03:18Z",
+      "published_at": "2026-09-22T04:45:57Z",
+      "title": "Banning self-recursive improvement in AI models?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/banning-self-recursive-improvement-in-ai-models.html?utm_source=rss&utm_medium=rss&utm_campaign=banning-self-recursive-improvement-in-ai-models",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/callum-williams-on-cybersecurity-prices.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/callum-williams-on-cybersecurity-prices.html",
@@ -46,6 +63,23 @@
       "published_at": "2026-09-15T18:40:18Z",
       "title": "Callum Williams on cybersecurity prices",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/callum-williams-on-cybersecurity-prices.html?utm_source=rss&utm_medium=rss&utm_campaign=callum-williams-on-cybersecurity-prices",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/dartmouth-provost-okie-dokie.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/dartmouth-provost-okie-dokie.html",
+        "pid:rss:https://marginalrevolution.com/?p=93863",
+        "syn:dartmouth-provost-okie-dokie|voice:tyler-cowen|2026-09-22",
+        "fp:marginalrevolution.com|dartmouth-provost-okie-dokie|2026-09-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-22T19:03:18Z",
+      "published_at": "2026-09-22T12:20:22Z",
+      "title": "Dartmouth Provost okie-dokie",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/dartmouth-provost-okie-dokie.html?utm_source=rss&utm_medium=rss&utm_campaign=dartmouth-provost-okie-dokie",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -183,7 +217,7 @@
       "title": "Further results on AI and labor market reallocation",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/further-results-on-ai-and-labor-market-reallocation.html?utm_source=rss&utm_medium=rss&utm_campaign=further-results-on-ai-and-labor-market-reallocation",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html": {
       "keys": [
@@ -319,7 +353,7 @@
       "title": "Monday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-578.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-578",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/muse.html": {
       "keys": [
@@ -610,6 +644,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html",
+        "pid:rss:https://marginalrevolution.com/?p=93862",
+        "syn:the-economics-of-late-grandmotherhood|voice:tyler-cowen|2026-09-22",
+        "fp:marginalrevolution.com|the-economics-of-late-grandmotherhood|2026-09-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-22T19:03:18Z",
+      "published_at": "2026-09-22T18:52:28Z",
+      "title": "The economics of late grandmotherhood",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-late-grandmotherhood",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html",
@@ -726,6 +777,23 @@
       "published_at": "2026-09-15T16:13:21Z",
       "title": "Tuesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-586.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-586",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-587.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-587.html",
+        "pid:rss:https://marginalrevolution.com/?p=93856",
+        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-09-22",
+        "fp:marginalrevolution.com|tuesday-assorted-links|2026-09-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-22T19:03:18Z",
+      "published_at": "2026-09-22T16:10:01Z",
+      "title": "Tuesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-587",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -954,6 +1022,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
     },
+    "url:https://nytimes.com/2026/09/22/opinion/artificial-intelligence-ai-danger.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/09/22/opinion/artificial-intelligence-ai-danger.html",
+        "pid:rss:https://www.nytimes.com/2026/09/22/opinion/artificial-intelligence-ai-danger.html",
+        "syn:why-a-i-is-dangerous-for-science|voice:zeynep-tufekci|2026-09-22",
+        "fp:nytimes.com|why-a-i-is-dangerous-for-science|2026-09-22"
+      ],
+      "voice_ids": [
+        "zeynep-tufekci"
+      ],
+      "first_seen": "2026-09-22T19:03:18Z",
+      "published_at": "2026-09-22T14:51:41Z",
+      "title": "Why A.I. Is Dangerous for Science",
+      "url": "https://www.nytimes.com/2026/09/22/opinion/artificial-intelligence-ai-danger.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
+    },
     "url:https://persuasion.community/p/the-beginning-of-the-end-of-history": {
       "keys": [
         "url:https://persuasion.community/p/the-beginning-of-the-end-of-history",
@@ -986,7 +1071,7 @@
       "title": "Why I Changed My Mind About AI Risk",
       "url": "https://www.persuasion.community/p/why-i-changed-my-mind-about-ai-risk",
       "publication": "Persuasion",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
     },
     "url:https://theatlantic.com/podcasts/2026/09/what-is-humanitys-place-in-the-cosmos/688668": {
       "keys": [
@@ -1035,7 +1120,7 @@
       "title": "Arthur Brooks: Letting AI Write for You Will Make You Unhappy",
       "url": "https://www.thefp.com/p/arthur-brooks-ai-writing-meaning",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
     },
     "url:https://thefp.com/p/arthur-brooks-americans-cant-grieve-911": {
       "keys": [
