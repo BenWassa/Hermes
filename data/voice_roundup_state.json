@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-22T19:03:18Z",
-  "last_reconcile_at": "2026-09-21T20:06:13Z",
+  "updated_at": "2026-09-23T19:10:42Z",
+  "last_reconcile_at": "2026-09-23T19:10:42Z",
   "last_roundup": {
     "period_id": "2026-09-20",
     "cutoff": "2026-09-20T21:00:00Z",
@@ -81,7 +81,7 @@
       "title": "Dartmouth Provost okie-dokie",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/dartmouth-provost-okie-dokie.html?utm_source=rss&utm_medium=rss&utm_campaign=dartmouth-provost-okie-dokie",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/did-the-aca-reduce-mortality.html": {
       "keys": [
@@ -457,6 +457,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-21T20:06:13Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/optimal-liability-for-offensive-and-defensive-ai.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/optimal-liability-for-offensive-and-defensive-ai.html",
+        "pid:rss:https://marginalrevolution.com/?p=93867",
+        "syn:optimal-liability-for-offensive-and-defensive-ai|voice:tyler-cowen|2026-09-23",
+        "fp:marginalrevolution.com|optimal-liability-for-offensive-and-defensive-ai|2026-09-23"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-23T19:10:42Z",
+      "published_at": "2026-09-23T18:03:36Z",
+      "title": "Optimal liability for offensive and defensive AI",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/optimal-liability-for-offensive-and-defensive-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=optimal-liability-for-offensive-and-defensive-ai",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/reasons-to-go-to-college.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/reasons-to-go-to-college.html",
@@ -659,7 +676,7 @@
       "title": "The economics of late grandmotherhood",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-late-grandmotherhood",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-excess-pessimism-of-early-nuclear-bomb-designers.html": {
       "keys": [
@@ -795,7 +812,7 @@
       "title": "Tuesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-587",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/uk-fact-of-the-day-8.html": {
       "keys": [
@@ -881,6 +898,40 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-571.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-571",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-572.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-572.html",
+        "pid:rss:https://marginalrevolution.com/?p=93866",
+        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-09-23",
+        "fp:marginalrevolution.com|wednesday-assorted-links|2026-09-23"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-23T19:10:42Z",
+      "published_at": "2026-09-23T15:48:52Z",
+      "title": "Wednesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-572.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-572",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-ive-been-reading-295.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-ive-been-reading-295.html",
+        "pid:rss:https://marginalrevolution.com/?p=93835",
+        "syn:what-i-ve-been-reading|voice:tyler-cowen|2026-09-23",
+        "fp:marginalrevolution.com|what-i-ve-been-reading|2026-09-23"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-23T19:10:42Z",
+      "published_at": "2026-09-23T04:40:51Z",
+      "title": "What I’ve been reading",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/what-ive-been-reading-295.html?utm_source=rss&utm_medium=rss&utm_campaign=what-ive-been-reading-295",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-should-i-ask-kevin-roose.html": {
       "keys": [
@@ -1010,7 +1061,9 @@
         "url:https://nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html",
         "pid:rss:https://www.nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html",
         "syn:there-is-something-we-have-to-do-right-now-about-a-i|voice:ezra-klein|2026-09-20",
-        "fp:nytimes.com|there-is-something-we-have-to-do-right-now-about-a-i|2026-09-20"
+        "syn:there-is-something-we-have-to-do-right-now-about-a-i|voice:ezra-klein|2026-09-23",
+        "fp:nytimes.com|there-is-something-we-have-to-do-right-now-about-a-i|2026-09-20",
+        "fp:nytimes.com|there-is-something-we-have-to-do-right-now-about-a-i|2026-09-23"
       ],
       "voice_ids": [
         "ezra-klein"
@@ -1038,6 +1091,23 @@
       "url": "https://www.nytimes.com/2026/09/22/opinion/artificial-intelligence-ai-danger.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
+    },
+    "url:https://nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html",
+        "pid:rss:https://www.nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html",
+        "syn:jensen-huang-thinks-a-i-alarmism-has-gone-too-far|voice:ezra-klein|2026-09-23",
+        "fp:nytimes.com|jensen-huang-thinks-a-i-alarmism-has-gone-too-far|2026-09-23"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-09-23T19:10:42Z",
+      "published_at": "2026-09-23T16:56:47Z",
+      "title": "Jensen Huang Thinks A.I. Alarmism Has Gone Too Far",
+      "url": "https://www.nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
     },
     "url:https://persuasion.community/p/the-beginning-of-the-end-of-history": {
       "keys": [
