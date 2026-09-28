@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-28T01:10:34Z",
+  "updated_at": "2026-09-28T05:53:45Z",
   "last_reconcile_at": "2026-09-27T19:13:02Z",
   "last_roundup": {
     "period_id": "2026-09-27",
@@ -100,6 +100,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html",
+        "pid:rss:https://marginalrevolution.com/?p=93841",
+        "syn:bundesrepublik-deutschland|voice:tyler-cowen|2026-09-28",
+        "fp:marginalrevolution.com|bundesrepublik-deutschland|2026-09-28"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-28T05:53:45Z",
+      "published_at": "2026-09-28T04:34:12Z",
+      "title": "Bundesrepublik Deutschland",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html?utm_source=rss&utm_medium=rss&utm_campaign=bundesrepublik-deutschland",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/callum-williams-on-cybersecurity-prices.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/callum-williams-on-cybersecurity-prices.html",
@@ -150,23 +167,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/did-the-aca-reduce-mortality.html?utm_source=rss&utm_medium=rss&utm_campaign=did-the-aca-reduce-mortality",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/does-ai-assistance-enhance-or-erode-expertise.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/does-ai-assistance-enhance-or-erode-expertise.html",
-        "pid:rss:https://marginalrevolution.com/?p=93761",
-        "syn:does-ai-assistance-enhance-or-erode-expertise|voice:tyler-cowen|2026-09-14",
-        "fp:marginalrevolution.com|does-ai-assistance-enhance-or-erode-expertise|2026-09-14"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-14T05:28:03Z",
-      "published_at": "2026-09-14T04:14:34Z",
-      "title": "Does AI assistance enhance or erode expertise?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/does-ai-assistance-enhance-or-erode-expertise.html?utm_source=rss&utm_medium=rss&utm_campaign=does-ai-assistance-enhance-or-erode-expertise",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/earth-fact-of-the-day-2-2.html": {
       "keys": [
