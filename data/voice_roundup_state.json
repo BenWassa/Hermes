@@ -4,14 +4,14 @@
   "updated_at": "2026-09-28T01:10:34Z",
   "last_reconcile_at": "2026-09-27T19:13:02Z",
   "last_roundup": {
-    "period_id": "2026-09-20",
-    "cutoff": "2026-09-20T21:00:00Z",
-    "claimed_at": "2026-09-21T00:29:29Z",
-    "status": "notified",
+    "period_id": "2026-09-27",
+    "cutoff": "2026-09-27T21:00:00Z",
+    "claimed_at": "2026-09-28T01:10:34Z",
+    "status": "pending",
     "selection_keys": [
-      "url:https://nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html",
-      "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html",
-      "url:https://marginalrevolution.com/marginalrevolution/2026/09/reimagining-research-papers-as-interactive-and-reliable-ai-agents.html"
+      "url:https://marginalrevolution.com/marginalrevolution/2026/09/ai-in-science.html",
+      "url:https://thefp.com/p/arthur-brooks-parents-aging-elder-care",
+      "url:https://marginalrevolution.com/marginalrevolution/2026/09/good-points-from-james-gilliland.html"
     ]
   },
   "items": {
