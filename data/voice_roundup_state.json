@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-27T19:13:02Z",
+  "updated_at": "2026-09-28T01:10:34Z",
   "last_reconcile_at": "2026-09-27T19:13:02Z",
   "last_roundup": {
     "period_id": "2026-09-20",
@@ -1143,22 +1143,22 @@
       "publication": "The Free Press",
       "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
     },
-    "url:https://thefp.com/p/arthur-brooks-americans-cant-grieve-911": {
+    "url:https://thefp.com/p/arthur-brooks-parents-aging-elder-care": {
       "keys": [
-        "url:https://thefp.com/p/arthur-brooks-americans-cant-grieve-911",
-        "pid:rss:https://www.thefp.com/p/arthur-brooks-americans-cant-grieve-911",
-        "syn:arthur-brooks-why-americans-no-longer-grieve-together|voice:arthur-c-brooks|2026-09-13",
-        "fp:thefp.com|arthur-brooks-why-americans-no-longer-grieve-together|2026-09-13"
+        "url:https://thefp.com/p/arthur-brooks-parents-aging-elder-care",
+        "pid:rss:https://www.thefp.com/p/arthur-brooks-parents-aging-elder-care",
+        "syn:arthur-brooks-your-parents-raised-you-what-do-you-owe-them|voice:arthur-c-brooks|2026-09-27",
+        "fp:thefp.com|arthur-brooks-your-parents-raised-you-what-do-you-owe-them|2026-09-27"
       ],
       "voice_ids": [
         "arthur-c-brooks"
       ],
-      "first_seen": "2026-09-14T00:25:42Z",
-      "published_at": "2026-09-13T22:49:37Z",
-      "title": "Arthur Brooks: Why Americans No Longer Grieve Together",
-      "url": "https://www.thefp.com/p/arthur-brooks-americans-cant-grieve-911",
+      "first_seen": "2026-09-28T01:10:34Z",
+      "published_at": "2026-09-27T20:18:02Z",
+      "title": "Arthur Brooks: Your Parents Raised You. What Do You Owe Them?",
+      "url": "https://www.thefp.com/p/arthur-brooks-parents-aging-elder-care",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://theglobeandmail.com/opinion/article-bc-election-no-reason-eby-findlay": {
       "keys": [
