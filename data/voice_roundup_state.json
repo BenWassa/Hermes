@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-28T05:53:45Z",
-  "last_reconcile_at": "2026-09-27T19:13:02Z",
+  "updated_at": "2026-09-28T21:20:57Z",
+  "last_reconcile_at": "2026-09-28T21:20:57Z",
   "last_roundup": {
     "period_id": "2026-09-27",
     "cutoff": "2026-09-27T21:00:00Z",
@@ -64,7 +64,7 @@
       "title": "AI in science",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/ai-in-science.html?utm_source=rss&utm_medium=rss&utm_campaign=ai-in-science",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/armenia-notes.html": {
       "keys": [
@@ -115,7 +115,7 @@
       "title": "Bundesrepublik Deutschland",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html?utm_source=rss&utm_medium=rss&utm_campaign=bundesrepublik-deutschland",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/callum-williams-on-cybersecurity-prices.html": {
       "keys": [
@@ -355,22 +355,22 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/is-it-the-screens-or-education-systems.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/mans-best-friend.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/is-it-the-screens-or-education-systems.html",
-        "pid:rss:https://marginalrevolution.com/?p=93805",
-        "syn:is-it-the-screens-or-education-systems|voice:tyler-cowen|2026-09-14",
-        "fp:marginalrevolution.com|is-it-the-screens-or-education-systems|2026-09-14"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/mans-best-friend.html",
+        "pid:rss:https://marginalrevolution.com/?p=93894",
+        "syn:man-s-best-friend|voice:tyler-cowen|2026-09-28",
+        "fp:marginalrevolution.com|man-s-best-friend|2026-09-28"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-09-14T19:55:12Z",
-      "published_at": "2026-09-14T07:01:27Z",
-      "title": "Is it the screens? Or education systems?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/is-it-the-screens-or-education-systems.html?utm_source=rss&utm_medium=rss&utm_campaign=is-it-the-screens-or-education-systems",
+      "first_seen": "2026-09-28T21:20:57Z",
+      "published_at": "2026-09-28T17:53:27Z",
+      "title": "Man’s best friend?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/mans-best-friend.html?utm_source=rss&utm_medium=rss&utm_campaign=mans-best-friend",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-14T19:55:12Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/metr-ea-and-others-being-attacked.html": {
       "keys": [
@@ -389,20 +389,20 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-17T19:12:56Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-577.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/mighty-sparrow-rip.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-577.html",
-        "pid:rss:https://marginalrevolution.com/?p=93790",
-        "syn:monday-assorted-links|voice:tyler-cowen|2026-09-14",
-        "fp:marginalrevolution.com|monday-assorted-links|2026-09-14"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/mighty-sparrow-rip.html",
+        "pid:rss:https://marginalrevolution.com/?p=93895",
+        "syn:mighty-sparrow-rip|voice:tyler-cowen|2026-09-28",
+        "fp:marginalrevolution.com|mighty-sparrow-rip|2026-09-28"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-09-14T19:55:12Z",
-      "published_at": "2026-09-14T16:53:00Z",
-      "title": "Monday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-577.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-577",
+      "first_seen": "2026-09-28T21:20:57Z",
+      "published_at": "2026-09-28T13:56:32Z",
+      "title": "Mighty Sparrow, RIP",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/mighty-sparrow-rip.html?utm_source=rss&utm_medium=rss&utm_campaign=mighty-sparrow-rip",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -422,6 +422,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-578.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-578",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-579.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-579.html",
+        "pid:rss:https://marginalrevolution.com/?p=93886",
+        "syn:monday-assorted-links|voice:tyler-cowen|2026-09-28",
+        "fp:marginalrevolution.com|monday-assorted-links|2026-09-28"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-28T21:20:57Z",
+      "published_at": "2026-09-28T16:36:21Z",
+      "title": "Monday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-579.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-579",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/muse.html": {
       "keys": [
@@ -659,7 +676,7 @@
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/sunday-assorted-links-584.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-584",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-correct-model-of-ai-ceo-behavior.html": {
       "keys": [
@@ -1077,6 +1094,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-09-26T18:41:16Z"
     },
+    "url:https://persuasion.community/p/trumps-golden-fleet-is-still-ridiculous": {
+      "keys": [
+        "url:https://persuasion.community/p/trumps-golden-fleet-is-still-ridiculous",
+        "pid:rss:https://www.persuasion.community/p/trumps-golden-fleet-is-still-ridiculous",
+        "syn:trump-s-golden-fleet-is-still-ridiculous|voice:francis-fukuyama|2026-09-28",
+        "fp:persuasion.community|trump-s-golden-fleet-is-still-ridiculous|2026-09-28"
+      ],
+      "voice_ids": [
+        "francis-fukuyama"
+      ],
+      "first_seen": "2026-09-28T21:20:57Z",
+      "published_at": "2026-09-28T18:55:40Z",
+      "title": "Trump’s “Golden Fleet” Is Still Ridiculous",
+      "url": "https://www.persuasion.community/p/trumps-golden-fleet-is-still-ridiculous",
+      "publication": "Persuasion",
+      "first_morning_surfaced_at": null
+    },
     "url:https://persuasion.community/p/why-i-changed-my-mind-about-ai-risk": {
       "keys": [
         "url:https://persuasion.community/p/why-i-changed-my-mind-about-ai-risk",
@@ -1124,7 +1158,7 @@
       "title": "What Is the Meaning of Mystical Experience?",
       "url": "https://www.theatlantic.com/podcasts/2026/09/what-meaning-mystical-experience/688782/?utm_source=feed",
       "publication": "The Atlantic",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
     },
     "url:https://thefp.com/p/arthur-brooks-ai-writing-meaning": {
       "keys": [
@@ -1158,7 +1192,7 @@
       "title": "Arthur Brooks: Your Parents Raised You. What Do You Owe Them?",
       "url": "https://www.thefp.com/p/arthur-brooks-parents-aging-elder-care",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
     },
     "url:https://theglobeandmail.com/opinion/article-bc-election-no-reason-eby-findlay": {
       "keys": [
