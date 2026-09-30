@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-29T20:10:42Z",
-  "last_reconcile_at": "2026-09-28T21:20:57Z",
+  "updated_at": "2026-09-30T20:15:28Z",
+  "last_reconcile_at": "2026-09-30T20:15:28Z",
   "last_roundup": {
     "period_id": "2026-09-27",
     "cutoff": "2026-09-27T21:00:00Z",
@@ -150,6 +150,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/dartmouth-provost-okie-dokie.html?utm_source=rss&utm_medium=rss&utm_campaign=dartmouth-provost-okie-dokie",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html",
+        "pid:rss:https://marginalrevolution.com/?p=93902",
+        "syn:don-t-let-ai-make-you-dumber|voice:tyler-cowen|2026-09-30",
+        "fp:marginalrevolution.com|don-t-let-ai-make-you-dumber|2026-09-30"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-30T20:15:28Z",
+      "published_at": "2026-09-30T04:17:47Z",
+      "title": "Don’t let AI make you dumber",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html?utm_source=rss&utm_medium=rss&utm_campaign=dont-let-ai-make-you-dumber",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/earth-fact-of-the-day-2-2.html": {
       "keys": [
@@ -610,6 +627,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/shade.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/shade.html",
+        "pid:rss:https://marginalrevolution.com/?p=93903",
+        "syn:shade|voice:tyler-cowen|2026-09-30",
+        "fp:marginalrevolution.com|shade|2026-09-30"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-30T20:15:28Z",
+      "published_at": "2026-09-30T06:26:22Z",
+      "title": "*Shade*",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/shade.html?utm_source=rss&utm_medium=rss&utm_campaign=shade",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/shipping-to-america.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/shipping-to-america.html",
@@ -625,7 +659,7 @@
       "title": "Shipping to America",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/shipping-to-america.html?utm_source=rss&utm_medium=rss&utm_campaign=shipping-to-america",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/should-you-text-more.html": {
       "keys": [
@@ -695,23 +729,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-17T19:12:56Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-cyber-risk.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-cyber-risk.html",
-        "pid:rss:https://marginalrevolution.com/?p=93797",
-        "syn:the-economics-of-cyber-risk|voice:tyler-cowen|2026-09-16",
-        "fp:marginalrevolution.com|the-economics-of-cyber-risk|2026-09-16"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-16T19:02:10Z",
-      "published_at": "2026-09-16T07:30:24Z",
-      "title": "The economics of cyber risk",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-cyber-risk.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-cyber-risk",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html",
@@ -779,6 +796,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-2.html?utm_source=rss&utm_medium=rss&utm_campaign=the-polity-that-is-singapore-2",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html",
+        "pid:rss:https://marginalrevolution.com/?p=93904",
+        "syn:the-polity-that-is-singapore|voice:tyler-cowen|2026-09-30",
+        "fp:marginalrevolution.com|the-polity-that-is-singapore|2026-09-30"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-30T20:15:28Z",
+      "published_at": "2026-09-30T18:37:04Z",
+      "title": "The polity that is Singapore",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html?utm_source=rss&utm_medium=rss&utm_campaign=the-polity-that-is-singapore-3",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-570.html": {
       "keys": [
@@ -865,40 +899,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/very-good-news.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/very-good-news.html",
-        "pid:rss:https://marginalrevolution.com/?p=93819",
-        "syn:very-good-news|voice:tyler-cowen|2026-09-16",
-        "fp:marginalrevolution.com|very-good-news|2026-09-16"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-16T19:02:10Z",
-      "published_at": "2026-09-16T13:12:00Z",
-      "title": "Very good news",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/very-good-news.html?utm_source=rss&utm_medium=rss&utm_campaign=very-good-news",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-571.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-571.html",
-        "pid:rss:https://marginalrevolution.com/?p=93814",
-        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-09-16",
-        "fp:marginalrevolution.com|wednesday-assorted-links|2026-09-16"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-16T19:02:10Z",
-      "published_at": "2026-09-16T16:30:58Z",
-      "title": "Wednesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-571.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-571",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-572.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-572.html",
@@ -915,6 +915,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-572.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-572",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html",
+        "pid:rss:https://marginalrevolution.com/?p=93896",
+        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-09-30",
+        "fp:marginalrevolution.com|wednesday-assorted-links|2026-09-30"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-09-30T20:15:28Z",
+      "published_at": "2026-09-30T15:49:34Z",
+      "title": "Wednesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-573",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-ive-been-reading-295.html": {
       "keys": [
@@ -949,23 +966,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/what-should-i-ask-terence-tao.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-terence-tao",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-27T19:13:02Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/when-discussing-ai-policy-start-with-china.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/when-discussing-ai-policy-start-with-china.html",
-        "pid:rss:https://marginalrevolution.com/?p=93815",
-        "syn:when-discussing-ai-policy-start-with-china|voice:tyler-cowen|2026-09-16",
-        "fp:marginalrevolution.com|when-discussing-ai-policy-start-with-china|2026-09-16"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-16T19:02:10Z",
-      "published_at": "2026-09-16T04:58:51Z",
-      "title": "When discussing AI policy, start with China",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/when-discussing-ai-policy-start-with-china.html?utm_source=rss&utm_medium=rss&utm_campaign=when-discussing-ai-policy-start-with-china",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/why-papua-new-guinea-is-so-interesting.html": {
       "keys": [
@@ -1082,7 +1082,9 @@
         "url:https://nytimes.com/2026/09/29/opinion/ezra-klein-podcast-bill-gates.html",
         "pid:rss:https://www.nytimes.com/2026/09/29/opinion/ezra-klein-podcast-bill-gates.html",
         "syn:bill-gates-s-blunt-warning-on-a-i|voice:ezra-klein|2026-09-29",
-        "fp:nytimes.com|bill-gates-s-blunt-warning-on-a-i|2026-09-29"
+        "syn:bill-gates-s-blunt-warning-on-a-i|voice:ezra-klein|2026-09-30",
+        "fp:nytimes.com|bill-gates-s-blunt-warning-on-a-i|2026-09-29",
+        "fp:nytimes.com|bill-gates-s-blunt-warning-on-a-i|2026-09-30"
       ],
       "voice_ids": [
         "ezra-klein"
@@ -1210,21 +1212,21 @@
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-09-25T19:28:08Z"
     },
-    "url:https://theglobeandmail.com/opinion/article-canadas-investment-problem-wont-be-solved-in-a-hotel-ballroom": {
+    "url:https://theglobeandmail.com/opinion/article-the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy": {
       "keys": [
-        "url:https://theglobeandmail.com/opinion/article-canadas-investment-problem-wont-be-solved-in-a-hotel-ballroom",
-        "syn:canada-s-investment-problem-won-t-be-solved-in-a-hotel-ballroom|voice:andrew-coyne|2026-09-16",
-        "fp:theglobeandmail.com|canada-s-investment-problem-won-t-be-solved-in-a-hotel-ballroom|2026-09-16"
+        "url:https://theglobeandmail.com/opinion/article-the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy",
+        "syn:the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy|voice:andrew-coyne|2026-09-30",
+        "fp:theglobeandmail.com|the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy|2026-09-30"
       ],
       "voice_ids": [
         "andrew-coyne"
       ],
-      "first_seen": "2026-09-16T19:02:10Z",
-      "published_at": "2026-09-16T00:00:00Z",
-      "title": "Canada’s investment problem won’t be solved in a hotel ballroom",
-      "url": "https://www.theglobeandmail.com/opinion/article-canadas-investment-problem-wont-be-solved-in-a-hotel-ballroom/",
+      "first_seen": "2026-09-30T20:15:28Z",
+      "published_at": "2026-09-30T00:00:00Z",
+      "title": "The trade war is no excuse for flights of economic nationalist fancy",
+      "url": "https://www.theglobeandmail.com/opinion/article-the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy/",
       "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-09-16T19:02:10Z"
+      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
     },
     "url:https://theglobeandmail.com/opinion/article-we-may-look-back-on-this-as-the-week-canada-began-to-take-its-fate": {
       "keys": [
