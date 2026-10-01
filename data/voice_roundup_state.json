@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-09-30T20:15:28Z",
-  "last_reconcile_at": "2026-09-30T20:15:28Z",
+  "updated_at": "2026-10-01T20:26:53Z",
+  "last_reconcile_at": "2026-10-01T20:26:53Z",
   "last_roundup": {
     "period_id": "2026-09-27",
     "cutoff": "2026-09-27T21:00:00Z",
@@ -372,23 +372,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/metr-ea-and-others-being-attacked.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/metr-ea-and-others-being-attacked.html",
-        "pid:rss:https://marginalrevolution.com/?p=93829",
-        "syn:metr-ea-and-others-being-attacked|voice:tyler-cowen|2026-09-17",
-        "fp:marginalrevolution.com|metr-ea-and-others-being-attacked|2026-09-17"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-17T19:12:56Z",
-      "published_at": "2026-09-17T03:10:53Z",
-      "title": "METR, EA, and others being attacked",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/metr-ea-and-others-being-attacked.html?utm_source=rss&utm_medium=rss&utm_campaign=metr-ea-and-others-being-attacked",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-17T19:12:56Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/mighty-sparrow-rip.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/mighty-sparrow-rip.html",
@@ -490,23 +473,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-economics-rich-conversation-with-gita-gopinath.html?utm_source=rss&utm_medium=rss&utm_campaign=my-economics-rich-conversation-with-gita-gopinath",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-24T19:27:08Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-excellent-conversation-with-annie-lowrey.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-excellent-conversation-with-annie-lowrey.html",
-        "pid:rss:https://marginalrevolution.com/?p=93826",
-        "syn:my-excellent-conversation-with-annie-lowrey|voice:tyler-cowen|2026-09-17",
-        "fp:marginalrevolution.com|my-excellent-conversation-with-annie-lowrey|2026-09-17"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-17T19:12:56Z",
-      "published_at": "2026-09-17T08:20:16Z",
-      "title": "My excellent Conversation with Annie Lowrey",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-excellent-conversation-with-annie-lowrey.html?utm_source=rss&utm_medium=rss&utm_campaign=my-excellent-conversation-with-annie-lowrey",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-17T19:12:56Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/obama-on-agentic-ai.html": {
       "keys": [
@@ -712,23 +678,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-correct-model-of-ai-ceo-behavior.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-correct-model-of-ai-ceo-behavior.html",
-        "pid:rss:https://marginalrevolution.com/?p=93820",
-        "syn:the-correct-model-of-ai-ceo-behavior|voice:tyler-cowen|2026-09-17",
-        "fp:marginalrevolution.com|the-correct-model-of-ai-ceo-behavior|2026-09-17"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-17T19:12:56Z",
-      "published_at": "2026-09-17T04:19:07Z",
-      "title": "The correct model of AI CEO behavior",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-correct-model-of-ai-ceo-behavior.html?utm_source=rss&utm_medium=rss&utm_campaign=the-correct-model-of-ai-ceo-behavior",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-17T19:12:56Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html",
@@ -812,24 +761,7 @@
       "title": "The polity that is Singapore",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html?utm_source=rss&utm_medium=rss&utm_campaign=the-polity-that-is-singapore-3",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-570.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-570.html",
-        "pid:rss:https://marginalrevolution.com/?p=93818",
-        "syn:thursday-assorted-links|voice:tyler-cowen|2026-09-17",
-        "fp:marginalrevolution.com|thursday-assorted-links|2026-09-17"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-17T19:12:56Z",
-      "published_at": "2026-09-17T15:54:05Z",
-      "title": "Thursday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-570.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-570",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-18T18:37:04Z"
+      "first_morning_surfaced_at": "2026-10-01T20:26:53Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-571.html": {
       "keys": [
@@ -983,6 +915,91 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/why-papua-new-guinea-is-so-interesting.html?utm_source=rss&utm_medium=rss&utm_campaign=why-papua-new-guinea-is-so-interesting",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-18T18:37:04Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/alvin-roth-to-the-rescue-the-polity-that-is-singapore.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/alvin-roth-to-the-rescue-the-polity-that-is-singapore.html",
+        "pid:rss:https://marginalrevolution.com/?p=93908",
+        "syn:alvin-roth-to-the-rescue-the-polity-that-is-singapore|voice:tyler-cowen|2026-10-01",
+        "fp:marginalrevolution.com|alvin-roth-to-the-rescue-the-polity-that-is-singapore|2026-10-01"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-01T20:26:53Z",
+      "published_at": "2026-10-01T18:26:45Z",
+      "title": "Alvin Roth to the rescue, the polity that is Singapore",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/alvin-roth-to-the-rescue-the-polity-that-is-singapore.html?utm_source=rss&utm_medium=rss&utm_campaign=alvin-roth-to-the-rescue-the-polity-that-is-singapore",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/merging-llms-and-economics-research.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/merging-llms-and-economics-research.html",
+        "pid:rss:https://marginalrevolution.com/?p=93907",
+        "syn:merging-llms-and-economics-research|voice:tyler-cowen|2026-10-01",
+        "fp:marginalrevolution.com|merging-llms-and-economics-research|2026-10-01"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-01T20:26:53Z",
+      "published_at": "2026-10-01T04:31:10Z",
+      "title": "Merging LLMs and economics research",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/merging-llms-and-economics-research.html?utm_source=rss&utm_medium=rss&utm_campaign=merging-llms-and-economics-research",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-01T20:26:53Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html",
+        "pid:rss:https://marginalrevolution.com/?p=93905",
+        "syn:the-top-private-sector-employers-of-economics-graduates|voice:tyler-cowen|2026-10-01",
+        "fp:marginalrevolution.com|the-top-private-sector-employers-of-economics-graduates|2026-10-01"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-01T20:26:53Z",
+      "published_at": "2026-10-01T06:23:03Z",
+      "title": "The top private sector employers of economics graduates",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html?utm_source=rss&utm_medium=rss&utm_campaign=the-top-private-sector-employers-of-economics-graduates",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-01T20:26:53Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-572.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-572.html",
+        "pid:rss:https://marginalrevolution.com/?p=93906",
+        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-01",
+        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-01"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-01T20:26:53Z",
+      "published_at": "2026-10-01T15:58:50Z",
+      "title": "Thursday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-572.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-572",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html",
+        "pid:rss:https://marginalrevolution.com/?p=93909",
+        "syn:what-should-i-ask-moxie-marlinspike|voice:tyler-cowen|2026-10-01",
+        "fp:marginalrevolution.com|what-should-i-ask-moxie-marlinspike|2026-10-01"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-01T20:26:53Z",
+      "published_at": "2026-10-01T14:30:41Z",
+      "title": "What should I ask Moxie Marlinspike?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-moxie-marlinspike",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html": {
       "keys": [
