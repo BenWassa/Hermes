@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-02T20:06:14Z",
-  "last_reconcile_at": "2026-10-01T20:26:53Z",
+  "updated_at": "2026-10-03T18:47:55Z",
+  "last_reconcile_at": "2026-10-03T18:47:55Z",
   "last_roundup": {
     "period_id": "2026-09-27",
     "cutoff": "2026-09-27T21:00:00Z",
@@ -47,7 +47,7 @@
       "title": "What’s at Stake in Brazil’s Election",
       "url": "https://foreignpolicy.com/2026/10/02/brazil-lula-bolsonaro-election-trump-china-united-states-cuba/",
       "publication": "Foreign Policy",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/a-doomsday-scenario-for-american-ai.html": {
       "keys": [
@@ -219,23 +219,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/emergent-ventures-india-19th-cohort.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/emergent-ventures-india-19th-cohort.html",
-        "pid:rss:https://marginalrevolution.com/?p=93834",
-        "syn:emergent-ventures-india-19th-cohort|voice:tyler-cowen|2026-09-19",
-        "fp:marginalrevolution.com|emergent-ventures-india-19th-cohort|2026-09-19"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-19T18:10:53Z",
-      "published_at": "2026-09-19T04:22:09Z",
-      "title": "Emergent Ventures India, 19th cohort",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/emergent-ventures-india-19th-cohort.html?utm_source=rss&utm_medium=rss&utm_campaign=emergent-ventures-india-19th-cohort",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/empathy-gaps.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/empathy-gaps.html",
@@ -337,23 +320,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/good-points-from-james-gilliland.html?utm_source=rss&utm_medium=rss&utm_campaign=good-points-from-james-gilliland",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html",
-        "pid:rss:https://marginalrevolution.com/?p=93831",
-        "syn:internet-diffusion-and-religious-decline|voice:tyler-cowen|2026-09-19",
-        "fp:marginalrevolution.com|internet-diffusion-and-religious-decline|2026-09-19"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-19T18:10:53Z",
-      "published_at": "2026-09-19T06:22:39Z",
-      "title": "Internet diffusion and religious decline?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/internet-diffusion-and-religious-decline.html?utm_source=rss&utm_medium=rss&utm_campaign=internet-diffusion-and-religious-decline",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-19T18:10:53Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/mans-best-friend.html": {
       "keys": [
@@ -524,23 +490,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/peter-thiel-on-ai-and-tech-stagnation.html?utm_source=rss&utm_medium=rss&utm_campaign=peter-thiel-on-ai-and-tech-stagnation",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-579.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-579.html",
-        "pid:rss:https://marginalrevolution.com/?p=93833",
-        "syn:saturday-assorted-links|voice:tyler-cowen|2026-09-19",
-        "fp:marginalrevolution.com|saturday-assorted-links|2026-09-19"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-19T18:10:53Z",
-      "published_at": "2026-09-19T17:04:04Z",
-      "title": "Saturday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-579.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-579",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-20T18:16:49Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-580.html": {
       "keys": [
@@ -882,6 +831,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/florian-schneider-rip.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/florian-schneider-rip.html",
+        "pid:rss:https://marginalrevolution.com/?p=93923",
+        "syn:florian-schneider-rip|voice:tyler-cowen|2026-10-03",
+        "fp:marginalrevolution.com|florian-schneider-rip|2026-10-03"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-03T18:47:55Z",
+      "published_at": "2026-10-03T15:29:40Z",
+      "title": "Florian Schneider, RIP",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/florian-schneider-rip.html?utm_source=rss&utm_medium=rss&utm_campaign=florian-schneider-rip",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-593.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-593.html",
@@ -932,6 +898,40 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-luis-garicano.html?utm_source=rss&utm_medium=rss&utm_campaign=my-excellent-conversation-with-luis-garicano",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html",
+        "pid:rss:https://marginalrevolution.com/?p=93912",
+        "syn:new-issue-of-econ-journal-watch|voice:tyler-cowen|2026-10-03",
+        "fp:marginalrevolution.com|new-issue-of-econ-journal-watch|2026-10-03"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-03T18:47:55Z",
+      "published_at": "2026-10-03T04:27:58Z",
+      "title": "New issue of Econ Journal Watch",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html?utm_source=rss&utm_medium=rss&utm_campaign=new-issue-of-econ-journal-watch-17",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-581.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-581.html",
+        "pid:rss:https://marginalrevolution.com/?p=93917",
+        "syn:saturday-assorted-links|voice:tyler-cowen|2026-10-03",
+        "fp:marginalrevolution.com|saturday-assorted-links|2026-10-03"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-03T18:47:55Z",
+      "published_at": "2026-10-03T16:29:20Z",
+      "title": "Saturday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-581.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-581",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html": {
       "keys": [
@@ -1017,6 +1017,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-tom-griffiths.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-tom-griffiths",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html",
+        "pid:rss:https://marginalrevolution.com/?p=93921",
+        "syn:words-to-live-by|voice:tyler-cowen|2026-10-03",
+        "fp:marginalrevolution.com|words-to-live-by|2026-10-03"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-03T18:47:55Z",
+      "published_at": "2026-10-03T07:15:58Z",
+      "title": "Words to live by?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html?utm_source=rss&utm_medium=rss&utm_campaign=words-to-live-by-2",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
     },
     "url:https://nytimes.com/2026/09/20/opinion/ai-ban-self-improvement-recursive-models.html": {
       "keys": [
@@ -1135,14 +1152,16 @@
         "url:https://nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html",
         "pid:rss:https://www.nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html",
         "syn:is-the-world-getting-uglier|voice:ezra-klein|2026-10-02",
-        "fp:nytimes.com|is-the-world-getting-uglier|2026-10-02"
+        "syn:why-cybertrucks-mcmansions-and-greige-matter|voice:ezra-klein|2026-10-02",
+        "fp:nytimes.com|is-the-world-getting-uglier|2026-10-02",
+        "fp:nytimes.com|why-cybertrucks-mcmansions-and-greige-matter|2026-10-02"
       ],
       "voice_ids": [
         "ezra-klein"
       ],
       "first_seen": "2026-10-02T20:06:14Z",
       "published_at": "2026-10-02T14:49:28Z",
-      "title": "Is the World Getting Uglier?",
+      "title": "Why Cybertrucks, McMansions and ‘Greige’ Matter",
       "url": "https://www.nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
@@ -1262,7 +1281,7 @@
       "title": "​​Arthur Brooks: Mike Tomlin’s ‘Minecraft’ Hobby Is a Lesson in Happiness",
       "url": "https://www.thefp.com/p/mike-tomlin-minecraft-arthur-brooks-hobby",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
     },
     "url:https://theglobeandmail.com/opinion/article-bc-election-no-reason-eby-findlay": {
       "keys": [
