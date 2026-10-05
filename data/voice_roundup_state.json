@@ -7,7 +7,7 @@
     "period_id": "2026-10-04",
     "cutoff": "2026-10-04T21:00:00Z",
     "claimed_at": "2026-10-05T01:16:19Z",
-    "status": "pending",
+    "status": "notified",
     "selection_keys": [
       "url:https://theatlantic.com/podcasts/2026/10/should-we-ban-ai-for-kids/688864",
       "url:https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html",
