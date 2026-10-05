@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-05T01:16:19Z",
+  "updated_at": "2026-10-05T06:14:24Z",
   "last_reconcile_at": "2026-10-05T01:16:19Z",
   "last_roundup": {
     "period_id": "2026-10-04",
@@ -406,23 +406,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-24T19:27:08Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/obama-on-agentic-ai.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/obama-on-agentic-ai.html",
-        "pid:rss:https://marginalrevolution.com/?p=93846",
-        "syn:obama-on-agentic-ai|voice:tyler-cowen|2026-09-21",
-        "fp:marginalrevolution.com|obama-on-agentic-ai|2026-09-21"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-21T05:30:08Z",
-      "published_at": "2026-09-21T04:11:54Z",
-      "title": "Obama on agentic AI",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/obama-on-agentic-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=obama-on-agentic-ai",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-21T20:06:13Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/optimal-liability-for-offensive-and-defensive-ai.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/optimal-liability-for-offensive-and-defensive-ai.html",
@@ -745,6 +728,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/alvin-roth-to-the-rescue-the-polity-that-is-singapore.html?utm_source=rss&utm_medium=rss&utm_campaign=alvin-roth-to-the-rescue-the-polity-that-is-singapore",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/crime-in-covid-times.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/crime-in-covid-times.html",
+        "pid:rss:https://marginalrevolution.com/?p=93929",
+        "syn:crime-in-covid-times|voice:tyler-cowen|2026-10-05",
+        "fp:marginalrevolution.com|crime-in-covid-times|2026-10-05"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-05T06:14:24Z",
+      "published_at": "2026-10-05T04:52:02Z",
+      "title": "Crime in Covid Times",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/crime-in-covid-times.html?utm_source=rss&utm_medium=rss&utm_campaign=crime-in-covid-times",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-the-elderly-prefer-robotic-care.html": {
       "keys": [
