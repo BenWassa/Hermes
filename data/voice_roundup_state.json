@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-05T06:14:24Z",
+  "updated_at": "2026-10-05T22:08:59Z",
   "last_reconcile_at": "2026-10-05T01:16:19Z",
   "last_roundup": {
     "period_id": "2026-10-04",
@@ -270,23 +270,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-24T19:27:08Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/further-results-on-ai-and-labor-market-reallocation.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/further-results-on-ai-and-labor-market-reallocation.html",
-        "pid:rss:https://marginalrevolution.com/?p=93851",
-        "syn:further-results-on-ai-and-labor-market-reallocation|voice:tyler-cowen|2026-09-21",
-        "fp:marginalrevolution.com|further-results-on-ai-and-labor-market-reallocation|2026-09-21"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-21T20:06:13Z",
-      "published_at": "2026-09-21T18:49:42Z",
-      "title": "Further results on AI and labor market reallocation",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/further-results-on-ai-and-labor-market-reallocation.html?utm_source=rss&utm_medium=rss&utm_campaign=further-results-on-ai-and-labor-market-reallocation",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/good-points-from-james-gilliland.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/good-points-from-james-gilliland.html",
@@ -337,23 +320,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/mighty-sparrow-rip.html?utm_source=rss&utm_medium=rss&utm_campaign=mighty-sparrow-rip",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-578.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-578.html",
-        "pid:rss:https://marginalrevolution.com/?p=93853",
-        "syn:monday-assorted-links|voice:tyler-cowen|2026-09-21",
-        "fp:marginalrevolution.com|monday-assorted-links|2026-09-21"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-21T20:06:13Z",
-      "published_at": "2026-09-21T17:57:03Z",
-      "title": "Monday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-578.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-578",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-579.html": {
       "keys": [
@@ -729,6 +695,40 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/authenticity-is-exactly-the-same-as-phoniness.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/authenticity-is-exactly-the-same-as-phoniness.html",
+        "pid:rss:https://marginalrevolution.com/?p=93932",
+        "syn:authenticity-is-exactly-the-same-as-phoniness|voice:tyler-cowen|2026-10-05",
+        "fp:marginalrevolution.com|authenticity-is-exactly-the-same-as-phoniness|2026-10-05"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-05T22:08:59Z",
+      "published_at": "2026-10-05T15:45:12Z",
+      "title": "“Authenticity is exactly the same as phoniness.”",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/authenticity-is-exactly-the-same-as-phoniness.html?utm_source=rss&utm_medium=rss&utm_campaign=authenticity-is-exactly-the-same-as-phoniness",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html",
+        "pid:rss:https://marginalrevolution.com/?p=93930",
+        "syn:china-fact-of-the-day|voice:tyler-cowen|2026-10-05",
+        "fp:marginalrevolution.com|china-fact-of-the-day|2026-10-05"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-05T22:08:59Z",
+      "published_at": "2026-10-05T06:56:41Z",
+      "title": "China fact of the day",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html?utm_source=rss&utm_medium=rss&utm_campaign=china-fact-of-the-day-82",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/crime-in-covid-times.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/crime-in-covid-times.html",
@@ -744,7 +744,7 @@
       "title": "Crime in Covid Times",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/crime-in-covid-times.html?utm_source=rss&utm_medium=rss&utm_campaign=crime-in-covid-times",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-the-elderly-prefer-robotic-care.html": {
       "keys": [
@@ -831,6 +831,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-01T20:26:53Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-580.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-580.html",
+        "pid:rss:https://marginalrevolution.com/?p=93931",
+        "syn:monday-assorted-links|voice:tyler-cowen|2026-10-05",
+        "fp:marginalrevolution.com|monday-assorted-links|2026-10-05"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-05T22:08:59Z",
+      "published_at": "2026-10-05T17:23:07Z",
+      "title": "Monday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-580.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-580",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-blurb-for-ethan-mollicks-new-book.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-blurb-for-ethan-mollicks-new-book.html",
@@ -846,7 +863,7 @@
       "title": "My blurb for Ethan Mollick’s new book",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-blurb-for-ethan-mollicks-new-book.html?utm_source=rss&utm_medium=rss&utm_campaign=my-blurb-for-ethan-mollicks-new-book",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-luis-garicano.html": {
       "keys": [
@@ -914,7 +931,7 @@
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-585.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-585",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html": {
       "keys": [
@@ -1130,6 +1147,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
     },
+    "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit": {
+      "keys": [
+        "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
+        "pid:rss:https://www.persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
+        "syn:the-afd-emerged-from-a-respect-deficit|voice:francis-fukuyama|2026-10-05",
+        "fp:persuasion.community|the-afd-emerged-from-a-respect-deficit|2026-10-05"
+      ],
+      "voice_ids": [
+        "francis-fukuyama"
+      ],
+      "first_seen": "2026-10-05T22:08:59Z",
+      "published_at": "2026-10-05T19:20:21Z",
+      "title": "The AfD Emerged From a Respect Deficit",
+      "url": "https://www.persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
+      "publication": "Persuasion",
+      "first_morning_surfaced_at": null
+    },
     "url:https://persuasion.community/p/trumps-golden-fleet-is-still-ridiculous": {
       "keys": [
         "url:https://persuasion.community/p/trumps-golden-fleet-is-still-ridiculous",
@@ -1194,24 +1228,7 @@
       "title": "Should We Ban AI for Kids?",
       "url": "https://www.theatlantic.com/podcasts/2026/10/should-we-ban-ai-for-kids/688864/?utm_source=feed",
       "publication": "The Atlantic",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://thefp.com/p/arthur-brooks-ai-writing-meaning": {
-      "keys": [
-        "url:https://thefp.com/p/arthur-brooks-ai-writing-meaning",
-        "pid:rss:https://www.thefp.com/p/arthur-brooks-ai-writing-meaning",
-        "syn:arthur-brooks-letting-ai-write-for-you-will-make-you-unhappy|voice:arthur-c-brooks|2026-09-21",
-        "fp:thefp.com|arthur-brooks-letting-ai-write-for-you-will-make-you-unhappy|2026-09-21"
-      ],
-      "voice_ids": [
-        "arthur-c-brooks"
-      ],
-      "first_seen": "2026-09-21T20:06:13Z",
-      "published_at": "2026-09-21T15:03:21Z",
-      "title": "Arthur Brooks: Letting AI Write for You Will Make You Unhappy",
-      "url": "https://www.thefp.com/p/arthur-brooks-ai-writing-meaning",
-      "publication": "The Free Press",
-      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
+      "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
     "url:https://thefp.com/p/arthur-brooks-parents-aging-elder-care": {
       "keys": [
