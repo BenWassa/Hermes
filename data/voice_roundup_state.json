@@ -4,14 +4,14 @@
   "updated_at": "2026-10-05T01:16:19Z",
   "last_reconcile_at": "2026-10-05T01:16:19Z",
   "last_roundup": {
-    "period_id": "2026-09-27",
-    "cutoff": "2026-09-27T21:00:00Z",
-    "claimed_at": "2026-09-28T01:10:34Z",
-    "status": "notified",
+    "period_id": "2026-10-04",
+    "cutoff": "2026-10-04T21:00:00Z",
+    "claimed_at": "2026-10-05T01:16:19Z",
+    "status": "pending",
     "selection_keys": [
-      "url:https://marginalrevolution.com/marginalrevolution/2026/09/ai-in-science.html",
-      "url:https://thefp.com/p/arthur-brooks-parents-aging-elder-care",
-      "url:https://marginalrevolution.com/marginalrevolution/2026/09/good-points-from-james-gilliland.html"
+      "url:https://theatlantic.com/podcasts/2026/10/should-we-ban-ai-for-kids/688864",
+      "url:https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html",
+      "url:https://nytimes.com/2026/09/29/opinion/ezra-klein-podcast-bill-gates.html"
     ]
   },
   "items": {
