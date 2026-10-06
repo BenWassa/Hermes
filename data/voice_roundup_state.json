@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-05T22:08:59Z",
-  "last_reconcile_at": "2026-10-05T01:16:19Z",
+  "updated_at": "2026-10-06T20:30:15Z",
+  "last_reconcile_at": "2026-10-06T20:30:15Z",
   "last_roundup": {
     "period_id": "2026-10-04",
     "cutoff": "2026-10-04T21:00:00Z",
@@ -117,23 +117,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-25T19:28:08Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/banning-self-recursive-improvement-in-ai-models.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/banning-self-recursive-improvement-in-ai-models.html",
-        "pid:rss:https://marginalrevolution.com/?p=93857",
-        "syn:banning-self-recursive-improvement-in-ai-models|voice:tyler-cowen|2026-09-22",
-        "fp:marginalrevolution.com|banning-self-recursive-improvement-in-ai-models|2026-09-22"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-22T19:03:18Z",
-      "published_at": "2026-09-22T04:45:57Z",
-      "title": "Banning self-recursive improvement in AI models?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/banning-self-recursive-improvement-in-ai-models.html?utm_source=rss&utm_medium=rss&utm_campaign=banning-self-recursive-improvement-in-ai-models",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html",
@@ -150,23 +133,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html?utm_source=rss&utm_medium=rss&utm_campaign=bundesrepublik-deutschland",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/dartmouth-provost-okie-dokie.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/dartmouth-provost-okie-dokie.html",
-        "pid:rss:https://marginalrevolution.com/?p=93863",
-        "syn:dartmouth-provost-okie-dokie|voice:tyler-cowen|2026-09-22",
-        "fp:marginalrevolution.com|dartmouth-provost-okie-dokie|2026-09-22"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-22T19:03:18Z",
-      "published_at": "2026-09-22T12:20:22Z",
-      "title": "Dartmouth Provost okie-dokie",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/dartmouth-provost-okie-dokie.html?utm_source=rss&utm_medium=rss&utm_campaign=dartmouth-provost-okie-dokie",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html": {
       "keys": [
@@ -491,23 +457,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html",
-        "pid:rss:https://marginalrevolution.com/?p=93862",
-        "syn:the-economics-of-late-grandmotherhood|voice:tyler-cowen|2026-09-22",
-        "fp:marginalrevolution.com|the-economics-of-late-grandmotherhood|2026-09-22"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-22T19:03:18Z",
-      "published_at": "2026-09-22T18:52:28Z",
-      "title": "The economics of late grandmotherhood",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-economics-of-late-grandmotherhood.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-late-grandmotherhood",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-federal-lands-an-economic-property-rights-perspective.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-federal-lands-an-economic-property-rights-perspective.html",
@@ -575,23 +524,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-571.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-571",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-587.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-587.html",
-        "pid:rss:https://marginalrevolution.com/?p=93856",
-        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-09-22",
-        "fp:marginalrevolution.com|tuesday-assorted-links|2026-09-22"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-22T19:03:18Z",
-      "published_at": "2026-09-22T16:10:01Z",
-      "title": "Tuesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-587",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-588.html": {
       "keys": [
@@ -710,7 +642,7 @@
       "title": "“Authenticity is exactly the same as phoniness.”",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/authenticity-is-exactly-the-same-as-phoniness.html?utm_source=rss&utm_medium=rss&utm_campaign=authenticity-is-exactly-the-same-as-phoniness",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html": {
       "keys": [
@@ -846,7 +778,7 @@
       "title": "Monday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-580.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-580",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-blurb-for-ethan-mollicks-new-book.html": {
       "keys": [
@@ -899,6 +831,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/rising-concentration-for-economics-awards.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/rising-concentration-for-economics-awards.html",
+        "pid:rss:https://marginalrevolution.com/?p=93939",
+        "syn:rising-concentration-for-economics-awards|voice:tyler-cowen|2026-10-06",
+        "fp:marginalrevolution.com|rising-concentration-for-economics-awards|2026-10-06"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-06T20:30:15Z",
+      "published_at": "2026-10-06T04:24:14Z",
+      "title": "Rising concentration for economics awards",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/rising-concentration-for-economics-awards.html?utm_source=rss&utm_medium=rss&utm_campaign=rising-concentration-for-economics-awards",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-581.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-581.html",
@@ -950,6 +899,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-great-accretion-and-the-great-depression.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-great-accretion-and-the-great-depression.html",
+        "pid:rss:https://marginalrevolution.com/?p=93937",
+        "syn:the-great-accretion-and-the-great-depression|voice:tyler-cowen|2026-10-06",
+        "fp:marginalrevolution.com|the-great-accretion-and-the-great-depression|2026-10-06"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-06T20:30:15Z",
+      "published_at": "2026-10-06T07:06:24Z",
+      "title": "The Great Accretion and the Great Depression",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-great-accretion-and-the-great-depression.html?utm_source=rss&utm_medium=rss&utm_campaign=the-great-accretion-and-the-great-depression",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html",
@@ -983,6 +949,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-572.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-572",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html",
+        "pid:rss:https://marginalrevolution.com/?p=93934",
+        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-10-06",
+        "fp:marginalrevolution.com|tuesday-assorted-links|2026-10-06"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-06T20:30:15Z",
+      "published_at": "2026-10-06T16:50:43Z",
+      "title": "Tuesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-589",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html": {
       "keys": [
@@ -1034,27 +1017,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html?utm_source=rss&utm_medium=rss&utm_campaign=words-to-live-by-2",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
-    },
-    "url:https://nytimes.com/2026/09/22/opinion/artificial-intelligence-ai-danger.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/09/22/opinion/artificial-intelligence-ai-danger.html",
-        "pid:rss:https://www.nytimes.com/2026/09/22/opinion/artificial-intelligence-ai-danger.html",
-        "syn:why-a-i-is-dangerous-for-science|voice:zeynep-tufekci|2026-09-22",
-        "syn:why-a-i-is-dangerous-for-science|voice:zeynep-tufekci|2026-09-24",
-        "syn:why-a-i-is-dangerous-for-science|voice:zeynep-tufekci|2026-09-25",
-        "fp:nytimes.com|why-a-i-is-dangerous-for-science|2026-09-22",
-        "fp:nytimes.com|why-a-i-is-dangerous-for-science|2026-09-24",
-        "fp:nytimes.com|why-a-i-is-dangerous-for-science|2026-09-25"
-      ],
-      "voice_ids": [
-        "zeynep-tufekci"
-      ],
-      "first_seen": "2026-09-22T19:03:18Z",
-      "published_at": "2026-09-22T14:51:41Z",
-      "title": "Why A.I. Is Dangerous for Science",
-      "url": "https://www.nytimes.com/2026/09/22/opinion/artificial-intelligence-ai-danger.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
     },
     "url:https://nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html": {
       "keys": [
@@ -1162,7 +1124,7 @@
       "title": "The AfD Emerged From a Respect Deficit",
       "url": "https://www.persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
       "publication": "Persuasion",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
     "url:https://persuasion.community/p/trumps-golden-fleet-is-still-ridiculous": {
       "keys": [
@@ -1180,23 +1142,6 @@
       "url": "https://www.persuasion.community/p/trumps-golden-fleet-is-still-ridiculous",
       "publication": "Persuasion",
       "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
-    },
-    "url:https://persuasion.community/p/why-i-changed-my-mind-about-ai-risk": {
-      "keys": [
-        "url:https://persuasion.community/p/why-i-changed-my-mind-about-ai-risk",
-        "pid:rss:https://www.persuasion.community/p/why-i-changed-my-mind-about-ai-risk",
-        "syn:why-i-changed-my-mind-about-ai-risk|voice:francis-fukuyama|2026-09-21",
-        "fp:persuasion.community|why-i-changed-my-mind-about-ai-risk|2026-09-21"
-      ],
-      "voice_ids": [
-        "francis-fukuyama"
-      ],
-      "first_seen": "2026-09-22T01:10:48Z",
-      "published_at": "2026-09-21T20:15:56Z",
-      "title": "Why I Changed My Mind About AI Risk",
-      "url": "https://www.persuasion.community/p/why-i-changed-my-mind-about-ai-risk",
-      "publication": "Persuasion",
-      "first_morning_surfaced_at": "2026-09-22T19:03:18Z"
     },
     "url:https://theatlantic.com/podcasts/2026/09/what-meaning-mystical-experience/688782": {
       "keys": [
