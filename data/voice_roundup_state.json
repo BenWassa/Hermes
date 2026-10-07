@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-06T20:30:15Z",
-  "last_reconcile_at": "2026-10-06T20:30:15Z",
+  "updated_at": "2026-10-07T20:44:42Z",
+  "last_reconcile_at": "2026-10-07T20:44:42Z",
   "last_roundup": {
     "period_id": "2026-10-04",
     "cutoff": "2026-10-04T21:00:00Z",
@@ -48,6 +48,23 @@
       "url": "https://foreignpolicy.com/2026/10/02/brazil-lula-bolsonaro-election-trump-china-united-states-cuba/",
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
+    },
+    "url:https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics": {
+      "keys": [
+        "url:https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics",
+        "pid:rss:https://foreignpolicy.com/?p=1242703",
+        "syn:what-s-freezing-the-u-s-housing-market|voice:adam-tooze|2026-10-06",
+        "fp:foreignpolicy.com|what-s-freezing-the-u-s-housing-market|2026-10-06"
+      ],
+      "voice_ids": [
+        "adam-tooze"
+      ],
+      "first_seen": "2026-10-07T20:44:42Z",
+      "published_at": "2026-10-06T19:28:43Z",
+      "title": "What’s Freezing the U.S. Housing Market?",
+      "url": "https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics/",
+      "publication": "Foreign Policy",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/a-doomsday-scenario-for-american-ai.html": {
       "keys": [
@@ -338,23 +355,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-24T19:27:08Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/optimal-liability-for-offensive-and-defensive-ai.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/optimal-liability-for-offensive-and-defensive-ai.html",
-        "pid:rss:https://marginalrevolution.com/?p=93867",
-        "syn:optimal-liability-for-offensive-and-defensive-ai|voice:tyler-cowen|2026-09-23",
-        "fp:marginalrevolution.com|optimal-liability-for-offensive-and-defensive-ai|2026-09-23"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-23T19:10:42Z",
-      "published_at": "2026-09-23T18:03:36Z",
-      "title": "Optimal liability for offensive and defensive AI",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/optimal-liability-for-offensive-and-defensive-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=optimal-liability-for-offensive-and-defensive-ai",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/peter-thiel-on-ai-and-tech-stagnation.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/peter-thiel-on-ai-and-tech-stagnation.html",
@@ -542,23 +542,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-572.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-572.html",
-        "pid:rss:https://marginalrevolution.com/?p=93866",
-        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-09-23",
-        "fp:marginalrevolution.com|wednesday-assorted-links|2026-09-23"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-23T19:10:42Z",
-      "published_at": "2026-09-23T15:48:52Z",
-      "title": "Wednesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-572.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-572",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html",
@@ -575,23 +558,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-573",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-ive-been-reading-295.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-ive-been-reading-295.html",
-        "pid:rss:https://marginalrevolution.com/?p=93835",
-        "syn:what-i-ve-been-reading|voice:tyler-cowen|2026-09-23",
-        "fp:marginalrevolution.com|what-i-ve-been-reading|2026-09-23"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-23T19:10:42Z",
-      "published_at": "2026-09-23T04:40:51Z",
-      "title": "What I’ve been reading",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/what-ive-been-reading-295.html?utm_source=rss&utm_medium=rss&utm_campaign=what-ive-been-reading-295",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-should-i-ask-terence-tao.html": {
       "keys": [
@@ -644,6 +610,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazil-election-notes-from-my-email.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazil-election-notes-from-my-email.html",
+        "pid:rss:https://marginalrevolution.com/?p=93942",
+        "syn:brazil-election-notes-from-my-email|voice:tyler-cowen|2026-10-06",
+        "fp:marginalrevolution.com|brazil-election-notes-from-my-email|2026-10-06"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-07T20:44:42Z",
+      "published_at": "2026-10-06T22:38:14Z",
+      "title": "Brazil election notes (from my email)",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/brazil-election-notes-from-my-email.html?utm_source=rss&utm_medium=rss&utm_campaign=brazil-election-notes-from-my-email",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html",
@@ -694,6 +677,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/do-the-elderly-prefer-robotic-care.html?utm_source=rss&utm_medium=rss&utm_campaign=do-the-elderly-prefer-robotic-care",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-04T18:44:54Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/effective-altruism-is-useful-at-the-margin.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/effective-altruism-is-useful-at-the-margin.html",
+        "pid:rss:https://marginalrevolution.com/?p=93943",
+        "syn:effective-altruism-is-useful-at-the-margin|voice:tyler-cowen|2026-10-07",
+        "fp:marginalrevolution.com|effective-altruism-is-useful-at-the-margin|2026-10-07"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-07T20:44:42Z",
+      "published_at": "2026-10-07T04:49:13Z",
+      "title": "Effective altruism is useful at the margin",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/effective-altruism-is-useful-at-the-margin.html?utm_source=rss&utm_medium=rss&utm_campaign=effective-altruism-is-useful-at-the-margin",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/florian-schneider-rip.html": {
       "keys": [
@@ -967,6 +967,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html",
+        "pid:rss:https://marginalrevolution.com/?p=93946",
+        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-10-07",
+        "fp:marginalrevolution.com|wednesday-assorted-links|2026-10-07"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-07T20:44:42Z",
+      "published_at": "2026-10-07T17:40:28Z",
+      "title": "Wednesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-574",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html",
@@ -1001,6 +1018,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-most-stereotypes-are-negative.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-most-stereotypes-are-negative.html",
+        "pid:rss:https://marginalrevolution.com/?p=93941",
+        "syn:why-most-stereotypes-are-negative|voice:tyler-cowen|2026-10-07",
+        "fp:marginalrevolution.com|why-most-stereotypes-are-negative|2026-10-07"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-07T20:44:42Z",
+      "published_at": "2026-10-07T07:03:57Z",
+      "title": "Why most stereotypes are negative",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/why-most-stereotypes-are-negative.html?utm_source=rss&utm_medium=rss&utm_campaign=why-most-stereotypes-are-negative",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html",
@@ -1017,23 +1051,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html?utm_source=rss&utm_medium=rss&utm_campaign=words-to-live-by-2",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
-    },
-    "url:https://nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html",
-        "pid:rss:https://www.nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html",
-        "syn:jensen-huang-thinks-a-i-alarmism-has-gone-too-far|voice:ezra-klein|2026-09-23",
-        "fp:nytimes.com|jensen-huang-thinks-a-i-alarmism-has-gone-too-far|2026-09-23"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-09-23T19:10:42Z",
-      "published_at": "2026-09-23T16:56:47Z",
-      "title": "Jensen Huang Thinks A.I. Alarmism Has Gone Too Far",
-      "url": "https://www.nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-09-23T19:10:42Z"
     },
     "url:https://nytimes.com/2026/09/25/opinion/ezra-klein-podcast-abdul-el-sayed.html": {
       "keys": [
@@ -1108,6 +1125,23 @@
       "url": "https://www.nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
+    },
+    "url:https://nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html",
+        "pid:rss:https://www.nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html",
+        "syn:this-is-nuts-an-openai-insider-explains-why-he-quit|voice:ezra-klein|2026-10-07",
+        "fp:nytimes.com|this-is-nuts-an-openai-insider-explains-why-he-quit|2026-10-07"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-07T20:44:42Z",
+      "published_at": "2026-10-07T13:48:13Z",
+      "title": "‘This Is Nuts.’ An OpenAI Insider Explains Why He Quit.",
+      "url": "https://www.nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     },
     "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit": {
       "keys": [
@@ -1256,6 +1290,22 @@
       "url": "https://www.theglobeandmail.com/opinion/article-the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-the-weakness-of-its-mandate-will-not-deter-the-pq-from-the-chaos-and": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-the-weakness-of-its-mandate-will-not-deter-the-pq-from-the-chaos-and",
+        "syn:the-weakness-of-its-mandate-will-not-deter-the-pq-from-the|voice:andrew-coyne|2026-10-06",
+        "fp:theglobeandmail.com|the-weakness-of-its-mandate-will-not-deter-the-pq-from-the|2026-10-06"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-10-07T20:44:42Z",
+      "published_at": "2026-10-06T00:00:00Z",
+      "title": "The weakness of its mandate will not deter the PQ from the chaos and division of its project",
+      "url": "https://www.theglobeandmail.com/opinion/article-the-weakness-of-its-mandate-will-not-deter-the-pq-from-the-chaos-and/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     }
   }
 }
