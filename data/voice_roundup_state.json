@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-07T20:44:42Z",
-  "last_reconcile_at": "2026-10-07T20:44:42Z",
+  "updated_at": "2026-10-08T20:46:53Z",
+  "last_reconcile_at": "2026-10-08T20:46:53Z",
   "last_roundup": {
     "period_id": "2026-10-04",
     "cutoff": "2026-10-04T21:00:00Z",
@@ -15,23 +15,6 @@
     ]
   },
   "items": {
-    "url:https://foreignpolicy.com/2026/09/24/ai-regulation-technology-pace-frontier-stock-market": {
-      "keys": [
-        "url:https://foreignpolicy.com/2026/09/24/ai-regulation-technology-pace-frontier-stock-market",
-        "pid:rss:https://foreignpolicy.com/?p=1241845",
-        "syn:can-ai-be-regulated|voice:adam-tooze|2026-09-24",
-        "fp:foreignpolicy.com|can-ai-be-regulated|2026-09-24"
-      ],
-      "voice_ids": [
-        "adam-tooze"
-      ],
-      "first_seen": "2026-09-24T19:27:08Z",
-      "published_at": "2026-09-24T16:14:30Z",
-      "title": "Can AI Be Regulated?",
-      "url": "https://foreignpolicy.com/2026/09/24/ai-regulation-technology-pace-frontier-stock-market/",
-      "publication": "Foreign Policy",
-      "first_morning_surfaced_at": "2026-09-25T19:28:08Z"
-    },
     "url:https://foreignpolicy.com/2026/10/02/brazil-lula-bolsonaro-election-trump-china-united-states-cuba": {
       "keys": [
         "url:https://foreignpolicy.com/2026/10/02/brazil-lula-bolsonaro-election-trump-china-united-states-cuba",
@@ -185,40 +168,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-27T19:13:02Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/earth-fact-of-the-day-2.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/earth-fact-of-the-day-2.html",
-        "pid:rss:https://marginalrevolution.com/?p=93878",
-        "syn:earth-fact-of-the-day|voice:tyler-cowen|2026-09-24",
-        "fp:marginalrevolution.com|earth-fact-of-the-day|2026-09-24"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-24T19:27:08Z",
-      "published_at": "2026-09-24T18:58:55Z",
-      "title": "Earth fact of the day",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/earth-fact-of-the-day-2.html?utm_source=rss&utm_medium=rss&utm_campaign=earth-fact-of-the-day-2",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/fear-of-data.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/fear-of-data.html",
-        "pid:rss:https://marginalrevolution.com/?p=93864",
-        "syn:fear-of-data|voice:tyler-cowen|2026-09-24",
-        "fp:marginalrevolution.com|fear-of-data|2026-09-24"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-24T19:27:08Z",
-      "published_at": "2026-09-24T08:24:05Z",
-      "title": "*Fear of Data*",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/fear-of-data.html?utm_source=rss&utm_medium=rss&utm_campaign=fear-of-data",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-24T19:27:08Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-592.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-592.html",
@@ -235,23 +184,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-592.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-592",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/from-the-master-of-industrial-organization.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/from-the-master-of-industrial-organization.html",
-        "pid:rss:https://marginalrevolution.com/?p=93874",
-        "syn:from-the-master-of-industrial-organization|voice:tyler-cowen|2026-09-23",
-        "fp:marginalrevolution.com|from-the-master-of-industrial-organization|2026-09-23"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-24T19:27:08Z",
-      "published_at": "2026-09-23T21:40:20Z",
-      "title": "From the Master of Industrial Organization",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/from-the-master-of-industrial-organization.html?utm_source=rss&utm_medium=rss&utm_campaign=from-the-master-of-industrial-organization",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-24T19:27:08Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/good-points-from-james-gilliland.html": {
       "keys": [
@@ -337,23 +269,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-dreadful-body.html?utm_source=rss&utm_medium=rss&utm_campaign=my-dreadful-body",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-25T19:28:08Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-economics-rich-conversation-with-gita-gopinath.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-economics-rich-conversation-with-gita-gopinath.html",
-        "pid:rss:https://marginalrevolution.com/?p=93872",
-        "syn:my-economics-rich-conversation-with-gita-gopinath|voice:tyler-cowen|2026-09-24",
-        "fp:marginalrevolution.com|my-economics-rich-conversation-with-gita-gopinath|2026-09-24"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-24T19:27:08Z",
-      "published_at": "2026-09-24T04:41:41Z",
-      "title": "My economics-rich Conversation with Gita Gopinath",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-economics-rich-conversation-with-gita-gopinath.html?utm_source=rss&utm_medium=rss&utm_campaign=my-economics-rich-conversation-with-gita-gopinath",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-24T19:27:08Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/peter-thiel-on-ai-and-tech-stagnation.html": {
       "keys": [
@@ -507,23 +422,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html?utm_source=rss&utm_medium=rss&utm_campaign=the-polity-that-is-singapore-3",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-01T20:26:53Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-571.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-571.html",
-        "pid:rss:https://marginalrevolution.com/?p=93871",
-        "syn:thursday-assorted-links|voice:tyler-cowen|2026-09-24",
-        "fp:marginalrevolution.com|thursday-assorted-links|2026-09-24"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-24T19:27:08Z",
-      "published_at": "2026-09-24T16:07:24Z",
-      "title": "Thursday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/thursday-assorted-links-571.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-571",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-588.html": {
       "keys": [
@@ -729,6 +627,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html",
+        "pid:rss:https://marginalrevolution.com/?p=93948",
+        "syn:how-and-why-did-the-victorians-succeed|voice:tyler-cowen|2026-10-08",
+        "fp:marginalrevolution.com|how-and-why-did-the-victorians-succeed|2026-10-08"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-08T20:46:53Z",
+      "published_at": "2026-10-08T07:02:17Z",
+      "title": "How and why did the Victorians succeed?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html?utm_source=rss&utm_medium=rss&utm_campaign=how-and-why-did-the-victorians-succeed",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/marital-sorting-by-class-and-race.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/marital-sorting-by-class-and-race.html",
@@ -830,6 +745,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html?utm_source=rss&utm_medium=rss&utm_campaign=new-issue-of-econ-journal-watch-17",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html",
+        "pid:rss:https://marginalrevolution.com/?p=93949",
+        "syn:predictions-for-economics-given-ai|voice:tyler-cowen|2026-10-08",
+        "fp:marginalrevolution.com|predictions-for-economics-given-ai|2026-10-08"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-08T20:46:53Z",
+      "published_at": "2026-10-08T17:34:18Z",
+      "title": "Predictions for economics, given AI",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=predictions-for-economics-given-ai",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/rising-concentration-for-economics-awards.html": {
       "keys": [
@@ -950,6 +882,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-573.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-573.html",
+        "pid:rss:https://marginalrevolution.com/?p=93947",
+        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-08",
+        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-08"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-08T20:46:53Z",
+      "published_at": "2026-10-08T17:14:37Z",
+      "title": "Thursday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-573.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-573",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html",
@@ -982,7 +931,24 @@
       "title": "Wednesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-574",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html",
+        "pid:rss:https://marginalrevolution.com/?p=93918",
+        "syn:what-i-ve-been-reading|voice:tyler-cowen|2026-10-08",
+        "fp:marginalrevolution.com|what-i-ve-been-reading|2026-10-08"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-08T20:46:53Z",
+      "published_at": "2026-10-08T04:52:29Z",
+      "title": "What I’ve been reading",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html?utm_source=rss&utm_medium=rss&utm_campaign=what-ive-been-reading-296",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html": {
       "keys": [
