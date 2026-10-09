@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-08T20:46:53Z",
+  "updated_at": "2026-10-09T20:17:11Z",
   "last_reconcile_at": "2026-10-08T20:46:53Z",
   "last_roundup": {
     "period_id": "2026-10-04",
@@ -100,23 +100,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/armenia-notes.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/armenia-notes.html",
-        "pid:rss:https://marginalrevolution.com/?p=93844",
-        "syn:armenia-notes|voice:tyler-cowen|2026-09-25",
-        "fp:marginalrevolution.com|armenia-notes|2026-09-25"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-25T19:28:08Z",
-      "published_at": "2026-09-25T04:52:17Z",
-      "title": "Armenia notes",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/armenia-notes.html?utm_source=rss&utm_medium=rss&utm_campaign=armenia-notes",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-25T19:28:08Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html",
@@ -168,40 +151,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-27T19:13:02Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-592.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-592.html",
-        "pid:rss:https://marginalrevolution.com/?p=93875",
-        "syn:friday-assorted-links|voice:tyler-cowen|2026-09-25",
-        "fp:marginalrevolution.com|friday-assorted-links|2026-09-25"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-25T19:28:08Z",
-      "published_at": "2026-09-25T15:40:23Z",
-      "title": "Friday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/friday-assorted-links-592.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-592",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/good-points-from-james-gilliland.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/good-points-from-james-gilliland.html",
-        "pid:rss:https://marginalrevolution.com/?p=93881",
-        "syn:good-points-from-james-gilliland|voice:tyler-cowen|2026-09-25",
-        "fp:marginalrevolution.com|good-points-from-james-gilliland|2026-09-25"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-25T19:28:08Z",
-      "published_at": "2026-09-25T18:13:07Z",
-      "title": "Good points from James Gilliland",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/good-points-from-james-gilliland.html?utm_source=rss&utm_medium=rss&utm_campaign=good-points-from-james-gilliland",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/mans-best-friend.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/mans-best-friend.html",
@@ -252,40 +201,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/monday-assorted-links-579.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-579",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-dreadful-body.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/my-dreadful-body.html",
-        "pid:rss:https://marginalrevolution.com/?p=93877",
-        "syn:my-dreadful-body|voice:tyler-cowen|2026-09-25",
-        "fp:marginalrevolution.com|my-dreadful-body|2026-09-25"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-25T19:28:08Z",
-      "published_at": "2026-09-25T10:08:21Z",
-      "title": "*My Dreadful Body*",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/my-dreadful-body.html?utm_source=rss&utm_medium=rss&utm_campaign=my-dreadful-body",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-25T19:28:08Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/peter-thiel-on-ai-and-tech-stagnation.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/peter-thiel-on-ai-and-tech-stagnation.html",
-        "pid:rss:https://marginalrevolution.com/?p=93882",
-        "syn:peter-thiel-on-ai-and-tech-stagnation-and-democracy|voice:tyler-cowen|2026-09-24",
-        "fp:marginalrevolution.com|peter-thiel-on-ai-and-tech-stagnation-and-democracy|2026-09-24"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-25T19:28:08Z",
-      "published_at": "2026-09-24T23:31:20Z",
-      "title": "Peter Thiel on AI and tech stagnation and democracy",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/peter-thiel-on-ai-and-tech-stagnation.html?utm_source=rss&utm_medium=rss&utm_campaign=peter-thiel-on-ai-and-tech-stagnation",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-580.html": {
       "keys": [
@@ -474,6 +389,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-27T19:13:02Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html",
+        "pid:rss:https://marginalrevolution.com/?p=93952",
+        "syn:a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman|voice:tyler-cowen|2026-10-09",
+        "fp:marginalrevolution.com|a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman|2026-10-09"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-09T20:17:11Z",
+      "published_at": "2026-10-09T06:26:35Z",
+      "title": "A Sentiment Analysis of Cowen, Hanson, Caplan, and Krugman",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html?utm_source=rss&utm_medium=rss&utm_campaign=a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/alvin-roth-to-the-rescue-the-polity-that-is-singapore.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/alvin-roth-to-the-rescue-the-polity-that-is-singapore.html",
@@ -593,6 +525,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/ethiopia-update.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/ethiopia-update.html",
+        "pid:rss:https://marginalrevolution.com/?p=93958",
+        "syn:ethiopia-update|voice:tyler-cowen|2026-10-09",
+        "fp:marginalrevolution.com|ethiopia-update|2026-10-09"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-09T20:17:11Z",
+      "published_at": "2026-10-09T16:24:04Z",
+      "title": "Ethiopia update",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/ethiopia-update.html?utm_source=rss&utm_medium=rss&utm_campaign=ethiopia-update",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/florian-schneider-rip.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/florian-schneider-rip.html",
@@ -624,6 +573,23 @@
       "published_at": "2026-10-02T15:30:39Z",
       "title": "Friday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-593.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-593",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html",
+        "pid:rss:https://marginalrevolution.com/?p=93951",
+        "syn:friday-assorted-links|voice:tyler-cowen|2026-10-09",
+        "fp:marginalrevolution.com|friday-assorted-links|2026-10-09"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-09T20:17:11Z",
+      "published_at": "2026-10-09T16:06:02Z",
+      "title": "Friday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-594",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -746,6 +712,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html",
+        "pid:rss:https://marginalrevolution.com/?p=93950",
+        "syn:on-stubborn-attachments-and-religion-from-my-email|voice:tyler-cowen|2026-10-09",
+        "fp:marginalrevolution.com|on-stubborn-attachments-and-religion-from-my-email|2026-10-09"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-09T20:17:11Z",
+      "published_at": "2026-10-09T04:38:05Z",
+      "title": "On *Stubborn Attachments* and religion (from my email)",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html?utm_source=rss&utm_medium=rss&utm_campaign=on-stubborn-attachments-and-religion-from-my-email",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html",
@@ -847,6 +830,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-great-accretion-and-the-great-depression.html?utm_source=rss&utm_medium=rss&utm_campaign=the-great-accretion-and-the-great-depression",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html",
+        "pid:rss:https://marginalrevolution.com/?p=93957",
+        "syn:the-origin-of-risk|voice:tyler-cowen|2026-10-09",
+        "fp:marginalrevolution.com|the-origin-of-risk|2026-10-09"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-09T20:17:11Z",
+      "published_at": "2026-10-09T18:20:57Z",
+      "title": "The origin of risk",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html?utm_source=rss&utm_medium=rss&utm_campaign=the-origin-of-risk",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html": {
       "keys": [
@@ -1018,42 +1018,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
     },
-    "url:https://nytimes.com/2026/09/25/opinion/ezra-klein-podcast-abdul-el-sayed.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/09/25/opinion/ezra-klein-podcast-abdul-el-sayed.html",
-        "pid:rss:https://www.nytimes.com/2026/09/25/opinion/ezra-klein-podcast-abdul-el-sayed.html",
-        "syn:what-does-abdul-el-sayed-believe|voice:ezra-klein|2026-09-25",
-        "syn:what-does-abdul-el-sayed-believe|voice:ezra-klein|2026-09-26",
-        "fp:nytimes.com|what-does-abdul-el-sayed-believe|2026-09-25",
-        "fp:nytimes.com|what-does-abdul-el-sayed-believe|2026-09-26"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-09-25T19:28:08Z",
-      "published_at": "2026-09-25T09:01:59Z",
-      "title": "What Does Abdul El-Sayed Believe?",
-      "url": "https://www.nytimes.com/2026/09/25/opinion/ezra-klein-podcast-abdul-el-sayed.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-09-25T19:28:08Z"
-    },
-    "url:https://nytimes.com/2026/09/25/podcasts/hardfork-ezra-klein-jensen-huang.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/09/25/podcasts/hardfork-ezra-klein-jensen-huang.html",
-        "pid:rss:https://www.nytimes.com/2026/09/25/podcasts/hardfork-ezra-klein-jensen-huang.html",
-        "syn:the-ezra-klein-show-jensen-huang-thinks-a-i-alarmism-has-gone|voice:ezra-klein|2026-09-25",
-        "fp:nytimes.com|the-ezra-klein-show-jensen-huang-thinks-a-i-alarmism-has-gone|2026-09-25"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-09-25T19:28:08Z",
-      "published_at": "2026-09-25T11:00:03Z",
-      "title": "The Ezra Klein Show: Jensen Huang Thinks A.I. Alarmism Has Gone Too Far",
-      "url": "https://www.nytimes.com/2026/09/25/podcasts/hardfork-ezra-klein-jensen-huang.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-09-26T18:41:16Z"
-    },
     "url:https://nytimes.com/2026/09/29/opinion/ezra-klein-podcast-bill-gates.html": {
       "keys": [
         "url:https://nytimes.com/2026/09/29/opinion/ezra-klein-podcast-bill-gates.html",
@@ -1108,6 +1072,23 @@
       "url": "https://www.nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
+    },
+    "url:https://nytimes.com/2026/10/09/opinion/ezra-klein-podcast-arvind-narayanan.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/09/opinion/ezra-klein-podcast-arvind-narayanan.html",
+        "pid:rss:https://www.nytimes.com/2026/10/09/opinion/ezra-klein-podcast-arvind-narayanan.html",
+        "syn:intelligence-isn-t-power|voice:ezra-klein|2026-10-09",
+        "fp:nytimes.com|intelligence-isn-t-power|2026-10-09"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-09T20:17:11Z",
+      "published_at": "2026-10-09T16:05:02Z",
+      "title": "Intelligence Isn’t Power",
+      "url": "https://www.nytimes.com/2026/10/09/opinion/ezra-klein-podcast-arvind-narayanan.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     },
     "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit": {
       "keys": [
@@ -1209,22 +1190,6 @@
       "publication": "The Free Press",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
     },
-    "url:https://theglobeandmail.com/opinion/article-bc-election-no-reason-eby-findlay": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-bc-election-no-reason-eby-findlay",
-        "syn:the-fix-b-c-is-in-an-election-without-a-reason-an|voice:andrew-coyne|2026-09-24",
-        "fp:theglobeandmail.com|the-fix-b-c-is-in-an-election-without-a-reason-an|2026-09-24"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-09-25T19:28:08Z",
-      "published_at": "2026-09-24T00:00:00Z",
-      "title": "The fix B.C. is in: An election without a reason, an opposition without a leader",
-      "url": "https://www.theglobeandmail.com/opinion/article-bc-election-no-reason-eby-findlay/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-09-25T19:28:08Z"
-    },
     "url:https://theglobeandmail.com/opinion/article-just-how-conservative-is-mark-carneys-government": {
       "keys": [
         "url:https://theglobeandmail.com/opinion/article-just-how-conservative-is-mark-carneys-government",
@@ -1240,6 +1205,22 @@
       "url": "https://www.theglobeandmail.com/opinion/article-just-how-conservative-is-mark-carneys-government/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one",
+        "syn:the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one|voice:andrew-coyne|2026-10-08",
+        "fp:theglobeandmail.com|the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one|2026-10-08"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-10-09T20:17:11Z",
+      "published_at": "2026-10-08T00:00:00Z",
+      "title": "The Alberta referendum: a pointless, futile stunt, just like the last one",
+      "url": "https://www.theglobeandmail.com/opinion/article-the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     },
     "url:https://theglobeandmail.com/opinion/article-the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy": {
       "keys": [
