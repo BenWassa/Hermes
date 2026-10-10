@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-09T20:17:11Z",
-  "last_reconcile_at": "2026-10-08T20:46:53Z",
+  "updated_at": "2026-10-10T19:28:07Z",
+  "last_reconcile_at": "2026-10-10T19:28:07Z",
   "last_roundup": {
     "period_id": "2026-10-04",
     "cutoff": "2026-10-04T21:00:00Z",
@@ -48,23 +48,6 @@
       "url": "https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics/",
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/a-doomsday-scenario-for-american-ai.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/a-doomsday-scenario-for-american-ai.html",
-        "pid:rss:https://marginalrevolution.com/?p=93860",
-        "syn:a-doomsday-scenario-for-american-ai|voice:tyler-cowen|2026-09-26",
-        "fp:marginalrevolution.com|a-doomsday-scenario-for-american-ai|2026-09-26"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-26T18:41:16Z",
-      "published_at": "2026-09-26T04:10:05Z",
-      "title": "A doomsday scenario for American AI",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/a-doomsday-scenario-for-american-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=a-doomsday-scenario-for-american-ai",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-26T18:41:16Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/accounting-for-cross-country-income-differences-revisited.html": {
       "keys": [
@@ -202,23 +185,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-580.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-580.html",
-        "pid:rss:https://marginalrevolution.com/?p=93876",
-        "syn:saturday-assorted-links|voice:tyler-cowen|2026-09-26",
-        "fp:marginalrevolution.com|saturday-assorted-links|2026-09-26"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-26T18:41:16Z",
-      "published_at": "2026-09-26T16:11:35Z",
-      "title": "Saturday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/saturday-assorted-links-580.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-580",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-27T19:13:02Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/shade.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/shade.html",
@@ -252,23 +218,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/shipping-to-america.html?utm_source=rss&utm_medium=rss&utm_campaign=shipping-to-america",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/should-you-text-more.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/should-you-text-more.html",
-        "pid:rss:https://marginalrevolution.com/?p=93869",
-        "syn:should-you-text-more|voice:tyler-cowen|2026-09-26",
-        "fp:marginalrevolution.com|should-you-text-more|2026-09-26"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-26T18:41:16Z",
-      "published_at": "2026-09-26T07:28:35Z",
-      "title": "Should you text more?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/should-you-text-more.html?utm_source=rss&utm_medium=rss&utm_campaign=should-you-text-more",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-26T18:41:16Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/sunday-assorted-links-584.html": {
       "keys": [
@@ -372,23 +321,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-should-i-ask-terence-tao.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/what-should-i-ask-terence-tao.html",
-        "pid:rss:https://marginalrevolution.com/?p=93885",
-        "syn:what-should-i-ask-terence-tao|voice:tyler-cowen|2026-09-26",
-        "fp:marginalrevolution.com|what-should-i-ask-terence-tao|2026-09-26"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-26T18:41:16Z",
-      "published_at": "2026-09-26T17:38:34Z",
-      "title": "What should I ask Terence Tao?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/what-should-i-ask-terence-tao.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-terence-tao",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-27T19:13:02Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html",
@@ -457,6 +389,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/california-in-migration-and-out-migration.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/california-in-migration-and-out-migration.html",
+        "pid:rss:https://marginalrevolution.com/?p=93956",
+        "syn:california-in-migration-and-out-migration|voice:tyler-cowen|2026-10-10",
+        "fp:marginalrevolution.com|california-in-migration-and-out-migration|2026-10-10"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-10T19:28:07Z",
+      "published_at": "2026-10-10T04:26:55Z",
+      "title": "California in-migration and out-migration",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/california-in-migration-and-out-migration.html?utm_source=rss&utm_medium=rss&utm_campaign=california-in-migration-and-out-migration",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html",
@@ -507,6 +456,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/do-the-elderly-prefer-robotic-care.html?utm_source=rss&utm_medium=rss&utm_campaign=do-the-elderly-prefer-robotic-care",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-04T18:44:54Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html",
+        "pid:rss:https://marginalrevolution.com/?p=93959",
+        "syn:earth-facts-of-the-day|voice:tyler-cowen|2026-10-10",
+        "fp:marginalrevolution.com|earth-facts-of-the-day|2026-10-10"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-10T19:28:07Z",
+      "published_at": "2026-10-10T07:31:46Z",
+      "title": "Earth facts of the day",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html?utm_source=rss&utm_medium=rss&utm_campaign=earth-facts-of-the-day",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/effective-altruism-is-useful-at-the-margin.html": {
       "keys": [
@@ -780,6 +746,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-04T18:44:54Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-582.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-582.html",
+        "pid:rss:https://marginalrevolution.com/?p=93955",
+        "syn:saturday-assorted-links|voice:tyler-cowen|2026-10-10",
+        "fp:marginalrevolution.com|saturday-assorted-links|2026-10-10"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-10T19:28:07Z",
+      "published_at": "2026-10-10T16:34:52Z",
+      "title": "Saturday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-582.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-582",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-585.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-585.html",
@@ -846,7 +829,7 @@
       "title": "The origin of risk",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html?utm_source=rss&utm_medium=rss&utm_campaign=the-origin-of-risk",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html": {
       "keys": [
