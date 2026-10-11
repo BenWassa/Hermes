@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-10T19:28:07Z",
-  "last_reconcile_at": "2026-10-10T19:28:07Z",
+  "updated_at": "2026-10-11T19:40:03Z",
+  "last_reconcile_at": "2026-10-11T19:40:03Z",
   "last_roundup": {
     "period_id": "2026-10-04",
     "cutoff": "2026-10-04T21:00:00Z",
@@ -15,6 +15,23 @@
     ]
   },
   "items": {
+    "url:https://afterbabel.com/p/thank-you-frances-haugen": {
+      "keys": [
+        "url:https://afterbabel.com/p/thank-you-frances-haugen",
+        "pid:rss:https://www.afterbabel.com/p/thank-you-frances-haugen",
+        "syn:thank-you-frances-haugen|voice:jonathan-haidt|2026-10-11",
+        "fp:afterbabel.com|thank-you-frances-haugen|2026-10-11"
+      ],
+      "voice_ids": [
+        "jonathan-haidt"
+      ],
+      "first_seen": "2026-10-11T19:40:03Z",
+      "published_at": "2026-10-11T11:44:25Z",
+      "title": "Thank You, Frances Haugen",
+      "url": "https://www.afterbabel.com/p/thank-you-frances-haugen",
+      "publication": "After Babel",
+      "first_morning_surfaced_at": null
+    },
     "url:https://foreignpolicy.com/2026/10/02/brazil-lula-bolsonaro-election-trump-china-united-states-cuba": {
       "keys": [
         "url:https://foreignpolicy.com/2026/10/02/brazil-lula-bolsonaro-election-trump-china-united-states-cuba",
@@ -66,23 +83,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/ai-in-science.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/ai-in-science.html",
-        "pid:rss:https://marginalrevolution.com/?p=93889",
-        "syn:ai-in-science|voice:tyler-cowen|2026-09-27",
-        "fp:marginalrevolution.com|ai-in-science|2026-09-27"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-27T19:13:02Z",
-      "published_at": "2026-09-27T19:03:12Z",
-      "title": "AI in science",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/ai-in-science.html?utm_source=rss&utm_medium=rss&utm_campaign=ai-in-science",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html",
@@ -116,23 +116,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html?utm_source=rss&utm_medium=rss&utm_campaign=dont-let-ai-make-you-dumber",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/earth-fact-of-the-day-2-2.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/earth-fact-of-the-day-2-2.html",
-        "pid:rss:https://marginalrevolution.com/?p=93888",
-        "syn:earth-fact-of-the-day-2|voice:tyler-cowen|2026-09-27",
-        "fp:marginalrevolution.com|earth-fact-of-the-day-2|2026-09-27"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-27T19:13:02Z",
-      "published_at": "2026-09-27T06:56:56Z",
-      "title": "Earth fact of the day, #2",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/earth-fact-of-the-day-2-2.html?utm_source=rss&utm_medium=rss&utm_campaign=earth-fact-of-the-day-2-2",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-27T19:13:02Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/mans-best-friend.html": {
       "keys": [
@@ -218,40 +201,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/shipping-to-america.html?utm_source=rss&utm_medium=rss&utm_campaign=shipping-to-america",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/sunday-assorted-links-584.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/sunday-assorted-links-584.html",
-        "pid:rss:https://marginalrevolution.com/?p=93884",
-        "syn:sunday-assorted-links|voice:tyler-cowen|2026-09-27",
-        "fp:marginalrevolution.com|sunday-assorted-links|2026-09-27"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-27T19:13:02Z",
-      "published_at": "2026-09-27T15:52:50Z",
-      "title": "Sunday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/sunday-assorted-links-584.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-584",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-federal-lands-an-economic-property-rights-perspective.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-federal-lands-an-economic-property-rights-perspective.html",
-        "pid:rss:https://marginalrevolution.com/?p=93883",
-        "syn:the-federal-lands-an-economic-property-rights-perspective|voice:tyler-cowen|2026-09-27",
-        "fp:marginalrevolution.com|the-federal-lands-an-economic-property-rights-perspective|2026-09-27"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-27T19:13:02Z",
-      "published_at": "2026-09-27T04:27:05Z",
-      "title": "The Federal Lands: An Economic Property Rights Perspective",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-federal-lands-an-economic-property-rights-perspective.html?utm_source=rss&utm_medium=rss&utm_campaign=the-federal-lands-an-economic-property-rights-perspective",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-27T19:13:02Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-macroeconomic-effect-of-ai-through-software-engineering.html": {
       "keys": [
@@ -761,7 +710,7 @@
       "title": "Saturday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-582.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-582",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-585.html": {
       "keys": [
@@ -780,6 +729,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-586.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-586.html",
+        "pid:rss:https://marginalrevolution.com/?p=93968",
+        "syn:sunday-assorted-links|voice:tyler-cowen|2026-10-11",
+        "fp:marginalrevolution.com|sunday-assorted-links|2026-10-11"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-11T19:40:03Z",
+      "published_at": "2026-10-11T16:17:20Z",
+      "title": "Sunday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-586.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-586",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html",
@@ -796,6 +762,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html?utm_source=rss&utm_medium=rss&utm_campaign=supply-is-elastic-installment-1637-2",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html",
+        "pid:rss:https://marginalrevolution.com/?p=93960",
+        "syn:the-economics-of-agents|voice:tyler-cowen|2026-10-11",
+        "fp:marginalrevolution.com|the-economics-of-agents|2026-10-11"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-11T19:40:03Z",
+      "published_at": "2026-10-11T04:56:43Z",
+      "title": "The economics of agents",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-agents",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-great-accretion-and-the-great-depression.html": {
       "keys": [
@@ -932,6 +915,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html?utm_source=rss&utm_medium=rss&utm_campaign=what-ive-been-reading-296",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-fuchsia-dunlop-2.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-fuchsia-dunlop-2.html",
+        "pid:rss:https://marginalrevolution.com/?p=93969",
+        "syn:what-should-i-ask-fuchsia-dunlop|voice:tyler-cowen|2026-10-11",
+        "fp:marginalrevolution.com|what-should-i-ask-fuchsia-dunlop|2026-10-11"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-11T19:40:03Z",
+      "published_at": "2026-10-11T08:52:47Z",
+      "title": "What should I ask Fuchsia Dunlop?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-fuchsia-dunlop-2.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-fuchsia-dunlop-2",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html": {
       "keys": [
@@ -1107,21 +1107,21 @@
       "publication": "Persuasion",
       "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
     },
-    "url:https://theatlantic.com/podcasts/2026/09/what-meaning-mystical-experience/688782": {
+    "url:https://theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931": {
       "keys": [
-        "url:https://theatlantic.com/podcasts/2026/09/what-meaning-mystical-experience/688782",
-        "syn:what-is-the-meaning-of-mystical-experience|voice:david-brooks|2026-09-27",
-        "fp:theatlantic.com|what-is-the-meaning-of-mystical-experience|2026-09-27"
+        "url:https://theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931",
+        "syn:do-human-beings-have-souls|voice:david-brooks|2026-10-11",
+        "fp:theatlantic.com|do-human-beings-have-souls|2026-10-11"
       ],
       "voice_ids": [
         "david-brooks"
       ],
-      "first_seen": "2026-09-27T19:13:02Z",
-      "published_at": "2026-09-27T13:00:00Z",
-      "title": "What Is the Meaning of Mystical Experience?",
-      "url": "https://www.theatlantic.com/podcasts/2026/09/what-meaning-mystical-experience/688782/?utm_source=feed",
+      "first_seen": "2026-10-11T19:40:03Z",
+      "published_at": "2026-10-11T13:00:00Z",
+      "title": "Do Human Beings Have Souls?",
+      "url": "https://www.theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931/?utm_source=feed",
       "publication": "The Atlantic",
-      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://theatlantic.com/podcasts/2026/10/should-we-ban-ai-for-kids/688864": {
       "keys": [
