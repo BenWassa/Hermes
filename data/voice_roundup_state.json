@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-11T19:40:03Z",
+  "updated_at": "2026-10-12T01:46:43Z",
   "last_reconcile_at": "2026-10-11T19:40:03Z",
   "last_roundup": {
     "period_id": "2026-10-04",
@@ -1139,22 +1139,22 @@
       "publication": "The Atlantic",
       "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
-    "url:https://thefp.com/p/arthur-brooks-parents-aging-elder-care": {
+    "url:https://thefp.com/p/arthur-brooks-happiness-meaning": {
       "keys": [
-        "url:https://thefp.com/p/arthur-brooks-parents-aging-elder-care",
-        "pid:rss:https://www.thefp.com/p/arthur-brooks-parents-aging-elder-care",
-        "syn:arthur-brooks-your-parents-raised-you-what-do-you-owe-them|voice:arthur-c-brooks|2026-09-27",
-        "fp:thefp.com|arthur-brooks-your-parents-raised-you-what-do-you-owe-them|2026-09-27"
+        "url:https://thefp.com/p/arthur-brooks-happiness-meaning",
+        "pid:rss:https://www.thefp.com/p/arthur-brooks-happiness-meaning",
+        "syn:arthur-brooks-don-t-pursue-happiness|voice:arthur-c-brooks|2026-10-11",
+        "fp:thefp.com|arthur-brooks-don-t-pursue-happiness|2026-10-11"
       ],
       "voice_ids": [
         "arthur-c-brooks"
       ],
-      "first_seen": "2026-09-28T01:10:34Z",
-      "published_at": "2026-09-27T20:18:02Z",
-      "title": "Arthur Brooks: Your Parents Raised You. What Do You Owe Them?",
-      "url": "https://www.thefp.com/p/arthur-brooks-parents-aging-elder-care",
+      "first_seen": "2026-10-12T01:46:43Z",
+      "published_at": "2026-10-11T23:17:24Z",
+      "title": "Arthur Brooks: Don’t Pursue Happiness",
+      "url": "https://www.thefp.com/p/arthur-brooks-happiness-meaning",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://thefp.com/p/mike-tomlin-minecraft-arthur-brooks-hobby": {
       "keys": [
