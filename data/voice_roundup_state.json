@@ -7,7 +7,7 @@
     "period_id": "2026-10-11",
     "cutoff": "2026-10-11T21:00:00Z",
     "claimed_at": "2026-10-12T01:46:43Z",
-    "status": "pending",
+    "status": "notified",
     "selection_keys": [
       "url:https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics",
       "url:https://theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931",
