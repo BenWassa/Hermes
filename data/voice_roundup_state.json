@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-12T01:46:43Z",
+  "updated_at": "2026-10-12T06:33:10Z",
   "last_reconcile_at": "2026-10-11T19:40:03Z",
   "last_roundup": {
     "period_id": "2026-10-11",
@@ -82,23 +82,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/accounting-for-cross-country-income-differences-revisited.html?utm_source=rss&utm_medium=rss&utm_campaign=accounting-for-cross-country-income-differences-revisited",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html",
-        "pid:rss:https://marginalrevolution.com/?p=93841",
-        "syn:bundesrepublik-deutschland|voice:tyler-cowen|2026-09-28",
-        "fp:marginalrevolution.com|bundesrepublik-deutschland|2026-09-28"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-28T05:53:45Z",
-      "published_at": "2026-09-28T04:34:12Z",
-      "title": "Bundesrepublik Deutschland",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/bundesrepublik-deutschland.html?utm_source=rss&utm_medium=rss&utm_campaign=bundesrepublik-deutschland",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-28T21:20:57Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html": {
       "keys": [
@@ -626,6 +609,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html?utm_source=rss&utm_medium=rss&utm_campaign=new-issue-of-econ-journal-watch-17",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/okie-dokie-casey-handmer-edition.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/okie-dokie-casey-handmer-edition.html",
+        "pid:rss:https://marginalrevolution.com/?p=93972",
+        "syn:okie-dokie-casey-handmer-edition|voice:tyler-cowen|2026-10-12",
+        "fp:marginalrevolution.com|okie-dokie-casey-handmer-edition|2026-10-12"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-12T06:33:10Z",
+      "published_at": "2026-10-12T04:20:47Z",
+      "title": "Okie-dokie, Casey Handmer edition",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/okie-dokie-casey-handmer-edition.html?utm_source=rss&utm_medium=rss&utm_campaign=okie-dokie-casey-handmer-edition",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html": {
       "keys": [
