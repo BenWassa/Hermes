@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-12T22:34:06Z",
+  "updated_at": "2026-10-13T20:47:57Z",
   "last_reconcile_at": "2026-10-12T22:34:06Z",
   "last_roundup": {
     "period_id": "2026-10-11",
@@ -15,6 +15,23 @@
     ]
   },
   "items": {
+    "url:https://afterbabel.com/p/happiness-hypothesis": {
+      "keys": [
+        "url:https://afterbabel.com/p/happiness-hypothesis",
+        "pid:rss:https://www.afterbabel.com/p/happiness-hypothesis",
+        "syn:ancient-wisdom-is-needed-today-more-than-ever-here-is-my-book|voice:jonathan-haidt|2026-10-13",
+        "fp:afterbabel.com|ancient-wisdom-is-needed-today-more-than-ever-here-is-my-book|2026-10-13"
+      ],
+      "voice_ids": [
+        "jonathan-haidt"
+      ],
+      "first_seen": "2026-10-13T20:47:57Z",
+      "published_at": "2026-10-13T11:02:20Z",
+      "title": "Ancient Wisdom Is Needed Today More Than Ever. Here Is My Book About It.",
+      "url": "https://www.afterbabel.com/p/happiness-hypothesis",
+      "publication": "After Babel",
+      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
+    },
     "url:https://afterbabel.com/p/thank-you-frances-haugen": {
       "keys": [
         "url:https://afterbabel.com/p/thank-you-frances-haugen",
@@ -66,23 +83,6 @@
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/accounting-for-cross-country-income-differences-revisited.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/accounting-for-cross-country-income-differences-revisited.html",
-        "pid:rss:https://marginalrevolution.com/?p=93898",
-        "syn:accounting-for-cross-country-income-differences-revisited|voice:tyler-cowen|2026-09-29",
-        "fp:marginalrevolution.com|accounting-for-cross-country-income-differences-revisited|2026-09-29"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-29T20:10:42Z",
-      "published_at": "2026-09-29T06:53:35Z",
-      "title": "Accounting for Cross-Country Income Differences Revisited",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/accounting-for-cross-country-income-differences-revisited.html?utm_source=rss&utm_medium=rss&utm_campaign=accounting-for-cross-country-income-differences-revisited",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html",
@@ -117,40 +117,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/shipping-to-america.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/shipping-to-america.html",
-        "pid:rss:https://marginalrevolution.com/?p=93899",
-        "syn:shipping-to-america|voice:tyler-cowen|2026-09-29",
-        "fp:marginalrevolution.com|shipping-to-america|2026-09-29"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-29T20:10:42Z",
-      "published_at": "2026-09-29T17:53:09Z",
-      "title": "Shipping to America",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/shipping-to-america.html?utm_source=rss&utm_medium=rss&utm_campaign=shipping-to-america",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-macroeconomic-effect-of-ai-through-software-engineering.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-macroeconomic-effect-of-ai-through-software-engineering.html",
-        "pid:rss:https://marginalrevolution.com/?p=93897",
-        "syn:the-macroeconomic-effect-of-ai-through-software-engineering|voice:tyler-cowen|2026-09-29",
-        "fp:marginalrevolution.com|the-macroeconomic-effect-of-ai-through-software-engineering|2026-09-29"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-29T20:10:42Z",
-      "published_at": "2026-09-29T04:50:01Z",
-      "title": "The Macroeconomic Effect of AI through software engineering",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-macroeconomic-effect-of-ai-through-software-engineering.html?utm_source=rss&utm_medium=rss&utm_campaign=the-macroeconomic-effect-of-ai-through-software-engineering",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html",
@@ -167,23 +133,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html?utm_source=rss&utm_medium=rss&utm_campaign=the-polity-that-is-singapore-3",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-01T20:26:53Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-588.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-588.html",
-        "pid:rss:https://marginalrevolution.com/?p=93893",
-        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-09-29",
-        "fp:marginalrevolution.com|tuesday-assorted-links|2026-09-29"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-29T20:10:42Z",
-      "published_at": "2026-09-29T15:47:30Z",
-      "title": "Tuesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/tuesday-assorted-links-588.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-588",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html": {
       "keys": [
@@ -457,6 +406,40 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-have-no-mouth-and-i-must-scream.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-have-no-mouth-and-i-must-scream.html",
+        "pid:rss:https://marginalrevolution.com/?p=93984",
+        "syn:i-have-no-mouth-and-i-must-scream|voice:tyler-cowen|2026-10-13",
+        "fp:marginalrevolution.com|i-have-no-mouth-and-i-must-scream|2026-10-13"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-13T20:47:57Z",
+      "published_at": "2026-10-13T04:42:32Z",
+      "title": "“I have no mouth and I must scream”",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/i-have-no-mouth-and-i-must-scream.html?utm_source=rss&utm_medium=rss&utm_campaign=i-have-no-mouth-and-i-must-scream",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/lost-worlds.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/lost-worlds.html",
+        "pid:rss:https://marginalrevolution.com/?p=93986",
+        "syn:lost-worlds|voice:tyler-cowen|2026-10-13",
+        "fp:marginalrevolution.com|lost-worlds|2026-10-13"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-13T20:47:57Z",
+      "published_at": "2026-10-13T07:28:20Z",
+      "title": "*Lost Worlds*",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/lost-worlds.html?utm_source=rss&utm_medium=rss&utm_campaign=lost-worlds",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/marital-sorting-by-class-and-race.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/marital-sorting-by-class-and-race.html",
@@ -540,7 +523,7 @@
       "title": "Monday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-581.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-581",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-blurb-for-ethan-mollicks-new-book.html": {
       "keys": [
@@ -882,6 +865,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html",
+        "pid:rss:https://marginalrevolution.com/?p=93983",
+        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-10-13",
+        "fp:marginalrevolution.com|tuesday-assorted-links|2026-10-13"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-13T20:47:57Z",
+      "published_at": "2026-10-13T16:22:29Z",
+      "title": "Tuesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-590",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html",
@@ -1001,25 +1001,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
     },
-    "url:https://nytimes.com/2026/09/29/opinion/ezra-klein-podcast-bill-gates.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/09/29/opinion/ezra-klein-podcast-bill-gates.html",
-        "pid:rss:https://www.nytimes.com/2026/09/29/opinion/ezra-klein-podcast-bill-gates.html",
-        "syn:bill-gates-s-blunt-warning-on-a-i|voice:ezra-klein|2026-09-29",
-        "syn:bill-gates-s-blunt-warning-on-a-i|voice:ezra-klein|2026-09-30",
-        "fp:nytimes.com|bill-gates-s-blunt-warning-on-a-i|2026-09-29",
-        "fp:nytimes.com|bill-gates-s-blunt-warning-on-a-i|2026-09-30"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-09-29T20:10:42Z",
-      "published_at": "2026-09-29T19:21:31Z",
-      "title": "Bill Gates’s Blunt Warning on A.I.",
-      "url": "https://www.nytimes.com/2026/09/29/opinion/ezra-klein-podcast-bill-gates.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-09-29T20:10:42Z"
-    },
     "url:https://nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html": {
       "keys": [
         "url:https://nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html",
@@ -1105,7 +1086,7 @@
       "title": "Thymos and American Foreign Policy",
       "url": "https://www.persuasion.community/p/thymos-and-american-foreign-policy",
       "publication": "Persuasion",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
     },
     "url:https://theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931": {
       "keys": [
