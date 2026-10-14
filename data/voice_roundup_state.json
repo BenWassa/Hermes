@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-13T20:47:57Z",
-  "last_reconcile_at": "2026-10-12T22:34:06Z",
+  "updated_at": "2026-10-14T19:38:03Z",
+  "last_reconcile_at": "2026-10-14T19:38:03Z",
   "last_roundup": {
     "period_id": "2026-10-11",
     "cutoff": "2026-10-11T21:00:00Z",
@@ -252,6 +252,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html?utm_source=rss&utm_medium=rss&utm_campaign=china-fact-of-the-day-82",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html",
+        "pid:rss:https://marginalrevolution.com/?p=93996",
+        "syn:china-fact-of-the-day|voice:tyler-cowen|2026-10-14",
+        "fp:marginalrevolution.com|china-fact-of-the-day|2026-10-14"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-14T19:38:03Z",
+      "published_at": "2026-10-14T18:56:23Z",
+      "title": "China fact (?) of the day",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html?utm_source=rss&utm_medium=rss&utm_campaign=china-fact-of-the-day-83",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/crime-in-covid-times.html": {
       "keys": [
@@ -610,6 +627,40 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/perry-mehrling-rip.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/perry-mehrling-rip.html",
+        "pid:rss:https://marginalrevolution.com/?p=93991",
+        "syn:perry-mehrling-rip|voice:tyler-cowen|2026-10-13",
+        "fp:marginalrevolution.com|perry-mehrling-rip|2026-10-13"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-14T19:38:03Z",
+      "published_at": "2026-10-13T20:51:16Z",
+      "title": "Perry Mehrling, RIP",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/perry-mehrling-rip.html?utm_source=rss&utm_medium=rss&utm_campaign=perry-mehrling-rip",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/plunder-the-last-of-the-war-in-europe-1945.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/plunder-the-last-of-the-war-in-europe-1945.html",
+        "pid:rss:https://marginalrevolution.com/?p=93992",
+        "syn:plunder-the-last-of-the-war-in-europe-1945|voice:tyler-cowen|2026-10-14",
+        "fp:marginalrevolution.com|plunder-the-last-of-the-war-in-europe-1945|2026-10-14"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-14T19:38:03Z",
+      "published_at": "2026-10-14T07:02:57Z",
+      "title": "*Plunder: The Last of the War in Europe, 1945*",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/plunder-the-last-of-the-war-in-europe-1945.html?utm_source=rss&utm_medium=rss&utm_campaign=plunder-the-last-of-the-war-in-europe-1945",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html",
@@ -899,6 +950,40 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html",
+        "pid:rss:https://marginalrevolution.com/?p=93989",
+        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-10-14",
+        "fp:marginalrevolution.com|wednesday-assorted-links|2026-10-14"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-14T19:38:03Z",
+      "published_at": "2026-10-14T16:07:03Z",
+      "title": "Wednesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-575",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/well-planned-african-immigration-to-america-will-go-fine.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/well-planned-african-immigration-to-america-will-go-fine.html",
+        "pid:rss:https://marginalrevolution.com/?p=93990",
+        "syn:well-planned-african-immigration-to-america-will-go-fine|voice:tyler-cowen|2026-10-14",
+        "fp:marginalrevolution.com|well-planned-african-immigration-to-america-will-go-fine|2026-10-14"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-14T19:38:03Z",
+      "published_at": "2026-10-14T04:19:22Z",
+      "title": "Well-planned African immigration to America will go fine",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/well-planned-african-immigration-to-america-will-go-fine.html?utm_source=rss&utm_medium=rss&utm_campaign=well-planned-african-immigration-to-america-will-go-fine",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html",
@@ -1054,6 +1139,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     },
+    "url:https://nytimes.com/2026/10/14/opinion/ezra-klein-podcast-sherry-turkle.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/14/opinion/ezra-klein-podcast-sherry-turkle.html",
+        "pid:rss:https://www.nytimes.com/2026/10/14/opinion/ezra-klein-podcast-sherry-turkle.html",
+        "syn:is-it-a-relationship-if-no-one-s-on-the-other-side|voice:ezra-klein|2026-10-14",
+        "fp:nytimes.com|is-it-a-relationship-if-no-one-s-on-the-other-side|2026-10-14"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-14T19:38:03Z",
+      "published_at": "2026-10-14T14:04:42Z",
+      "title": "Is It a Relationship if No One’s on the Other Side?",
+      "url": "https://www.nytimes.com/2026/10/14/opinion/ezra-klein-podcast-sherry-turkle.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
+    },
     "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit": {
       "keys": [
         "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
@@ -1153,6 +1255,22 @@
       "url": "https://www.thefp.com/p/mike-tomlin-minecraft-arthur-brooks-hobby",
       "publication": "The Free Press",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats",
+        "syn:first-past-the-post-sets-canada-up-for-secession-threats|voice:andrew-coyne|2026-10-13",
+        "fp:theglobeandmail.com|first-past-the-post-sets-canada-up-for-secession-threats|2026-10-13"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-10-14T19:38:03Z",
+      "published_at": "2026-10-13T00:00:00Z",
+      "title": "First past the post sets Canada up for secession threats",
+      "url": "https://www.theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
     },
     "url:https://theglobeandmail.com/opinion/article-just-how-conservative-is-mark-carneys-government": {
       "keys": [
