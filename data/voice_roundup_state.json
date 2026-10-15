@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-14T19:38:03Z",
+  "updated_at": "2026-10-15T19:20:31Z",
   "last_reconcile_at": "2026-10-14T19:38:03Z",
   "last_roundup": {
     "period_id": "2026-10-11",
@@ -82,74 +82,6 @@
       "url": "https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics/",
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html",
-        "pid:rss:https://marginalrevolution.com/?p=93902",
-        "syn:don-t-let-ai-make-you-dumber|voice:tyler-cowen|2026-09-30",
-        "fp:marginalrevolution.com|don-t-let-ai-make-you-dumber|2026-09-30"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-30T20:15:28Z",
-      "published_at": "2026-09-30T04:17:47Z",
-      "title": "Don’t let AI make you dumber",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/dont-let-ai-make-you-dumber.html?utm_source=rss&utm_medium=rss&utm_campaign=dont-let-ai-make-you-dumber",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/shade.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/shade.html",
-        "pid:rss:https://marginalrevolution.com/?p=93903",
-        "syn:shade|voice:tyler-cowen|2026-09-30",
-        "fp:marginalrevolution.com|shade|2026-09-30"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-30T20:15:28Z",
-      "published_at": "2026-09-30T06:26:22Z",
-      "title": "*Shade*",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/shade.html?utm_source=rss&utm_medium=rss&utm_campaign=shade",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html",
-        "pid:rss:https://marginalrevolution.com/?p=93904",
-        "syn:the-polity-that-is-singapore|voice:tyler-cowen|2026-09-30",
-        "fp:marginalrevolution.com|the-polity-that-is-singapore|2026-09-30"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-30T20:15:28Z",
-      "published_at": "2026-09-30T18:37:04Z",
-      "title": "The polity that is Singapore",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/the-polity-that-is-singapore-3.html?utm_source=rss&utm_medium=rss&utm_campaign=the-polity-that-is-singapore-3",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-01T20:26:53Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html",
-        "pid:rss:https://marginalrevolution.com/?p=93896",
-        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-09-30",
-        "fp:marginalrevolution.com|wednesday-assorted-links|2026-09-30"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-09-30T20:15:28Z",
-      "published_at": "2026-09-30T15:49:34Z",
-      "title": "Wednesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/09/wednesday-assorted-links-573.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-573",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html": {
       "keys": [
@@ -268,7 +200,7 @@
       "title": "China fact (?) of the day",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html?utm_source=rss&utm_medium=rss&utm_campaign=china-fact-of-the-day-83",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/crime-in-covid-times.html": {
       "keys": [
@@ -558,6 +490,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-blurb-for-ethan-mollicks-new-book.html?utm_source=rss&utm_medium=rss&utm_campaign=my-blurb-for-ethan-mollicks-new-book",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html",
+        "pid:rss:https://marginalrevolution.com/?p=93995",
+        "syn:my-excellent-conversation-with-liaquat-ahamed|voice:tyler-cowen|2026-10-15",
+        "fp:marginalrevolution.com|my-excellent-conversation-with-liaquat-ahamed|2026-10-15"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-15T19:20:31Z",
+      "published_at": "2026-10-15T04:37:06Z",
+      "title": "My excellent Conversation with Liaquat Ahamed",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html?utm_source=rss&utm_medium=rss&utm_campaign=my-excellent-conversation-with-liaquat-ahamed",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-luis-garicano.html": {
       "keys": [
@@ -899,6 +848,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-574.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-574.html",
+        "pid:rss:https://marginalrevolution.com/?p=93994",
+        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-15",
+        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-15"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-15T19:20:31Z",
+      "published_at": "2026-10-15T16:43:28Z",
+      "title": "Thursday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-574.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-574",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html",
@@ -965,7 +931,7 @@
       "title": "Wednesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-575",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/well-planned-african-immigration-to-america-will-go-fine.html": {
       "keys": [
@@ -1051,6 +1017,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-tom-griffiths.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-tom-griffiths",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html",
+        "pid:rss:https://marginalrevolution.com/?p=94000",
+        "syn:why-i-do-not-use-llms-more|voice:tyler-cowen|2026-10-15",
+        "fp:marginalrevolution.com|why-i-do-not-use-llms-more|2026-10-15"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-15T19:20:31Z",
+      "published_at": "2026-10-15T08:20:41Z",
+      "title": "Why I do not use LLMs more",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html?utm_source=rss&utm_medium=rss&utm_campaign=why-i-do-not-use-llms-more",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-most-stereotypes-are-negative.html": {
       "keys": [
@@ -1303,22 +1286,6 @@
       "url": "https://www.theglobeandmail.com/opinion/article-the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
-    },
-    "url:https://theglobeandmail.com/opinion/article-the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy",
-        "syn:the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy|voice:andrew-coyne|2026-09-30",
-        "fp:theglobeandmail.com|the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy|2026-09-30"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-09-30T20:15:28Z",
-      "published_at": "2026-09-30T00:00:00Z",
-      "title": "The trade war is no excuse for flights of economic nationalist fancy",
-      "url": "https://www.theglobeandmail.com/opinion/article-the-trade-war-is-no-excuse-for-flights-of-economic-nationalist-fancy/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-09-30T20:15:28Z"
     },
     "url:https://theglobeandmail.com/opinion/article-the-weakness-of-its-mandate-will-not-deter-the-pq-from-the-chaos-and": {
       "keys": [
