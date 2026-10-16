@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-15T19:20:31Z",
-  "last_reconcile_at": "2026-10-14T19:38:03Z",
+  "updated_at": "2026-10-16T18:57:10Z",
+  "last_reconcile_at": "2026-10-16T18:57:10Z",
   "last_roundup": {
     "period_id": "2026-10-11",
     "cutoff": "2026-10-11T21:00:00Z",
@@ -99,23 +99,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html?utm_source=rss&utm_medium=rss&utm_campaign=a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/alvin-roth-to-the-rescue-the-polity-that-is-singapore.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/alvin-roth-to-the-rescue-the-polity-that-is-singapore.html",
-        "pid:rss:https://marginalrevolution.com/?p=93908",
-        "syn:alvin-roth-to-the-rescue-the-polity-that-is-singapore|voice:tyler-cowen|2026-10-01",
-        "fp:marginalrevolution.com|alvin-roth-to-the-rescue-the-polity-that-is-singapore|2026-10-01"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-01T20:26:53Z",
-      "published_at": "2026-10-01T18:26:45Z",
-      "title": "Alvin Roth to the rescue, the polity that is Singapore",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/alvin-roth-to-the-rescue-the-polity-that-is-singapore.html?utm_source=rss&utm_medium=rss&utm_campaign=alvin-roth-to-the-rescue-the-polity-that-is-singapore",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/authenticity-is-exactly-the-same-as-phoniness.html": {
       "keys": [
@@ -338,6 +321,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html",
+        "pid:rss:https://marginalrevolution.com/?p=94003",
+        "syn:friday-assorted-links|voice:tyler-cowen|2026-10-16",
+        "fp:marginalrevolution.com|friday-assorted-links|2026-10-16"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-16T18:57:10Z",
+      "published_at": "2026-10-16T16:42:18Z",
+      "title": "Friday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-595",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html",
@@ -354,6 +354,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html?utm_source=rss&utm_medium=rss&utm_campaign=how-and-why-did-the-victorians-succeed",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-the-nyt-podcast-and-interview-dwarkesh.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-the-nyt-podcast-and-interview-dwarkesh.html",
+        "pid:rss:https://marginalrevolution.com/?p=94002",
+        "syn:i-guest-host-the-nyt-podcast-and-interview-dwarkesh|voice:tyler-cowen|2026-10-16",
+        "fp:marginalrevolution.com|i-guest-host-the-nyt-podcast-and-interview-dwarkesh|2026-10-16"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-16T18:57:10Z",
+      "published_at": "2026-10-16T04:44:22Z",
+      "title": "I guest host the NYT podcast and interview Dwarkesh",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-the-nyt-podcast-and-interview-dwarkesh.html?utm_source=rss&utm_medium=rss&utm_campaign=i-guest-host-the-nyt-podcast-and-interview-dwarkesh",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-have-no-mouth-and-i-must-scream.html": {
       "keys": [
@@ -405,23 +422,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/marital-sorting-by-class-and-race.html?utm_source=rss&utm_medium=rss&utm_campaign=marital-sorting-by-class-and-race",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-04T18:44:54Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/merging-llms-and-economics-research.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/merging-llms-and-economics-research.html",
-        "pid:rss:https://marginalrevolution.com/?p=93907",
-        "syn:merging-llms-and-economics-research|voice:tyler-cowen|2026-10-01",
-        "fp:marginalrevolution.com|merging-llms-and-economics-research|2026-10-01"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-01T20:26:53Z",
-      "published_at": "2026-10-01T04:31:10Z",
-      "title": "Merging LLMs and economics research",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/merging-llms-and-economics-research.html?utm_source=rss&utm_medium=rss&utm_campaign=merging-llms-and-economics-research",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-01T20:26:53Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/michael-woodford-nobel-laureate.html": {
       "keys": [
@@ -558,6 +558,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/okie-dokie-casey-handmer-edition.html?utm_source=rss&utm_medium=rss&utm_campaign=okie-dokie-casey-handmer-edition",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-bergmans-persona.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-bergmans-persona.html",
+        "pid:rss:https://marginalrevolution.com/?p=94001",
+        "syn:on-bergman-s-persona|voice:tyler-cowen|2026-10-16",
+        "fp:marginalrevolution.com|on-bergman-s-persona|2026-10-16"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-16T18:57:10Z",
+      "published_at": "2026-10-16T06:53:12Z",
+      "title": "On Bergman’s *Persona*",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/on-bergmans-persona.html?utm_source=rss&utm_medium=rss&utm_campaign=on-bergmans-persona",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html": {
       "keys": [
@@ -797,40 +814,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html",
-        "pid:rss:https://marginalrevolution.com/?p=93905",
-        "syn:the-top-private-sector-employers-of-economics-graduates|voice:tyler-cowen|2026-10-01",
-        "fp:marginalrevolution.com|the-top-private-sector-employers-of-economics-graduates|2026-10-01"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-01T20:26:53Z",
-      "published_at": "2026-10-01T06:23:03Z",
-      "title": "The top private sector employers of economics graduates",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-top-private-sector-employers-of-economics-graduates.html?utm_source=rss&utm_medium=rss&utm_campaign=the-top-private-sector-employers-of-economics-graduates",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-01T20:26:53Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-572.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-572.html",
-        "pid:rss:https://marginalrevolution.com/?p=93906",
-        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-01",
-        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-01"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-01T20:26:53Z",
-      "published_at": "2026-10-01T15:58:50Z",
-      "title": "Thursday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-572.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-572",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-573.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-573.html",
@@ -863,7 +846,7 @@
       "title": "Thursday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-574.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-574",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html": {
       "keys": [
@@ -983,23 +966,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-fuchsia-dunlop-2.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-fuchsia-dunlop-2",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html",
-        "pid:rss:https://marginalrevolution.com/?p=93909",
-        "syn:what-should-i-ask-moxie-marlinspike|voice:tyler-cowen|2026-10-01",
-        "fp:marginalrevolution.com|what-should-i-ask-moxie-marlinspike|2026-10-01"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-01T20:26:53Z",
-      "published_at": "2026-10-01T14:30:41Z",
-      "title": "What should I ask Moxie Marlinspike?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-moxie-marlinspike.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-moxie-marlinspike",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-tom-griffiths.html": {
       "keys": [
@@ -1139,6 +1105,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
     },
+    "url:https://nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html",
+        "pid:rss:https://www.nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html",
+        "syn:is-there-an-a-i-bubble-a-debate|voice:ezra-klein|2026-10-16",
+        "fp:nytimes.com|is-there-an-a-i-bubble-a-debate|2026-10-16"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-16T18:57:10Z",
+      "published_at": "2026-10-16T09:04:26Z",
+      "title": "Is There an A.I. Bubble? A Debate.",
+      "url": "https://www.nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
+    },
     "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit": {
       "keys": [
         "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
@@ -1238,6 +1221,22 @@
       "url": "https://www.thefp.com/p/mike-tomlin-minecraft-arthur-brooks-hobby",
       "publication": "The Free Press",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform",
+        "syn:radical-tax-reform-is-not-just-good-policy-it-s-the-only|voice:andrew-coyne|2026-10-16",
+        "fp:theglobeandmail.com|radical-tax-reform-is-not-just-good-policy-it-s-the-only|2026-10-16"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-10-16T18:57:10Z",
+      "published_at": "2026-10-16T00:00:00Z",
+      "title": "Radical tax reform is not just good policy: it’s the only kind likely to succeed",
+      "url": "https://www.theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": null
     },
     "url:https://theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats": {
       "keys": [
