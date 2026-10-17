@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-16T18:57:10Z",
+  "updated_at": "2026-10-17T17:54:41Z",
   "last_reconcile_at": "2026-10-16T18:57:10Z",
   "last_roundup": {
     "period_id": "2026-10-11",
@@ -49,23 +49,6 @@
       "publication": "After Babel",
       "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
-    "url:https://foreignpolicy.com/2026/10/02/brazil-lula-bolsonaro-election-trump-china-united-states-cuba": {
-      "keys": [
-        "url:https://foreignpolicy.com/2026/10/02/brazil-lula-bolsonaro-election-trump-china-united-states-cuba",
-        "pid:rss:https://foreignpolicy.com/?p=1242506",
-        "syn:what-s-at-stake-in-brazil-s-election|voice:adam-tooze|2026-10-02",
-        "fp:foreignpolicy.com|what-s-at-stake-in-brazil-s-election|2026-10-02"
-      ],
-      "voice_ids": [
-        "adam-tooze"
-      ],
-      "first_seen": "2026-10-02T20:06:14Z",
-      "published_at": "2026-10-02T17:09:19Z",
-      "title": "What’s at Stake in Brazil’s Election",
-      "url": "https://foreignpolicy.com/2026/10/02/brazil-lula-bolsonaro-election-trump-china-united-states-cuba/",
-      "publication": "Foreign Policy",
-      "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
-    },
     "url:https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics": {
       "keys": [
         "url:https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics",
@@ -82,6 +65,23 @@
       "url": "https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics/",
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
+    },
+    "url:https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall": {
+      "keys": [
+        "url:https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall",
+        "pid:rss:https://foreignpolicy.com/?p=1243605",
+        "syn:how-this-year-s-economics-nobel-winners-shaped-the-world|voice:adam-tooze|2026-10-16",
+        "fp:foreignpolicy.com|how-this-year-s-economics-nobel-winners-shaped-the-world|2026-10-16"
+      ],
+      "voice_ids": [
+        "adam-tooze"
+      ],
+      "first_seen": "2026-10-17T17:54:41Z",
+      "published_at": "2026-10-16T20:05:43Z",
+      "title": "How This Year’s Economics Nobel Winners Shaped the World",
+      "url": "https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall/",
+      "publication": "Foreign Policy",
+      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html": {
       "keys": [
@@ -287,23 +287,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-593.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-593.html",
-        "pid:rss:https://marginalrevolution.com/?p=93911",
-        "syn:friday-assorted-links|voice:tyler-cowen|2026-10-02",
-        "fp:marginalrevolution.com|friday-assorted-links|2026-10-02"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-02T20:06:14Z",
-      "published_at": "2026-10-02T15:30:39Z",
-      "title": "Friday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-593.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-593",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html",
@@ -336,7 +319,7 @@
       "title": "Friday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-595",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html": {
       "keys": [
@@ -508,23 +491,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-luis-garicano.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-luis-garicano.html",
-        "pid:rss:https://marginalrevolution.com/?p=93910",
-        "syn:my-excellent-conversation-with-luis-garicano|voice:tyler-cowen|2026-10-02",
-        "fp:marginalrevolution.com|my-excellent-conversation-with-luis-garicano|2026-10-02"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-02T20:06:14Z",
-      "published_at": "2026-10-02T05:06:16Z",
-      "title": "My excellent Conversation with Luis Garicano",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-luis-garicano.html?utm_source=rss&utm_medium=rss&utm_campaign=my-excellent-conversation-with-luis-garicano",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html",
@@ -541,6 +507,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html?utm_source=rss&utm_medium=rss&utm_campaign=new-issue-of-econ-journal-watch-17",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html",
+        "pid:rss:https://marginalrevolution.com/?p=94013",
+        "syn:new-matt-faherty-study-of-the-nsf|voice:tyler-cowen|2026-10-17",
+        "fp:marginalrevolution.com|new-matt-faherty-study-of-the-nsf|2026-10-17"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-17T17:54:41Z",
+      "published_at": "2026-10-17T04:55:57Z",
+      "title": "New Matt Faherty study of the NSF",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html?utm_source=rss&utm_medium=rss&utm_campaign=new-matt-flaherty-study-of-the-nsf",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/okie-dokie-casey-handmer-edition.html": {
       "keys": [
@@ -712,6 +695,40 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html",
+        "pid:rss:https://marginalrevolution.com/?p=94005",
+        "syn:saturday-assorted-links|voice:tyler-cowen|2026-10-17",
+        "fp:marginalrevolution.com|saturday-assorted-links|2026-10-17"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-17T17:54:41Z",
+      "published_at": "2026-10-17T15:57:58Z",
+      "title": "Saturday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-583",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html",
+        "pid:rss:https://marginalrevolution.com/?p=94012",
+        "syn:solving-for-the-equilibrium|voice:tyler-cowen|2026-10-17",
+        "fp:marginalrevolution.com|solving-for-the-equilibrium|2026-10-17"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-17T17:54:41Z",
+      "published_at": "2026-10-17T07:34:21Z",
+      "title": "Solving for the equilibrium?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html?utm_source=rss&utm_medium=rss&utm_campaign=solving-for-the-equilibrium-2",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-585.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-585.html",
@@ -743,23 +760,6 @@
       "published_at": "2026-10-11T16:17:20Z",
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-586.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-586",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html",
-        "pid:rss:https://marginalrevolution.com/?p=93915",
-        "syn:supply-is-elastic-installment-1637|voice:tyler-cowen|2026-10-02",
-        "fp:marginalrevolution.com|supply-is-elastic-installment-1637|2026-10-02"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-02T20:06:14Z",
-      "published_at": "2026-10-02T17:32:37Z",
-      "title": "Supply is elastic, installment #1637",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/supply-is-elastic-installment-1637-2.html?utm_source=rss&utm_medium=rss&utm_campaign=supply-is-elastic-installment-1637-2",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -967,23 +967,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-tom-griffiths.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-tom-griffiths.html",
-        "pid:rss:https://marginalrevolution.com/?p=93855",
-        "syn:what-should-i-ask-tom-griffiths|voice:tyler-cowen|2026-10-02",
-        "fp:marginalrevolution.com|what-should-i-ask-tom-griffiths|2026-10-02"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-02T20:06:14Z",
-      "published_at": "2026-10-02T08:29:57Z",
-      "title": "What should I ask Tom Griffiths?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-tom-griffiths.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-tom-griffiths",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html",
@@ -1034,25 +1017,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html?utm_source=rss&utm_medium=rss&utm_campaign=words-to-live-by-2",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
-    },
-    "url:https://nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html",
-        "pid:rss:https://www.nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html",
-        "syn:is-the-world-getting-uglier|voice:ezra-klein|2026-10-02",
-        "syn:why-cybertrucks-mcmansions-and-greige-matter|voice:ezra-klein|2026-10-02",
-        "fp:nytimes.com|is-the-world-getting-uglier|2026-10-02",
-        "fp:nytimes.com|why-cybertrucks-mcmansions-and-greige-matter|2026-10-02"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-10-02T20:06:14Z",
-      "published_at": "2026-10-02T14:49:28Z",
-      "title": "Why Cybertrucks, McMansions and ‘Greige’ Matter",
-      "url": "https://www.nytimes.com/2026/10/02/opinion/ezra-klein-podcast-debbie-millman.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
     },
     "url:https://nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html": {
       "keys": [
@@ -1110,7 +1074,9 @@
         "url:https://nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html",
         "pid:rss:https://www.nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html",
         "syn:is-there-an-a-i-bubble-a-debate|voice:ezra-klein|2026-10-16",
-        "fp:nytimes.com|is-there-an-a-i-bubble-a-debate|2026-10-16"
+        "syn:what-if-the-a-i-economy-crashes|voice:ezra-klein|2026-10-16",
+        "fp:nytimes.com|is-there-an-a-i-bubble-a-debate|2026-10-16",
+        "fp:nytimes.com|what-if-the-a-i-economy-crashes|2026-10-16"
       ],
       "voice_ids": [
         "ezra-klein"
@@ -1205,23 +1171,6 @@
       "publication": "The Free Press",
       "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
-    "url:https://thefp.com/p/mike-tomlin-minecraft-arthur-brooks-hobby": {
-      "keys": [
-        "url:https://thefp.com/p/mike-tomlin-minecraft-arthur-brooks-hobby",
-        "pid:rss:https://www.thefp.com/p/mike-tomlin-minecraft-arthur-brooks-hobby",
-        "syn:arthur-brooks-mike-tomlin-s-minecraft-hobby-is-a-lesson-in-happiness|voice:arthur-c-brooks|2026-10-02",
-        "fp:thefp.com|arthur-brooks-mike-tomlin-s-minecraft-hobby-is-a-lesson-in-happiness|2026-10-02"
-      ],
-      "voice_ids": [
-        "arthur-c-brooks"
-      ],
-      "first_seen": "2026-10-02T20:06:14Z",
-      "published_at": "2026-10-02T15:24:52Z",
-      "title": "​​Arthur Brooks: Mike Tomlin’s ‘Minecraft’ Hobby Is a Lesson in Happiness",
-      "url": "https://www.thefp.com/p/mike-tomlin-minecraft-arthur-brooks-hobby",
-      "publication": "The Free Press",
-      "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
-    },
     "url:https://theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform": {
       "keys": [
         "url:https://theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform",
@@ -1236,7 +1185,7 @@
       "title": "Radical tax reform is not just good policy: it’s the only kind likely to succeed",
       "url": "https://www.theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform/",
       "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
     },
     "url:https://theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats": {
       "keys": [
@@ -1253,22 +1202,6 @@
       "url": "https://www.theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
-    },
-    "url:https://theglobeandmail.com/opinion/article-just-how-conservative-is-mark-carneys-government": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-just-how-conservative-is-mark-carneys-government",
-        "syn:just-how-conservative-is-mark-carney-s-government|voice:andrew-coyne|2026-10-02",
-        "fp:theglobeandmail.com|just-how-conservative-is-mark-carney-s-government|2026-10-02"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-10-02T20:06:14Z",
-      "published_at": "2026-10-02T00:00:00Z",
-      "title": "Just how conservative is Mark Carney’s government?",
-      "url": "https://www.theglobeandmail.com/opinion/article-just-how-conservative-is-mark-carneys-government/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-10-02T20:06:14Z"
     },
     "url:https://theglobeandmail.com/opinion/article-the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one": {
       "keys": [
