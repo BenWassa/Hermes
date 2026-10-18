@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-17T17:54:41Z",
-  "last_reconcile_at": "2026-10-16T18:57:10Z",
+  "updated_at": "2026-10-18T18:15:26Z",
+  "last_reconcile_at": "2026-10-18T18:15:26Z",
   "last_roundup": {
     "period_id": "2026-10-11",
     "cutoff": "2026-10-11T21:00:00Z",
@@ -270,23 +270,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/florian-schneider-rip.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/florian-schneider-rip.html",
-        "pid:rss:https://marginalrevolution.com/?p=93923",
-        "syn:florian-schneider-rip|voice:tyler-cowen|2026-10-03",
-        "fp:marginalrevolution.com|florian-schneider-rip|2026-10-03"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-03T18:47:55Z",
-      "published_at": "2026-10-03T15:29:40Z",
-      "title": "Florian Schneider, RIP",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/florian-schneider-rip.html?utm_source=rss&utm_medium=rss&utm_campaign=florian-schneider-rip",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html",
@@ -491,23 +474,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html",
-        "pid:rss:https://marginalrevolution.com/?p=93912",
-        "syn:new-issue-of-econ-journal-watch|voice:tyler-cowen|2026-10-03",
-        "fp:marginalrevolution.com|new-issue-of-econ-journal-watch|2026-10-03"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-03T18:47:55Z",
-      "published_at": "2026-10-03T04:27:58Z",
-      "title": "New issue of Econ Journal Watch",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/new-issue-of-econ-journal-watch-17.html?utm_source=rss&utm_medium=rss&utm_campaign=new-issue-of-econ-journal-watch-17",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html",
@@ -575,6 +541,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html?utm_source=rss&utm_medium=rss&utm_campaign=on-stubborn-attachments-and-religion-from-my-email",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/our-fascination-with-screens-demand-curves-slope-downward-installment-1637.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/our-fascination-with-screens-demand-curves-slope-downward-installment-1637.html",
+        "pid:rss:https://marginalrevolution.com/?p=94017",
+        "syn:our-fascination-with-screens-demand-curves-slope-downward-installment-1637|voice:tyler-cowen|2026-10-18",
+        "fp:marginalrevolution.com|our-fascination-with-screens-demand-curves-slope-downward-installment-1637|2026-10-18"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-18T18:15:26Z",
+      "published_at": "2026-10-18T06:28:18Z",
+      "title": "Our fascination with screens, demand curves slope downward installment #1637",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/our-fascination-with-screens-demand-curves-slope-downward-installment-1637.html?utm_source=rss&utm_medium=rss&utm_campaign=our-fascination-with-screens-demand-curves-slope-downward-installment-1637",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-18T18:15:26Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/perry-mehrling-rip.html": {
       "keys": [
@@ -661,23 +644,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-581.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-581.html",
-        "pid:rss:https://marginalrevolution.com/?p=93917",
-        "syn:saturday-assorted-links|voice:tyler-cowen|2026-10-03",
-        "fp:marginalrevolution.com|saturday-assorted-links|2026-10-03"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-03T18:47:55Z",
-      "published_at": "2026-10-03T16:29:20Z",
-      "title": "Saturday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-581.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-581",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-04T18:44:54Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-582.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-582.html",
@@ -710,7 +676,7 @@
       "title": "Saturday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-583",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-18T18:15:26Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html": {
       "keys": [
@@ -763,6 +729,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-archaeology-tranche-of-emergent-ventures.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-archaeology-tranche-of-emergent-ventures.html",
+        "pid:rss:https://marginalrevolution.com/?p=93880",
+        "syn:the-archaeology-tranche-of-emergent-ventures|voice:tyler-cowen|2026-10-18",
+        "fp:marginalrevolution.com|the-archaeology-tranche-of-emergent-ventures|2026-10-18"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-18T18:15:26Z",
+      "published_at": "2026-10-18T04:57:12Z",
+      "title": "The archaeology tranche of Emergent Ventures",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-archaeology-tranche-of-emergent-ventures.html?utm_source=rss&utm_medium=rss&utm_campaign=the-archaeology-tranche-of-emergent-ventures",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-18T18:15:26Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html",
@@ -813,6 +796,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html?utm_source=rss&utm_medium=rss&utm_campaign=the-origin-of-risk",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html",
+        "pid:rss:https://marginalrevolution.com/?p=94018",
+        "syn:this-beautiful-country|voice:tyler-cowen|2026-10-18",
+        "fp:marginalrevolution.com|this-beautiful-country|2026-10-18"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-18T18:15:26Z",
+      "published_at": "2026-10-18T16:32:02Z",
+      "title": "*This Beautiful Country*",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html?utm_source=rss&utm_medium=rss&utm_campaign=this-beautiful-country",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-573.html": {
       "keys": [
@@ -1001,23 +1001,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html",
-        "pid:rss:https://marginalrevolution.com/?p=93921",
-        "syn:words-to-live-by|voice:tyler-cowen|2026-10-03",
-        "fp:marginalrevolution.com|words-to-live-by|2026-10-03"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-03T18:47:55Z",
-      "published_at": "2026-10-03T07:15:58Z",
-      "title": "Words to live by?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/words-to-live-by-2.html?utm_source=rss&utm_medium=rss&utm_campaign=words-to-live-by-2",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-03T18:47:55Z"
-    },
     "url:https://nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html": {
       "keys": [
         "url:https://nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html",
@@ -1088,6 +1071,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
+    "url:https://nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
+        "pid:rss:https://www.nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
+        "syn:this-is-the-good-scenario|voice:ezra-klein|2026-10-18",
+        "fp:nytimes.com|this-is-the-good-scenario|2026-10-18"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-18T18:15:26Z",
+      "published_at": "2026-10-18T15:20:30Z",
+      "title": "This Is the Good Scenario?",
+      "url": "https://www.nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
+    },
     "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit": {
       "keys": [
         "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
@@ -1121,6 +1121,22 @@
       "url": "https://www.persuasion.community/p/thymos-and-american-foreign-policy",
       "publication": "Persuasion",
       "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
+    },
+    "url:https://theatlantic.com/podcasts/2026/10/are-we-too-political/689011": {
+      "keys": [
+        "url:https://theatlantic.com/podcasts/2026/10/are-we-too-political/689011",
+        "syn:are-we-too-political|voice:david-brooks|2026-10-18",
+        "fp:theatlantic.com|are-we-too-political|2026-10-18"
+      ],
+      "voice_ids": [
+        "david-brooks"
+      ],
+      "first_seen": "2026-10-18T18:15:26Z",
+      "published_at": "2026-10-18T13:00:00Z",
+      "title": "Are We Too Political?",
+      "url": "https://www.theatlantic.com/podcasts/2026/10/are-we-too-political/689011/?utm_source=feed",
+      "publication": "The Atlantic",
+      "first_morning_surfaced_at": null
     },
     "url:https://theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931": {
       "keys": [
