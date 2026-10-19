@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-18T18:15:26Z",
+  "updated_at": "2026-10-19T00:29:06Z",
   "last_reconcile_at": "2026-10-18T18:15:26Z",
   "last_roundup": {
     "period_id": "2026-10-11",
@@ -202,23 +202,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-the-elderly-prefer-robotic-care.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-the-elderly-prefer-robotic-care.html",
-        "pid:rss:https://marginalrevolution.com/?p=93916",
-        "syn:do-the-elderly-prefer-robotic-care|voice:tyler-cowen|2026-10-04",
-        "fp:marginalrevolution.com|do-the-elderly-prefer-robotic-care|2026-10-04"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-04T18:44:54Z",
-      "published_at": "2026-10-04T05:17:41Z",
-      "title": "Do the elderly prefer robotic care?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/do-the-elderly-prefer-robotic-care.html?utm_source=rss&utm_medium=rss&utm_campaign=do-the-elderly-prefer-robotic-care",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-04T18:44:54Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html",
@@ -372,23 +355,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/marital-sorting-by-class-and-race.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/marital-sorting-by-class-and-race.html",
-        "pid:rss:https://marginalrevolution.com/?p=93913",
-        "syn:marital-sorting-by-class-and-race|voice:tyler-cowen|2026-10-04",
-        "fp:marginalrevolution.com|marital-sorting-by-class-and-race|2026-10-04"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-04T18:44:54Z",
-      "published_at": "2026-10-04T07:01:17Z",
-      "title": "Marital sorting by class and race",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/marital-sorting-by-class-and-race.html?utm_source=rss&utm_medium=rss&utm_campaign=marital-sorting-by-class-and-race",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-04T18:44:54Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/michael-woodford-nobel-laureate.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/michael-woodford-nobel-laureate.html",
@@ -439,23 +405,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-581.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-581",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-blurb-for-ethan-mollicks-new-book.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-blurb-for-ethan-mollicks-new-book.html",
-        "pid:rss:https://marginalrevolution.com/?p=93927",
-        "syn:my-blurb-for-ethan-mollick-s-new-book|voice:tyler-cowen|2026-10-04",
-        "fp:marginalrevolution.com|my-blurb-for-ethan-mollick-s-new-book|2026-10-04"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-04T18:44:54Z",
-      "published_at": "2026-10-04T15:49:12Z",
-      "title": "My blurb for Ethan Mollick’s new book",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-blurb-for-ethan-mollicks-new-book.html?utm_source=rss&utm_medium=rss&utm_campaign=my-blurb-for-ethan-mollicks-new-book",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html": {
       "keys": [
@@ -694,23 +643,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html?utm_source=rss&utm_medium=rss&utm_campaign=solving-for-the-equilibrium-2",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-585.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-585.html",
-        "pid:rss:https://marginalrevolution.com/?p=93922",
-        "syn:sunday-assorted-links|voice:tyler-cowen|2026-10-04",
-        "fp:marginalrevolution.com|sunday-assorted-links|2026-10-04"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-04T18:44:54Z",
-      "published_at": "2026-10-04T17:43:19Z",
-      "title": "Sunday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-585.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-585",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-586.html": {
       "keys": [
@@ -1001,6 +933,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html",
+        "pid:rss:https://marginalrevolution.com/?p=94020",
+        "syn:you-can-see-everything-no-spoilers|voice:tyler-cowen|2026-10-18",
+        "fp:marginalrevolution.com|you-can-see-everything-no-spoilers|2026-10-18"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-19T00:29:06Z",
+      "published_at": "2026-10-18T22:03:02Z",
+      "title": "*You Can See Everything* (no spoilers)",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html?utm_source=rss&utm_medium=rss&utm_campaign=you-can-see-everything-no-spoilers",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html": {
       "keys": [
         "url:https://nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html",
@@ -1153,22 +1102,6 @@
       "url": "https://www.theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931/?utm_source=feed",
       "publication": "The Atlantic",
       "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
-    },
-    "url:https://theatlantic.com/podcasts/2026/10/should-we-ban-ai-for-kids/688864": {
-      "keys": [
-        "url:https://theatlantic.com/podcasts/2026/10/should-we-ban-ai-for-kids/688864",
-        "syn:should-we-ban-ai-for-kids|voice:david-brooks|2026-10-04",
-        "fp:theatlantic.com|should-we-ban-ai-for-kids|2026-10-04"
-      ],
-      "voice_ids": [
-        "david-brooks"
-      ],
-      "first_seen": "2026-10-04T18:44:54Z",
-      "published_at": "2026-10-04T13:00:00Z",
-      "title": "Should We Ban AI for Kids?",
-      "url": "https://www.theatlantic.com/podcasts/2026/10/should-we-ban-ai-for-kids/688864/?utm_source=feed",
-      "publication": "The Atlantic",
-      "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
     "url:https://thefp.com/p/arthur-brooks-happiness-meaning": {
       "keys": [
