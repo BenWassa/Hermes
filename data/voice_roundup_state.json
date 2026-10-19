@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-19T00:29:06Z",
+  "updated_at": "2026-10-19T05:20:53Z",
   "last_reconcile_at": "2026-10-18T18:15:26Z",
   "last_roundup": {
     "period_id": "2026-10-18",
@@ -881,6 +881,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html?utm_source=rss&utm_medium=rss&utm_campaign=what-ive-been-reading-296",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html",
+        "pid:rss:https://marginalrevolution.com/?p=93985",
+        "syn:what-i-ve-been-reading|voice:tyler-cowen|2026-10-19",
+        "fp:marginalrevolution.com|what-i-ve-been-reading|2026-10-19"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-19T05:20:53Z",
+      "published_at": "2026-10-19T04:29:27Z",
+      "title": "What I’ve been reading",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html?utm_source=rss&utm_medium=rss&utm_campaign=what-ive-been-reading-297",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-fuchsia-dunlop-2.html": {
       "keys": [
