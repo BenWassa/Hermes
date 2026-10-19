@@ -4,14 +4,14 @@
   "updated_at": "2026-10-19T00:29:06Z",
   "last_reconcile_at": "2026-10-18T18:15:26Z",
   "last_roundup": {
-    "period_id": "2026-10-11",
-    "cutoff": "2026-10-11T21:00:00Z",
-    "claimed_at": "2026-10-12T01:46:43Z",
-    "status": "notified",
+    "period_id": "2026-10-18",
+    "cutoff": "2026-10-18T21:00:00Z",
+    "claimed_at": "2026-10-19T00:29:06Z",
+    "status": "pending",
     "selection_keys": [
-      "url:https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics",
-      "url:https://theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931",
-      "url:https://marginalrevolution.com/marginalrevolution/2026/10/ethiopia-update.html"
+      "url:https://nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
+      "url:https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html",
+      "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html"
     ]
   },
   "items": {
