@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-19T20:41:10Z",
+  "updated_at": "2026-10-20T01:17:08Z",
   "last_reconcile_at": "2026-10-19T20:41:10Z",
   "last_roundup": {
     "period_id": "2026-10-18",
@@ -100,23 +100,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/authenticity-is-exactly-the-same-as-phoniness.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/authenticity-is-exactly-the-same-as-phoniness.html",
-        "pid:rss:https://marginalrevolution.com/?p=93932",
-        "syn:authenticity-is-exactly-the-same-as-phoniness|voice:tyler-cowen|2026-10-05",
-        "fp:marginalrevolution.com|authenticity-is-exactly-the-same-as-phoniness|2026-10-05"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-05T22:08:59Z",
-      "published_at": "2026-10-05T15:45:12Z",
-      "title": "“Authenticity is exactly the same as phoniness.”",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/authenticity-is-exactly-the-same-as-phoniness.html?utm_source=rss&utm_medium=rss&utm_campaign=authenticity-is-exactly-the-same-as-phoniness",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazil-election-notes-from-my-email.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazil-election-notes-from-my-email.html",
@@ -150,23 +133,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/california-in-migration-and-out-migration.html?utm_source=rss&utm_medium=rss&utm_campaign=california-in-migration-and-out-migration",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html",
-        "pid:rss:https://marginalrevolution.com/?p=93930",
-        "syn:china-fact-of-the-day|voice:tyler-cowen|2026-10-05",
-        "fp:marginalrevolution.com|china-fact-of-the-day|2026-10-05"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-05T22:08:59Z",
-      "published_at": "2026-10-05T06:56:41Z",
-      "title": "China fact of the day",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-82.html?utm_source=rss&utm_medium=rss&utm_campaign=china-fact-of-the-day-82",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-05T22:08:59Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html": {
       "keys": [
@@ -354,23 +320,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/michael-woodford-nobel-laureate.html?utm_source=rss&utm_medium=rss&utm_campaign=michael-woodford-nobel-laureate",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-580.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-580.html",
-        "pid:rss:https://marginalrevolution.com/?p=93931",
-        "syn:monday-assorted-links|voice:tyler-cowen|2026-10-05",
-        "fp:marginalrevolution.com|monday-assorted-links|2026-10-05"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-05T22:08:59Z",
-      "published_at": "2026-10-05T17:23:07Z",
-      "title": "Monday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-580.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-580",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-581.html": {
       "keys": [
@@ -1073,23 +1022,6 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
     },
-    "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit": {
-      "keys": [
-        "url:https://persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
-        "pid:rss:https://www.persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
-        "syn:the-afd-emerged-from-a-respect-deficit|voice:francis-fukuyama|2026-10-05",
-        "fp:persuasion.community|the-afd-emerged-from-a-respect-deficit|2026-10-05"
-      ],
-      "voice_ids": [
-        "francis-fukuyama"
-      ],
-      "first_seen": "2026-10-05T22:08:59Z",
-      "published_at": "2026-10-05T19:20:21Z",
-      "title": "The AfD Emerged From a Respect Deficit",
-      "url": "https://www.persuasion.community/p/the-afd-emerged-from-a-respect-deficit",
-      "publication": "Persuasion",
-      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
-    },
     "url:https://persuasion.community/p/thymos-and-american-foreign-policy": {
       "keys": [
         "url:https://persuasion.community/p/thymos-and-american-foreign-policy",
@@ -1160,7 +1092,9 @@
       "keys": [
         "url:https://thefp.com/p/i-turned-myself-into-an-ai-model",
         "pid:rss:https://www.thefp.com/p/i-turned-myself-into-an-ai-model",
+        "syn:arthur-brooks-i-turned-myself-into-an-ai-model|voice:arthur-c-brooks|2026-10-19",
         "syn:i-turned-myself-into-an-ai-model|voice:arthur-c-brooks|2026-10-19",
+        "fp:thefp.com|arthur-brooks-i-turned-myself-into-an-ai-model|2026-10-19",
         "fp:thefp.com|i-turned-myself-into-an-ai-model|2026-10-19"
       ],
       "voice_ids": [
@@ -1168,7 +1102,7 @@
       ],
       "first_seen": "2026-10-19T20:41:10Z",
       "published_at": "2026-10-19T15:02:58Z",
-      "title": "I Turned Myself Into an AI Model",
+      "title": "Arthur Brooks: I Turned Myself Into an AI Model",
       "url": "https://www.thefp.com/p/i-turned-myself-into-an-ai-model",
       "publication": "The Free Press",
       "first_morning_surfaced_at": null
