@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-20T01:17:08Z",
+  "updated_at": "2026-10-20T19:32:21Z",
   "last_reconcile_at": "2026-10-19T20:41:10Z",
   "last_roundup": {
     "period_id": "2026-10-18",
@@ -423,6 +423,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-brazilian-food.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-brazilian-food.html",
+        "pid:rss:https://marginalrevolution.com/?p=94028",
+        "syn:on-brazilian-food|voice:tyler-cowen|2026-10-20",
+        "fp:marginalrevolution.com|on-brazilian-food|2026-10-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-20T19:32:21Z",
+      "published_at": "2026-10-20T04:08:38Z",
+      "title": "On Brazilian food",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/on-brazilian-food.html?utm_source=rss&utm_medium=rss&utm_campaign=on-brazilian-food",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html",
@@ -576,6 +593,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-18T18:15:26Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html",
+        "pid:rss:https://marginalrevolution.com/?p=94030",
+        "syn:saving-for-the-machines|voice:tyler-cowen|2026-10-20",
+        "fp:marginalrevolution.com|saving-for-the-machines|2026-10-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-20T19:32:21Z",
+      "published_at": "2026-10-20T18:38:49Z",
+      "title": "Saving for the machines",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html?utm_source=rss&utm_medium=rss&utm_campaign=saving-for-the-machines",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html",
@@ -678,6 +712,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-net-fiscal-impact-of-immigration-should-include-gains-from-trade.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-net-fiscal-impact-of-immigration-should-include-gains-from-trade.html",
+        "pid:rss:https://marginalrevolution.com/?p=94022",
+        "syn:the-net-fiscal-impact-of-immigration-should-include-gains-from-trade|voice:tyler-cowen|2026-10-20",
+        "fp:marginalrevolution.com|the-net-fiscal-impact-of-immigration-should-include-gains-from-trade|2026-10-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-20T19:32:21Z",
+      "published_at": "2026-10-20T04:47:19Z",
+      "title": "The net fiscal impact of immigration should include gains from trade",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-net-fiscal-impact-of-immigration-should-include-gains-from-trade.html?utm_source=rss&utm_medium=rss&utm_campaign=the-net-fiscal-impact-of-immigration-should-include-gains-from-trade",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html",
@@ -777,6 +828,23 @@
       "published_at": "2026-10-13T16:22:29Z",
       "title": "Tuesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-590",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html",
+        "pid:rss:https://marginalrevolution.com/?p=94026",
+        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-10-20",
+        "fp:marginalrevolution.com|tuesday-assorted-links|2026-10-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-20T19:32:21Z",
+      "published_at": "2026-10-20T15:56:57Z",
+      "title": "Tuesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-591",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -1021,6 +1089,23 @@
       "url": "https://www.nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
+    },
+    "url:https://nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html",
+        "pid:rss:https://www.nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html",
+        "syn:trumpism-is-backfiring|voice:ezra-klein|2026-10-20",
+        "fp:nytimes.com|trumpism-is-backfiring|2026-10-20"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-20T19:32:21Z",
+      "published_at": "2026-10-20T13:11:05Z",
+      "title": "Trumpism Is Backfiring",
+      "url": "https://www.nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
     },
     "url:https://persuasion.community/p/thymos-and-american-foreign-policy": {
       "keys": [
