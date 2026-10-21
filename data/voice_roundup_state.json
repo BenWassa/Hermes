@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-20T19:32:21Z",
-  "last_reconcile_at": "2026-10-19T20:41:10Z",
+  "updated_at": "2026-10-21T19:30:38Z",
+  "last_reconcile_at": "2026-10-21T19:30:38Z",
   "last_roundup": {
     "period_id": "2026-10-18",
     "cutoff": "2026-10-18T21:00:00Z",
@@ -355,6 +355,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html",
+        "pid:rss:https://marginalrevolution.com/?p=94050",
+        "syn:more-on-elizabeth-holmes-and-prison|voice:tyler-cowen|2026-10-21",
+        "fp:marginalrevolution.com|more-on-elizabeth-holmes-and-prison|2026-10-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-21T19:30:38Z",
+      "published_at": "2026-10-21T19:12:57Z",
+      "title": "More on Elizabeth Holmes and prison",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html?utm_source=rss&utm_medium=rss&utm_campaign=more-on-elizabeth-holmes-and-prison",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html",
@@ -457,6 +474,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing.html",
+        "pid:rss:https://marginalrevolution.com/?p=94029",
+        "syn:one-reason-i-do-not-love-ai-writing-or-even-ai-assisted|voice:tyler-cowen|2026-10-21",
+        "fp:marginalrevolution.com|one-reason-i-do-not-love-ai-writing-or-even-ai-assisted|2026-10-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-21T19:30:38Z",
+      "published_at": "2026-10-21T06:20:34Z",
+      "title": "One reason I do not love AI writing, or even AI-assisted writing",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing.html?utm_source=rss&utm_medium=rss&utm_campaign=one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/our-fascination-with-screens-demand-curves-slope-downward-installment-1637.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/our-fascination-with-screens-demand-curves-slope-downward-installment-1637.html",
@@ -525,23 +559,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/rising-concentration-for-economics-awards.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/rising-concentration-for-economics-awards.html",
-        "pid:rss:https://marginalrevolution.com/?p=93939",
-        "syn:rising-concentration-for-economics-awards|voice:tyler-cowen|2026-10-06",
-        "fp:marginalrevolution.com|rising-concentration-for-economics-awards|2026-10-06"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-06T20:30:15Z",
-      "published_at": "2026-10-06T04:24:14Z",
-      "title": "Rising concentration for economics awards",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/rising-concentration-for-economics-awards.html?utm_source=rss&utm_medium=rss&utm_campaign=rising-concentration-for-economics-awards",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/robert-hall-nobel-laureate.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/robert-hall-nobel-laureate.html",
@@ -608,7 +625,7 @@
       "title": "Saving for the machines",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html?utm_source=rss&utm_medium=rss&utm_campaign=saving-for-the-machines",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html": {
       "keys": [
@@ -678,6 +695,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-causal-effect-of-foreign-ideas-on-u-s-innovation.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-causal-effect-of-foreign-ideas-on-u-s-innovation.html",
+        "pid:rss:https://marginalrevolution.com/?p=94038",
+        "syn:the-causal-effect-of-foreign-ideas-on-u-s-innovation|voice:tyler-cowen|2026-10-21",
+        "fp:marginalrevolution.com|the-causal-effect-of-foreign-ideas-on-u-s-innovation|2026-10-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-21T19:30:38Z",
+      "published_at": "2026-10-21T05:00:58Z",
+      "title": "The Causal Effect of Foreign Ideas on U.S. Innovation",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-causal-effect-of-foreign-ideas-on-u-s-innovation.html?utm_source=rss&utm_medium=rss&utm_campaign=the-causal-effect-of-foreign-ideas-on-u-s-innovation",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html",
@@ -694,23 +728,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-agents",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-great-accretion-and-the-great-depression.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-great-accretion-and-the-great-depression.html",
-        "pid:rss:https://marginalrevolution.com/?p=93937",
-        "syn:the-great-accretion-and-the-great-depression|voice:tyler-cowen|2026-10-06",
-        "fp:marginalrevolution.com|the-great-accretion-and-the-great-depression|2026-10-06"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-06T20:30:15Z",
-      "published_at": "2026-10-06T07:06:24Z",
-      "title": "The Great Accretion and the Great Depression",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-great-accretion-and-the-great-depression.html?utm_source=rss&utm_medium=rss&utm_campaign=the-great-accretion-and-the-great-depression",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-net-fiscal-impact-of-immigration-should-include-gains-from-trade.html": {
       "keys": [
@@ -797,23 +814,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html",
-        "pid:rss:https://marginalrevolution.com/?p=93934",
-        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-10-06",
-        "fp:marginalrevolution.com|tuesday-assorted-links|2026-10-06"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-06T20:30:15Z",
-      "published_at": "2026-10-06T16:50:43Z",
-      "title": "Tuesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-589.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-589",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-06T20:30:15Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html",
@@ -846,7 +846,7 @@
       "title": "Tuesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-591",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html": {
       "keys": [
@@ -881,6 +881,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-575",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-576.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-576.html",
+        "pid:rss:https://marginalrevolution.com/?p=94034",
+        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-10-21",
+        "fp:marginalrevolution.com|wednesday-assorted-links|2026-10-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-21T19:30:38Z",
+      "published_at": "2026-10-21T16:09:38Z",
+      "title": "Wednesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-576.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-576",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/well-planned-african-immigration-to-america-will-go-fine.html": {
       "keys": [
@@ -1105,7 +1122,7 @@
       "title": "Trumpism Is Backfiring",
       "url": "https://www.nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html",
       "publication": "The New York Times",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
     "url:https://persuasion.community/p/thymos-and-american-foreign-policy": {
       "keys": [
@@ -1207,6 +1224,22 @@
       "url": "https://www.theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-alberta-separatists-lost-badly-danielle-smith-might-have-lost-worse": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-alberta-separatists-lost-badly-danielle-smith-might-have-lost-worse",
+        "syn:alberta-s-separatists-lost-badly-danielle-smith-might-have-lost-even-worse|voice:andrew-coyne|2026-10-20",
+        "fp:theglobeandmail.com|alberta-s-separatists-lost-badly-danielle-smith-might-have-lost-even-worse|2026-10-20"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-10-21T19:30:38Z",
+      "published_at": "2026-10-20T00:00:00Z",
+      "title": "Alberta’s separatists lost badly. Danielle Smith might have lost even worse",
+      "url": "https://www.theglobeandmail.com/opinion/article-alberta-separatists-lost-badly-danielle-smith-might-have-lost-worse/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
     "url:https://theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats": {
       "keys": [
