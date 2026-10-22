@@ -218,6 +218,12 @@ def test_workflow_cocommits_evidence_but_preserves_gate_and_notification():
     publish = next(s["run"] for s in build["jobs"]["build"]["steps"] if s.get("name") == "Commit and push")
     assert "git add docs/index.html" in publish
     assert 'git add "$EVIDENCE_FILE"' in publish
+    # Evidence must NEVER authorize a publish commit on its own.
+    html_guard = "if git diff --cached --quiet -- docs/index.html; then"
+    assert html_guard in publish
+    assert publish.index(html_guard) < publish.index('git add "$EVIDENCE_FILE"')
+    assert 'TODAY="${{ steps.gate.outputs.today }}"' in publish
+    assert '"$TODAY" != "$CURRENT_DAY"' in publish
     assert "git commit -m" in publish
     assert "git rebase" in publish
     assert "data/edition_evidence/**" in build["on" if "on" in build else True]["push"]["paths-ignore"]
@@ -338,3 +344,55 @@ def test_provenance_disk_failure_cannot_block_successful_daily(monkeypatch, tmp_
     monkeypatch.setattr(EditionEvidence, "write", broken_write)
     assert build_mod.main() == 0
     assert page.read_text(encoding="utf-8") == "Published regardless of evidence failure"
+
+
+def test_html_only_publication_gate_in_real_git_index(tmp_path):
+    """An evidence-only change cannot turn an unchanged page into an edition."""
+    import subprocess
+
+    def git(*args, check=False):
+        return subprocess.run(["git", *args], cwd=tmp_path, text=True,
+                              capture_output=True, check=check)
+
+    git("init", "-q", check=True)
+    git("config", "user.name", "Hermes test", check=True)
+    git("config", "user.email", "test@example.invalid", check=True)
+    page = tmp_path / "docs" / "index.html"
+    page.parent.mkdir(parents=True)
+    page.write_text("existing published newspaper", encoding="utf-8")
+    git("add", "docs/index.html", check=True)
+    git("commit", "-qm", "previous day", check=True)
+
+    evidence = tmp_path / "data/edition_evidence/2026/10/2026-10-22.json"
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text('{"status":"published"}', encoding="utf-8")
+    git("add", "docs/index.html", "data/edition_evidence/2026/10/2026-10-22.json", check=True)
+
+    assert git("diff", "--cached", "--quiet").returncode == 1
+    assert git("diff", "--cached", "--quiet", "--", "docs/index.html").returncode == 0
+
+    page.write_text("genuinely new newspaper", encoding="utf-8")
+    git("add", "docs/index.html", check=True)
+    assert git("diff", "--cached", "--quiet", "--", "docs/index.html").returncode == 1
+
+
+def test_adversarial_public_metadata_credentials_are_withheld(tmp_path):
+    rec = EditionEvidence(when=WHEN)
+    item = story(1, url="https://example.org/article/sk-proj-ABCDEFGHIJKLMN",
+                 description="Client credential: token=unguessable-value")
+    item["title"] = "Story with ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    item["source_article_id"] = "gsk_ABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    item["source"] = "Feed AKIAABCDEFGHIJKLMNOP"
+    rec.record_pool([{"_src": "rss"}], [item])
+    rec.record_trim([item], [item], TODAY)
+    document, path = _published(rec, tmp_path)
+    content = path.read_text(encoding="utf-8")
+    for secret in ("ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ012345", "gsk_ABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                   "AKIAABCDEFGHIJKLMNOP", "unguessable-value", "sk-proj-ABCDEFGHIJKLMN"):
+        assert secret not in content
+    candidate = document["candidates"][0]
+    assert candidate["headline"] == "[withheld]"
+    assert candidate["public_excerpt"] == "[withheld]"
+    assert candidate["source"] == "[withheld]"
+    assert candidate["source_article_id"] == "[withheld]"
+    assert candidate["canonical_url"] is None
