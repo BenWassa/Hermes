@@ -1,0 +1,2301 @@
+{
+  "schema_version": 1,
+  "description": "Issue #72 constructed (hypothetical) public-metadata pools. Not recorded Hermes upstream pools and never extracted from final HTML. See fixture schema.",
+  "cases": [
+    {
+      "id": "canada-crowded",
+      "description": "Busy global day with nationally material Canadian news, no token Canada quota",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Canada unveils new federal fiscal framework",
+          "description": "Ottawa proposes $18 billion in infrastructure spending over four years; parliamentary vote pending.",
+          "source": "Federal Desk",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-crowded/budget",
+          "coverage_lane": "canada-national"
+        },
+        {
+          "title": "US lawmakers advance transport bill",
+          "description": "Committee votes to advance US highway package; final vote next month.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-crowded/us"
+        },
+        {
+          "title": "European leaders discuss energy supply",
+          "description": "Joint statement commits to further talks, with no binding production targets.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-crowded/europe"
+        },
+        {
+          "title": "Consumer technology shares climb",
+          "description": "A large index of technology stocks rises 1.4% on Wednesday.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-crowded/tech"
+        },
+        {
+          "title": "Toronto council approves weekend street repairs",
+          "description": "Municipal works office schedules overnight lane closures.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-crowded/toronto"
+        },
+        {
+          "title": "Celebrity's sweater sparks online conversation",
+          "description": "A viral lifestyle discussion is gaining attention.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-crowded/celebrity"
+        },
+        {
+          "title": "Ottawa infrastructure plan totals $18 billion",
+          "description": "A second outlet covers the same four-year Ottawa infrastructure package.",
+          "source": "Second National Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-crowded/duplicate"
+        },
+        {
+          "title": "Manufacturers report slower hiring",
+          "description": "Survey points to softer orders, but not a confirmed recession.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-crowded/market"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/canada-crowded/budget",
+          "https://example.org/hermes-fixture/canada-crowded/tech"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/canada-crowded/celebrity"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/canada-crowded/budget": "front",
+          "https://example.org/hermes-fixture/canada-crowded/toronto": "toronto"
+        },
+        "duplicate_groups": [
+          [
+            "https://example.org/hermes-fixture/canada-crowded/budget",
+            "https://example.org/hermes-fixture/canada-crowded/duplicate"
+          ]
+        ],
+        "ranking_pairs": [
+          [
+            "https://example.org/hermes-fixture/canada-crowded/budget",
+            "https://example.org/hermes-fixture/canada-crowded/celebrity"
+          ]
+        ],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/canada-crowded/budget",
+            "text": "$18 billion"
+          }
+        ]
+      }
+    },
+    {
+      "id": "canada-event-window",
+      "description": "Rare scheduled national event within existing recall window; public seed is not article evidence",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-09-12",
+      "stories": [
+        {
+          "title": "Canada Investment Summit opens with proposed project pipeline",
+          "description": "At the Canada Investment Summit, officials discuss a proposed investment pipeline; there is no signed $1 trillion agreement.",
+          "source": "Canadian National Wire",
+          "section_hint": "world",
+          "pub_date": "2026-09-12T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-event-window/summit",
+          "coverage_lane": "canada-national"
+        },
+        {
+          "title": "Investment summit participants debate financing",
+          "description": "Panel participants propose options but announce no finalized financing.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-09-12T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-event-window/summit2"
+        },
+        {
+          "title": "International central bank issues guidance",
+          "description": "Guidance is unchanged and no policy vote is scheduled.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-09-12T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-event-window/euro"
+        },
+        {
+          "title": "City advances water infrastructure consultation",
+          "description": "No contract awarded as public comment opens.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-09-12T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-event-window/cities"
+        },
+        {
+          "title": "Film premiere attracts celebrities",
+          "description": "A red-carpet event attracts attention.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-09-12T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-event-window/entertainment"
+        },
+        {
+          "title": "Canadian dollar weakens modestly",
+          "description": "Currency falls 0.3% against its reference basket.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-09-12T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/canada-event-window/fx"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/canada-event-window/summit"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/canada-event-window/entertainment"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/canada-event-window/summit": "front"
+        },
+        "duplicate_groups": [
+          [
+            "https://example.org/hermes-fixture/canada-event-window/summit",
+            "https://example.org/hermes-fixture/canada-event-window/summit2"
+          ]
+        ],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/canada-event-window/summit",
+            "text": "proposed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "toronto-versus-ottawa",
+      "description": "Preserve Toronto local vs Canada-wide distinction",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Toronto transit agency changes Line 2 maintenance schedule",
+          "description": "Two late-night closures planned; no daytime interruption expected.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/toronto-versus-ottawa/transit"
+        },
+        {
+          "title": "Federal immigration department updates processing rules",
+          "description": "New Canada-wide application rules take effect next quarter.",
+          "source": "Canada Policy Desk",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/toronto-versus-ottawa/immigration",
+          "coverage_lane": "canada-national"
+        },
+        {
+          "title": "Downtown bridge inspection closes one lane",
+          "description": "One westbound lane closes from 10 PM to 5 AM.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/toronto-versus-ottawa/bridge"
+        },
+        {
+          "title": "Supreme Court of Canada sets hearing date",
+          "description": "The court schedules a hearing, without ruling on merits.",
+          "source": "Canadian Legal Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/toronto-versus-ottawa/courts",
+          "coverage_lane": "canada-national"
+        },
+        {
+          "title": "Street festival announces food vendors",
+          "description": "A list of participating businesses is published.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/toronto-versus-ottawa/event"
+        },
+        {
+          "title": "Allied ministers issue joint communiqué",
+          "description": "Talks end with a non-binding statement.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/toronto-versus-ottawa/global"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/toronto-versus-ottawa/immigration",
+          "https://example.org/hermes-fixture/toronto-versus-ottawa/transit"
+        ],
+        "must_omit": [],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/toronto-versus-ottawa/immigration": "front",
+          "https://example.org/hermes-fixture/toronto-versus-ottawa/transit": "toronto",
+          "https://example.org/hermes-fixture/toronto-versus-ottawa/bridge": "toronto"
+        },
+        "duplicate_groups": [],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/toronto-versus-ottawa/bridge",
+            "text": "one lane"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opinion-following",
+      "description": "Two guaranteed Following pieces; ordinary Opinion is independent; argument vs endorsement",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "An editorial case against blanket subsidies",
+          "description": "Writer argues subsidies often hide inefficient spending; admits exceptions for market failures.",
+          "source": "Opinion Desk",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/opinion-following/column"
+        },
+        {
+          "title": "Opinion: targeted subsidies may address public risks",
+          "description": "Author disputes blanket opposition and cites a narrow hypothetical exception.",
+          "source": "Opinion Desk",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/opinion-following/rebuttal"
+        },
+        {
+          "title": "Canadian committee schedules hearing",
+          "description": "Committee hearing set for next week.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/opinion-following/fed"
+        },
+        {
+          "title": "Bank publishes quarterly lending report",
+          "description": "New lending report is descriptive, not a recommendation.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/opinion-following/report"
+        },
+        {
+          "title": "Why productivity reform requires stable implementation",
+          "description": "Metadata repeats a followed author essay and should not create an ordinary Opinion duplicate.",
+          "source": "Example Opinion",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/opinion-following/duplicate"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/opinion-following/column"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/opinion-following/duplicate"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/opinion-following/column": "opinion"
+        },
+        "duplicate_groups": [],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/opinion-following/column",
+            "text": "subsidies"
+          }
+        ]
+      },
+      "following": [
+        {
+          "key": "voice-key-01",
+          "headline": "Why productivity reform requires stable implementation",
+          "description": "Columnist argues that repeated policy reversals, not simply funding, prevent long-term infrastructure planning.",
+          "author": "Alex North",
+          "publication": "Example Opinion",
+          "published_at": "2026-10-22T10:00:00Z",
+          "link": "https://example.org/hermes-following/voice-01"
+        },
+        {
+          "key": "voice-key-02",
+          "headline": "The problem with instant crime alerts",
+          "description": "Writer argues sensational crime headlines misstate everyday risk and asks for trend data instead.",
+          "author": "Morgan Bell",
+          "publication": "Example Review",
+          "published_at": "2026-10-22T11:00:00Z",
+          "link": "https://example.org/hermes-following/voice-02"
+        }
+      ]
+    },
+    {
+      "id": "business-numbers",
+      "description": "Financial claim precision and denominator, do not infer causality from a single quarter",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Manufacturer revenue rises 12% year over year",
+          "description": "Revenue rose from $250 million to $280 million, a $30 million (12%) increase; profit margin fell from 9% to 7%.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/business-numbers/rev"
+        },
+        {
+          "title": "Company sales gain $30 million in latest quarter",
+          "description": "Second report covers the same $250 million to $280 million sales result.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/business-numbers/rev2"
+        },
+        {
+          "title": "Inflation rate changes from 3.1% to 2.8%",
+          "description": "The annual price growth rate declined by 0.3 percentage points, not 0.3%.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/business-numbers/infl"
+        },
+        {
+          "title": "Bond yields fall five basis points",
+          "description": "Benchmark yield changes from 4.20% to 4.15%.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/business-numbers/bond"
+        },
+        {
+          "title": "Local bookstore holds annual sale",
+          "description": "The sale begins Saturday.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/business-numbers/local"
+        },
+        {
+          "title": "Newsletter says markets may move",
+          "description": "No verifiable data or catalyst is identified.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/business-numbers/noise"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/business-numbers/rev",
+          "https://example.org/hermes-fixture/business-numbers/infl"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/business-numbers/noise"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/business-numbers/rev": "business",
+          "https://example.org/hermes-fixture/business-numbers/infl": "business"
+        },
+        "duplicate_groups": [
+          [
+            "https://example.org/hermes-fixture/business-numbers/rev",
+            "https://example.org/hermes-fixture/business-numbers/rev2"
+          ]
+        ],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/business-numbers/rev",
+            "text": "$280 million"
+          },
+          {
+            "link": "https://example.org/hermes-fixture/business-numbers/infl",
+            "text": "2.8%"
+          }
+        ]
+      }
+    },
+    {
+      "id": "geopolitical-uncertainty",
+      "description": "Separate asserted, denied and confirmed claims on diplomatic event",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Negotiators announce tentative ceasefire outline",
+          "description": "Both sides acknowledge talks; agreement is provisional and implementation is not confirmed.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/geopolitical-uncertainty/cease"
+        },
+        {
+          "title": "Government disputes reports of final ceasefire deal",
+          "description": "Spokesperson states no final deal has been signed; talks continue.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/geopolitical-uncertainty/deny"
+        },
+        {
+          "title": "Aid agency warns of displacement",
+          "description": "Agency estimates 12,000 people displaced; estimate has not been independently verified.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/geopolitical-uncertainty/cas"
+        },
+        {
+          "title": "Regional neighbours call for further talks",
+          "description": "Joint appeal does not include enforcement provisions.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/geopolitical-uncertainty/border"
+        },
+        {
+          "title": "Shipping insurers raise risk premiums",
+          "description": "Some insurers raise regional premiums; no sector-wide average released.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/geopolitical-uncertainty/trade"
+        },
+        {
+          "title": "Local charity launches relief appeal",
+          "description": "Fundraising announced without verified totals.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/geopolitical-uncertainty/local"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/geopolitical-uncertainty/cease",
+          "https://example.org/hermes-fixture/geopolitical-uncertainty/cas"
+        ],
+        "must_omit": [],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/geopolitical-uncertainty/cease": "front"
+        },
+        "duplicate_groups": [
+          [
+            "https://example.org/hermes-fixture/geopolitical-uncertainty/cease",
+            "https://example.org/hermes-fixture/geopolitical-uncertainty/deny"
+          ]
+        ],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/geopolitical-uncertainty/cease",
+            "text": "tentative"
+          },
+          {
+            "link": "https://example.org/hermes-fixture/geopolitical-uncertainty/cas",
+            "text": "12,000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "duplicate-feeds",
+      "description": "Cross-source event dedupe with overlapping but non-identical headlines",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Port authority reopens shipping channel",
+          "description": "Authority confirms channel reopened at 8 AM after a 12-hour closure.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/duplicate-feeds/a"
+        },
+        {
+          "title": "Shipping lane reopens after half-day disruption",
+          "description": "A second report repeats port authority's channel reopening.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/duplicate-feeds/b"
+        },
+        {
+          "title": "Channel reopens, says port authority",
+          "description": "A third wire repeats the reopening, no new facts.",
+          "source": "Additional Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/duplicate-feeds/c"
+        },
+        {
+          "title": "Container cargo volumes decline",
+          "description": "Monthly cargo volume is down 2% year over year.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/duplicate-feeds/d"
+        },
+        {
+          "title": "Toronto port announces water sampling programme",
+          "description": "A separate local environmental monitoring effort.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/duplicate-feeds/e"
+        },
+        {
+          "title": "Opinion: port delays need better disclosure",
+          "description": "Commentary urges clearer port reporting.",
+          "source": "Opinion Desk",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/duplicate-feeds/f"
+        },
+        {
+          "title": "Regional weather service forecasts clear skies",
+          "description": "Routine forecast with no public safety impact.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/duplicate-feeds/g"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/duplicate-feeds/a"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/duplicate-feeds/g"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/duplicate-feeds/a": "front",
+          "https://example.org/hermes-fixture/duplicate-feeds/e": "toronto"
+        },
+        "duplicate_groups": [
+          [
+            "https://example.org/hermes-fixture/duplicate-feeds/a",
+            "https://example.org/hermes-fixture/duplicate-feeds/b",
+            "https://example.org/hermes-fixture/duplicate-feeds/c"
+          ]
+        ],
+        "ranking_pairs": [],
+        "facts": []
+      }
+    },
+    {
+      "id": "sparse-metadata",
+      "description": "Blank public descriptions; abstain rather than fabricate unsupported specifics",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Parliament schedules special sitting",
+          "description": "",
+          "source": "National Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sparse-metadata/sparse"
+        },
+        {
+          "title": "Company announces investor event",
+          "description": "",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sparse-metadata/blank"
+        },
+        {
+          "title": "Retail chain confirms 24-store pilot",
+          "description": "Chain specifies 24 participating locations; no expansion has been authorized.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sparse-metadata/clear"
+        },
+        {
+          "title": "Toronto street closure extended by two days",
+          "description": "City notice sets reopening for Friday.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sparse-metadata/tor"
+        },
+        {
+          "title": "Opinion: the value of asking better questions",
+          "description": "No summary metadata provided.",
+          "source": "Opinion Desk",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sparse-metadata/op"
+        },
+        {
+          "title": "Five-year-old background explainer resurfaces",
+          "description": "Archive item originally published years ago.",
+          "source": "Archive Feed",
+          "section_hint": "world",
+          "pub_date": "2021-03-22T08:00:00Z",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sparse-metadata/stale"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/sparse-metadata/clear"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/sparse-metadata/stale"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/sparse-metadata/clear": "business"
+        },
+        "duplicate_groups": [],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/sparse-metadata/clear",
+            "text": "24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sensitivity-crime",
+      "description": "Sensational crime headline vs public safety trend; sensitivity drives image suppression",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Two people killed in Toronto overnight shooting",
+          "description": "Police confirm two deaths; motive and relationship between victims unknown.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sensitivity-crime/crime"
+        },
+        {
+          "title": "City publishes annual violent-crime trend data",
+          "description": "New five-year data series; annual citywide trend must be calculated rather than inferred from one incident.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sensitivity-crime/trend"
+        },
+        {
+          "title": "Viral post misstates neighbourhood crime figures",
+          "description": "Municipal source disputes figure circulating online.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sensitivity-crime/false"
+        },
+        {
+          "title": "Federal public safety committee sets hearing",
+          "description": "No findings or new legislation have been announced.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sensitivity-crime/policy"
+        },
+        {
+          "title": "Celebrity responds to crime headline",
+          "description": "Personal commentary includes no new verifiable facts.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/sensitivity-crime/celebrity"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/sensitivity-crime/trend",
+          "https://example.org/hermes-fixture/sensitivity-crime/crime"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/sensitivity-crime/celebrity"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/sensitivity-crime/crime": "toronto",
+          "https://example.org/hermes-fixture/sensitivity-crime/trend": "toronto"
+        },
+        "duplicate_groups": [],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/sensitivity-crime/crime",
+            "text": "two"
+          }
+        ]
+      }
+    },
+    {
+      "id": "markets-causality",
+      "description": "Distinguish correlation from causation and distinguish points from percentages",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Price index gains 0.6% month over month",
+          "description": "Monthly rise is 0.6% and annual change is 3.2%; figures are from distinct windows.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/markets-causality/cpi"
+        },
+        {
+          "title": "Central bank keeps policy rate unchanged",
+          "description": "Policy rate stays 3.75%; statement says future decisions remain data-dependent.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/markets-causality/rates"
+        },
+        {
+          "title": "Currency index falls one percentage point",
+          "description": "Index share changes from 61% to 60%, which is one percentage point.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/markets-causality/fx"
+        },
+        {
+          "title": "Election poll shows a three-point lead",
+          "description": "Margin of error is ±4 percentage points; it cannot establish a definite leader.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/markets-causality/poll"
+        },
+        {
+          "title": "City budgets for sidewalk improvements",
+          "description": "Funding remains under council debate.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/markets-causality/local"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/markets-causality/cpi",
+          "https://example.org/hermes-fixture/markets-causality/rates"
+        ],
+        "must_omit": [],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/markets-causality/cpi": "business",
+          "https://example.org/hermes-fixture/markets-causality/rates": "business"
+        },
+        "duplicate_groups": [],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/markets-causality/cpi",
+            "text": "0.6%"
+          },
+          {
+            "link": "https://example.org/hermes-fixture/markets-causality/rates",
+            "text": "3.75%"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiet-cycle",
+      "description": "Sparse signal: no invented urgency, no mandatory Canadian front-page filler",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Diplomats agree to meet next month",
+          "description": "A scheduling announcement without new agreement.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/quiet-cycle/n1"
+        },
+        {
+          "title": "Market exchange publishes routine holiday hours",
+          "description": "Trading times for the next holiday.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/quiet-cycle/n2"
+        },
+        {
+          "title": "Toronto library announces extended Sunday opening",
+          "description": "New hours begin this Sunday.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/quiet-cycle/n3"
+        },
+        {
+          "title": "Column: improving municipal accountability",
+          "description": "Writer proposes public meeting minutes within 48 hours.",
+          "source": "Opinion Desk",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/quiet-cycle/n4"
+        },
+        {
+          "title": "Foreign ministry posts standard travel advice",
+          "description": "Guidance is unchanged.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/quiet-cycle/n5"
+        },
+        {
+          "title": "Local sports club announces volunteer meeting",
+          "description": "No citywide significance.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/quiet-cycle/n6"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/quiet-cycle/n3",
+          "https://example.org/hermes-fixture/quiet-cycle/n4"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/quiet-cycle/n5",
+          "https://example.org/hermes-fixture/quiet-cycle/n6"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/quiet-cycle/n3": "toronto",
+          "https://example.org/hermes-fixture/quiet-cycle/n4": "opinion"
+        },
+        "duplicate_groups": [],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/quiet-cycle/n4",
+            "text": "48 hours"
+          }
+        ]
+      }
+    },
+    {
+      "id": "officeholder-date",
+      "description": "Use source-level evidence for current official titles; do not invent a real officeholder",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Prime Minister Nadia Vale signs national transport accord",
+          "description": "In this fictional scenario Nadia Vale is the sitting prime minister and signs the agreement this morning.",
+          "source": "International Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/officeholder-date/a"
+        },
+        {
+          "title": "Opinion: Nadia Vale's infrastructure promise needs scrutiny",
+          "description": "Writer criticizes Prime Minister Nadia Vale's newly signed national transport accord.",
+          "source": "Opinion Desk",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/officeholder-date/b"
+        },
+        {
+          "title": "Older profile called Nadia Vale an opposition leader",
+          "description": "Archived profile from six years earlier, before the fictional premiership.",
+          "source": "Archive Wire",
+          "section_hint": "world",
+          "pub_date": "2020-04-01T08:00:00Z",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/officeholder-date/c"
+        },
+        {
+          "title": "Transport companies await agreement details",
+          "description": "Agreement text has not yet been published.",
+          "source": "Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/officeholder-date/d"
+        },
+        {
+          "title": "Local transit group asks for details",
+          "description": "No local funding amount confirmed.",
+          "source": "Toronto Local Wire",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/officeholder-date/e"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/officeholder-date/a",
+          "https://example.org/hermes-fixture/officeholder-date/b"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/officeholder-date/c"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/officeholder-date/a": "front",
+          "https://example.org/hermes-fixture/officeholder-date/b": "opinion"
+        },
+        "duplicate_groups": [],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/officeholder-date/a",
+            "text": "Prime Minister"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dense-sixty-cap",
+      "description": "65 distinct candidates: 60-story bound and protected late Canada-national candidate",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Quarterly industry bulletin number 1",
+          "description": "Synthetic source metadata case 1. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item01"
+        },
+        {
+          "title": "Municipal update number 2",
+          "description": "Synthetic source metadata case 2. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item02"
+        },
+        {
+          "title": "Opinion commentary number 3",
+          "description": "Synthetic source metadata case 3. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item03"
+        },
+        {
+          "title": "International policy update number 4",
+          "description": "Synthetic source metadata case 4. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item04"
+        },
+        {
+          "title": "Quarterly industry bulletin number 5",
+          "description": "Synthetic source metadata case 5. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item05"
+        },
+        {
+          "title": "Municipal update number 6",
+          "description": "Synthetic source metadata case 6. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item06"
+        },
+        {
+          "title": "Opinion commentary number 7",
+          "description": "Synthetic source metadata case 7. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item07"
+        },
+        {
+          "title": "International policy update number 8",
+          "description": "Synthetic source metadata case 8. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item08"
+        },
+        {
+          "title": "Quarterly industry bulletin number 9",
+          "description": "Synthetic source metadata case 9. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item09"
+        },
+        {
+          "title": "Municipal update number 10",
+          "description": "Synthetic source metadata case 10. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item10"
+        },
+        {
+          "title": "Opinion commentary number 11",
+          "description": "Synthetic source metadata case 11. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item11"
+        },
+        {
+          "title": "International policy update number 12",
+          "description": "Synthetic source metadata case 12. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item12"
+        },
+        {
+          "title": "Quarterly industry bulletin number 13",
+          "description": "Synthetic source metadata case 13. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item13"
+        },
+        {
+          "title": "Municipal update number 14",
+          "description": "Synthetic source metadata case 14. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item14"
+        },
+        {
+          "title": "Opinion commentary number 15",
+          "description": "Synthetic source metadata case 15. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item15"
+        },
+        {
+          "title": "International policy update number 16",
+          "description": "Synthetic source metadata case 16. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item16"
+        },
+        {
+          "title": "Quarterly industry bulletin number 17",
+          "description": "Synthetic source metadata case 17. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item17"
+        },
+        {
+          "title": "Municipal update number 18",
+          "description": "Synthetic source metadata case 18. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item18"
+        },
+        {
+          "title": "Opinion commentary number 19",
+          "description": "Synthetic source metadata case 19. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item19"
+        },
+        {
+          "title": "International policy update number 20",
+          "description": "Synthetic source metadata case 20. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item20"
+        },
+        {
+          "title": "Quarterly industry bulletin number 21",
+          "description": "Synthetic source metadata case 21. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item21"
+        },
+        {
+          "title": "Municipal update number 22",
+          "description": "Synthetic source metadata case 22. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item22"
+        },
+        {
+          "title": "Opinion commentary number 23",
+          "description": "Synthetic source metadata case 23. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item23"
+        },
+        {
+          "title": "International policy update number 24",
+          "description": "Synthetic source metadata case 24. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item24"
+        },
+        {
+          "title": "Quarterly industry bulletin number 25",
+          "description": "Synthetic source metadata case 25. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item25"
+        },
+        {
+          "title": "Municipal update number 26",
+          "description": "Synthetic source metadata case 26. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item26"
+        },
+        {
+          "title": "Opinion commentary number 27",
+          "description": "Synthetic source metadata case 27. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item27"
+        },
+        {
+          "title": "International policy update number 28",
+          "description": "Synthetic source metadata case 28. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item28"
+        },
+        {
+          "title": "Quarterly industry bulletin number 29",
+          "description": "Synthetic source metadata case 29. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item29"
+        },
+        {
+          "title": "Municipal update number 30",
+          "description": "Synthetic source metadata case 30. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item30"
+        },
+        {
+          "title": "Opinion commentary number 31",
+          "description": "Synthetic source metadata case 31. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item31"
+        },
+        {
+          "title": "International policy update number 32",
+          "description": "Synthetic source metadata case 32. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item32"
+        },
+        {
+          "title": "Quarterly industry bulletin number 33",
+          "description": "Synthetic source metadata case 33. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item33"
+        },
+        {
+          "title": "Municipal update number 34",
+          "description": "Synthetic source metadata case 34. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item34"
+        },
+        {
+          "title": "Opinion commentary number 35",
+          "description": "Synthetic source metadata case 35. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item35"
+        },
+        {
+          "title": "International policy update number 36",
+          "description": "Synthetic source metadata case 36. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item36"
+        },
+        {
+          "title": "Quarterly industry bulletin number 37",
+          "description": "Synthetic source metadata case 37. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item37"
+        },
+        {
+          "title": "Municipal update number 38",
+          "description": "Synthetic source metadata case 38. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item38"
+        },
+        {
+          "title": "Opinion commentary number 39",
+          "description": "Synthetic source metadata case 39. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item39"
+        },
+        {
+          "title": "International policy update number 40",
+          "description": "Synthetic source metadata case 40. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item40"
+        },
+        {
+          "title": "Quarterly industry bulletin number 41",
+          "description": "Synthetic source metadata case 41. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item41"
+        },
+        {
+          "title": "Municipal update number 42",
+          "description": "Synthetic source metadata case 42. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item42"
+        },
+        {
+          "title": "Opinion commentary number 43",
+          "description": "Synthetic source metadata case 43. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item43"
+        },
+        {
+          "title": "International policy update number 44",
+          "description": "Synthetic source metadata case 44. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item44"
+        },
+        {
+          "title": "Quarterly industry bulletin number 45",
+          "description": "Synthetic source metadata case 45. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item45"
+        },
+        {
+          "title": "Municipal update number 46",
+          "description": "Synthetic source metadata case 46. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item46"
+        },
+        {
+          "title": "Opinion commentary number 47",
+          "description": "Synthetic source metadata case 47. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item47"
+        },
+        {
+          "title": "International policy update number 48",
+          "description": "Synthetic source metadata case 48. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item48"
+        },
+        {
+          "title": "Quarterly industry bulletin number 49",
+          "description": "Synthetic source metadata case 49. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item49"
+        },
+        {
+          "title": "Municipal update number 50",
+          "description": "Synthetic source metadata case 50. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item50"
+        },
+        {
+          "title": "Opinion commentary number 51",
+          "description": "Synthetic source metadata case 51. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item51"
+        },
+        {
+          "title": "International policy update number 52",
+          "description": "Synthetic source metadata case 52. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item52"
+        },
+        {
+          "title": "Quarterly industry bulletin number 53",
+          "description": "Synthetic source metadata case 53. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item53"
+        },
+        {
+          "title": "Municipal update number 54",
+          "description": "Synthetic source metadata case 54. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item54"
+        },
+        {
+          "title": "Opinion commentary number 55",
+          "description": "Synthetic source metadata case 55. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item55"
+        },
+        {
+          "title": "International policy update number 56",
+          "description": "Synthetic source metadata case 56. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item56"
+        },
+        {
+          "title": "Quarterly industry bulletin number 57",
+          "description": "Synthetic source metadata case 57. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item57"
+        },
+        {
+          "title": "Municipal update number 58",
+          "description": "Synthetic source metadata case 58. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item58"
+        },
+        {
+          "title": "Opinion commentary number 59",
+          "description": "Synthetic source metadata case 59. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item59"
+        },
+        {
+          "title": "International policy update number 60",
+          "description": "Synthetic source metadata case 60. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item60"
+        },
+        {
+          "title": "Quarterly industry bulletin number 61",
+          "description": "Synthetic source metadata case 61. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item61"
+        },
+        {
+          "title": "Municipal update number 62",
+          "description": "Synthetic source metadata case 62. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/item62"
+        },
+        {
+          "title": "Ottawa announces nationwide energy grid review",
+          "description": "Federal minister announces a national regulatory review with potential consequences for investment planning; first consultations in November.",
+          "source": "Canadian National Desk",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/national",
+          "coverage_lane": "canada-national"
+        },
+        {
+          "title": "Regulators detail national energy review schedule",
+          "description": "Same planned Canadian nationwide grid review, with no decisions on funding yet.",
+          "source": "Federal Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/national2",
+          "coverage_lane": "canada-national"
+        },
+        {
+          "title": "Routine celebrity recap with no public-policy relevance",
+          "description": "Entertainment recap lacking decision significance.",
+          "source": "Lifestyle Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-cap/filler"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/dense-sixty-cap/national"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/dense-sixty-cap/filler"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/dense-sixty-cap/national": "front"
+        },
+        "duplicate_groups": [
+          [
+            "https://example.org/hermes-fixture/dense-sixty-cap/national",
+            "https://example.org/hermes-fixture/dense-sixty-cap/national2"
+          ]
+        ],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/dense-sixty-cap/national",
+            "text": "review"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dense-sixty-following",
+      "description": "Full-size combined 65-to-60 news trim plus two exact-key Following seeds; verifies single-request prompt transport and intact Following order without changing source eligibility",
+      "origin": "synthetic_public_metadata_hypothetical",
+      "date": "2026-10-22",
+      "stories": [
+        {
+          "title": "Quarterly industry bulletin number 1",
+          "description": "Synthetic source metadata case 1. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item01"
+        },
+        {
+          "title": "Municipal update number 2",
+          "description": "Synthetic source metadata case 2. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item02"
+        },
+        {
+          "title": "Opinion commentary number 3",
+          "description": "Synthetic source metadata case 3. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item03"
+        },
+        {
+          "title": "International policy update number 4",
+          "description": "Synthetic source metadata case 4. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item04"
+        },
+        {
+          "title": "Quarterly industry bulletin number 5",
+          "description": "Synthetic source metadata case 5. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item05"
+        },
+        {
+          "title": "Municipal update number 6",
+          "description": "Synthetic source metadata case 6. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item06"
+        },
+        {
+          "title": "Opinion commentary number 7",
+          "description": "Synthetic source metadata case 7. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item07"
+        },
+        {
+          "title": "International policy update number 8",
+          "description": "Synthetic source metadata case 8. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item08"
+        },
+        {
+          "title": "Quarterly industry bulletin number 9",
+          "description": "Synthetic source metadata case 9. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item09"
+        },
+        {
+          "title": "Municipal update number 10",
+          "description": "Synthetic source metadata case 10. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item10"
+        },
+        {
+          "title": "Opinion commentary number 11",
+          "description": "Synthetic source metadata case 11. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item11"
+        },
+        {
+          "title": "International policy update number 12",
+          "description": "Synthetic source metadata case 12. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item12"
+        },
+        {
+          "title": "Quarterly industry bulletin number 13",
+          "description": "Synthetic source metadata case 13. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item13"
+        },
+        {
+          "title": "Municipal update number 14",
+          "description": "Synthetic source metadata case 14. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item14"
+        },
+        {
+          "title": "Opinion commentary number 15",
+          "description": "Synthetic source metadata case 15. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item15"
+        },
+        {
+          "title": "International policy update number 16",
+          "description": "Synthetic source metadata case 16. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item16"
+        },
+        {
+          "title": "Quarterly industry bulletin number 17",
+          "description": "Synthetic source metadata case 17. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item17"
+        },
+        {
+          "title": "Municipal update number 18",
+          "description": "Synthetic source metadata case 18. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item18"
+        },
+        {
+          "title": "Opinion commentary number 19",
+          "description": "Synthetic source metadata case 19. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item19"
+        },
+        {
+          "title": "International policy update number 20",
+          "description": "Synthetic source metadata case 20. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item20"
+        },
+        {
+          "title": "Quarterly industry bulletin number 21",
+          "description": "Synthetic source metadata case 21. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item21"
+        },
+        {
+          "title": "Municipal update number 22",
+          "description": "Synthetic source metadata case 22. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item22"
+        },
+        {
+          "title": "Opinion commentary number 23",
+          "description": "Synthetic source metadata case 23. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item23"
+        },
+        {
+          "title": "International policy update number 24",
+          "description": "Synthetic source metadata case 24. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item24"
+        },
+        {
+          "title": "Quarterly industry bulletin number 25",
+          "description": "Synthetic source metadata case 25. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item25"
+        },
+        {
+          "title": "Municipal update number 26",
+          "description": "Synthetic source metadata case 26. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item26"
+        },
+        {
+          "title": "Opinion commentary number 27",
+          "description": "Synthetic source metadata case 27. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item27"
+        },
+        {
+          "title": "International policy update number 28",
+          "description": "Synthetic source metadata case 28. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item28"
+        },
+        {
+          "title": "Quarterly industry bulletin number 29",
+          "description": "Synthetic source metadata case 29. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item29"
+        },
+        {
+          "title": "Municipal update number 30",
+          "description": "Synthetic source metadata case 30. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item30"
+        },
+        {
+          "title": "Opinion commentary number 31",
+          "description": "Synthetic source metadata case 31. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item31"
+        },
+        {
+          "title": "International policy update number 32",
+          "description": "Synthetic source metadata case 32. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item32"
+        },
+        {
+          "title": "Quarterly industry bulletin number 33",
+          "description": "Synthetic source metadata case 33. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item33"
+        },
+        {
+          "title": "Municipal update number 34",
+          "description": "Synthetic source metadata case 34. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item34"
+        },
+        {
+          "title": "Opinion commentary number 35",
+          "description": "Synthetic source metadata case 35. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item35"
+        },
+        {
+          "title": "International policy update number 36",
+          "description": "Synthetic source metadata case 36. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item36"
+        },
+        {
+          "title": "Quarterly industry bulletin number 37",
+          "description": "Synthetic source metadata case 37. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item37"
+        },
+        {
+          "title": "Municipal update number 38",
+          "description": "Synthetic source metadata case 38. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item38"
+        },
+        {
+          "title": "Opinion commentary number 39",
+          "description": "Synthetic source metadata case 39. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item39"
+        },
+        {
+          "title": "International policy update number 40",
+          "description": "Synthetic source metadata case 40. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item40"
+        },
+        {
+          "title": "Quarterly industry bulletin number 41",
+          "description": "Synthetic source metadata case 41. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item41"
+        },
+        {
+          "title": "Municipal update number 42",
+          "description": "Synthetic source metadata case 42. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item42"
+        },
+        {
+          "title": "Opinion commentary number 43",
+          "description": "Synthetic source metadata case 43. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item43"
+        },
+        {
+          "title": "International policy update number 44",
+          "description": "Synthetic source metadata case 44. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item44"
+        },
+        {
+          "title": "Quarterly industry bulletin number 45",
+          "description": "Synthetic source metadata case 45. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item45"
+        },
+        {
+          "title": "Municipal update number 46",
+          "description": "Synthetic source metadata case 46. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item46"
+        },
+        {
+          "title": "Opinion commentary number 47",
+          "description": "Synthetic source metadata case 47. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item47"
+        },
+        {
+          "title": "International policy update number 48",
+          "description": "Synthetic source metadata case 48. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item48"
+        },
+        {
+          "title": "Quarterly industry bulletin number 49",
+          "description": "Synthetic source metadata case 49. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item49"
+        },
+        {
+          "title": "Municipal update number 50",
+          "description": "Synthetic source metadata case 50. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item50"
+        },
+        {
+          "title": "Opinion commentary number 51",
+          "description": "Synthetic source metadata case 51. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 0",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item51"
+        },
+        {
+          "title": "International policy update number 52",
+          "description": "Synthetic source metadata case 52. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 1",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item52"
+        },
+        {
+          "title": "Quarterly industry bulletin number 53",
+          "description": "Synthetic source metadata case 53. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 2",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item53"
+        },
+        {
+          "title": "Municipal update number 54",
+          "description": "Synthetic source metadata case 54. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 0",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item54"
+        },
+        {
+          "title": "Opinion commentary number 55",
+          "description": "Synthetic source metadata case 55. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 1",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item55"
+        },
+        {
+          "title": "International policy update number 56",
+          "description": "Synthetic source metadata case 56. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 2",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item56"
+        },
+        {
+          "title": "Quarterly industry bulletin number 57",
+          "description": "Synthetic source metadata case 57. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 0",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item57"
+        },
+        {
+          "title": "Municipal update number 58",
+          "description": "Synthetic source metadata case 58. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 1",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item58"
+        },
+        {
+          "title": "Opinion commentary number 59",
+          "description": "Synthetic source metadata case 59. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic opinion feed 2",
+          "section_hint": "opinion",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item59"
+        },
+        {
+          "title": "International policy update number 60",
+          "description": "Synthetic source metadata case 60. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic world feed 0",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item60"
+        },
+        {
+          "title": "Quarterly industry bulletin number 61",
+          "description": "Synthetic source metadata case 61. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic business feed 1",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item61"
+        },
+        {
+          "title": "Municipal update number 62",
+          "description": "Synthetic source metadata case 62. Routine briefing with no announced national consequence; recorded from the constructed stress pool.",
+          "source": "Synthetic toronto feed 2",
+          "section_hint": "toronto",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/item62"
+        },
+        {
+          "title": "Ottawa announces nationwide energy grid review",
+          "description": "Federal minister announces a national regulatory review with potential consequences for investment planning; first consultations in November.",
+          "source": "Canadian National Desk",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/national",
+          "coverage_lane": "canada-national"
+        },
+        {
+          "title": "Regulators detail national energy review schedule",
+          "description": "Same planned Canadian nationwide grid review, with no decisions on funding yet.",
+          "source": "Federal Business Wire",
+          "section_hint": "business",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/national2",
+          "coverage_lane": "canada-national"
+        },
+        {
+          "title": "Routine celebrity recap with no public-policy relevance",
+          "description": "Entertainment recap lacking decision significance.",
+          "source": "Lifestyle Wire",
+          "section_hint": "world",
+          "pub_date": "2026-10-22T09:00:00-04:00",
+          "image": null,
+          "link": "https://example.org/hermes-fixture/dense-sixty-following/filler"
+        }
+      ],
+      "reference": {
+        "must_select": [
+          "https://example.org/hermes-fixture/dense-sixty-following/national"
+        ],
+        "must_omit": [
+          "https://example.org/hermes-fixture/dense-sixty-following/filler"
+        ],
+        "section_by_link": {
+          "https://example.org/hermes-fixture/dense-sixty-following/national": "front"
+        },
+        "duplicate_groups": [
+          [
+            "https://example.org/hermes-fixture/dense-sixty-following/national",
+            "https://example.org/hermes-fixture/dense-sixty-following/national2"
+          ]
+        ],
+        "ranking_pairs": [],
+        "facts": [
+          {
+            "link": "https://example.org/hermes-fixture/dense-sixty-following/national",
+            "text": "review"
+          }
+        ]
+      },
+      "following": [
+        {
+          "key": "voice-key-01",
+          "headline": "Why productivity reform requires stable implementation",
+          "description": "Columnist argues that repeated policy reversals, not simply funding, prevent long-term infrastructure planning.",
+          "author": "Alex North",
+          "publication": "Example Opinion",
+          "published_at": "2026-10-22T10:00:00Z",
+          "link": "https://example.org/hermes-following/voice-01"
+        },
+        {
+          "key": "voice-key-02",
+          "headline": "The problem with instant crime alerts",
+          "description": "Writer argues sensational crime headlines misstate everyday risk and asks for trend data instead.",
+          "author": "Morgan Bell",
+          "publication": "Example Review",
+          "published_at": "2026-10-22T11:00:00Z",
+          "link": "https://example.org/hermes-following/voice-02"
+        }
+      ]
+    }
+  ]
+}
