@@ -77,12 +77,16 @@ and schema are represented by SHA-256 fingerprints, **not the prompt text**.
 The SDK package version is captured if installed.
 
 Source health: `raw_by_provider` counts *returned candidates*, not successful
-requests. The existing fetcher isolates individual provider errors and reports
-them in Actions logs; the ledger intentionally says
-`complete_with_source_level_outages_unreported` and does **not** infer that a
-provider was healthy or absent from a zero count. Investigate the build log
-for partial outages. A failed/non-published build is reflected in Actions,
-not incorrectly written as a successfully published edition record.
+requests. `source_outcomes[]` records bounded per-request status
+(`ok`, `empty`, `error`, `malformed`, `missing_key`), public provider/lane
+name and returned-item count, **never the error body or credential**.
+`counts.source_requests` aggregates those statuses. The existing fetcher
+isolates individual provider errors, including a failed section/feed inside a
+healthy provider. If fetch was replaced or no observations were captured, the
+ledger explicitly says `complete_with_source_level_outages_unreported`:
+do **not** infer success or failure from a zero candidate count. Consult
+Actions logs for underlying errors. A failed/non-published build is reflected
+in Actions, not incorrectly recorded as a published edition.
 
 ## Privacy and reliability boundaries
 
