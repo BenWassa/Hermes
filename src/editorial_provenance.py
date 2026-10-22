@@ -187,11 +187,13 @@ class EditionEvidence:
         self.counts["after_following"] = len(editorial)
         self.following = [_identity(s) for s in following][:config.VOICE_FOLLOWING_CAP]
         self.counts["following_selected"] = len(following)
+        self.stages["following"] = "complete"
         self._eligible = retained
 
     def record_sports(self, editorial: list[dict], count: int) -> None:
         self.counts["sports_duplicates_suppressed"] = count
         self.counts["after_sports"] = len(editorial)
+        self.stages["sports"] = "complete"
         self._sports_eligible = {id(s) for s in editorial}
 
     def record_trim(self, stories: list[dict], selected: list[dict], today: dt.date) -> None:
