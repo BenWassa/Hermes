@@ -11,14 +11,16 @@
   },
   "status": "published",
   "stages": {
-    "fetch": "complete_with_source_level_outages_unreported",
+    "fetch": "complete_with_source_outcomes",
     "normalize": "complete",
     "following": "complete",
     "sports": "complete",
     "trim": "complete",
     "model": "attempted",
     "selection": "complete",
-    "render": "complete"
+    "render": "complete",
+    "weather": "complete",
+    "images": "complete"
   },
   "counts": {
     "raw_fetched": 3,
@@ -38,7 +40,10 @@
     "following_selected": 0,
     "following_final": 0,
     "unmatched_final_links": 0,
-    "sports_duplicates_suppressed": 0
+    "sports_duplicates_suppressed": 0,
+    "source_requests": {
+      "ok": 2
+    }
   },
   "candidates": [
     {
@@ -142,5 +147,19 @@
     "json_parse_outcomes": [
       "valid_json"
     ]
-  }
+  },
+  "source_outcomes": [
+    {
+      "provider": "rss",
+      "lane": "Toronto RSS",
+      "status": "ok",
+      "items_returned": 2
+    },
+    {
+      "provider": "nyt",
+      "lane": "world",
+      "status": "ok",
+      "items_returned": 1
+    }
+  ]
 }
