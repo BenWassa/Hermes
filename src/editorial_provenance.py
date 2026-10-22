@@ -31,6 +31,15 @@ MAX_BYTES = 131072
 MAX_ATTEMPTS = 12
 _ACTIVE: ContextVar["EditionEvidence | None"] = ContextVar("daily_evidence", default=None)
 _SUSPICIOUS = re.compile(r"ignore (all |any )?(previous|prior)|system prompt|api.?key|secret|bearer |password|</?(script|system)", re.I)
+# Defense in depth: publisher metadata is untrusted, even when labelled public.
+# Withhold a whole field if it resembles a known credential; never persist the
+# token or a partly redacted prefix. This cannot recognize arbitrary secrets.
+_CREDENTIAL = re.compile(
+    r"(?:sk-(?:proj-)?|gh[pousr]_|github_pat_|gsk_|AIza)[A-Za-z0-9_-]{12,}"
+    r"|\\b(?:AKIA|ASIA)[A-Z0-9]{16}\\b"
+    r"|\\b(?:token|api[_-]?key|authorization|client[_-]?secret|passwd)\\s*[:=]\\s*\\S+",
+    re.I,
+)
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]+")
 _SPACE = re.compile(r"\s+")
 
@@ -39,7 +48,7 @@ def _clean(value: object, limit: int) -> str:
     if not isinstance(value, (str, int, float)):
         return ""
     value = _SPACE.sub(" ", _CONTROL.sub(" ", str(value))).strip()
-    if _SUSPICIOUS.search(value):
+    if _SUSPICIOUS.search(value) or _CREDENTIAL.search(value):
         return "[withheld]"
     return value[:limit]
 
@@ -55,7 +64,8 @@ def _public_url(value: object) -> str | None:
         # credentials. It stays in the SHA identity, not in the public record.
         url = urlunsplit((parts.scheme, parts.netloc, parts.path, "", ""))
     parts = urlsplit(url)
-    if len(url) > 360 or re.search(r"(?:token|secret|apikey|api_key|auth|password|signature)", parts.path, re.I):
+    if (len(url) > 360 or _CREDENTIAL.search(parts.path)
+            or re.search(r"(?:token|secret|apikey|api_key|auth|password|signature)", parts.path, re.I)):
         return None
     return url
 
