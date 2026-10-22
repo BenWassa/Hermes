@@ -39,6 +39,30 @@ def test_current_production_request_boundary():
     assert "CANADA-NATIONAL EDITORIAL PRIORITY" in prompt
 
 
+def test_full_size_following_case_exports_shared_provider_request():
+    """#77 transport contract: 60 post-trim stories and immutable Following."""
+    cases = {c["id"]: c for c in b.read_fixtures()["cases"]}
+    case = cases["dense-sixty-following"]
+    assert len(case["stories"]) == 65
+    assert len(case["following"]) == 2
+    prompt, user_content = b.request_payload(case)
+    payload = json.loads(user_content)
+    assert isinstance(payload, dict)
+    assert len(payload["stories"]) == 60
+    assert len(payload["following"]) == 2
+    keys = [item["key"] for item in payload["following"]]
+    assert keys == [item["key"] for item in case["following"]]
+    assert all(set(s).issubset(set(b.CURATION_KEYS) | {"editorial_priority"})
+               for s in payload["stories"])
+    # This is the exact #77 fixture export shape; user_content is already
+    # serialized and must not be serialized a second time by the adapter.
+    export = {"fixture_id": case["id"],
+              "system_instruction": prompt, "user_content": user_content}
+    assert export["system_instruction"] == prompt
+    assert json.loads(export["user_content"]) == payload
+    assert "FOLLOWING OVERRIDE" in prompt
+
+
 def test_following_payload_preserves_separate_authority():
     case = next(c for c in b.read_fixtures()["cases"] if c["id"] == "opinion-following")
     prompt, payload = b.request_payload(case)
