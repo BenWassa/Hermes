@@ -12,6 +12,7 @@ and, for national Canadian intake, optional ``_coverage_lane``.
 
 from __future__ import annotations
 
+import datetime as dt
 import logging
 import os
 
@@ -19,8 +20,16 @@ import feedparser
 import requests
 
 from . import canada, config
+from .editorial_provenance import current as evidence_current, safely as evidence_safely
 
 log = logging.getLogger("the-daily.fetch")
+
+
+def _source_result(provider: str, lane: str, status: str, count: int = 0) -> None:
+    recorder = evidence_current()
+    if recorder is not None:
+        evidence_safely(recorder.record_source, provider, lane, status, count)
+
 
 GUARDIAN_URL = "https://content.guardianapis.com/search"
 NYT_URL = "https://api.nytimes.com/svc/topstories/v2/{section}.json"
@@ -34,6 +43,7 @@ def fetch_guardian(page_size: int = 10) -> list[dict]:
     key = os.environ.get("GUARDIAN_API_KEY")
     if not key:
         log.warning("GUARDIAN_API_KEY not set; skipping Guardian")
+        _source_result("guardian", "all", "missing_key")
         return []
 
     items: list[dict] = []
@@ -58,9 +68,12 @@ def fetch_guardian(page_size: int = 10) -> list[dict]:
             results = resp.json().get("response", {}).get("results", [])
             for r in results:
                 r["_src"] = "guardian"
+                r["_fetched_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
                 r["_section_hint"] = hint
             items.extend(results)
+            _source_result("guardian", section, "ok" if results else "empty", len(results))
         except Exception as exc:  # graceful per-section
+            _source_result("guardian", section, "error")
             log.warning("Guardian section %s failed: %s", section, exc)
     return items
 
@@ -70,6 +83,7 @@ def fetch_nyt() -> list[dict]:
     key = os.environ.get("NYT_API_KEY")
     if not key:
         log.warning("NYT_API_KEY not set; skipping NYT")
+        _source_result("nyt", "all", "missing_key")
         return []
 
     items: list[dict] = []
@@ -84,9 +98,12 @@ def fetch_nyt() -> list[dict]:
             results = resp.json().get("results", [])
             for r in results:
                 r["_src"] = "nyt"
+                r["_fetched_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
                 r["_section_hint"] = hint
             items.extend(results)
+            _source_result("nyt", section, "ok" if results else "empty", len(results))
         except Exception as exc:
+            _source_result("nyt", section, "error")
             log.warning("NYT section %s failed: %s", section, exc)
     return items
 
@@ -101,6 +118,7 @@ def fetch_perigon(size: int = 10) -> list[dict]:
     key = os.environ.get("PERIGON_API_KEY")
     if not key:
         log.warning("PERIGON_API_KEY not set; skipping Perigon")
+        _source_result("perigon", "all", "missing_key")
         return []
 
     items: list[dict] = []
@@ -119,11 +137,14 @@ def fetch_perigon(size: int = 10) -> list[dict]:
             results = resp.json().get("articles", [])
             for r in results:
                 r["_src"] = "perigon"
+                r["_fetched_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
                 r["_section_hint"] = query["hint"]
                 if query.get("coverage_lane"):
                     r["_coverage_lane"] = query["coverage_lane"]
             items.extend(results)
+            _source_result("perigon", str(query.get("label") or "query"), "ok" if results else "empty", len(results))
         except Exception as exc:  # graceful per-query
+            _source_result("perigon", str(query.get("label") or "query"), "error")
             log.warning("Perigon query %s failed: %s", query.get("label"), exc)
     return items
 
@@ -143,16 +164,20 @@ def _fetch_rss_feeds(
             parsed = feedparser.parse(resp.content)
             if parsed.bozo and not parsed.entries:
                 log.warning("RSS feed %s looks dead (%s)", feed["name"], parsed.bozo_exception)
+                _source_result("rss", str(feed.get("name") or "feed"), "malformed")
                 continue
             for entry in parsed.entries:
                 entry["_src"] = "rss"
+                entry["_fetched_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
                 entry["_section_hint"] = feed.get("hint", default_hint)
                 entry["_source_name"] = feed["name"]
                 lane = feed.get("coverage_lane", default_coverage_lane)
                 if lane:
                     entry["_coverage_lane"] = lane
             items.extend(parsed.entries)
+            _source_result("rss", str(feed.get("name") or "feed"), "ok" if parsed.entries else "empty", len(parsed.entries))
         except Exception as exc:
+            _source_result("rss", str(feed.get("name") or "feed"), "error")
             log.warning("RSS feed %s failed: %s", feed["name"], exc)
     return items
 

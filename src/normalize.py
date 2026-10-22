@@ -6,6 +6,7 @@ Convert source-native items from fetch.py into one unified story schema:
       "title": str, "description": str, "source": str,
       "section_hint": str,   # world|business|sports|opinion|toronto
       "pub_date": str,       # ISO-ish
+    "fetched_at": str,     # observational fetch timestamp, not sent to model
       "image": str | None,
       "link": str,
 
@@ -93,6 +94,7 @@ def _normalize_guardian(item: dict) -> dict:
         "source": "The Guardian",
         "section_hint": item.get("_section_hint", "world"),
         "pub_date": item.get("webPublicationDate", ""),
+        "fetched_at": item.get("_fetched_at", ""),
         "image": fields.get("thumbnail") or None,
         "link": link,
         "coverage_lane": _coverage_lane(item),
@@ -132,6 +134,7 @@ def _normalize_nyt(item: dict) -> dict:
         "source": "The New York Times",
         "section_hint": item.get("_section_hint", "world"),
         "pub_date": item.get("published_date", ""),
+        "fetched_at": item.get("_fetched_at", ""),
         "image": image,
         "link": link,
         "coverage_lane": _coverage_lane(item),
@@ -180,6 +183,7 @@ def _normalize_perigon(item: dict) -> dict:
         "source": name,
         "section_hint": item.get("_section_hint", "world"),
         "pub_date": item.get("pubDate", "") or item.get("addDate", ""),
+        "fetched_at": item.get("_fetched_at", ""),
         "image": item.get("imageUrl") or None,
         "link": link,
         "coverage_lane": _coverage_lane(item),
@@ -222,6 +226,7 @@ def _normalize_rss(item: dict) -> dict:
         "source": item.get("_source_name", "Toronto RSS"),
         "section_hint": item.get("_section_hint", "toronto"),
         "pub_date": item.get("published", "") or item.get("updated", ""),
+        "fetched_at": item.get("_fetched_at", ""),
         "image": image or None,
         "link": link,
         "coverage_lane": _coverage_lane(item),

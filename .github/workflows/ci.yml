@@ -11,6 +11,7 @@ on:
     paths-ignore:
       - "docs/index.html"
       - "data/latest.json"
+      - "data/edition_evidence/**"
       # Generated operational state/artifacts are exercised before deployment
       # in deterministic CI; their routine production commits do not rerun CI.
       - "data/voice_watch_state.json"
