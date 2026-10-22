@@ -27,6 +27,7 @@ import sys
 from . import config
 from . import weather as weather_mod
 from .curate import curate
+from .editorial_provenance import EditionEvidence, activate, deactivate, safely
 from .fetch import fetch_all
 from .images import resolve_images
 from .normalize import normalize
@@ -45,6 +46,8 @@ log = logging.getLogger("the-daily.build")
 
 def main() -> int:
     stage = "start"
+    evidence = EditionEvidence()
+    token = activate(evidence)
     try:
         stage = "weather"
         weather = weather_mod.get_weather()
@@ -55,6 +58,7 @@ def main() -> int:
         stage = "normalize"
         stories = normalize(raw)
         log.info("normalized %d stories", len(stories))
+        safely(evidence.record_pool, raw, stories)
         if not stories:
             raise RuntimeError("no stories fetched; aborting before curation")
 
@@ -75,6 +79,7 @@ def main() -> int:
         )
         following = following_seeds(followed, registry)
         editorial_stories = editorial_without_following(stories, following)
+        safely(evidence.record_following, editorial_stories, following)
         log.info(
             "following: %d attributed Core/Selective candidates, %d selected, "
             "%d ordinary Opinion duplicate(s) withheld",
@@ -98,6 +103,7 @@ def main() -> int:
             sports_result.payload,
         )
         sports_result.metrics["ordinary_duplicates_suppressed"] = sports_duplicates
+        safely(evidence.record_sports, editorial_stories, sports_duplicates)
         log.info(
             "sports telemetry %s",
             json.dumps(sports_result.metrics, sort_keys=True, separators=(",", ":")),
@@ -111,10 +117,15 @@ def main() -> int:
         resolve_images(edition)
 
         stage = "render"
+        safely(evidence.record_final, edition)
         out = render(edition)
+        safely(evidence.write, out)
     except Exception as exc:  # noqa: BLE001 - top-level guard for CI visibility
+        evidence.stages[stage] = "failed"
         log.error("build failed at stage '%s': %s", stage, exc)
         return 1
+    finally:
+        deactivate(token)
 
     sections = edition["sections"]
     all_stories = [st for s in sections for st in s["stories"]] + list(edition.get("following", []))
