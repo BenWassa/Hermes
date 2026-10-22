@@ -31,8 +31,8 @@ MAX_BYTES = 131072
 MAX_ATTEMPTS = 12
 _ACTIVE: ContextVar["EditionEvidence | None"] = ContextVar("daily_evidence", default=None)
 _SUSPICIOUS = re.compile(r"ignore (all |any )?(previous|prior)|system prompt|api.?key|secret|bearer |password|<\\/?(script|system)", re.I)
-_CONTROL = re.compile(r"[\\x00-\\x1f\\x7f]+")
-_SPACE = re.compile(r"\\s+")
+_CONTROL = re.compile(r"[\x00-\x1f\x7f]+")
+_SPACE = re.compile(r"\s+")
 
 
 def _clean(value: object, limit: int) -> str:
@@ -183,10 +183,6 @@ class EditionEvidence:
         self.counts["after_following"] = len(editorial)
         self.following = [_identity(s) for s in following][:config.VOICE_FOLLOWING_CAP]
         self.counts["following_selected"] = len(following)
-        for story in self.candidates:
-            # The actual Following suppressor keeps ordinary non-Opinion copies.
-            # Classify by object identity, never by headline similarities.
-            pass
         self._eligible = retained
 
     def record_sports(self, editorial: list[dict], count: int) -> None:
