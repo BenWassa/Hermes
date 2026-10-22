@@ -149,6 +149,7 @@ class EditionEvidence:
         self.attempts: list[dict] = []
         self.parse_outcomes: list[str] = []
         self.stages: dict = {}
+        self.source_outcomes: list[dict] = []
         self.outcome = "in_progress"
         self.omitted_candidates = 0
         self.build_run_id = _clean(os.environ.get("GITHUB_RUN_ID"), 24) or None
@@ -166,13 +167,32 @@ class EditionEvidence:
         self._ids[id(story)] = observation_id
         return observation_id
 
+    def record_source(self, provider: str, lane: str, status: str, count: int = 0) -> None:
+        """Record public-safe per-request outcomes; never store errors or URLs."""
+        if len(self.source_outcomes) >= 32:
+            return
+        if status not in {"ok", "empty", "error", "malformed", "missing_key"}:
+            return
+        self.source_outcomes.append({
+            "provider": _clean(provider, 32),
+            "lane": _clean(lane, 50),
+            "status": status,
+            "items_returned": max(0, int(count)),
+        })
+
     def record_pool(self, raw: list, stories: list[dict]) -> None:
         self.counts["raw_fetched"] = len(raw)
         self.counts["normalized"] = len(stories)
         self.counts["raw_by_provider"] = dict(sorted(Counter(
             str(item.get("_src", "unknown")) for item in raw if isinstance(item, dict)
         ).items()))
-        self.stages["fetch"] = "complete_with_source_level_outages_unreported"
+        self.stages["fetch"] = (
+            "complete_with_source_outcomes" if self.source_outcomes
+            else "complete_with_source_level_outages_unreported"
+        )
+        self.counts["source_requests"] = dict(sorted(Counter(
+            item["status"] for item in self.source_outcomes
+        ).items()))
         self.stages["normalize"] = "complete"
         for story in stories:
             oid = self._observe(story)
@@ -329,6 +349,7 @@ class EditionEvidence:
             "status": self.outcome,
             "stages": self.stages,
             "counts": self.counts,
+            "source_outcomes": self.source_outcomes,
             "candidates": self.candidates,
             "candidates_omitted": self.omitted_candidates,
             "duplicate_groups": self.duplicate_groups,
