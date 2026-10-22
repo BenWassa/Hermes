@@ -279,3 +279,20 @@ def test_invalid_json_reinforcement_uses_existing_retry_and_records_parse(monkey
     assert edition["sections"] == []
     assert rec.parse_outcomes == ["invalid_json", "valid_json"]
     assert len(rec.attempts) == 2
+
+
+def test_fetch_timestamp_is_preserved_but_never_sent_to_gemini():
+    from src.normalize import curation_view, normalize
+    raw = [{
+        "_src": "rss", "_section_hint": "toronto", "_source_name": "CBC Toronto",
+        "_fetched_at": "2026-10-22T10:16:03+00:00",
+        "title": "Recorded Toronto event",
+        "summary": "A public source abstract",
+        "link": "https://example.org/local",
+    }]
+    normalized = normalize(raw)
+    assert normalized[0]["fetched_at"] == "2026-10-22T10:16:03+00:00"
+    assert "fetched_at" not in curation_view(normalized)[0]
+    rec = EditionEvidence(when=WHEN)
+    rec.record_pool(raw, normalized)
+    assert rec.candidates[0]["fetched_at"] == "2026-10-22T10:16:03+00:00"
