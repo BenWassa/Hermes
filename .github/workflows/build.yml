@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths-ignore:
       - "docs/index.html"
+      - "data/edition_evidence/**"
       - "docs/open/**"
       - "docs/closed/**"
       - "docs/ISSUE_TRACKING.md"
@@ -121,7 +122,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          TODAY="$(TZ=America/Toronto date +%Y-%m-%d)"
+          EVIDENCE_FILE="data/edition_evidence/${TODAY:0:4}/${TODAY:5:2}/${TODAY}.json"
           git add docs/index.html
+          # Evidence is advisory. It joins the *same* publication commit when
+          # present, without changing the edition/no-update decision.
+          if [ -f "$EVIDENCE_FILE" ]; then
+            git add "$EVIDENCE_FILE"
+            echo "Edition evidence: $EVIDENCE_FILE"
+          else
+            echo "::warning::Edition evidence unavailable; publishing HTML regardless."
+          fi
 
           if git diff --cached --quiet; then
             echo "::error::Build completed for a missing Toronto-calendar edition but produced no docs/index.html change."
@@ -129,7 +140,6 @@ jobs:
             exit 1
           fi
 
-          TODAY="$(TZ=America/Toronto date +%Y-%m-%d)"
           git commit -m "chore(edition): publish ${TODAY} edition"
 
           BRANCH="${GITHUB_REF_NAME:-main}"
