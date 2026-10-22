@@ -60,6 +60,18 @@ def _public_url(value: object) -> str | None:
     return url
 
 
+def _safe_source_id(value: object) -> str:
+    """Keep ordinary public provider IDs, never embedded URL/query secrets."""
+    if not isinstance(value, (str, int)):
+        return ""
+    raw = str(value).strip()
+    if raw.startswith(("https://", "http://")):
+        return _public_url(raw) or "[withheld]"
+    if re.search(r"(?:token|api.?key|secret|auth|password|session|signature|[?&=])", raw, re.I):
+        return "[withheld]"
+    return _clean(raw, 100)
+
+
 def _identity(story: dict) -> str:
     canonical = story.get("canonical_url") or canonical_url(story.get("link"))
     provider = _clean(story.get("provider"), 32)
@@ -116,7 +128,7 @@ def _candidate_record(story: dict, oid: str, when: dt.datetime) -> dict:
         "observation_id": oid,
         "article_id": oid.split(".")[0],
         "provider": _clean(story.get("provider"), 32),
-        "source_article_id": _clean(story.get("source_article_id"), 100),
+        "source_article_id": _safe_source_id(story.get("source_article_id")),
         "source": _clean(story.get("source"), 65),
         "canonical_url": _public_url(story.get("canonical_url") or story.get("link")),
         "headline": _clean(story.get("title"), 170),
