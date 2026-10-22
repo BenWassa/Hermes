@@ -17,6 +17,15 @@ python -m research.gemini_benchmark validate
 python -m research.gemini_benchmark plan
 python -m pytest tests/test_gemini_benchmark.py -q
 
+# Export the exact synthetic 60-story + Following prompt (offline).
+python -m research.gemini_benchmark export \
+  --fixture dense-sixty-following \
+  --export-out research/gemini/exports/dense-sixty-following.json
+# #77's provider probe defaults to local preflight, NOT a network request:
+python -m research.free_ai_providers.spike \
+  --fixture research/gemini/exports/dense-sixty-following.json \
+  --provider cloudflare --require-full-size
+
 # Explicitly opted in: may consume account quota and incur charges.
 # Supply GEMINI_API_KEY or GOOGLE_API_KEY in YOUR shell/secret manager.
 python -m research.gemini_benchmark run --live --confirm-spend \
@@ -29,7 +38,7 @@ python -m research.gemini_benchmark blind
 
 By default, no API call runs. `plan` enumerates intended calls without credentials; `run` without `--live --confirm-spend` also only prints an offline plan. A missing key with both switches exits before any API call. Responses, request prompts, projected payloads, setting hashes, tokens and errors are written to local ignored `research/gemini/runs/`; blind packets and the **separately withheld** identity key are written under `research/gemini/blind/`. Never publish the key with blinded packets. The harness makes exactly one attempt per cell; no fallback, auto-retry or hidden request changes. Each output is one JSON file, with failures preserved instead of silently discarded. Reusing the same file requires `--overwrite`.
 
-Use `--fixture business-numbers` or `--fixture dense-sixty-cap` for a small opt-in validation before full runs. A difficult-case premium subset should include `business-numbers`, `opinion-following`, `geopolitical-uncertainty`, `dense-sixty-cap`. The new `dense-sixty-following` case explicitly tests **60 model-input stories plus two Following seeds**, reusing a synthetic 65-candidate trim case without changing the production curation algorithm. Export its `request_payload` tuple in #77's adapter format for non-Gemini provider probes. This is a shape/transport fixture, not a live full-payload measurement.
+Use `--fixture business-numbers` or `--fixture dense-sixty-cap` for a small opt-in validation before full runs. A difficult-case premium subset should include `business-numbers`, `opinion-following`, `geopolitical-uncertainty`, `dense-sixty-cap`. The new `dense-sixty-following` case explicitly tests **60 model-input stories plus two Following seeds**, reusing a synthetic 65-candidate trim case without changing the production curation algorithm. The offline `export` command writes the exact `request_payload` tuple in #77's transport format into a gitignored local file; it refuses to overwrite by default. This is a shape/transport fixture, not a live full-payload measurement.
 
 To compare an output budget change, repeat **all paired variants** with an explicitly recorded `--max-output-tokens` value, and keep budgets separate in analysis.
 
