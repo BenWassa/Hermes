@@ -385,7 +385,7 @@ def summarize(folder: Path) -> dict:
                 output = json.loads(rec["raw_output"])
                 links = {item["link"] for section in output["sections"]
                          for item in section.get("stories", []) if isinstance(item.get("link"), str)}
-            except (KeyError, TypeError, ValueError):
+            except (AttributeError, KeyError, TypeError, ValueError):
                 continue
             group["selections"].setdefault(rec["fixture_id"], []).append(links)
     for group in result["variants"].values():
