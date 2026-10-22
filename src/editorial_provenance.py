@@ -122,7 +122,7 @@ def _candidate_record(story: dict, oid: str, when: dt.datetime) -> dict:
         "headline": _clean(story.get("title"), 170),
         "public_excerpt": _clean(story.get("description"), 100),
         "published_at": _clean(story.get("pub_date"), 40),
-        "fetched_at": when.isoformat(timespec="seconds"),
+        "fetched_at": _clean(story.get("fetched_at"), 40) or when.isoformat(timespec="seconds"),
         "section_hint": _clean(story.get("section_hint"), 24),
         "canada_lane": bool(canada.is_canada_national(story)),
         "major_event_ids": list(canada.matching_major_event_ids(story, when.astimezone(ZoneInfo(config.TIMEZONE)).date()))[:4],
@@ -139,7 +139,6 @@ class EditionEvidence:
         self.candidates: list[dict] = []
         self._ids: dict[int, str] = {}
         self._ordinal: Counter = Counter()
-        self._known_ids: set[str] = set()
         self.model_input_ids: list[str] = []
         self.selected: list[dict] = []
         self.unmatched: list[dict] = []
@@ -196,7 +195,6 @@ class EditionEvidence:
         self.stages["normalize"] = "complete"
         for story in stories:
             oid = self._observe(story)
-            self._known_ids.add(oid)
             if len(self.candidates) >= MAX_CANDIDATES:
                 self.omitted_candidates += 1
                 continue
@@ -397,9 +395,17 @@ class EditionEvidence:
                 handle.write(data)
                 handle.flush()
                 os.fsync(handle.fileno())
-            if path.exists():
+            try:
+                # Exclusive, atomic create: two workers racing for the same
+                # edition date cannot replace a previously written record.
+                os.link(name, path)
+            except FileExistsError:
                 return None
-            os.replace(name, path)
+            directory = os.open(path.parent, os.O_RDONLY)
+            try:
+                os.fsync(directory)
+            finally:
+                os.close(directory)
         finally:
             if os.path.exists(name):
                 os.unlink(name)
