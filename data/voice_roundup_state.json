@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-21T19:30:38Z",
+  "updated_at": "2026-10-22T19:22:58Z",
   "last_reconcile_at": "2026-10-21T19:30:38Z",
   "last_roundup": {
     "period_id": "2026-10-18",
@@ -49,23 +49,6 @@
       "publication": "After Babel",
       "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
-    "url:https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics": {
-      "keys": [
-        "url:https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics",
-        "pid:rss:https://foreignpolicy.com/?p=1242703",
-        "syn:what-s-freezing-the-u-s-housing-market|voice:adam-tooze|2026-10-06",
-        "fp:foreignpolicy.com|what-s-freezing-the-u-s-housing-market|2026-10-06"
-      ],
-      "voice_ids": [
-        "adam-tooze"
-      ],
-      "first_seen": "2026-10-07T20:44:42Z",
-      "published_at": "2026-10-06T19:28:43Z",
-      "title": "What’s Freezing the U.S. Housing Market?",
-      "url": "https://foreignpolicy.com/2026/10/06/us-housing-market-frozen-ai-interest-rates-economics/",
-      "publication": "Foreign Policy",
-      "first_morning_surfaced_at": null
-    },
     "url:https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall": {
       "keys": [
         "url:https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall",
@@ -100,22 +83,22 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazil-election-notes-from-my-email.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazil-election-notes-from-my-email.html",
-        "pid:rss:https://marginalrevolution.com/?p=93942",
-        "syn:brazil-election-notes-from-my-email|voice:tyler-cowen|2026-10-06",
-        "fp:marginalrevolution.com|brazil-election-notes-from-my-email|2026-10-06"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html",
+        "pid:rss:https://marginalrevolution.com/?p=94043",
+        "syn:a-simple-point-about-the-intertemporal-regulation-of-ai|voice:tyler-cowen|2026-10-22",
+        "fp:marginalrevolution.com|a-simple-point-about-the-intertemporal-regulation-of-ai|2026-10-22"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-10-07T20:44:42Z",
-      "published_at": "2026-10-06T22:38:14Z",
-      "title": "Brazil election notes (from my email)",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/brazil-election-notes-from-my-email.html?utm_source=rss&utm_medium=rss&utm_campaign=brazil-election-notes-from-my-email",
+      "first_seen": "2026-10-22T19:22:58Z",
+      "published_at": "2026-10-22T07:12:46Z",
+      "title": "A simple point about the intertemporal regulation of AI",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=a-simple-point-about-the-intertemporal-regulation-of-ai",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
+      "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/california-in-migration-and-out-migration.html": {
       "keys": [
@@ -151,6 +134,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-mass-shootings-in-universities-lead-to-permanent-effects.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-mass-shootings-in-universities-lead-to-permanent-effects.html",
+        "pid:rss:https://marginalrevolution.com/?p=94027",
+        "syn:do-mass-shootings-in-universities-lead-to-permanent-effects|voice:tyler-cowen|2026-10-22",
+        "fp:marginalrevolution.com|do-mass-shootings-in-universities-lead-to-permanent-effects|2026-10-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-22T19:22:58Z",
+      "published_at": "2026-10-22T04:42:11Z",
+      "title": "Do mass shootings in universities lead to permanent effects?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/do-mass-shootings-in-universities-lead-to-permanent-effects.html?utm_source=rss&utm_medium=rss&utm_campaign=do-mass-shootings-in-universities-lead-to-permanent-effects",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html",
@@ -167,23 +167,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html?utm_source=rss&utm_medium=rss&utm_campaign=earth-facts-of-the-day",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/effective-altruism-is-useful-at-the-margin.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/effective-altruism-is-useful-at-the-margin.html",
-        "pid:rss:https://marginalrevolution.com/?p=93943",
-        "syn:effective-altruism-is-useful-at-the-margin|voice:tyler-cowen|2026-10-07",
-        "fp:marginalrevolution.com|effective-altruism-is-useful-at-the-margin|2026-10-07"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-07T20:44:42Z",
-      "published_at": "2026-10-07T04:49:13Z",
-      "title": "Effective altruism is useful at the margin",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/effective-altruism-is-useful-at-the-margin.html?utm_source=rss&utm_medium=rss&utm_campaign=effective-altruism-is-useful-at-the-margin",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/ethiopia-update.html": {
       "keys": [
@@ -252,6 +235,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html?utm_source=rss&utm_medium=rss&utm_campaign=how-and-why-did-the-victorians-succeed",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html",
+        "pid:rss:https://marginalrevolution.com/?p=94042",
+        "syn:how-long-do-wealth-shocks-persist-less-than-three-generations-in-england|voice:tyler-cowen|2026-10-22",
+        "fp:marginalrevolution.com|how-long-do-wealth-shocks-persist-less-than-three-generations-in-england|2026-10-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-22T19:22:58Z",
+      "published_at": "2026-10-22T18:36:11Z",
+      "title": "How Long Do Wealth Shocks Persist? Less Than Three Generations in England, 1700–2026",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html?utm_source=rss&utm_medium=rss&utm_campaign=how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-the-nyt-podcast-and-interview-dwarkesh.html": {
       "keys": [
@@ -370,7 +370,7 @@
       "title": "More on Elizabeth Holmes and prison",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html?utm_source=rss&utm_medium=rss&utm_campaign=more-on-elizabeth-holmes-and-prison",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html": {
       "keys": [
@@ -814,6 +814,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html",
+        "pid:rss:https://marginalrevolution.com/?p=94037",
+        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-22",
+        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-22T19:22:58Z",
+      "published_at": "2026-10-22T15:55:47Z",
+      "title": "Thursday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-575",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html",
@@ -848,23 +865,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html",
-        "pid:rss:https://marginalrevolution.com/?p=93946",
-        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-10-07",
-        "fp:marginalrevolution.com|wednesday-assorted-links|2026-10-07"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-07T20:44:42Z",
-      "published_at": "2026-10-07T17:40:28Z",
-      "title": "Wednesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-574.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-574",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html",
@@ -897,7 +897,7 @@
       "title": "Wednesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-576.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-576",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/well-planned-african-immigration-to-america-will-go-fine.html": {
       "keys": [
@@ -984,23 +984,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-most-stereotypes-are-negative.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-most-stereotypes-are-negative.html",
-        "pid:rss:https://marginalrevolution.com/?p=93941",
-        "syn:why-most-stereotypes-are-negative|voice:tyler-cowen|2026-10-07",
-        "fp:marginalrevolution.com|why-most-stereotypes-are-negative|2026-10-07"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-07T20:44:42Z",
-      "published_at": "2026-10-07T07:03:57Z",
-      "title": "Why most stereotypes are negative",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/why-most-stereotypes-are-negative.html?utm_source=rss&utm_medium=rss&utm_campaign=why-most-stereotypes-are-negative",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html",
@@ -1017,23 +1000,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html?utm_source=rss&utm_medium=rss&utm_campaign=you-can-see-everything-no-spoilers",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
-    },
-    "url:https://nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html",
-        "pid:rss:https://www.nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html",
-        "syn:this-is-nuts-an-openai-insider-explains-why-he-quit|voice:ezra-klein|2026-10-07",
-        "fp:nytimes.com|this-is-nuts-an-openai-insider-explains-why-he-quit|2026-10-07"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-10-07T20:44:42Z",
-      "published_at": "2026-10-07T13:48:13Z",
-      "title": "‘This Is Nuts.’ An OpenAI Insider Explains Why He Quit.",
-      "url": "https://www.nytimes.com/2026/10/07/opinion/ezra-klein-podcast-david-robinson.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     },
     "url:https://nytimes.com/2026/10/09/opinion/ezra-klein-podcast-arvind-narayanan.html": {
       "keys": [
@@ -1272,22 +1238,6 @@
       "url": "https://www.theglobeandmail.com/opinion/article-the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
-    },
-    "url:https://theglobeandmail.com/opinion/article-the-weakness-of-its-mandate-will-not-deter-the-pq-from-the-chaos-and": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-the-weakness-of-its-mandate-will-not-deter-the-pq-from-the-chaos-and",
-        "syn:the-weakness-of-its-mandate-will-not-deter-the-pq-from-the|voice:andrew-coyne|2026-10-06",
-        "fp:theglobeandmail.com|the-weakness-of-its-mandate-will-not-deter-the-pq-from-the|2026-10-06"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-10-07T20:44:42Z",
-      "published_at": "2026-10-06T00:00:00Z",
-      "title": "The weakness of its mandate will not deter the PQ from the chaos and division of its project",
-      "url": "https://www.theglobeandmail.com/opinion/article-the-weakness-of-its-mandate-will-not-deter-the-pq-from-the-chaos-and/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-10-07T20:44:42Z"
     }
   }
 }
