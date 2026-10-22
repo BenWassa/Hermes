@@ -36,8 +36,8 @@ _SUSPICIOUS = re.compile(r"ignore (all |any )?(previous|prior)|system prompt|api
 # token or a partly redacted prefix. This cannot recognize arbitrary secrets.
 _CREDENTIAL = re.compile(
     r"(?:sk-(?:proj-)?|gh[pousr]_|github_pat_|gsk_|AIza)[A-Za-z0-9_-]{12,}"
-    r"|\\b(?:AKIA|ASIA)[A-Z0-9]{16}\\b"
-    r"|\\b(?:token|api[_-]?key|authorization|client[_-]?secret|passwd)\\s*[:=]\\s*\\S+",
+    r"|\b(?:AKIA|ASIA)[A-Z0-9]{16}\b"
+    r"|\b(?:token|api[_-]?key|authorization|client[_-]?secret|passwd)\s*[:=]\s*\S+",
     re.I,
 )
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]+")
