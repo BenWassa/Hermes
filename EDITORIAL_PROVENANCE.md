@@ -92,7 +92,8 @@ in Actions, not incorrectly recorded as a published edition.
 
 - Store only publisher headline and up to 100 characters of sanitized public
   description metadata, provider IDs, safe canonical URL without query or
-  fragment, timestamps, safe flags and hashes. No article bodies.
+  fragment, fetch timestamps where providers return records (otherwise marked
+  by the build-start observation time), safe flags and hashes. No article bodies.
 - Suspicious imperative/prompt-injection patterns are replaced by
   `[withheld]`; HTML markup has already been removed by normalization.
 - Never store API keys, provider response bodies, full prompts, model JSON
