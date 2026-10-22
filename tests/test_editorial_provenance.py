@@ -223,3 +223,59 @@ def test_workflow_cocommits_evidence_but_preserves_gate_and_notification():
     assert "data/edition_evidence/**" in build["on" if "on" in build else True]["push"]["paths-ignore"]
     assert "data/edition_evidence/**" in ci["on" if "on" in ci else True]["push"]["paths-ignore"]
     assert "notify" not in publish.lower()
+
+
+def test_partial_guardian_failure_records_observed_status_without_errors(monkeypatch):
+    from src import fetch as fetch_mod
+    monkeypatch.setenv("GUARDIAN_API_KEY", "test-only-key")
+    monkeypatch.setattr(config, "GUARDIAN_SECTIONS", {"world": "world", "business": "business"})
+
+    class Response:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"response": {"results": [{
+                "webTitle": "Example", "webUrl": "https://example.org/1"
+            }]}}
+
+    def fake_get(_url, *, params, timeout):
+        if params["section"] == "business":
+            raise RuntimeError("simulated secret provider error")
+        return Response()
+
+    monkeypatch.setattr(fetch_mod.requests, "get", fake_get)
+    rec = EditionEvidence(when=WHEN)
+    token = activate(rec)
+    try:
+        raw = fetch_mod.fetch_guardian()
+        rec.record_pool(raw, [story(1, provider="guardian")])
+    finally:
+        deactivate(token)
+    assert len(raw) == 1
+    assert rec.source_outcomes == [
+        {"provider": "guardian", "lane": "world", "status": "ok", "items_returned": 1},
+        {"provider": "guardian", "lane": "business", "status": "error", "items_returned": 0},
+    ]
+    assert rec.counts["source_requests"] == {"error": 1, "ok": 1}
+    assert rec.stages["fetch"] == "complete_with_source_outcomes"
+    assert "secret provider error" not in json.dumps(rec.source_outcomes)
+
+
+def test_invalid_json_reinforcement_uses_existing_retry_and_records_parse(monkeypatch):
+    import importlib
+    curate = importlib.import_module("src.curate")
+    responses = ['NOT JSON', '{"sections":[]}']
+    class Model:
+        def generate_content(self, *, model, contents, config):
+            return SimpleNamespace(text=responses.pop(0), model_version=model, usage_metadata=None)
+    monkeypatch.setattr(curate, "_client", lambda: SimpleNamespace(models=Model()))
+    rec = EditionEvidence(when=WHEN)
+    token = activate(rec)
+    try:
+        edition = curate.curate([story(1)], today=TODAY)
+    finally:
+        deactivate(token)
+    assert edition["sections"] == []
+    assert rec.parse_outcomes == ["invalid_json", "valid_json"]
+    assert len(rec.attempts) == 2
