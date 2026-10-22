@@ -442,9 +442,21 @@ def blind(folder: Path, dest: Path) -> None:
     print(f"Created {len(packets)} blinded packets; keep review_key.private.json from reviewers.")
 
 
+def export_provider_case(case: dict, output_path: Path, *, overwrite: bool = False) -> None:
+    """Write a byte-preserving, offline #77 transport interchange for one fixture."""
+    if output_path.exists() and not overwrite:
+        raise SystemExit(f"Export already exists: {output_path}; pass --overwrite to replace")
+    system_prompt, user_content = request_payload(case)
+    payload = {"fixture_id": case["id"],
+               "system_instruction": system_prompt,
+               "user_content": user_content}
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(stable_json(payload) + "\n", encoding="utf-8")
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("command", choices=("validate", "plan", "run", "summarize", "blind"))
+    p.add_argument("command", choices=("validate", "plan", "run", "summarize", "blind", "export"))
     p.add_argument("--fixtures", type=Path, default=DEFAULT_FIXTURES)
     p.add_argument("--out", type=Path, default=DEFAULT_RUNS)
     p.add_argument("--fixture", action="append", help="Select a fixture ID (repeatable)")
@@ -457,6 +469,7 @@ def main(argv=None) -> int:
     p.add_argument("--pause-seconds", type=float, default=5)
     p.add_argument("--overwrite", action="store_true")
     p.add_argument("--blind-out", type=Path, default=ROOT / "research" / "gemini" / "blind")
+    p.add_argument("--export-out", type=Path, help="Local offline #77 interchange output path")
     args = p.parse_args(argv)
     if args.repeat < 1 or args.max_calls < 1 or not 1024 <= args.max_output_tokens <= 65536:
         p.error("repeat/max-calls must be positive; max-output-tokens must be 1024..65536")
@@ -469,6 +482,14 @@ def main(argv=None) -> int:
         run(args)
     elif args.command == "summarize":
         print(json.dumps(summarize(args.out), indent=2))
+    elif args.command == "export":
+        if not args.export_out or not args.fixture or len(args.fixture) != 1:
+            p.error("export requires exactly one --fixture ID and --export-out PATH")
+        cases = {case["id"]: case for case in read_fixtures(args.fixtures)["cases"]}
+        if args.fixture[0] not in cases:
+            p.error(f"Unknown fixture: {args.fixture[0]}")
+        export_provider_case(cases[args.fixture[0]], args.export_out, overwrite=args.overwrite)
+        print(f"Wrote offline #77 fixture interchange: {args.export_out}")
     else:
         blind(args.out, args.blind_out)
     return 0
