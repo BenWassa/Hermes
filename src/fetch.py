@@ -12,6 +12,7 @@ and, for national Canadian intake, optional ``_coverage_lane``.
 
 from __future__ import annotations
 
+import datetime as dt
 import logging
 import os
 
@@ -67,6 +68,7 @@ def fetch_guardian(page_size: int = 10) -> list[dict]:
             results = resp.json().get("response", {}).get("results", [])
             for r in results:
                 r["_src"] = "guardian"
+                r["_fetched_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
                 r["_section_hint"] = hint
             items.extend(results)
             _source_result("guardian", section, "ok" if results else "empty", len(results))
@@ -96,6 +98,7 @@ def fetch_nyt() -> list[dict]:
             results = resp.json().get("results", [])
             for r in results:
                 r["_src"] = "nyt"
+                r["_fetched_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
                 r["_section_hint"] = hint
             items.extend(results)
             _source_result("nyt", section, "ok" if results else "empty", len(results))
@@ -134,6 +137,7 @@ def fetch_perigon(size: int = 10) -> list[dict]:
             results = resp.json().get("articles", [])
             for r in results:
                 r["_src"] = "perigon"
+                r["_fetched_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
                 r["_section_hint"] = query["hint"]
                 if query.get("coverage_lane"):
                     r["_coverage_lane"] = query["coverage_lane"]
@@ -164,6 +168,7 @@ def _fetch_rss_feeds(
                 continue
             for entry in parsed.entries:
                 entry["_src"] = "rss"
+                entry["_fetched_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
                 entry["_section_hint"] = feed.get("hint", default_hint)
                 entry["_source_name"] = feed["name"]
                 lane = feed.get("coverage_lane", default_coverage_lane)
