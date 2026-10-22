@@ -56,6 +56,18 @@ After **2–4 weeks of actual scheduled reports**, calibrate the auditor against
 
 GitHub Contents commits are per-file, not transactional across files; partial weekly commits must be flagged. Auditor cannot infer branch write authorization for future schedule contexts merely from this setup's account permissions. Neither branch nor data structure is a GitHub Actions scheduled runner.
 
+## Frozen historical research handoff
+
+The #75 research-only retrospective is merged on main as
+[`research/historical-audit/HISTORY_INDEX.md`](https://github.com/BenWassa/Hermes/blob/main/research/historical-audit/HISTORY_INDEX.md)
+and [`BASELINE_2026-10-22.md`](https://github.com/BenWassa/Hermes/blob/main/research/historical-audit/BASELINE_2026-10-22.md).
+Weekly reviewers may **read those files on main** as a dated calibration baseline,
+but must distinguish the retrospective research's `HA-##` labels from persistent
+weekly-owned `HQA-###` findings. Do not import stale research as new daily
+observations or assume unavailable model candidate pools. The reserved
+`docs/sentinel/HISTORY_INDEX.md` remains intentionally absent; do not
+duplicate the historical rows merely to make a second index.
+
 ## Initial validation
 
 The examples folder contains a **manual connector write/readback smoke test**, not daily or weekly schedule execution or evidence of editorial quality. The already enabled daily (~10:00 Toronto) and weekly (Sunday afternoon) ChatGPT schedules must each independently persist and verify their first live report, or return explicit NOT PERSISTED. Do not represent them as tested before their scheduled runs occur.
