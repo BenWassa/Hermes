@@ -51,6 +51,7 @@ def main() -> int:
     try:
         stage = "weather"
         weather = weather_mod.get_weather()
+        evidence.stages["weather"] = "complete"
 
         stage = "fetch"
         raw = fetch_all()
@@ -115,6 +116,7 @@ def main() -> int:
 
         stage = "images"
         resolve_images(edition)
+        evidence.stages["images"] = "complete"
 
         stage = "render"
         safely(evidence.record_final, edition)
