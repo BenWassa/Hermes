@@ -29,3 +29,7 @@ The only conclusion allowed is whether GitHub accepted this isolated-branch Mark
 ## Revision log
 
 - 2026-10-22 Toronto — initial controlled infrastructure sample (#76).
+
+## Idempotent-update protocol exercise
+
+- 2026-10-22 Toronto — this *same sample file* was amended using the blob SHA fetched immediately before the update; no duplicate sample report path was created. A fresh post-update readback is required before calling the revision verified.
