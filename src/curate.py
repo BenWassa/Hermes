@@ -32,6 +32,7 @@ from google.genai import errors as genai_errors
 from google.genai import types
 
 from . import canada, config
+from .editorial_provenance import current as evidence_current, safely as evidence_safely
 from .normalize import curation_view
 from .opinion import (
     build_following_cards,
@@ -121,14 +122,30 @@ def _generate(
         models_to_try.append(_FALLBACK_MODEL)
 
     last: Exception | None = None
+    recorder = evidence_current()
     for model in models_to_try:
         cfg = _gen_config(today, model, include_following=include_following)
+        instruction = config.build_curate_system_prompt(today) + canada.editorial_instruction(today)
+        if include_following:
+            instruction += _FOLLOWING_INSTRUCTION
+        if recorder is not None:
+            evidence_safely(recorder.record_prompt, model, instruction, has_following=include_following)
         for attempt in range(retries + 1):
+            started = time.monotonic()
             try:
-                return client.models.generate_content(
+                response = client.models.generate_content(
                     model=model, contents=contents, config=cfg
                 )
+                if recorder is not None:
+                    evidence_safely(recorder.record_attempt, model=model, attempt=attempt,
+                                    duration_ms=round((time.monotonic() - started) * 1000),
+                                    response=response)
+                return response
             except genai_errors.APIError as exc:
+                if recorder is not None:
+                    evidence_safely(recorder.record_attempt, model=model, attempt=attempt,
+                                    duration_ms=round((time.monotonic() - started) * 1000),
+                                    code=getattr(exc, "code", None), outcome="api_error")
                 code = getattr(exc, "code", None)
                 if code in _RETRY_CODES and attempt < retries:
                     wait = min(60, 5 * (2 ** attempt))
@@ -144,6 +161,12 @@ def _generate(
                         models_to_try[-1],
                     )
                 break
+            except Exception:
+                if recorder is not None:
+                    evidence_safely(recorder.record_attempt, model=model, attempt=attempt,
+                                    duration_ms=round((time.monotonic() - started) * 1000),
+                                    outcome="unexpected_error")
+                raise
 
     raise last  # type: ignore[misc]
 
@@ -184,10 +207,21 @@ def _call(
         include_following=bool(following),
     )
     text = resp.text
+    recorder = evidence_current()
     if not text:
+        if recorder is not None:
+            evidence_safely(recorder.record_parse, "empty_response")
         reason = resp.candidates[0].finish_reason if resp.candidates else None
         raise RuntimeError(f"Empty curation response (finish_reason={reason})")
-    return json.loads(text)
+    try:
+        result = json.loads(text)
+    except json.JSONDecodeError:
+        if recorder is not None:
+            evidence_safely(recorder.record_parse, "invalid_json")
+        raise
+    if recorder is not None:
+        evidence_safely(recorder.record_parse, "valid_json")
+    return result
 
 
 def _story_identity(story: dict) -> str:
@@ -414,7 +448,11 @@ def curate(
     """Raw normalized stories -> finished edition, optionally with Following."""
     today = today or dt.date.today()
     client = _client()
+    eligible = stories
     stories = _trim_input(stories, today=today)
+    recorder = evidence_current()
+    if recorder is not None:
+        evidence_safely(recorder.record_trim, eligible, stories, today)
     following = list(following or [])
     try:
         raw = _call(client, stories, today, following=following)
