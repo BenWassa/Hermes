@@ -296,3 +296,45 @@ def test_fetch_timestamp_is_preserved_but_never_sent_to_gemini():
     rec = EditionEvidence(when=WHEN)
     rec.record_pool(raw, normalized)
     assert rec.candidates[0]["fetched_at"] == "2026-10-22T10:16:03+00:00"
+
+
+def test_provenance_disk_failure_cannot_block_successful_daily(monkeypatch, tmp_path):
+    from src import build as build_mod
+    monkeypatch.setattr(build_mod.weather_mod, "get_weather", lambda: {})
+    monkeypatch.setattr(build_mod, "fetch_all", lambda: [{"_src": "rss"}])
+    monkeypatch.setattr(build_mod, "normalize", lambda raw: [story(1)])
+
+    class Registry:
+        def for_tiers(self, tiers):
+            return self
+
+    monkeypatch.setattr(build_mod, "load_registry", lambda path: Registry())
+    monkeypatch.setattr(build_mod, "discover", lambda *args, **kwargs: SimpleNamespace(fresh=[]))
+    monkeypatch.setattr(build_mod, "select_following", lambda *args, **kwargs: [])
+    monkeypatch.setattr(build_mod, "following_seeds", lambda *args, **kwargs: [])
+    monkeypatch.setattr(build_mod, "build_sports_desk",
+                        lambda: SimpleNamespace(payload={}, metrics={}))
+    monkeypatch.setattr(build_mod, "suppress_sports_editorial_duplicates",
+                        lambda stories, sports: (stories, 0))
+    monkeypatch.setattr(build_mod, "attach_sports_to_edition", lambda edition, sports: None)
+    monkeypatch.setattr(build_mod, "curate", lambda stories, **kwargs: {
+        "date": "Thursday, October 22, 2026",
+        "sections": [{"id": "world", "stories": [
+            {"headline": "Still published", "link": "https://example.org/news/1"}
+        ]}],
+    })
+    monkeypatch.setattr(build_mod, "resolve_images", lambda edition: None)
+    page = tmp_path / "index.html"
+
+    def fake_render(edition):
+        page.write_text("Published regardless of evidence failure", encoding="utf-8")
+        return page
+
+    monkeypatch.setattr(build_mod, "render", fake_render)
+
+    def broken_write(self, html_path, **kwargs):
+        raise OSError("simulated disk failure")
+
+    monkeypatch.setattr(EditionEvidence, "write", broken_write)
+    assert build_mod.main() == 0
+    assert page.read_text(encoding="utf-8") == "Published regardless of evidence failure"
