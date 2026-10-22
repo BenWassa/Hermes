@@ -134,3 +134,32 @@ def test_usage_missing_tokens_is_not_zero():
         prompt_token_count=200, candidates_token_count=50, total_token_count=300)))
     assert result["thought_tokens"] is None
     assert result["input_tokens"] == 200
+
+
+def test_summarize_proxy_rates_repeatability_and_p95(tmp_path):
+    records = [
+        ("a", 1, 2.0, ["https://example.org/a", "https://example.org/b"]),
+        ("b", 2, 4.0, ["https://example.org/a"]),
+    ]
+    for name, trial, latency, urls in records:
+        sections = [{"id": "front", "stories": [{"link": link} for link in urls]}]
+        record = {
+            "fixture_id": "same-case", "model": "gemini-3.8-flash",
+            "thinking_level": "medium", "trial": trial, "status": "ok",
+            "latency_seconds": latency, "max_output_tokens": 16000,
+            "system_prompt_sha256": "samehash", "raw_output": json.dumps({"sections": sections}),
+            "usage": {"input_tokens": 1200, "visible_output_tokens": 200, "thought_tokens": 40},
+            "validation": {"schema_ok": True, "issues": [],
+                           "metrics": {"must_select": [1, 2], "dedupe_groups": [1, 1]}},
+            "usd_intro_2026": .01, "usd_2027": .02,
+        }
+        (tmp_path / f"{name}.json").write_text(json.dumps(record), encoding="utf-8")
+    group = b.summarize(tmp_path)["variants"]["gemini-3.8-flash@medium"]
+    assert group["p50_latency_seconds"] == 3.0
+    assert group["p95_latency_seconds"] == 4.0
+    assert group["proxies"]["must_select"] == {"passed": 2, "eligible": 4, "rate": .5}
+    assert group["repeat_jaccard_mean"] == .5
+    assert group["repeat_pairs"] == 1
+    assert group["mean_tokens"]["thought_tokens"] == 40
+    assert group["valid_schema"] == 2
+    assert group["mean_usd_2027"] == .02
