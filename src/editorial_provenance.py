@@ -30,7 +30,7 @@ MAX_CANDIDATES = 240
 MAX_BYTES = 131072
 MAX_ATTEMPTS = 12
 _ACTIVE: ContextVar["EditionEvidence | None"] = ContextVar("daily_evidence", default=None)
-_SUSPICIOUS = re.compile(r"ignore (all |any )?(previous|prior)|system prompt|api.?key|secret|bearer |password|<\\/?(script|system)", re.I)
+_SUSPICIOUS = re.compile(r"ignore (all |any )?(previous|prior)|system prompt|api.?key|secret|bearer |password|</?(script|system)", re.I)
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]+")
 _SPACE = re.compile(r"\s+")
 
@@ -111,6 +111,25 @@ def safely(method, *args, **kwargs) -> None:
         log.warning("provenance capture unavailable (%s): %s", type(exc).__name__, exc)
 
 
+def _candidate_record(story: dict, oid: str, when: dt.datetime) -> dict:
+    return {
+        "observation_id": oid,
+        "article_id": oid.split(".")[0],
+        "provider": _clean(story.get("provider"), 32),
+        "source_article_id": _clean(story.get("source_article_id"), 100),
+        "source": _clean(story.get("source"), 65),
+        "canonical_url": _public_url(story.get("canonical_url") or story.get("link")),
+        "headline": _clean(story.get("title"), 170),
+        "public_excerpt": _clean(story.get("description"), 100),
+        "published_at": _clean(story.get("pub_date"), 40),
+        "fetched_at": when.isoformat(timespec="seconds"),
+        "section_hint": _clean(story.get("section_hint"), 24),
+        "canada_lane": bool(canada.is_canada_national(story)),
+        "major_event_ids": list(canada.matching_major_event_ids(story, when.astimezone(ZoneInfo(config.TIMEZONE)).date()))[:4],
+        "stage": "normalized",
+    }
+
+
 class EditionEvidence:
     def __init__(self, *, when: dt.datetime | None = None):
         self.started = when or dt.datetime.now(dt.timezone.utc)
@@ -161,22 +180,7 @@ class EditionEvidence:
             if len(self.candidates) >= MAX_CANDIDATES:
                 self.omitted_candidates += 1
                 continue
-            self.candidates.append({
-                "observation_id": oid,
-                "article_id": oid.split(".")[0],
-                "provider": _clean(story.get("provider"), 32),
-                "source_article_id": _clean(story.get("source_article_id"), 100),
-                "source": _clean(story.get("source"), 65),
-                "canonical_url": _public_url(story.get("canonical_url") or story.get("link")),
-                "headline": _clean(story.get("title"), 170),
-                "public_excerpt": _clean(story.get("description"), 100),
-                "published_at": _clean(story.get("pub_date"), 40),
-                "fetched_at": self.started.isoformat(timespec="seconds"),
-                "section_hint": _clean(story.get("section_hint"), 24),
-                "canada_lane": bool(canada.is_canada_national(story)),
-                "major_event_ids": list(canada.matching_major_event_ids(story, self.started.date()))[:4],
-                "stage": "normalized",
-            })
+            self.candidates.append(_candidate_record(story, oid, self.started))
 
     def record_following(self, editorial: list[dict], following: list[dict]) -> None:
         retained = {id(s) for s in editorial}
@@ -205,6 +209,24 @@ class EditionEvidence:
         self.counts["input_canada"] = sum(bool(canada.is_canada_national(s)) for s in selected)
         self.counts["input_major_events"] = sum(bool(canada.matching_major_event_ids(s, today)) for s in selected)
         chosen = set(self.model_input_ids)
+        # Large source pools are summarized, but every item actually handed
+        # to Gemini must remain independently auditable.
+        stored = {c["observation_id"] for c in self.candidates}
+        for selected_story in selected:
+            oid = self._observe(selected_story)
+            if oid in stored:
+                continue
+            if len(self.candidates) == MAX_CANDIDATES:
+                victim = next((i for i in range(len(self.candidates) - 1, -1, -1)
+                               if self.candidates[i]["observation_id"] not in chosen), None)
+                if victim is None:
+                    break
+                stored.discard(self.candidates[victim]["observation_id"])
+                self.candidates.pop(victim)
+                self.omitted_candidates += 1
+            self.candidates.append(_candidate_record(selected_story, oid, self.started))
+            stored.add(oid)
+            self.omitted_candidates = max(0, self.omitted_candidates - 1)
         duplicate_tail = {oid for ids in groups.values() for oid in ids[1:]}
         for candidate in self.candidates:
             oid = candidate["observation_id"]
@@ -260,18 +282,19 @@ class EditionEvidence:
     def record_final(self, edition: dict) -> None:
         sources = defaultdict(list)
         for candidate in self.candidates:
-            url = candidate.get("canonical_url")
-            if url:
-                sources[url].append(candidate)
+            sources[candidate["article_id"]].append(candidate)
+        input_sources = {
+            article_id: [c for c in options if c["observation_id"] in self.model_input_ids]
+            for article_id, options in sources.items()
+        }
         for section in edition.get("sections", []):
             if section.get("id") == "sports":
                 continue
             for story in section.get("stories", []):
                 if not isinstance(story, dict):
                     continue
-                url = _public_url(story.get("link"))
-                found = sources.get(url, []) if url else []
-                match = next((c for c in found if c["observation_id"] in self.model_input_ids), None)
+                article_id = _identity(story) if story.get("link") else None
+                match = (input_sources.get(article_id) or [None])[0] if article_id else None
                 result = {"section": _clean(section.get("id"), 24),
                           "article_id": match["article_id"] if match else None,
                           "observation_id": match["observation_id"] if match else None}
