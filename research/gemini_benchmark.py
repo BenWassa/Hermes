@@ -331,6 +331,10 @@ def run(args) -> None:
 
 
 def summarize(folder: Path) -> dict:
+    """Summarize *recorded* runs only; do not fill missing trials or claim semantic accuracy."""
+    from itertools import combinations
+    import math
+
     records = []
     for path in sorted(folder.glob("*.json")):
         if path.name == "manifest.json":
@@ -339,10 +343,17 @@ def summarize(folder: Path) -> dict:
         if "fixture_id" in doc and "model" in doc:
             records.append(doc)
     result = {"runs": len(records), "variants": {}}
+    proxy_names = ("must_select", "must_omit", "section_placement", "dedupe_groups",
+                   "ranking_pairs_conditional", "literal_fact_anchors_conditional")
     for rec in records:
         name = rec["model"] + "@" + (rec["thinking_level"] or "default")
-        group = result["variants"].setdefault(name, {"runs": 0, "ok": 0, "valid_schema": 0,
-            "latencies": [], "cost_intro": [], "cost_2027": [], "errors": {}})
+        group = result["variants"].setdefault(name, {
+            "runs": 0, "ok": 0, "valid_schema": 0, "latencies": [],
+            "cost_intro": [], "cost_2027": [], "errors": {}, "tokens": {},
+            "proxies": {key: [0, 0] for key in proxy_names}, "selections": {},
+            "max_output_budgets": set(), "prompt_fingerprints": set(),
+            "issue_counts": {},
+        })
         group["runs"] += 1
         group["ok"] += rec["status"] == "ok"
         group["valid_schema"] += bool(rec.get("validation", {}).get("schema_ok"))
@@ -353,13 +364,52 @@ def summarize(folder: Path) -> dict:
                 group[target].append(rec[source])
         if rec["status"] != "ok":
             group["errors"][rec["status"]] = group["errors"].get(rec["status"], 0) + 1
+        if rec.get("max_output_tokens"):
+            group["max_output_budgets"].add(rec["max_output_tokens"])
+        if rec.get("system_prompt_sha256"):
+            group["prompt_fingerprints"].add(rec["system_prompt_sha256"])
+        for key, val in rec.get("usage", {}).items():
+            if val is not None:
+                group["tokens"].setdefault(key, []).append(val)
+        check = rec.get("validation", {})
+        for issue in check.get("issues", []):
+            category = issue.split(" ", 1)[0]
+            group["issue_counts"][category] = group["issue_counts"].get(category, 0) + 1
+        for key in proxy_names:
+            score = check.get("metrics", {}).get(key)
+            if isinstance(score, list) and len(score) == 2:
+                group["proxies"][key][0] += score[0]
+                group["proxies"][key][1] += score[1]
+        if rec.get("status") == "ok":
+            try:
+                output = json.loads(rec["raw_output"])
+                links = {item["link"] for section in output["sections"]
+                         for item in section.get("stories", []) if isinstance(item.get("link"), str)}
+            except (KeyError, TypeError, ValueError):
+                continue
+            group["selections"].setdefault(rec["fixture_id"], []).append(links)
     for group in result["variants"].values():
-        for key in ("latencies", "cost_intro", "cost_2027"):
-            series = group.pop(key)
-            group[{"latencies": "p50_latency_seconds", "cost_intro": "mean_usd_intro",
-                   "cost_2027": "mean_usd_2027"}[key]] = (
-                       round(statistics.median(series) if key == "latencies" else statistics.mean(series), 6)
-                       if series else None)
+        times = sorted(group.pop("latencies"))
+        group["p50_latency_seconds"] = round(statistics.median(times), 6) if times else None
+        group["p95_latency_seconds"] = round(times[math.ceil(len(times) * .95) - 1], 6) if times else None
+        for key, destination in (("cost_intro", "mean_usd_intro"), ("cost_2027", "mean_usd_2027")):
+            values = group.pop(key)
+            group[destination] = round(statistics.mean(values), 8) if values else None
+            group[destination + "_sample_n"] = len(values)
+        group["mean_tokens"] = {k: round(statistics.mean(v), 1) for k, v in group.pop("tokens").items()}
+        for key, score in group["proxies"].items():
+            group["proxies"][key] = {"passed": score[0], "eligible": score[1],
+                                     "rate": round(score[0] / score[1], 4) if score[1] else None}
+        sets_by_case = group.pop("selections")
+        comparisons = []
+        for selections in sets_by_case.values():
+            for a, b in combinations(selections, 2):
+                comparisons.append(len(a & b) / len(a | b) if (a | b) else 1.0)
+        group["repeat_jaccard_mean"] = round(statistics.mean(comparisons), 4) if comparisons else None
+        group["repeat_pairs"] = len(comparisons)
+        group["max_output_budgets"] = sorted(group["max_output_budgets"])
+        group["prompt_fingerprint_count"] = len(group.pop("prompt_fingerprints"))
+        group["note"] = "Automatic proxies only; manual blind factual and analysis review required"
     return result
 
 
