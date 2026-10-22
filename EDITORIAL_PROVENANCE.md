@@ -12,7 +12,8 @@ A successful Daily build atomically writes one file:
 `data/edition_evidence/YYYY/MM/YYYY-MM-DD.json` (Toronto calendar date).
 
 The workflow stages that file, if present, in the **same git commit** as
-`docs/index.html`. Read the publication commit with
+`docs/index.html` **only if the HTML changed**. An evidence-only staged change
+cannot satisfy the publication gate. Read the publication commit with
 `git log -1 --format=%H -- data/edition_evidence/YYYY/MM/YYYY-MM-DD.json`;
 it must be the commit that published that day's HTML. Self-embedding the commit
 SHA would change the commit hash, so `publication.commit` deliberately says
@@ -25,7 +26,11 @@ still represents an earlier edition.
 One file is created **once per day**; existing evidence is never overwritten.
 Git rebase/push retries reuse the same staged evidence and page. A resumed,
 already-published run does not fetch, call Gemini or change evidence. The
-evidence writer uses fsync, a same-directory temporary file and atomic rename.
+evidence writer uses fsync, a same-directory temporary file and an exclusive
+atomic hard link (`os.link`) that fails rather than overwriting an existing file.
+The build workflow commits evidence only after verifying that `docs/index.html`
+has a staged change, and it refuses publication if the gated Toronto edition
+date differs from the current Toronto date at the commit step.
 If evidence fails, the Daily still publishes HTML; an absent ledger is *missing
 evidence*, never proof that the edition failed.
 
@@ -99,6 +104,10 @@ in Actions, not incorrectly recorded as a published edition.
 - Never store API keys, provider response bodies, full prompts, model JSON
   output, chain-of-thought, tool traces or hidden reasoning. Reasoning **token
   counts** from provider usage metadata are permitted; reasoning text is not.
+- Publisher-supplied public metadata can contain unexpected personal information
+  or novel secret formats: bounded fields, suspicious-text screening and known
+  credential-shape rejection reduce exposure but do not prove an arbitrary string
+  is free of sensitive data. Do not include private pools in public telemetry.
 - Unmatched final links are explicit; never manufacture source attribution.
   Following and Sports remain their existing deterministic independent desks.
 - `.github/workflows/build.yml` and `ci.yml` ignore evidence-only commits
