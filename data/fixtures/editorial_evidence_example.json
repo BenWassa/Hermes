@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "edition_date_toronto": "2026-10-22",
+  "build_started_utc": "2026-10-22T10:15:00+00:00",
+  "build_run_id": null,
+  "build_attempt": null,
+  "publication": {
+    "page_path": "docs/index.html",
+    "page_sha256": "f29c4511672f1610be08d4aabde8ad0bf0ef4680bcea6fd334d457833cdde32d",
+    "commit": "same_git_commit_as_page"
+  },
+  "status": "published",
+  "stages": {
+    "fetch": "complete_with_source_level_outages_unreported",
+    "normalize": "complete",
+    "following": "complete",
+    "sports": "complete",
+    "trim": "complete",
+    "model": "attempted",
+    "selection": "complete",
+    "render": "complete"
+  },
+  "counts": {
+    "raw_fetched": 3,
+    "raw_by_provider": {
+      "rss": 2,
+      "nyt": 1
+    },
+    "normalized": 3,
+    "after_following": 3,
+    "after_sports": 3,
+    "curation_eligible": 3,
+    "exact_duplicate_suppressed": 1,
+    "sent_to_model": 2,
+    "input_canada": 0,
+    "input_major_events": 0,
+    "editorial_final": 1,
+    "following_selected": 0,
+    "following_final": 0,
+    "unmatched_final_links": 0,
+    "sports_duplicates_suppressed": 0
+  },
+  "candidates": [
+    {
+      "observation_id": "a_809e5c5700222b3a96d6.1",
+      "article_id": "a_809e5c5700222b3a96d6",
+      "provider": "rss",
+      "source_article_id": "1",
+      "source": "Example News",
+      "canonical_url": "https://example.org/news/1",
+      "headline": "Story 1",
+      "public_excerpt": "Public excerpt",
+      "published_at": "2026-10-22T08:00:00Z",
+      "fetched_at": "2026-10-22T10:15:00+00:00",
+      "section_hint": "world",
+      "canada_lane": false,
+      "major_event_ids": [],
+      "stage": "final_selected"
+    },
+    {
+      "observation_id": "a_809e5c5700222b3a96d6.2",
+      "article_id": "a_809e5c5700222b3a96d6",
+      "provider": "nyt",
+      "source_article_id": "1-alt",
+      "source": "Example News",
+      "canonical_url": "https://example.org/news/1",
+      "headline": "Story 1",
+      "public_excerpt": "Public excerpt",
+      "published_at": "2026-10-22T08:00:00Z",
+      "fetched_at": "2026-10-22T10:15:00+00:00",
+      "section_hint": "world",
+      "canada_lane": false,
+      "major_event_ids": [],
+      "stage": "exact_duplicate"
+    },
+    {
+      "observation_id": "a_064e9e8fcb43eb7598ea.1",
+      "article_id": "a_064e9e8fcb43eb7598ea",
+      "provider": "rss",
+      "source_article_id": "2",
+      "source": "Example News",
+      "canonical_url": "https://example.org/news/2",
+      "headline": "Story 2",
+      "public_excerpt": "Public excerpt",
+      "published_at": "2026-10-22T08:00:00Z",
+      "fetched_at": "2026-10-22T10:15:00+00:00",
+      "section_hint": "world",
+      "canada_lane": false,
+      "major_event_ids": [],
+      "stage": "model_input"
+    }
+  ],
+  "candidates_omitted": 0,
+  "duplicate_groups": [
+    {
+      "article_id": "a_809e5c5700222b3a96d6",
+      "observations": [
+        "a_809e5c5700222b3a96d6.1",
+        "a_809e5c5700222b3a96d6.2"
+      ],
+      "total": 2
+    }
+  ],
+  "model_input_observation_ids": [
+    "a_809e5c5700222b3a96d6.1",
+    "a_064e9e8fcb43eb7598ea.1"
+  ],
+  "final_editorial_sources": [
+    {
+      "section": "world",
+      "article_id": "a_809e5c5700222b3a96d6",
+      "observation_id": "a_809e5c5700222b3a96d6.1"
+    }
+  ],
+  "final_unmatched": [],
+  "following_selected_article_ids": [],
+  "model": {
+    "requested": "gemini-2.5-flash",
+    "prompt_sha256": "85b2bb5cc05a3ebc8bc05cd1728dfb3a3777938157a8b2c5b3dc2f07eda53cdc",
+    "schema_sha256": "29a8ca41b2f08c5b9419aaab65a1f37cc6c5f909f18c270491f7cdaec98c4185",
+    "sdk": "google-genai",
+    "sdk_version": "synthetic",
+    "attempts": [
+      {
+        "requested_model": "gemini-2.5-flash",
+        "attempted_model": "gemini-2.5-flash",
+        "actual_model": "gemini-2.5-flash",
+        "thinking_budget": 1024,
+        "retry_index": 0,
+        "fallback": false,
+        "duration_ms": 900,
+        "outcome": "ok",
+        "provider_status": null,
+        "usage": {
+          "input_tokens": 100,
+          "output_tokens": 50,
+          "thinking_tokens": 25,
+          "total_tokens": 175
+        }
+      }
+    ],
+    "json_parse_outcomes": [
+      "valid_json"
+    ]
+  }
+}
