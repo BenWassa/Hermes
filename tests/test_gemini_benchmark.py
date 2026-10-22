@@ -63,6 +63,30 @@ def test_full_size_following_case_exports_shared_provider_request():
     assert "FOLLOWING OVERRIDE" in prompt
 
 
+def test_offline_provider_export_writes_exact_payload_without_network(tmp_path, monkeypatch):
+    from urllib import request
+
+    def forbidden_network(*args, **kwargs):
+        raise AssertionError("No network access permitted for export")
+
+    monkeypatch.setattr(request, "urlopen", forbidden_network)
+    dest = tmp_path / "full-size.json"
+    assert b.main(["export", "--fixture", "dense-sixty-following",
+                   "--export-out", str(dest)]) == 0
+    data = json.loads(dest.read_text(encoding="utf-8"))
+    case = next(c for c in b.read_fixtures()["cases"]
+                if c["id"] == "dense-sixty-following")
+    prompt, payload = b.request_payload(case)
+    assert data == {"fixture_id": case["id"], "system_instruction": prompt,
+                    "user_content": payload}
+    assert len(json.loads(data["user_content"])["stories"]) == 60
+    assert len(json.loads(data["user_content"])["following"]) == 2
+    with pytest.raises(SystemExit, match="already exists"):
+        b.main(["export", "--fixture", case["id"], "--export-out", str(dest)])
+    assert b.main(["export", "--fixture", case["id"],
+                   "--export-out", str(dest), "--overwrite"]) == 0
+
+
 def test_following_payload_preserves_separate_authority():
     case = next(c for c in b.read_fixtures()["cases"] if c["id"] == "opinion-following")
     prompt, payload = b.request_payload(case)
