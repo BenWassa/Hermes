@@ -168,6 +168,7 @@ class EditionEvidence:
         self.counts: dict = {}
         self.duplicate_groups: list[dict] = []
         self.attempts: list[dict] = []
+        self.fallback_used = False
         self.parse_outcomes: list[str] = []
         self.stages: dict = {}
         self.source_outcomes: list[dict] = []
@@ -301,6 +302,8 @@ class EditionEvidence:
 
     def record_attempt(self, *, model: str, attempt: int, duration_ms: int,
                        response=None, code=None, outcome: str = "ok") -> None:
+        if outcome == "ok" and model != config.CURATE_MODEL:
+            self.fallback_used = True  # kept outside the attempts cap below
         if len(self.attempts) >= MAX_ATTEMPTS:
             return
         result = {
@@ -379,6 +382,7 @@ class EditionEvidence:
             "following_selected_article_ids": self.following,
             "model": {
                 "requested": config.CURATE_MODEL,
+                "fallback_used": self.fallback_used,
                 "prompt_sha256": self.prompt_hash,
                 "schema_sha256": self.schema_hash,
                 "sdk": "google-genai",
