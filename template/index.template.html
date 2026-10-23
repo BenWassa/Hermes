@@ -444,7 +444,9 @@
         var tag = st.tag
           ? '<span class="tag ' + (isHotTag(st.tag) ? 'hot' : 'cool') + '">' + esc(st.tag) + '</span>'
           : '';
-        var kicker = st.kicker ? '<div class="kicker">' + tag + esc(st.kicker) + '</div>' : '';
+        // A tag must render even when the model gave the story no kicker text,
+        // so a deterministic genre tag (OPINION) can never be silently dropped.
+        var kicker = (st.kicker || st.tag) ? '<div class="kicker">' + tag + esc(st.kicker || '') + '</div>' : '';
         var sub = st.sub ? '<div class="sub">' + esc(st.sub) + '</div>' : '';
         var filed = st.time ? '<div class="time">' + esc(st.time) + '</div>' : '';
         var expand = '';

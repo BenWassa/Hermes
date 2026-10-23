@@ -20,6 +20,12 @@ Convert source-native items from fetch.py into one unified story schema:
       "byline": str,                 # the displayed byline, verbatim
       "authors": [{"name": str, "source_author_id": str, ...}],
       "paywalled": bool | None,
+
+      # deterministic genre evidence (#84; not sent to the curation model)
+      "content_genre": str,          # "opinion" when the publisher path or feed
+                                     # category says commentary, otherwise ""
+      "genre_signal": str,           # e.g. "path:thestar.com/opinion"
+      "source_section_hint": str,    # the feed's original section_hint
     }
 
 The original curation keys are unchanged, so existing model cost and rendering
@@ -30,6 +36,12 @@ Only *stated authorship* is carried. Provider fields listing people a story is
 merely about (NYT ``per_facet``, Perigon ``people``) are deliberately ignored:
 being written about is not a byline.
 
+Opinion/commentary detection (src/genre.py) is deterministic and runs here from
+the publisher URL path and the provider's own section name. An opinion item
+fetched through a news feed is routed to ``section_hint="opinion"`` (the
+original hint is kept in ``source_section_hint``), so news desks stay factual
+and neutral. No model call is involved.
+
 Descriptions are stripped of HTML. Items missing a title or link are dropped.
 """
 
@@ -38,6 +50,7 @@ from __future__ import annotations
 import re
 from html import unescape
 
+from .genre import OPINION, opinion_signal
 from .voices.names import parse_byline
 from .voices.urls import canonical_url
 
@@ -242,6 +255,26 @@ def _normalize_rss(item: dict) -> dict:
     }
 
 
+#: Raw provider field naming the provider's own section, used as corroborating
+#: feed-category evidence for opinion detection.
+_CATEGORY_FIELD = {"guardian": "sectionId", "nyt": "section"}
+
+
+def _apply_genre(story: dict, item: dict) -> dict:
+    """Record opinion evidence and route opinion-path items to the Opinion desk."""
+    provider = story["provider"]
+    category = item.get(_CATEGORY_FIELD.get(provider, ""), "")
+    signal = opinion_signal(
+        story["link"], provider=provider, category=category if isinstance(category, str) else ""
+    )
+    story["content_genre"] = OPINION if signal else ""
+    story["genre_signal"] = signal
+    story["source_section_hint"] = story["section_hint"]
+    if signal and story["section_hint"] not in ("opinion", "sports"):
+        story["section_hint"] = "opinion"
+    return story
+
+
 _DISPATCH = {
     "guardian": _normalize_guardian,
     "nyt": _normalize_nyt,
@@ -274,7 +307,7 @@ def normalize(raw_items: list[dict]) -> list[dict]:
         fn = _DISPATCH.get(item.get("_src"))
         if fn is None:
             continue
-        story = fn(item)
+        story = _apply_genre(fn(item), item)
         if story["title"] and story["link"]:
             out.append(story)
     return out
