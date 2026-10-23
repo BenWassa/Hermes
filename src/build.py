@@ -29,6 +29,7 @@ from . import weather as weather_mod
 from .curate import curate
 from .editorial_provenance import EditionEvidence, activate, deactivate, safely
 from .fetch import fetch_all
+from .genre import tag_opinion_in_edition
 from .images import resolve_images
 from .normalize import normalize
 from .opinion import editorial_without_following, following_seeds
@@ -112,6 +113,11 @@ def main() -> int:
 
         stage = "curate"
         edition = curate(editorial_stories, weather=weather, following=following)
+        # Deterministic, no model call: opinion-path stories that the editor
+        # placed outside the Opinion desk must still carry the OPINION tag (#84).
+        tagged = tag_opinion_in_edition(edition)
+        if tagged:
+            log.info("genre: tagged %d opinion-path story(ies) outside the Opinion desk", tagged)
         attach_sports_to_edition(edition, sports_result.payload)
 
         stage = "images"

@@ -153,6 +153,15 @@ screening/synthesis model call; if it fails, degrade to a conservative small
 deterministic selection. Paywalls and publisher access controls are never
 bypassed.
 
+Opinion is never presented as ordinary reporting. News desks stay factual and
+neutral; commentary belongs in the Opinion desk. Hermes therefore detects
+opinion deterministically from the publisher URL path and provider section
+(`/opinion/`, `/commentisfree/`, per-outlet rules in `src/genre.py`), routes
+such items to the Opinion desk at normalize time, and, if the editor still
+places one elsewhere, stamps an `OPINION` tag on the card after curation. This
+needs no model call. A publisher path is genre evidence only, never a judgment
+on the piece's accuracy.
+
 Morning Daily notification remains a separate Daily product and is unaffected.
 See `VOICES.md` for the proven identity/source architecture and `VOICES_V2.md`
 for current tier and weekly-notification semantics. Issue #29 owns the
