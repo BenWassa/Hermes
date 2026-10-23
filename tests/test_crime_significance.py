@@ -392,3 +392,125 @@ def test_enforce_placement_is_idempotent_and_leaves_supported_incidents_alone():
     assert crime.enforce_placement(keep, [threat, other]) == 0
     assert [s["id"] for s in keep[0]["stories"]] == ["a", "b"]
     assert keep[1]["stories"][0]["lead"] is True
+
+
+# --- review fixes: false positives in the matcher (#85) ---------------------
+
+@pytest.mark.parametrize(
+    "title, description",
+    [
+        ("Carney announces ban on assault-style firearms", "Gun owners will have two years to comply."),
+        ("Liberals table assault weapons buyback legislation", ""),
+        ("Cameras roll as shooting begins on new Toronto film", "The production will close streets."),
+        ("Raptors' shooting woes continue in loss", "Toronto shot 38 per cent from the floor."),
+    ],
+)
+def test_policy_film_and_sports_wording_is_not_an_incident(title, description):
+    story = _story(1, title, description)
+
+    assert not crime.is_incident(story)
+    assert not crime.is_unsupported_incident(story)
+    assert crime.bound_unsupported_incidents([story]) == ([story], 0)
+    assert "crime_significance" not in _curation_view([story], TODAY)[0]
+
+
+def test_gun_control_policy_story_is_never_an_isolated_incident():
+    story = _story(
+        1,
+        "Carney announces ban on assault-style firearms after shooting",
+        "Police chiefs welcomed the gun control measures.",
+    )
+
+    assert crime.is_incident(story)
+    assert "policing, courts or policy" in crime.significance_reasons(story)
+    assert not crime.is_unsupported_incident(story)
+
+
+@pytest.mark.parametrize(
+    "title, description",
+    [
+        ("Man shot in Etobicoke", "Police say the shooting was reported overnight."),
+        ("Shooting leaves woman dead in Scarborough", ""),
+        ("Two wounded in shooting near Jane and Finch", ""),
+        ("Man shot dead in North York", ""),
+    ],
+)
+def test_violent_shootings_are_still_incidents(title, description):
+    assert crime.is_incident(_story(1, title, description))
+
+
+def test_boilerplate_urging_for_information_is_not_an_active_threat():
+    story = _story(
+        1,
+        "Man fatally shot in Etobicoke",
+        "Police are urging anyone with information to come forward.",
+    )
+
+    assert crime.significance_reasons(story) == ()
+    assert crime.is_unsupported_incident(story)
+
+
+@pytest.mark.parametrize(
+    "description",
+    [
+        "Police are urging residents to avoid the area while the suspect is sought.",
+        "Residents were urged to stay indoors and lock their doors.",
+    ],
+)
+def test_urging_residents_to_take_precautions_is_an_active_threat(description):
+    story = _story(1, "Man fatally shot in Etobicoke", description)
+
+    assert crime.significance_reasons(story)[0] == "active public threat"
+
+
+@pytest.mark.parametrize(
+    "description",
+    [
+        "Police say the shooting is linked to a dispute between neighbours.",
+        "The victim was connected to the suspect through work.",
+    ],
+)
+def test_ordinary_link_wording_is_not_a_recurring_pattern(description):
+    story = _story(1, "Man fatally shot in Etobicoke", description)
+
+    assert crime.significance_reasons(story) == ()
+    assert crime.is_unsupported_incident(story)
+
+
+@pytest.mark.parametrize(
+    "description",
+    [
+        "Police say the shooting is linked to earlier incidents in the area.",
+        "Investigators are probing linked incidents across the east end.",
+        "The attack was connected to a series of robberies.",
+    ],
+)
+def test_real_pattern_wording_is_still_a_recurring_pattern(description):
+    story = _story(1, "Man fatally shot in Etobicoke", description)
+
+    assert "recurring pattern" in crime.significance_reasons(story)
+
+
+def test_opinion_items_are_out_of_scope_by_section_or_genre():
+    column = _story(
+        1,
+        "Her murder shows our justice system failed women",
+        "A column on bail and violence.",
+        section="world",
+        coverage_lane=canada.CANADA_COVERAGE_LANE,
+    )
+    column["content_genre"] = "opinion"
+    sectioned = _story(
+        2, "Why the latest stabbing should change our politics", "",
+        section="opinion", coverage_lane=canada.CANADA_COVERAGE_LANE,
+    )
+    news = dict(column, content_genre="news")
+    no_genre = {k: v for k, v in column.items() if k != "content_genre"}
+
+    assert not crime.in_scope(column)
+    assert not crime.is_unsupported_incident(column)
+    assert not crime.is_unsupported_incident(sectioned)
+    assert crime.bound_unsupported_incidents([column, sectioned]) == ([column, sectioned], 0)
+    assert "crime_significance" not in _curation_view([column], TODAY)[0]
+    assert crime.is_unsupported_incident(news)
+    assert crime.is_unsupported_incident(no_genre)

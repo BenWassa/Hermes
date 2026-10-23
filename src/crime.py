@@ -43,7 +43,9 @@ CRIME_INCIDENT_INPUT_CAP = 0
 
 # Intake scope: Toronto-local and Canada-national reporting. World wire items
 # (wars, attacks abroad, political violence) are never gated here, and neither
-# are Opinion, Sports or the deterministic Following block.
+# are Opinion, Sports or the deterministic Following block. Opinion is excluded
+# by genre as well as by section, so a Canada-national commentary piece about a
+# crime is not treated as an incident.
 _LOCAL_HINTS = frozenset({"toronto"})
 _CANADA_LANE = "canada-national"
 
@@ -52,12 +54,28 @@ _SPACE_RE = re.compile(r"\s+")
 # What makes a record an incident-level crime item. Only specific acts of
 # violence; a bare "killed" or "died" also covers crashes, fires and war.
 _INCIDENT_RE = re.compile(
-    r"\b(?:homicides?|murder(?:ed|s)?|manslaughter|shootings?|gunfire|gunman|"
+    r"\b(?:homicides?|murder(?:ed|s)?|manslaughter|gunfire|gunman|"
     r"(?:fatally|critically|seriously) (?:shot|stabbed)|"
     r"shot (?:dead|and killed|to death|multiple times|outside|in the)|stabb(?:ed|ing|ings)|"
     r"slain|found dead|suspicious death|death investigation|"
     r"(?:sexual )?assault(?:ed)?|carjacking|armed robbery|home invasion|"
     r"kidnapp(?:ed|ing)|abduct(?:ed|ion))\b"
+)
+
+# Gun-control wording ("assault-style firearms", "assault weapons ban") names a
+# policy subject, not an act of violence, so it is removed before incident
+# matching.
+_POLICY_NOISE_RE = re.compile(
+    r"\bassault[- ](?:style|type|weapons?|rifles?|firearms?|guns?)\b"
+)
+
+# "Shooting" is also a film shoot or a basketball stat. The bare noun is an
+# incident only when the text also carries violent-crime context.
+_SHOOTING_RE = re.compile(r"\bshootings?\b")
+_VIOLENT_CONTEXT_RE = re.compile(
+    r"\b(?:police|victims?|killed|wounded|injured|dead|deaths?|died|fatal(?:ly)?|"
+    r"gunfire|gunmen|gunman|suspects?|homicides?|paramedics|"
+    r"(?:was|were|been|being) shot|shot (?:dead|and|to death|multiple|by|outside))\b"
 )
 
 # A statement that there is no continuing threat (or that an attack was not
@@ -77,8 +95,9 @@ _REASONS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("active public threat", re.compile(
         r"\b(?:at large|armed and dangerous|considered dangerous|outstanding suspects?|"
         r"public safety (?:alert|threat|concern|risk)|threat to (?:the )?public|"
-        r"police (?:warn|are warning|urge|are urging|ask the public)|"
-        r"residents? (?:are |were )?(?:urged|asked|told)|shelter in place|"
+        r"police (?:warn|are warning)|"
+        r"(?:police|residents?|public) (?:(?:are |were )?(?:urg\w+|asked|told|ask\w*))"
+        r"(?: \w+){0,3} to (?:avoid|stay|lock|shelter|remain|keep)|shelter in place|"
         r"hold and secure|lockdown|locked down|hostages?|barricaded|"
         r"random(?:ly)?)\b")),
     ("multiple victims or mass casualty", re.compile(
@@ -88,7 +107,9 @@ _REASONS: tuple[tuple[str, re.Pattern[str]], ...] = (
         r"terror(?:ism|ist)?|explosion|bombing|bomb threat)\b")),
     ("recurring pattern", re.compile(
         r"\b(?:serial|string of|series of|spate of|wave of|rash of|latest in a|"
-        r"latest of|linked (?:to|incidents)|connected (?:to|incidents)|pattern|"
+        r"latest of|(?:linked|connected) incidents|"
+        r"(?:linked|connected) to (?:earlier|other|previous|recent|several|multiple|"
+        r"a series|a string|a spate|a wave)|pattern|"
         r"repeat offenders?|second (?:shooting|homicide|stabbing|killing) in)\b")),
     ("crime trend or statistics", re.compile(
         r"(?:\bper ?cent\b|\bpercent\b|%|\byear[- ]over[- ]year\b|"
@@ -104,7 +125,10 @@ _REASONS: tuple[tuple[str, re.Pattern[str]], ...] = (
         r"racketeering|wrongful conviction|public inquiry|inquest|class action|"
         r"lawsuit|sentenced|convicted|verdict|acquitted|supreme court|court of appeal|"
         r"(?:court|judge'?s|judicial) ruling|judge ruled|ruled (?:unconstitutional|inadmissible)|"
-        r"constitutional|charter (?:rights|challenge)|line of duty)\b")),
+        r"constitutional|charter (?:rights|challenge)|line of duty|"
+        r"gun control|gun laws?|firearms? (?:ban|bans|control|laws?|legislation|regulations?|"
+        r"licen[cs]ing)|(?:ban|bans|banning) (?:on|of) (?:assault|handguns?|firearms?|guns?)|"
+        r"buyback|bill c-\d+)\b")),
     ("civic disruption", re.compile(
         r"\b(?:service (?:suspended|disrupted|halted)|suspended service|"
         r"shut down|evacuat(?:ed|ion)|road closures?|(?:road|highway|station) closed|"
@@ -165,13 +189,24 @@ def _text(story: dict) -> str:
 
 
 def in_scope(story: dict) -> bool:
-    """Whether the gate applies: Toronto-local or Canada-national news intake."""
+    """Whether the gate applies: Toronto-local or Canada-national news intake.
+
+    Opinion is never gated, by section or by genre (``content_genre`` may be
+    absent on records produced before it was introduced).
+    """
+    if story.get("section_hint") == "opinion" or story.get("content_genre") == "opinion":
+        return False
     return story.get("section_hint") in _LOCAL_HINTS or story.get("coverage_lane") == _CANADA_LANE
 
 
 def is_incident(story: dict) -> bool:
     """Whether an in-scope story is an individual violent-crime incident."""
-    return in_scope(story) and bool(_INCIDENT_RE.search(_text(story)))
+    if not in_scope(story):
+        return False
+    text = _POLICY_NOISE_RE.sub(" ", _text(story))
+    if _INCIDENT_RE.search(text):
+        return True
+    return bool(_SHOOTING_RE.search(text) and _VIOLENT_CONTEXT_RE.search(text))
 
 
 def significance_reasons(story: dict) -> tuple[str, ...]:
