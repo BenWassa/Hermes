@@ -7,8 +7,8 @@ no Gemini call. It does three things around the existing single curation call:
 
 1. Before the model boundary, a local crime *incident* (a shooting, stabbing,
    homicide, assault and similar) whose public title/description establishes no
-   substantive reason to be in a compact morning paper is demoted and bounded
-   inside the existing input cap. Incidents that do carry a reason are
+   substantive reason to be in a compact morning paper is withheld from the
+   model input. Incidents that do carry a reason are
    untouched.
 2. The model sees one transient ``crime_significance`` field on incident
    records only, plus a short editorial contract, so a surviving incident is
@@ -27,17 +27,19 @@ example intimate partner violence or a murder-suicide investigation.
 
 Matching is a conservative heuristic over public title and description, not a
 verdict on any one story: no victim category, neighbourhood or count is a
-rule, and two incidents are allowed through the cap so a missed signal still
-reaches an editor who sees the full text.
+rule. Unsupported incidents are withheld from the model (cap 0), so a signal the
+keyword matching misses means that story does not reach the edition; extend the
+signal lists when a review of real candidate pools finds such a miss.
 """
 
 from __future__ import annotations
 
 import re
 
-# Ceiling on unsupported incidents that may reach the model on a busy day.
-# Like the Canada reserves this is a bound, not a quota: quiet days send none.
-CRIME_INCIDENT_INPUT_CAP = 2
+# Unsupported incidents that may reach the model. Owner decision: none. An
+# incident with no established civic significance is withheld from the model
+# input entirely; the post-model placement guard remains as defence in depth.
+CRIME_INCIDENT_INPUT_CAP = 0
 
 # Intake scope: Toronto-local and Canada-national reporting. World wire items
 # (wars, attacks abroad, political violence) are never gated here, and neither

@@ -86,7 +86,7 @@ def test_unsupported_incidents_are_demoted_behind_ordinary_news_in_bounded_input
     assert incident not in selected
 
 
-def test_unsupported_incidents_are_capped_even_when_input_has_room():
+def test_unsupported_incidents_are_withheld_from_the_model_input():
     incidents = [
         _story(i, f"Man shot dead in neighbourhood {i}", "Police are investigating.")
         for i in range(1, 6)
@@ -94,11 +94,9 @@ def test_unsupported_incidents_are_capped_even_when_input_has_room():
 
     selected = _trim_input(incidents + _filler(3), total=20, today=TODAY)
 
-    kept = [story for story in selected if crime.is_unsupported_incident(story)]
-    assert len(kept) == crime.CRIME_INCIDENT_INPUT_CAP
-    assert len(selected) == 3 + crime.CRIME_INCIDENT_INPUT_CAP
-    # Survivors sit behind the ordinary candidates they would otherwise displace.
-    assert selected[-crime.CRIME_INCIDENT_INPUT_CAP:] == kept
+    assert crime.CRIME_INCIDENT_INPUT_CAP == 0
+    assert not [story for story in selected if crime.is_unsupported_incident(story)]
+    assert len(selected) == 3
 
 
 def test_model_sees_an_isolated_incident_note_only_on_incident_records():
@@ -307,7 +305,7 @@ def test_quiet_pool_without_crime_selects_exactly_as_before():
     assert _trim_input(pool, total=10, today=TODAY) == pool[:10]
 
 
-def test_curate_makes_exactly_one_model_call_and_sends_the_note(monkeypatch):
+def test_curate_withholds_unsupported_incidents_and_makes_one_model_call(monkeypatch):
     calls: list[dict] = []
     incident = isolated(1)
 
@@ -317,16 +315,14 @@ def test_curate_makes_exactly_one_model_call_and_sends_the_note(monkeypatch):
             payload = {
                 "sections": [
                     {"id": "front", "label": "Front Page", "stories": [
-                        {"id": "f1", "lead": True, "headline": "Hospital shooting",
-                         "link": incident["link"]},
-                        {"id": "f2", "lead": False, "headline": "Routine",
+                        {"id": "f1", "lead": True, "headline": "Routine",
                          "link": "https://example.com/1000"},
                     ]},
                     {"id": "toronto", "label": "Toronto", "stories": [
-                        {"id": "t1", "lead": True, "headline": "Hospital shooting",
-                         "link": incident["link"]},
-                        {"id": "t2", "lead": False, "headline": "Routine",
+                        {"id": "t1", "lead": True, "headline": "Routine",
                          "link": "https://example.com/1000"},
+                        {"id": "t2", "lead": False, "headline": "Routine two",
+                         "link": "https://example.com/1001"},
                     ]},
                 ]
             }
@@ -335,17 +331,14 @@ def test_curate_makes_exactly_one_model_call_and_sends_the_note(monkeypatch):
 
     monkeypatch.setattr(curate_mod, "_client", lambda: SimpleNamespace(models=Model()))
 
-    edition = curate_mod.curate([incident, *_filler(1)], today=TODAY)
+    edition = curate_mod.curate([incident, *_filler(2)], today=TODAY)
 
     assert len(calls) == 1
-    assert "isolated incident" in calls[0]["contents"]
+    assert incident["title"] not in calls[0]["contents"]
     assert "CRIME AND INCIDENT SIGNIFICANCE" in calls[0]["system"]
     sections = {section["id"]: section["stories"] for section in edition["sections"]}
-    assert [s["id"] for s in sections["front"]] == ["f2"]
-    assert [s["id"] for s in sections["toronto"]] == ["t2", "t1"]
-    assert sections["toronto"][0]["lead"] is True
-    assert sections["toronto"][1]["lead"] is False
-    assert sections["toronto"][1]["analysis"] is None
+    assert [s["id"] for s in sections["toronto"]] == ["t1", "t2"]
+    assert all(s["link"] != incident["link"] for st in sections.values() for s in st)
 
 
 def test_system_prompt_states_the_significance_and_human_interest_contract():

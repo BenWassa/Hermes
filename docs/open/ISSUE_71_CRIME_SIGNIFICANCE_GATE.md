@@ -32,9 +32,11 @@ No new Gemini call, no new source, no schema change to the edition.
    partner violence, murder-suicide) or a wider investigation. Statements such
    as "no ongoing threat" are removed first. Human-interest terms are not in any
    list, so they cannot move a story either way.
-2. Before the model: incidents with no reason are capped at
-   `CRIME_INCIDENT_INPUT_CAP` and moved behind ordinary candidates; they cannot
-   become Canada-national or major-event recall. The input bound never grows.
+2. Before the model: incidents with no reason are withheld from the model input
+   (`CRIME_INCIDENT_INPUT_CAP = 0`, owner decision), so they cannot become
+   Canada-national or major-event recall. The input bound never grows. Trade-off:
+   a real signal the keyword matching misses means that story is not published;
+   review real candidate pools and extend the signal lists accordingly.
 3. At the model boundary: incident records alone gain a transient
    `crime_significance` note, and the system prompt gains a short contract
    (reason-first headlines, human-interest details are not hooks, prefer
