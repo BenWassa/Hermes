@@ -417,6 +417,7 @@ Output STRICT JSON only. No preamble, no markdown fences, no commentary. Match t
 
 Rules:
 - Include every section id listed above, in that order, each with at least one story when source material allows.
+- The "toronto" section is for Toronto and Greater Toronto Area stories only. A story about another city, province or region, or a national story with no Toronto angle, belongs in front, world or business (or is cut), never in "toronto".
 - "kicker" is a short uppercase topic label derived from the story (e.g. "UKRAINE", "MARKETS").
 - "analysis" is present only on lead stories; null everywhere else.
 - "image" and "link" come from the source story; preserve them. If no image, use null.

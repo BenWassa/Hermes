@@ -37,7 +37,7 @@ from google import genai
 from google.genai import errors as genai_errors
 from google.genai import types
 
-from . import canada, config, crime
+from . import canada, config, crime, toronto
 from .editorial_provenance import current as evidence_current, safely as evidence_safely
 from .normalize import curation_view
 from .opinion import (
@@ -469,6 +469,22 @@ def _ensure_opinion_section(sections: list[dict]) -> list[dict]:
     return sections
 
 
+def _guard_toronto_section(
+    sections: list[dict], pool: list[dict], today: dt.date
+) -> list[dict]:
+    """Keep off-city stories out of Toronto and never publish without it (toronto.py).
+
+    Re-normalizing afterwards re-applies caps and the exactly-one-lead rule to
+    sections the guard touched; it is idempotent for the rest.
+    """
+    guarded, _stats = toronto.enforce_toronto_section(sections, pool, today)
+    out = _normalize_edition({"sections": guarded})
+    if not any(section["id"] == toronto.TORONTO_SECTION_ID for section in out):
+        # No Toronto candidate at all: keep the (empty) tab rather than drop it.
+        toronto.place_section(out, {"id": toronto.TORONTO_SECTION_ID, "label": "Toronto", "stories": []})
+    return out
+
+
 def _log_major_event_coverage(
     sections: list[dict], input_stories: list[dict], today: dt.date
 ) -> None:
@@ -510,6 +526,7 @@ def curate(
     if demoted:
         log.info("crime gate: %d unsupported incident(s) kept off Front Page/lead", demoted)
     sections = _normalize_edition(raw)
+    sections = _guard_toronto_section(sections, eligible, today)
     _log_major_event_coverage(sections, stories, today)
     if following:
         _ensure_opinion_section(sections)

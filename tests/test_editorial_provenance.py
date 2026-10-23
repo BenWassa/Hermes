@@ -71,6 +71,28 @@ def test_records_exact_input_duplicate_groups_and_unknown_model_exclusion(tmp_pa
     assert doc["publication"]["commit"] == "same_git_commit_as_page"
 
 
+def test_backfilled_cards_are_counted_apart_from_unmatched_model_links(tmp_path):
+    rec = EditionEvidence(when=WHEN)
+    a = story(1)
+    rec.record_pool([{"_src": "rss"}], [a])
+    rec.record_following([a], [])
+    rec.record_sports([a], 0)
+    rec.record_trim([a], _trim_input([a], total=2, today=TODAY), TODAY)
+    backfilled = {"link": "https://example.org/backfilled", "backfill": True}
+    rec.record_final({"sections": [{"id": "toronto", "stories": [
+        {"link": a["link"]}, backfilled, {"link": "https://unknown.org/invented"}
+    ]}], "following": []})
+    doc, _ = _published(rec, tmp_path)
+
+    assert doc["counts"]["backfilled_final"] == 1
+    assert doc["counts"]["unmatched_final_links"] == 1  # only the invented link
+    assert doc["counts"]["editorial_final"] == 3
+    assert len(doc["final_unmatched"]) == 1
+    origins = [entry.get("origin") for entry in doc["final_editorial_sources"]]
+    assert origins == [None, "backfill", None]
+    assert doc["final_editorial_sources"][1]["observation_id"] is None
+
+
 def test_partial_provider_outage_is_not_misreported_as_proven_success(tmp_path):
     rec = EditionEvidence(when=WHEN)
     only_rss = story(1)
@@ -280,10 +302,13 @@ def test_invalid_json_reinforcement_uses_existing_retry_and_records_parse(monkey
     rec = EditionEvidence(when=WHEN)
     token = activate(rec)
     try:
-        edition = curate.curate([story(1)], today=TODAY)
+        local = dict(story(2), source="CBC Toronto", section_hint="toronto")
+        edition = curate.curate([story(1), local], today=TODAY)
     finally:
         deactivate(token)
-    assert edition["sections"] == []
+    # The model returned no sections; the Toronto integrity guard (#83) backfills
+    # the one section the paper must never publish without.
+    assert [section["id"] for section in edition["sections"]] == ["toronto"]
     assert rec.parse_outcomes == ["invalid_json", "valid_json"]
     assert len(rec.attempts) == 2
 

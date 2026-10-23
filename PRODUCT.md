@@ -76,6 +76,19 @@ ceiling, create a Canada quota, or inject prose from an event seed or official
 schedule. The Canada Investment Summit 2026 is the regression case for this
 contract. Issues #57 and #62 own the intake-recall and final-selection layers.
 
+### Toronto section integrity
+
+The Toronto desk is for Toronto and the GTA only; Canada-national intake must
+not leak into it. After the single curation call, a deterministic guard
+(`src/toronto.py`) requires each Toronto story to have a Toronto/GTA signal (a
+configured Toronto local feed, place terms in the headline or newswire
+dateline, or body place terms with no other region or national marker). Stories
+without one move to the World/Business/Opinion desk their intake hint names
+when it has room, otherwise they are dropped, and the section is topped back up
+from Toronto candidates so edition size holds. The edition never publishes
+without a Toronto section: if no Toronto candidate exists at all the section
+publishes empty with an error log and the build does not fail. No extra model call is made.
+
 ## Sports
 
 Sports is a personalized Toronto-first morning desk, not a generic sports-news

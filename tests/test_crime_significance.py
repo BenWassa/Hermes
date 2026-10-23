@@ -37,7 +37,7 @@ def _story(
 
 def _filler(count: int, start: int = 1000) -> list[dict]:
     return [
-        _story(start + i, f"Routine city story {i}", section="toronto") for i in range(count)
+        _story(start + i, f"Routine Toronto city story {i}", section="toronto") for i in range(count)
     ]
 
 
