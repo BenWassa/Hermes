@@ -150,3 +150,32 @@ Core publication
 
 This note supersedes the earlier reconciliation language that described weekly
 catch-up as complementary to release-time Core alerts.
+
+## Editorial fidelity rules (#70)
+
+The single weekly model call is trusted only for *which* stored items to select
+and for draft prose. `src/voice_digest.py::finalize_curation` and
+`src/voices/weekly_fidelity.py` apply deterministic rules before anything is
+published or notified (no additional model calls):
+
+- **Canonical metadata.** Cards use the stored title, Core Voice name,
+  publication, date and URL only. A selected item with no title, no canonical
+  URL, no Core Voice attribution, an unknown key, a repeated key, or beyond the
+  cap of 3 (at most 2 per Voice) is excluded. Publication and date are optional.
+- **One set.** The rendered cards, the claim's `selection_keys` and the
+  notification all use the final set. The lead is kept only if it passes checks
+  for exactly that set: it may not quote a title that is not an exact canonical
+  title, name an unselected piece or writer, state a piece/writer count larger
+  than the cards, or report `summary_covers` outside the set. If the final set
+  differs from the model's (exclusion, publish-retry reload) or a check fails, the lead
+  is replaced by a metadata-only canonical lead (`canonical_summary`).
+- **Evidence strength.** Each candidate gets a deterministic `evidence_posture`
+  (`association_only`, `causal_support`, `unspecified`) from its title and public
+  excerpt. Causal wording ("causes", "explains", "drives", "explanatory") about an
+  `association_only` piece is rejected unless the same sentence keeps the
+  limitation explicit.
+- **Filler.** Stock phrasing ("evolving landscape", "societal implications",
+  "the headline suggests", ...) is rejected in the lead and in per-card reasons.
+  A rejected reason is dropped (the card then shows only canonical metadata).
+- **Inspectable.** The page labels the section "Worth your time · N pieces";
+  weekly `--dry-run` prints the selected titles and every fidelity issue.

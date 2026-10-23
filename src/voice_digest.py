@@ -23,7 +23,7 @@ import json
 import logging
 import os
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
@@ -35,8 +35,11 @@ from . import config
 from .voices import roundup_settings as settings
 from .voices.names import clean_text
 from .voices.notify import Alert, NtfyNotifier, NotifyError, RecordingNotifier
+from .voices import weekly_fidelity as fidelity
 from .voices.registry import Registry, RegistryError, TIER_CORE, load_registry
 from .voices.roundup import automatic_period, collect_daily, eligible_items, period_for_id, select_weekly
+from .voices.urls import canonical_url
+from .voices.weekly_context import description_for_item
 from .voices.roundup_state import (
     STATUS_EMPTY,
     STATUS_FAILED,
@@ -57,9 +60,12 @@ TORONTO = ZoneInfo(config.TIMEZONE)
 
 RECENT_PAGE_PATH = Path("docs/voices/recent/index.html")
 WEEKLY_CAP = 3
+# Deterministic bound on a model-chosen shortlist: the brief favors breadth, so one
+# Voice may take at most two of the three slots.
+WEEKLY_MAX_PER_VOICE = 2
 MODEL_POOL_CAP = 30
 RECENT_CAP = 40
-MAX_SUMMARY_CHARS = 1800
+MAX_SUMMARY_CHARS = 1000
 MAX_REASON_CHARS = 360
 SUMMARY_MAX_TOKENS = int(os.environ.get("VOICE_WEEKLY_SUMMARY_MAX_TOKENS", "1400"))
 
@@ -75,6 +81,13 @@ class WeeklyCuration:
     reasons: dict[str, str]
     model_used: bool = False
     fallback_reason: str = ""
+    # Keys the model says its summary discusses; must be a subset of selected_keys.
+    covers: tuple[str, ...] = ()
+    # Per-candidate evidence posture and public excerpt (from source metadata, never the model).
+    postures: dict[str, str] = field(default_factory=dict)
+    excerpts: dict[str, str] = field(default_factory=dict)
+    # Why model text was replaced/dropped or an item was excluded; diagnostic only.
+    issues: tuple[str, ...] = ()
 
 
 class WeeklyCurator:
@@ -162,8 +175,35 @@ class DeterministicWeeklyCurator(WeeklyCurator):
         )
 
 
+SYNTHESIS_RULES = (
+    "Choose selected_keys first. The summary may discuss ONLY the selected pieces: never "
+    "mention, allude to or compare any other candidate or writer, and do not state a count "
+    "of pieces that differs from the number of selected keys.",
+    "The summary must answer what the selected pieces collectively add to the reader's "
+    "understanding: name a real connection, contrast or shared question in concrete terms, "
+    "using each piece's specific claim from its source_description.",
+    "If the selected pieces are unrelated, say so and give each piece its own short sentence. "
+    "Never invent a theme to join them.",
+    "Refer to pieces by writer and publication. Do not put headlines or any other text in "
+    "quotation marks; titles are rendered separately from source metadata.",
+    "Say what each piece claims or contributes, not its broad topic. Keep what a piece "
+    "reports, what its author argues, and what is proposal or speculation distinct.",
+    "When a candidate's evidence_posture is association_only, write 'associated with' or "
+    "'linked to' and never 'causes', 'explains', 'drives' or 'leads to'; name the limitation.",
+    "When a candidate has no source_description, say only what its headline states. Do not "
+    "describe its argument or evidence.",
+    "Avoid stock filler such as 'the evolving landscape of', 'provides substantive insights "
+    "into', 'a significant social trend', 'far-reaching implications' and 'societal "
+    "implications', and never narrate your own evidence ('the headline suggests').",
+)
+
+
 class GeminiWeeklyCurator(WeeklyCurator):
-    """One model call that screens attention-worthiness and writes one weekly editorial brief."""
+    """One model call that screens attention-worthiness and writes one weekly editorial brief.
+
+    Model text is untrusted: titles, writers and dates always come from stored source
+    metadata, and the summary/reasons are re-validated by :func:`finalize_curation`.
+    """
 
     def __init__(self, *, client=None, model: str | None = None):
         self.client = client
@@ -178,23 +218,59 @@ class GeminiWeeklyCurator(WeeklyCurator):
         self.client = genai.Client(api_key=key)
         return self.client
 
+    def _descriptions(self, registry, period) -> dict[str, str] | None:
+        """Public excerpts keyed by identity; ``None`` means metadata-only screening."""
+        return None
+
     def curate(self, candidates, registry, *, period) -> WeeklyCuration:
         pool = candidate_pool(candidates, period)
         if not pool:
             return WeeklyCuration((), "No Core Voice pieces to catch up on this week.", {}, False)
 
+        descriptions = self._descriptions(registry, period)
+        grounded = descriptions is not None
         payload_items = []
+        postures: dict[str, str] = {}
+        excerpts: dict[str, str] = {}
         for item in pool:
-            payload_items.append(
-                {
-                    "key": item.key,
-                    "writer": " & ".join(_voice_names(item, registry)),
-                    "publication": item.publication,
-                    "published_at": item.published_at.isoformat() if item.published_at else None,
-                    "headline": item.title,
-                    "already_in_morning_daily": _already_surfaced(item, period),
-                }
+            excerpt = description_for_item(item, descriptions) if grounded else ""
+            postures[item.key] = fidelity.evidence_posture(item.title, excerpt)
+            if excerpt:
+                excerpts[item.key] = excerpt
+            entry = {
+                "key": item.key,
+                "writer": " & ".join(_voice_names(item, registry)),
+                "publication": item.publication,
+                "published_at": item.published_at.isoformat() if item.published_at else None,
+                "headline": item.title,
+            }
+            if grounded:
+                entry["source_description"] = excerpt or None
+            entry["evidence_posture"] = postures[item.key]
+            entry["already_in_morning_daily"] = _already_surfaced(item, period)
+            payload_items.append(entry)
+
+        if grounded:
+            evidence_boundary = (
+                "Candidates contain publisher/feed metadata. source_description, when present, "
+                "is a public feed/archive excerpt or description and may be incomplete; it is "
+                "not proof that you have the full article. Ground every selection reason and "
+                "the weekly summary only in supplied fields."
             )
+            selection_extra = [
+                "Prefer work that the supplied headline and excerpt support as substantive, explanatory or materially consequential.",
+                "When a candidate has no source_description, be more conservative and do not infer its argument from the headline alone.",
+                "Never invent article arguments, evidence, quotations or conclusions beyond the supplied metadata/excerpts.",
+            ]
+        else:
+            evidence_boundary = (
+                "Candidates contain only writer, publication, date and headline metadata. "
+                "Ground every reason and the summary only in those fields."
+            )
+            selection_extra = [
+                "Prefer work likely to add a new model, argument, explanation or important development.",
+                "Do not infer article arguments or facts that are not supported by the supplied metadata.",
+            ]
 
         prompt = json.dumps(
             {
@@ -204,24 +280,33 @@ class GeminiWeeklyCurator(WeeklyCurator):
                     "institutions, politics and consequential social/cultural questions. "
                     "Attention is scarce; routine publication churn is not enough."
                 ),
+                "evidence_boundary": evidence_boundary,
                 "selection_rules": [
                     "Select 1 to 3 pieces maximum; fewer is better when the week is weak.",
-                    "Prefer work likely to add a new model, argument, explanation or important development.",
+                    f"Select at most {WEEKLY_MAX_PER_VOICE} pieces from any one writer.",
                     "Prefer material significance and novelty over frequency, fame or recency alone.",
-                    "Avoid redundant pieces covering substantially the same apparent topic.",
+                    "Avoid redundant pieces covering substantially the same topic or apparent argument.",
                     "Prefer useful breadth across writers when quality is comparable.",
                     "De-prioritize pieces already surfaced in the morning Daily unless clearly exceptional.",
-                    "Do not infer article arguments or facts that are not supported by the supplied metadata.",
+                    *selection_extra,
                 ],
+                "synthesis_rules": list(SYNTHESIS_RULES),
                 "candidates": payload_items,
                 "output": {
                     "selected_keys": "array of 1-3 exact candidate keys",
                     "summary": (
-                        "one concise 120-180 word editorial brief explaining why this small "
-                        "shortlist is worth attention, grounded only in writer/headline/publication metadata; "
-                        "do not pretend to have read unavailable article bodies"
+                        "a concise 60-110 word synthesis of the selected pieces only, following "
+                        "synthesis_rules; do not pretend to have read unavailable full articles"
                     ),
-                    "reasons": "object mapping selected key to one short attention-based reason",
+                    "summary_covers": (
+                        "array of the selected keys that the summary discusses; every entry "
+                        "must also appear in selected_keys"
+                    ),
+                    "reasons": (
+                        "object mapping each selected key to one short sentence stating that "
+                        "piece's specific claim or contribution as supported by its excerpt; "
+                        "omit a key when the supplied fields do not support a specific claim"
+                    ),
                 },
             },
             ensure_ascii=False,
@@ -231,8 +316,9 @@ class GeminiWeeklyCurator(WeeklyCurator):
             "system_instruction": (
                 "You are the attention editor for Hermes, a private finite newspaper. Your job is "
                 "to say no to most material. Screen for likely reader value, not author prestige or "
-                "publication frequency. You have metadata, not article bodies: never invent article "
-                "arguments, evidence, quotations or conclusions. Return strict JSON only."
+                "publication frequency. You have partial public metadata, not article bodies: never "
+                "invent article arguments, evidence, quotations or conclusions, never restate "
+                "headlines, and never upgrade association to causation. Return strict JSON only."
             ),
             "response_mime_type": "application/json",
             "max_output_tokens": SUMMARY_MAX_TOKENS,
@@ -276,12 +362,138 @@ class GeminiWeeklyCurator(WeeklyCurator):
                 if reason:
                     reasons[key] = reason
 
+        raw_covers = raw.get("summary_covers") or []
+        covers = (
+            tuple(dict.fromkeys(key for key in raw_covers if isinstance(key, str)))
+            if isinstance(raw_covers, list)
+            else ()
+        )
+
         return WeeklyCuration(
             selected_keys=tuple(selected),
             summary=summary,
             reasons=reasons,
             model_used=True,
+            covers=covers,
+            postures=postures,
+            excerpts=excerpts,
         )
+
+
+def _unrenderable(item: RoundupItem, registry: Registry) -> str:
+    """Why a selected item cannot be shown as a faithful card (empty string when it can)."""
+    if not clean_text(item.title):
+        return "missing title"
+    if not canonical_url(item.url):
+        return "missing canonical URL"
+    if not _voice_names(item, registry):
+        return "missing Core Voice attribution"
+    return ""
+
+
+def _piece(item: RoundupItem, registry: Registry, curation: WeeklyCuration) -> fidelity.Piece:
+    return fidelity.Piece(
+        key=item.key,
+        title=item.title,
+        writers=tuple(_voice_names(item, registry)),
+        publication=item.publication,
+        posture=curation.postures.get(item.key, fidelity.POSTURE_UNSPECIFIED),
+        excerpt=curation.excerpts.get(item.key, ""),
+    )
+
+
+def finalize_curation(
+    curation: WeeklyCuration,
+    items_by_key: dict[str, RoundupItem],
+    pool: list[RoundupItem],
+    registry: Registry,
+) -> tuple[list[RoundupItem], WeeklyCuration]:
+    """Resolve the final rendered set and make the model text consistent with it.
+
+    Selection is resolved only against stored items, so canonical title, Voice, publication,
+    date and URL come from source metadata.  Items that cannot be rendered faithfully, repeat
+    a key, or exceed the per-Voice bound are excluded.  Model summary/reasons are published
+    only when they pass the deterministic checks for exactly this final set; otherwise the
+    summary is replaced by a metadata-only canonical lead and offending reasons are dropped.
+    """
+    issues = list(curation.issues)
+    selected: list[RoundupItem] = []
+    per_voice: dict[str, int] = {}
+    for key in curation.selected_keys:
+        item = items_by_key.get(key)
+        if item is None:
+            issues.append(f"excluded {key}: not in the candidate set")
+            continue
+        if any(chosen.key == key for chosen in selected):
+            continue
+        problem = _unrenderable(item, registry)
+        if problem:
+            issues.append(f"excluded {key}: {problem}")
+            continue
+        names = _voice_names(item, registry)
+        if any(per_voice.get(name, 0) >= WEEKLY_MAX_PER_VOICE for name in names):
+            issues.append(f"excluded {key}: per-Voice limit")
+            continue
+        if len(selected) >= WEEKLY_CAP:
+            issues.append(f"excluded {key}: weekly cap")
+            continue
+        for name in names:
+            per_voice[name] = per_voice.get(name, 0) + 1
+        selected.append(item)
+
+    keys = tuple(item.key for item in selected)
+    changed = keys != tuple(curation.selected_keys)
+    if not selected:
+        return [], WeeklyCuration(
+            (),
+            "",
+            {},
+            curation.model_used,
+            curation.fallback_reason,
+            postures=curation.postures,
+            excerpts=curation.excerpts,
+            issues=tuple(dict.fromkeys(issues)),
+        )
+
+    chosen = [_piece(item, registry, curation) for item in selected]
+    pool_pieces = [_piece(item, registry, curation) for item in pool]
+    canonical = fidelity.canonical_summary(chosen)
+    summary = curation.summary
+    reasons = {key: text for key, text in curation.reasons.items() if key in keys}
+
+    if curation.model_used:
+        if changed:
+            issues.append("summary replaced: final selection differs from the model's selection")
+            summary = canonical
+        elif summary != canonical:
+            problems = fidelity.summary_problems(
+                summary, chosen, pool_pieces, covers=curation.covers
+            )
+            if problems:
+                issues.extend(f"summary replaced: {problem}" for problem in problems)
+                summary = canonical
+        for piece in chosen:
+            text = reasons.get(piece.key)
+            if not text:
+                continue
+            problems = fidelity.reason_problems(text, piece, chosen, pool_pieces)
+            if problems:
+                issues.extend(f"reason dropped for {piece.key}: {problem}" for problem in problems)
+                del reasons[piece.key]
+    elif changed:
+        summary = canonical
+
+    return selected, WeeklyCuration(
+        selected_keys=keys,
+        summary=summary,
+        reasons=reasons,
+        model_used=curation.model_used,
+        fallback_reason=curation.fallback_reason,
+        covers=tuple(key for key in curation.covers if key in keys),
+        postures=curation.postures,
+        excerpts=curation.excerpts,
+        issues=tuple(dict.fromkeys(issues)),
+    )
 
 
 def screen_weekly(candidates, registry, *, period, curator: WeeklyCurator | None = None):
@@ -367,6 +579,14 @@ def _page_shell(*, title: str, eyebrow: str, heading: str, dek: str, body: str) 
 </main></body></html>"""
 
 
+def _summary_for_render(selected, registry: Registry, curation: WeeklyCuration) -> str:
+    """Never print a synthesis written for a different set than the cards beside it."""
+    rendered = {item.key for item in selected}
+    if curation.summary and (not curation.selected_keys or set(curation.selected_keys) == rendered):
+        return curation.summary
+    return fidelity.canonical_summary([_piece(item, registry, curation) for item in selected])
+
+
 def render_weekly(period, selected, registry, curation: WeeklyCuration, *, suppressed=False) -> str:
     label = period.cutoff.astimezone(TORONTO).strftime("Week ending %B %-d, %Y")
     if suppressed:
@@ -378,9 +598,10 @@ def render_weekly(period, selected, registry, curation: WeeklyCuration, *, suppr
             _card(item, registry, reason=curation.reasons.get(item.key, ""))
             for item in selected
         )
+        count = f"{len(selected)} piece" + ("" if len(selected) == 1 else "s")
         body = (
-            f'<div class="summary">{html.escape(curation.summary)}</div>'
-            '<div class="section-title">Worth your time</div>'
+            f'<div class="summary">{html.escape(_summary_for_render(selected, registry, curation))}</div>'
+            f'<div class="section-title">Worth your time \u00b7 {count}</div>'
             f'{cards}'
             '<a class="quiet-link" href="recent/">Browse all recent Core writing →</a>'
         )
@@ -515,8 +736,9 @@ def publish_weekly_screened(
     else:
         use_curator = curator or (DeterministicWeeklyCurator() if dry_run else GeminiWeeklyCurator())
         curation = screen_weekly(candidates, registry, period=period, curator=use_curator)
-        selected_by_key = {item.key: item for item in candidates}
-        selected = [selected_by_key[key] for key in curation.selected_keys if key in selected_by_key][:WEEKLY_CAP]
+        selected, curation = finalize_curation(
+            curation, {item.key: item for item in candidates}, candidates, registry
+        )
         status = STATUS_PENDING if selected else STATUS_EMPTY
 
     if dry_run:
@@ -524,9 +746,19 @@ def publish_weekly_screened(
             "period": period.period_id,
             "candidates": len(candidates),
             "selected": [item.key for item in selected],
+            "selected_pieces": [
+                {
+                    "title": item.title,
+                    "voices": _voice_names(item, registry),
+                    "publication": item.publication,
+                    "url": item.url,
+                }
+                for item in selected
+            ],
             "model_used": curation.model_used,
             "summary": curation.summary,
             "fallback_reason": curation.fallback_reason,
+            "fidelity_issues": list(curation.issues),
         }, indent=2))
         return EXIT_OK
 
@@ -536,13 +768,18 @@ def publish_weekly_screened(
     attempts = settings.PUSH_ATTEMPTS
     published_state: RoundupState | None = None
     final_selected = selected
+    final_curation = curation
     for attempt in range(1, attempts + 1):
         if attempt > 1:
             state = store.load()
             if state.last_roundup and state.last_roundup.period_id == period.period_id:
                 print(f"weekly: {period.period_id} claimed by another writer; no notification")
                 return EXIT_OK
-            final_selected = [state.items[key] for key in curation.selected_keys if key in state.items][:WEEKLY_CAP]
+            # Re-resolve against freshly loaded state; if the set shifts, the lead is rewritten
+            # from canonical metadata rather than printed beside a different set of cards.
+            final_selected, final_curation = finalize_curation(
+                curation, state.items, candidates, registry
+            )
             if status == STATUS_PENDING and not final_selected:
                 status = STATUS_EMPTY
 
@@ -558,7 +795,7 @@ def publish_weekly_screened(
             period,
             final_selected,
             registry,
-            curation,
+            final_curation,
             suppressed=status == STATUS_SUPPRESSED,
         )
         if store.publish(
