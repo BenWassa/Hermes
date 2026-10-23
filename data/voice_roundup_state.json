@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-22T19:22:58Z",
-  "last_reconcile_at": "2026-10-21T19:30:38Z",
+  "updated_at": "2026-10-23T19:30:29Z",
+  "last_reconcile_at": "2026-10-23T19:30:29Z",
   "last_roundup": {
     "period_id": "2026-10-18",
     "cutoff": "2026-10-18T21:00:00Z",
@@ -219,22 +219,22 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html",
-        "pid:rss:https://marginalrevolution.com/?p=93948",
-        "syn:how-and-why-did-the-victorians-succeed|voice:tyler-cowen|2026-10-08",
-        "fp:marginalrevolution.com|how-and-why-did-the-victorians-succeed|2026-10-08"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html",
+        "pid:rss:https://marginalrevolution.com/?p=94053",
+        "syn:friday-assorted-links|voice:tyler-cowen|2026-10-23",
+        "fp:marginalrevolution.com|friday-assorted-links|2026-10-23"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-10-08T20:46:53Z",
-      "published_at": "2026-10-08T07:02:17Z",
-      "title": "How and why did the Victorians succeed?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-and-why-did-the-victorians-succeed.html?utm_source=rss&utm_medium=rss&utm_campaign=how-and-why-did-the-victorians-succeed",
+      "first_seen": "2026-10-23T19:30:29Z",
+      "published_at": "2026-10-23T16:35:40Z",
+      "title": "Friday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-596",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html": {
       "keys": [
@@ -251,7 +251,7 @@
       "title": "How Long Do Wealth Shocks Persist? Less Than Three Generations in England, 1700–2026",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html?utm_source=rss&utm_medium=rss&utm_campaign=how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-the-nyt-podcast-and-interview-dwarkesh.html": {
       "keys": [
@@ -542,22 +542,22 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html",
-        "pid:rss:https://marginalrevolution.com/?p=93949",
-        "syn:predictions-for-economics-given-ai|voice:tyler-cowen|2026-10-08",
-        "fp:marginalrevolution.com|predictions-for-economics-given-ai|2026-10-08"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html",
+        "pid:rss:https://marginalrevolution.com/?p=94060",
+        "syn:podcast-with-rabbi-david-wolpe|voice:tyler-cowen|2026-10-23",
+        "fp:marginalrevolution.com|podcast-with-rabbi-david-wolpe|2026-10-23"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-10-08T20:46:53Z",
-      "published_at": "2026-10-08T17:34:18Z",
-      "title": "Predictions for economics, given AI",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/predictions-for-economics-given-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=predictions-for-economics-given-ai",
+      "first_seen": "2026-10-23T19:30:29Z",
+      "published_at": "2026-10-23T07:38:28Z",
+      "title": "Podcast with Rabbi David Wolpe",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html?utm_source=rss&utm_medium=rss&utm_campaign=podcast-with-rabbi-david-wolpe",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
+      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/robert-hall-nobel-laureate.html": {
       "keys": [
@@ -780,23 +780,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-573.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-573.html",
-        "pid:rss:https://marginalrevolution.com/?p=93947",
-        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-08",
-        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-08"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-08T20:46:53Z",
-      "published_at": "2026-10-08T17:14:37Z",
-      "title": "Thursday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-573.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-573",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-574.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-574.html",
@@ -829,7 +812,7 @@
       "title": "Thursday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-575",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html": {
       "keys": [
@@ -916,23 +899,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html",
-        "pid:rss:https://marginalrevolution.com/?p=93918",
-        "syn:what-i-ve-been-reading|voice:tyler-cowen|2026-10-08",
-        "fp:marginalrevolution.com|what-i-ve-been-reading|2026-10-08"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-08T20:46:53Z",
-      "published_at": "2026-10-08T04:52:29Z",
-      "title": "What I’ve been reading",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-296.html?utm_source=rss&utm_medium=rss&utm_campaign=what-ive-been-reading-296",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-08T20:46:53Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html",
@@ -983,6 +949,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html?utm_source=rss&utm_medium=rss&utm_campaign=why-i-do-not-use-llms-more",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/will-bystander-economies-be-able-to-finance-their-governments.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/will-bystander-economies-be-able-to-finance-their-governments.html",
+        "pid:rss:https://marginalrevolution.com/?p=94044",
+        "syn:will-bystander-economies-be-able-to-finance-their-governments|voice:tyler-cowen|2026-10-23",
+        "fp:marginalrevolution.com|will-bystander-economies-be-able-to-finance-their-governments|2026-10-23"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-23T19:30:29Z",
+      "published_at": "2026-10-23T04:51:50Z",
+      "title": "Will bystander economies be able to finance their governments?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/will-bystander-economies-be-able-to-finance-their-governments.html?utm_source=rss&utm_medium=rss&utm_campaign=will-bystander-economies-be-able-to-finance-their-governments",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html": {
       "keys": [
@@ -1090,6 +1073,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
+    "url:https://nytimes.com/2026/10/23/opinion/ezra-klein-podcast-sarah-longwell.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/23/opinion/ezra-klein-podcast-sarah-longwell.html",
+        "pid:rss:https://www.nytimes.com/2026/10/23/opinion/ezra-klein-podcast-sarah-longwell.html",
+        "syn:what-hundreds-of-focus-groups-with-trump-voters-revealed|voice:ezra-klein|2026-10-23",
+        "fp:nytimes.com|what-hundreds-of-focus-groups-with-trump-voters-revealed|2026-10-23"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-23T19:30:29Z",
+      "published_at": "2026-10-23T19:19:54Z",
+      "title": "What Hundreds of Focus Groups With Trump Voters Revealed",
+      "url": "https://www.nytimes.com/2026/10/23/opinion/ezra-klein-podcast-sarah-longwell.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
+    },
     "url:https://persuasion.community/p/thymos-and-american-foreign-policy": {
       "keys": [
         "url:https://persuasion.community/p/thymos-and-american-foreign-policy",
@@ -1190,6 +1190,22 @@
       "url": "https://www.theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-alberta-premier-danielle-smith-is-targeting-immigration-but-what-do": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-alberta-premier-danielle-smith-is-targeting-immigration-but-what-do",
+        "syn:alberta-premier-danielle-smith-is-targeting-immigration-but-what-do-the-numbers|voice:andrew-coyne|2026-10-23",
+        "fp:theglobeandmail.com|alberta-premier-danielle-smith-is-targeting-immigration-but-what-do-the-numbers|2026-10-23"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-10-23T19:30:29Z",
+      "published_at": "2026-10-23T00:00:00Z",
+      "title": "Alberta Premier Danielle Smith is targeting immigration. But what do the numbers say?",
+      "url": "https://www.theglobeandmail.com/opinion/article-alberta-premier-danielle-smith-is-targeting-immigration-but-what-do/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
     "url:https://theglobeandmail.com/opinion/article-alberta-separatists-lost-badly-danielle-smith-might-have-lost-worse": {
       "keys": [
