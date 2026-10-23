@@ -161,7 +161,7 @@ published or notified (no additional model calls):
 - **Canonical metadata.** Cards use the stored title, Core Voice name,
   publication, date and URL only. A selected item with no title, no canonical
   URL, no Core Voice attribution, an unknown key, a repeated key, or beyond the
-  cap of 3 (at most 2 per Voice) is excluded. Publication and date are optional.
+  cap of 3 (at most 1 per Voice) is excluded. Publication and date are optional.
 - **One set.** The rendered cards, the claim's `selection_keys` and the
   notification all use the final set. The lead is kept only if it passes checks
   for exactly that set: it may not quote a title that is not an exact canonical

@@ -62,7 +62,7 @@ RECENT_PAGE_PATH = Path("docs/voices/recent/index.html")
 WEEKLY_CAP = 3
 # Deterministic bound on a model-chosen shortlist: the brief favors breadth, so one
 # Voice may take at most two of the three slots.
-WEEKLY_MAX_PER_VOICE = 2
+WEEKLY_MAX_PER_VOICE = 1
 MODEL_POOL_CAP = 30
 RECENT_CAP = 40
 MAX_SUMMARY_CHARS = 1000

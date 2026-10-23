@@ -284,6 +284,5 @@ def canonical_summary(selected: list[Piece]) -> str:
     count = {2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six"}.get(len(selected), str(len(selected)))
     parts = "; ".join(f"{_byline(p)}, “{p.title}”" for p in selected)
     return (
-        f"{count} Core pieces cleared the filter this week. "
-        f"No shared theme is claimed beyond the selection itself: {parts}."
+        f"{count} Core pieces cleared the filter this week, each standing on its own: {parts}."
     )

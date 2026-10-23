@@ -291,10 +291,10 @@ def test_same_voice_is_bounded_and_synthesis_is_rewritten_for_the_kept_set():
     curation = WeeklyCuration(keys, text, {}, True, covers=keys)
     selected, final = finalize_curation(curation, dict(state.items), items, registry())
 
-    assert len(selected) == WEEKLY_MAX_PER_VOICE == 2
+    assert len(selected) == WEEKLY_MAX_PER_VOICE == 1
     assert final.selected_keys == tuple(item.key for item in selected)
     assert final.summary != text
-    assert "Two Core pieces" in final.summary
+    assert final.summary.startswith("One Core piece")
     assert any("per-Voice limit" in issue for issue in final.issues)
 
 
