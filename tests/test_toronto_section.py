@@ -274,7 +274,8 @@ def test_backfill_skips_stories_already_in_the_paper_near_duplicates_and_opinion
 
 
 def test_backfill_prefers_non_violent_items_and_marks_sensitivity():
-    violent = cand("Man killed in Scarborough shooting", "https://example.com/v", source="CBC Toronto", hint="toronto")
+    violent = cand("Man killed in Scarborough shooting", "https://example.com/v", source="CBC Toronto", hint="toronto",
+                   description="Police warn the public; suspect at large.")
     calm = cand("Scarborough library reopens", "https://example.com/c", source="CBC Toronto", hint="toronto")
     out, _ = toronto.enforce_toronto_section(sections_with(None), [violent, calm], TODAY)
     stories = section(out, "toronto")["stories"]
@@ -350,7 +351,10 @@ def test_backfill_skips_opinion_by_hint_genre_or_path(attrs):
     "Gunfire heard near Jane and Finch", "Slain man identified", "Manslaughter charge laid in Toronto",
 ])
 def test_backfill_marks_newly_covered_incidents_sensitive_and_sorts_them_last(title):
-    incident = cand(title, "https://example.com/incident", source="CBC Toronto", hint="toronto")
+    # A civic reason keeps the incident eligible under the crime gate (#71), so
+    # this exercises sensitivity ordering rather than the gate's exclusion.
+    incident = cand(title, "https://example.com/incident", source="CBC Toronto", hint="toronto",
+                    description="Police warn the public; suspect at large.")
     calm = cand("Scarborough library reopens", "https://example.com/c", source="CBC Toronto", hint="toronto")
     out, _ = toronto.enforce_toronto_section(sections_with(None), [incident, calm], TODAY)
     stories = section(out, "toronto")["stories"]
@@ -420,3 +424,22 @@ def test_canada_national_recall_is_untouched_by_the_guard():
                for i in range(12) for h in ("world", "business")]
     stories.append(MORDEN)
     assert MORDEN in _trim_input(stories, total=8, today=TODAY)
+
+
+def test_backfill_never_readds_incidents_withheld_by_the_crime_gate():
+    from src import crime
+
+    incident = cand(
+        "Man shot dead outside Scarborough restaurant",
+        "https://example.com/withheld",
+        source="CBC Toronto",
+        hint="toronto",
+        description="Police are investigating.",
+    )
+    calm = cand("Scarborough library reopens", "https://example.com/calm", source="CBC Toronto", hint="toronto")
+    assert crime.is_unsupported_incident(incident)
+
+    out, _ = toronto.enforce_toronto_section(sections_with(None), [incident, calm], TODAY)
+
+    links = [s["link"] for s in section(out, "toronto")["stories"]]
+    assert links == [calm["link"]]

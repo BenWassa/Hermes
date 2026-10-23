@@ -36,7 +36,7 @@ from collections import defaultdict
 from email.utils import parsedate_to_datetime
 from zoneinfo import ZoneInfo
 
-from . import canada, config
+from . import canada, config, crime
 from .voices.urls import canonical_url
 
 log = logging.getLogger("the-daily.toronto")
@@ -286,6 +286,8 @@ def _backfill(
         if not candidate.get("title") or not candidate.get("link"):
             continue
         if not _is_toronto_intake(candidate) or _is_opinion(candidate):
+            continue
+        if crime.is_unsupported_incident(candidate):
             continue
         eligible.append(candidate)
     ordered = _round_robin_sources(eligible)
