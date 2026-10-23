@@ -132,3 +132,33 @@ def test_fallback_equal_to_primary_is_not_tried_twice(curate, monkeypatch):
         _run(curate, client, retries=0)
 
     assert calls == ["gemini-2.5-flash"]
+
+
+def test_reinforcement_call_does_not_retry_a_model_already_exhausted(curate):
+    exhausted: set[str] = set()
+    client, calls = _model(curate, {"gemini-2.5-flash": 503})
+
+    for _ in range(2):  # first call, then the JSON-reinforcement call
+        recorder = EditionEvidence(when=WHEN)
+        token = activate(recorder)
+        try:
+            curate._generate(client, "[]", TODAY, retries=3, exhausted=exhausted)
+        finally:
+            deactivate(token)
+
+    assert calls == ["gemini-2.5-flash"] * 4 + ["gemini-2.5-flash-lite"] * 2
+
+
+def test_ledger_flags_fallback_use_even_when_attempts_overflow_the_cap(curate):
+    from src import editorial_provenance as ep
+
+    recorder = EditionEvidence(when=WHEN)
+    for i in range(ep.MAX_ATTEMPTS):
+        recorder.record_attempt(model="gemini-2.5-flash", attempt=i, duration_ms=1, code=503, outcome="api_error")
+    recorder.record_attempt(
+        model="gemini-2.5-flash-lite", attempt=0, duration_ms=1,
+        response=SimpleNamespace(model_version="gemini-2.5-flash-lite", usage_metadata=None),
+    )
+
+    assert len(recorder.attempts) == ep.MAX_ATTEMPTS  # the fallback attempt row was truncated
+    assert recorder.fallback_used is True
