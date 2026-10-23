@@ -1,8 +1,10 @@
 # Issue #64 — Daily schedule recovery
 
-Status: **OPEN**  
+Status: **CLOSED** (2026-10-23)  
 GitHub: https://github.com/BenWassa/Hermes/issues/64  
-Lifecycle: keep this spec in `docs/open/` while active; move it to `docs/closed/` when #64 is completed and verified on merged `main`.
+Shipped: PR #65. Residual punctuality work (hedging the ~06:00 target against multi-hour schedule delay) was split to #68 and is tracked there.  
+Production verification: the Sep 21 push-triggered recovery run published the missing edition (~08:31 Toronto), and every edition since has published; the workflow now reports distinct outcomes (`already-published-noop`, `pre-05-scheduled-noop`, `build-failure`, ...) so a green run can no longer hide a missing Daily.  
+Lifecycle: moved from `docs/open/` per `docs/ISSUE_TRACKING.md` after merge and production verification.
 
 ## Problem
 
