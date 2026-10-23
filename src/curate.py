@@ -43,7 +43,6 @@ from .opinion import (
 log = logging.getLogger("the-daily.curate")
 
 _RETRY_CODES = {429, 500, 503}
-_FALLBACK_MODEL = "gemini-2.5-flash"
 
 _FOLLOWING_INSTRUCTION = """
 
@@ -116,10 +115,15 @@ def _generate(
     *,
     include_following: bool = False,
 ):
-    """generate_content with transient backoff and quota-model fallback."""
+    """generate_content with transient backoff and a labelled degraded fallback.
+
+    The fallback model is tried only after the primary exhausts its retries on a
+    transient provider error (429/500/503); any other API error is raised as is.
+    """
     models_to_try = [config.CURATE_MODEL]
-    if config.CURATE_MODEL != _FALLBACK_MODEL:
-        models_to_try.append(_FALLBACK_MODEL)
+    fallback = config.CURATE_FALLBACK_MODEL
+    if fallback and fallback != config.CURATE_MODEL:
+        models_to_try.append(fallback)
 
     last: Exception | None = None
     recorder = evidence_current()
@@ -154,12 +158,15 @@ def _generate(
                     last = exc
                     continue
                 last = exc
-                if code == 429 and model != models_to_try[-1]:
-                    log.warning(
-                        "Quota exhausted on %s; switching to fallback %s",
-                        model,
-                        models_to_try[-1],
-                    )
+                if code not in _RETRY_CODES or model == models_to_try[-1]:
+                    raise
+                log.warning(
+                    "Gemini %s on %s after %d attempts; DEGRADED edition: falling back to %s",
+                    code,
+                    model,
+                    retries + 1,
+                    models_to_try[-1],
+                )
                 break
             except Exception:
                 if recorder is not None:
