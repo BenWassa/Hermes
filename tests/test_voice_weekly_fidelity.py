@@ -499,3 +499,28 @@ def test_synthesis_input_is_bounded_to_the_candidate_pool():
     payload = json.loads(models.calls[0]["contents"])
     assert {c["key"] for c in payload["candidates"]} == {i.key for i in items}
     assert all(c["writer"] for c in payload["candidates"])
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Associated Press reports rents rose again this quarter.",
+        "A paper from the American Economic Association on housing.",
+        "An associate professor at MIT on chip supply.",
+        "Survey data show households are spending less.",
+    ],
+)
+def test_incidental_association_words_do_not_mark_a_piece_association_only(text):
+    assert fid.evidence_posture(text) == fid.POSTURE_UNSPECIFIED
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Religiosity is associated with lower internet use, an observational result.",
+        "The study finds a correlation between the two.",
+        "A link between sleep and mood, from cross-sectional data.",
+    ],
+)
+def test_explicit_association_language_still_marks_a_piece_association_only(text):
+    assert fid.evidence_posture(text) == fid.POSTURE_ASSOCIATION

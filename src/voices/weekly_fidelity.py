@@ -37,8 +37,8 @@ _CAUSAL_SUPPORT = re.compile(
     re.I,
 )
 _ASSOCIATION = re.compile(
-    r"\b(correlat\w*|associat\w*|linked to|link between|relationship between|"
-    r"observational|cross-sectional|survey data|self-report\w*|"
+    r"\b(correlat\w*|associat(?:ed|ion|ions) (?:with|between)|linked to|link between|"
+    r"relationship between|observational|cross-sectional|self-report\w*|"
     r"(?:cannot|can't|does not|doesn't|not) (?:establish|prove|show|demonstrate) causa\w*|"
     r"causal limitations?|no causal)\b",
     re.I,

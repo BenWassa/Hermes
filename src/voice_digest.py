@@ -61,7 +61,7 @@ TORONTO = ZoneInfo(config.TIMEZONE)
 RECENT_PAGE_PATH = Path("docs/voices/recent/index.html")
 WEEKLY_CAP = 3
 # Deterministic bound on a model-chosen shortlist: the brief favors breadth, so one
-# Voice may take at most two of the three slots.
+# Voice may take at most one of the three slots, so the brief spans writers.
 WEEKLY_MAX_PER_VOICE = 1
 MODEL_POOL_CAP = 30
 RECENT_CAP = 40
