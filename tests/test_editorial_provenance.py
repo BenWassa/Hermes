@@ -209,6 +209,7 @@ def test_quota_fallback_records_both_model_attempts(monkeypatch):
     import importlib
     curate = importlib.import_module("src.curate")
     monkeypatch.setattr(config, "CURATE_MODEL", "gemini-2.5-pro")
+    monkeypatch.setattr(config, "CURATE_FALLBACK_MODEL", "gemini-2.5-flash")
     class QuotaError(Exception):
         code = 429
     monkeypatch.setattr(curate.genai_errors, "APIError", QuotaError)

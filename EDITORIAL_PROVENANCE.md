@@ -76,7 +76,10 @@ separable without an independent rubric.
 `model.attempts[]` captures requested/attempted/actual model names, fallback
 status, retry index, per-attempt duration, provider status code, configured
 thinking budget, and provider-reported token counters. Token counters can be
-missing; do not replace missing values with zeros. `json_parse_outcomes[]`
+missing; do not replace missing values with zeros. `model.fallback_used` is true
+whenever a successful attempt used a model other than the requested one (a
+degraded edition, #82); it is set outside the attempts cap, so it survives
+truncation of `attempts[]`. `json_parse_outcomes[]`
 distinguishes valid JSON from invalid JSON and empty model responses. Prompt
 and schema are represented by SHA-256 fingerprints, **not the prompt text**.
 The SDK package version is captured if installed.

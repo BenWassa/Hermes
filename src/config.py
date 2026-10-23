@@ -243,6 +243,11 @@ NTFY_BASE_URL = os.environ.get("NTFY_BASE_URL", "https://ntfy.sh").rstrip("/")
 # Google Gemini, free tier via an AI Studio key. Override with CURATE_MODEL
 # (e.g. "gemini-2.0-flash" or "gemini-2.5-flash-lite") if you hit free limits.
 CURATE_MODEL = os.environ.get("CURATE_MODEL", "gemini-2.5-flash")
+# Degraded fallback, tried only after the primary model exhausts its retries on
+# a transient provider error (429/500/503). It is never silent: the evidence
+# ledger records requested vs. attempted model and the log carries a warning.
+# Set to an empty string to disable. Not yet quality-benchmarked (#72/#73).
+CURATE_FALLBACK_MODEL = os.environ.get("CURATE_FALLBACK_MODEL", "gemini-2.5-flash-lite").strip()
 CURATE_MAX_TOKENS = 16000
 # Cap raw stories sent to the model (PRD targets ~40-60), balanced across
 # section hints so Toronto and the wire sections all stay represented.
