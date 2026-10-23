@@ -86,9 +86,8 @@ dateline, or body place terms with no other region or national marker). Stories
 without one move to the World/Business/Opinion desk their intake hint names
 when it has room, otherwise they are dropped, and the section is topped back up
 from Toronto candidates so edition size holds. The edition never publishes
-without a Toronto section: if no Toronto candidate exists at all the build
-fails loudly (`TORONTO_SECTION_REQUIRED=0` degrades to an empty section with an
-error log). No extra model call is made.
+without a Toronto section: if no Toronto candidate exists at all the section
+publishes empty with an error log and the build does not fail. No extra model call is made.
 
 ## Sports
 

@@ -435,7 +435,7 @@ def _guard_toronto_section(
     guarded, _stats = toronto.enforce_toronto_section(sections, pool, today)
     out = _normalize_edition({"sections": guarded})
     if not any(section["id"] == toronto.TORONTO_SECTION_ID for section in out):
-        # Only reachable with TORONTO_SECTION_REQUIRED=0: keep the (empty) tab.
+        # No Toronto candidate at all: keep the (empty) tab rather than drop it.
         toronto.place_section(out, {"id": toronto.TORONTO_SECTION_ID, "label": "Toronto", "stories": []})
     return out
 

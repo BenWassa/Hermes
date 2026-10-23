@@ -12,7 +12,7 @@ import logging
 
 import pytest
 
-from src import canada, config, toronto
+from src import canada, toronto
 from src.curate import _guard_toronto_section, _normalize_edition
 
 TODAY = dt.date(2026, 10, 22)
@@ -279,21 +279,16 @@ def test_backfill_prefers_non_violent_items_and_marks_sensitivity():
     assert [s["sensitivity"] for s in stories] == [False, True]
 
 
-def test_no_toronto_candidate_at_all_fails_loudly():
-    with pytest.raises(toronto.TorontoSectionError):
-        toronto.enforce_toronto_section(sections_with(None), OFF_CITY, TODAY)
-
-
-def test_off_city_only_toronto_section_without_candidates_fails_loudly():
-    with pytest.raises(toronto.TorontoSectionError):
-        toronto.enforce_toronto_section(sections_with([card(MORDEN, 1)], world=[]), [MORDEN], TODAY)
-
-
-def test_optional_mode_degrades_to_an_empty_section_with_an_error_log(caplog):
+def test_no_toronto_candidate_at_all_degrades_to_an_empty_section_with_an_error_log(caplog):
     with caplog.at_level(logging.ERROR, logger="the-daily.toronto"):
-        out, stats = toronto.enforce_toronto_section(sections_with(None), OFF_CITY, TODAY, required=False)
+        out, stats = toronto.enforce_toronto_section(sections_with(None), OFF_CITY, TODAY)
     assert section(out, "toronto")["stories"] == [] and stats["final"] == 0
     assert any("empty" in r.message for r in caplog.records)
+
+
+def test_off_city_only_toronto_section_without_candidates_publishes_empty():
+    out, stats = toronto.enforce_toronto_section(sections_with([card(MORDEN, 1)], world=[]), [MORDEN], TODAY)
+    assert section(out, "toronto")["stories"] == [] and stats["final"] == 0
 
 
 # --- curate hook -------------------------------------------------------------
@@ -322,8 +317,7 @@ def test_hook_leaves_a_clean_edition_unchanged():
     assert [(s["id"], [x["link"] for x in s["stories"]]) for s in out] == before
 
 
-def test_hook_keeps_empty_toronto_tab_only_when_not_required(monkeypatch):
-    monkeypatch.setattr(config, "TORONTO_SECTION_REQUIRED", False)
+def test_hook_keeps_an_empty_toronto_tab_when_there_is_no_candidate():
     sections = _normalize_edition({"sections": sections_with(None, world=[card(MORDEN, 1)])})
     out = _guard_toronto_section(sections, [MORDEN], TODAY)
     assert section(out, "toronto") == {"id": "toronto", "label": "Toronto", "stories": []}

@@ -247,13 +247,6 @@ CURATE_MAX_TOKENS = 16000
 # Cap raw stories sent to the model (PRD targets ~40-60), balanced across
 # section hints so Toronto and the wire sections all stay represented.
 CURATE_MAX_INPUT = 60
-# The finished edition must carry a non-empty Toronto section (see toronto.py).
-# When no Toronto candidate exists at all the build fails loudly instead of
-# publishing without it; set TORONTO_SECTION_REQUIRED=0 to publish an empty
-# Toronto section with an error log instead.
-TORONTO_SECTION_REQUIRED = os.environ.get("TORONTO_SECTION_REQUIRED", "1").strip().lower() not in {
-    "0", "false", "no", "off"
-}
 # Reasoning budget for the curate call (2.5-series models). A modest budget lets
 # the model actually weigh, dedupe, rank, and synthesize rather than paraphrase,
 # which is what lifts the lead summaries and the "why it matters" analysis. Set

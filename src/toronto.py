@@ -18,9 +18,9 @@ call. It adds no model call and sends nothing new to the model:
 * The signal rules are generic place and feed evidence, not per-story rules.
 * After removal the section is topped back up from strong-signal Toronto
   candidates in the full eligible pool, so edition size survives.
-* The finished edition must contain a non-empty Toronto section. If no
-  Toronto candidate exists at all the build fails loudly rather than publish
-  without it (set TORONTO_SECTION_REQUIRED=0 to degrade to an empty section).
+* The finished edition always carries a Toronto section. If no Toronto
+  candidate exists at all the section publishes empty with an error log; the
+  build never fails over it.
 
 Backfilled cards are built from source metadata only. They are a fallback and
 deliberately plain: no analysis, no invented prose.
@@ -92,10 +92,6 @@ _WORD_RE = re.compile(r"[a-z0-9']{4,}")
 _TORONTO_TZ = ZoneInfo(config.TIMEZONE)
 _SUMMARY_LIMIT = 320
 _DUPLICATE_OVERLAP = 0.6
-
-
-class TorontoSectionError(RuntimeError):
-    """The edition would publish without any Toronto story."""
 
 
 def _norm(text: object) -> str:
@@ -295,8 +291,6 @@ def enforce_toronto_section(
     sections: list[dict],
     pool: list[dict],
     today: dt.date,
-    *,
-    required: bool | None = None,
 ) -> tuple[list[dict], dict]:
     """Return sections whose Toronto section is on-city and present.
 
@@ -304,7 +298,6 @@ def enforce_toronto_section(
     intake (not just the bounded model input) so backfill can reach Toronto
     candidates the balanced trim did not send. Returns ``(sections, stats)``.
     """
-    required = config.TORONTO_SECTION_REQUIRED if required is None else required
     sections = [dict(s, stories=list(s.get("stories", []))) for s in sections]
     index = _index(pool)
     spec_cap = _section_cap(TORONTO_SECTION_ID)
@@ -342,8 +335,6 @@ def enforce_toronto_section(
 
     if not kept:
         message = "Toronto section would publish empty: no on-city story and no Toronto candidate in the pool"
-        if required:
-            raise TorontoSectionError(message)
         log.error("toronto guard: %s; publishing an empty Toronto section", message)
 
     label = next(s["label"] for s in config.SECTIONS if s["id"] == TORONTO_SECTION_ID)
