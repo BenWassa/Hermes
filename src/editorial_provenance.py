@@ -329,6 +329,7 @@ class EditionEvidence:
             article_id: [c for c in options if c["observation_id"] in self.model_input_ids]
             for article_id, options in sources.items()
         }
+        backfilled = 0
         for section in edition.get("sections", []):
             if section.get("id") == "sports":
                 continue
@@ -336,6 +337,14 @@ class EditionEvidence:
                 if not isinstance(story, dict):
                     continue
                 article_id = _identity(story) if story.get("link") else None
+                if story.get("backfill") is True:
+                    # Deterministic section-integrity fallback card (toronto.py):
+                    # not model-selected, so not an unmatched/invented link.
+                    self.selected.append({"section": _clean(section.get("id"), 24),
+                                          "article_id": article_id, "observation_id": None,
+                                          "origin": "backfill"})
+                    backfilled += 1
+                    continue
                 match = (input_sources.get(article_id) or [None])[0] if article_id else None
                 result = {"section": _clean(section.get("id"), 24),
                           "article_id": match["article_id"] if match else None,
@@ -349,6 +358,7 @@ class EditionEvidence:
         self.counts["editorial_final"] = len(self.selected)
         self.counts["following_final"] = len(edition.get("following", []))
         self.counts["unmatched_final_links"] = len(self.unmatched)
+        self.counts["backfilled_final"] = backfilled
         self.stages["selection"] = "complete"
         self.stages["render"] = "pending"
 

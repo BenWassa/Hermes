@@ -168,9 +168,11 @@ def test_off_city_items_leave_toronto_and_genuine_ones_stay():
     assert WAYMO["link"] in links and SANTA_FUND["link"] in links
     assert GOOSE_BAY["link"] not in links and MORDEN["link"] not in links
     assert stats["kept"] == 2 and stats["reassigned"] + stats["dropped"] == 2
-    # Edition size preserved: the two slots are refilled from the Toronto pool.
-    assert len(links) == 4
-    assert {BIKE_LANES["link"], PERIGON_TORONTO["link"]} <= set(links)
+    # Edition size is refilled from Toronto-intake candidates only. The Perigon
+    # item has a Toronto headline but came through a World hint, so keyword
+    # evidence alone does not qualify it for backfill.
+    assert len(links) == 3
+    assert BIKE_LANES["link"] in links and PERIGON_TORONTO["link"] not in links
 
 
 def test_every_baseline_off_city_item_is_removed_even_if_all_seven_were_placed():
@@ -226,14 +228,15 @@ def test_unmatched_story_is_judged_on_its_own_text():
 # --- HA-03: the missing section ---------------------------------------------
 
 def test_missing_toronto_section_is_filled_from_the_toronto_pool():
-    pool = OFF_CITY + [WAYMO, SANTA_FUND, BIKE_LANES, MISSISSAUGA]
+    mississauga = dict(MISSISSAUGA, section_hint="toronto")
+    pool = OFF_CITY + [WAYMO, SANTA_FUND, BIKE_LANES, mississauga]
 
     out, stats = toronto.enforce_toronto_section(sections_with(None), pool, TODAY)
 
     assert [s["id"] for s in out] == ["front", "toronto"]
     links = toronto_links(out)
     assert len(links) == CAP == stats["backfilled"]
-    assert set(links) <= {c["link"] for c in (WAYMO, SANTA_FUND, BIKE_LANES, MISSISSAUGA)}
+    assert set(links) <= {c["link"] for c in (WAYMO, SANTA_FUND, BIKE_LANES, mississauga)}
     assert not {c["link"] for c in OFF_CITY} & set(links)
 
 
@@ -277,6 +280,91 @@ def test_backfill_prefers_non_violent_items_and_marks_sensitivity():
     stories = section(out, "toronto")["stories"]
     assert [s["link"] for s in stories] == [calm["link"], violent["link"]]
     assert [s["sensitivity"] for s in stories] == [False, True]
+
+
+# --- review findings: backfill must not import keyword look-alikes ------------
+
+HAMILTON_F1 = cand("Lewis Hamilton wins Mexican Grand Prix", "https://example.com/f1", hint="world")
+GTA_GAME = cand("GTA VI delayed again, Rockstar says", "https://example.com/gta6", hint="world")
+TSX = cand("S&P/TSX closes higher as Toronto stock index gains", "https://example.com/tsx", hint="business")
+
+
+def test_backfill_ignores_keyword_lookalikes_from_world_and_business():
+    calm = cand("New library branch opens", "https://example.com/library", source="CBC Toronto", hint="toronto")
+    out, stats = toronto.enforce_toronto_section(
+        sections_with(None), [HAMILTON_F1, GTA_GAME, TSX, calm], TODAY
+    )
+    assert toronto_links(out) == [calm["link"]] and stats["backfilled"] == 1
+
+
+def test_lookalikes_cannot_fill_or_lead_toronto_when_no_toronto_candidate_exists():
+    out, _ = toronto.enforce_toronto_section(sections_with(None), [HAMILTON_F1, GTA_GAME, TSX], TODAY)
+    assert section(out, "toronto")["stories"] == []
+
+
+def test_backfill_accepts_toronto_hinted_item_but_not_a_canada_national_one():
+    hinted = cand("Quiet week at city hall", "https://example.com/hall", hint="toronto")
+    national = cand("Quiet week in the Prairies", "https://example.com/prairies", hint="toronto", lane=NATIONAL)
+    out, _ = toronto.enforce_toronto_section(sections_with(None), [national, hinted], TODAY)
+    assert toronto_links(out) == [hinted["link"]]
+
+
+@pytest.mark.parametrize("title", [
+    "Lewis Hamilton wins Mexican Grand Prix", "Alexander Hamilton musical returns",
+    "GTA VI delayed again, Rockstar says", "GTA 6 trailer breaks records", "GTA V sales top 200 million",
+    "Union Station evacuated in Denver",
+])
+def test_keyword_lookalikes_carry_no_toronto_signal(title):
+    assert toronto.toronto_signal({"headline": title}) == ""
+
+
+@pytest.mark.parametrize("title", [
+    "Hamilton, Ont., council backs transit plan", "City of Hamilton opens warming centres",
+    "Hamilton Spectator reports mill closure", "New GTA hospital funding announced",
+    "Toronto's Union Station reopens its east wing",
+])
+def test_real_hamilton_gta_and_union_station_stories_keep_a_signal(title):
+    assert toronto.toronto_signal({"headline": title}) == "headline"
+
+
+def test_hamilton_newswire_dateline_keeps_a_signal():
+    release = cand("Water main upgrade", "https://example.com/wm",
+                   description="HAMILTON, ON, Oct. 14, 2026 /CNW/ - Crews begin work downtown.")
+    assert toronto.toronto_signal({}, release) == "dateline"
+
+
+@pytest.mark.parametrize("attrs", [
+    {"section_hint": "opinion"}, {"content_genre": "opinion"},
+    {"link": "https://example.com/opinions/a"}, {"link": "https://example.com/voices/a"},
+    {"link": "https://example.com/leaders/a"},
+])
+def test_backfill_skips_opinion_by_hint_genre_or_path(attrs):
+    base = cand("Why Toronto needs a plan", "https://example.com/plan", source="CBC Toronto", hint="toronto")
+    out, _ = toronto.enforce_toronto_section(sections_with(None), [dict(base, **attrs)], TODAY)
+    assert toronto_links(out) == []
+
+
+@pytest.mark.parametrize("title", [
+    "Armed robbery at Etobicoke jewellery store", "Carjacking in Brampton", "Home invasion in Vaughan",
+    "Kidnapping suspect arrested in Markham", "Man abducted in Scarborough", "Gunman held in Toronto",
+    "Gunfire heard near Jane and Finch", "Slain man identified", "Manslaughter charge laid in Toronto",
+])
+def test_backfill_marks_newly_covered_incidents_sensitive_and_sorts_them_last(title):
+    incident = cand(title, "https://example.com/incident", source="CBC Toronto", hint="toronto")
+    calm = cand("Scarborough library reopens", "https://example.com/c", source="CBC Toronto", hint="toronto")
+    out, _ = toronto.enforce_toronto_section(sections_with(None), [incident, calm], TODAY)
+    stories = section(out, "toronto")["stories"]
+    assert [s["link"] for s in stories] == [calm["link"], incident["link"]]
+    assert [s["sensitivity"] for s in stories] == [False, True]
+
+
+def test_backfilled_cards_carry_a_backfill_marker_and_model_cards_do_not():
+    # Two model cards, one of them off-city: the removed slot is backfilled.
+    cards = [card(WAYMO, 1), card(MORDEN, 2)]
+    out, _ = toronto.enforce_toronto_section(sections_with(cards), [WAYMO, MORDEN, SANTA_FUND], TODAY)
+    stories = section(out, "toronto")["stories"]
+    assert [s["link"] for s in stories] == [WAYMO["link"], SANTA_FUND["link"]]
+    assert [bool(s.get("backfill")) for s in stories] == [False, True]
 
 
 def test_no_toronto_candidate_at_all_degrades_to_an_empty_section_with_an_error_log(caplog):

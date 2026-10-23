@@ -16,13 +16,14 @@ call. It adds no model call and sends nothing new to the model:
   the desk its source hint names (World/Business/Opinion, only when that desk
   has room) or dropped. It is never silently kept under the Toronto label.
 * The signal rules are generic place and feed evidence, not per-story rules.
-* After removal the section is topped back up from strong-signal Toronto
-  candidates in the full eligible pool, so edition size survives.
+* After removal the section is topped back up from Toronto-intake candidates
+  (Toronto local feeds or a ``toronto`` section hint, never keywords alone)
+  in the full eligible pool, so edition size survives.
 * The finished edition always carries a Toronto section. If no Toronto
   candidate exists at all the section publishes empty with an error log; the
   build never fails over it.
 
-Backfilled cards are built from source metadata only. They are a fallback and
+Backfilled cards are built from source metadata only (and carry ``backfill: True``). They are a fallback and
 deliberately plain: no analysis, no invented prose.
 """
 
@@ -56,9 +57,12 @@ _TORONTO_TERMS = (
     "east york", "york region", "york regional police", "peel region",
     "peel regional police", "durham region", "halton region", "halton hills",
     "oakville", "burlington", "pickering", "oshawa", "newmarket", "caledon",
-    "hamilton", "ttc", "metrolinx", "go transit", "queen's park",
+    "ttc", "metrolinx", "go transit", "queen's park",
     "ontario legislature", "ontario government", "ontario premier",
-    "pearson airport", "ontario place", "union station",
+    "pearson airport", "ontario place",
+    # Bare "Hamilton" is a surname and a Grand Prix driver; only the city forms.
+    "hamilton, ont", "hamilton, on", "city of hamilton", "hamilton spectator",
+    "hamilton police", "hamilton city council", "hamilton tiger-cats",
 )
 
 # Region and national markers. They only veto a *body-only* Toronto mention
@@ -74,18 +78,26 @@ _OFF_CITY_TERMS = (
 )
 
 
-def _phrase_re(terms: tuple[str, ...]) -> re.Pattern:
+def _phrase_re(terms: tuple[str, ...], *, gta_guard: bool = False) -> re.Pattern:
     ordered = sorted(terms, key=len, reverse=True)
-    return re.compile(r"(?<!\w)(?:" + "|".join(re.escape(t) for t in ordered) + r")(?!\w)")
+    alternatives = []
+    for term in ordered:
+        pattern = re.escape(term)
+        if gta_guard and term == "gta":
+            # "GTA VI" / "GTA 6" / "GTA V" are the video game, not the region.
+            pattern += r"(?!\s*(?:\d|[ivx]+(?!\w)))"
+        alternatives.append(pattern)
+    return re.compile(r"(?<!\w)(?:" + "|".join(alternatives) + r")(?!\w)")
 
 
-_TORONTO_RE = _phrase_re(_TORONTO_TERMS)
+_TORONTO_RE = _phrase_re(_TORONTO_TERMS, gta_guard=True)
 _OFF_CITY_RE = _phrase_re(_OFF_CITY_TERMS)
 # Newswire datelines open the description: "TORONTO, Oct. 14, 2026 /CNW/ - ...".
-_DATELINE_RE = re.compile(r"^\s*([A-Z][A-Z .'’\-–—]{2,40}?)\s*,")
+_DATELINE_RE = re.compile(r"^\s*([A-Z][A-Z .'’\-–—]{2,40}?)\s*,(?:\s*(ONT?)(?![A-Za-z]))?")
 _SENSITIVE_RE = re.compile(
     r"\b(?:shoot|shot|stab|murder|homicid|kill|dead|death|died|dies|fatal|"
-    r"assault|attack|war|bomb|terror|disaster|victim)",
+    r"assault|attack|war|bomb|terror|disaster|victim|armed robbery|carjack|"
+    r"home invasion|kidnap|abduct|gunm[ae]n|gunfire|slain|manslaughter)",
     re.IGNORECASE,
 )
 _WORD_RE = re.compile(r"[a-z0-9']{4,}")
@@ -127,7 +139,9 @@ def toronto_signal(story: dict, candidate: dict | None = None) -> str:
 
     description = str(candidate.get("description") or story.get("description") or "")
     dateline = _DATELINE_RE.match(description)
-    if dateline and _TORONTO_RE.search(_norm(dateline.group(1))):
+    if dateline and _TORONTO_RE.search(
+        _norm(dateline.group(1) + (f", {dateline.group(2)}" if dateline.group(2) else ""))
+    ):
         return "dateline"
 
     weak = _norm(" ".join([strong, description, str(story.get("sub") or ""), str(story.get("summary") or "")]))
@@ -203,6 +217,9 @@ def _fallback_card(candidate: dict, card_id: str, today: dt.date) -> dict:
         "sensitivity": bool(_SENSITIVE_RE.search(f"{title} {description}")),
         "image": candidate.get("image") or None,
         "link": candidate.get("link"),
+        # Marks a card built from source metadata, not chosen by the model
+        # (editorial_provenance counts these apart from invented links).
+        "backfill": True,
     }
 
 
@@ -220,14 +237,39 @@ def _round_robin_sources(candidates: list[dict]) -> list[dict]:
     return out
 
 
+_OPINION_PATHS = ("/opinion/", "/opinions/", "/commentisfree/", "/voices/", "/leaders/")
+
+
 def _is_opinion_path(link: str) -> bool:
-    return "/opinion/" in link.casefold() or "/commentisfree/" in link.casefold()
+    lowered = link.casefold()
+    return any(path in lowered for path in _OPINION_PATHS)
+
+
+def _is_opinion(candidate: dict) -> bool:
+    return (
+        _is_opinion_path(str(candidate.get("link") or ""))
+        or candidate.get("section_hint") == "opinion"
+        or candidate.get("content_genre") == "opinion"
+    )
+
+
+def _is_toronto_intake(candidate: dict) -> bool:
+    """Backfill Toronto-ness comes from the intake lane, never from keywords."""
+    if canada.is_canada_national(candidate):
+        return False
+    return candidate.get("source") in _feed_names() or candidate.get("section_hint") == TORONTO_SECTION_ID
 
 
 def _backfill(
     need: int, pool: list[dict], sections: list[dict], today: dt.date
 ) -> list[dict]:
-    """Plain cards from strong-signal Toronto candidates not already in the paper."""
+    """Plain cards from Toronto-intake candidates not already in the paper.
+
+    Candidates are limited to Toronto local feeds or items the intake hinted
+    ``toronto``; a keyword match (Hamilton the driver, GTA the game) never
+    qualifies a World or Business item. Candidates must not include incidents
+    withheld by the crime gate, so that gate's decision is not undone here.
+    """
     if need <= 0:
         return []
     taken_links: set[str] = set()
@@ -243,9 +285,7 @@ def _backfill(
     for candidate in pool:
         if not candidate.get("title") or not candidate.get("link"):
             continue
-        if toronto_signal(candidate, candidate) not in ("feed", "headline", "dateline"):
-            continue
-        if _is_opinion_path(str(candidate["link"])):
+        if not _is_toronto_intake(candidate) or _is_opinion(candidate):
             continue
         eligible.append(candidate)
     ordered = _round_robin_sources(eligible)
