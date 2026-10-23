@@ -16,6 +16,12 @@ input. Active matched major-event records receive one transient model-only
 priority field so the single editor call can distinguish deliberate recall
 protection from ordinary candidates. The normalized story and final edition
 schemas remain unchanged.
+
+An incident-level crime significance gate (see crime.py) works at the same three
+boundaries without a second model call: isolated local crime incidents are
+demoted and capped inside the same bounded input, incident records carry one
+transient model-only significance note, and an incident with no established
+civic significance cannot hold Front Page or lead a section afterwards.
 """
 
 from __future__ import annotations
@@ -31,7 +37,7 @@ from google import genai
 from google.genai import errors as genai_errors
 from google.genai import types
 
-from . import canada, config
+from . import canada, config, crime
 from .editorial_provenance import current as evidence_current, safely as evidence_safely
 from .normalize import curation_view
 from .opinion import (
@@ -88,13 +94,22 @@ def _client() -> genai.Client:
     return genai.Client(api_key=key)
 
 
+def _system_instruction(today: dt.date, include_following: bool) -> str:
+    instruction = (
+        config.build_curate_system_prompt(today)
+        + canada.editorial_instruction(today)
+        + crime.editorial_instruction()
+    )
+    if include_following:
+        instruction += _FOLLOWING_INSTRUCTION
+    return instruction
+
+
 def _gen_config(
     today: dt.date, model: str | None = None, *, include_following: bool = False
 ) -> types.GenerateContentConfig:
     m = model if model is not None else config.CURATE_MODEL
-    system_instruction = config.build_curate_system_prompt(today) + canada.editorial_instruction(today)
-    if include_following:
-        system_instruction += _FOLLOWING_INSTRUCTION
+    system_instruction = _system_instruction(today, include_following)
     kwargs: dict = dict(
         system_instruction=system_instruction,
         response_mime_type="application/json",
@@ -125,9 +140,7 @@ def _generate(
     recorder = evidence_current()
     for model in models_to_try:
         cfg = _gen_config(today, model, include_following=include_following)
-        instruction = config.build_curate_system_prompt(today) + canada.editorial_instruction(today)
-        if include_following:
-            instruction += _FOLLOWING_INSTRUCTION
+        instruction = _system_instruction(today, include_following)
         if recorder is not None:
             evidence_safely(recorder.record_prompt, model, instruction, has_following=include_following)
         for attempt in range(retries + 1):
@@ -172,12 +185,19 @@ def _generate(
 
 
 def _curation_view(stories: list[dict], today: dt.date) -> list[dict]:
-    """Normal seven-field model view plus rare active-event priority markers."""
+    """Normal seven-field model view plus rare transient editorial markers.
+
+    Markers are the active-event priority and, for incident-level crime only,
+    the civic-significance note. Both are model-only and never reach the edition.
+    """
     editorial = curation_view(stories)
     for source, item in zip(stories, editorial):
         priority = canada.editorial_priority(source, today)
         if priority:
             item["editorial_priority"] = priority
+        significance = crime.model_marker(source)
+        if significance:
+            item["crime_significance"] = significance
     return editorial
 
 
@@ -305,11 +325,17 @@ def _trim_input(
     active scheduled-event and Canada-national candidates survive by replacing
     only non-priority tail items. The total input bound never grows and quiet
     days reserve nothing.
+
+    Local crime incidents with no established civic significance are capped and
+    moved behind ordinary candidates first, so they can neither crowd out other
+    news nor become protected recall.
     """
     if total <= 0:
         return []
     today = today or dt.date.today()
-    unique = _dedupe_exact_articles(stories)
+    unique, crime_withheld = crime.bound_unsupported_incidents(
+        _dedupe_exact_articles(stories)
+    )
     baseline = _round_robin(unique, min(total, len(unique)))
 
     event_raw = [story for story in unique if canada.matching_major_event_ids(story, today)]
@@ -359,13 +385,15 @@ def _trim_input(
         1 for story in selected if canada.matching_major_event_ids(story, today)
     )
     log.info(
-        "curation recall canada=%d/%d major_event=%d/%d selected=%d/%d",
+        "curation recall canada=%d/%d major_event=%d/%d selected=%d/%d "
+        "crime_incidents_withheld=%d",
         post_canada,
         len(canada_raw),
         post_event,
         len(event_raw),
         len(selected),
         len(unique),
+        crime_withheld,
     )
     return selected
 
@@ -460,6 +488,9 @@ def curate(
         log.warning("First curate parse failed; retrying with reinforcement")
         raw = _call(client, stories, today, reinforce=True, following=following)
 
+    demoted = crime.enforce_placement(raw.get("sections", []), stories)
+    if demoted:
+        log.info("crime gate: %d unsupported incident(s) kept off Front Page/lead", demoted)
     sections = _normalize_edition(raw)
     _log_major_event_coverage(sections, stories, today)
     if following:
