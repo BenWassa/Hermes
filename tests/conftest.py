@@ -200,3 +200,22 @@ def production_registry():
     from src.voices import load_registry
 
     return load_registry(Path(__file__).resolve().parents[1] / "data" / "voices.json")
+
+
+@pytest.fixture(autouse=True)
+def _isolated_edition_evidence(tmp_path_factory, monkeypatch):
+    """Keep build-path tests from writing evidence into the repo's data/ tree.
+
+    The writer is create-once, so a fixture record committed under a real
+    edition date would permanently block that date's genuine record.
+    """
+    from src import editorial_provenance
+
+    default_root = tmp_path_factory.mktemp("edition_evidence")
+    original = editorial_provenance.EditionEvidence.write
+
+    def write(self, html_path, **kwargs):
+        kwargs.setdefault("root", default_root)
+        return original(self, html_path, **kwargs)
+
+    monkeypatch.setattr(editorial_provenance.EditionEvidence, "write", write)
