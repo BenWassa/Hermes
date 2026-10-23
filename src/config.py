@@ -247,6 +247,13 @@ CURATE_MAX_TOKENS = 16000
 # Cap raw stories sent to the model (PRD targets ~40-60), balanced across
 # section hints so Toronto and the wire sections all stay represented.
 CURATE_MAX_INPUT = 60
+# The finished edition must carry a non-empty Toronto section (see toronto.py).
+# When no Toronto candidate exists at all the build fails loudly instead of
+# publishing without it; set TORONTO_SECTION_REQUIRED=0 to publish an empty
+# Toronto section with an error log instead.
+TORONTO_SECTION_REQUIRED = os.environ.get("TORONTO_SECTION_REQUIRED", "1").strip().lower() not in {
+    "0", "false", "no", "off"
+}
 # Reasoning budget for the curate call (2.5-series models). A modest budget lets
 # the model actually weigh, dedupe, rank, and synthesize rather than paraphrase,
 # which is what lifts the lead summaries and the "why it matters" analysis. Set
@@ -412,6 +419,7 @@ Output STRICT JSON only. No preamble, no markdown fences, no commentary. Match t
 
 Rules:
 - Include every section id listed above, in that order, each with at least one story when source material allows.
+- The "toronto" section is for Toronto and Greater Toronto Area stories only. A story about another city, province or region, or a national story with no Toronto angle, belongs in front, world or business (or is cut), never in "toronto".
 - "kicker" is a short uppercase topic label derived from the story (e.g. "UKRAINE", "MARKETS").
 - "analysis" is present only on lead stories; null everywhere else.
 - "image" and "link" come from the source story; preserve them. If no image, use null.

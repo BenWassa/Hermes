@@ -279,10 +279,13 @@ def test_invalid_json_reinforcement_uses_existing_retry_and_records_parse(monkey
     rec = EditionEvidence(when=WHEN)
     token = activate(rec)
     try:
-        edition = curate.curate([story(1)], today=TODAY)
+        local = dict(story(2), source="CBC Toronto", section_hint="toronto")
+        edition = curate.curate([story(1), local], today=TODAY)
     finally:
         deactivate(token)
-    assert edition["sections"] == []
+    # The model returned no sections; the Toronto integrity guard (#83) backfills
+    # the one section the paper must never publish without.
+    assert [section["id"] for section in edition["sections"]] == ["toronto"]
     assert rec.parse_outcomes == ["invalid_json", "valid_json"]
     assert len(rec.attempts) == 2
 

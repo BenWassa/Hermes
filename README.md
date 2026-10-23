@@ -31,6 +31,7 @@ weather -> fetch -> normalize -> discover Voices -> curate (Gemini) -> select Fo
 | [src/fetch.py](src/fetch.py) | Guardian + NYT + Perigon APIs, Toronto RSS (graceful per-source failure) |
 | [src/normalize.py](src/normalize.py) | Unify sources into one story schema while preserving authorship |
 | [src/curate.py](src/curate.py) | One Gemini call: dedupe, section, rank, summarize, flag |
+| [src/toronto.py](src/toronto.py) | Deterministic Toronto-section guard: off-city stories out, section never missing |
 | [src/opinion.py](src/opinion.py) | Deterministic finite Following selection + dedupe from Today's Opinion |
 | [src/images.py](src/images.py) | Keep source thumbnails; suppress on sensitive stories |
 | [src/render.py](src/render.py) | Inject edition JSON into the HTML template |
