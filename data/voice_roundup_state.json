@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-23T19:30:29Z",
+  "updated_at": "2026-10-24T18:19:12Z",
   "last_reconcile_at": "2026-10-23T19:30:29Z",
   "last_roundup": {
     "period_id": "2026-10-18",
@@ -66,23 +66,6 @@
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html",
-        "pid:rss:https://marginalrevolution.com/?p=93952",
-        "syn:a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman|voice:tyler-cowen|2026-10-09",
-        "fp:marginalrevolution.com|a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman|2026-10-09"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-09T20:17:11Z",
-      "published_at": "2026-10-09T06:26:35Z",
-      "title": "A Sentiment Analysis of Cowen, Hanson, Caplan, and Krugman",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman.html?utm_source=rss&utm_medium=rss&utm_campaign=a-sentiment-analysis-of-cowen-hanson-caplan-and-krugman",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html",
@@ -134,6 +117,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/cybersecurity-etf.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/cybersecurity-etf.html",
+        "pid:rss:https://marginalrevolution.com/?p=94061",
+        "syn:cybersecurity-etf|voice:tyler-cowen|2026-10-24",
+        "fp:marginalrevolution.com|cybersecurity-etf|2026-10-24"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-24T18:19:12Z",
+      "published_at": "2026-10-24T08:46:22Z",
+      "title": "Cybersecurity ETF",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/cybersecurity-etf.html?utm_source=rss&utm_medium=rss&utm_campaign=cybersecurity-etf",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-24T18:19:12Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-mass-shootings-in-universities-lead-to-permanent-effects.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-mass-shootings-in-universities-lead-to-permanent-effects.html",
@@ -168,37 +168,20 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/ethiopia-update.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/econvitals.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/ethiopia-update.html",
-        "pid:rss:https://marginalrevolution.com/?p=93958",
-        "syn:ethiopia-update|voice:tyler-cowen|2026-10-09",
-        "fp:marginalrevolution.com|ethiopia-update|2026-10-09"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/econvitals.html",
+        "pid:rss:https://marginalrevolution.com/?p=94067",
+        "syn:econvitals|voice:tyler-cowen|2026-10-24",
+        "fp:marginalrevolution.com|econvitals|2026-10-24"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-10-09T20:17:11Z",
-      "published_at": "2026-10-09T16:24:04Z",
-      "title": "Ethiopia update",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/ethiopia-update.html?utm_source=rss&utm_medium=rss&utm_campaign=ethiopia-update",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html",
-        "pid:rss:https://marginalrevolution.com/?p=93951",
-        "syn:friday-assorted-links|voice:tyler-cowen|2026-10-09",
-        "fp:marginalrevolution.com|friday-assorted-links|2026-10-09"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-09T20:17:11Z",
-      "published_at": "2026-10-09T16:06:02Z",
-      "title": "Friday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-594.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-594",
+      "first_seen": "2026-10-24T18:19:12Z",
+      "published_at": "2026-10-24T17:54:44Z",
+      "title": "Econvitals",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/econvitals.html?utm_source=rss&utm_medium=rss&utm_campaign=econvitals",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -234,7 +217,7 @@
       "title": "Friday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-596",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-24T18:19:12Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html": {
       "keys": [
@@ -252,6 +235,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html?utm_source=rss&utm_medium=rss&utm_campaign=how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-an-nyt-podcast-with-michael-kratsios-trump-science-advisor.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-an-nyt-podcast-with-michael-kratsios-trump-science-advisor.html",
+        "pid:rss:https://marginalrevolution.com/?p=94064",
+        "syn:i-guest-host-an-nyt-podcast-with-michael-kratsios-trump-science-advisor|voice:tyler-cowen|2026-10-24",
+        "fp:marginalrevolution.com|i-guest-host-an-nyt-podcast-with-michael-kratsios-trump-science-advisor|2026-10-24"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-24T18:19:12Z",
+      "published_at": "2026-10-24T04:53:27Z",
+      "title": "I guest host an NYT podcast with Michael Kratsios, Trump science advisor",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-an-nyt-podcast-with-michael-kratsios-trump-science-advisor.html?utm_source=rss&utm_medium=rss&utm_campaign=i-guest-host-an-nyt-podcast-with-michael-kratsios-trump-science-advisor",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-24T18:19:12Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-the-nyt-podcast-and-interview-dwarkesh.html": {
       "keys": [
@@ -456,23 +456,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/on-brazilian-food.html?utm_source=rss&utm_medium=rss&utm_campaign=on-brazilian-food",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html",
-        "pid:rss:https://marginalrevolution.com/?p=93950",
-        "syn:on-stubborn-attachments-and-religion-from-my-email|voice:tyler-cowen|2026-10-09",
-        "fp:marginalrevolution.com|on-stubborn-attachments-and-religion-from-my-email|2026-10-09"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-09T20:17:11Z",
-      "published_at": "2026-10-09T04:38:05Z",
-      "title": "On *Stubborn Attachments* and religion (from my email)",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/on-stubborn-attachments-and-religion-from-my-email.html?utm_source=rss&utm_medium=rss&utm_campaign=on-stubborn-attachments-and-religion-from-my-email",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing.html": {
       "keys": [
@@ -746,23 +729,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html",
-        "pid:rss:https://marginalrevolution.com/?p=93957",
-        "syn:the-origin-of-risk|voice:tyler-cowen|2026-10-09",
-        "fp:marginalrevolution.com|the-origin-of-risk|2026-10-09"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-09T20:17:11Z",
-      "published_at": "2026-10-09T18:20:57Z",
-      "title": "The origin of risk",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-origin-of-risk.html?utm_source=rss&utm_medium=rss&utm_campaign=the-origin-of-risk",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html",
@@ -933,6 +899,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-are-cybersecurity-losses-not-worse.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-are-cybersecurity-losses-not-worse.html",
+        "pid:rss:https://marginalrevolution.com/?p=94065",
+        "syn:why-are-cybersecurity-losses-not-worse|voice:tyler-cowen|2026-10-24",
+        "fp:marginalrevolution.com|why-are-cybersecurity-losses-not-worse|2026-10-24"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-24T18:19:12Z",
+      "published_at": "2026-10-24T15:57:10Z",
+      "title": "Why are cybersecurity losses not worse?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/why-are-cybersecurity-losses-not-worse.html?utm_source=rss&utm_medium=rss&utm_campaign=why-are-cybersecurity-losses-not-worse",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html",
@@ -983,23 +966,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html?utm_source=rss&utm_medium=rss&utm_campaign=you-can-see-everything-no-spoilers",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
-    },
-    "url:https://nytimes.com/2026/10/09/opinion/ezra-klein-podcast-arvind-narayanan.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/10/09/opinion/ezra-klein-podcast-arvind-narayanan.html",
-        "pid:rss:https://www.nytimes.com/2026/10/09/opinion/ezra-klein-podcast-arvind-narayanan.html",
-        "syn:intelligence-isn-t-power|voice:ezra-klein|2026-10-09",
-        "fp:nytimes.com|intelligence-isn-t-power|2026-10-09"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-10-09T20:17:11Z",
-      "published_at": "2026-10-09T16:05:02Z",
-      "title": "Intelligence Isn’t Power",
-      "url": "https://www.nytimes.com/2026/10/09/opinion/ezra-klein-podcast-arvind-narayanan.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     },
     "url:https://nytimes.com/2026/10/14/opinion/ezra-klein-podcast-sherry-turkle.html": {
       "keys": [
@@ -1238,22 +1204,6 @@
       "url": "https://www.theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
-    },
-    "url:https://theglobeandmail.com/opinion/article-the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one",
-        "syn:the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one|voice:andrew-coyne|2026-10-08",
-        "fp:theglobeandmail.com|the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one|2026-10-08"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-10-09T20:17:11Z",
-      "published_at": "2026-10-08T00:00:00Z",
-      "title": "The Alberta referendum: a pointless, futile stunt, just like the last one",
-      "url": "https://www.theglobeandmail.com/opinion/article-the-alberta-referendum-a-pointless-futile-stunt-just-like-the-last-one/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-10-09T20:17:11Z"
     }
   }
 }
