@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-24T18:19:12Z",
-  "last_reconcile_at": "2026-10-23T19:30:29Z",
+  "updated_at": "2026-10-25T18:31:57Z",
+  "last_reconcile_at": "2026-10-25T18:31:57Z",
   "last_roundup": {
     "period_id": "2026-10-18",
     "cutoff": "2026-10-18T21:00:00Z",
@@ -83,23 +83,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/california-in-migration-and-out-migration.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/california-in-migration-and-out-migration.html",
-        "pid:rss:https://marginalrevolution.com/?p=93956",
-        "syn:california-in-migration-and-out-migration|voice:tyler-cowen|2026-10-10",
-        "fp:marginalrevolution.com|california-in-migration-and-out-migration|2026-10-10"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-10T19:28:07Z",
-      "published_at": "2026-10-10T04:26:55Z",
-      "title": "California in-migration and out-migration",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/california-in-migration-and-out-migration.html?utm_source=rss&utm_medium=rss&utm_campaign=california-in-migration-and-out-migration",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html",
@@ -151,23 +134,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html",
-        "pid:rss:https://marginalrevolution.com/?p=93959",
-        "syn:earth-facts-of-the-day|voice:tyler-cowen|2026-10-10",
-        "fp:marginalrevolution.com|earth-facts-of-the-day|2026-10-10"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-10T19:28:07Z",
-      "published_at": "2026-10-10T07:31:46Z",
-      "title": "Earth facts of the day",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/earth-facts-of-the-day.html?utm_source=rss&utm_medium=rss&utm_campaign=earth-facts-of-the-day",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-10T19:28:07Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/econvitals.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/econvitals.html",
@@ -183,7 +149,41 @@
       "title": "Econvitals",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/econvitals.html?utm_source=rss&utm_medium=rss&utm_campaign=econvitals",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/emergent-ventures-india-20th-cohort.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/emergent-ventures-india-20th-cohort.html",
+        "pid:rss:https://marginalrevolution.com/?p=94062",
+        "syn:emergent-ventures-india-20th-cohort|voice:tyler-cowen|2026-10-25",
+        "fp:marginalrevolution.com|emergent-ventures-india-20th-cohort|2026-10-25"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-25T18:31:57Z",
+      "published_at": "2026-10-25T04:42:24Z",
+      "title": "Emergent Ventures India, 20th cohort",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/emergent-ventures-india-20th-cohort.html?utm_source=rss&utm_medium=rss&utm_campaign=emergent-ventures-india-20th-cohort",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/facts-about-breastfeeding.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/facts-about-breastfeeding.html",
+        "pid:rss:https://marginalrevolution.com/?p=94078",
+        "syn:facts-about-breastfeeding|voice:tyler-cowen|2026-10-25",
+        "fp:marginalrevolution.com|facts-about-breastfeeding|2026-10-25"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-25T18:31:57Z",
+      "published_at": "2026-10-25T06:57:04Z",
+      "title": "Facts about breastfeeding",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/facts-about-breastfeeding.html?utm_source=rss&utm_medium=rss&utm_campaign=facts-about-breastfeeding",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html": {
       "keys": [
@@ -218,6 +218,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-596",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-24T18:19:12Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-central-bankers-spend-their-time.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-central-bankers-spend-their-time.html",
+        "pid:rss:https://marginalrevolution.com/?p=94068",
+        "syn:how-central-bankers-spend-their-time|voice:tyler-cowen|2026-10-25",
+        "fp:marginalrevolution.com|how-central-bankers-spend-their-time|2026-10-25"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-25T18:31:57Z",
+      "published_at": "2026-10-25T05:14:29Z",
+      "title": "How central bankers spend their time",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-central-bankers-spend-their-time.html?utm_source=rss&utm_medium=rss&utm_campaign=how-central-bankers-spend-their-time",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html": {
       "keys": [
@@ -559,23 +576,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-582.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-582.html",
-        "pid:rss:https://marginalrevolution.com/?p=93955",
-        "syn:saturday-assorted-links|voice:tyler-cowen|2026-10-10",
-        "fp:marginalrevolution.com|saturday-assorted-links|2026-10-10"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-10T19:28:07Z",
-      "published_at": "2026-10-10T16:34:52Z",
-      "title": "Saturday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-582.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-582",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html",
@@ -641,6 +641,23 @@
       "published_at": "2026-10-11T16:17:20Z",
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-586.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-586",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html",
+        "pid:rss:https://marginalrevolution.com/?p=94066",
+        "syn:sunday-assorted-links|voice:tyler-cowen|2026-10-25",
+        "fp:marginalrevolution.com|sunday-assorted-links|2026-10-25"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-25T18:31:57Z",
+      "published_at": "2026-10-25T15:42:58Z",
+      "title": "Sunday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-587",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -914,7 +931,7 @@
       "title": "Why are cybersecurity losses not worse?",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/why-are-cybersecurity-losses-not-worse.html?utm_source=rss&utm_medium=rss&utm_campaign=why-are-cybersecurity-losses-not-worse",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html": {
       "keys": [
@@ -1056,6 +1073,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
+    "url:https://nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html",
+        "pid:rss:https://www.nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html",
+        "syn:netanyahu-won-the-middle-east-and-lost-the-world|voice:ezra-klein|2026-10-25",
+        "fp:nytimes.com|netanyahu-won-the-middle-east-and-lost-the-world|2026-10-25"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-25T18:31:57Z",
+      "published_at": "2026-10-25T16:11:02Z",
+      "title": "Netanyahu Won the Middle East and Lost the World",
+      "url": "https://www.nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
+    },
     "url:https://persuasion.community/p/thymos-and-american-foreign-policy": {
       "keys": [
         "url:https://persuasion.community/p/thymos-and-american-foreign-policy",
@@ -1104,6 +1138,22 @@
       "url": "https://www.theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931/?utm_source=feed",
       "publication": "The Atlantic",
       "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
+    },
+    "url:https://theatlantic.com/podcasts/2026/10/do-miracles-really-happen/689116": {
+      "keys": [
+        "url:https://theatlantic.com/podcasts/2026/10/do-miracles-really-happen/689116",
+        "syn:do-miracles-really-happen|voice:david-brooks|2026-10-25",
+        "fp:theatlantic.com|do-miracles-really-happen|2026-10-25"
+      ],
+      "voice_ids": [
+        "david-brooks"
+      ],
+      "first_seen": "2026-10-25T18:31:57Z",
+      "published_at": "2026-10-25T13:00:00Z",
+      "title": "Do Miracles Really Happen?",
+      "url": "https://www.theatlantic.com/podcasts/2026/10/do-miracles-really-happen/689116/?utm_source=feed",
+      "publication": "The Atlantic",
+      "first_morning_surfaced_at": null
     },
     "url:https://thefp.com/p/arthur-brooks-happiness-meaning": {
       "keys": [
