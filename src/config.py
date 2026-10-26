@@ -333,6 +333,12 @@ HOUSE_VOICE = """House voice for all summaries:
 - No em dashes anywhere. Use commas, periods, or restructure.
 - Plain, confident, concrete. Prefer specifics (numbers, names, stakes) over
   abstractions. Every sentence should earn its place.
+- Elections are temporally precise: distinguish future scheduled voting,
+  current polling, projected outcomes and officially declared results. Do not
+  call a future election underway, a projection a certified result, or an
+  incumbent's reelection a return to office. Preserve candidate-versus-winner
+  roles and the same-person link across sources. If source metadata does not
+  establish a winner or result, omit that assertion instead of guessing.
 - Titles and offices (President, Prime Minister, CEO, etc.) must reflect who
   holds them as of the edition date given below, not a title recalled from
   training data or copied from a stale source dateline. If a story describes
