@@ -312,6 +312,8 @@ def test_visual_article_summary_has_structured_takeaways_and_source_note():
     assert 'class="limitation"' in page
     assert "SOURCE NOTE" in page
     assert "Only public feed descriptions were available." in page
-    assert 'href="https://publisher.example/essay"' in page
+    # Reader navigation must use the source-stated URL (including www), not
+    # the normalized canonical identity used only for deduplication.
+    assert 'href="https://www.publisher.example/essay"' in page
     assert "<canvas" not in page
 
