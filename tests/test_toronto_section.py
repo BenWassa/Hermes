@@ -443,3 +443,29 @@ def test_backfill_never_readds_incidents_withheld_by_the_crime_gate():
 
     links = [s["link"] for s in section(out, "toronto")["stories"]]
     assert links == [calm["link"]]
+
+
+def test_syndicated_citynews_fallback_needs_explicit_city_and_fresh_timestamp():
+    today = dt.date(2026, 10, 26)
+    source = toronto.config.TORONTO_FALLBACK_RSS["name"]
+    election = cand(
+        "Toronto municipal election: polls open today",
+        "https://toronto.citynews.ca/2026/10/26/toronto-election/",
+        source=source, hint="toronto", pub="2026-10-26T10:00:00Z",
+        description="Torontonians vote in a city-wide municipal contest.",
+    )
+    hamilton = cand("Hamilton prepares heat-protection bylaw",
+                    "https://toronto.citynews.ca/2026/10/26/hamilton-heat/",
+                    source=source, hint="toronto", pub="2026-10-26T10:00:00Z")
+    stale = cand("Toronto city council debates transit funding",
+                 "https://toronto.citynews.ca/2026/10/21/transit/",
+                 source=source, hint="toronto", pub="2026-10-21T10:00:00Z")
+    dateless = cand("Toronto voters receive election notice",
+                    "https://toronto.citynews.ca/election/",
+                    source=source, hint="toronto", pub="")
+    out, stats = toronto.enforce_toronto_section(
+        sections_with(None), [hamilton, stale, dateless, election], today
+    )
+    assert toronto_links(out) == [election["link"]]
+    assert stats["backfilled"] == 1
+    assert section(out, "toronto")["stories"][0]["backfill"] is True
