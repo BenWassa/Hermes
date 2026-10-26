@@ -66,7 +66,7 @@ def _contradictions(text: str, *, vote_day: dt.date | None,
         issues.add("future-vote-described-as-underway")
     # "returned to power in 2022" is accurate historical context even if the
     # same incumbent has just been reelected. Do not suppress a dated history.
-    historical_return = bool(re.search(r"\\b(?:in|during|back in)\\s+(?:19|20)\\d{2}\\b", text, re.I))
+    historical_return = bool(re.search(r"\b(?:in|during|back in)\s+(?:19|20)\d{2}\b", text, re.I))
     if (subject and subject in text.casefold() and _RETURN_TO_POWER.search(text)
             and not historical_return):
         issues.add("incumbent-reelection-described-as-return")
