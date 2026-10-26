@@ -32,7 +32,7 @@ _TODAY_VOTE = re.compile(
     re.I,
 )
 _INCUMBENT_PERSON = re.compile(
-    r"\bincumbent\s+(?:president|prime minister|premier|governor)\s+"
+    r"\b[Ii]ncumbent\s+(?:president|prime minister|premier|governor)\s+"
     r"([A-ZÀ-ÖØ-Þ][\wÀ-ÿ'-]+(?:\s+[A-ZÀ-ÖØ-Þ][\wÀ-ÿ'-]+){0,2})\b"
 )
 _REELECTED = re.compile(r"\b(?:re-?elect(?:ed|ion)|wins?\s+(?:a\s+)?(?:second|third|fourth)\s+term)\b", re.I)
