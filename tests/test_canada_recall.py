@@ -285,3 +285,40 @@ def test_final_selection_observability_reports_an_omitted_protected_event(caplog
         "major-event final id=canada-investment-summit-2026 input=1 "
         "selected=0 sections=none"
     ) in caplog.text
+
+
+def test_canada_query_origin_is_not_proof_of_canadian_subject():
+    cases = [
+        ("Ather Energy Limited reports quarterly earnings", "", False),
+        ("U.S. Fed signals it will hold rates", "Officials discuss U.S. rates and markets.", False),
+        ("Ottawa announces new federal investment policy", "", True),
+        ("British Columbia election outcome changes provincial majority", "", True),
+        ("Bank of Canada maintains overnight rate", "", True),
+        ("Canadian manufacturers face new U.S. tariffs", "", True),
+        ("Economic policy changes", "Canada's finance ministry outlined new measures.", True),
+        ("Toronto announces municipal election polling hours", "", True),
+    ]
+    for idx, (title, description, wanted) in enumerate(cases):
+        item = _story(idx + 4000, title=title, description=description,
+                      coverage_lane=canada.CANADA_COVERAGE_LANE)
+        assert canada.is_canada_national(item)
+        assert canada.qualifies_canada_priority(item) is wanted, title
+        assert not canada.qualifies_canada_priority(dict(item, coverage_lane=""))
+
+
+def test_false_canada_lanes_do_not_use_protected_bounded_input_capacity():
+    ordinary = [_story(i, section="world") for i in range(30)]
+    unrelated = [
+        _story(1001, title="Ather Energy Limited reports earnings",
+               coverage_lane=canada.CANADA_COVERAGE_LANE),
+        _story(1002, title="U.S. Fed holds rates",
+               coverage_lane=canada.CANADA_COVERAGE_LANE),
+    ]
+    protected = _story(1003, title="Canada announces provincial election agreement",
+                       coverage_lane=canada.CANADA_COVERAGE_LANE)
+    selected = _trim_input(ordinary + unrelated + [protected], total=8,
+                           today=dt.date(2026, 10, 26))
+    assert len(selected) == 8
+    assert protected in selected
+    assert unrelated[0] not in selected
+    assert unrelated[1] not in selected
