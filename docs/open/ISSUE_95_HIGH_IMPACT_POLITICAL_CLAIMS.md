@@ -9,7 +9,7 @@ updated: 2026-10-26
 # Daily: verify high-impact political and election claims before publication (Sentinel HQA-003)
 
 **Tracking:** https://github.com/BenWassa/Hermes/issues/95
-**Current state:** Partial conservative safeguard in PR #105: source-bound future-election/reelected-incumbent contradiction checks and original single-call prompt tightening; full leader/office-holder verification remains unimplemented and requires evidence-specific assessment.
+**Current state:** Partial conservative safeguard **merged in PR #105** (`199a76bae6be3622ab28b3db4e7878c97f16774f`; 776 passing tests): source-bound future-election/reelected-incumbent contradictions and single-call prompt guidance. Full result-leader/role validation remains unimplemented and requires evidence-specific design; issue stays open for calibration and prospective verification.
 
 The GitHub issue is the discussion/approval surface; this is its single retained execution spec under [issue tracking conventions](../ISSUE_TRACKING.md). The requirements below originate from the owner-reviewed issue. Keep only this file updated for durable scope changes; do not create a parallel plan.
 
