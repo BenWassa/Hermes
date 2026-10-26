@@ -118,6 +118,18 @@ TORONTO_RSS = [
 ]
 
 
+# Bounded, independently reachable local journalism fallback. Fetched only
+# when both existing Toronto feeds return no usable entries (not every day).
+# Local/category feeds include some Ontario/world stories; the Toronto
+# backfill guard requires city/GTA headline or dateline evidence before using
+# a fallback item as a Toronto card.
+TORONTO_FALLBACK_RSS = {
+    "name": "CityNews Toronto Local",
+    "url": "https://toronto.citynews.ca/category/local/feed/",
+    "hint": "toronto",
+}
+
+
 # --- Voices (followed writers) --------------------------------------------
 
 # The followed-Voice registry is repository-backed and reviewed: adding or
