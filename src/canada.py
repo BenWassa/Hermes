@@ -225,5 +225,34 @@ def final_event_coverage(
 
 
 def is_canada_national(story: dict) -> bool:
-    """Whether a normalized story came through the Canada-national intake lane."""
+    """Origin signal only: a Canada-scoped query may return unrelated stories."""
     return story.get("coverage_lane") == CANADA_COVERAGE_LANE
+
+
+# A query-provider country filter is not reliable proof of a Canadian subject.
+# Keep this bounded and conservative: protect explicitly Canadian material,
+# not every result returned by a country-scoped news aggregation query. This
+# signal reserves *input* capacity; the editor still chooses final stories.
+_CANADA_SUBJECT = re.compile(
+    r"(?<!\\w)(?:canada|canadian|canadians|ottawa|toronto|ontario|quebec|"
+    r"québec|montreal|montréal|vancouver|alberta|british columbia|"
+    r"manitoba|saskatchewan|nova scotia|new brunswick|newfoundland|"
+    r"prince edward island|nunavut|yukon|northwest territories|"
+    r"bank of canada|b\\.?c\\.? premier)(?!\\w)",
+    re.I,
+)
+
+
+def qualifies_canada_priority(story: dict) -> bool:
+    """High-confidence Canadian subject within Canada intake, not feed origin.
+
+    A direct headline signal suffices. A generic headline needs a Canadian
+    actor/place in the opening source description. Do not use publisher domain,
+    query origin, or vague cross-border economic effects as proof. Unqualified
+    stories remain eligible for ordinary editorial selection and sectioning.
+    """
+    if not is_canada_national(story):
+        return False
+    title = str(story.get("title") or "")
+    description = str(story.get("description") or "")
+    return bool(_CANADA_SUBJECT.search(title) or _CANADA_SUBJECT.search(description[:160]))
