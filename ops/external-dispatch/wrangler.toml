@@ -1,0 +1,10 @@
+# Deploy explicitly only after owner authorizes Cloudflare + fine-grained token.
+# Cron runs in UTC. The Worker gates each invocation by America/Toronto
+# local time so both EST and EDT publish windows are supported.
+name = "hermes-morning-dispatch"
+main = "worker.mjs"
+compatibility_date = "2026-10-26"
+workers_dev = false
+
+[triggers]
+crons = ["35,50 9,10 * * *"]
