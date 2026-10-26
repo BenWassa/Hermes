@@ -4,14 +4,13 @@
   "updated_at": "2026-10-26T00:42:55Z",
   "last_reconcile_at": "2026-10-25T18:31:57Z",
   "last_roundup": {
-    "period_id": "2026-10-18",
-    "cutoff": "2026-10-18T21:00:00Z",
-    "claimed_at": "2026-10-19T00:29:06Z",
-    "status": "notified",
+    "period_id": "2026-10-25",
+    "cutoff": "2026-10-25T21:00:00Z",
+    "claimed_at": "2026-10-26T00:42:55Z",
+    "status": "pending",
     "selection_keys": [
-      "url:https://nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
-      "url:https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html",
-      "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html"
+      "url:https://nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html",
+      "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html"
     ]
   },
   "items": {
