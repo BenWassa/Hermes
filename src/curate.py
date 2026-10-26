@@ -39,6 +39,7 @@ from google.genai import types
 
 from . import canada, config, crime, toronto
 from .editorial_integrity import restore_source_metadata
+from .editorial_fact_guard import enforce_source_claims
 from .editorial_provenance import current as evidence_current, safely as evidence_safely
 from .normalize import curation_view
 from .opinion import (
@@ -530,6 +531,9 @@ def curate(
     # The model selects/composes, but it cannot author source URLs or clocks.
     # Only the actual post-trim curation input may supply this metadata.
     restore_source_metadata(sections, stories, today)
+    # Only withhold proven contradictions from the *same* source record;
+    # missing metadata must never be treated as contrary evidence.
+    enforce_source_claims(sections, stories, today)
     sections = _guard_toronto_section(sections, eligible, today)
     _log_major_event_coverage(sections, stories, today)
     if following:
