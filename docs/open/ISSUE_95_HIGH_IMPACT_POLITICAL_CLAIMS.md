@@ -9,11 +9,19 @@ updated: 2026-10-26
 # Daily: verify high-impact political and election claims before publication (Sentinel HQA-003)
 
 **Tracking:** https://github.com/BenWassa/Hermes/issues/95
-**Current state:** Scoped, no implementation branch or PR. Requires bounded evidence design and fact-checker false-positive review.
+**Current state:** Partial conservative safeguard in PR #105: source-bound future-election/reelected-incumbent contradiction checks and original single-call prompt tightening; full leader/office-holder verification remains unimplemented and requires evidence-specific assessment.
 
 The GitHub issue is the discussion/approval surface; this is its single retained execution spec under [issue tracking conventions](../ISSUE_TRACKING.md). The requirements below originate from the owner-reviewed issue. Keep only this file updated for durable scope changes; do not create a parallel plan.
 
 ---
+
+## Implementation slice: narrow deterministic contradiction suppression (2026-10-26)
+
+[PR #105](https://github.com/BenWassa/Hermes/pull/105) owns a bounded source-bound pass after URL/time provenance restoration. The guard only compares **the same model-selected article's source title and public description** with generated fields. Two supported classes: a clearly scheduled future election falsely described as underway on the edition date, and a named reelected incumbent falsely described as returning to power now. Contradicted sentences are withheld; missing or ambiguous evidence abstains. Neutral source-headline fallback applies only if a full generated summary is withheld.
+
+Deterministic fixtures cover those errors, historical-return exceptions, unrelated candidates, unmatched links, unsupported numerical leader reversal and false positives. The edit preserves current model, one-call budget, selection, exact source-link authority, Toronto and Following/Sports isolation.
+
+**Not included:** detecting unsupported winners, role/coreference errors without clear same-source metadata, multi-source cross-card contradiction resolution or external fact-checking. This is not a claim of comprehensive accuracy. Acceptance still requires independent blind false-positive review and real post-merge observations, and the remaining broader claim classes should be scoped from evidence before implementation.
 
 ## Decision and evidence
 **Scoped proposal; pending owner approval to implement.** P1 editorial correctness. Sentinel **Candidate 2 / HQA-003**: three verified claim-level inaccuracies on two of three audited editions (only **3/7** daily reports available for W43). [Weekly synthesis](https://github.com/BenWassa/Hermes/blob/sentinel/reviews/docs/sentinel/weekly/2026-W43.md), [register](https://github.com/BenWassa/Hermes/blob/sentinel/reviews/docs/sentinel/FINDINGS.md).
