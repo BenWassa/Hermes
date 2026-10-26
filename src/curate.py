@@ -356,7 +356,7 @@ def _trim_input(
     baseline = _round_robin(unique, min(total, len(unique)))
 
     event_raw = [story for story in unique if canada.matching_major_event_ids(story, today)]
-    canada_raw = [story for story in unique if canada.is_canada_national(story)]
+    canada_raw = [story for story in unique if canada.qualifies_canada_priority(story)]
 
     event_reserved = _unique_priority(
         event_raw,
@@ -397,7 +397,7 @@ def _trim_input(
         selected[victim_index] = priority_story
         selected_ids.add(id(priority_story))
 
-    post_canada = sum(1 for story in selected if canada.is_canada_national(story))
+    post_canada = sum(1 for story in selected if canada.qualifies_canada_priority(story))
     post_event = sum(
         1 for story in selected if canada.matching_major_event_ids(story, today)
     )
