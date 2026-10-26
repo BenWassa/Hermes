@@ -234,11 +234,11 @@ def is_canada_national(story: dict) -> bool:
 # not every result returned by a country-scoped news aggregation query. This
 # signal reserves *input* capacity; the editor still chooses final stories.
 _CANADA_SUBJECT = re.compile(
-    r"(?<!\\w)(?:canada|canadian|canadians|ottawa|toronto|ontario|quebec|"
+    r"(?<!\w)(?:canada|canadian|canadians|ottawa|toronto|ontario|quebec|"
     r"québec|montreal|montréal|vancouver|alberta|british columbia|"
     r"manitoba|saskatchewan|nova scotia|new brunswick|newfoundland|"
     r"prince edward island|nunavut|yukon|northwest territories|"
-    r"bank of canada|b\\.?c\\.? premier)(?!\\w)",
+    r"bank of canada|b\.?c\.? premier)(?!\w)",
     re.I,
 )
 
