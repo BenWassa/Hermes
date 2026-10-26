@@ -58,7 +58,7 @@ export async function dispatchWorkflow(token, request = fetch, pause = async ms 
         "Content-Type": "application/json",
         "User-Agent": "hermes-independent-morning-dispatch",
       },
-      body: JSON.stringify({ ref: "main" }),
+      body: JSON.stringify({ ref: "main", inputs: { trigger_source: "cloudflare" } }),
     });
     if (response.status === 204 || response.status === 200) return;
     const retryable = response.status === 429 || response.status >= 500;
