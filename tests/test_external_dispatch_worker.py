@@ -33,6 +33,8 @@ def test_independent_dispatch_is_inert_until_external_account_configured():
     assert "async fetch(" not in code  # no callable public web endpoint
     assert "GITHUB_DISPATCH_TOKEN" in code and "GITHUB_DISPATCH_TOKEN" not in conf
     assert "workflow_dispatch:" in workflow
+    assert "trigger_source:" in workflow
+    assert "Dispatch label:" in workflow
     assert "group: build-the-daily" in workflow
     assert "Check whether today's edition already exists" in workflow
     assert "cancel-in-progress: false" in workflow
