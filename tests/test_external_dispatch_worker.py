@@ -35,6 +35,12 @@ def test_independent_dispatch_is_inert_until_external_account_configured():
     assert "workflow_dispatch:" in workflow
     assert "trigger_source:" in workflow
     assert "Dispatch label:" in workflow
+    # Caller-controlled workflow_dispatch inputs must never be rendered into
+    # shell source; environment transport and a closed allowlist are required.
+    assert "HERMES_DISPATCH_ORIGIN: ${{ inputs.trigger_source || 'not-supplied' }}" in workflow
+    assert 'case "$HERMES_DISPATCH_ORIGIN" in' in workflow
+    assert 'echo "trigger_source=${TRIGGER_SOURCE}"' in workflow
+    assert 'echo "trigger_source=${{ inputs.trigger_source' not in workflow
     assert "group: build-the-daily" in workflow
     assert "Check whether today's edition already exists" in workflow
     assert "cancel-in-progress: false" in workflow
