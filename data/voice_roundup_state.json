@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-25T18:31:57Z",
+  "updated_at": "2026-10-26T00:42:55Z",
   "last_reconcile_at": "2026-10-25T18:31:57Z",
   "last_roundup": {
     "period_id": "2026-10-18",
@@ -31,23 +31,6 @@
       "url": "https://www.afterbabel.com/p/happiness-hypothesis",
       "publication": "After Babel",
       "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
-    },
-    "url:https://afterbabel.com/p/thank-you-frances-haugen": {
-      "keys": [
-        "url:https://afterbabel.com/p/thank-you-frances-haugen",
-        "pid:rss:https://www.afterbabel.com/p/thank-you-frances-haugen",
-        "syn:thank-you-frances-haugen|voice:jonathan-haidt|2026-10-11",
-        "fp:afterbabel.com|thank-you-frances-haugen|2026-10-11"
-      ],
-      "voice_ids": [
-        "jonathan-haidt"
-      ],
-      "first_seen": "2026-10-11T19:40:03Z",
-      "published_at": "2026-10-11T11:44:25Z",
-      "title": "Thank You, Frances Haugen",
-      "url": "https://www.afterbabel.com/p/thank-you-frances-haugen",
-      "publication": "After Babel",
-      "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
     "url:https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall": {
       "keys": [
@@ -627,23 +610,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-586.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-586.html",
-        "pid:rss:https://marginalrevolution.com/?p=93968",
-        "syn:sunday-assorted-links|voice:tyler-cowen|2026-10-11",
-        "fp:marginalrevolution.com|sunday-assorted-links|2026-10-11"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-11T19:40:03Z",
-      "published_at": "2026-10-11T16:17:20Z",
-      "title": "Sunday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-586.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-586",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html",
@@ -711,23 +677,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-causal-effect-of-foreign-ideas-on-u-s-innovation.html?utm_source=rss&utm_medium=rss&utm_campaign=the-causal-effect-of-foreign-ideas-on-u-s-innovation",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html",
-        "pid:rss:https://marginalrevolution.com/?p=93960",
-        "syn:the-economics-of-agents|voice:tyler-cowen|2026-10-11",
-        "fp:marginalrevolution.com|the-economics-of-agents|2026-10-11"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-11T19:40:03Z",
-      "published_at": "2026-10-11T04:56:43Z",
-      "title": "The economics of agents",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-economics-of-agents.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-agents",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-net-fiscal-impact-of-immigration-should-include-gains-from-trade.html": {
       "keys": [
@@ -898,23 +847,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html?utm_source=rss&utm_medium=rss&utm_campaign=what-ive-been-reading-297",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-fuchsia-dunlop-2.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-fuchsia-dunlop-2.html",
-        "pid:rss:https://marginalrevolution.com/?p=93969",
-        "syn:what-should-i-ask-fuchsia-dunlop|voice:tyler-cowen|2026-10-11",
-        "fp:marginalrevolution.com|what-should-i-ask-fuchsia-dunlop|2026-10-11"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-11T19:40:03Z",
-      "published_at": "2026-10-11T08:52:47Z",
-      "title": "What should I ask Fuchsia Dunlop?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-should-i-ask-fuchsia-dunlop-2.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-fuchsia-dunlop-2",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-11T19:40:03Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-are-cybersecurity-losses-not-worse.html": {
       "keys": [
@@ -1122,22 +1054,6 @@
       "url": "https://www.theatlantic.com/podcasts/2026/10/are-we-too-political/689011/?utm_source=feed",
       "publication": "The Atlantic",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
-    },
-    "url:https://theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931": {
-      "keys": [
-        "url:https://theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931",
-        "syn:do-human-beings-have-souls|voice:david-brooks|2026-10-11",
-        "fp:theatlantic.com|do-human-beings-have-souls|2026-10-11"
-      ],
-      "voice_ids": [
-        "david-brooks"
-      ],
-      "first_seen": "2026-10-11T19:40:03Z",
-      "published_at": "2026-10-11T13:00:00Z",
-      "title": "Do Human Beings Have Souls?",
-      "url": "https://www.theatlantic.com/podcasts/2026/10/do-human-beings-have-souls/688931/?utm_source=feed",
-      "publication": "The Atlantic",
-      "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
     "url:https://theatlantic.com/podcasts/2026/10/do-miracles-really-happen/689116": {
       "keys": [
