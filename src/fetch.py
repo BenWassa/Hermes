@@ -192,8 +192,17 @@ def fetch_canada_rss() -> list[dict]:
 
 
 def fetch_toronto_rss() -> list[dict]:
-    """Toronto local RSS feeds; failures remain local to the affected feed."""
-    return _fetch_rss_feeds(config.TORONTO_RSS, default_hint="toronto")
+    """Local journalism with one bounded fallback if both primary feeds fail.
+
+    A fallback category feed is not inherently Toronto-only. The deterministic
+    Toronto backfill guard separately requires city/GTA headline or dateline
+    evidence for fallback-origin items; ordinary curation may still see them.
+    """
+    primary = _fetch_rss_feeds(config.TORONTO_RSS, default_hint="toronto")
+    if primary:
+        return primary
+    log.warning("Toronto RSS primary feeds returned no items; trying CityNews local fallback")
+    return _fetch_rss_feeds([config.TORONTO_FALLBACK_RSS], default_hint="toronto")[:25]
 
 
 def fetch_all() -> list[dict]:
