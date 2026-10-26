@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-26T00:42:55Z",
+  "updated_at": "2026-10-26T05:19:21Z",
   "last_reconcile_at": "2026-10-25T18:31:57Z",
   "last_roundup": {
     "period_id": "2026-10-25",
@@ -166,6 +166,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/facts-about-breastfeeding.html?utm_source=rss&utm_medium=rss&utm_campaign=facts-about-breastfeeding",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/frances-lee-on-american-elections.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/frances-lee-on-american-elections.html",
+        "pid:rss:https://marginalrevolution.com/?p=94081",
+        "syn:frances-lee-on-american-elections|voice:tyler-cowen|2026-10-26",
+        "fp:marginalrevolution.com|frances-lee-on-american-elections|2026-10-26"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-26T05:19:21Z",
+      "published_at": "2026-10-26T04:51:28Z",
+      "title": "Frances Lee on American elections",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/frances-lee-on-american-elections.html?utm_source=rss&utm_medium=rss&utm_campaign=frances-lee-on-american-elections",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html": {
       "keys": [
@@ -1069,23 +1086,6 @@
       "url": "https://www.theatlantic.com/podcasts/2026/10/do-miracles-really-happen/689116/?utm_source=feed",
       "publication": "The Atlantic",
       "first_morning_surfaced_at": null
-    },
-    "url:https://thefp.com/p/arthur-brooks-happiness-meaning": {
-      "keys": [
-        "url:https://thefp.com/p/arthur-brooks-happiness-meaning",
-        "pid:rss:https://www.thefp.com/p/arthur-brooks-happiness-meaning",
-        "syn:arthur-brooks-don-t-pursue-happiness|voice:arthur-c-brooks|2026-10-11",
-        "fp:thefp.com|arthur-brooks-don-t-pursue-happiness|2026-10-11"
-      ],
-      "voice_ids": [
-        "arthur-c-brooks"
-      ],
-      "first_seen": "2026-10-12T01:46:43Z",
-      "published_at": "2026-10-11T23:17:24Z",
-      "title": "Arthur Brooks: Don’t Pursue Happiness",
-      "url": "https://www.thefp.com/p/arthur-brooks-happiness-meaning",
-      "publication": "The Free Press",
-      "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
     "url:https://thefp.com/p/i-turned-myself-into-an-ai-model": {
       "keys": [
