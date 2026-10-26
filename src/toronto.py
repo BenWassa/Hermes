@@ -254,9 +254,13 @@ def _is_opinion(candidate: dict) -> bool:
 
 
 def _is_toronto_intake(candidate: dict) -> bool:
-    """Backfill Toronto-ness comes from the intake lane, never from keywords."""
+    """Backfill only trusted Toronto intake, with stricter fallback handling."""
     if canada.is_canada_national(candidate):
         return False
+    if candidate.get("source") == config.TORONTO_FALLBACK_RSS["name"]:
+        # The syndicated CityNews local feed also contains Hamilton and other
+        # non-GTA news. Origin alone is not proof of Toronto relevance.
+        return toronto_signal(candidate, candidate) in {"headline", "dateline"}
     return candidate.get("source") in _feed_names() or candidate.get("section_hint") == TORONTO_SECTION_ID
 
 
@@ -286,6 +290,10 @@ def _backfill(
         if not candidate.get("title") or not candidate.get("link"):
             continue
         if not _is_toronto_intake(candidate) or _is_opinion(candidate):
+            continue
+        # Do not backfill with stale or dateless syndicated fallback stories.
+        if (candidate.get("source") == config.TORONTO_FALLBACK_RSS["name"]
+                and _filed_label(str(candidate.get("pub_date") or ""), today) is None):
             continue
         if crime.is_unsupported_incident(candidate):
             continue
