@@ -187,6 +187,77 @@ def test_raptors_regular_snapshot_uses_provider_record_and_standing():
     assert snapshot.next_game.opponent == "Boston Celtics"
 
 
+def test_raptors_opening_win_withholds_provider_record_that_still_says_zero():
+    now = _now("2026-10-23T11:00:00Z")
+    schedule = {"events": [
+        _espn_event("opening", "2026-10-22T23:00:00Z", state="post",
+                    completed=True, toronto_score=135, opponent_score=92),
+    ]}
+    team = {"team": {"record": {"summary": "0-0"}, "standingSummary": "1st in Atlantic"}}
+    snapshot = parse_raptors_snapshot(schedule, team, now=now, fetched_at=now)
+    assert snapshot.last_game.result == "W"
+    assert snapshot.record is None
+    assert snapshot.standing is None
+    assert snapshot.available
+
+
+def test_raptors_two_wins_one_loss_detects_lag_and_preserves_last_game():
+    now = _now("2026-10-26T11:00:00Z")
+    events = [
+        _espn_event("win1", "2026-10-22T23:00:00Z", state="post",
+                    completed=True, toronto_score=135, opponent_score=92),
+        _espn_event("win2", "2026-10-24T23:00:00Z", state="post",
+                    completed=True, toronto_score=113, opponent_score=100),
+        _espn_event("loss", "2026-10-25T23:00:00Z", state="post",
+                    completed=True, toronto_score=94, opponent_score=117),
+        # A repeated result is a provider duplicate, not another win.
+        _espn_event("win2", "2026-10-24T23:00:00Z", state="post",
+                    completed=True, toronto_score=113, opponent_score=100),
+        _espn_event("future", "2026-10-27T23:00:00Z", state="pre", completed=False),
+    ]
+    snapshot = parse_raptors_snapshot(
+        {"events": events},
+        {"team": {"record": {"summary": "1-1"}, "standingSummary": "2nd in Atlantic"}},
+        now=now, fetched_at=now,
+    )
+    assert snapshot.record is None
+    assert snapshot.standing is None
+    assert snapshot.last_game.provider_game_id == "loss"
+    assert snapshot.next_game.provider_game_id == "future"
+
+
+def test_raptors_partial_schedule_does_not_invent_full_record():
+    now = _now("2026-11-15T12:00:00Z")
+    schedule = {"events": [
+        _espn_event("recent", "2026-11-14T23:00:00Z", state="post",
+                    completed=True, toronto_score=120, opponent_score=110),
+        _espn_event("preseason", "2026-10-06T23:00:00Z", state="post",
+                    completed=True, season_type=1, toronto_score=100, opponent_score=95),
+    ]}
+    snapshot = parse_raptors_snapshot(
+        schedule, {"team": {"record": {"summary": "8-4"}}},
+        now=now, fetched_at=now,
+    )
+    assert snapshot.record.display == "8-4"
+    assert snapshot.standing is None
+    assert snapshot.last_game.provider_game_id == "recent"
+
+
+def test_raptors_preseason_result_never_invalidates_regular_record():
+    now = _now("2026-10-23T11:00:00Z")
+    schedule = {"events": [
+        _espn_event("pre", "2026-10-02T23:00:00Z", state="post",
+                    completed=True, season_type=1, toronto_score=111, opponent_score=88),
+        _espn_event("regular", "2026-10-22T23:00:00Z", state="post",
+                    completed=True, toronto_score=120, opponent_score=100),
+    ]}
+    snapshot = parse_raptors_snapshot(
+        schedule, {"team": {"record": {"summary": "1-0"}}},
+        now=now, fetched_at=now,
+    )
+    assert snapshot.record.display == "1-0"
+
+
 def test_blue_jays_regular_snapshot_has_division_context_and_games_back():
     now = _now("2026-09-11T12:00:00Z")
     schedule = {

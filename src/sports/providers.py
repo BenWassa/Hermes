@@ -7,6 +7,7 @@ provider-independent objects in :mod:`src.sports.models`.
 from __future__ import annotations
 
 import datetime as dt
+import logging
 import re
 
 import requests
@@ -22,6 +23,8 @@ from .models import (
     TORONTO,
     UTC,
 )
+
+log = logging.getLogger("the-daily.sports.providers")
 
 TIMEOUT = 12
 USER_AGENT = "Hermes-Sports/1.0 (+https://github.com/BenWassa/Hermes)"
@@ -369,6 +372,27 @@ def parse_raptors_snapshot(
     record, standing = _espn_record(team_payload), _espn_standing(team_payload)
     if phase not in {SeasonPhase.REGULAR, SeasonPhase.POSTSEASON}:
         record = standing = None
+    elif phase == SeasonPhase.REGULAR and record is not None:
+        # ESPN's independent team-record endpoint can lag behind its schedule.
+        # Completed, uniquely identified regular-season games establish a
+        # minimum W/L count, even when schedule history is incomplete. Never
+        # infer a full-season total from a bounded fixture window.
+        finished = {}
+        for game in games:
+            if (game.phase != SeasonPhase.REGULAR or game.status != GameStatus.FINAL
+                    or game.start_time_utc > now or game.result not in {"W", "L"}):
+                continue
+            key = game.provider_game_id or game.start_time_utc.isoformat()
+            finished.setdefault(key, game)
+        minimum_wins = sum(game.result == "W" for game in finished.values())
+        minimum_losses = sum(game.result == "L" for game in finished.values())
+        if record.wins < minimum_wins or record.losses < minimum_losses:
+            log.warning(
+                "ESPN Raptors record inconsistent with confirmed schedule "
+                "record=%d-%d observed_minimum=%d-%d; withholding record/standing",
+                record.wins, record.losses, minimum_wins, minimum_losses,
+            )
+            record = standing = None
     return TeamSnapshot(RAPTORS, phase, "ESPN", fetched_at, last, record, standing, nxt)
 
 
