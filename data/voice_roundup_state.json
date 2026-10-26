@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-26T05:19:21Z",
-  "last_reconcile_at": "2026-10-25T18:31:57Z",
+  "updated_at": "2026-10-26T20:42:18Z",
+  "last_reconcile_at": "2026-10-26T20:42:18Z",
   "last_roundup": {
     "period_id": "2026-10-25",
     "cutoff": "2026-10-25T21:00:00Z",
@@ -64,6 +64,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=a-simple-point-about-the-intertemporal-regulation-of-ai",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html",
+        "pid:rss:https://marginalrevolution.com/?p=94082",
+        "syn:brazil-s-economic-problems-in-a-nutshell|voice:tyler-cowen|2026-10-26",
+        "fp:marginalrevolution.com|brazil-s-economic-problems-in-a-nutshell|2026-10-26"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-26T20:42:18Z",
+      "published_at": "2026-10-26T07:03:20Z",
+      "title": "Brazil’s economic problems, in a nutshell",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html?utm_source=rss&utm_medium=rss&utm_campaign=brazils-economic-problems-in-a-nutshell",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html": {
       "keys": [
@@ -182,7 +199,7 @@
       "title": "Frances Lee on American elections",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/frances-lee-on-american-elections.html?utm_source=rss&utm_medium=rss&utm_campaign=frances-lee-on-american-elections",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html": {
       "keys": [
@@ -371,6 +388,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-583.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-583.html",
+        "pid:rss:https://marginalrevolution.com/?p=94080",
+        "syn:monday-assorted-links|voice:tyler-cowen|2026-10-26",
+        "fp:marginalrevolution.com|monday-assorted-links|2026-10-26"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-26T20:42:18Z",
+      "published_at": "2026-10-26T16:23:21Z",
+      "title": "Monday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-583.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-583",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html",
@@ -421,23 +455,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html?utm_source=rss&utm_medium=rss&utm_campaign=new-matt-flaherty-study-of-the-nsf",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/okie-dokie-casey-handmer-edition.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/okie-dokie-casey-handmer-edition.html",
-        "pid:rss:https://marginalrevolution.com/?p=93972",
-        "syn:okie-dokie-casey-handmer-edition|voice:tyler-cowen|2026-10-12",
-        "fp:marginalrevolution.com|okie-dokie-casey-handmer-edition|2026-10-12"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-12T06:33:10Z",
-      "published_at": "2026-10-12T04:20:47Z",
-      "title": "Okie-dokie, Casey Handmer edition",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/okie-dokie-casey-handmer-edition.html?utm_source=rss&utm_medium=rss&utm_campaign=okie-dokie-casey-handmer-edition",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-bergmans-persona.html": {
       "keys": [
@@ -641,7 +658,7 @@
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-587",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-archaeology-tranche-of-emergent-ventures.html": {
       "keys": [
@@ -1036,6 +1053,23 @@
       "title": "Netanyahu Won the Middle East and Lost the World",
       "url": "https://www.nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html",
       "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
+    },
+    "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong": {
+      "keys": [
+        "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong",
+        "pid:rss:https://www.persuasion.community/p/the-spirit-of-democracy-remains-strong",
+        "syn:the-spirit-of-democracy-remains-strong|voice:francis-fukuyama|2026-10-26",
+        "fp:persuasion.community|the-spirit-of-democracy-remains-strong|2026-10-26"
+      ],
+      "voice_ids": [
+        "francis-fukuyama"
+      ],
+      "first_seen": "2026-10-26T20:42:18Z",
+      "published_at": "2026-10-26T16:30:46Z",
+      "title": "The Spirit of Democracy Remains Strong",
+      "url": "https://www.persuasion.community/p/the-spirit-of-democracy-remains-strong",
+      "publication": "Persuasion",
       "first_morning_surfaced_at": null
     },
     "url:https://persuasion.community/p/thymos-and-american-foreign-policy": {
@@ -1085,6 +1119,23 @@
       "title": "Do Miracles Really Happen?",
       "url": "https://www.theatlantic.com/podcasts/2026/10/do-miracles-really-happen/689116/?utm_source=feed",
       "publication": "The Atlantic",
+      "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
+    },
+    "url:https://thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness": {
+      "keys": [
+        "url:https://thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness",
+        "pid:rss:https://www.thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness",
+        "syn:arthur-brooks-the-real-lesson-of-the-stanford-prison-experiment|voice:arthur-c-brooks|2026-10-26",
+        "fp:thefp.com|arthur-brooks-the-real-lesson-of-the-stanford-prison-experiment|2026-10-26"
+      ],
+      "voice_ids": [
+        "arthur-c-brooks"
+      ],
+      "first_seen": "2026-10-26T20:42:18Z",
+      "published_at": "2026-10-26T14:47:31Z",
+      "title": "Arthur Brooks: The Real Lesson of the Stanford Prison Experiment",
+      "url": "https://www.thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness",
+      "publication": "The Free Press",
       "first_morning_surfaced_at": null
     },
     "url:https://thefp.com/p/i-turned-myself-into-an-ai-model": {
