@@ -30,6 +30,15 @@ def _safe_source_link(candidate: dict) -> str:
     return _canonical(candidate.get("canonical_url") or candidate.get("link"))
 
 
+def _reader_url(candidate: dict) -> str:
+    # Keep the publisher-stated destination: the comparable canonical form
+    # may normalize away host/addressing details essential to navigation.
+    original = candidate.get("link")
+    if isinstance(original, str) and _canonical(original):
+        return original
+    return _safe_source_link(candidate)
+
+
 def _unique_exact(link: str, candidates: list[dict]) -> dict | None:
     identity = _canonical(link)
     if not identity:
@@ -112,7 +121,7 @@ def restore_source_metadata(sections: list[dict], model_input: list[dict], today
             if source is None:
                 unmatched += 1
                 continue
-            authoritative = _safe_source_link(source)
+            authoritative = _reader_url(source)
             if authoritative and supplied != authoritative:
                 card["link"] = authoritative
                 repaired_links += 1
