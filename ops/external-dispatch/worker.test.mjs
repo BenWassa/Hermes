@@ -38,7 +38,7 @@ test("dispatch is restricted to the existing main build with least-capability to
   assert.equal(calls[0].url,
     "https://api.github.com/repos/BenWassa/Hermes/actions/workflows/build.yml/dispatches");
   assert.equal(calls[0].options.method, "POST");
-  assert.deepEqual(JSON.parse(calls[0].options.body), { ref: "main" });
+  assert.deepEqual(JSON.parse(calls[0].options.body), { ref: "main", inputs: { trigger_source: "cloudflare" } });
   assert.equal(calls[0].options.headers.Authorization, "Bearer test-secret");
 });
 
