@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-27T01:37:17Z",
+  "updated_at": "2026-10-27T20:11:49Z",
   "last_reconcile_at": "2026-10-26T20:42:18Z",
   "last_roundup": {
     "period_id": "2026-10-25",
@@ -320,6 +320,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html",
+        "pid:rss:https://marginalrevolution.com/?p=94083",
+        "syn:is-who-s-on-first-funny|voice:tyler-cowen|2026-10-27",
+        "fp:marginalrevolution.com|is-who-s-on-first-funny|2026-10-27"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-27T20:11:49Z",
+      "published_at": "2026-10-27T04:32:03Z",
+      "title": "Is “Who’s on First?” funny?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html?utm_source=rss&utm_medium=rss&utm_campaign=is-whos-on-first-funny",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/lost-worlds.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/lost-worlds.html",
@@ -369,7 +386,7 @@
       "title": "Monday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-583.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-583",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html": {
       "keys": [
@@ -421,6 +438,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html?utm_source=rss&utm_medium=rss&utm_campaign=new-matt-flaherty-study-of-the-nsf",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/nyt-debate-on-the-rules-for-ai-companies.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/nyt-debate-on-the-rules-for-ai-companies.html",
+        "pid:rss:https://marginalrevolution.com/?p=94087",
+        "syn:nyt-debate-on-the-rules-for-ai-companies|voice:tyler-cowen|2026-10-27",
+        "fp:marginalrevolution.com|nyt-debate-on-the-rules-for-ai-companies|2026-10-27"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-27T20:11:49Z",
+      "published_at": "2026-10-27T08:17:58Z",
+      "title": "NYT debate on the rules for AI companies",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/nyt-debate-on-the-rules-for-ai-companies.html?utm_source=rss&utm_medium=rss&utm_campaign=nyt-debate-on-the-rules-for-ai-companies",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-bergmans-persona.html": {
       "keys": [
@@ -762,6 +796,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-592.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-592.html",
+        "pid:rss:https://marginalrevolution.com/?p=94086",
+        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-10-27",
+        "fp:marginalrevolution.com|tuesday-assorted-links|2026-10-27"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-27T20:11:49Z",
+      "published_at": "2026-10-27T16:33:54Z",
+      "title": "Tuesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-592.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-592",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html",
@@ -1004,6 +1055,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
     },
+    "url:https://nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html",
+        "pid:rss:https://www.nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html",
+        "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-27",
+        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-27"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-27T20:11:49Z",
+      "published_at": "2026-10-27T19:56:16Z",
+      "title": "Nate Silver on What the Polls Say — and What His Gut’s Telling Him",
+      "url": "https://www.nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
+    },
     "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong": {
       "keys": [
         "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong",
@@ -1019,7 +1087,7 @@
       "title": "The Spirit of Democracy Remains Strong",
       "url": "https://www.persuasion.community/p/the-spirit-of-democracy-remains-strong",
       "publication": "Persuasion",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
     "url:https://theatlantic.com/podcasts/2026/10/are-we-too-political/689011": {
       "keys": [
@@ -1068,7 +1136,7 @@
       "title": "Arthur Brooks: The Real Lesson of the Stanford Prison Experiment",
       "url": "https://www.thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
     "url:https://thefp.com/p/i-turned-myself-into-an-ai-model": {
       "keys": [
