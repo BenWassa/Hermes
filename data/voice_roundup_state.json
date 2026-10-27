@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-26T20:42:18Z",
+  "updated_at": "2026-10-27T01:37:17Z",
   "last_reconcile_at": "2026-10-26T20:42:18Z",
   "last_roundup": {
     "period_id": "2026-10-25",
@@ -337,40 +337,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/michael-woodford-nobel-laureate.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/michael-woodford-nobel-laureate.html",
-        "pid:rss:https://marginalrevolution.com/?p=93979",
-        "syn:michael-woodford-nobel-laureate|voice:tyler-cowen|2026-10-12",
-        "fp:marginalrevolution.com|michael-woodford-nobel-laureate|2026-10-12"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-12T22:34:06Z",
-      "published_at": "2026-10-12T12:20:40Z",
-      "title": "Michael Woodford, Nobel Laureate",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/michael-woodford-nobel-laureate.html?utm_source=rss&utm_medium=rss&utm_campaign=michael-woodford-nobel-laureate",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-581.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-581.html",
-        "pid:rss:https://marginalrevolution.com/?p=93971",
-        "syn:monday-assorted-links|voice:tyler-cowen|2026-10-12",
-        "fp:marginalrevolution.com|monday-assorted-links|2026-10-12"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-12T22:34:06Z",
-      "published_at": "2026-10-12T18:22:31Z",
-      "title": "Monday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-581.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-581",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-582.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-582.html",
@@ -574,23 +540,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html?utm_source=rss&utm_medium=rss&utm_campaign=podcast-with-rabbi-david-wolpe",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/robert-hall-nobel-laureate.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/robert-hall-nobel-laureate.html",
-        "pid:rss:https://marginalrevolution.com/?p=93976",
-        "syn:robert-e-hall-nobel-laureate|voice:tyler-cowen|2026-10-12",
-        "fp:marginalrevolution.com|robert-e-hall-nobel-laureate|2026-10-12"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-12T22:34:06Z",
-      "published_at": "2026-10-12T11:59:30Z",
-      "title": "Robert E. Hall, Nobel Laureate",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/robert-hall-nobel-laureate.html?utm_source=rss&utm_medium=rss&utm_campaign=robert-hall-nobel-laureate",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-12T22:34:06Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html": {
       "keys": [
@@ -1071,23 +1020,6 @@
       "url": "https://www.persuasion.community/p/the-spirit-of-democracy-remains-strong",
       "publication": "Persuasion",
       "first_morning_surfaced_at": null
-    },
-    "url:https://persuasion.community/p/thymos-and-american-foreign-policy": {
-      "keys": [
-        "url:https://persuasion.community/p/thymos-and-american-foreign-policy",
-        "pid:rss:https://www.persuasion.community/p/thymos-and-american-foreign-policy",
-        "syn:thymos-and-american-foreign-policy|voice:francis-fukuyama|2026-10-12",
-        "fp:persuasion.community|thymos-and-american-foreign-policy|2026-10-12"
-      ],
-      "voice_ids": [
-        "francis-fukuyama"
-      ],
-      "first_seen": "2026-10-12T22:34:06Z",
-      "published_at": "2026-10-12T15:00:32Z",
-      "title": "Thymos and American Foreign Policy",
-      "url": "https://www.persuasion.community/p/thymos-and-american-foreign-policy",
-      "publication": "Persuasion",
-      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
     },
     "url:https://theatlantic.com/podcasts/2026/10/are-we-too-political/689011": {
       "keys": [
