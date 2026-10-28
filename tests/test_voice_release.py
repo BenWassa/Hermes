@@ -316,4 +316,3 @@ def test_visual_article_summary_has_structured_takeaways_and_source_note():
     # the normalized canonical identity used only for deduplication.
     assert 'href="https://www.publisher.example/essay"' in page
     assert "<canvas" not in page
-

@@ -2,6 +2,10 @@
 
 **Issue:** [#72](https://github.com/BenWassa/Hermes/issues/72) · **Research date:** 2026-10-22 · **Scope:** research only; no production curation/model/workflow changes.
 
+## Integration checkpoint (2026-10-27)
+
+Integrated as offline research infrastructure. The model matrix and price tables below are historical research assumptions, not verified current provider offerings or prices. Reconfirm model IDs, pricing, account access and quotas before any live run. Live paired measurements, independent blind review and the separate #73 production decision remain outstanding; merging the harness does not complete #72 or authorize a production model switch.
+
 ## Outcome at this checkpoint
 
 The reproducible research **infrastructure** is available: 14 synthetic public-metadata candidate pools (201 story records including a 65-item cap test), exact production prompt/candidate projection, per-model setting matrix, offline structural/reference checks, a blind-review exporter, usage/latency capture, introductory/2027 cost estimates, and credential-gated live execution. **No Gemini responses or quality comparisons have yet been measured.** Neither `GEMINI_API_KEY` nor `GOOGLE_API_KEY` was available in the execution environment on 2026-10-22; the Google SDK also was not installed in that local environment. Existing repository CI installs the required SDK through `requirements-dev.txt`. Availability and quotas for the owner's AI Studio account remain unknown. No secret value was read or exposed.

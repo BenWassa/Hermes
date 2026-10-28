@@ -1,7 +1,7 @@
 # Hermes × Crucix Integration Plan (v2)
 
-**Status:** Active Draft (Execution-Ready)  
-**Date:** 2026-04-10  
+**Status:** Archived v1 proposal; not an active Daily implementation plan.
+**Date:** 2026-04-10
 **Branch:** `feature/crucix-integration-v2`
 
 ---
