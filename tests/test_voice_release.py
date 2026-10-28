@@ -292,3 +292,28 @@ def test_gemini_and_page_work_never_start_when_claim_cannot_be_persisted():
     assert summarizer.calls == 0
     assert publisher.calls == 0
     assert downstream.sent == []
+
+
+def test_visual_article_summary_has_structured_takeaways_and_source_note():
+    from src.voices.release import render_release_page
+
+    item = article()
+    summary = ReleaseSummary(
+        thesis="The main argument stays visible.",
+        takeaways=("First supported point.", "Second supported point."),
+        why_it_matters="Public consequences of the author's argument.",
+        limitation="Only public feed descriptions were available.",
+    )
+    page = render_release_page(item, writers="Core Writer", summary=summary)
+
+    assert '<section class="lead-summary" aria-label="Article thesis">' in page
+    assert '<ol class="takeaway-list">' in page
+    assert page.count("<li>") == 2
+    assert 'class="limitation"' in page
+    assert "SOURCE NOTE" in page
+    assert "Only public feed descriptions were available." in page
+    # Reader navigation must use the source-stated URL (including www), not
+    # the normalized canonical identity used only for deduplication.
+    assert 'href="https://www.publisher.example/essay"' in page
+    assert "<canvas" not in page
+

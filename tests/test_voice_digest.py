@@ -190,6 +190,33 @@ def test_weekly_page_is_one_summary_plus_at_most_three_selected_items():
     assert "article-by-article alerts" in page
 
 
+def test_weekly_visual_layout_is_decorative_and_keeps_one_editorial_summary():
+    reg = registry()
+    selected = list(state_with_items().items.values())[:3]
+    curation = WeeklyCuration(
+        selected_keys=tuple(item.key for item in selected),
+        summary="A source-grounded weekly synthesis.",
+        reasons={item.key: f"Reason for selection {i}." for i, item in enumerate(selected)},
+        model_used=True,
+    )
+    page = render_weekly(PERIOD, selected, reg, curation)
+
+    assert page.count('class="piece"') == len(selected)
+    assert page.count('class="cover-art"') == 1
+    assert 'aria-hidden="true"' in page
+    assert page.count('class="summary-kicker"') == 1
+    assert page.count("A source-grounded weekly synthesis.") == 1
+    assert "Worth your time · 3 pieces" in page
+    assert 'class="small-index"' in page
+    assert 'class="selection"' in page
+    # No hallucinated pictures, charts, article text, or fetching implied by styling.
+    assert "<img " not in page
+    assert "<canvas" not in page
+    for item in selected:
+        assert item.title in page
+        assert f'href="{item.url}"' in page
+
+
 def test_weekly_alert_is_one_compact_pointer(monkeypatch):
     reg = registry()
     state = state_with_items()

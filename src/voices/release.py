@@ -309,7 +309,7 @@ def render_release_page(
         takeaways_html = (
             '<section class="section" aria-labelledby="takeaways">'
             '<h2 id="takeaways">Key takeaways</h2>'
-            f"<ul>{items}</ul></section>"
+            f'<ol class="takeaway-list">{items}</ol></section>'
         )
     why_html = ""
     if summary.why_it_matters:
@@ -387,6 +387,45 @@ def render_release_page(
     .source {{ font-family:Arial,sans-serif; color:var(--meta); font-size:.72rem; line-height:1.4; }}
     .read:focus-visible,.brand:focus-visible {{ outline:2px solid var(--link); outline-offset:3px; }}
     @media (prefers-color-scheme:dark) {{ .read {{ color:#101722; }} }}
+
+    /* Visual reading furniture; facts remain entirely in source-grounded copy. */
+    header{{border-bottom:0;padding-bottom:24px}}
+    header h1{{max-width:18ch;letter-spacing:-.025em}}
+    .meta{{border-top:1px solid var(--rule);padding-top:13px}}
+    .lead-summary{{border-top:4px solid var(--navy);border-bottom:1px solid var(--rule);
+      padding:20px 0 23px;margin-top:3px}}
+    .summary-label,.section h2,.limitation::before{{
+      font-family:Arial,sans-serif;font-size:.67rem;font-weight:700;
+      letter-spacing:.14em;text-transform:uppercase;color:var(--navy)
+    }}
+    .lead-summary .thesis{{font-size:clamp(1.24rem,3vw,1.62rem);
+      line-height:1.53;margin:12px 0 0;max-width:48ch}}
+    .section{{margin-top:17px;padding:25px 0 6px}}
+    .section h2{{margin:0 0 20px}}
+    .takeaway-list{{counter-reset:point;list-style:none;padding:0;margin:0}}
+    .takeaway-list li{{counter-increment:point;display:grid;grid-template-columns:47px minmax(0,1fr);
+      column-gap:12px;padding:16px 0;margin:0;border-top:1px solid var(--rule);
+      font-size:1.03rem;line-height:1.62}}
+    .takeaway-list li:first-child{{border-top:0;padding-top:0}}
+    .takeaway-list li::before{{content:counter(point,decimal-leading-zero);
+      font-family:Georgia,serif;font-size:1.9rem;line-height:1.1;font-weight:700;
+      letter-spacing:-.05em;color:var(--navy)}}
+    #why{{margin-bottom:15px}}
+    #why + p{{font-size:1.08rem;line-height:1.68;max-width:57ch;margin:0}}
+    .limitation{{border-top:1px solid var(--rule);background:transparent;
+      font-size:.78rem;padding:19px 0;margin-top:22px}}
+    .limitation::before{{content:"SOURCE NOTE";display:block;margin-bottom:8px}}
+    .original{{border-top:3px solid var(--navy);margin-top:25px}}
+    .read{{background:var(--navy);color:var(--paper)}}
+    @media(max-width:420px){{
+      .takeaway-list li{{grid-template-columns:36px minmax(0,1fr);column-gap:10px}}
+      .takeaway-list li::before{{font-size:1.5rem}}
+    }}
+    @media print{{
+      html,body{{background:white}}
+      main{{max-width:none}}
+      .read{{border:1px solid var(--navy);background:transparent;color:var(--navy)}}
+    }}
   </style>
 </head>
 <body>
@@ -398,7 +437,10 @@ def render_release_page(
       <div class="meta">{html.escape(writers)} · {html.escape(publication)} · {html.escape(date_label)}</div>
     </header>
     <article aria-label="Hermes summary of the original article">
-      <p class="thesis">{html.escape(summary.thesis)}</p>
+      <section class="lead-summary" aria-label="Article thesis">
+        <div class="summary-label">IN BRIEF</div>
+        <p class="thesis">{html.escape(summary.thesis)}</p>
+      </section>
       {takeaways_html}
       {why_html}
       {limitation_html}

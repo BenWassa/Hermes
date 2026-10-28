@@ -519,7 +519,8 @@ def _format_day(value: dt.datetime | None) -> str:
     return value.astimezone(TORONTO).strftime("%b %-d")
 
 
-def _card(item: RoundupItem, registry: Registry, *, reason: str = "") -> str:
+def _card(item: RoundupItem, registry: Registry, *, reason: str = "", ordinal: int = 1) -> str:
+    """An editorial reading selection, using decoration but no invented source imagery."""
     names = " &amp; ".join(html.escape(name) for name in _voice_names(item, registry))
     meta = " · ".join(
         part
@@ -531,13 +532,33 @@ def _card(item: RoundupItem, registry: Registry, *, reason: str = "") -> str:
         if part
     )
     reason_html = f'<p class="reason">{html.escape(reason)}</p>' if reason else ""
+    if ordinal == 1:
+        # Purely decorative engraving; intentionally not a photograph, data graphic,
+        # description of the subject, or a new claim about the linked article.
+        artwork = (
+            '<div class="cover-art" aria-hidden="true">'
+            '<svg viewBox="0 0 180 180" focusable="false">'
+            '<g fill="none" stroke="currentColor" stroke-width="1">'
+            '<circle cx="130" cy="51" r="34"/><circle cx="130" cy="51" r="51"/>'
+            '<circle cx="130" cy="51" r="68"/><circle cx="130" cy="51" r="85"/>'
+            '<path d="M-10 108H195M-10 121H195M-10 134H195M-10 147H195"/>'
+            '</g></svg><span class="cover-index">01</span></div>'
+        )
+        kicker = "The lead selection"
+    else:
+        artwork = f'<span class="small-index" aria-hidden="true">{ordinal:02d}</span>'
+        kicker = "Also worth reading"
     return (
-        '<article class="piece">'
+        '<article class="piece"' + (' data-lead="true"' if ordinal == 1 else '') + '>'
+        '<div class="piece-copy">'
+        f'<div class="item-kicker">{html.escape(kicker)}</div>'
         f'<div class="meta">{meta}</div>'
         f'<h2>{html.escape(item.title)}</h2>'
         f'{reason_html}'
         f'<a class="open" href="{html.escape(item.url, quote=True)}" target="_blank" rel="noopener">'
         'Read original <span aria-hidden="true">→</span></a>'
+        '</div>'
+        f'{artwork}'
         '</article>'
     )
 
@@ -570,6 +591,48 @@ def _page_shell(*, title: str, eyebrow: str, heading: str, dek: str, body: str) 
     .recent a{{color:var(--ink);text-decoration:none;font-weight:700;line-height:1.28}}.recent .meta{{margin:5px 0 0}}
     .empty{{border-top:1px solid var(--rule);color:var(--meta);line-height:1.55;padding:25px 0;margin:0}}
     a:focus-visible{{outline:2px solid var(--navy);outline-offset:3px}}
+
+    /* Issue furniture: restrained visuals without fabricated photographs or data. */
+    main{{max-width:760px}}
+    header{{padding-bottom:25px}}
+    header h1{{font-size:clamp(2.35rem,7vw,3.7rem);line-height:1.04;max-width:15ch;letter-spacing:-.025em}}
+    .dek{{color:var(--meta);max-width:56ch}}
+    .summary{{border-top:3px solid var(--navy);border-bottom:1px solid var(--rule);padding:19px 0 22px;margin-top:8px}}
+    .summary-kicker,.item-kicker{{
+      font-family:Arial,sans-serif;text-transform:uppercase;font-size:.65rem;
+      font-weight:700;letter-spacing:.14em;color:var(--navy)
+    }}
+    .summary p{{font-size:clamp(1.06rem,2.7vw,1.24rem);line-height:1.62;margin:12px 0 0;max-width:64ch}}
+    .section-title{{margin:27px 0 0;padding-bottom:12px;border-bottom:2px solid var(--navy);font-weight:700}}
+    .piece{{display:grid;grid-template-columns:minmax(0,1fr) 48px;column-gap:18px;align-items:start;padding:22px 0 24px}}
+    .piece:first-child{{border-top:0}}
+    .piece-copy{{min-width:0}}
+    .item-kicker{{margin-bottom:10px}}
+    .piece .meta{{margin-bottom:9px;line-height:1.55}}
+    .piece h2{{font-size:clamp(1.35rem,3.6vw,1.66rem);line-height:1.17;overflow-wrap:anywhere}}
+    .reason{{font-size:.96rem;line-height:1.62;max-width:59ch;color:var(--ink)}}
+    .piece[data-lead="true"]{{grid-template-columns:minmax(0,1fr) minmax(145px,34%);column-gap:22px;padding-top:25px;padding-bottom:29px}}
+    .piece[data-lead="true"] h2{{font-size:clamp(1.8rem,4.8vw,2.5rem);line-height:1.1}}
+    .cover-art{{position:relative;min-height:210px;overflow:hidden;background:var(--navy);color:var(--paper)}}
+    .cover-art svg{{position:absolute;width:100%;height:100%;inset:0;opacity:.54}}
+    .cover-index{{position:absolute;bottom:7px;left:15px;line-height:1;font-size:6.3rem;font-weight:700;letter-spacing:-.08em}}
+    .small-index{{font-family:Georgia,serif;font-size:3rem;line-height:1;color:var(--navy);text-align:right;opacity:.72}}
+    .open:hover,.quiet-link:hover{{text-decoration:underline;text-underline-offset:3px}}
+    .quiet-link{{border-top:1px solid var(--rule);width:100%;padding-top:8px}}
+    @media(max-width:520px){{
+      .piece[data-lead="true"]{{display:flex;flex-direction:column;gap:13px}}
+      .piece[data-lead="true"] .cover-art{{order:-1;min-height:128px;width:100%}}
+      .cover-index{{font-size:5.6rem}}
+      .piece{{grid-template-columns:minmax(0,1fr) 36px;column-gap:8px}}
+      .piece h2{{font-size:1.35rem}}
+      .small-index{{font-size:2.35rem}}
+      .summary p{{font-size:1.06rem}}
+    }}
+    @media print{{
+      html,body{{background:white}}
+      main{{max-width:none}}
+      .cover-art{{border:1px solid var(--navy);background:transparent;color:var(--navy)}}
+    }}
   </style>
 </head>
 <body><main>
@@ -595,14 +658,16 @@ def render_weekly(period, selected, registry, curation: WeeklyCuration, *, suppr
         body = '<p class="empty">Nothing this week cleared the deliberately small attention filter.</p>'
     else:
         cards = "".join(
-            _card(item, registry, reason=curation.reasons.get(item.key, ""))
-            for item in selected
+            _card(item, registry, reason=curation.reasons.get(item.key, ""), ordinal=ordinal)
+            for ordinal, item in enumerate(selected, start=1)
         )
         count = f"{len(selected)} piece" + ("" if len(selected) == 1 else "s")
         body = (
-            f'<div class="summary">{html.escape(_summary_for_render(selected, registry, curation))}</div>'
+            '<section class="summary" aria-label="Weekly editorial synthesis">'
+            '<div class="summary-kicker">The week in brief</div>'
+            f'<p>{html.escape(_summary_for_render(selected, registry, curation))}</p></section>'
             f'<div class="section-title">Worth your time \u00b7 {count}</div>'
-            f'{cards}'
+            f'<div class="selection">{cards}</div>'
             '<a class="quiet-link" href="recent/">Browse all recent Core writing →</a>'
         )
     return _page_shell(
