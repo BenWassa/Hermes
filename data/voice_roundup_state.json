@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-27T20:11:49Z",
-  "last_reconcile_at": "2026-10-26T20:42:18Z",
+  "updated_at": "2026-10-28T20:29:07Z",
+  "last_reconcile_at": "2026-10-28T20:29:07Z",
   "last_roundup": {
     "period_id": "2026-10-25",
     "cutoff": "2026-10-25T21:00:00Z",
@@ -14,23 +14,6 @@
     ]
   },
   "items": {
-    "url:https://afterbabel.com/p/happiness-hypothesis": {
-      "keys": [
-        "url:https://afterbabel.com/p/happiness-hypothesis",
-        "pid:rss:https://www.afterbabel.com/p/happiness-hypothesis",
-        "syn:ancient-wisdom-is-needed-today-more-than-ever-here-is-my-book|voice:jonathan-haidt|2026-10-13",
-        "fp:afterbabel.com|ancient-wisdom-is-needed-today-more-than-ever-here-is-my-book|2026-10-13"
-      ],
-      "voice_ids": [
-        "jonathan-haidt"
-      ],
-      "first_seen": "2026-10-13T20:47:57Z",
-      "published_at": "2026-10-13T11:02:20Z",
-      "title": "Ancient Wisdom Is Needed Today More Than Ever. Here Is My Book About It.",
-      "url": "https://www.afterbabel.com/p/happiness-hypothesis",
-      "publication": "After Babel",
-      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
-    },
     "url:https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall": {
       "keys": [
         "url:https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall",
@@ -65,6 +48,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-hacking-risks.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-hacking-risks.html",
+        "pid:rss:https://marginalrevolution.com/?p=94091",
+        "syn:ai-hacking-risks|voice:tyler-cowen|2026-10-28",
+        "fp:marginalrevolution.com|ai-hacking-risks|2026-10-28"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-28T20:29:07Z",
+      "published_at": "2026-10-28T04:38:22Z",
+      "title": "AI hacking risks",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/ai-hacking-risks.html?utm_source=rss&utm_medium=rss&utm_campaign=ai-hacking-risks",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-28T20:29:07Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html",
@@ -81,23 +81,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html?utm_source=rss&utm_medium=rss&utm_campaign=brazils-economic-problems-in-a-nutshell",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html",
-        "pid:rss:https://marginalrevolution.com/?p=93996",
-        "syn:china-fact-of-the-day|voice:tyler-cowen|2026-10-14",
-        "fp:marginalrevolution.com|china-fact-of-the-day|2026-10-14"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-14T19:38:03Z",
-      "published_at": "2026-10-14T18:56:23Z",
-      "title": "China fact (?) of the day",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/china-fact-of-the-day-83.html?utm_source=rss&utm_medium=rss&utm_campaign=china-fact-of-the-day-83",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/cybersecurity-etf.html": {
       "keys": [
@@ -166,6 +149,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/emergent-ventures-india-20th-cohort.html?utm_source=rss&utm_medium=rss&utm_campaign=emergent-ventures-india-20th-cohort",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman.html",
+        "pid:rss:https://marginalrevolution.com/?p=94099",
+        "syn:errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman|voice:tyler-cowen|2026-10-28",
+        "fp:marginalrevolution.com|errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman|2026-10-28"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-28T20:29:07Z",
+      "published_at": "2026-10-28T18:56:51Z",
+      "title": "Errors in the research of Emmanuel Saez and Gabriel Zucman",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman.html?utm_source=rss&utm_medium=rss&utm_campaign=errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/facts-about-breastfeeding.html": {
       "keys": [
@@ -252,6 +252,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-is-ai-shaping-economic-research.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-is-ai-shaping-economic-research.html",
+        "pid:rss:https://marginalrevolution.com/?p=94092",
+        "syn:how-is-ai-shaping-economic-research|voice:tyler-cowen|2026-10-28",
+        "fp:marginalrevolution.com|how-is-ai-shaping-economic-research|2026-10-28"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-28T20:29:07Z",
+      "published_at": "2026-10-28T18:52:56Z",
+      "title": "How is AI shaping economic research?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-is-ai-shaping-economic-research.html?utm_source=rss&utm_medium=rss&utm_campaign=how-is-ai-shaping-economic-research",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html",
@@ -303,23 +320,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-have-no-mouth-and-i-must-scream.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-have-no-mouth-and-i-must-scream.html",
-        "pid:rss:https://marginalrevolution.com/?p=93984",
-        "syn:i-have-no-mouth-and-i-must-scream|voice:tyler-cowen|2026-10-13",
-        "fp:marginalrevolution.com|i-have-no-mouth-and-i-must-scream|2026-10-13"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-13T20:47:57Z",
-      "published_at": "2026-10-13T04:42:32Z",
-      "title": "“I have no mouth and I must scream”",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/i-have-no-mouth-and-i-must-scream.html?utm_source=rss&utm_medium=rss&utm_campaign=i-have-no-mouth-and-i-must-scream",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html",
@@ -336,23 +336,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html?utm_source=rss&utm_medium=rss&utm_campaign=is-whos-on-first-funny",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/lost-worlds.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/lost-worlds.html",
-        "pid:rss:https://marginalrevolution.com/?p=93986",
-        "syn:lost-worlds|voice:tyler-cowen|2026-10-13",
-        "fp:marginalrevolution.com|lost-worlds|2026-10-13"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-13T20:47:57Z",
-      "published_at": "2026-10-13T07:28:20Z",
-      "title": "*Lost Worlds*",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/lost-worlds.html?utm_source=rss&utm_medium=rss&utm_campaign=lost-worlds",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-13T20:47:57Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-582.html": {
       "keys": [
@@ -523,40 +506,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/our-fascination-with-screens-demand-curves-slope-downward-installment-1637.html?utm_source=rss&utm_medium=rss&utm_campaign=our-fascination-with-screens-demand-curves-slope-downward-installment-1637",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-18T18:15:26Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/perry-mehrling-rip.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/perry-mehrling-rip.html",
-        "pid:rss:https://marginalrevolution.com/?p=93991",
-        "syn:perry-mehrling-rip|voice:tyler-cowen|2026-10-13",
-        "fp:marginalrevolution.com|perry-mehrling-rip|2026-10-13"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-14T19:38:03Z",
-      "published_at": "2026-10-13T20:51:16Z",
-      "title": "Perry Mehrling, RIP",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/perry-mehrling-rip.html?utm_source=rss&utm_medium=rss&utm_campaign=perry-mehrling-rip",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/plunder-the-last-of-the-war-in-europe-1945.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/plunder-the-last-of-the-war-in-europe-1945.html",
-        "pid:rss:https://marginalrevolution.com/?p=93992",
-        "syn:plunder-the-last-of-the-war-in-europe-1945|voice:tyler-cowen|2026-10-14",
-        "fp:marginalrevolution.com|plunder-the-last-of-the-war-in-europe-1945|2026-10-14"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-14T19:38:03Z",
-      "published_at": "2026-10-14T07:02:57Z",
-      "title": "*Plunder: The Last of the War in Europe, 1945*",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/plunder-the-last-of-the-war-in-europe-1945.html?utm_source=rss&utm_medium=rss&utm_campaign=plunder-the-last-of-the-war-in-europe-1945",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html": {
       "keys": [
@@ -762,23 +711,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html",
-        "pid:rss:https://marginalrevolution.com/?p=93983",
-        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-10-13",
-        "fp:marginalrevolution.com|tuesday-assorted-links|2026-10-13"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-13T20:47:57Z",
-      "published_at": "2026-10-13T16:22:29Z",
-      "title": "Tuesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-590.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-590",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html",
@@ -811,24 +743,7 @@
       "title": "Tuesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-592.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-592",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html",
-        "pid:rss:https://marginalrevolution.com/?p=93989",
-        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-10-14",
-        "fp:marginalrevolution.com|wednesday-assorted-links|2026-10-14"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-14T19:38:03Z",
-      "published_at": "2026-10-14T16:07:03Z",
-      "title": "Wednesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-575.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-575",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
+      "first_morning_surfaced_at": "2026-10-28T20:29:07Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-576.html": {
       "keys": [
@@ -847,22 +762,22 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/well-planned-african-immigration-to-america-will-go-fine.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-577.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/well-planned-african-immigration-to-america-will-go-fine.html",
-        "pid:rss:https://marginalrevolution.com/?p=93990",
-        "syn:well-planned-african-immigration-to-america-will-go-fine|voice:tyler-cowen|2026-10-14",
-        "fp:marginalrevolution.com|well-planned-african-immigration-to-america-will-go-fine|2026-10-14"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-577.html",
+        "pid:rss:https://marginalrevolution.com/?p=94090",
+        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-10-28",
+        "fp:marginalrevolution.com|wednesday-assorted-links|2026-10-28"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-10-14T19:38:03Z",
-      "published_at": "2026-10-14T04:19:22Z",
-      "title": "Well-planned African immigration to America will go fine",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/well-planned-african-immigration-to-america-will-go-fine.html?utm_source=rss&utm_medium=rss&utm_campaign=well-planned-african-immigration-to-america-will-go-fine",
+      "first_seen": "2026-10-28T20:29:07Z",
+      "published_at": "2026-10-28T15:55:58Z",
+      "title": "Wednesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-577.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-577",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html": {
       "keys": [
@@ -948,23 +863,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html?utm_source=rss&utm_medium=rss&utm_campaign=you-can-see-everything-no-spoilers",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
-    },
-    "url:https://nytimes.com/2026/10/14/opinion/ezra-klein-podcast-sherry-turkle.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/10/14/opinion/ezra-klein-podcast-sherry-turkle.html",
-        "pid:rss:https://www.nytimes.com/2026/10/14/opinion/ezra-klein-podcast-sherry-turkle.html",
-        "syn:is-it-a-relationship-if-no-one-s-on-the-other-side|voice:ezra-klein|2026-10-14",
-        "fp:nytimes.com|is-it-a-relationship-if-no-one-s-on-the-other-side|2026-10-14"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-10-14T19:38:03Z",
-      "published_at": "2026-10-14T14:04:42Z",
-      "title": "Is It a Relationship if No One’s on the Other Side?",
-      "url": "https://www.nytimes.com/2026/10/14/opinion/ezra-klein-podcast-sherry-turkle.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
     },
     "url:https://nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html": {
       "keys": [
@@ -1060,7 +958,9 @@
         "url:https://nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html",
         "pid:rss:https://www.nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html",
         "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-27",
-        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-27"
+        "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-28",
+        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-27",
+        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-28"
       ],
       "voice_ids": [
         "ezra-klein"
@@ -1204,22 +1104,6 @@
       "url": "https://www.theglobeandmail.com/opinion/article-alberta-separatists-lost-badly-danielle-smith-might-have-lost-worse/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
-    },
-    "url:https://theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats",
-        "syn:first-past-the-post-sets-canada-up-for-secession-threats|voice:andrew-coyne|2026-10-13",
-        "fp:theglobeandmail.com|first-past-the-post-sets-canada-up-for-secession-threats|2026-10-13"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-10-14T19:38:03Z",
-      "published_at": "2026-10-13T00:00:00Z",
-      "title": "First past the post sets Canada up for secession threats",
-      "url": "https://www.theglobeandmail.com/opinion/article-first-past-the-post-sets-canada-up-for-secession-threats/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-10-14T19:38:03Z"
     }
   }
 }
