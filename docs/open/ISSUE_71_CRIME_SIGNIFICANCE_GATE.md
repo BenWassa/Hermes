@@ -48,8 +48,10 @@ No new Gemini call, no new source, no schema change to the edition.
 
 - Not a crime-statistics module; trend evidence is preferred by prompt and by
   never gating stories that carry it.
-- Classification is lexical and conservative by design. Two unsupported
-  incidents may still reach the model so a missed signal can be recovered.
+- Classification is lexical and conservative by design. Under the owner's
+  `CRIME_INCIDENT_INPUT_CAP = 0` decision no unsupported incident reaches the
+  model, so a signal the matcher misses means that story is not published
+  (see "Closeout verification" for known matcher gaps).
 - Duplicate reports of one event are classified individually; if the model
   picks the weaker variant of a significant event, the guard applies to it.
 
