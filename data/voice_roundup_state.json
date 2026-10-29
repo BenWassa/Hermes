@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-28T20:29:07Z",
-  "last_reconcile_at": "2026-10-28T20:29:07Z",
+  "updated_at": "2026-10-29T20:29:21Z",
+  "last_reconcile_at": "2026-10-29T20:29:21Z",
   "last_roundup": {
     "period_id": "2026-10-25",
     "cutoff": "2026-10-25T21:00:00Z",
@@ -48,6 +48,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-dominates-human-peer-reviews.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-dominates-human-peer-reviews.html",
+        "pid:rss:https://marginalrevolution.com/?p=94102",
+        "syn:ai-dominates-human-peer-reviews|voice:tyler-cowen|2026-10-29",
+        "fp:marginalrevolution.com|ai-dominates-human-peer-reviews|2026-10-29"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-29T20:29:21Z",
+      "published_at": "2026-10-29T07:13:03Z",
+      "title": "AI dominates human peer reviews",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/ai-dominates-human-peer-reviews.html?utm_source=rss&utm_medium=rss&utm_campaign=ai-dominates-human-peer-reviews",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-hacking-risks.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-hacking-risks.html",
@@ -81,6 +98,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html?utm_source=rss&utm_medium=rss&utm_campaign=brazils-economic-problems-in-a-nutshell",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/can-artificial-intelligence-forecast-treatment-effects-in-economics.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/can-artificial-intelligence-forecast-treatment-effects-in-economics.html",
+        "pid:rss:https://marginalrevolution.com/?p=94101",
+        "syn:can-artificial-intelligence-forecast-treatment-effects-in-economics|voice:tyler-cowen|2026-10-29",
+        "fp:marginalrevolution.com|can-artificial-intelligence-forecast-treatment-effects-in-economics|2026-10-29"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-29T20:29:21Z",
+      "published_at": "2026-10-29T18:02:03Z",
+      "title": "Can Artificial Intelligence Forecast Treatment Effects in Economics?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/can-artificial-intelligence-forecast-treatment-effects-in-economics.html?utm_source=rss&utm_medium=rss&utm_campaign=can-artificial-intelligence-forecast-treatment-effects-in-economics",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/cybersecurity-etf.html": {
       "keys": [
@@ -165,7 +199,7 @@
       "title": "Errors in the research of Emmanuel Saez and Gabriel Zucman",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman.html?utm_source=rss&utm_medium=rss&utm_campaign=errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/facts-about-breastfeeding.html": {
       "keys": [
@@ -388,22 +422,22 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html",
-        "pid:rss:https://marginalrevolution.com/?p=93995",
-        "syn:my-excellent-conversation-with-liaquat-ahamed|voice:tyler-cowen|2026-10-15",
-        "fp:marginalrevolution.com|my-excellent-conversation-with-liaquat-ahamed|2026-10-15"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html",
+        "pid:rss:https://marginalrevolution.com/?p=94015",
+        "syn:my-design-conversation-with-roman-mars|voice:tyler-cowen|2026-10-29",
+        "fp:marginalrevolution.com|my-design-conversation-with-roman-mars|2026-10-29"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-10-15T19:20:31Z",
-      "published_at": "2026-10-15T04:37:06Z",
-      "title": "My excellent Conversation with Liaquat Ahamed",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-excellent-conversation-with-liaquat-ahamed.html?utm_source=rss&utm_medium=rss&utm_campaign=my-excellent-conversation-with-liaquat-ahamed",
+      "first_seen": "2026-10-29T20:29:21Z",
+      "published_at": "2026-10-29T04:41:19Z",
+      "title": "My design Conversation with Roman Mars",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html?utm_source=rss&utm_medium=rss&utm_campaign=my-design-conversation-with-roman-mars",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
+      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html": {
       "keys": [
@@ -677,23 +711,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-574.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-574.html",
-        "pid:rss:https://marginalrevolution.com/?p=93994",
-        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-15",
-        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-15"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-15T19:20:31Z",
-      "published_at": "2026-10-15T16:43:28Z",
-      "title": "Thursday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-574.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-574",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html",
@@ -710,6 +727,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-575",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html",
+        "pid:rss:https://marginalrevolution.com/?p=94100",
+        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-29",
+        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-29"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-29T20:29:21Z",
+      "published_at": "2026-10-29T16:19:21Z",
+      "title": "Thursday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-576",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html": {
       "keys": [
@@ -812,23 +846,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/why-are-cybersecurity-losses-not-worse.html?utm_source=rss&utm_medium=rss&utm_campaign=why-are-cybersecurity-losses-not-worse",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html",
-        "pid:rss:https://marginalrevolution.com/?p=94000",
-        "syn:why-i-do-not-use-llms-more|voice:tyler-cowen|2026-10-15",
-        "fp:marginalrevolution.com|why-i-do-not-use-llms-more|2026-10-15"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-15T19:20:31Z",
-      "published_at": "2026-10-15T08:20:41Z",
-      "title": "Why I do not use LLMs more",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/why-i-do-not-use-llms-more.html?utm_source=rss&utm_medium=rss&utm_campaign=why-i-do-not-use-llms-more",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-15T19:20:31Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/will-bystander-economies-be-able-to-finance-their-governments.html": {
       "keys": [
@@ -959,8 +976,10 @@
         "pid:rss:https://www.nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html",
         "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-27",
         "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-28",
+        "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-29",
         "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-27",
-        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-28"
+        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-28",
+        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-29"
       ],
       "voice_ids": [
         "ezra-klein"
@@ -1104,6 +1123,22 @@
       "url": "https://www.theglobeandmail.com/opinion/article-alberta-separatists-lost-badly-danielle-smith-might-have-lost-worse/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics",
+        "syn:did-the-b-c-conservatives-election-win-run-against-the-federal-tide|voice:andrew-coyne|2026-10-28",
+        "fp:theglobeandmail.com|did-the-b-c-conservatives-election-win-run-against-the-federal-tide|2026-10-28"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-10-29T20:29:21Z",
+      "published_at": "2026-10-28T00:00:00Z",
+      "title": "Did the B.C. Conservatives’ election win run against the federal tide, or with it?",
+      "url": "https://www.theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
     }
   }
 }
