@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-29T20:29:21Z",
+  "updated_at": "2026-10-30T20:03:20Z",
   "last_reconcile_at": "2026-10-29T20:29:21Z",
   "last_roundup": {
     "period_id": "2026-10-25",
@@ -82,6 +82,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-28T20:29:07Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/are-there-too-many-misdemeanor-convictions.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/are-there-too-many-misdemeanor-convictions.html",
+        "pid:rss:https://marginalrevolution.com/?p=94094",
+        "syn:are-there-too-many-misdemeanor-convictions|voice:tyler-cowen|2026-10-30",
+        "fp:marginalrevolution.com|are-there-too-many-misdemeanor-convictions|2026-10-30"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-30T20:03:20Z",
+      "published_at": "2026-10-30T07:33:45Z",
+      "title": "Are there too many misdemeanor convictions?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/are-there-too-many-misdemeanor-convictions.html?utm_source=rss&utm_medium=rss&utm_campaign=are-there-too-many-misdemeanor-convictions",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html",
@@ -115,6 +132,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/can-artificial-intelligence-forecast-treatment-effects-in-economics.html?utm_source=rss&utm_medium=rss&utm_campaign=can-artificial-intelligence-forecast-treatment-effects-in-economics",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/chronicle-of-higher-education-interviews-me-on-ai-and-education.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/chronicle-of-higher-education-interviews-me-on-ai-and-education.html",
+        "pid:rss:https://marginalrevolution.com/?p=94093",
+        "syn:chronicle-of-higher-education-interviews-me-on-ai-and-education|voice:tyler-cowen|2026-10-30",
+        "fp:marginalrevolution.com|chronicle-of-higher-education-interviews-me-on-ai-and-education|2026-10-30"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-30T20:03:20Z",
+      "published_at": "2026-10-30T04:32:28Z",
+      "title": "Chronicle of Higher Education interviews me on AI and education",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/chronicle-of-higher-education-interviews-me-on-ai-and-education.html?utm_source=rss&utm_medium=rss&utm_campaign=chronicle-of-higher-education-interviews-me-on-ai-and-education",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/cybersecurity-etf.html": {
       "keys": [
@@ -235,23 +269,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html",
-        "pid:rss:https://marginalrevolution.com/?p=94003",
-        "syn:friday-assorted-links|voice:tyler-cowen|2026-10-16",
-        "fp:marginalrevolution.com|friday-assorted-links|2026-10-16"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-16T18:57:10Z",
-      "published_at": "2026-10-16T16:42:18Z",
-      "title": "Friday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-595.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-595",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html",
@@ -268,6 +285,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-596",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-24T18:19:12Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html",
+        "pid:rss:https://marginalrevolution.com/?p=94108",
+        "syn:friday-assorted-links|voice:tyler-cowen|2026-10-30",
+        "fp:marginalrevolution.com|friday-assorted-links|2026-10-30"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-30T20:03:20Z",
+      "published_at": "2026-10-30T16:16:29Z",
+      "title": "Friday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-597",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-central-bankers-spend-their-time.html": {
       "keys": [
@@ -336,23 +370,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-an-nyt-podcast-with-michael-kratsios-trump-science-advisor.html?utm_source=rss&utm_medium=rss&utm_campaign=i-guest-host-an-nyt-podcast-with-michael-kratsios-trump-science-advisor",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-24T18:19:12Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-the-nyt-podcast-and-interview-dwarkesh.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-the-nyt-podcast-and-interview-dwarkesh.html",
-        "pid:rss:https://marginalrevolution.com/?p=94002",
-        "syn:i-guest-host-the-nyt-podcast-and-interview-dwarkesh|voice:tyler-cowen|2026-10-16",
-        "fp:marginalrevolution.com|i-guest-host-the-nyt-podcast-and-interview-dwarkesh|2026-10-16"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-16T18:57:10Z",
-      "published_at": "2026-10-16T04:44:22Z",
-      "title": "I guest host the NYT podcast and interview Dwarkesh",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-the-nyt-podcast-and-interview-dwarkesh.html?utm_source=rss&utm_medium=rss&utm_campaign=i-guest-host-the-nyt-podcast-and-interview-dwarkesh",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html": {
       "keys": [
@@ -472,23 +489,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/nyt-debate-on-the-rules-for-ai-companies.html?utm_source=rss&utm_medium=rss&utm_campaign=nyt-debate-on-the-rules-for-ai-companies",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-bergmans-persona.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-bergmans-persona.html",
-        "pid:rss:https://marginalrevolution.com/?p=94001",
-        "syn:on-bergman-s-persona|voice:tyler-cowen|2026-10-16",
-        "fp:marginalrevolution.com|on-bergman-s-persona|2026-10-16"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-16T18:57:10Z",
-      "published_at": "2026-10-16T06:53:12Z",
-      "title": "On Bergman’s *Persona*",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/on-bergmans-persona.html?utm_source=rss&utm_medium=rss&utm_campaign=on-bergmans-persona",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-brazilian-food.html": {
       "keys": [
@@ -881,25 +881,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
     },
-    "url:https://nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html",
-        "pid:rss:https://www.nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html",
-        "syn:is-there-an-a-i-bubble-a-debate|voice:ezra-klein|2026-10-16",
-        "syn:what-if-the-a-i-economy-crashes|voice:ezra-klein|2026-10-16",
-        "fp:nytimes.com|is-there-an-a-i-bubble-a-debate|2026-10-16",
-        "fp:nytimes.com|what-if-the-a-i-economy-crashes|2026-10-16"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-10-16T18:57:10Z",
-      "published_at": "2026-10-16T09:04:26Z",
-      "title": "Is There an A.I. Bubble? A Debate.",
-      "url": "https://www.nytimes.com/2026/10/16/opinion/ezra-klein-podcast-azeem-azhar-paul-kedrosky.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-16T18:57:10Z"
-    },
     "url:https://nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html": {
       "keys": [
         "url:https://nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
@@ -991,6 +972,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
+    "url:https://nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
+        "pid:rss:https://www.nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
+        "syn:what-s-driving-elon-musk|voice:ezra-klein|2026-10-30",
+        "fp:nytimes.com|what-s-driving-elon-musk|2026-10-30"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-10-30T20:03:20Z",
+      "published_at": "2026-10-30T09:03:28Z",
+      "title": "What’s Driving Elon Musk?",
+      "url": "https://www.nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
+    },
     "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong": {
       "keys": [
         "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong",
@@ -1076,22 +1074,6 @@
       "publication": "The Free Press",
       "first_morning_surfaced_at": null
     },
-    "url:https://theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform",
-        "syn:radical-tax-reform-is-not-just-good-policy-it-s-the-only|voice:andrew-coyne|2026-10-16",
-        "fp:theglobeandmail.com|radical-tax-reform-is-not-just-good-policy-it-s-the-only|2026-10-16"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-10-16T18:57:10Z",
-      "published_at": "2026-10-16T00:00:00Z",
-      "title": "Radical tax reform is not just good policy: it’s the only kind likely to succeed",
-      "url": "https://www.theglobeandmail.com/opinion/article-a-modest-proposal-on-tax-reform/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
-    },
     "url:https://theglobeandmail.com/opinion/article-alberta-premier-danielle-smith-is-targeting-immigration-but-what-do": {
       "keys": [
         "url:https://theglobeandmail.com/opinion/article-alberta-premier-danielle-smith-is-targeting-immigration-but-what-do",
@@ -1139,6 +1121,22 @@
       "url": "https://www.theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the-qa": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the-qa",
+        "syn:the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the|voice:andrew-coyne|2026-10-29",
+        "fp:theglobeandmail.com|the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the|2026-10-29"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-10-30T20:03:20Z",
+      "published_at": "2026-10-29T00:00:00Z",
+      "title": "The speech Paul St-Pierre Plamondon never gave (or at least the Q&A)",
+      "url": "https://www.theglobeandmail.com/opinion/article-the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the-qa/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
     }
   }
 }
