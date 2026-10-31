@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-30T20:03:20Z",
-  "last_reconcile_at": "2026-10-29T20:29:21Z",
+  "updated_at": "2026-10-31T19:29:21Z",
+  "last_reconcile_at": "2026-10-31T19:29:21Z",
   "last_roundup": {
     "period_id": "2026-10-25",
     "cutoff": "2026-10-25T21:00:00Z",
@@ -14,23 +14,6 @@
     ]
   },
   "items": {
-    "url:https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall": {
-      "keys": [
-        "url:https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall",
-        "pid:rss:https://foreignpolicy.com/?p=1243605",
-        "syn:how-this-year-s-economics-nobel-winners-shaped-the-world|voice:adam-tooze|2026-10-16",
-        "fp:foreignpolicy.com|how-this-year-s-economics-nobel-winners-shaped-the-world|2026-10-16"
-      ],
-      "voice_ids": [
-        "adam-tooze"
-      ],
-      "first_seen": "2026-10-17T17:54:41Z",
-      "published_at": "2026-10-16T20:05:43Z",
-      "title": "How This Year’s Economics Nobel Winners Shaped the World",
-      "url": "https://foreignpolicy.com/2026/10/16/economics-nobel-central-banks-fed-warsh-woodford-hall/",
-      "publication": "Foreign Policy",
-      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html",
@@ -81,6 +64,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/ai-hacking-risks.html?utm_source=rss&utm_medium=rss&utm_campaign=ai-hacking-risks",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-28T20:29:07Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html",
+        "pid:rss:https://marginalrevolution.com/?p=94114",
+        "syn:and-so-it-begins|voice:tyler-cowen|2026-10-31",
+        "fp:marginalrevolution.com|and-so-it-begins|2026-10-31"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-31T19:29:21Z",
+      "published_at": "2026-10-31T18:21:28Z",
+      "title": "And so it begins…",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html?utm_source=rss&utm_medium=rss&utm_campaign=and-so-it-begins-2",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/are-there-too-many-misdemeanor-convictions.html": {
       "keys": [
@@ -301,7 +301,7 @@
       "title": "Friday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-597",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-central-bankers-spend-their-time.html": {
       "keys": [
@@ -439,6 +439,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html",
+        "pid:rss:https://marginalrevolution.com/?p=94115",
+        "syn:my-barcelona-talk|voice:tyler-cowen|2026-10-31",
+        "fp:marginalrevolution.com|my-barcelona-talk|2026-10-31"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-31T19:29:21Z",
+      "published_at": "2026-10-31T13:29:19Z",
+      "title": "My Barcelona talk",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html?utm_source=rss&utm_medium=rss&utm_campaign=my-barcelona-talk",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html",
@@ -455,23 +472,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html?utm_source=rss&utm_medium=rss&utm_campaign=my-design-conversation-with-roman-mars",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html",
-        "pid:rss:https://marginalrevolution.com/?p=94013",
-        "syn:new-matt-faherty-study-of-the-nsf|voice:tyler-cowen|2026-10-17",
-        "fp:marginalrevolution.com|new-matt-faherty-study-of-the-nsf|2026-10-17"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-17T17:54:41Z",
-      "published_at": "2026-10-17T04:55:57Z",
-      "title": "New Matt Faherty study of the NSF",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/new-matt-flaherty-study-of-the-nsf.html?utm_source=rss&utm_medium=rss&utm_campaign=new-matt-flaherty-study-of-the-nsf",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/nyt-debate-on-the-rules-for-ai-companies.html": {
       "keys": [
@@ -558,22 +558,22 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html",
-        "pid:rss:https://marginalrevolution.com/?p=94005",
-        "syn:saturday-assorted-links|voice:tyler-cowen|2026-10-17",
-        "fp:marginalrevolution.com|saturday-assorted-links|2026-10-17"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html",
+        "pid:rss:https://marginalrevolution.com/?p=94110",
+        "syn:saturday-assorted-links|voice:tyler-cowen|2026-10-31",
+        "fp:marginalrevolution.com|saturday-assorted-links|2026-10-31"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-10-17T17:54:41Z",
-      "published_at": "2026-10-17T15:57:58Z",
+      "first_seen": "2026-10-31T19:29:21Z",
+      "published_at": "2026-10-31T16:16:45Z",
       "title": "Saturday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-583.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-583",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-584",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-18T18:15:26Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html": {
       "keys": [
@@ -591,23 +591,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html?utm_source=rss&utm_medium=rss&utm_campaign=saving-for-the-machines",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html",
-        "pid:rss:https://marginalrevolution.com/?p=94012",
-        "syn:solving-for-the-equilibrium|voice:tyler-cowen|2026-10-17",
-        "fp:marginalrevolution.com|solving-for-the-equilibrium|2026-10-17"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-17T17:54:41Z",
-      "published_at": "2026-10-17T07:34:21Z",
-      "title": "Solving for the equilibrium?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/solving-for-the-equilibrium-2.html?utm_source=rss&utm_medium=rss&utm_campaign=solving-for-the-equilibrium-2",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-17T17:54:41Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html": {
       "keys": [
@@ -693,6 +676,40 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-net-fiscal-impact-of-immigration-should-include-gains-from-trade.html?utm_source=rss&utm_medium=rss&utm_campaign=the-net-fiscal-impact-of-immigration-should-include-gains-from-trade",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-pass-through-of-retail-crime.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-pass-through-of-retail-crime.html",
+        "pid:rss:https://marginalrevolution.com/?p=94107",
+        "syn:the-pass-through-of-retail-crime|voice:tyler-cowen|2026-10-31",
+        "fp:marginalrevolution.com|the-pass-through-of-retail-crime|2026-10-31"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-31T19:29:21Z",
+      "published_at": "2026-10-31T06:44:07Z",
+      "title": "The pass-through of retail crime",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-pass-through-of-retail-crime.html?utm_source=rss&utm_medium=rss&utm_campaign=the-pass-through-of-retail-crime",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-unintended-consequences-of-academic-leniency.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-unintended-consequences-of-academic-leniency.html",
+        "pid:rss:https://marginalrevolution.com/?p=94106",
+        "syn:the-unintended-consequences-of-academic-leniency|voice:tyler-cowen|2026-10-31",
+        "fp:marginalrevolution.com|the-unintended-consequences-of-academic-leniency|2026-10-31"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-31T19:29:21Z",
+      "published_at": "2026-10-31T04:43:23Z",
+      "title": "The unintended consequences of academic leniency",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-unintended-consequences-of-academic-leniency.html?utm_source=rss&utm_medium=rss&utm_campaign=the-unintended-consequences-of-academic-leniency",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html": {
       "keys": [
@@ -864,6 +881,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html",
+        "pid:rss:https://marginalrevolution.com/?p=94116",
+        "syn:william-nordhaus-rip|voice:tyler-cowen|2026-10-31",
+        "fp:marginalrevolution.com|william-nordhaus-rip|2026-10-31"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-10-31T19:29:21Z",
+      "published_at": "2026-10-31T18:33:58Z",
+      "title": "William Nordhaus, RIP",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html?utm_source=rss&utm_medium=rss&utm_campaign=william-nordhaus-rip",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html",
@@ -958,9 +992,11 @@
         "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-27",
         "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-28",
         "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-29",
+        "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-30",
         "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-27",
         "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-28",
-        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-29"
+        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-29",
+        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-30"
       ],
       "voice_ids": [
         "ezra-klein"
@@ -976,7 +1012,9 @@
       "keys": [
         "url:https://nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
         "pid:rss:https://www.nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
+        "syn:elon-musk-s-endgame|voice:ezra-klein|2026-10-30",
         "syn:what-s-driving-elon-musk|voice:ezra-klein|2026-10-30",
+        "fp:nytimes.com|elon-musk-s-endgame|2026-10-30",
         "fp:nytimes.com|what-s-driving-elon-musk|2026-10-30"
       ],
       "voice_ids": [
