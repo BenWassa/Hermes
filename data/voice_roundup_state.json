@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-10-31T19:29:21Z",
-  "last_reconcile_at": "2026-10-31T19:29:21Z",
+  "updated_at": "2026-11-01T19:52:16Z",
+  "last_reconcile_at": "2026-11-01T19:52:16Z",
   "last_roundup": {
     "period_id": "2026-10-25",
     "cutoff": "2026-10-25T21:00:00Z",
@@ -80,7 +80,7 @@
       "title": "And so it begins…",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html?utm_source=rss&utm_medium=rss&utm_campaign=and-so-it-begins-2",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/are-there-too-many-misdemeanor-convictions.html": {
       "keys": [
@@ -524,23 +524,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/our-fascination-with-screens-demand-curves-slope-downward-installment-1637.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/our-fascination-with-screens-demand-curves-slope-downward-installment-1637.html",
-        "pid:rss:https://marginalrevolution.com/?p=94017",
-        "syn:our-fascination-with-screens-demand-curves-slope-downward-installment-1637|voice:tyler-cowen|2026-10-18",
-        "fp:marginalrevolution.com|our-fascination-with-screens-demand-curves-slope-downward-installment-1637|2026-10-18"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-18T18:15:26Z",
-      "published_at": "2026-10-18T06:28:18Z",
-      "title": "Our fascination with screens, demand curves slope downward installment #1637",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/our-fascination-with-screens-demand-curves-slope-downward-installment-1637.html?utm_source=rss&utm_medium=rss&utm_campaign=our-fascination-with-screens-demand-curves-slope-downward-installment-1637",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-18T18:15:26Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html",
@@ -573,7 +556,7 @@
       "title": "Saturday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-584",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html": {
       "keys": [
@@ -608,23 +591,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-587",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-archaeology-tranche-of-emergent-ventures.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-archaeology-tranche-of-emergent-ventures.html",
-        "pid:rss:https://marginalrevolution.com/?p=93880",
-        "syn:the-archaeology-tranche-of-emergent-ventures|voice:tyler-cowen|2026-10-18",
-        "fp:marginalrevolution.com|the-archaeology-tranche-of-emergent-ventures|2026-10-18"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-18T18:15:26Z",
-      "published_at": "2026-10-18T04:57:12Z",
-      "title": "The archaeology tranche of Emergent Ventures",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-archaeology-tranche-of-emergent-ventures.html?utm_source=rss&utm_medium=rss&utm_campaign=the-archaeology-tranche-of-emergent-ventures",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-18T18:15:26Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-california-billionaire-tax.html": {
       "keys": [
@@ -710,23 +676,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-unintended-consequences-of-academic-leniency.html?utm_source=rss&utm_medium=rss&utm_campaign=the-unintended-consequences-of-academic-leniency",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html",
-        "pid:rss:https://marginalrevolution.com/?p=94018",
-        "syn:this-beautiful-country|voice:tyler-cowen|2026-10-18",
-        "fp:marginalrevolution.com|this-beautiful-country|2026-10-18"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-18T18:15:26Z",
-      "published_at": "2026-10-18T16:32:02Z",
-      "title": "*This Beautiful Country*",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/this-beautiful-country.html?utm_source=rss&utm_medium=rss&utm_campaign=this-beautiful-country",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html": {
       "keys": [
@@ -896,7 +845,7 @@
       "title": "William Nordhaus, RIP",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html?utm_source=rss&utm_medium=rss&utm_campaign=william-nordhaus-rip",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/you-can-see-everything-no-spoilers.html": {
       "keys": [
@@ -915,24 +864,72 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
     },
-    "url:https://nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-llms-good-or-bad-bayesians.html": {
       "keys": [
-        "url:https://nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
-        "pid:rss:https://www.nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
-        "syn:this-is-the-good-scenario|voice:ezra-klein|2026-10-18",
-        "syn:this-is-the-good-scenario|voice:ezra-klein|2026-10-19",
-        "fp:nytimes.com|this-is-the-good-scenario|2026-10-18",
-        "fp:nytimes.com|this-is-the-good-scenario|2026-10-19"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-llms-good-or-bad-bayesians.html",
+        "pid:rss:https://marginalrevolution.com/?p=94097",
+        "syn:are-llms-good-or-bad-bayesians|voice:tyler-cowen|2026-11-01",
+        "fp:marginalrevolution.com|are-llms-good-or-bad-bayesians|2026-11-01"
       ],
       "voice_ids": [
-        "ezra-klein"
+        "tyler-cowen"
       ],
-      "first_seen": "2026-10-18T18:15:26Z",
-      "published_at": "2026-10-18T15:20:30Z",
-      "title": "This Is the Good Scenario?",
-      "url": "https://www.nytimes.com/2026/10/18/opinion/ai-bubble-catastrophe-investors-control.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
+      "first_seen": "2026-11-01T19:52:16Z",
+      "published_at": "2026-11-01T04:17:10Z",
+      "title": "Are LLMs good or bad Bayesians?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/are-llms-good-or-bad-bayesians.html?utm_source=rss&utm_medium=rss&utm_campaign=are-llms-good-or-bad-bayesians",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-588.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-588.html",
+        "pid:rss:https://marginalrevolution.com/?p=94095",
+        "syn:sunday-assorted-links|voice:tyler-cowen|2026-11-01",
+        "fp:marginalrevolution.com|sunday-assorted-links|2026-11-01"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-01T19:52:16Z",
+      "published_at": "2026-11-01T16:31:04Z",
+      "title": "Sunday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-588.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-588",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html",
+        "pid:rss:https://marginalrevolution.com/?p=94096",
+        "syn:those-new-service-sector-jobs|voice:tyler-cowen|2026-11-01",
+        "fp:marginalrevolution.com|those-new-service-sector-jobs|2026-11-01"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-01T19:52:16Z",
+      "published_at": "2026-11-01T07:55:35Z",
+      "title": "Those new service sector jobs?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html?utm_source=rss&utm_medium=rss&utm_campaign=those-new-service-sector-jobs-18",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
+    },
+    "url:https://nationalpost.com/opinion/conrad-black-dont-bet-against-capable-netanyahu": {
+      "keys": [
+        "url:https://nationalpost.com/opinion/conrad-black-dont-bet-against-capable-netanyahu",
+        "syn:don-t-bet-against-capable-netanyahu|voice:conrad-black|2026-10-31",
+        "fp:nationalpost.com|don-t-bet-against-capable-netanyahu|2026-10-31"
+      ],
+      "voice_ids": [
+        "conrad-black"
+      ],
+      "first_seen": "2026-11-01T19:52:16Z",
+      "published_at": "2026-10-31T00:00:00Z",
+      "title": "Don’t bet against capable Netanyahu",
+      "url": "https://nationalpost.com/opinion/conrad-black-dont-bet-against-capable-netanyahu/",
+      "publication": "National Post",
+      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
     "url:https://nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html": {
       "keys": [
@@ -1044,22 +1041,6 @@
       "publication": "Persuasion",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
-    "url:https://theatlantic.com/podcasts/2026/10/are-we-too-political/689011": {
-      "keys": [
-        "url:https://theatlantic.com/podcasts/2026/10/are-we-too-political/689011",
-        "syn:are-we-too-political|voice:david-brooks|2026-10-18",
-        "fp:theatlantic.com|are-we-too-political|2026-10-18"
-      ],
-      "voice_ids": [
-        "david-brooks"
-      ],
-      "first_seen": "2026-10-18T18:15:26Z",
-      "published_at": "2026-10-18T13:00:00Z",
-      "title": "Are We Too Political?",
-      "url": "https://www.theatlantic.com/podcasts/2026/10/are-we-too-political/689011/?utm_source=feed",
-      "publication": "The Atlantic",
-      "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
-    },
     "url:https://theatlantic.com/podcasts/2026/10/do-miracles-really-happen/689116": {
       "keys": [
         "url:https://theatlantic.com/podcasts/2026/10/do-miracles-really-happen/689116",
@@ -1075,6 +1056,22 @@
       "url": "https://www.theatlantic.com/podcasts/2026/10/do-miracles-really-happen/689116/?utm_source=feed",
       "publication": "The Atlantic",
       "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
+    },
+    "url:https://theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201": {
+      "keys": [
+        "url:https://theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201",
+        "syn:is-radicalism-the-answer|voice:david-brooks|2026-11-01",
+        "fp:theatlantic.com|is-radicalism-the-answer|2026-11-01"
+      ],
+      "voice_ids": [
+        "david-brooks"
+      ],
+      "first_seen": "2026-11-01T19:52:16Z",
+      "published_at": "2026-11-01T14:00:00Z",
+      "title": "Is Radicalism the Answer?",
+      "url": "https://www.theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201/?utm_source=feed",
+      "publication": "The Atlantic",
+      "first_morning_surfaced_at": null
     },
     "url:https://thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness": {
       "keys": [
