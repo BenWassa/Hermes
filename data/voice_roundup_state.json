@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-02T01:48:29Z",
+  "updated_at": "2026-11-02T06:51:33Z",
   "last_reconcile_at": "2026-11-01T19:52:16Z",
   "last_roundup": {
     "period_id": "2026-11-01",
@@ -779,23 +779,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html",
-        "pid:rss:https://marginalrevolution.com/?p=93985",
-        "syn:what-i-ve-been-reading|voice:tyler-cowen|2026-10-19",
-        "fp:marginalrevolution.com|what-i-ve-been-reading|2026-10-19"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-19T05:20:53Z",
-      "published_at": "2026-10-19T04:29:27Z",
-      "title": "What I’ve been reading",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/what-ive-been-reading-297.html?utm_source=rss&utm_medium=rss&utm_campaign=what-ive-been-reading-297",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-19T20:41:10Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-are-cybersecurity-losses-not-worse.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/why-are-cybersecurity-losses-not-worse.html",
@@ -878,6 +861,23 @@
       "published_at": "2026-11-01T19:53:38Z",
       "title": "As predicted, the ACA exchanges seem not to be stable",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html?utm_source=rss&utm_medium=rss&utm_campaign=as-predicted-the-aca-exchanges-seem-not-to-be-stable",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html",
+        "pid:rss:https://marginalrevolution.com/?p=93783",
+        "syn:should-you-feel-grief-for-the-dead-who-go-to-heaven|voice:tyler-cowen|2026-11-02",
+        "fp:marginalrevolution.com|should-you-feel-grief-for-the-dead-who-go-to-heaven|2026-11-02"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-02T06:51:33Z",
+      "published_at": "2026-11-02T05:24:47Z",
+      "title": "Should you feel grief for the dead who go to heaven?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html?utm_source=rss&utm_medium=rss&utm_campaign=should-you-feel-grief-for-the-dead-who-go-to-heaven",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
