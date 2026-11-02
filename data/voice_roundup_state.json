@@ -4,13 +4,13 @@
   "updated_at": "2026-11-02T01:48:29Z",
   "last_reconcile_at": "2026-11-01T19:52:16Z",
   "last_roundup": {
-    "period_id": "2026-10-25",
-    "cutoff": "2026-10-25T21:00:00Z",
-    "claimed_at": "2026-10-26T00:42:55Z",
-    "status": "notified",
+    "period_id": "2026-11-01",
+    "cutoff": "2026-11-01T22:00:00Z",
+    "claimed_at": "2026-11-02T01:48:29Z",
+    "status": "pending",
     "selection_keys": [
-      "url:https://nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html",
-      "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html"
+      "url:https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html",
+      "url:https://theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201"
     ]
   },
   "items": {

@@ -25,10 +25,52 @@
     .recent a{color:var(--ink);text-decoration:none;font-weight:700;line-height:1.28}.recent .meta{margin:5px 0 0}
     .empty{border-top:1px solid var(--rule);color:var(--meta);line-height:1.55;padding:25px 0;margin:0}
     a:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+
+    /* Issue furniture: restrained visuals without fabricated photographs or data. */
+    main{max-width:760px}
+    header{padding-bottom:25px}
+    header h1{font-size:clamp(2.35rem,7vw,3.7rem);line-height:1.04;max-width:15ch;letter-spacing:-.025em}
+    .dek{color:var(--meta);max-width:56ch}
+    .summary{border-top:3px solid var(--navy);border-bottom:1px solid var(--rule);padding:19px 0 22px;margin-top:8px}
+    .summary-kicker,.item-kicker{
+      font-family:Arial,sans-serif;text-transform:uppercase;font-size:.65rem;
+      font-weight:700;letter-spacing:.14em;color:var(--navy)
+    }
+    .summary p{font-size:clamp(1.06rem,2.7vw,1.24rem);line-height:1.62;margin:12px 0 0;max-width:64ch}
+    .section-title{margin:27px 0 0;padding-bottom:12px;border-bottom:2px solid var(--navy);font-weight:700}
+    .piece{display:grid;grid-template-columns:minmax(0,1fr) 48px;column-gap:18px;align-items:start;padding:22px 0 24px}
+    .piece:first-child{border-top:0}
+    .piece-copy{min-width:0}
+    .item-kicker{margin-bottom:10px}
+    .piece .meta{margin-bottom:9px;line-height:1.55}
+    .piece h2{font-size:clamp(1.35rem,3.6vw,1.66rem);line-height:1.17;overflow-wrap:anywhere}
+    .reason{font-size:.96rem;line-height:1.62;max-width:59ch;color:var(--ink)}
+    .piece[data-lead="true"]{grid-template-columns:minmax(0,1fr) minmax(145px,34%);column-gap:22px;padding-top:25px;padding-bottom:29px}
+    .piece[data-lead="true"] h2{font-size:clamp(1.8rem,4.8vw,2.5rem);line-height:1.1}
+    .cover-art{position:relative;min-height:210px;overflow:hidden;background:var(--navy);color:var(--paper)}
+    .cover-art svg{position:absolute;width:100%;height:100%;inset:0;opacity:.54}
+    .cover-index{position:absolute;bottom:7px;left:15px;line-height:1;font-size:6.3rem;font-weight:700;letter-spacing:-.08em}
+    .small-index{font-family:Georgia,serif;font-size:3rem;line-height:1;color:var(--navy);text-align:right;opacity:.72}
+    .open:hover,.quiet-link:hover{text-decoration:underline;text-underline-offset:3px}
+    .quiet-link{border-top:1px solid var(--rule);width:100%;padding-top:8px}
+    @media(max-width:520px){
+      .piece[data-lead="true"]{display:flex;flex-direction:column;gap:13px}
+      .piece[data-lead="true"] .cover-art{order:-1;min-height:128px;width:100%}
+      .cover-index{font-size:5.6rem}
+      .piece{grid-template-columns:minmax(0,1fr) 36px;column-gap:8px}
+      .piece h2{font-size:1.35rem}
+      .small-index{font-size:2.35rem}
+      .summary p{font-size:1.06rem}
+    }
+    @media print{
+      html,body{background:white}
+      main{max-width:none}
+      .cover-art{border:1px solid var(--navy);background:transparent;color:var(--navy)}
+    }
   </style>
 </head>
 <body><main>
 <a class="brand" href="../../">The Daily</a>
-<header><div class="eyebrow">Voices this week</div><h1>A small weekly reading brief.</h1><p class="dek">Week ending October 25, 2026. One screen, one summary, no article-by-article alerts.</p></header>
-<div class="summary">Ezra Klein in The New York Times argues that both Israelis and Palestinians are trapped in the Netanyahu paradigm. Separately, Tyler Cowen in Marginal Revolution&#x27;s &quot;Sunday assorted links&quot; discusses a safe harbor for open source, false but interesting claims about economic growth, and the quantitatively significant welfare gain from an estimated mortality decline relative to the welfare loss from the Great Recession&#x27;s impact on consumption.</div><div class="section-title">Worth your time · 2 pieces</div><article class="piece"><div class="meta">Ezra Klein · The New York Times · Oct 25</div><h2>Netanyahu Won the Middle East and Lost the World</h2><p class="reason">Ezra Klein argues that both Israelis and Palestinians are trapped in the Netanyahu paradigm.</p><a class="open" href="https://www.nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html" target="_blank" rel="noopener">Read original <span aria-hidden="true">→</span></a></article><article class="piece"><div class="meta">Tyler Cowen · Marginal Revolution · Oct 25</div><h2>Sunday assorted links</h2><p class="reason">Tyler Cowen&#x27;s &quot;Sunday assorted links&quot; discusses a safe harbor for open source, claims about economic growth, and the welfare effects of the Great Recession on consumption and mortality.</p><a class="open" href="https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=sunday-assorted-links-587" target="_blank" rel="noopener">Read original <span aria-hidden="true">→</span></a></article><a class="quiet-link" href="recent/">Browse all recent Core writing →</a>
+<header><div class="eyebrow">Voices this week</div><h1>A small weekly reading brief.</h1><p class="dek">Week ending November 1, 2026. One screen, one summary, no article-by-article alerts.</p></header>
+<section class="summary" aria-label="Weekly editorial synthesis"><div class="summary-kicker">The week in brief</div><p>Two Core pieces cleared the filter this week, each standing on its own: Tyler Cowen in Marginal Revolution, “As predicted, the ACA exchanges seem not to be stable”; David Brooks in The Atlantic, “Is Radicalism the Answer?”.</p></section><div class="section-title">Worth your time · 2 pieces</div><div class="selection"><article class="piece" data-lead="true"><div class="piece-copy"><div class="item-kicker">The lead selection</div><div class="meta">Tyler Cowen · Marginal Revolution · Nov 1</div><h2>As predicted, the ACA exchanges seem not to be stable</h2><p class="reason">Tyler Cowen reports that an analysis by KFF projects a 13 percent increase in the average price of health insurance in Obamacare marketplaces next year.</p><a class="open" href="https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=as-predicted-the-aca-exchanges-seem-not-to-be-stable" target="_blank" rel="noopener">Read original <span aria-hidden="true">→</span></a></div><div class="cover-art" aria-hidden="true"><svg viewBox="0 0 180 180" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1"><circle cx="130" cy="51" r="34"/><circle cx="130" cy="51" r="51"/><circle cx="130" cy="51" r="68"/><circle cx="130" cy="51" r="85"/><path d="M-10 108H195M-10 121H195M-10 134H195M-10 147H195"/></g></svg><span class="cover-index">01</span></div></article><article class="piece"><div class="piece-copy"><div class="item-kicker">Also worth reading</div><div class="meta">David Brooks · The Atlantic · Nov 1</div><h2>Is Radicalism the Answer?</h2><p class="reason">David Brooks discusses legal scholar Samuel Moyn&#x27;s argument that moderates have given up on the emancipatory promise of liberalism.</p><a class="open" href="https://www.theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201/?utm_source=feed" target="_blank" rel="noopener">Read original <span aria-hidden="true">→</span></a></div><span class="small-index" aria-hidden="true">02</span></article></div><a class="quiet-link" href="recent/">Browse all recent Core writing →</a>
 </main></body></html>
