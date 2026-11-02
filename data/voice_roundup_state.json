@@ -7,7 +7,7 @@
     "period_id": "2026-11-01",
     "cutoff": "2026-11-01T22:00:00Z",
     "claimed_at": "2026-11-02T01:48:29Z",
-    "status": "pending",
+    "status": "notified",
     "selection_keys": [
       "url:https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html",
       "url:https://theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201"
