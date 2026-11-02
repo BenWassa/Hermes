@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-02T06:51:33Z",
-  "last_reconcile_at": "2026-11-01T19:52:16Z",
+  "updated_at": "2026-11-02T23:11:06Z",
+  "last_reconcile_at": "2026-11-02T23:11:06Z",
   "last_roundup": {
     "period_id": "2026-11-01",
     "cutoff": "2026-11-01T22:00:00Z",
@@ -388,23 +388,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-582.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-582.html",
-        "pid:rss:https://marginalrevolution.com/?p=94019",
-        "syn:monday-assorted-links|voice:tyler-cowen|2026-10-19",
-        "fp:marginalrevolution.com|monday-assorted-links|2026-10-19"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-19T20:41:10Z",
-      "published_at": "2026-10-19T16:03:42Z",
-      "title": "Monday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-582.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-582",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-583.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-583.html",
@@ -591,23 +574,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-587",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-california-billionaire-tax.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-california-billionaire-tax.html",
-        "pid:rss:https://marginalrevolution.com/?p=94021",
-        "syn:the-california-billionaire-tax-is-very-likely-a-net-revenue-loser|voice:tyler-cowen|2026-10-19",
-        "fp:marginalrevolution.com|the-california-billionaire-tax-is-very-likely-a-net-revenue-loser|2026-10-19"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-19T20:41:10Z",
-      "published_at": "2026-10-19T18:31:59Z",
-      "title": "The California billionaire tax is very likely a net revenue loser",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-california-billionaire-tax.html?utm_source=rss&utm_medium=rss&utm_campaign=the-california-billionaire-tax",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-causal-effect-of-foreign-ideas-on-u-s-innovation.html": {
       "keys": [
@@ -862,6 +828,40 @@
       "title": "As predicted, the ACA exchanges seem not to be stable",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html?utm_source=rss&utm_medium=rss&utm_campaign=as-predicted-the-aca-exchanges-seem-not-to-be-stable",
       "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/fjord-and-fatherland.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/fjord-and-fatherland.html",
+        "pid:rss:https://marginalrevolution.com/?p=94120",
+        "syn:fjord-and-fatherland|voice:tyler-cowen|2026-11-02",
+        "fp:marginalrevolution.com|fjord-and-fatherland|2026-11-02"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-02T23:11:06Z",
+      "published_at": "2026-11-02T19:44:38Z",
+      "title": "*Fjord* and *Fatherland*",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/fjord-and-fatherland.html?utm_source=rss&utm_medium=rss&utm_campaign=fjord-and-fatherland",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html",
+        "pid:rss:https://marginalrevolution.com/?p=94104",
+        "syn:monday-assorted-links|voice:tyler-cowen|2026-11-02",
+        "fp:marginalrevolution.com|monday-assorted-links|2026-11-02"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-02T23:11:06Z",
+      "published_at": "2026-11-02T17:13:35Z",
+      "title": "Monday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-584",
+      "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html": {
@@ -879,7 +879,7 @@
       "title": "Should you feel grief for the dead who go to heaven?",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html?utm_source=rss&utm_medium=rss&utm_campaign=should-you-feel-grief-for-the-dead-who-go-to-heaven",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-588.html": {
       "keys": [
@@ -896,7 +896,7 @@
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-588.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-588",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html": {
       "keys": [
@@ -1024,6 +1024,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
     },
+    "url:https://persuasion.community/p/americas-test": {
+      "keys": [
+        "url:https://persuasion.community/p/americas-test",
+        "pid:rss:https://www.persuasion.community/p/americas-test",
+        "syn:america-s-test|voice:francis-fukuyama|2026-11-02",
+        "fp:persuasion.community|america-s-test|2026-11-02"
+      ],
+      "voice_ids": [
+        "francis-fukuyama"
+      ],
+      "first_seen": "2026-11-02T23:11:06Z",
+      "published_at": "2026-11-02T20:15:35Z",
+      "title": "America’s Test",
+      "url": "https://www.persuasion.community/p/americas-test",
+      "publication": "Persuasion",
+      "first_morning_surfaced_at": null
+    },
     "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong": {
       "keys": [
         "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong",
@@ -1071,7 +1088,7 @@
       "title": "Is Radicalism the Answer?",
       "url": "https://www.theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201/?utm_source=feed",
       "publication": "The Atlantic",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
     },
     "url:https://thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness": {
       "keys": [
@@ -1090,22 +1107,20 @@
       "publication": "The Free Press",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
-    "url:https://thefp.com/p/i-turned-myself-into-an-ai-model": {
+    "url:https://thefp.com/p/how-to-raise-a-reader": {
       "keys": [
-        "url:https://thefp.com/p/i-turned-myself-into-an-ai-model",
-        "pid:rss:https://www.thefp.com/p/i-turned-myself-into-an-ai-model",
-        "syn:arthur-brooks-i-turned-myself-into-an-ai-model|voice:arthur-c-brooks|2026-10-19",
-        "syn:i-turned-myself-into-an-ai-model|voice:arthur-c-brooks|2026-10-19",
-        "fp:thefp.com|arthur-brooks-i-turned-myself-into-an-ai-model|2026-10-19",
-        "fp:thefp.com|i-turned-myself-into-an-ai-model|2026-10-19"
+        "url:https://thefp.com/p/how-to-raise-a-reader",
+        "pid:rss:https://www.thefp.com/p/how-to-raise-a-reader",
+        "syn:arthur-brooks-how-to-raise-a-reader|voice:arthur-c-brooks|2026-11-02",
+        "fp:thefp.com|arthur-brooks-how-to-raise-a-reader|2026-11-02"
       ],
       "voice_ids": [
         "arthur-c-brooks"
       ],
-      "first_seen": "2026-10-19T20:41:10Z",
-      "published_at": "2026-10-19T15:02:58Z",
-      "title": "Arthur Brooks: I Turned Myself Into an AI Model",
-      "url": "https://www.thefp.com/p/i-turned-myself-into-an-ai-model",
+      "first_seen": "2026-11-02T23:11:06Z",
+      "published_at": "2026-11-02T16:03:25Z",
+      "title": "Arthur Brooks: How to Raise a Reader",
+      "url": "https://www.thefp.com/p/how-to-raise-a-reader",
       "publication": "The Free Press",
       "first_morning_surfaced_at": null
     },
