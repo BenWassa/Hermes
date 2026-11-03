@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-02T23:11:06Z",
+  "updated_at": "2026-11-03T21:13:40Z",
   "last_reconcile_at": "2026-11-02T23:11:06Z",
   "last_roundup": {
     "period_id": "2026-11-01",
@@ -14,6 +14,23 @@
     ]
   },
   "items": {
+    "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-is-leaving-his-economy-remains": {
+      "keys": [
+        "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-is-leaving-his-economy-remains",
+        "pid:rss:https://foreignpolicy.com/?p=1245064",
+        "syn:vucic-is-leaving-his-economy-remains|voice:adam-tooze|2026-11-03",
+        "fp:foreignpolicy.com|vucic-is-leaving-his-economy-remains|2026-11-03"
+      ],
+      "voice_ids": [
+        "adam-tooze"
+      ],
+      "first_seen": "2026-11-03T21:13:40Z",
+      "published_at": "2026-11-03T09:00:37Z",
+      "title": "Vucic Is Leaving. His Economy Remains.",
+      "url": "https://foreignpolicy.com/2026/11/03/serbia-vucic-is-leaving-his-economy-remains/",
+      "publication": "Foreign Policy",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html",
@@ -473,23 +490,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-brazilian-food.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/on-brazilian-food.html",
-        "pid:rss:https://marginalrevolution.com/?p=94028",
-        "syn:on-brazilian-food|voice:tyler-cowen|2026-10-20",
-        "fp:marginalrevolution.com|on-brazilian-food|2026-10-20"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-20T19:32:21Z",
-      "published_at": "2026-10-20T04:08:38Z",
-      "title": "On Brazilian food",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/on-brazilian-food.html?utm_source=rss&utm_medium=rss&utm_campaign=on-brazilian-food",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing.html",
@@ -541,23 +541,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html",
-        "pid:rss:https://marginalrevolution.com/?p=94030",
-        "syn:saving-for-the-machines|voice:tyler-cowen|2026-10-20",
-        "fp:marginalrevolution.com|saving-for-the-machines|2026-10-20"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-20T19:32:21Z",
-      "published_at": "2026-10-20T18:38:49Z",
-      "title": "Saving for the machines",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saving-for-the-machines.html?utm_source=rss&utm_medium=rss&utm_campaign=saving-for-the-machines",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html",
@@ -591,23 +574,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-causal-effect-of-foreign-ideas-on-u-s-innovation.html?utm_source=rss&utm_medium=rss&utm_campaign=the-causal-effect-of-foreign-ideas-on-u-s-innovation",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-net-fiscal-impact-of-immigration-should-include-gains-from-trade.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-net-fiscal-impact-of-immigration-should-include-gains-from-trade.html",
-        "pid:rss:https://marginalrevolution.com/?p=94022",
-        "syn:the-net-fiscal-impact-of-immigration-should-include-gains-from-trade|voice:tyler-cowen|2026-10-20",
-        "fp:marginalrevolution.com|the-net-fiscal-impact-of-immigration-should-include-gains-from-trade|2026-10-20"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-20T19:32:21Z",
-      "published_at": "2026-10-20T04:47:19Z",
-      "title": "The net fiscal impact of immigration should include gains from trade",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-net-fiscal-impact-of-immigration-should-include-gains-from-trade.html?utm_source=rss&utm_medium=rss&utm_campaign=the-net-fiscal-impact-of-immigration-should-include-gains-from-trade",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-pass-through-of-retail-crime.html": {
       "keys": [
@@ -676,23 +642,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-576",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html",
-        "pid:rss:https://marginalrevolution.com/?p=94026",
-        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-10-20",
-        "fp:marginalrevolution.com|tuesday-assorted-links|2026-10-20"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-20T19:32:21Z",
-      "published_at": "2026-10-20T15:56:57Z",
-      "title": "Tuesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-591.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-591",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-592.html": {
       "keys": [
@@ -796,6 +745,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-economists-declining-in-status.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-economists-declining-in-status.html",
+        "pid:rss:https://marginalrevolution.com/?p=94123",
+        "syn:are-economists-declining-in-status|voice:tyler-cowen|2026-11-03",
+        "fp:marginalrevolution.com|are-economists-declining-in-status|2026-11-03"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-03T21:13:40Z",
+      "published_at": "2026-11-03T05:22:51Z",
+      "title": "Are economists declining in status?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/are-economists-declining-in-status.html?utm_source=rss&utm_medium=rss&utm_campaign=are-economists-declining-in-status",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-llms-good-or-bad-bayesians.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-llms-good-or-bad-bayesians.html",
@@ -845,6 +811,23 @@
       "title": "*Fjord* and *Fatherland*",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/fjord-and-fatherland.html?utm_source=rss&utm_medium=rss&utm_campaign=fjord-and-fatherland",
       "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/ireland-fact-of-the-day-8.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/ireland-fact-of-the-day-8.html",
+        "pid:rss:https://marginalrevolution.com/?p=94124",
+        "syn:ireland-fact-of-the-day|voice:tyler-cowen|2026-11-03",
+        "fp:marginalrevolution.com|ireland-fact-of-the-day|2026-11-03"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-03T21:13:40Z",
+      "published_at": "2026-11-03T19:26:51Z",
+      "title": "Ireland fact of the day",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/ireland-fact-of-the-day-8.html?utm_source=rss&utm_medium=rss&utm_campaign=ireland-fact-of-the-day-8",
+      "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html": {
@@ -862,7 +845,7 @@
       "title": "Monday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-584",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html": {
       "keys": [
@@ -898,6 +881,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-tips.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-tips.html",
+        "pid:rss:https://marginalrevolution.com/?p=94121",
+        "syn:the-economics-of-tips|voice:tyler-cowen|2026-11-03",
+        "fp:marginalrevolution.com|the-economics-of-tips|2026-11-03"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-03T21:13:40Z",
+      "published_at": "2026-11-03T07:58:10Z",
+      "title": "The economics of tips",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-tips.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-tips",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html",
@@ -915,6 +915,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-593.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-593.html",
+        "pid:rss:https://marginalrevolution.com/?p=94119",
+        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-11-03",
+        "fp:marginalrevolution.com|tuesday-assorted-links|2026-11-03"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-03T21:13:40Z",
+      "published_at": "2026-11-03T17:01:23Z",
+      "title": "Tuesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-593.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-593",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://nationalpost.com/opinion/conrad-black-dont-bet-against-capable-netanyahu": {
       "keys": [
         "url:https://nationalpost.com/opinion/conrad-black-dont-bet-against-capable-netanyahu",
@@ -930,23 +947,6 @@
       "url": "https://nationalpost.com/opinion/conrad-black-dont-bet-against-capable-netanyahu/",
       "publication": "National Post",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
-    },
-    "url:https://nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html",
-        "pid:rss:https://www.nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html",
-        "syn:trumpism-is-backfiring|voice:ezra-klein|2026-10-20",
-        "fp:nytimes.com|trumpism-is-backfiring|2026-10-20"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-10-20T19:32:21Z",
-      "published_at": "2026-10-20T13:11:05Z",
-      "title": "Trumpism Is Backfiring",
-      "url": "https://www.nytimes.com/2026/10/20/opinion/ezra-klein-podcast-chrystia-freeland.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
     "url:https://nytimes.com/2026/10/23/opinion/ezra-klein-podcast-sarah-longwell.html": {
       "keys": [
@@ -1039,7 +1039,7 @@
       "title": "America’s Test",
       "url": "https://www.persuasion.community/p/americas-test",
       "publication": "Persuasion",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
     },
     "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong": {
       "keys": [
@@ -1122,7 +1122,7 @@
       "title": "Arthur Brooks: How to Raise a Reader",
       "url": "https://www.thefp.com/p/how-to-raise-a-reader",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
     },
     "url:https://theglobeandmail.com/opinion/article-alberta-premier-danielle-smith-is-targeting-immigration-but-what-do": {
       "keys": [
