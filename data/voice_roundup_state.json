@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-03T21:13:40Z",
-  "last_reconcile_at": "2026-11-02T23:11:06Z",
+  "updated_at": "2026-11-04T21:27:23Z",
+  "last_reconcile_at": "2026-11-04T21:27:23Z",
   "last_roundup": {
     "period_id": "2026-11-01",
     "cutoff": "2026-11-01T22:00:00Z",
@@ -16,6 +16,7 @@
   "items": {
     "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-is-leaving-his-economy-remains": {
       "keys": [
+        "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-elections-economy-europe",
         "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-is-leaving-his-economy-remains",
         "pid:rss:https://foreignpolicy.com/?p=1245064",
         "syn:vucic-is-leaving-his-economy-remains|voice:adam-tooze|2026-11-03",
@@ -27,9 +28,9 @@
       "first_seen": "2026-11-03T21:13:40Z",
       "published_at": "2026-11-03T09:00:37Z",
       "title": "Vucic Is Leaving. His Economy Remains.",
-      "url": "https://foreignpolicy.com/2026/11/03/serbia-vucic-is-leaving-his-economy-remains/",
+      "url": "https://foreignpolicy.com/2026/11/03/serbia-vucic-elections-economy-europe/",
       "publication": "Foreign Policy",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html": {
       "keys": [
@@ -422,23 +423,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html",
-        "pid:rss:https://marginalrevolution.com/?p=94050",
-        "syn:more-on-elizabeth-holmes-and-prison|voice:tyler-cowen|2026-10-21",
-        "fp:marginalrevolution.com|more-on-elizabeth-holmes-and-prison|2026-10-21"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-21T19:30:38Z",
-      "published_at": "2026-10-21T19:12:57Z",
-      "title": "More on Elizabeth Holmes and prison",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/more-on-elizabeth-holmes-and-prison.html?utm_source=rss&utm_medium=rss&utm_campaign=more-on-elizabeth-holmes-and-prison",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html",
@@ -490,23 +474,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing.html",
-        "pid:rss:https://marginalrevolution.com/?p=94029",
-        "syn:one-reason-i-do-not-love-ai-writing-or-even-ai-assisted|voice:tyler-cowen|2026-10-21",
-        "fp:marginalrevolution.com|one-reason-i-do-not-love-ai-writing-or-even-ai-assisted|2026-10-21"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-21T19:30:38Z",
-      "published_at": "2026-10-21T06:20:34Z",
-      "title": "One reason I do not love AI writing, or even AI-assisted writing",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing.html?utm_source=rss&utm_medium=rss&utm_campaign=one-reason-i-do-not-love-ai-writing-or-even-ai-assisted-writing",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html",
@@ -557,23 +524,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/sunday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-587",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-causal-effect-of-foreign-ideas-on-u-s-innovation.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-causal-effect-of-foreign-ideas-on-u-s-innovation.html",
-        "pid:rss:https://marginalrevolution.com/?p=94038",
-        "syn:the-causal-effect-of-foreign-ideas-on-u-s-innovation|voice:tyler-cowen|2026-10-21",
-        "fp:marginalrevolution.com|the-causal-effect-of-foreign-ideas-on-u-s-innovation|2026-10-21"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-21T19:30:38Z",
-      "published_at": "2026-10-21T05:00:58Z",
-      "title": "The Causal Effect of Foreign Ideas on U.S. Innovation",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-causal-effect-of-foreign-ideas-on-u-s-innovation.html?utm_source=rss&utm_medium=rss&utm_campaign=the-causal-effect-of-foreign-ideas-on-u-s-innovation",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-pass-through-of-retail-crime.html": {
       "keys": [
@@ -659,23 +609,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-592.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-592",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-28T20:29:07Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-576.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-576.html",
-        "pid:rss:https://marginalrevolution.com/?p=94034",
-        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-10-21",
-        "fp:marginalrevolution.com|wednesday-assorted-links|2026-10-21"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-21T19:30:38Z",
-      "published_at": "2026-10-21T16:09:38Z",
-      "title": "Wednesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-576.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-576",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-577.html": {
       "keys": [
@@ -828,7 +761,7 @@
       "title": "Ireland fact of the day",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/ireland-fact-of-the-day-8.html?utm_source=rss&utm_medium=rss&utm_campaign=ireland-fact-of-the-day-8",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
+      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html": {
       "keys": [
@@ -898,6 +831,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-election.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-election.html",
+        "pid:rss:https://marginalrevolution.com/?p=94131",
+        "syn:the-election|voice:tyler-cowen|2026-11-04",
+        "fp:marginalrevolution.com|the-election|2026-11-04"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-04T21:27:23Z",
+      "published_at": "2026-11-04T07:41:25Z",
+      "title": "The election",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-election.html?utm_source=rss&utm_medium=rss&utm_campaign=the-election",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html",
@@ -915,6 +865,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world.html",
+        "pid:rss:https://marginalrevolution.com/?p=94125",
+        "syn:trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize|voice:tyler-cowen|2026-11-04",
+        "fp:marginalrevolution.com|trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize|2026-11-04"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-04T21:27:23Z",
+      "published_at": "2026-11-04T05:54:16Z",
+      "title": "Trade and the end of antiquity, or did Islam serve to deglobalize the world?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world.html?utm_source=rss&utm_medium=rss&utm_campaign=trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-593.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-593.html",
@@ -929,6 +896,40 @@
       "published_at": "2026-11-03T17:01:23Z",
       "title": "Tuesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-593.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-593",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-578.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-578.html",
+        "pid:rss:https://marginalrevolution.com/?p=94127",
+        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-11-04",
+        "fp:marginalrevolution.com|wednesday-assorted-links|2026-11-04"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-04T21:27:23Z",
+      "published_at": "2026-11-04T16:48:24Z",
+      "title": "Wednesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-578.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-578",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/what-drives-censorship-on-college-campuses.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/what-drives-censorship-on-college-campuses.html",
+        "pid:rss:https://marginalrevolution.com/?p=94130",
+        "syn:what-drives-censorship-on-college-campuses|voice:tyler-cowen|2026-11-04",
+        "fp:marginalrevolution.com|what-drives-censorship-on-college-campuses|2026-11-04"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-04T21:27:23Z",
+      "published_at": "2026-11-04T19:58:38Z",
+      "title": "What Drives Censorship on College Campuses?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/what-drives-censorship-on-college-campuses.html?utm_source=rss&utm_medium=rss&utm_campaign=what-drives-censorship-on-college-campuses",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -1140,22 +1141,6 @@
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
-    "url:https://theglobeandmail.com/opinion/article-alberta-separatists-lost-badly-danielle-smith-might-have-lost-worse": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-alberta-separatists-lost-badly-danielle-smith-might-have-lost-worse",
-        "syn:alberta-s-separatists-lost-badly-danielle-smith-might-have-lost-even-worse|voice:andrew-coyne|2026-10-20",
-        "fp:theglobeandmail.com|alberta-s-separatists-lost-badly-danielle-smith-might-have-lost-even-worse|2026-10-20"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-10-21T19:30:38Z",
-      "published_at": "2026-10-20T00:00:00Z",
-      "title": "Alberta’s separatists lost badly. Danielle Smith might have lost even worse",
-      "url": "https://www.theglobeandmail.com/opinion/article-alberta-separatists-lost-badly-danielle-smith-might-have-lost-worse/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-10-21T19:30:38Z"
-    },
     "url:https://theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics": {
       "keys": [
         "url:https://theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics",
@@ -1187,6 +1172,22 @@
       "url": "https://www.theglobeandmail.com/opinion/article-the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the-qa/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
+    },
+    "url:https://theglobeandmail.com/opinion/article-us-midterms-are-a-rebuke-to-the-republicans-but-not-the-wipeout-they": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-us-midterms-are-a-rebuke-to-the-republicans-but-not-the-wipeout-they",
+        "syn:u-s-midterms-are-a-rebuke-to-the-republicans-but-not-the|voice:andrew-coyne|2026-11-04",
+        "fp:theglobeandmail.com|u-s-midterms-are-a-rebuke-to-the-republicans-but-not-the|2026-11-04"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-11-04T21:27:23Z",
+      "published_at": "2026-11-04T00:00:00Z",
+      "title": "U.S. midterms are a rebuke to the Republicans, but not the wipeout they deserved",
+      "url": "https://www.theglobeandmail.com/opinion/article-us-midterms-are-a-rebuke-to-the-republicans-but-not-the-wipeout-they/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": null
     }
   }
 }
