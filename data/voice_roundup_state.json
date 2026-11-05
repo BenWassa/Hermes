@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-04T21:27:23Z",
-  "last_reconcile_at": "2026-11-04T21:27:23Z",
+  "updated_at": "2026-11-05T21:32:09Z",
+  "last_reconcile_at": "2026-11-05T21:32:09Z",
   "last_roundup": {
     "period_id": "2026-11-01",
     "cutoff": "2026-11-01T22:00:00Z",
@@ -31,23 +31,6 @@
       "url": "https://foreignpolicy.com/2026/11/03/serbia-vucic-elections-economy-europe/",
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html",
-        "pid:rss:https://marginalrevolution.com/?p=94043",
-        "syn:a-simple-point-about-the-intertemporal-regulation-of-ai|voice:tyler-cowen|2026-10-22",
-        "fp:marginalrevolution.com|a-simple-point-about-the-intertemporal-regulation-of-ai|2026-10-22"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-22T19:22:58Z",
-      "published_at": "2026-10-22T07:12:46Z",
-      "title": "A simple point about the intertemporal regulation of AI",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/a-simple-point-about-the-intertemporal-regulation-of-ai.html?utm_source=rss&utm_medium=rss&utm_campaign=a-simple-point-about-the-intertemporal-regulation-of-ai",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-dominates-human-peer-reviews.html": {
       "keys": [
@@ -184,23 +167,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/cybersecurity-etf.html?utm_source=rss&utm_medium=rss&utm_campaign=cybersecurity-etf",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-24T18:19:12Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-mass-shootings-in-universities-lead-to-permanent-effects.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/do-mass-shootings-in-universities-lead-to-permanent-effects.html",
-        "pid:rss:https://marginalrevolution.com/?p=94027",
-        "syn:do-mass-shootings-in-universities-lead-to-permanent-effects|voice:tyler-cowen|2026-10-22",
-        "fp:marginalrevolution.com|do-mass-shootings-in-universities-lead-to-permanent-effects|2026-10-22"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-22T19:22:58Z",
-      "published_at": "2026-10-22T04:42:11Z",
-      "title": "Do mass shootings in universities lead to permanent effects?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/do-mass-shootings-in-universities-lead-to-permanent-effects.html?utm_source=rss&utm_medium=rss&utm_campaign=do-mass-shootings-in-universities-lead-to-permanent-effects",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-22T19:22:58Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/econvitals.html": {
       "keys": [
@@ -354,23 +320,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-is-ai-shaping-economic-research.html?utm_source=rss&utm_medium=rss&utm_campaign=how-is-ai-shaping-economic-research",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html",
-        "pid:rss:https://marginalrevolution.com/?p=94042",
-        "syn:how-long-do-wealth-shocks-persist-less-than-three-generations-in-england|voice:tyler-cowen|2026-10-22",
-        "fp:marginalrevolution.com|how-long-do-wealth-shocks-persist-less-than-three-generations-in-england|2026-10-22"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-22T19:22:58Z",
-      "published_at": "2026-10-22T18:36:11Z",
-      "title": "How Long Do Wealth Shocks Persist? Less Than Three Generations in England, 1700–2026",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026.html?utm_source=rss&utm_medium=rss&utm_campaign=how-long-do-wealth-shocks-persist-less-than-three-generations-in-england-1700-2026",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/i-guest-host-an-nyt-podcast-with-michael-kratsios-trump-science-advisor.html": {
       "keys": [
@@ -559,23 +508,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html",
-        "pid:rss:https://marginalrevolution.com/?p=94037",
-        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-22",
-        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-22"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-22T19:22:58Z",
-      "published_at": "2026-10-22T15:55:47Z",
-      "title": "Thursday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-575.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-575",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html",
@@ -763,6 +695,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/love-at-first-photo.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/love-at-first-photo.html",
+        "pid:rss:https://marginalrevolution.com/?p=94122",
+        "syn:love-at-first-photo|voice:tyler-cowen|2026-11-05",
+        "fp:marginalrevolution.com|love-at-first-photo|2026-11-05"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-05T21:32:09Z",
+      "published_at": "2026-11-05T19:55:13Z",
+      "title": "Love at first photo?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/love-at-first-photo.html?utm_source=rss&utm_medium=rss&utm_campaign=love-at-first-photo",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html",
@@ -780,6 +729,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/my-very-good-conversation-with-richard-hanania.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/my-very-good-conversation-with-richard-hanania.html",
+        "pid:rss:https://marginalrevolution.com/?p=94134",
+        "syn:my-very-good-conversation-with-richard-hanania|voice:tyler-cowen|2026-11-05",
+        "fp:marginalrevolution.com|my-very-good-conversation-with-richard-hanania|2026-11-05"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-05T21:32:09Z",
+      "published_at": "2026-11-05T05:51:48Z",
+      "title": "My very good Conversation with Richard Hanania",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/my-very-good-conversation-with-richard-hanania.html?utm_source=rss&utm_medium=rss&utm_campaign=my-very-good-conversation-with-richard-hanania",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html",
@@ -796,6 +762,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html?utm_source=rss&utm_medium=rss&utm_campaign=should-you-feel-grief-for-the-dead-who-go-to-heaven",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/social-media-and-political-radicalization.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/social-media-and-political-radicalization.html",
+        "pid:rss:https://marginalrevolution.com/?p=94136",
+        "syn:social-media-and-political-radicalization|voice:tyler-cowen|2026-11-05",
+        "fp:marginalrevolution.com|social-media-and-political-radicalization|2026-11-05"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-05T21:32:09Z",
+      "published_at": "2026-11-05T09:19:09Z",
+      "title": "Social media and political radicalization",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/social-media-and-political-radicalization.html?utm_source=rss&utm_medium=rss&utm_campaign=social-media-and-political-radicalization",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-588.html": {
       "keys": [
@@ -864,6 +847,23 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html?utm_source=rss&utm_medium=rss&utm_campaign=those-new-service-sector-jobs-18",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html",
+        "pid:rss:https://marginalrevolution.com/?p=94133",
+        "syn:thursday-assorted-links|voice:tyler-cowen|2026-11-05",
+        "fp:marginalrevolution.com|thursday-assorted-links|2026-11-05"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-05T21:32:09Z",
+      "published_at": "2026-11-05T17:25:46Z",
+      "title": "Thursday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-577",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world.html": {
       "keys": [
@@ -1024,6 +1024,23 @@
       "url": "https://www.nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
+    },
+    "url:https://nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html",
+        "pid:rss:https://www.nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html",
+        "syn:the-bell-tolls-for-trumpism|voice:ezra-klein|2026-11-05",
+        "fp:nytimes.com|the-bell-tolls-for-trumpism|2026-11-05"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-11-05T21:32:09Z",
+      "published_at": "2026-11-05T11:04:32Z",
+      "title": "The Bell Tolls for Trumpism",
+      "url": "https://www.nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
     },
     "url:https://persuasion.community/p/americas-test": {
       "keys": [
