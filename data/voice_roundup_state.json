@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-05T21:32:09Z",
+  "updated_at": "2026-11-06T21:00:20Z",
   "last_reconcile_at": "2026-11-05T21:32:09Z",
   "last_roundup": {
     "period_id": "2026-11-01",
@@ -31,6 +31,23 @@
       "url": "https://foreignpolicy.com/2026/11/03/serbia-vucic-elections-economy-europe/",
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
+    },
+    "url:https://foreignpolicy.com/2026/11/06/economy-election-congress-trade-affordability-artificial-intelligence-trump-democrats": {
+      "keys": [
+        "url:https://foreignpolicy.com/2026/11/06/economy-election-congress-trade-affordability-artificial-intelligence-trump-democrats",
+        "pid:rss:https://foreignpolicy.com/?p=1245550",
+        "syn:do-the-democrats-have-a-cohesive-economic-plan|voice:adam-tooze|2026-11-06",
+        "fp:foreignpolicy.com|do-the-democrats-have-a-cohesive-economic-plan|2026-11-06"
+      ],
+      "voice_ids": [
+        "adam-tooze"
+      ],
+      "first_seen": "2026-11-06T21:00:20Z",
+      "published_at": "2026-11-06T17:41:27Z",
+      "title": "Do the Democrats Have a Cohesive Economic Plan?",
+      "url": "https://foreignpolicy.com/2026/11/06/economy-election-congress-trade-affordability-artificial-intelligence-trump-democrats/",
+      "publication": "Foreign Policy",
+      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-dominates-human-peer-reviews.html": {
       "keys": [
@@ -253,23 +270,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html",
-        "pid:rss:https://marginalrevolution.com/?p=94053",
-        "syn:friday-assorted-links|voice:tyler-cowen|2026-10-23",
-        "fp:marginalrevolution.com|friday-assorted-links|2026-10-23"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-23T19:30:29Z",
-      "published_at": "2026-10-23T16:35:40Z",
-      "title": "Friday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-596.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-596",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-24T18:19:12Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html",
@@ -423,23 +423,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html",
-        "pid:rss:https://marginalrevolution.com/?p=94060",
-        "syn:podcast-with-rabbi-david-wolpe|voice:tyler-cowen|2026-10-23",
-        "fp:marginalrevolution.com|podcast-with-rabbi-david-wolpe|2026-10-23"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-23T19:30:29Z",
-      "published_at": "2026-10-23T07:38:28Z",
-      "title": "Podcast with Rabbi David Wolpe",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/podcast-with-rabbi-david-wolpe.html?utm_source=rss&utm_medium=rss&utm_campaign=podcast-with-rabbi-david-wolpe",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html",
@@ -575,23 +558,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/why-are-cybersecurity-losses-not-worse.html?utm_source=rss&utm_medium=rss&utm_campaign=why-are-cybersecurity-losses-not-worse",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-25T18:31:57Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/will-bystander-economies-be-able-to-finance-their-governments.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/will-bystander-economies-be-able-to-finance-their-governments.html",
-        "pid:rss:https://marginalrevolution.com/?p=94044",
-        "syn:will-bystander-economies-be-able-to-finance-their-governments|voice:tyler-cowen|2026-10-23",
-        "fp:marginalrevolution.com|will-bystander-economies-be-able-to-finance-their-governments|2026-10-23"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-23T19:30:29Z",
-      "published_at": "2026-10-23T04:51:50Z",
-      "title": "Will bystander economies be able to finance their governments?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/will-bystander-economies-be-able-to-finance-their-governments.html?utm_source=rss&utm_medium=rss&utm_campaign=will-bystander-economies-be-able-to-finance-their-governments",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html": {
       "keys": [
@@ -949,23 +915,6 @@
       "publication": "National Post",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
-    "url:https://nytimes.com/2026/10/23/opinion/ezra-klein-podcast-sarah-longwell.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/10/23/opinion/ezra-klein-podcast-sarah-longwell.html",
-        "pid:rss:https://www.nytimes.com/2026/10/23/opinion/ezra-klein-podcast-sarah-longwell.html",
-        "syn:what-hundreds-of-focus-groups-with-trump-voters-revealed|voice:ezra-klein|2026-10-23",
-        "fp:nytimes.com|what-hundreds-of-focus-groups-with-trump-voters-revealed|2026-10-23"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-10-23T19:30:29Z",
-      "published_at": "2026-10-23T19:19:54Z",
-      "title": "What Hundreds of Focus Groups With Trump Voters Revealed",
-      "url": "https://www.nytimes.com/2026/10/23/opinion/ezra-klein-podcast-sarah-longwell.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
-    },
     "url:https://nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html": {
       "keys": [
         "url:https://nytimes.com/2026/10/25/opinion/israel-gaza-election-netanyahu-hamas.html",
@@ -1142,21 +1091,21 @@
       "publication": "The Free Press",
       "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
     },
-    "url:https://theglobeandmail.com/opinion/article-alberta-premier-danielle-smith-is-targeting-immigration-but-what-do": {
+    "url:https://theglobeandmail.com/opinion/article-a-strange-budget-as-opaque-as-it-is-complacent": {
       "keys": [
-        "url:https://theglobeandmail.com/opinion/article-alberta-premier-danielle-smith-is-targeting-immigration-but-what-do",
-        "syn:alberta-premier-danielle-smith-is-targeting-immigration-but-what-do-the-numbers|voice:andrew-coyne|2026-10-23",
-        "fp:theglobeandmail.com|alberta-premier-danielle-smith-is-targeting-immigration-but-what-do-the-numbers|2026-10-23"
+        "url:https://theglobeandmail.com/opinion/article-a-strange-budget-as-opaque-as-it-is-complacent",
+        "syn:budget-2026-a-strange-budget-as-opaque-as-it-is-complacent|voice:andrew-coyne|2026-11-06",
+        "fp:theglobeandmail.com|budget-2026-a-strange-budget-as-opaque-as-it-is-complacent|2026-11-06"
       ],
       "voice_ids": [
         "andrew-coyne"
       ],
-      "first_seen": "2026-10-23T19:30:29Z",
-      "published_at": "2026-10-23T00:00:00Z",
-      "title": "Alberta Premier Danielle Smith is targeting immigration. But what do the numbers say?",
-      "url": "https://www.theglobeandmail.com/opinion/article-alberta-premier-danielle-smith-is-targeting-immigration-but-what-do/",
+      "first_seen": "2026-11-06T21:00:20Z",
+      "published_at": "2026-11-06T00:00:00Z",
+      "title": "Budget 2026: A strange budget, as opaque as it is complacent",
+      "url": "https://www.theglobeandmail.com/opinion/article-a-strange-budget-as-opaque-as-it-is-complacent/",
       "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-10-23T19:30:29Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics": {
       "keys": [
