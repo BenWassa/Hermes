@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-08T19:54:51Z",
+  "updated_at": "2026-11-09T01:57:37Z",
   "last_reconcile_at": "2026-11-08T19:54:51Z",
   "last_roundup": {
     "period_id": "2026-11-01",
@@ -888,6 +888,23 @@
       "url": "https://www.persuasion.community/p/americas-test",
       "publication": "Persuasion",
       "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
+    },
+    "url:https://persuasion.community/p/the-next-two-years-might-be-more": {
+      "keys": [
+        "url:https://persuasion.community/p/the-next-two-years-might-be-more",
+        "pid:rss:https://www.persuasion.community/p/the-next-two-years-might-be-more",
+        "syn:the-midterms-just-made-the-world-more-dangerous|voice:francis-fukuyama|2026-11-08",
+        "fp:persuasion.community|the-midterms-just-made-the-world-more-dangerous|2026-11-08"
+      ],
+      "voice_ids": [
+        "francis-fukuyama"
+      ],
+      "first_seen": "2026-11-09T01:57:37Z",
+      "published_at": "2026-11-08T22:20:35Z",
+      "title": "The Midterms Just Made the World More Dangerous",
+      "url": "https://www.persuasion.community/p/the-next-two-years-might-be-more",
+      "publication": "Persuasion",
+      "first_morning_surfaced_at": null
     },
     "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong": {
       "keys": [
