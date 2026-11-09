@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-09T01:57:37Z",
+  "updated_at": "2026-11-09T07:12:30Z",
   "last_reconcile_at": "2026-11-08T19:54:51Z",
   "last_roundup": {
     "period_id": "2026-11-08",
@@ -185,23 +185,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman.html?utm_source=rss&utm_medium=rss&utm_campaign=errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/frances-lee-on-american-elections.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/frances-lee-on-american-elections.html",
-        "pid:rss:https://marginalrevolution.com/?p=94081",
-        "syn:frances-lee-on-american-elections|voice:tyler-cowen|2026-10-26",
-        "fp:marginalrevolution.com|frances-lee-on-american-elections|2026-10-26"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-26T05:19:21Z",
-      "published_at": "2026-10-26T04:51:28Z",
-      "title": "Frances Lee on American elections",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/frances-lee-on-american-elections.html?utm_source=rss&utm_medium=rss&utm_campaign=frances-lee-on-american-elections",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html": {
       "keys": [
