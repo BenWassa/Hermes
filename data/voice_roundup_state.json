@@ -4,13 +4,14 @@
   "updated_at": "2026-11-09T01:57:37Z",
   "last_reconcile_at": "2026-11-08T19:54:51Z",
   "last_roundup": {
-    "period_id": "2026-11-01",
-    "cutoff": "2026-11-01T22:00:00Z",
-    "claimed_at": "2026-11-02T01:48:29Z",
-    "status": "notified",
+    "period_id": "2026-11-08",
+    "cutoff": "2026-11-08T22:00:00Z",
+    "claimed_at": "2026-11-09T01:57:37Z",
+    "status": "pending",
     "selection_keys": [
-      "url:https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html",
-      "url:https://theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201"
+      "url:https://theatlantic.com/podcasts/2026/11/can-beauty-make-us-good/689302",
+      "url:https://nytimes.com/2026/11/08/opinion/midterms-democrats-schumer.html",
+      "url:https://foreignpolicy.com/2026/11/06/economy-election-congress-trade-affordability-artificial-intelligence-trump-democrats"
     ]
   },
   "items": {
