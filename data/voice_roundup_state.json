@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-09T07:12:30Z",
-  "last_reconcile_at": "2026-11-08T19:54:51Z",
+  "updated_at": "2026-11-09T23:50:10Z",
+  "last_reconcile_at": "2026-11-09T23:50:10Z",
   "last_roundup": {
     "period_id": "2026-11-08",
     "cutoff": "2026-11-08T22:00:00Z",
@@ -15,6 +15,23 @@
     ]
   },
   "items": {
+    "url:https://afterbabel.com/p/parental-consent-social-media": {
+      "keys": [
+        "url:https://afterbabel.com/p/parental-consent-social-media",
+        "pid:rss:https://www.afterbabel.com/p/parental-consent-social-media",
+        "syn:why-parental-consent-policies-for-social-media-do-not-help-families|voice:jonathan-haidt|2026-11-09",
+        "fp:afterbabel.com|why-parental-consent-policies-for-social-media-do-not-help-families|2026-11-09"
+      ],
+      "voice_ids": [
+        "jonathan-haidt"
+      ],
+      "first_seen": "2026-11-09T23:50:10Z",
+      "published_at": "2026-11-09T12:03:43Z",
+      "title": "Why Parental Consent Policies for Social Media Do Not Help Families",
+      "url": "https://www.afterbabel.com/p/parental-consent-social-media",
+      "publication": "After Babel",
+      "first_morning_surfaced_at": null
+    },
     "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-is-leaving-his-economy-remains": {
       "keys": [
         "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-elections-economy-europe",
@@ -118,23 +135,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html",
-        "pid:rss:https://marginalrevolution.com/?p=94082",
-        "syn:brazil-s-economic-problems-in-a-nutshell|voice:tyler-cowen|2026-10-26",
-        "fp:marginalrevolution.com|brazil-s-economic-problems-in-a-nutshell|2026-10-26"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-26T20:42:18Z",
-      "published_at": "2026-10-26T07:03:20Z",
-      "title": "Brazil’s economic problems, in a nutshell",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/brazils-economic-problems-in-a-nutshell.html?utm_source=rss&utm_medium=rss&utm_campaign=brazils-economic-problems-in-a-nutshell",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-26T20:42:18Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/can-artificial-intelligence-forecast-treatment-effects-in-economics.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/can-artificial-intelligence-forecast-treatment-effects-in-economics.html",
@@ -234,23 +234,6 @@
       "published_at": "2026-10-27T04:32:03Z",
       "title": "Is “Who’s on First?” funny?",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html?utm_source=rss&utm_medium=rss&utm_campaign=is-whos-on-first-funny",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-583.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-583.html",
-        "pid:rss:https://marginalrevolution.com/?p=94080",
-        "syn:monday-assorted-links|voice:tyler-cowen|2026-10-26",
-        "fp:marginalrevolution.com|monday-assorted-links|2026-10-26"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-26T20:42:18Z",
-      "published_at": "2026-10-26T16:23:21Z",
-      "title": "Monday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/monday-assorted-links-583.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-583",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
@@ -890,23 +873,6 @@
       "publication": "Persuasion",
       "first_morning_surfaced_at": null
     },
-    "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong": {
-      "keys": [
-        "url:https://persuasion.community/p/the-spirit-of-democracy-remains-strong",
-        "pid:rss:https://www.persuasion.community/p/the-spirit-of-democracy-remains-strong",
-        "syn:the-spirit-of-democracy-remains-strong|voice:francis-fukuyama|2026-10-26",
-        "fp:persuasion.community|the-spirit-of-democracy-remains-strong|2026-10-26"
-      ],
-      "voice_ids": [
-        "francis-fukuyama"
-      ],
-      "first_seen": "2026-10-26T20:42:18Z",
-      "published_at": "2026-10-26T16:30:46Z",
-      "title": "The Spirit of Democracy Remains Strong",
-      "url": "https://www.persuasion.community/p/the-spirit-of-democracy-remains-strong",
-      "publication": "Persuasion",
-      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
-    },
     "url:https://theatlantic.com/podcasts/2026/11/can-beauty-make-us-good/689302": {
       "keys": [
         "url:https://theatlantic.com/podcasts/2026/11/can-beauty-make-us-good/689302",
@@ -939,22 +905,22 @@
       "publication": "The Atlantic",
       "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
     },
-    "url:https://thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness": {
+    "url:https://thefp.com/p/arthur-brooks-why-wont-boomers-grandparent": {
       "keys": [
-        "url:https://thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness",
-        "pid:rss:https://www.thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness",
-        "syn:arthur-brooks-the-real-lesson-of-the-stanford-prison-experiment|voice:arthur-c-brooks|2026-10-26",
-        "fp:thefp.com|arthur-brooks-the-real-lesson-of-the-stanford-prison-experiment|2026-10-26"
+        "url:https://thefp.com/p/arthur-brooks-why-wont-boomers-grandparent",
+        "pid:rss:https://www.thefp.com/p/arthur-brooks-why-wont-boomers-grandparent",
+        "syn:why-won-t-boomers-grandparent|voice:arthur-c-brooks|2026-11-09",
+        "fp:thefp.com|why-won-t-boomers-grandparent|2026-11-09"
       ],
       "voice_ids": [
         "arthur-c-brooks"
       ],
-      "first_seen": "2026-10-26T20:42:18Z",
-      "published_at": "2026-10-26T14:47:31Z",
-      "title": "Arthur Brooks: The Real Lesson of the Stanford Prison Experiment",
-      "url": "https://www.thefp.com/p/arthur-brooks-you-are-not-the-victim-stanford-prison-experiment-happiness",
+      "first_seen": "2026-11-09T23:50:10Z",
+      "published_at": "2026-11-09T16:01:28Z",
+      "title": "Why Won’t Boomers Grandparent?",
+      "url": "https://www.thefp.com/p/arthur-brooks-why-wont-boomers-grandparent",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://thefp.com/p/how-to-raise-a-reader": {
       "keys": [
