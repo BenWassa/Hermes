@@ -213,6 +213,11 @@ def _parse_nhl_games(payload: dict) -> list[GameSummary]:
                 team_score=team_score,
                 opponent_score=opponent_score,
                 result=_result(team_score, opponent_score, status),
+                time_confirmed=not (
+                    _explicit_time_tbd(raw.get("startTimeTBD"))
+                    or _explicit_time_tbd(raw.get("timeTBD"))
+                    or str(raw.get("gameScheduleState") or "").upper() == "TBD"
+                ),
             )
         )
     return games
@@ -331,6 +336,11 @@ def _parse_espn_games(payload: dict) -> list[GameSummary]:
                 team_score=team_score,
                 opponent_score=opponent_score,
                 result=_result(team_score, opponent_score, status),
+                time_confirmed=not (
+                    _explicit_time_tbd(competition.get("timeTBD"))
+                    or _explicit_time_tbd(event.get("timeTBD"))
+                    or "tbd" in str((competition.get("status") or {}).get("type", {}).get("description") or "").lower()
+                ),
             )
         )
     return games
@@ -423,6 +433,25 @@ def _mlb_status(game: dict) -> GameStatus:
     return GameStatus.SCHEDULED
 
 
+
+def _explicit_time_tbd(value) -> bool:
+    """Use provider certainty signals, not suspicious-looking clock hours."""
+    return value is True or (isinstance(value, str) and value.strip().lower() in {"true", "tbd", "yes"})
+
+
+def _mlb_time_confirmed(game: dict, status: GameStatus) -> bool:
+    if status in {GameStatus.FINAL, GameStatus.LIVE}:
+        return True
+    metadata = game.get("status") or {}
+    return not (
+        _explicit_time_tbd(metadata.get("startTimeTBD"))
+        or _explicit_time_tbd(game.get("startTimeTBD"))
+        or _explicit_time_tbd(game.get("timeTBD"))
+        or "tbd" in str(metadata.get("detailedState") or "").lower()
+        or "to be determined" in str(metadata.get("detailedState") or "").lower()
+    )
+
+
 def _parse_mlb_games(payload: dict) -> list[GameSummary]:
     games: list[GameSummary] = []
     for day in payload.get("dates") or []:
@@ -451,6 +480,8 @@ def _parse_mlb_games(payload: dict) -> list[GameSummary]:
                     team_score=team_score,
                     opponent_score=opponent_score,
                     result=_result(team_score, opponent_score, status),
+                    time_confirmed=_mlb_time_confirmed(game, status),
+                    scheduled_date=str(game.get("officialDate") or day.get("date") or "") or None,
                 )
             )
     return games
