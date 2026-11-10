@@ -40,12 +40,12 @@ _RETURN_TO_POWER = re.compile(r"\b(?:returns?|returning|returned|back)\s+to\s+po
 # Explicit same-source role evidence only. Bare "President X" can denote a
 # historical figure and must not be treated as independently verified current.
 _ROLE = r"(?:president|prime minister|premier|governor)"
-_PERSON = r"[A-ZÀ-ÖØ-Þ][\\wÀ-ÿ'-]+(?:\\s+[A-ZÀ-ÖØ-Þ][\\wÀ-ÿ'-]+){0,2}"
+_PERSON = r"[A-ZÀ-ÖØ-Þ][\wÀ-ÿ'-]+(?:\s+[A-ZÀ-ÖØ-Þ][\wÀ-ÿ'-]+){0,2}"
 _SOURCE_CURRENT = re.compile(
-    rf"\\b(?:current|sitting|incumbent)\\s+(?:U\\.?S\\.?\\s+)?{_ROLE}\\s+({_PERSON})\\b", re.I
+    rf"\b(?:current|sitting|incumbent)\s+(?:U\.?S\.?\s+)?{_ROLE}\s+({_PERSON})\b", re.I
 )
 _FALSE_FORMER = re.compile(
-    rf"\\b(?:former|ex-)\\s+(?:U\\.?S\\.?\\s+)?{_ROLE}\\s+({_PERSON})\\b", re.I
+    rf"\b(?:former|ex-)\s+(?:U\.?S\.?\s+)?{_ROLE}\s+({_PERSON})\b", re.I
 )
 _FIELDS = ("headline", "sub", "summary", "analysis")
 _SENTENCE = re.compile(r"(?<=[.!?])\s+")
