@@ -62,6 +62,24 @@
     return date + ' · ' + time;
   }
 
+  // Preserve provider-confirmed game dates without displaying dummy start clocks.
+  function gameWhen(game) {
+    if (!game) return '';
+    var iso = game.start_time_toronto || game.start_time_utc;
+    if (game.time_confirmed === false) {
+      var officialDate = String(game.scheduled_date || '');
+      var dateInstant = /^\d{4}-\d{2}-\d{2}$/.test(officialDate)
+        ? new Date(officialDate + 'T12:00:00Z')
+        : new Date(iso);
+      if (isNaN(dateInstant.getTime())) return 'Time TBD';
+      var day = dateInstant.toLocaleDateString('en-CA', {
+        timeZone: 'America/Toronto', weekday: 'short', month: 'short', day: 'numeric'
+      });
+      return day + ' · Time TBD';
+    }
+    return torontoWhen(iso);
+  }
+
   function gamePlace(game) {
     if (!game) return '';
     return game.home_away === 'home' ? 'vs' : '@';
@@ -174,7 +192,7 @@
     } else if (phase === 'offseason') {
       var offNext = snapshot.next_game;
       body = '<div class="sports-status-line"><strong>Offseason</strong>' +
-        (offNext ? ' · Next: ' + esc(gamePlace(offNext) + ' ' + offNext.opponent + ' · ' + torontoWhen(offNext.start_time_toronto || offNext.start_time_utc)) : '') +
+        (offNext ? ' · Next: ' + esc(gamePlace(offNext) + ' ' + offNext.opponent + ' · ' + gameWhen(offNext)) : '') +
         '</div>';
     } else {
       var last = snapshot.last_game;
@@ -194,7 +212,7 @@
         if (nextStatus === 'postponed' || nextStatus === 'cancelled') {
           nextText = words(nextStatus) + ' · ' + gamePlace(next) + ' ' + next.opponent;
         } else {
-          nextText = gamePlace(next) + ' ' + next.opponent + ' · ' + torontoWhen(next.start_time_toronto || next.start_time_utc);
+          nextText = gamePlace(next) + ' ' + next.opponent + ' · ' + gameWhen(next);
         }
       }
       var facts = factHtml('Record', snapshot.record && snapshot.record.display) +
