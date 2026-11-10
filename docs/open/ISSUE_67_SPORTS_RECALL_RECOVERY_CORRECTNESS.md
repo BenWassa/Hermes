@@ -302,3 +302,17 @@ Remove or correct stale statements that describe superseded provider/horizon beh
 - Full automated regression matrix passes.
 - Production-network probes and end-to-end verification pass.
 - This spec is reconciled to shipped behavior and moved to `docs/closed/` only after merged-main and required production verification.
+
+## Serial remediation slice — 2026-11-10 (Workstream A)
+
+**Scope of focused PR:** Make the existing Sports news and registered-event policy horizon stable for a Toronto edition even after a delayed build. The original code used actual build wall clock for both Guardian team/event searches, significance recency and structured-event policy. A noon recovery therefore searched a materially different 36-hour interval.
+
+**Implemented candidate (pending merge):**
+- One Toronto 05:00 cutoff per edition, converted to UTC using zoneinfo for EST/EDT. An exceptional explicitly early manual build uses the actual earlier instant rather than a future cutoff.
+- Bound existing Guardian team and event discoveries to this cutoff, and rank team headline recency against that same cutoff. Pass the cutoff into structured major-event selection. No widening requests or additional calls.
+- Record edition date, anchor and since/until in the existing bounded Sports metrics.
+- Offline DST, Toronto midnight rollover, same-day recovery comparison and post-cutoff Guardian item rejection regressions.
+
+**Important limitation:** Favourite-team structured provider snapshots still reflect the *actual fetched source states*. For example, a live API fetched after a game has finished may no longer supply the same pre-game status it would have supplied at 05:00; the anchor cannot reverse external facts or guarantee identical historical snapshots. The source selection gap for a Kawhi/Raptors event, independent Guardian provider fallback and Champions League sparse-matchday/fallback/standings behaviour (Workstreams B and C) are **not fixed** by this slice. They require production-reachable bounded source probes, documented provider selection and separate tests; do not claim complete #67 acceptance. Keep issue open.
+
+**Release:** 05:00 cutoff is a documented editorial policy choice consistent with the existing automatic publication floor. PR CI and production run evidence still required. Model usage remains zero. Preserve this single workstream specification rather than creating another issue.
