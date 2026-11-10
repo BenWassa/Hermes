@@ -339,7 +339,7 @@ def _parse_espn_games(payload: dict) -> list[GameSummary]:
                 time_confirmed=not (
                     _explicit_time_tbd(competition.get("timeTBD"))
                     or _explicit_time_tbd(event.get("timeTBD"))
-                    or "tbd" in str((competition.get("status") or {}).get("type", {}).get("description") or "").lower()
+                    or "tbd" in str(((competition.get("status") or {}).get("type") or {}).get("description") or "").lower()
                 ),
             )
         )
