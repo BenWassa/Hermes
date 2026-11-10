@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-09T23:50:10Z",
+  "updated_at": "2026-11-10T21:23:41Z",
   "last_reconcile_at": "2026-11-09T23:50:10Z",
   "last_roundup": {
     "period_id": "2026-11-08",
@@ -64,6 +64,23 @@
       "published_at": "2026-11-06T17:41:27Z",
       "title": "Do the Democrats Have a Cohesive Economic Plan?",
       "url": "https://foreignpolicy.com/2026/11/06/economy-election-congress-trade-affordability-artificial-intelligence-trump-democrats/",
+      "publication": "Foreign Policy",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://foreignpolicy.com/2026/11/10/israel-election-economy-netanyahu-eisenkot-united-states-trump": {
+      "keys": [
+        "url:https://foreignpolicy.com/2026/11/10/israel-election-economy-netanyahu-eisenkot-united-states-trump",
+        "pid:rss:https://foreignpolicy.com/?p=1245707",
+        "syn:the-economic-impact-of-israel-s-election|voice:adam-tooze|2026-11-10",
+        "fp:foreignpolicy.com|the-economic-impact-of-israel-s-election|2026-11-10"
+      ],
+      "voice_ids": [
+        "adam-tooze"
+      ],
+      "first_seen": "2026-11-10T21:23:41Z",
+      "published_at": "2026-11-10T15:23:35Z",
+      "title": "The Economic Impact of Israel’s Election",
+      "url": "https://foreignpolicy.com/2026/11/10/israel-election-economy-netanyahu-eisenkot-united-states-trump/",
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
@@ -220,23 +237,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html",
-        "pid:rss:https://marginalrevolution.com/?p=94083",
-        "syn:is-who-s-on-first-funny|voice:tyler-cowen|2026-10-27",
-        "fp:marginalrevolution.com|is-who-s-on-first-funny|2026-10-27"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-27T20:11:49Z",
-      "published_at": "2026-10-27T04:32:03Z",
-      "title": "Is “Who’s on First?” funny?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/is-whos-on-first-funny.html?utm_source=rss&utm_medium=rss&utm_campaign=is-whos-on-first-funny",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html",
@@ -270,23 +270,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html?utm_source=rss&utm_medium=rss&utm_campaign=my-design-conversation-with-roman-mars",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/nyt-debate-on-the-rules-for-ai-companies.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/nyt-debate-on-the-rules-for-ai-companies.html",
-        "pid:rss:https://marginalrevolution.com/?p=94087",
-        "syn:nyt-debate-on-the-rules-for-ai-companies|voice:tyler-cowen|2026-10-27",
-        "fp:marginalrevolution.com|nyt-debate-on-the-rules-for-ai-companies|2026-10-27"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-27T20:11:49Z",
-      "published_at": "2026-10-27T08:17:58Z",
-      "title": "NYT debate on the rules for AI companies",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/nyt-debate-on-the-rules-for-ai-companies.html?utm_source=rss&utm_medium=rss&utm_campaign=nyt-debate-on-the-rules-for-ai-companies",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html": {
       "keys": [
@@ -355,23 +338,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-576",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-592.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-592.html",
-        "pid:rss:https://marginalrevolution.com/?p=94086",
-        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-10-27",
-        "fp:marginalrevolution.com|tuesday-assorted-links|2026-10-27"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-27T20:11:49Z",
-      "published_at": "2026-10-27T16:33:54Z",
-      "title": "Tuesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/tuesday-assorted-links-592.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-592",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-28T20:29:07Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-577.html": {
       "keys": [
@@ -746,29 +712,6 @@
       "publication": "National Post",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
-    "url:https://nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html",
-        "pid:rss:https://www.nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html",
-        "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-27",
-        "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-28",
-        "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-29",
-        "syn:nate-silver-on-what-the-polls-say-and-what-his-gut-s|voice:ezra-klein|2026-10-30",
-        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-27",
-        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-28",
-        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-29",
-        "fp:nytimes.com|nate-silver-on-what-the-polls-say-and-what-his-gut-s|2026-10-30"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-10-27T20:11:49Z",
-      "published_at": "2026-10-27T19:56:16Z",
-      "title": "Nate Silver on What the Polls Say — and What His Gut’s Telling Him",
-      "url": "https://www.nytimes.com/2026/10/27/opinion/ezra-klein-podcast-nate-silver.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-27T20:11:49Z"
-    },
     "url:https://nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html": {
       "keys": [
         "url:https://nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
@@ -836,6 +779,23 @@
       "published_at": "2026-11-08T11:00:21Z",
       "title": "A Stake Through the Heart of Trump’s Red Map",
       "url": "https://www.nytimes.com/2026/11/08/opinion/midterms-democrats-schumer.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html",
+        "pid:rss:https://www.nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html",
+        "syn:the-path-to-a-democratic-supermajority|voice:ezra-klein|2026-11-10",
+        "fp:nytimes.com|the-path-to-a-democratic-supermajority|2026-11-10"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-11-10T21:23:41Z",
+      "published_at": "2026-11-10T18:40:49Z",
+      "title": "The Path to a Democratic Supermajority",
+      "url": "https://www.nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": null
     },
