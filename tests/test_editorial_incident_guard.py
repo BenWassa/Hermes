@@ -78,7 +78,9 @@ def test_no_alternative_source_does_not_infer_contamination():
 
 def test_non_incident_overlap_is_not_enough():
     c = card(headline="Four teens killed in Guelph crash; city debates transport policy")
+    c["sub"] = "Traffic safety under discussion"
     c["summary"] = "Traffic safety will be discussed by councillors."
+    c["analysis"] = None
     assert apply(c, [CRASH, SIU])["repaired"] == 0
 
 
