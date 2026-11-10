@@ -52,3 +52,12 @@ A major factual political/election claim in the Daily should not be asserted wit
 
 ## Ownership / implementation boundaries
 Proposed branch `fix/editorial-high-impact-facts`. This issue owns **fact assertions**, not links or publication timestamps (separate metadata integrity issue), Canada source intake ([#94](https://github.com/BenWassa/Hermes/issues/94)), Toronto-section classification ([#83](https://github.com/BenWassa/Hermes/issues/83)), provider outage recovery ([#82](https://github.com/BenWassa/Hermes/issues/82)) or Sports. Coordinate `src/curate.py` changes with #94 and metadata integrity work; keep source identity as authority. [#72](https://github.com/BenWassa/Hermes/issues/72) / [draft PR #79](https://github.com/BenWassa/Hermes/pull/79) add evaluation cases but cannot stand in for this production fix. No model migration until [#73](https://github.com/BenWassa/Hermes/issues/73) approved. **Owner decision pending: do not begin implementation automatically.**
+
+
+## 2026-11-10 focused implementation: explicit officeholder role mismatch
+
+- Scope: only the selected article's **own** source title and public description explicitly saying named "current", "sitting" or "incumbent" president/premier/governor/prime minister, versus model output explicitly saying "former"/"ex-" with the *same complete named subject*. This is a supported contradiction; withhold only that sentence, falling back to the source title when no headline/summary remains.
+- Does not assume an unqualified "President X" is necessarily current; refuses unknown subject/coreference, historical time inference, external facts or conflicting candidates. No second model/provider call.
+- Frozen direct same-source tests for wrong-role headline+summary, a different former officeholder, bare title ambiguity, and unmatched article URL. CI and review required.
+- November 2 Guardian former-president example remains **not automatically corrected** without source metadata explicitly identifying current status. A broader officeholder authority/leader validation is **blocked pending demonstrable, cutoff-qualified and rights-safe evidence**. Issue #95 remains open.
+- Reuse existing guard and spec; do not create independent political fact checkers or close issue before post-merge editorial observation.
