@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-10T21:23:41Z",
-  "last_reconcile_at": "2026-11-09T23:50:10Z",
+  "updated_at": "2026-11-11T22:11:55Z",
+  "last_reconcile_at": "2026-11-11T22:11:55Z",
   "last_roundup": {
     "period_id": "2026-11-08",
     "cutoff": "2026-11-08T22:00:00Z",
@@ -101,23 +101,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-hacking-risks.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-hacking-risks.html",
-        "pid:rss:https://marginalrevolution.com/?p=94091",
-        "syn:ai-hacking-risks|voice:tyler-cowen|2026-10-28",
-        "fp:marginalrevolution.com|ai-hacking-risks|2026-10-28"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-28T20:29:07Z",
-      "published_at": "2026-10-28T04:38:22Z",
-      "title": "AI hacking risks",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/ai-hacking-risks.html?utm_source=rss&utm_medium=rss&utm_campaign=ai-hacking-risks",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-28T20:29:07Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html",
@@ -186,23 +169,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman.html",
-        "pid:rss:https://marginalrevolution.com/?p=94099",
-        "syn:errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman|voice:tyler-cowen|2026-10-28",
-        "fp:marginalrevolution.com|errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman|2026-10-28"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-28T20:29:07Z",
-      "published_at": "2026-10-28T18:56:51Z",
-      "title": "Errors in the research of Emmanuel Saez and Gabriel Zucman",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman.html?utm_source=rss&utm_medium=rss&utm_campaign=errors-in-the-research-of-emmanuel-saez-and-gabriel-zucman",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html",
@@ -219,23 +185,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-597",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-is-ai-shaping-economic-research.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/how-is-ai-shaping-economic-research.html",
-        "pid:rss:https://marginalrevolution.com/?p=94092",
-        "syn:how-is-ai-shaping-economic-research|voice:tyler-cowen|2026-10-28",
-        "fp:marginalrevolution.com|how-is-ai-shaping-economic-research|2026-10-28"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-28T20:29:07Z",
-      "published_at": "2026-10-28T18:52:56Z",
-      "title": "How is AI shaping economic research?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/how-is-ai-shaping-economic-research.html?utm_source=rss&utm_medium=rss&utm_campaign=how-is-ai-shaping-economic-research",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html": {
       "keys": [
@@ -338,23 +287,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-576",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-577.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-577.html",
-        "pid:rss:https://marginalrevolution.com/?p=94090",
-        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-10-28",
-        "fp:marginalrevolution.com|wednesday-assorted-links|2026-10-28"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-28T20:29:07Z",
-      "published_at": "2026-10-28T15:55:58Z",
-      "title": "Wednesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/wednesday-assorted-links-577.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-577",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html": {
       "keys": [
@@ -787,7 +719,9 @@
         "url:https://nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html",
         "pid:rss:https://www.nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html",
         "syn:the-path-to-a-democratic-supermajority|voice:ezra-klein|2026-11-10",
-        "fp:nytimes.com|the-path-to-a-democratic-supermajority|2026-11-10"
+        "syn:the-path-to-a-democratic-supermajority|voice:ezra-klein|2026-11-11",
+        "fp:nytimes.com|the-path-to-a-democratic-supermajority|2026-11-10",
+        "fp:nytimes.com|the-path-to-a-democratic-supermajority|2026-11-11"
       ],
       "voice_ids": [
         "ezra-klein"
