@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-11T22:11:55Z",
+  "updated_at": "2026-11-12T21:53:59Z",
   "last_reconcile_at": "2026-11-11T22:11:55Z",
   "last_roundup": {
     "period_id": "2026-11-08",
@@ -84,23 +84,6 @@
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-dominates-human-peer-reviews.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/ai-dominates-human-peer-reviews.html",
-        "pid:rss:https://marginalrevolution.com/?p=94102",
-        "syn:ai-dominates-human-peer-reviews|voice:tyler-cowen|2026-10-29",
-        "fp:marginalrevolution.com|ai-dominates-human-peer-reviews|2026-10-29"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-29T20:29:21Z",
-      "published_at": "2026-10-29T07:13:03Z",
-      "title": "AI dominates human peer reviews",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/ai-dominates-human-peer-reviews.html?utm_source=rss&utm_medium=rss&utm_campaign=ai-dominates-human-peer-reviews",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html",
@@ -134,23 +117,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/are-there-too-many-misdemeanor-convictions.html?utm_source=rss&utm_medium=rss&utm_campaign=are-there-too-many-misdemeanor-convictions",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/can-artificial-intelligence-forecast-treatment-effects-in-economics.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/can-artificial-intelligence-forecast-treatment-effects-in-economics.html",
-        "pid:rss:https://marginalrevolution.com/?p=94101",
-        "syn:can-artificial-intelligence-forecast-treatment-effects-in-economics|voice:tyler-cowen|2026-10-29",
-        "fp:marginalrevolution.com|can-artificial-intelligence-forecast-treatment-effects-in-economics|2026-10-29"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-29T20:29:21Z",
-      "published_at": "2026-10-29T18:02:03Z",
-      "title": "Can Artificial Intelligence Forecast Treatment Effects in Economics?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/can-artificial-intelligence-forecast-treatment-effects-in-economics.html?utm_source=rss&utm_medium=rss&utm_campaign=can-artificial-intelligence-forecast-treatment-effects-in-economics",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/chronicle-of-higher-education-interviews-me-on-ai-and-education.html": {
       "keys": [
@@ -203,23 +169,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html",
-        "pid:rss:https://marginalrevolution.com/?p=94015",
-        "syn:my-design-conversation-with-roman-mars|voice:tyler-cowen|2026-10-29",
-        "fp:marginalrevolution.com|my-design-conversation-with-roman-mars|2026-10-29"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-29T20:29:21Z",
-      "published_at": "2026-10-29T04:41:19Z",
-      "title": "My design Conversation with Roman Mars",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-design-conversation-with-roman-mars.html?utm_source=rss&utm_medium=rss&utm_campaign=my-design-conversation-with-roman-mars",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html",
@@ -270,23 +219,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-unintended-consequences-of-academic-leniency.html?utm_source=rss&utm_medium=rss&utm_campaign=the-unintended-consequences-of-academic-leniency",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html",
-        "pid:rss:https://marginalrevolution.com/?p=94100",
-        "syn:thursday-assorted-links|voice:tyler-cowen|2026-10-29",
-        "fp:marginalrevolution.com|thursday-assorted-links|2026-10-29"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-29T20:29:21Z",
-      "published_at": "2026-10-29T16:19:21Z",
-      "title": "Thursday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/thursday-assorted-links-576.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-576",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html": {
       "keys": [
@@ -849,21 +781,21 @@
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": null
     },
-    "url:https://theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics": {
+    "url:https://theglobeandmail.com/opinion/article-the-real-immigration-fib-budget-temporary-residents": {
       "keys": [
-        "url:https://theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics",
-        "syn:did-the-b-c-conservatives-election-win-run-against-the-federal-tide|voice:andrew-coyne|2026-10-28",
-        "fp:theglobeandmail.com|did-the-b-c-conservatives-election-win-run-against-the-federal-tide|2026-10-28"
+        "url:https://theglobeandmail.com/opinion/article-the-real-immigration-fib-budget-temporary-residents",
+        "syn:the-real-immigration-fib-far-fewer-migrants-are-entering-canada-than-official|voice:andrew-coyne|2026-11-12",
+        "fp:theglobeandmail.com|the-real-immigration-fib-far-fewer-migrants-are-entering-canada-than-official|2026-11-12"
       ],
       "voice_ids": [
         "andrew-coyne"
       ],
-      "first_seen": "2026-10-29T20:29:21Z",
-      "published_at": "2026-10-28T00:00:00Z",
-      "title": "Did the B.C. Conservatives’ election win run against the federal tide, or with it?",
-      "url": "https://www.theglobeandmail.com/opinion/article-bc-conservative-election-win-federal-politics/",
+      "first_seen": "2026-11-12T21:53:59Z",
+      "published_at": "2026-11-12T00:00:00Z",
+      "title": "The real immigration ‘fib’? Far fewer migrants are entering Canada than official figures say",
+      "url": "https://www.theglobeandmail.com/opinion/article-the-real-immigration-fib-budget-temporary-residents/",
       "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-10-29T20:29:21Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://theglobeandmail.com/opinion/article-the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the-qa": {
       "keys": [
