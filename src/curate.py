@@ -92,7 +92,12 @@ def _client() -> genai.Client:
     key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not key:
         raise RuntimeError("GEMINI_API_KEY (or GOOGLE_API_KEY) not set")
-    return genai.Client(api_key=key)
+    # The current structured-JSON + system-instruction request requires v1beta.
+    # SDK 3 defaults to v1 and returns HTTP 400 for this instruction mode.
+    # Pass explicitly to override SDK defaults and GOOGLE_GENAI_API_VERSION.
+    return genai.Client(
+        api_key=key, http_options=types.HttpOptions(api_version="v1beta")
+    )
 
 
 def _system_instruction(today: dt.date, include_following: bool) -> str:
