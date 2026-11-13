@@ -132,3 +132,43 @@ def test_summary_with_all_sentences_contradicted_falls_back_to_source_headline()
     c, stats = guard(c, source)
     assert c["summary"] == source["title"]
     assert stats["sentences_withheld"] == 1
+
+
+def test_explicit_same_source_incumbent_role_blocks_incorrect_former_label():
+    source = candidate(
+        "Current US president Donald Trump faces midterm challenge",
+        "The sitting president is campaigning before the midterms.",
+    )
+    c = card(headline="Former US president Donald Trump faces midterm challenge",
+             summary="Former President Donald Trump faces a challenge. Voters are preparing for midterms.")
+    c, stats = guard(c, source)
+    assert c["headline"] == source["title"]
+    assert c["summary"] == "Voters are preparing for midterms."
+    assert stats["flagged"] == 1
+    assert stats["sentences_withheld"] == 2
+
+
+def test_former_other_officeholder_not_conflated_with_explicit_current_subject():
+    source = candidate("Incumbent president Donald Trump addresses the nation",
+                       "Former president Barack Obama also spoke.")
+    c = card(summary="Former president Barack Obama issued a statement.")
+    c, stats = guard(c, source)
+    assert stats["flagged"] == 0
+    assert c["summary"] == "Former president Barack Obama issued a statement."
+
+
+def test_bare_president_description_abstains_from_role_assumption():
+    source = candidate("President Donald Trump remembered for past reform", "")
+    c = card(summary="Former President Donald Trump is recalled in historical context.")
+    c, stats = guard(c, source)
+    assert stats["abstained"] == 1
+    assert c["summary"].startswith("Former President")
+
+
+def test_unmatched_source_cannot_authorize_officeholder_correction():
+    source = candidate("Current president Donald Trump addresses the nation", "")
+    c = card(summary="Former president Donald Trump addresses the nation.")
+    c["link"] = "https://example.org/unmatched"
+    c, stats = guard(c, source)
+    assert stats["flagged"] == 0
+    assert stats["abstained"] == 1
