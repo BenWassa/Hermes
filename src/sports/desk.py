@@ -83,6 +83,20 @@ def _aware_now(value: dt.datetime | None) -> dt.datetime:
     return value.astimezone(UTC)
 
 
+def sports_edition_anchor(now: dt.datetime) -> dt.datetime:
+    """Stable 05:00 Toronto editorial cutoff for a Daily's Sports desk.
+
+    An actually early manual build uses its observed time, never a future cutoff.
+    Routine 05:00+ and delayed recoveries of the *same Toronto edition date*
+    share the identical cutoff across EST/EDT and UTC date boundaries.
+    """
+    clock = _aware_now(now)
+    local_date = clock.astimezone(TORONTO).date()
+    morning = dt.datetime.combine(local_date, dt.time(5, 0), tzinfo=TORONTO)
+    target = morning.astimezone(UTC)
+    return min(clock, target)
+
+
 def _flatten_event_articles(
     grouped: dict[str, tuple[EventArticle, ...]],
 ) -> tuple[EventArticle, ...]:
@@ -99,26 +113,27 @@ def build_sports_desk(
 ) -> SportsBuildResult:
     """Build one finite Sports payload and inspectable budget metrics."""
     now_utc = _aware_now(now)
+    edition_cutoff = sports_edition_anchor(now_utc)
     structured_http = CountingSession(structured_session)
     news_http = CountingSession(news_session)
 
     teams = build_toronto_snapshots(now=now_utc, session=structured_http)
-    events = build_major_events(now=now_utc, session=structured_http)
+    events = build_major_events(now=edition_cutoff, session=structured_http)
 
     lookback = dt.timedelta(hours=config.SPORTS_NEWS_LOOKBACK_HOURS)
-    since = now_utc - lookback
+    since = edition_cutoff - lookback
     raw_team_news = fetch_guardian_team_candidates(
         since=since,
-        until=now_utc,
+        until=edition_cutoff,
         session=news_http,
     )
     qualified_team_news = qualify(raw_team_news)
-    team_winners = select_team_winners(raw_team_news, now=now_utc)
+    team_winners = select_team_winners(raw_team_news, now=edition_cutoff)
 
     event_groups = fetch_guardian_event_articles(
-        on_date=now_utc.astimezone(TORONTO).date(),
+        on_date=edition_cutoff.astimezone(TORONTO).date(),
         since=since,
-        until=now_utc,
+        until=edition_cutoff,
         session=news_http,
     )
     event_articles = _flatten_event_articles(event_groups)
@@ -142,6 +157,10 @@ def build_sports_desk(
     )
     metrics.update(
         {
+            "edition_date_toronto": edition_cutoff.astimezone(TORONTO).date().isoformat(),
+            "edition_time_anchor_utc": edition_cutoff.isoformat().replace("+00:00", "Z"),
+            "team_news_horizon_since": since.isoformat().replace("+00:00", "Z"),
+            "team_news_horizon_until": edition_cutoff.isoformat().replace("+00:00", "Z"),
             "team_news_rejected": len(raw_team_news) - len(qualified_team_news),
             "event_news_selected": len(event_articles),
             "structured_requests": structured_http.total,
