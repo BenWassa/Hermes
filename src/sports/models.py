@@ -47,6 +47,10 @@ class GameSummary:
     team_score: int | None = None
     opponent_score: int | None = None
     result: str | None = None
+    # Upstream placeholder timestamps are not proof of a confirmed first pitch.
+    time_confirmed: bool = True
+    # Official game calendar date, independent of placeholder UTC clock.
+    scheduled_date: str | None = None
 
     def __post_init__(self) -> None:
         if self.start_time_utc.tzinfo is None:
@@ -61,6 +65,8 @@ class GameSummary:
             "id": self.provider_game_id,
             "start_time_utc": self.start_time_utc.astimezone(UTC).isoformat().replace("+00:00", "Z"),
             "start_time_toronto": self.start_time_toronto.isoformat(),
+            "time_confirmed": self.time_confirmed,
+            "scheduled_date": self.scheduled_date,
             "opponent": self.opponent,
             "opponent_abbreviation": self.opponent_abbreviation,
             "home_away": self.home_away,
