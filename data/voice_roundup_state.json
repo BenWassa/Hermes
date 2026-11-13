@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-12T21:53:59Z",
-  "last_reconcile_at": "2026-11-11T22:11:55Z",
+  "updated_at": "2026-11-13T21:31:18Z",
+  "last_reconcile_at": "2026-11-13T21:31:18Z",
   "last_roundup": {
     "period_id": "2026-11-08",
     "cutoff": "2026-11-08T22:00:00Z",
@@ -100,57 +100,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html?utm_source=rss&utm_medium=rss&utm_campaign=and-so-it-begins-2",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/are-there-too-many-misdemeanor-convictions.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/are-there-too-many-misdemeanor-convictions.html",
-        "pid:rss:https://marginalrevolution.com/?p=94094",
-        "syn:are-there-too-many-misdemeanor-convictions|voice:tyler-cowen|2026-10-30",
-        "fp:marginalrevolution.com|are-there-too-many-misdemeanor-convictions|2026-10-30"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-30T20:03:20Z",
-      "published_at": "2026-10-30T07:33:45Z",
-      "title": "Are there too many misdemeanor convictions?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/are-there-too-many-misdemeanor-convictions.html?utm_source=rss&utm_medium=rss&utm_campaign=are-there-too-many-misdemeanor-convictions",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/chronicle-of-higher-education-interviews-me-on-ai-and-education.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/chronicle-of-higher-education-interviews-me-on-ai-and-education.html",
-        "pid:rss:https://marginalrevolution.com/?p=94093",
-        "syn:chronicle-of-higher-education-interviews-me-on-ai-and-education|voice:tyler-cowen|2026-10-30",
-        "fp:marginalrevolution.com|chronicle-of-higher-education-interviews-me-on-ai-and-education|2026-10-30"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-30T20:03:20Z",
-      "published_at": "2026-10-30T04:32:28Z",
-      "title": "Chronicle of Higher Education interviews me on AI and education",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/chronicle-of-higher-education-interviews-me-on-ai-and-education.html?utm_source=rss&utm_medium=rss&utm_campaign=chronicle-of-higher-education-interviews-me-on-ai-and-education",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html",
-        "pid:rss:https://marginalrevolution.com/?p=94108",
-        "syn:friday-assorted-links|voice:tyler-cowen|2026-10-30",
-        "fp:marginalrevolution.com|friday-assorted-links|2026-10-30"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-30T20:03:20Z",
-      "published_at": "2026-10-30T16:16:29Z",
-      "title": "Friday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/friday-assorted-links-597.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-597",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html": {
       "keys": [
@@ -576,31 +525,14 @@
       "publication": "National Post",
       "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
-    "url:https://nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
-        "pid:rss:https://www.nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
-        "syn:elon-musk-s-endgame|voice:ezra-klein|2026-10-30",
-        "syn:what-s-driving-elon-musk|voice:ezra-klein|2026-10-30",
-        "fp:nytimes.com|elon-musk-s-endgame|2026-10-30",
-        "fp:nytimes.com|what-s-driving-elon-musk|2026-10-30"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-10-30T20:03:20Z",
-      "published_at": "2026-10-30T09:03:28Z",
-      "title": "What’s Driving Elon Musk?",
-      "url": "https://www.nytimes.com/2026/10/30/opinion/ezra-klein-podcast-quinn-slobodian.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
-    },
     "url:https://nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html": {
       "keys": [
         "url:https://nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html",
         "pid:rss:https://www.nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html",
         "syn:the-bell-tolls-for-trumpism|voice:ezra-klein|2026-11-05",
-        "fp:nytimes.com|the-bell-tolls-for-trumpism|2026-11-05"
+        "syn:the-bell-tolls-for-trumpism|voice:ezra-klein|2026-11-13",
+        "fp:nytimes.com|the-bell-tolls-for-trumpism|2026-11-05",
+        "fp:nytimes.com|the-bell-tolls-for-trumpism|2026-11-13"
       ],
       "voice_ids": [
         "ezra-klein"
@@ -665,6 +597,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": null
     },
+    "url:https://nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html",
+        "pid:rss:https://www.nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html",
+        "syn:hasan-piker-wants-to-win|voice:ezra-klein|2026-11-13",
+        "fp:nytimes.com|hasan-piker-wants-to-win|2026-11-13"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-11-13T21:31:18Z",
+      "published_at": "2026-11-13T10:39:40Z",
+      "title": "Hasan Piker Wants to Win",
+      "url": "https://www.nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
+    },
     "url:https://persuasion.community/p/americas-test": {
       "keys": [
         "url:https://persuasion.community/p/americas-test",
@@ -696,6 +645,23 @@
       "published_at": "2026-11-08T22:20:35Z",
       "title": "The Midterms Just Made the World More Dangerous",
       "url": "https://www.persuasion.community/p/the-next-two-years-might-be-more",
+      "publication": "Persuasion",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond": {
+      "keys": [
+        "url:https://persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond",
+        "pid:rss:https://www.persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond",
+        "syn:welcoming-mike-mcfaul-and-larry-diamond-to-american-purpose|voice:francis-fukuyama|2026-11-13",
+        "fp:persuasion.community|welcoming-mike-mcfaul-and-larry-diamond-to-american-purpose|2026-11-13"
+      ],
+      "voice_ids": [
+        "francis-fukuyama"
+      ],
+      "first_seen": "2026-11-13T21:31:18Z",
+      "published_at": "2026-11-13T18:23:41Z",
+      "title": "Welcoming Mike McFaul and Larry Diamond to American Purpose",
+      "url": "https://www.persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond",
       "publication": "Persuasion",
       "first_morning_surfaced_at": null
     },
@@ -781,6 +747,22 @@
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": null
     },
+    "url:https://theglobeandmail.com/opinion/article-america-needs-to-normalize-impeachment": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-america-needs-to-normalize-impeachment",
+        "syn:america-needs-to-make-it-easier-to-remove-a-president|voice:andrew-coyne|2026-11-13",
+        "fp:theglobeandmail.com|america-needs-to-make-it-easier-to-remove-a-president|2026-11-13"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-11-13T21:31:18Z",
+      "published_at": "2026-11-13T00:00:00Z",
+      "title": "America needs to make it easier to remove a president",
+      "url": "https://www.theglobeandmail.com/opinion/article-america-needs-to-normalize-impeachment/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": null
+    },
     "url:https://theglobeandmail.com/opinion/article-the-real-immigration-fib-budget-temporary-residents": {
       "keys": [
         "url:https://theglobeandmail.com/opinion/article-the-real-immigration-fib-budget-temporary-residents",
@@ -796,22 +778,6 @@
       "url": "https://www.theglobeandmail.com/opinion/article-the-real-immigration-fib-budget-temporary-residents/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": null
-    },
-    "url:https://theglobeandmail.com/opinion/article-the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the-qa": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the-qa",
-        "syn:the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the|voice:andrew-coyne|2026-10-29",
-        "fp:theglobeandmail.com|the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the|2026-10-29"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-10-30T20:03:20Z",
-      "published_at": "2026-10-29T00:00:00Z",
-      "title": "The speech Paul St-Pierre Plamondon never gave (or at least the Q&A)",
-      "url": "https://www.theglobeandmail.com/opinion/article-the-speech-paul-st-pierre-plamondon-never-gave-or-at-least-the-qa/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": "2026-10-30T20:03:20Z"
     },
     "url:https://theglobeandmail.com/opinion/article-us-midterms-are-a-rebuke-to-the-republicans-but-not-the-wipeout-they": {
       "keys": [
