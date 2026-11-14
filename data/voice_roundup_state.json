@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-13T21:31:18Z",
+  "updated_at": "2026-11-14T20:02:31Z",
   "last_reconcile_at": "2026-11-13T21:31:18Z",
   "last_roundup": {
     "period_id": "2026-11-08",
@@ -84,107 +84,22 @@
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html": {
+    "url:https://foreignpolicy.com/2026/11/13/nvidia-spy-chips-artificial-intelligence-huang-china": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html",
-        "pid:rss:https://marginalrevolution.com/?p=94114",
-        "syn:and-so-it-begins|voice:tyler-cowen|2026-10-31",
-        "fp:marginalrevolution.com|and-so-it-begins|2026-10-31"
+        "url:https://foreignpolicy.com/2026/11/13/nvidia-spy-chips-artificial-intelligence-huang-china",
+        "pid:rss:https://foreignpolicy.com/?p=1246554",
+        "syn:nvidia-spies-and-the-art-of-economic-espionage|voice:adam-tooze|2026-11-13",
+        "fp:foreignpolicy.com|nvidia-spies-and-the-art-of-economic-espionage|2026-11-13"
       ],
       "voice_ids": [
-        "tyler-cowen"
+        "adam-tooze"
       ],
-      "first_seen": "2026-10-31T19:29:21Z",
-      "published_at": "2026-10-31T18:21:28Z",
-      "title": "And so it begins…",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/and-so-it-begins-2.html?utm_source=rss&utm_medium=rss&utm_campaign=and-so-it-begins-2",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html",
-        "pid:rss:https://marginalrevolution.com/?p=94115",
-        "syn:my-barcelona-talk|voice:tyler-cowen|2026-10-31",
-        "fp:marginalrevolution.com|my-barcelona-talk|2026-10-31"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-31T19:29:21Z",
-      "published_at": "2026-10-31T13:29:19Z",
-      "title": "My Barcelona talk",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/my-barcelona-talk.html?utm_source=rss&utm_medium=rss&utm_campaign=my-barcelona-talk",
-      "publication": "Marginal Revolution",
+      "first_seen": "2026-11-14T20:02:31Z",
+      "published_at": "2026-11-13T19:35:54Z",
+      "title": "Nvidia, Spies, and the Art of Economic Espionage",
+      "url": "https://foreignpolicy.com/2026/11/13/nvidia-spy-chips-artificial-intelligence-huang-china/",
+      "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html",
-        "pid:rss:https://marginalrevolution.com/?p=94110",
-        "syn:saturday-assorted-links|voice:tyler-cowen|2026-10-31",
-        "fp:marginalrevolution.com|saturday-assorted-links|2026-10-31"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-31T19:29:21Z",
-      "published_at": "2026-10-31T16:16:45Z",
-      "title": "Saturday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/saturday-assorted-links-584.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-584",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-pass-through-of-retail-crime.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-pass-through-of-retail-crime.html",
-        "pid:rss:https://marginalrevolution.com/?p=94107",
-        "syn:the-pass-through-of-retail-crime|voice:tyler-cowen|2026-10-31",
-        "fp:marginalrevolution.com|the-pass-through-of-retail-crime|2026-10-31"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-31T19:29:21Z",
-      "published_at": "2026-10-31T06:44:07Z",
-      "title": "The pass-through of retail crime",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-pass-through-of-retail-crime.html?utm_source=rss&utm_medium=rss&utm_campaign=the-pass-through-of-retail-crime",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-unintended-consequences-of-academic-leniency.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/the-unintended-consequences-of-academic-leniency.html",
-        "pid:rss:https://marginalrevolution.com/?p=94106",
-        "syn:the-unintended-consequences-of-academic-leniency|voice:tyler-cowen|2026-10-31",
-        "fp:marginalrevolution.com|the-unintended-consequences-of-academic-leniency|2026-10-31"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-31T19:29:21Z",
-      "published_at": "2026-10-31T04:43:23Z",
-      "title": "The unintended consequences of academic leniency",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/the-unintended-consequences-of-academic-leniency.html?utm_source=rss&utm_medium=rss&utm_campaign=the-unintended-consequences-of-academic-leniency",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-10-31T19:29:21Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html",
-        "pid:rss:https://marginalrevolution.com/?p=94116",
-        "syn:william-nordhaus-rip|voice:tyler-cowen|2026-10-31",
-        "fp:marginalrevolution.com|william-nordhaus-rip|2026-10-31"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-10-31T19:29:21Z",
-      "published_at": "2026-10-31T18:33:58Z",
-      "title": "William Nordhaus, RIP",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/10/william-nordhaus-rip.html?utm_source=rss&utm_medium=rss&utm_campaign=william-nordhaus-rip",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-economists-declining-in-status.html": {
       "keys": [
