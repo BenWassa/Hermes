@@ -68,6 +68,10 @@ archive/**          historical, read-only
 - One logical change per commit. Squash merge. Add the Co-Authored-By trailer for agent work.
 - No em dashes in anything written for Ben.
 
+## Related
+
+- PR #108 adds a `CLAUDE.md` with Claude-specific guidance. Once both are merged, decide whether `CLAUDE.md` should import this file (`@AGENTS.md`) to avoid two sources of truth.
+
 ## Studio rules
 
 Global policy (authority order, permission tiers, quality evidence) lives in the studio repo: https://github.com/BenWassa/studio. This file may be stricter, never looser.
