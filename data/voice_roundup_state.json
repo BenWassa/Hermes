@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-14T20:02:31Z",
-  "last_reconcile_at": "2026-11-13T21:31:18Z",
+  "updated_at": "2026-11-15T20:30:25Z",
+  "last_reconcile_at": "2026-11-15T20:30:25Z",
   "last_roundup": {
     "period_id": "2026-11-08",
     "cutoff": "2026-11-08T22:00:00Z",
@@ -117,23 +117,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/are-economists-declining-in-status.html?utm_source=rss&utm_medium=rss&utm_campaign=are-economists-declining-in-status",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-llms-good-or-bad-bayesians.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-llms-good-or-bad-bayesians.html",
-        "pid:rss:https://marginalrevolution.com/?p=94097",
-        "syn:are-llms-good-or-bad-bayesians|voice:tyler-cowen|2026-11-01",
-        "fp:marginalrevolution.com|are-llms-good-or-bad-bayesians|2026-11-01"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-01T19:52:16Z",
-      "published_at": "2026-11-01T04:17:10Z",
-      "title": "Are LLMs good or bad Bayesians?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/are-llms-good-or-bad-bayesians.html?utm_source=rss&utm_medium=rss&utm_campaign=are-llms-good-or-bad-bayesians",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html": {
       "keys": [
@@ -271,23 +254,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-588.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-588.html",
-        "pid:rss:https://marginalrevolution.com/?p=94095",
-        "syn:sunday-assorted-links|voice:tyler-cowen|2026-11-01",
-        "fp:marginalrevolution.com|sunday-assorted-links|2026-11-01"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-01T19:52:16Z",
-      "published_at": "2026-11-01T16:31:04Z",
-      "title": "Sunday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-588.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-588",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-tips.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-tips.html",
@@ -321,23 +287,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-election.html?utm_source=rss&utm_medium=rss&utm_campaign=the-election",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html",
-        "pid:rss:https://marginalrevolution.com/?p=94096",
-        "syn:those-new-service-sector-jobs|voice:tyler-cowen|2026-11-01",
-        "fp:marginalrevolution.com|those-new-service-sector-jobs|2026-11-01"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-01T19:52:16Z",
-      "published_at": "2026-11-01T07:55:35Z",
-      "title": "Those new service sector jobs?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/those-new-service-sector-jobs-18.html?utm_source=rss&utm_medium=rss&utm_campaign=those-new-service-sector-jobs-18",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html": {
       "keys": [
@@ -423,22 +372,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/what-drives-censorship-on-college-campuses.html?utm_source=rss&utm_medium=rss&utm_campaign=what-drives-censorship-on-college-campuses",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://nationalpost.com/opinion/conrad-black-dont-bet-against-capable-netanyahu": {
-      "keys": [
-        "url:https://nationalpost.com/opinion/conrad-black-dont-bet-against-capable-netanyahu",
-        "syn:don-t-bet-against-capable-netanyahu|voice:conrad-black|2026-10-31",
-        "fp:nationalpost.com|don-t-bet-against-capable-netanyahu|2026-10-31"
-      ],
-      "voice_ids": [
-        "conrad-black"
-      ],
-      "first_seen": "2026-11-01T19:52:16Z",
-      "published_at": "2026-10-31T00:00:00Z",
-      "title": "Don’t bet against capable Netanyahu",
-      "url": "https://nationalpost.com/opinion/conrad-black-dont-bet-against-capable-netanyahu/",
-      "publication": "National Post",
-      "first_morning_surfaced_at": "2026-11-01T19:52:16Z"
     },
     "url:https://nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html": {
       "keys": [
@@ -529,6 +462,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": null
     },
+    "url:https://nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html",
+        "pid:rss:https://www.nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html",
+        "syn:the-risk-democrats-need-to-take|voice:ezra-klein|2026-11-15",
+        "fp:nytimes.com|the-risk-democrats-need-to-take|2026-11-15"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-11-15T20:30:25Z",
+      "published_at": "2026-11-15T18:03:43Z",
+      "title": "The Risk Democrats Need to Take",
+      "url": "https://www.nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
+    },
     "url:https://persuasion.community/p/americas-test": {
       "keys": [
         "url:https://persuasion.community/p/americas-test",
@@ -596,21 +546,21 @@
       "publication": "The Atlantic",
       "first_morning_surfaced_at": null
     },
-    "url:https://theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201": {
+    "url:https://theatlantic.com/podcasts/2026/11/what-are-masculine-virtues/689379": {
       "keys": [
-        "url:https://theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201",
-        "syn:is-radicalism-the-answer|voice:david-brooks|2026-11-01",
-        "fp:theatlantic.com|is-radicalism-the-answer|2026-11-01"
+        "url:https://theatlantic.com/podcasts/2026/11/what-are-masculine-virtues/689379",
+        "syn:what-are-the-masculine-virtues|voice:david-brooks|2026-11-15",
+        "fp:theatlantic.com|what-are-the-masculine-virtues|2026-11-15"
       ],
       "voice_ids": [
         "david-brooks"
       ],
-      "first_seen": "2026-11-01T19:52:16Z",
-      "published_at": "2026-11-01T14:00:00Z",
-      "title": "Is Radicalism the Answer?",
-      "url": "https://www.theatlantic.com/podcasts/2026/11/is-radicalism-the-answer/689201/?utm_source=feed",
+      "first_seen": "2026-11-15T20:30:25Z",
+      "published_at": "2026-11-15T14:00:00Z",
+      "title": "What Are the Masculine Virtues?",
+      "url": "https://www.theatlantic.com/podcasts/2026/11/what-are-masculine-virtues/689379/?utm_source=feed",
       "publication": "The Atlantic",
-      "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://thefp.com/p/arthur-brooks-why-wont-boomers-grandparent": {
       "keys": [
