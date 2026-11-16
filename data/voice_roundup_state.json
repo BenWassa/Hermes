@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-16T02:23:15Z",
+  "updated_at": "2026-11-16T07:17:52Z",
   "last_reconcile_at": "2026-11-15T20:30:25Z",
   "last_roundup": {
     "period_id": "2026-11-15",
@@ -202,23 +202,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/my-very-good-conversation-with-richard-hanania.html?utm_source=rss&utm_medium=rss&utm_campaign=my-very-good-conversation-with-richard-hanania",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html",
-        "pid:rss:https://marginalrevolution.com/?p=93783",
-        "syn:should-you-feel-grief-for-the-dead-who-go-to-heaven|voice:tyler-cowen|2026-11-02",
-        "fp:marginalrevolution.com|should-you-feel-grief-for-the-dead-who-go-to-heaven|2026-11-02"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-02T06:51:33Z",
-      "published_at": "2026-11-02T05:24:47Z",
-      "title": "Should you feel grief for the dead who go to heaven?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/should-you-feel-grief-for-the-dead-who-go-to-heaven.html?utm_source=rss&utm_medium=rss&utm_campaign=should-you-feel-grief-for-the-dead-who-go-to-heaven",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/social-media-and-political-radicalization.html": {
       "keys": [
