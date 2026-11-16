@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-15T20:30:25Z",
+  "updated_at": "2026-11-16T02:23:15Z",
   "last_reconcile_at": "2026-11-15T20:30:25Z",
   "last_roundup": {
     "period_id": "2026-11-08",
@@ -117,23 +117,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/are-economists-declining-in-status.html?utm_source=rss&utm_medium=rss&utm_campaign=are-economists-declining-in-status",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html",
-        "pid:rss:https://marginalrevolution.com/?p=94112",
-        "syn:as-predicted-the-aca-exchanges-seem-not-to-be-stable|voice:tyler-cowen|2026-11-01",
-        "fp:marginalrevolution.com|as-predicted-the-aca-exchanges-seem-not-to-be-stable|2026-11-01"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-02T01:48:29Z",
-      "published_at": "2026-11-01T19:53:38Z",
-      "title": "As predicted, the ACA exchanges seem not to be stable",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/as-predicted-the-aca-exchanges-seem-not-to-be-stable.html?utm_source=rss&utm_medium=rss&utm_campaign=as-predicted-the-aca-exchanges-seem-not-to-be-stable",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-02T23:11:06Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/fjord-and-fatherland.html": {
       "keys": [
