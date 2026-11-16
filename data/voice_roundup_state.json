@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-16T07:17:52Z",
-  "last_reconcile_at": "2026-11-15T20:30:25Z",
+  "updated_at": "2026-11-16T23:48:55Z",
+  "last_reconcile_at": "2026-11-16T23:48:55Z",
   "last_roundup": {
     "period_id": "2026-11-15",
     "cutoff": "2026-11-15T22:00:00Z",
@@ -118,23 +118,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/fjord-and-fatherland.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/fjord-and-fatherland.html",
-        "pid:rss:https://marginalrevolution.com/?p=94120",
-        "syn:fjord-and-fatherland|voice:tyler-cowen|2026-11-02",
-        "fp:marginalrevolution.com|fjord-and-fatherland|2026-11-02"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-02T23:11:06Z",
-      "published_at": "2026-11-02T19:44:38Z",
-      "title": "*Fjord* and *Fatherland*",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/fjord-and-fatherland.html?utm_source=rss&utm_medium=rss&utm_campaign=fjord-and-fatherland",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/ireland-fact-of-the-day-8.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/ireland-fact-of-the-day-8.html",
@@ -168,23 +151,6 @@
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/love-at-first-photo.html?utm_source=rss&utm_medium=rss&utm_campaign=love-at-first-photo",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html",
-        "pid:rss:https://marginalrevolution.com/?p=94104",
-        "syn:monday-assorted-links|voice:tyler-cowen|2026-11-02",
-        "fp:marginalrevolution.com|monday-assorted-links|2026-11-02"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-02T23:11:06Z",
-      "published_at": "2026-11-02T17:13:35Z",
-      "title": "Monday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-584.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-584",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
     },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/my-very-good-conversation-with-richard-hanania.html": {
       "keys": [
@@ -433,7 +399,9 @@
         "url:https://nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html",
         "pid:rss:https://www.nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html",
         "syn:the-risk-democrats-need-to-take|voice:ezra-klein|2026-11-15",
-        "fp:nytimes.com|the-risk-democrats-need-to-take|2026-11-15"
+        "syn:the-risk-democrats-need-to-take|voice:ezra-klein|2026-11-16",
+        "fp:nytimes.com|the-risk-democrats-need-to-take|2026-11-15",
+        "fp:nytimes.com|the-risk-democrats-need-to-take|2026-11-16"
       ],
       "voice_ids": [
         "ezra-klein"
@@ -444,23 +412,6 @@
       "url": "https://www.nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": null
-    },
-    "url:https://persuasion.community/p/americas-test": {
-      "keys": [
-        "url:https://persuasion.community/p/americas-test",
-        "pid:rss:https://www.persuasion.community/p/americas-test",
-        "syn:america-s-test|voice:francis-fukuyama|2026-11-02",
-        "fp:persuasion.community|america-s-test|2026-11-02"
-      ],
-      "voice_ids": [
-        "francis-fukuyama"
-      ],
-      "first_seen": "2026-11-02T23:11:06Z",
-      "published_at": "2026-11-02T20:15:35Z",
-      "title": "America’s Test",
-      "url": "https://www.persuasion.community/p/americas-test",
-      "publication": "Persuasion",
-      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
     },
     "url:https://persuasion.community/p/the-next-two-years-might-be-more": {
       "keys": [
@@ -545,22 +496,22 @@
       "publication": "The Free Press",
       "first_morning_surfaced_at": null
     },
-    "url:https://thefp.com/p/how-to-raise-a-reader": {
+    "url:https://thefp.com/p/why-working-less-might-make-you-miserable": {
       "keys": [
-        "url:https://thefp.com/p/how-to-raise-a-reader",
-        "pid:rss:https://www.thefp.com/p/how-to-raise-a-reader",
-        "syn:arthur-brooks-how-to-raise-a-reader|voice:arthur-c-brooks|2026-11-02",
-        "fp:thefp.com|arthur-brooks-how-to-raise-a-reader|2026-11-02"
+        "url:https://thefp.com/p/why-working-less-might-make-you-miserable",
+        "pid:rss:https://www.thefp.com/p/why-working-less-might-make-you-miserable",
+        "syn:why-working-less-might-make-you-miserable|voice:arthur-c-brooks|2026-11-16",
+        "fp:thefp.com|why-working-less-might-make-you-miserable|2026-11-16"
       ],
       "voice_ids": [
         "arthur-c-brooks"
       ],
-      "first_seen": "2026-11-02T23:11:06Z",
-      "published_at": "2026-11-02T16:03:25Z",
-      "title": "Arthur Brooks: How to Raise a Reader",
-      "url": "https://www.thefp.com/p/how-to-raise-a-reader",
+      "first_seen": "2026-11-16T23:48:55Z",
+      "published_at": "2026-11-16T15:37:20Z",
+      "title": "Why Working Less Might Make You Miserable",
+      "url": "https://www.thefp.com/p/why-working-less-might-make-you-miserable",
       "publication": "The Free Press",
-      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
+      "first_morning_surfaced_at": null
     },
     "url:https://theglobeandmail.com/opinion/article-a-strange-budget-as-opaque-as-it-is-complacent": {
       "keys": [
