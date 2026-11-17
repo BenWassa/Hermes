@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-16T23:48:55Z",
+  "updated_at": "2026-11-17T23:05:30Z",
   "last_reconcile_at": "2026-11-16T23:48:55Z",
   "last_roundup": {
     "period_id": "2026-11-15",
@@ -31,24 +31,6 @@
       "url": "https://www.afterbabel.com/p/parental-consent-social-media",
       "publication": "After Babel",
       "first_morning_surfaced_at": null
-    },
-    "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-is-leaving-his-economy-remains": {
-      "keys": [
-        "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-elections-economy-europe",
-        "url:https://foreignpolicy.com/2026/11/03/serbia-vucic-is-leaving-his-economy-remains",
-        "pid:rss:https://foreignpolicy.com/?p=1245064",
-        "syn:vucic-is-leaving-his-economy-remains|voice:adam-tooze|2026-11-03",
-        "fp:foreignpolicy.com|vucic-is-leaving-his-economy-remains|2026-11-03"
-      ],
-      "voice_ids": [
-        "adam-tooze"
-      ],
-      "first_seen": "2026-11-03T21:13:40Z",
-      "published_at": "2026-11-03T09:00:37Z",
-      "title": "Vucic Is Leaving. His Economy Remains.",
-      "url": "https://foreignpolicy.com/2026/11/03/serbia-vucic-elections-economy-europe/",
-      "publication": "Foreign Policy",
-      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
     },
     "url:https://foreignpolicy.com/2026/11/06/economy-election-congress-trade-affordability-artificial-intelligence-trump-democrats": {
       "keys": [
@@ -101,40 +83,6 @@
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-economists-declining-in-status.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/are-economists-declining-in-status.html",
-        "pid:rss:https://marginalrevolution.com/?p=94123",
-        "syn:are-economists-declining-in-status|voice:tyler-cowen|2026-11-03",
-        "fp:marginalrevolution.com|are-economists-declining-in-status|2026-11-03"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-03T21:13:40Z",
-      "published_at": "2026-11-03T05:22:51Z",
-      "title": "Are economists declining in status?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/are-economists-declining-in-status.html?utm_source=rss&utm_medium=rss&utm_campaign=are-economists-declining-in-status",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/ireland-fact-of-the-day-8.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/ireland-fact-of-the-day-8.html",
-        "pid:rss:https://marginalrevolution.com/?p=94124",
-        "syn:ireland-fact-of-the-day|voice:tyler-cowen|2026-11-03",
-        "fp:marginalrevolution.com|ireland-fact-of-the-day|2026-11-03"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-03T21:13:40Z",
-      "published_at": "2026-11-03T19:26:51Z",
-      "title": "Ireland fact of the day",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/ireland-fact-of-the-day-8.html?utm_source=rss&utm_medium=rss&utm_campaign=ireland-fact-of-the-day-8",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/love-at-first-photo.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/love-at-first-photo.html",
@@ -186,23 +134,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-tips.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-tips.html",
-        "pid:rss:https://marginalrevolution.com/?p=94121",
-        "syn:the-economics-of-tips|voice:tyler-cowen|2026-11-03",
-        "fp:marginalrevolution.com|the-economics-of-tips|2026-11-03"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-03T21:13:40Z",
-      "published_at": "2026-11-03T07:58:10Z",
-      "title": "The economics of tips",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-tips.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-tips",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-03T21:13:40Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-election.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-election.html",
@@ -251,23 +182,6 @@
       "published_at": "2026-11-04T05:54:16Z",
       "title": "Trade and the end of antiquity, or did Islam serve to deglobalize the world?",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world.html?utm_source=rss&utm_medium=rss&utm_campaign=trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-593.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-593.html",
-        "pid:rss:https://marginalrevolution.com/?p=94119",
-        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-11-03",
-        "fp:marginalrevolution.com|tuesday-assorted-links|2026-11-03"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-03T21:13:40Z",
-      "published_at": "2026-11-03T17:01:23Z",
-      "title": "Tuesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-593.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-593",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
     },
@@ -410,6 +324,23 @@
       "published_at": "2026-11-15T18:03:43Z",
       "title": "The Risk Democrats Need to Take",
       "url": "https://www.nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://nytimes.com/2026/11/17/opinion/ezra-klein-podcast-rob-sand.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/11/17/opinion/ezra-klein-podcast-rob-sand.html",
+        "pid:rss:https://www.nytimes.com/2026/11/17/opinion/ezra-klein-podcast-rob-sand.html",
+        "syn:the-winning-democrat-who-wants-to-break-up-political-parties|voice:ezra-klein|2026-11-17",
+        "fp:nytimes.com|the-winning-democrat-who-wants-to-break-up-political-parties|2026-11-17"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-11-17T23:05:30Z",
+      "published_at": "2026-11-17T14:56:44Z",
+      "title": "The Winning Democrat Who Wants to Break Up Political Parties",
+      "url": "https://www.nytimes.com/2026/11/17/opinion/ezra-klein-podcast-rob-sand.html",
       "publication": "The New York Times",
       "first_morning_surfaced_at": null
     },
