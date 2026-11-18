@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-17T23:05:30Z",
-  "last_reconcile_at": "2026-11-16T23:48:55Z",
+  "updated_at": "2026-11-18T22:40:27Z",
+  "last_reconcile_at": "2026-11-18T22:40:27Z",
   "last_roundup": {
     "period_id": "2026-11-15",
     "cutoff": "2026-11-15T22:00:00Z",
@@ -134,23 +134,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-election.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-election.html",
-        "pid:rss:https://marginalrevolution.com/?p=94131",
-        "syn:the-election|voice:tyler-cowen|2026-11-04",
-        "fp:marginalrevolution.com|the-election|2026-11-04"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-04T21:27:23Z",
-      "published_at": "2026-11-04T07:41:25Z",
-      "title": "The election",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-election.html?utm_source=rss&utm_medium=rss&utm_campaign=the-election",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
-    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html",
@@ -165,57 +148,6 @@
       "published_at": "2026-11-05T17:25:46Z",
       "title": "Thursday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-577",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world.html",
-        "pid:rss:https://marginalrevolution.com/?p=94125",
-        "syn:trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize|voice:tyler-cowen|2026-11-04",
-        "fp:marginalrevolution.com|trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize|2026-11-04"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-04T21:27:23Z",
-      "published_at": "2026-11-04T05:54:16Z",
-      "title": "Trade and the end of antiquity, or did Islam serve to deglobalize the world?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world.html?utm_source=rss&utm_medium=rss&utm_campaign=trade-and-the-end-of-antiquity-or-did-islam-serve-to-deglobalize-the-world",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": "2026-11-04T21:27:23Z"
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-578.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-578.html",
-        "pid:rss:https://marginalrevolution.com/?p=94127",
-        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-11-04",
-        "fp:marginalrevolution.com|wednesday-assorted-links|2026-11-04"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-04T21:27:23Z",
-      "published_at": "2026-11-04T16:48:24Z",
-      "title": "Wednesday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-578.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-578",
-      "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/what-drives-censorship-on-college-campuses.html": {
-      "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/what-drives-censorship-on-college-campuses.html",
-        "pid:rss:https://marginalrevolution.com/?p=94130",
-        "syn:what-drives-censorship-on-college-campuses|voice:tyler-cowen|2026-11-04",
-        "fp:marginalrevolution.com|what-drives-censorship-on-college-campuses|2026-11-04"
-      ],
-      "voice_ids": [
-        "tyler-cowen"
-      ],
-      "first_seen": "2026-11-04T21:27:23Z",
-      "published_at": "2026-11-04T19:58:38Z",
-      "title": "What Drives Censorship on College Campuses?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/what-drives-censorship-on-college-campuses.html?utm_source=rss&utm_medium=rss&utm_campaign=what-drives-censorship-on-college-campuses",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -492,19 +424,19 @@
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": null
     },
-    "url:https://theglobeandmail.com/opinion/article-us-midterms-are-a-rebuke-to-the-republicans-but-not-the-wipeout-they": {
+    "url:https://theglobeandmail.com/opinion/article-too-big-to-fail-canadas-auto-industry-isnt-even-all-that-big-any-more": {
       "keys": [
-        "url:https://theglobeandmail.com/opinion/article-us-midterms-are-a-rebuke-to-the-republicans-but-not-the-wipeout-they",
-        "syn:u-s-midterms-are-a-rebuke-to-the-republicans-but-not-the|voice:andrew-coyne|2026-11-04",
-        "fp:theglobeandmail.com|u-s-midterms-are-a-rebuke-to-the-republicans-but-not-the|2026-11-04"
+        "url:https://theglobeandmail.com/opinion/article-too-big-to-fail-canadas-auto-industry-isnt-even-all-that-big-any-more",
+        "syn:too-big-to-fail-canada-s-auto-industry-isn-t-even-all|voice:andrew-coyne|2026-11-18",
+        "fp:theglobeandmail.com|too-big-to-fail-canada-s-auto-industry-isn-t-even-all|2026-11-18"
       ],
       "voice_ids": [
         "andrew-coyne"
       ],
-      "first_seen": "2026-11-04T21:27:23Z",
-      "published_at": "2026-11-04T00:00:00Z",
-      "title": "U.S. midterms are a rebuke to the Republicans, but not the wipeout they deserved",
-      "url": "https://www.theglobeandmail.com/opinion/article-us-midterms-are-a-rebuke-to-the-republicans-but-not-the-wipeout-they/",
+      "first_seen": "2026-11-18T22:40:27Z",
+      "published_at": "2026-11-18T00:00:00Z",
+      "title": "Too big to fail? Canada’s auto industry isn’t even all that big any more",
+      "url": "https://www.theglobeandmail.com/opinion/article-too-big-to-fail-canadas-auto-industry-isnt-even-all-that-big-any-more/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": null
     }
