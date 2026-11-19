@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-18T22:40:27Z",
-  "last_reconcile_at": "2026-11-18T22:40:27Z",
+  "updated_at": "2026-11-19T22:44:32Z",
+  "last_reconcile_at": "2026-11-19T22:44:32Z",
   "last_roundup": {
     "period_id": "2026-11-15",
     "cutoff": "2026-11-15T22:00:00Z",
@@ -83,91 +83,123 @@
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/love-at-first-photo.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/me-on-the-cyberattacks.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/love-at-first-photo.html",
-        "pid:rss:https://marginalrevolution.com/?p=94122",
-        "syn:love-at-first-photo|voice:tyler-cowen|2026-11-05",
-        "fp:marginalrevolution.com|love-at-first-photo|2026-11-05"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/me-on-the-cyberattacks.html",
+        "pid:rss:https://marginalrevolution.com/?p=94232",
+        "syn:me-on-the-cyberattacks|voice:tyler-cowen|2026-11-18",
+        "fp:marginalrevolution.com|me-on-the-cyberattacks|2026-11-18"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-11-05T21:32:09Z",
-      "published_at": "2026-11-05T19:55:13Z",
-      "title": "Love at first photo?",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/love-at-first-photo.html?utm_source=rss&utm_medium=rss&utm_campaign=love-at-first-photo",
+      "first_seen": "2026-11-19T22:44:32Z",
+      "published_at": "2026-11-18T06:10:57Z",
+      "title": "Me on the cyberattacks",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/me-on-the-cyberattacks.html?utm_source=rss&utm_medium=rss&utm_campaign=me-on-the-cyberattacks",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/my-very-good-conversation-with-richard-hanania.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-anthropic-ipo.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/my-very-good-conversation-with-richard-hanania.html",
-        "pid:rss:https://marginalrevolution.com/?p=94134",
-        "syn:my-very-good-conversation-with-richard-hanania|voice:tyler-cowen|2026-11-05",
-        "fp:marginalrevolution.com|my-very-good-conversation-with-richard-hanania|2026-11-05"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-anthropic-ipo.html",
+        "pid:rss:https://marginalrevolution.com/?p=94238",
+        "syn:the-anthropic-ipo|voice:tyler-cowen|2026-11-19",
+        "fp:marginalrevolution.com|the-anthropic-ipo|2026-11-19"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-11-05T21:32:09Z",
-      "published_at": "2026-11-05T05:51:48Z",
-      "title": "My very good Conversation with Richard Hanania",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/my-very-good-conversation-with-richard-hanania.html?utm_source=rss&utm_medium=rss&utm_campaign=my-very-good-conversation-with-richard-hanania",
+      "first_seen": "2026-11-19T22:44:32Z",
+      "published_at": "2026-11-19T06:40:05Z",
+      "title": "The Anthropic IPO",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-anthropic-ipo.html?utm_source=rss&utm_medium=rss&utm_campaign=the-anthropic-ipo",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/social-media-and-political-radicalization.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-investment-expensing.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/social-media-and-political-radicalization.html",
-        "pid:rss:https://marginalrevolution.com/?p=94136",
-        "syn:social-media-and-political-radicalization|voice:tyler-cowen|2026-11-05",
-        "fp:marginalrevolution.com|social-media-and-political-radicalization|2026-11-05"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-investment-expensing.html",
+        "pid:rss:https://marginalrevolution.com/?p=94236",
+        "syn:the-economics-of-investment-expensing|voice:tyler-cowen|2026-11-18",
+        "fp:marginalrevolution.com|the-economics-of-investment-expensing|2026-11-18"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-11-05T21:32:09Z",
-      "published_at": "2026-11-05T09:19:09Z",
-      "title": "Social media and political radicalization",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/social-media-and-political-radicalization.html?utm_source=rss&utm_medium=rss&utm_campaign=social-media-and-political-radicalization",
+      "first_seen": "2026-11-19T22:44:32Z",
+      "published_at": "2026-11-18T18:17:04Z",
+      "title": "The economics of investment expensing",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-investment-expensing.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-investment-expensing",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-579.html": {
       "keys": [
-        "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html",
-        "pid:rss:https://marginalrevolution.com/?p=94133",
-        "syn:thursday-assorted-links|voice:tyler-cowen|2026-11-05",
-        "fp:marginalrevolution.com|thursday-assorted-links|2026-11-05"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-579.html",
+        "pid:rss:https://marginalrevolution.com/?p=94221",
+        "syn:thursday-assorted-links|voice:tyler-cowen|2026-11-19",
+        "fp:marginalrevolution.com|thursday-assorted-links|2026-11-19"
       ],
       "voice_ids": [
         "tyler-cowen"
       ],
-      "first_seen": "2026-11-05T21:32:09Z",
-      "published_at": "2026-11-05T17:25:46Z",
+      "first_seen": "2026-11-19T22:44:32Z",
+      "published_at": "2026-11-19T17:16:30Z",
       "title": "Thursday assorted links",
-      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-577.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-577",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-579.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-579",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html": {
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/uk-productivity-update.html": {
       "keys": [
-        "url:https://nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html",
-        "pid:rss:https://www.nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html",
-        "syn:the-bell-tolls-for-trumpism|voice:ezra-klein|2026-11-05",
-        "syn:the-bell-tolls-for-trumpism|voice:ezra-klein|2026-11-13",
-        "fp:nytimes.com|the-bell-tolls-for-trumpism|2026-11-05",
-        "fp:nytimes.com|the-bell-tolls-for-trumpism|2026-11-13"
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/uk-productivity-update.html",
+        "pid:rss:https://marginalrevolution.com/?p=94239",
+        "syn:uk-productivity-update|voice:tyler-cowen|2026-11-18",
+        "fp:marginalrevolution.com|uk-productivity-update|2026-11-18"
       ],
       "voice_ids": [
-        "ezra-klein"
+        "tyler-cowen"
       ],
-      "first_seen": "2026-11-05T21:32:09Z",
-      "published_at": "2026-11-05T11:04:32Z",
-      "title": "The Bell Tolls for Trumpism",
-      "url": "https://www.nytimes.com/2026/11/04/opinion/ezra-klein-podcast-aaron-retica-midterm-2026.html",
-      "publication": "The New York Times",
+      "first_seen": "2026-11-19T22:44:32Z",
+      "published_at": "2026-11-18T18:53:56Z",
+      "title": "UK productivity update",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/uk-productivity-update.html?utm_source=rss&utm_medium=rss&utm_campaign=uk-productivity-update",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-580.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-580.html",
+        "pid:rss:https://marginalrevolution.com/?p=94226",
+        "syn:wednesday-assorted-links|voice:tyler-cowen|2026-11-18",
+        "fp:marginalrevolution.com|wednesday-assorted-links|2026-11-18"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-19T22:44:32Z",
+      "published_at": "2026-11-18T16:41:46Z",
+      "title": "Wednesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-580.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-580",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/will-baird-book-maven-from-my-email.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/will-baird-book-maven-from-my-email.html",
+        "pid:rss:https://marginalrevolution.com/?p=94237",
+        "syn:will-baird-book-maven-from-my-email|voice:tyler-cowen|2026-11-19",
+        "fp:marginalrevolution.com|will-baird-book-maven-from-my-email|2026-11-19"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-19T22:44:32Z",
+      "published_at": "2026-11-19T06:02:15Z",
+      "title": "Will Baird, book maven (from my email)",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/will-baird-book-maven-from-my-email.html?utm_source=rss&utm_medium=rss&utm_campaign=will-baird-book-maven-from-my-email",
+      "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
     "url:https://nytimes.com/2026/11/07/opinion/ezra-klein-podcast-michelle-goldberg.html": {
