@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-19T22:44:32Z",
+  "updated_at": "2026-11-20T22:19:01Z",
   "last_reconcile_at": "2026-11-19T22:44:32Z",
   "last_roundup": {
     "period_id": "2026-11-15",
@@ -30,23 +30,6 @@
       "title": "Why Parental Consent Policies for Social Media Do Not Help Families",
       "url": "https://www.afterbabel.com/p/parental-consent-social-media",
       "publication": "After Babel",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://foreignpolicy.com/2026/11/06/economy-election-congress-trade-affordability-artificial-intelligence-trump-democrats": {
-      "keys": [
-        "url:https://foreignpolicy.com/2026/11/06/economy-election-congress-trade-affordability-artificial-intelligence-trump-democrats",
-        "pid:rss:https://foreignpolicy.com/?p=1245550",
-        "syn:do-the-democrats-have-a-cohesive-economic-plan|voice:adam-tooze|2026-11-06",
-        "fp:foreignpolicy.com|do-the-democrats-have-a-cohesive-economic-plan|2026-11-06"
-      ],
-      "voice_ids": [
-        "adam-tooze"
-      ],
-      "first_seen": "2026-11-06T21:00:20Z",
-      "published_at": "2026-11-06T17:41:27Z",
-      "title": "Do the Democrats Have a Cohesive Economic Plan?",
-      "url": "https://foreignpolicy.com/2026/11/06/economy-election-congress-trade-affordability-artificial-intelligence-trump-democrats/",
-      "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
     "url:https://foreignpolicy.com/2026/11/10/israel-election-economy-netanyahu-eisenkot-united-states-trump": {
@@ -83,6 +66,40 @@
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/ais-vs-humans-in-economics-papers.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/ais-vs-humans-in-economics-papers.html",
+        "pid:rss:https://marginalrevolution.com/?p=94244",
+        "syn:ais-vs-humans-in-economics-papers|voice:tyler-cowen|2026-11-20",
+        "fp:marginalrevolution.com|ais-vs-humans-in-economics-papers|2026-11-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-20T22:19:01Z",
+      "published_at": "2026-11-20T05:53:10Z",
+      "title": "AIs vs. humans in economics papers",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/ais-vs-humans-in-economics-papers.html?utm_source=rss&utm_medium=rss&utm_campaign=ais-vs-humans-in-economics-papers",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-600.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-600.html",
+        "pid:rss:https://marginalrevolution.com/?p=94225",
+        "syn:friday-assorted-links|voice:tyler-cowen|2026-11-20",
+        "fp:marginalrevolution.com|friday-assorted-links|2026-11-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-20T22:19:01Z",
+      "published_at": "2026-11-20T15:26:56Z",
+      "title": "Friday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-600.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-600",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/me-on-the-cyberattacks.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/me-on-the-cyberattacks.html",
@@ -97,6 +114,23 @@
       "published_at": "2026-11-18T06:10:57Z",
       "title": "Me on the cyberattacks",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/me-on-the-cyberattacks.html?utm_source=rss&utm_medium=rss&utm_campaign=me-on-the-cyberattacks",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/phonics-based-instruction-and-student-achievement.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/phonics-based-instruction-and-student-achievement.html",
+        "pid:rss:https://marginalrevolution.com/?p=94230",
+        "syn:phonics-based-instruction-and-student-achievement|voice:tyler-cowen|2026-11-20",
+        "fp:marginalrevolution.com|phonics-based-instruction-and-student-achievement|2026-11-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-20T22:19:01Z",
+      "published_at": "2026-11-20T08:00:04Z",
+      "title": "Phonics-based Instruction and Student Achievement",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/phonics-based-instruction-and-student-achievement.html?utm_source=rss&utm_medium=rss&utm_campaign=phonics-based-instruction-and-student-achievement",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -182,6 +216,23 @@
       "published_at": "2026-11-18T16:41:46Z",
       "title": "Wednesday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/wednesday-assorted-links-580.html?utm_source=rss&utm_medium=rss&utm_campaign=wednesday-assorted-links-580",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/what-should-i-ask-walter-isaacson.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/what-should-i-ask-walter-isaacson.html",
+        "pid:rss:https://marginalrevolution.com/?p=94231",
+        "syn:what-should-i-ask-walter-isaacson|voice:tyler-cowen|2026-11-20",
+        "fp:marginalrevolution.com|what-should-i-ask-walter-isaacson|2026-11-20"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-20T22:19:01Z",
+      "published_at": "2026-11-20T18:44:40Z",
+      "title": "What should I ask Walter Isaacson?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/what-should-i-ask-walter-isaacson.html?utm_source=rss&utm_medium=rss&utm_campaign=what-should-i-ask-walter-isaacson",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -308,6 +359,23 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": null
     },
+    "url:https://nytimes.com/2026/11/20/opinion/ezra-klein-podcast-robert-garcia.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/11/20/opinion/ezra-klein-podcast-robert-garcia.html",
+        "pid:rss:https://www.nytimes.com/2026/11/20/opinion/ezra-klein-podcast-robert-garcia.html",
+        "syn:how-do-you-investigate-a-president-this-corrupt|voice:ezra-klein|2026-11-20",
+        "fp:nytimes.com|how-do-you-investigate-a-president-this-corrupt|2026-11-20"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-11-20T22:19:01Z",
+      "published_at": "2026-11-20T21:32:33Z",
+      "title": "How Do You Investigate a President This Corrupt?",
+      "url": "https://www.nytimes.com/2026/11/20/opinion/ezra-klein-podcast-robert-garcia.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
+    },
     "url:https://persuasion.community/p/the-next-two-years-might-be-more": {
       "keys": [
         "url:https://persuasion.community/p/the-next-two-years-might-be-more",
@@ -408,22 +476,6 @@
       "publication": "The Free Press",
       "first_morning_surfaced_at": null
     },
-    "url:https://theglobeandmail.com/opinion/article-a-strange-budget-as-opaque-as-it-is-complacent": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-a-strange-budget-as-opaque-as-it-is-complacent",
-        "syn:budget-2026-a-strange-budget-as-opaque-as-it-is-complacent|voice:andrew-coyne|2026-11-06",
-        "fp:theglobeandmail.com|budget-2026-a-strange-budget-as-opaque-as-it-is-complacent|2026-11-06"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-11-06T21:00:20Z",
-      "published_at": "2026-11-06T00:00:00Z",
-      "title": "Budget 2026: A strange budget, as opaque as it is complacent",
-      "url": "https://www.theglobeandmail.com/opinion/article-a-strange-budget-as-opaque-as-it-is-complacent/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": null
-    },
     "url:https://theglobeandmail.com/opinion/article-america-needs-to-normalize-impeachment": {
       "keys": [
         "url:https://theglobeandmail.com/opinion/article-america-needs-to-normalize-impeachment",
@@ -437,6 +489,22 @@
       "published_at": "2026-11-13T00:00:00Z",
       "title": "America needs to make it easier to remove a president",
       "url": "https://www.theglobeandmail.com/opinion/article-america-needs-to-normalize-impeachment/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://theglobeandmail.com/opinion/article-on-trade-with-china-where-do-you-draw-the-line-and-how": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-on-trade-with-china-where-do-you-draw-the-line-and-how",
+        "syn:on-trade-with-china-where-do-you-draw-the-line-and-how|voice:andrew-coyne|2026-11-20",
+        "fp:theglobeandmail.com|on-trade-with-china-where-do-you-draw-the-line-and-how|2026-11-20"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-11-20T22:19:01Z",
+      "published_at": "2026-11-20T00:00:00Z",
+      "title": "On trade with China, where do you draw the line? And how?",
+      "url": "https://www.theglobeandmail.com/opinion/article-on-trade-with-china-where-do-you-draw-the-line-and-how/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": null
     },
