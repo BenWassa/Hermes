@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-20T22:19:01Z",
-  "last_reconcile_at": "2026-11-19T22:44:32Z",
+  "updated_at": "2026-11-21T21:01:43Z",
+  "last_reconcile_at": "2026-11-21T21:01:43Z",
   "last_roundup": {
     "period_id": "2026-11-15",
     "cutoff": "2026-11-15T22:00:00Z",
@@ -66,6 +66,23 @@
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/a-simple-observation.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/a-simple-observation.html",
+        "pid:rss:https://marginalrevolution.com/?p=94253",
+        "syn:a-simple-observation|voice:tyler-cowen|2026-11-21",
+        "fp:marginalrevolution.com|a-simple-observation|2026-11-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-21T21:01:43Z",
+      "published_at": "2026-11-21T15:12:31Z",
+      "title": "A simple observation",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/a-simple-observation.html?utm_source=rss&utm_medium=rss&utm_campaign=a-simple-observation",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/ais-vs-humans-in-economics-papers.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/ais-vs-humans-in-economics-papers.html",
@@ -80,6 +97,23 @@
       "published_at": "2026-11-20T05:53:10Z",
       "title": "AIs vs. humans in economics papers",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/ais-vs-humans-in-economics-papers.html?utm_source=rss&utm_medium=rss&utm_campaign=ais-vs-humans-in-economics-papers",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/emergent-ventures-60th-cohort.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/emergent-ventures-60th-cohort.html",
+        "pid:rss:https://marginalrevolution.com/?p=94223",
+        "syn:emergent-ventures-60th-cohort|voice:tyler-cowen|2026-11-21",
+        "fp:marginalrevolution.com|emergent-ventures-60th-cohort|2026-11-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-21T21:01:43Z",
+      "published_at": "2026-11-21T06:13:27Z",
+      "title": "Emergent Ventures, 60th cohort",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/emergent-ventures-60th-cohort.html?utm_source=rss&utm_medium=rss&utm_campaign=emergent-ventures-60th-cohort",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -117,6 +151,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/paul-litvaks-evidence-guide.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/paul-litvaks-evidence-guide.html",
+        "pid:rss:https://marginalrevolution.com/?p=94251",
+        "syn:paul-litvak-s-evidence-guide|voice:tyler-cowen|2026-11-21",
+        "fp:marginalrevolution.com|paul-litvak-s-evidence-guide|2026-11-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-21T21:01:43Z",
+      "published_at": "2026-11-21T11:58:56Z",
+      "title": "Paul Litvak’s Evidence Guide",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/paul-litvaks-evidence-guide.html?utm_source=rss&utm_medium=rss&utm_campaign=paul-litvaks-evidence-guide",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/phonics-based-instruction-and-student-achievement.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/phonics-based-instruction-and-student-achievement.html",
@@ -131,6 +182,23 @@
       "published_at": "2026-11-20T08:00:04Z",
       "title": "Phonics-based Instruction and Student Achievement",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/phonics-based-instruction-and-student-achievement.html?utm_source=rss&utm_medium=rss&utm_campaign=phonics-based-instruction-and-student-achievement",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/saturday-assorted-links-587.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/saturday-assorted-links-587.html",
+        "pid:rss:https://marginalrevolution.com/?p=94241",
+        "syn:saturday-assorted-links|voice:tyler-cowen|2026-11-21",
+        "fp:marginalrevolution.com|saturday-assorted-links|2026-11-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-21T21:01:43Z",
+      "published_at": "2026-11-21T16:41:52Z",
+      "title": "Saturday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/saturday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-587",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -165,6 +233,23 @@
       "published_at": "2026-11-18T18:17:04Z",
       "title": "The economics of investment expensing",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-economics-of-investment-expensing.html?utm_source=rss&utm_medium=rss&utm_campaign=the-economics-of-investment-expensing",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-great-enrichment.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-great-enrichment.html",
+        "pid:rss:https://marginalrevolution.com/?p=94234",
+        "syn:the-great-enrichment|voice:tyler-cowen|2026-11-21",
+        "fp:marginalrevolution.com|the-great-enrichment|2026-11-21"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-21T21:01:43Z",
+      "published_at": "2026-11-21T07:25:41Z",
+      "title": "*The Great Enrichment*",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-great-enrichment.html?utm_source=rss&utm_medium=rss&utm_campaign=the-great-enrichment",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -251,23 +336,6 @@
       "title": "Will Baird, book maven (from my email)",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/will-baird-book-maven-from-my-email.html?utm_source=rss&utm_medium=rss&utm_campaign=will-baird-book-maven-from-my-email",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://nytimes.com/2026/11/07/opinion/ezra-klein-podcast-michelle-goldberg.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/11/07/opinion/ezra-klein-podcast-michelle-goldberg.html",
-        "pid:rss:https://www.nytimes.com/2026/11/07/opinion/ezra-klein-podcast-michelle-goldberg.html",
-        "syn:what-michelle-goldberg-learned-from-the-most-exciting-democrats|voice:ezra-klein|2026-11-07",
-        "fp:nytimes.com|what-michelle-goldberg-learned-from-the-most-exciting-democrats|2026-11-07"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-11-07T19:33:57Z",
-      "published_at": "2026-11-07T14:45:02Z",
-      "title": "What Michelle Goldberg Learned From the Most Exciting Democrats",
-      "url": "https://www.nytimes.com/2026/11/07/opinion/ezra-klein-podcast-michelle-goldberg.html",
-      "publication": "The New York Times",
       "first_morning_surfaced_at": null
     },
     "url:https://nytimes.com/2026/11/08/opinion/midterms-democrats-schumer.html": {
