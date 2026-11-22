@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-21T21:01:43Z",
-  "last_reconcile_at": "2026-11-21T21:01:43Z",
+  "updated_at": "2026-11-22T21:10:48Z",
+  "last_reconcile_at": "2026-11-22T21:10:48Z",
   "last_roundup": {
     "period_id": "2026-11-15",
     "cutoff": "2026-11-15T22:00:00Z",
@@ -100,6 +100,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/danish-daughters.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/danish-daughters.html",
+        "pid:rss:https://marginalrevolution.com/?p=94247",
+        "syn:danish-daughters|voice:tyler-cowen|2026-11-22",
+        "fp:marginalrevolution.com|danish-daughters|2026-11-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-22T21:10:48Z",
+      "published_at": "2026-11-22T07:40:20Z",
+      "title": "Danish daughters",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/danish-daughters.html?utm_source=rss&utm_medium=rss&utm_campaign=danish-daughters",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/emergent-ventures-60th-cohort.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/emergent-ventures-60th-cohort.html",
@@ -131,6 +148,23 @@
       "published_at": "2026-11-20T15:26:56Z",
       "title": "Friday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-600.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-600",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/increasing-pay-for-lower-wage-workers.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/increasing-pay-for-lower-wage-workers.html",
+        "pid:rss:https://marginalrevolution.com/?p=94254",
+        "syn:increasing-pay-for-lower-wage-workers|voice:tyler-cowen|2026-11-22",
+        "fp:marginalrevolution.com|increasing-pay-for-lower-wage-workers|2026-11-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-22T21:10:48Z",
+      "published_at": "2026-11-22T19:24:24Z",
+      "title": "Increasing pay for lower wage workers",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/increasing-pay-for-lower-wage-workers.html?utm_source=rss&utm_medium=rss&utm_campaign=increasing-pay-for-lower-wage-workers",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -199,6 +233,23 @@
       "published_at": "2026-11-21T16:41:52Z",
       "title": "Saturday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/saturday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=saturday-assorted-links-587",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-591.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-591.html",
+        "pid:rss:https://marginalrevolution.com/?p=94252",
+        "syn:sunday-assorted-links|voice:tyler-cowen|2026-11-22",
+        "fp:marginalrevolution.com|sunday-assorted-links|2026-11-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-22T21:10:48Z",
+      "published_at": "2026-11-22T17:31:05Z",
+      "title": "Sunday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-591.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-591",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -321,6 +372,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/will-ai-growth-reach-the-developing-world.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/will-ai-growth-reach-the-developing-world.html",
+        "pid:rss:https://marginalrevolution.com/?p=94227",
+        "syn:will-ai-growth-reach-the-developing-world|voice:tyler-cowen|2026-11-22",
+        "fp:marginalrevolution.com|will-ai-growth-reach-the-developing-world|2026-11-22"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-22T21:10:48Z",
+      "published_at": "2026-11-22T06:14:28Z",
+      "title": "Will AI Growth Reach the Developing World?",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/will-ai-growth-reach-the-developing-world.html?utm_source=rss&utm_medium=rss&utm_campaign=will-ai-growth-reach-the-developing-world",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/will-baird-book-maven-from-my-email.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/will-baird-book-maven-from-my-email.html",
@@ -336,23 +404,6 @@
       "title": "Will Baird, book maven (from my email)",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/will-baird-book-maven-from-my-email.html?utm_source=rss&utm_medium=rss&utm_campaign=will-baird-book-maven-from-my-email",
       "publication": "Marginal Revolution",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://nytimes.com/2026/11/08/opinion/midterms-democrats-schumer.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/11/08/opinion/midterms-democrats-schumer.html",
-        "pid:rss:https://www.nytimes.com/2026/11/08/opinion/midterms-democrats-schumer.html",
-        "syn:a-stake-through-the-heart-of-trump-s-red-map|voice:ezra-klein|2026-11-08",
-        "fp:nytimes.com|a-stake-through-the-heart-of-trump-s-red-map|2026-11-08"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-11-08T19:54:51Z",
-      "published_at": "2026-11-08T11:00:21Z",
-      "title": "A Stake Through the Heart of Trump’s Red Map",
-      "url": "https://www.nytimes.com/2026/11/08/opinion/midterms-democrats-schumer.html",
-      "publication": "The New York Times",
       "first_morning_surfaced_at": null
     },
     "url:https://nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html": {
@@ -478,19 +529,19 @@
       "publication": "Persuasion",
       "first_morning_surfaced_at": null
     },
-    "url:https://theatlantic.com/podcasts/2026/11/can-beauty-make-us-good/689302": {
+    "url:https://theatlantic.com/podcasts/2026/11/populist-moment-over/689507": {
       "keys": [
-        "url:https://theatlantic.com/podcasts/2026/11/can-beauty-make-us-good/689302",
-        "syn:can-beauty-make-us-good|voice:david-brooks|2026-11-08",
-        "fp:theatlantic.com|can-beauty-make-us-good|2026-11-08"
+        "url:https://theatlantic.com/podcasts/2026/11/populist-moment-over/689507",
+        "syn:is-the-populist-moment-over|voice:david-brooks|2026-11-22",
+        "fp:theatlantic.com|is-the-populist-moment-over|2026-11-22"
       ],
       "voice_ids": [
         "david-brooks"
       ],
-      "first_seen": "2026-11-08T19:54:51Z",
-      "published_at": "2026-11-08T14:00:00Z",
-      "title": "Can Beauty Make Us Good?",
-      "url": "https://www.theatlantic.com/podcasts/2026/11/can-beauty-make-us-good/689302/?utm_source=feed",
+      "first_seen": "2026-11-22T21:10:48Z",
+      "published_at": "2026-11-22T14:00:00Z",
+      "title": "Is the Populist Moment Over?",
+      "url": "https://www.theatlantic.com/podcasts/2026/11/populist-moment-over/689507/?utm_source=feed",
       "publication": "The Atlantic",
       "first_morning_surfaced_at": null
     },
