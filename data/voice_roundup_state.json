@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-23T03:06:45Z",
+  "updated_at": "2026-11-23T08:16:01Z",
   "last_reconcile_at": "2026-11-22T21:10:48Z",
   "last_roundup": {
     "period_id": "2026-11-22",
@@ -97,6 +97,23 @@
       "published_at": "2026-11-20T05:53:10Z",
       "title": "AIs vs. humans in economics papers",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/ais-vs-humans-in-economics-papers.html?utm_source=rss&utm_medium=rss&utm_campaign=ais-vs-humans-in-economics-papers",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/best-non-fiction-books-of-2026.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/best-non-fiction-books-of-2026.html",
+        "pid:rss:https://marginalrevolution.com/?p=91887",
+        "syn:best-non-fiction-books-of-2026|voice:tyler-cowen|2026-11-23",
+        "fp:marginalrevolution.com|best-non-fiction-books-of-2026|2026-11-23"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-23T08:16:01Z",
+      "published_at": "2026-11-23T06:10:57Z",
+      "title": "Best non-fiction books of 2026",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/best-non-fiction-books-of-2026.html?utm_source=rss&utm_medium=rss&utm_campaign=best-non-fiction-books-of-2026",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
