@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-22T21:10:48Z",
+  "updated_at": "2026-11-23T03:06:45Z",
   "last_reconcile_at": "2026-11-22T21:10:48Z",
   "last_roundup": {
     "period_id": "2026-11-15",
@@ -495,23 +495,6 @@
       "publication": "The New York Times",
       "first_morning_surfaced_at": null
     },
-    "url:https://persuasion.community/p/the-next-two-years-might-be-more": {
-      "keys": [
-        "url:https://persuasion.community/p/the-next-two-years-might-be-more",
-        "pid:rss:https://www.persuasion.community/p/the-next-two-years-might-be-more",
-        "syn:the-midterms-just-made-the-world-more-dangerous|voice:francis-fukuyama|2026-11-08",
-        "fp:persuasion.community|the-midterms-just-made-the-world-more-dangerous|2026-11-08"
-      ],
-      "voice_ids": [
-        "francis-fukuyama"
-      ],
-      "first_seen": "2026-11-09T01:57:37Z",
-      "published_at": "2026-11-08T22:20:35Z",
-      "title": "The Midterms Just Made the World More Dangerous",
-      "url": "https://www.persuasion.community/p/the-next-two-years-might-be-more",
-      "publication": "Persuasion",
-      "first_morning_surfaced_at": null
-    },
     "url:https://persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond": {
       "keys": [
         "url:https://persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond",
@@ -575,6 +558,23 @@
       "published_at": "2026-11-09T16:01:28Z",
       "title": "Why Won’t Boomers Grandparent?",
       "url": "https://www.thefp.com/p/arthur-brooks-why-wont-boomers-grandparent",
+      "publication": "The Free Press",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://thefp.com/p/thanksgiving-dinner-might-be-killing-family-happy-politics": {
+      "keys": [
+        "url:https://thefp.com/p/thanksgiving-dinner-might-be-killing-family-happy-politics",
+        "pid:rss:https://www.thefp.com/p/thanksgiving-dinner-might-be-killing-family-happy-politics",
+        "syn:thanksgiving-dinner-might-be-killing-you|voice:arthur-c-brooks|2026-11-22",
+        "fp:thefp.com|thanksgiving-dinner-might-be-killing-you|2026-11-22"
+      ],
+      "voice_ids": [
+        "arthur-c-brooks"
+      ],
+      "first_seen": "2026-11-23T03:06:45Z",
+      "published_at": "2026-11-22T21:34:36Z",
+      "title": "Thanksgiving Dinner Might Be Killing You",
+      "url": "https://www.thefp.com/p/thanksgiving-dinner-might-be-killing-family-happy-politics",
       "publication": "The Free Press",
       "first_morning_surfaced_at": null
     },
