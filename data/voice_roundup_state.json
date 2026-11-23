@@ -4,14 +4,14 @@
   "updated_at": "2026-11-23T03:06:45Z",
   "last_reconcile_at": "2026-11-22T21:10:48Z",
   "last_roundup": {
-    "period_id": "2026-11-15",
-    "cutoff": "2026-11-15T22:00:00Z",
-    "claimed_at": "2026-11-16T02:23:15Z",
-    "status": "notified",
+    "period_id": "2026-11-22",
+    "cutoff": "2026-11-22T22:00:00Z",
+    "claimed_at": "2026-11-23T03:06:45Z",
+    "status": "pending",
     "selection_keys": [
-      "url:https://nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html",
-      "url:https://theatlantic.com/podcasts/2026/11/what-are-masculine-virtues/689379",
-      "url:https://foreignpolicy.com/2026/11/13/nvidia-spy-chips-artificial-intelligence-huang-china"
+      "url:https://thefp.com/p/thanksgiving-dinner-might-be-killing-family-happy-politics",
+      "url:https://marginalrevolution.com/marginalrevolution/2026/11/increasing-pay-for-lower-wage-workers.html",
+      "url:https://theatlantic.com/podcasts/2026/11/populist-moment-over/689507"
     ]
   },
   "items": {
