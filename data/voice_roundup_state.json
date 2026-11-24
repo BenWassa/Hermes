@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-23T08:16:01Z",
-  "last_reconcile_at": "2026-11-22T21:10:48Z",
+  "updated_at": "2026-11-24T02:30:33Z",
+  "last_reconcile_at": "2026-11-24T02:30:33Z",
   "last_roundup": {
     "period_id": "2026-11-22",
     "cutoff": "2026-11-22T22:00:00Z",
@@ -15,23 +15,6 @@
     ]
   },
   "items": {
-    "url:https://afterbabel.com/p/parental-consent-social-media": {
-      "keys": [
-        "url:https://afterbabel.com/p/parental-consent-social-media",
-        "pid:rss:https://www.afterbabel.com/p/parental-consent-social-media",
-        "syn:why-parental-consent-policies-for-social-media-do-not-help-families|voice:jonathan-haidt|2026-11-09",
-        "fp:afterbabel.com|why-parental-consent-policies-for-social-media-do-not-help-families|2026-11-09"
-      ],
-      "voice_ids": [
-        "jonathan-haidt"
-      ],
-      "first_seen": "2026-11-09T23:50:10Z",
-      "published_at": "2026-11-09T12:03:43Z",
-      "title": "Why Parental Consent Policies for Social Media Do Not Help Families",
-      "url": "https://www.afterbabel.com/p/parental-consent-social-media",
-      "publication": "After Babel",
-      "first_morning_surfaced_at": null
-    },
     "url:https://foreignpolicy.com/2026/11/10/israel-election-economy-netanyahu-eisenkot-united-states-trump": {
       "keys": [
         "url:https://foreignpolicy.com/2026/11/10/israel-election-economy-netanyahu-eisenkot-united-states-trump",
@@ -202,6 +185,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-587.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-587.html",
+        "pid:rss:https://marginalrevolution.com/?p=94256",
+        "syn:monday-assorted-links|voice:tyler-cowen|2026-11-23",
+        "fp:marginalrevolution.com|monday-assorted-links|2026-11-23"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-24T02:30:33Z",
+      "published_at": "2026-11-23T17:01:36Z",
+      "title": "Monday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-587",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/paul-litvaks-evidence-guide.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/paul-litvaks-evidence-guide.html",
@@ -267,6 +267,23 @@
       "published_at": "2026-11-22T17:31:05Z",
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-591.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-591",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-ai-gains-that-gdp-misses.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-ai-gains-that-gdp-misses.html",
+        "pid:rss:https://marginalrevolution.com/?p=94255",
+        "syn:the-ai-gains-that-gdp-misses|voice:tyler-cowen|2026-11-23",
+        "fp:marginalrevolution.com|the-ai-gains-that-gdp-misses|2026-11-23"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-24T02:30:33Z",
+      "published_at": "2026-11-23T18:44:20Z",
+      "title": "The AI gains that gdp misses",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-ai-gains-that-gdp-misses.html?utm_source=rss&utm_medium=rss&utm_campaign=the-ai-gains-that-gdp-misses",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -561,28 +578,13 @@
       "publication": "The Atlantic",
       "first_morning_surfaced_at": null
     },
-    "url:https://thefp.com/p/arthur-brooks-why-wont-boomers-grandparent": {
-      "keys": [
-        "url:https://thefp.com/p/arthur-brooks-why-wont-boomers-grandparent",
-        "pid:rss:https://www.thefp.com/p/arthur-brooks-why-wont-boomers-grandparent",
-        "syn:why-won-t-boomers-grandparent|voice:arthur-c-brooks|2026-11-09",
-        "fp:thefp.com|why-won-t-boomers-grandparent|2026-11-09"
-      ],
-      "voice_ids": [
-        "arthur-c-brooks"
-      ],
-      "first_seen": "2026-11-09T23:50:10Z",
-      "published_at": "2026-11-09T16:01:28Z",
-      "title": "Why Won’t Boomers Grandparent?",
-      "url": "https://www.thefp.com/p/arthur-brooks-why-wont-boomers-grandparent",
-      "publication": "The Free Press",
-      "first_morning_surfaced_at": null
-    },
     "url:https://thefp.com/p/thanksgiving-dinner-might-be-killing-family-happy-politics": {
       "keys": [
         "url:https://thefp.com/p/thanksgiving-dinner-might-be-killing-family-happy-politics",
         "pid:rss:https://www.thefp.com/p/thanksgiving-dinner-might-be-killing-family-happy-politics",
+        "syn:arthur-brooks-thanksgiving-dinner-might-be-killing-you|voice:arthur-c-brooks|2026-11-22",
         "syn:thanksgiving-dinner-might-be-killing-you|voice:arthur-c-brooks|2026-11-22",
+        "fp:thefp.com|arthur-brooks-thanksgiving-dinner-might-be-killing-you|2026-11-22",
         "fp:thefp.com|thanksgiving-dinner-might-be-killing-you|2026-11-22"
       ],
       "voice_ids": [
@@ -590,7 +592,7 @@
       ],
       "first_seen": "2026-11-23T03:06:45Z",
       "published_at": "2026-11-22T21:34:36Z",
-      "title": "Thanksgiving Dinner Might Be Killing You",
+      "title": "Arthur Brooks: Thanksgiving Dinner Might Be Killing You",
       "url": "https://www.thefp.com/p/thanksgiving-dinner-might-be-killing-family-happy-politics",
       "publication": "The Free Press",
       "first_morning_surfaced_at": null
