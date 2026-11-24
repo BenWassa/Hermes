@@ -259,3 +259,50 @@ def test_no_sports_payload_preserves_legacy_renderer_without_sports_assets(monke
     html = output.read_text(encoding="utf-8")
     assert "data-sports-rendered" not in html
     assert "Sports V2: newspaper furniture" not in html
+
+
+def test_offseason_unconfirmed_mlb_time_displays_tbd_not_0333(monkeypatch: pytest.MonkeyPatch):
+    edition = _edition()
+    blue_jays = edition["sports"]["toronto"][2]["snapshot"]
+    blue_jays["next_game"] = {
+        **_game("feb19", "Pittsburgh Pirates", "2027-02-19T08:33:00Z", home_away="away"),
+        "time_confirmed": False,
+        "scheduled_date": "2027-02-19",
+    }
+    ARTIFACTS.mkdir(exist_ok=True)
+    monkeypatch.setattr(render_mod, "LATEST", ARTIFACTS / "latest-time-tbd.json")
+    path = render_mod.render(edition, output_path=ARTIFACTS / "sports-tbd.html").resolve()
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page(viewport={"width": 390, "height": 844})
+        page.goto(path.as_uri())
+        _open_sports(page)
+        card = page.locator('[data-sports-team="blue-jays"] .sports-status-line')
+        text = card.inner_text()
+        assert "Pittsburgh Pirates" in text
+        assert "Feb 19" in text
+        assert "Time TBD" in text
+        assert "3:33" not in text
+        browser.close()
+
+
+def test_offseason_confirmed_mlb_time_displays_local_start(monkeypatch: pytest.MonkeyPatch):
+    edition = _edition()
+    blue_jays = edition["sports"]["toronto"][2]["snapshot"]
+    blue_jays["next_game"] = {
+        **_game("feb19", "Pittsburgh Pirates", "2027-02-19T18:05:00Z", home_away="away"),
+        "time_confirmed": True,
+        "scheduled_date": "2027-02-19",
+    }
+    ARTIFACTS.mkdir(exist_ok=True)
+    monkeypatch.setattr(render_mod, "LATEST", ARTIFACTS / "latest-time-known.json")
+    path = render_mod.render(edition, output_path=ARTIFACTS / "sports-time-known.html").resolve()
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page(viewport={"width": 390, "height": 844})
+        page.goto(path.as_uri())
+        _open_sports(page)
+        text = page.locator('[data-sports-team="blue-jays"] .sports-status-line').inner_text()
+        assert "1:05" in text
+        assert "Time TBD" not in text
+        browser.close()
