@@ -37,6 +37,16 @@ _INCUMBENT_PERSON = re.compile(
 )
 _REELECTED = re.compile(r"\b(?:re-?elect(?:ed|ion)|wins?\s+(?:a\s+)?(?:second|third|fourth)\s+term)\b", re.I)
 _RETURN_TO_POWER = re.compile(r"\b(?:returns?|returning|returned|back)\s+to\s+power\b", re.I)
+# Explicit same-source role evidence only. Bare "President X" can denote a
+# historical figure and must not be treated as independently verified current.
+_ROLE = r"(?:president|prime minister|premier|governor)"
+_PERSON = r"[A-ZÀ-ÖØ-Þ][\wÀ-ÿ'-]+(?:\s+[A-ZÀ-ÖØ-Þ][\wÀ-ÿ'-]+){0,2}"
+_SOURCE_CURRENT = re.compile(
+    rf"\b(?:current|sitting|incumbent)\s+(?:U\.?S\.?\s+)?{_ROLE}\s+({_PERSON})\b", re.I
+)
+_FALSE_FORMER = re.compile(
+    rf"\b(?:former|ex-)\s+(?:U\.?S\.?\s+)?{_ROLE}\s+({_PERSON})\b", re.I
+)
 _FIELDS = ("headline", "sub", "summary", "analysis")
 _SENTENCE = re.compile(r"(?<=[.!?])\s+")
 
@@ -73,6 +83,19 @@ def _contradictions(text: str, *, vote_day: dt.date | None,
     return issues
 
 
+def _explicit_current_role_conflict(text: str, source_current: str | None) -> bool:
+    """Withhold only a *named* former-officeholder claim directly at odds
+    with the same source explicitly identifying the person as incumbent.
+    Historical references about other people and unidentified roles abstain.
+    """
+    if not source_current:
+        return False
+    return any(
+        match.group(1).casefold() == source_current
+        for match in _FALSE_FORMER.finditer(text)
+    )
+
+
 def _source_fallback(source: dict) -> str:
     # Never fabricate a replacement political event. The source headline is
     # already part of the bounded, model-visible public candidate metadata.
@@ -101,7 +124,9 @@ def enforce_source_claims(sections: list[dict], model_input: list[dict],
             source_text = " ".join(str(source.get(key) or "") for key in ("title", "description"))
             vote_day = _source_election_day(source_text[:600], today)
             subject = _incumbent_subject(source_text[:600])
-            if vote_day is None and subject is None:
+            current_match = _SOURCE_CURRENT.search(source_text[:600])
+            source_current = current_match.group(1).casefold() if current_match else None
+            if vote_day is None and subject is None and source_current is None:
                 stats["abstained"] += 1
                 continue
             stats["checked"] += 1
@@ -115,6 +140,8 @@ def enforce_source_claims(sections: list[dict], model_input: list[dict],
                 for sentence in sentences:
                     issues = _contradictions(sentence, vote_day=vote_day,
                                              subject=subject, today=today)
+                    if _explicit_current_role_conflict(sentence, source_current):
+                        issues.add("named-current-official-described-as-former")
                     if issues:
                         had_contradiction = True
                         stats["sentences_withheld"] += 1
