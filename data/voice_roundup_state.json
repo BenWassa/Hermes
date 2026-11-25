@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-24T02:30:33Z",
+  "updated_at": "2026-11-25T00:02:29Z",
   "last_reconcile_at": "2026-11-24T02:30:33Z",
   "last_roundup": {
     "period_id": "2026-11-22",
@@ -15,23 +15,6 @@
     ]
   },
   "items": {
-    "url:https://foreignpolicy.com/2026/11/10/israel-election-economy-netanyahu-eisenkot-united-states-trump": {
-      "keys": [
-        "url:https://foreignpolicy.com/2026/11/10/israel-election-economy-netanyahu-eisenkot-united-states-trump",
-        "pid:rss:https://foreignpolicy.com/?p=1245707",
-        "syn:the-economic-impact-of-israel-s-election|voice:adam-tooze|2026-11-10",
-        "fp:foreignpolicy.com|the-economic-impact-of-israel-s-election|2026-11-10"
-      ],
-      "voice_ids": [
-        "adam-tooze"
-      ],
-      "first_seen": "2026-11-10T21:23:41Z",
-      "published_at": "2026-11-10T15:23:35Z",
-      "title": "The Economic Impact of Israel’s Election",
-      "url": "https://foreignpolicy.com/2026/11/10/israel-election-economy-netanyahu-eisenkot-united-states-trump/",
-      "publication": "Foreign Policy",
-      "first_morning_surfaced_at": null
-    },
     "url:https://foreignpolicy.com/2026/11/13/nvidia-spy-chips-artificial-intelligence-huang-china": {
       "keys": [
         "url:https://foreignpolicy.com/2026/11/13/nvidia-spy-chips-artificial-intelligence-huang-china",
@@ -80,6 +63,23 @@
       "published_at": "2026-11-20T05:53:10Z",
       "title": "AIs vs. humans in economics papers",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/ais-vs-humans-in-economics-papers.html?utm_source=rss&utm_medium=rss&utm_campaign=ais-vs-humans-in-economics-papers",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/best-fiction-2026.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/best-fiction-2026.html",
+        "pid:rss:https://marginalrevolution.com/?p=94208",
+        "syn:best-fiction-2026|voice:tyler-cowen|2026-11-24",
+        "fp:marginalrevolution.com|best-fiction-2026|2026-11-24"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-25T00:02:29Z",
+      "published_at": "2026-11-24T07:33:57Z",
+      "title": "Best fiction 2026",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/best-fiction-2026.html?utm_source=rss&utm_medium=rss&utm_campaign=best-fiction-2026",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -148,6 +148,23 @@
       "published_at": "2026-11-20T15:26:56Z",
       "title": "Friday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-600.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-600",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/gambling-for-goals.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/gambling-for-goals.html",
+        "pid:rss:https://marginalrevolution.com/?p=94246",
+        "syn:gambling-for-goals|voice:tyler-cowen|2026-11-24",
+        "fp:marginalrevolution.com|gambling-for-goals|2026-11-24"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-25T00:02:29Z",
+      "published_at": "2026-11-24T19:33:13Z",
+      "title": "Gambling for Goals",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/gambling-for-goals.html?utm_source=rss&utm_medium=rss&utm_campaign=gambling-for-goals",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -338,6 +355,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-health-effects-of-eating-red-meat.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-health-effects-of-eating-red-meat.html",
+        "pid:rss:https://marginalrevolution.com/?p=94229",
+        "syn:the-health-effects-of-eating-red-meat|voice:tyler-cowen|2026-11-24",
+        "fp:marginalrevolution.com|the-health-effects-of-eating-red-meat|2026-11-24"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-25T00:02:29Z",
+      "published_at": "2026-11-24T06:15:54Z",
+      "title": "The Health Effects of Eating Red Meat",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-health-effects-of-eating-red-meat.html?utm_source=rss&utm_medium=rss&utm_campaign=the-health-effects-of-eating-red-meat",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-579.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-579.html",
@@ -352,6 +386,23 @@
       "published_at": "2026-11-19T17:16:30Z",
       "title": "Thursday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-579.html?utm_source=rss&utm_medium=rss&utm_campaign=thursday-assorted-links-579",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-596.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-596.html",
+        "pid:rss:https://marginalrevolution.com/?p=94260",
+        "syn:tuesday-assorted-links|voice:tyler-cowen|2026-11-24",
+        "fp:marginalrevolution.com|tuesday-assorted-links|2026-11-24"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-25T00:02:29Z",
+      "published_at": "2026-11-24T16:26:55Z",
+      "title": "Tuesday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/tuesday-assorted-links-596.html?utm_source=rss&utm_medium=rss&utm_campaign=tuesday-assorted-links-596",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -440,25 +491,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html",
-        "pid:rss:https://www.nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html",
-        "syn:the-path-to-a-democratic-supermajority|voice:ezra-klein|2026-11-10",
-        "syn:the-path-to-a-democratic-supermajority|voice:ezra-klein|2026-11-11",
-        "fp:nytimes.com|the-path-to-a-democratic-supermajority|2026-11-10",
-        "fp:nytimes.com|the-path-to-a-democratic-supermajority|2026-11-11"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-11-10T21:23:41Z",
-      "published_at": "2026-11-10T18:40:49Z",
-      "title": "The Path to a Democratic Supermajority",
-      "url": "https://www.nytimes.com/2026/11/10/opinion/ezra-klein-podcast-adam-jentleson.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": null
-    },
     "url:https://nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html": {
       "keys": [
         "url:https://nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html",
@@ -527,6 +559,40 @@
       "title": "How Do You Investigate a President This Corrupt?",
       "url": "https://www.nytimes.com/2026/11/20/opinion/ezra-klein-podcast-robert-garcia.html",
       "publication": "The New York Times",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://nytimes.com/2026/11/24/opinion/ezra-klein-podcast-nicole-perlroth.html": {
+      "keys": [
+        "url:https://nytimes.com/2026/11/24/opinion/ezra-klein-podcast-nicole-perlroth.html",
+        "pid:rss:https://www.nytimes.com/2026/11/24/opinion/ezra-klein-podcast-nicole-perlroth.html",
+        "syn:the-everywhere-all-at-once-cybersecurity-crisis|voice:ezra-klein|2026-11-24",
+        "fp:nytimes.com|the-everywhere-all-at-once-cybersecurity-crisis|2026-11-24"
+      ],
+      "voice_ids": [
+        "ezra-klein"
+      ],
+      "first_seen": "2026-11-25T00:02:29Z",
+      "published_at": "2026-11-24T10:03:45Z",
+      "title": "The ‘Everywhere, All at Once’ Cybersecurity Crisis",
+      "url": "https://www.nytimes.com/2026/11/24/opinion/ezra-klein-podcast-nicole-perlroth.html",
+      "publication": "The New York Times",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://persuasion.community/p/the-neediest-president": {
+      "keys": [
+        "url:https://persuasion.community/p/the-neediest-president",
+        "pid:rss:https://www.persuasion.community/p/the-neediest-president",
+        "syn:trump-s-foreign-policy-is-all-about-trump|voice:francis-fukuyama|2026-11-24",
+        "fp:persuasion.community|trump-s-foreign-policy-is-all-about-trump|2026-11-24"
+      ],
+      "voice_ids": [
+        "francis-fukuyama"
+      ],
+      "first_seen": "2026-11-25T00:02:29Z",
+      "published_at": "2026-11-24T13:31:52Z",
+      "title": "Trump's Foreign Policy Is All About Trump",
+      "url": "https://www.persuasion.community/p/the-neediest-president",
+      "publication": "Persuasion",
       "first_morning_surfaced_at": null
     },
     "url:https://persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond": {
