@@ -1,8 +1,8 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-25T23:44:46Z",
-  "last_reconcile_at": "2026-11-25T23:44:46Z",
+  "updated_at": "2026-11-26T23:58:03Z",
+  "last_reconcile_at": "2026-11-26T23:58:03Z",
   "last_roundup": {
     "period_id": "2026-11-22",
     "cutoff": "2026-11-22T22:00:00Z",
@@ -29,6 +29,23 @@
       "published_at": "2026-11-13T19:35:54Z",
       "title": "Nvidia, Spies, and the Art of Economic Espionage",
       "url": "https://foreignpolicy.com/2026/11/13/nvidia-spy-chips-artificial-intelligence-huang-china/",
+      "publication": "Foreign Policy",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://foreignpolicy.com/2026/11/25/jensen-huang-reinstated-nvidia-trump-pardon-ai-big-tech": {
+      "keys": [
+        "url:https://foreignpolicy.com/2026/11/25/jensen-huang-reinstated-nvidia-trump-pardon-ai-big-tech",
+        "pid:rss:https://foreignpolicy.com/?p=1248057",
+        "syn:trump-s-unprecedented-intervention-in-nvidia|voice:adam-tooze|2026-11-25",
+        "fp:foreignpolicy.com|trump-s-unprecedented-intervention-in-nvidia|2026-11-25"
+      ],
+      "voice_ids": [
+        "adam-tooze"
+      ],
+      "first_seen": "2026-11-26T23:58:03Z",
+      "published_at": "2026-11-25T19:58:04Z",
+      "title": "Trump’s ‘Unprecedented Intervention’ in Nvidia",
+      "url": "https://foreignpolicy.com/2026/11/25/jensen-huang-reinstated-nvidia-trump-pardon-ai-big-tech/",
       "publication": "Foreign Policy",
       "first_morning_surfaced_at": null
     },
@@ -168,6 +185,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/five-facts-about-stablecoins.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/five-facts-about-stablecoins.html",
+        "pid:rss:https://marginalrevolution.com/?p=94264",
+        "syn:five-facts-about-stablecoins|voice:tyler-cowen|2026-11-26",
+        "fp:marginalrevolution.com|five-facts-about-stablecoins|2026-11-26"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-26T23:58:03Z",
+      "published_at": "2026-11-26T10:50:37Z",
+      "title": "Five Facts About Stablecoins",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/five-facts-about-stablecoins.html?utm_source=rss&utm_medium=rss&utm_campaign=five-facts-about-stablecoins",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-600.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-600.html",
@@ -219,6 +253,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/humanfish-predicting-who-actually-wins-a-human-chess-game.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/humanfish-predicting-who-actually-wins-a-human-chess-game.html",
+        "pid:rss:https://marginalrevolution.com/?p=94277",
+        "syn:humanfish-predicting-who-actually-wins-a-human-chess-game|voice:tyler-cowen|2026-11-26",
+        "fp:marginalrevolution.com|humanfish-predicting-who-actually-wins-a-human-chess-game|2026-11-26"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-26T23:58:03Z",
+      "published_at": "2026-11-26T19:29:17Z",
+      "title": "HumanFish — Predicting Who Actually Wins a Human Chess Game",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/humanfish-predicting-who-actually-wins-a-human-chess-game.html?utm_source=rss&utm_medium=rss&utm_campaign=humanfish-predicting-who-actually-wins-a-human-chess-game",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/increasing-pay-for-lower-wage-workers.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/increasing-pay-for-lower-wage-workers.html",
@@ -267,6 +318,23 @@
       "published_at": "2026-11-23T17:01:36Z",
       "title": "Monday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/monday-assorted-links-587.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-587",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/my-excellent-conversation-with-moxie-marlinspike-of-signal.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/my-excellent-conversation-with-moxie-marlinspike-of-signal.html",
+        "pid:rss:https://marginalrevolution.com/?p=94268",
+        "syn:my-excellent-conversation-with-moxie-marlinspike-of-signal|voice:tyler-cowen|2026-11-26",
+        "fp:marginalrevolution.com|my-excellent-conversation-with-moxie-marlinspike-of-signal|2026-11-26"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-26T23:58:03Z",
+      "published_at": "2026-11-26T05:56:51Z",
+      "title": "My excellent Conversation with Moxie Marlinspike of Signal",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/my-excellent-conversation-with-moxie-marlinspike-of-signal.html?utm_source=rss&utm_medium=rss&utm_campaign=my-excellent-conversation-with-moxie-marlinspike-of-signal",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -335,6 +403,23 @@
       "published_at": "2026-11-22T17:31:05Z",
       "title": "Sunday assorted links",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/sunday-assorted-links-591.html?utm_source=rss&utm_medium=rss&utm_campaign=sunday-assorted-links-591",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/thanksgiving-assorted-links-6.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/thanksgiving-assorted-links-6.html",
+        "pid:rss:https://marginalrevolution.com/?p=94267",
+        "syn:thanksgiving-assorted-links|voice:tyler-cowen|2026-11-26",
+        "fp:marginalrevolution.com|thanksgiving-assorted-links|2026-11-26"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-26T23:58:03Z",
+      "published_at": "2026-11-26T16:45:28Z",
+      "title": "Thanksgiving assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/thanksgiving-assorted-links-6.html?utm_source=rss&utm_medium=rss&utm_campaign=thanksgiving-assorted-links-6",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -525,6 +610,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/what-we-are-grateful-for.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/what-we-are-grateful-for.html",
+        "pid:rss:https://marginalrevolution.com/?p=94270",
+        "syn:what-we-are-grateful-for|voice:tyler-cowen|2026-11-26",
+        "fp:marginalrevolution.com|what-we-are-grateful-for|2026-11-26"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-26T23:58:03Z",
+      "published_at": "2026-11-26T12:14:54Z",
+      "title": "What we are grateful for",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/what-we-are-grateful-for.html?utm_source=rss&utm_medium=rss&utm_campaign=what-we-are-grateful-for",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/will-ai-growth-reach-the-developing-world.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/will-ai-growth-reach-the-developing-world.html",
@@ -680,6 +782,22 @@
       "publication": "Persuasion",
       "first_morning_surfaced_at": null
     },
+    "url:https://theatlantic.com/ideas/2026/11/scandinavia-inclusion-dynamism-welfare-sweden/689556": {
+      "keys": [
+        "url:https://theatlantic.com/ideas/2026/11/scandinavia-inclusion-dynamism-welfare-sweden/689556",
+        "syn:the-scandinavian-compromise|voice:david-brooks|2026-11-26",
+        "fp:theatlantic.com|the-scandinavian-compromise|2026-11-26"
+      ],
+      "voice_ids": [
+        "david-brooks"
+      ],
+      "first_seen": "2026-11-26T23:58:03Z",
+      "published_at": "2026-11-26T11:00:00Z",
+      "title": "The Scandinavian Compromise",
+      "url": "https://www.theatlantic.com/ideas/2026/11/scandinavia-inclusion-dynamism-welfare-sweden/689556/?utm_source=feed",
+      "publication": "The Atlantic",
+      "first_morning_surfaced_at": null
+    },
     "url:https://theatlantic.com/podcasts/2026/11/populist-moment-over/689507": {
       "keys": [
         "url:https://theatlantic.com/podcasts/2026/11/populist-moment-over/689507",
@@ -793,22 +911,6 @@
       "published_at": "2026-11-25T00:00:00Z",
       "title": "Quebec’s legislators are shocked – shocked! – to discover they cannot vote to defy the Constitution",
       "url": "https://www.theglobeandmail.com/opinion/article-quebec-oath-to-king-canada-constitution/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": null
-    },
-    "url:https://theglobeandmail.com/opinion/article-the-real-immigration-fib-budget-temporary-residents": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-the-real-immigration-fib-budget-temporary-residents",
-        "syn:the-real-immigration-fib-far-fewer-migrants-are-entering-canada-than-official|voice:andrew-coyne|2026-11-12",
-        "fp:theglobeandmail.com|the-real-immigration-fib-far-fewer-migrants-are-entering-canada-than-official|2026-11-12"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-11-12T21:53:59Z",
-      "published_at": "2026-11-12T00:00:00Z",
-      "title": "The real immigration ‘fib’? Far fewer migrants are entering Canada than official figures say",
-      "url": "https://www.theglobeandmail.com/opinion/article-the-real-immigration-fib-budget-temporary-residents/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": null
     },
