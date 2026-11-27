@@ -1,7 +1,7 @@
 {
   "version": 1,
   "collecting_since": "2026-09-10T18:38:50Z",
-  "updated_at": "2026-11-26T23:58:03Z",
+  "updated_at": "2026-11-27T23:40:05Z",
   "last_reconcile_at": "2026-11-26T23:58:03Z",
   "last_roundup": {
     "period_id": "2026-11-22",
@@ -219,6 +219,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-601.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-601.html",
+        "pid:rss:https://marginalrevolution.com/?p=94276",
+        "syn:friday-assorted-links|voice:tyler-cowen|2026-11-27",
+        "fp:marginalrevolution.com|friday-assorted-links|2026-11-27"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-27T23:40:05Z",
+      "published_at": "2026-11-27T17:39:47Z",
+      "title": "Friday assorted links",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/friday-assorted-links-601.html?utm_source=rss&utm_medium=rss&utm_campaign=friday-assorted-links-601",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/gambling-for-goals.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/gambling-for-goals.html",
@@ -335,6 +352,23 @@
       "published_at": "2026-11-26T05:56:51Z",
       "title": "My excellent Conversation with Moxie Marlinspike of Signal",
       "url": "https://marginalrevolution.com/marginalrevolution/2026/11/my-excellent-conversation-with-moxie-marlinspike-of-signal.html?utm_source=rss&utm_medium=rss&utm_campaign=my-excellent-conversation-with-moxie-marlinspike-of-signal",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/my-podcast-with-hasan.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/my-podcast-with-hasan.html",
+        "pid:rss:https://marginalrevolution.com/?p=94279",
+        "syn:my-podcast-with-hasan|voice:tyler-cowen|2026-11-27",
+        "fp:marginalrevolution.com|my-podcast-with-hasan|2026-11-27"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-27T23:40:05Z",
+      "published_at": "2026-11-27T05:58:24Z",
+      "title": "My podcast with Hasan",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/my-podcast-with-hasan.html?utm_source=rss&utm_medium=rss&utm_campaign=my-podcast-with-hasan",
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
@@ -508,6 +542,23 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
+    "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-mental-illness-theory-of-politics-is-modestly-underrated.html": {
+      "keys": [
+        "url:https://marginalrevolution.com/marginalrevolution/2026/11/the-mental-illness-theory-of-politics-is-modestly-underrated.html",
+        "pid:rss:https://marginalrevolution.com/?p=94280",
+        "syn:the-mental-illness-theory-of-politics-is-modestly-underrated|voice:tyler-cowen|2026-11-27",
+        "fp:marginalrevolution.com|the-mental-illness-theory-of-politics-is-modestly-underrated|2026-11-27"
+      ],
+      "voice_ids": [
+        "tyler-cowen"
+      ],
+      "first_seen": "2026-11-27T23:40:05Z",
+      "published_at": "2026-11-27T09:01:02Z",
+      "title": "The mental illness theory of politics is modestly underrated",
+      "url": "https://marginalrevolution.com/marginalrevolution/2026/11/the-mental-illness-theory-of-politics-is-modestly-underrated.html?utm_source=rss&utm_medium=rss&utm_campaign=the-mental-illness-theory-of-politics-is-modestly-underrated",
+      "publication": "Marginal Revolution",
+      "first_morning_surfaced_at": null
+    },
     "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-579.html": {
       "keys": [
         "url:https://marginalrevolution.com/marginalrevolution/2026/11/thursday-assorted-links-579.html",
@@ -661,23 +712,6 @@
       "publication": "Marginal Revolution",
       "first_morning_surfaced_at": null
     },
-    "url:https://nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html": {
-      "keys": [
-        "url:https://nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html",
-        "pid:rss:https://www.nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html",
-        "syn:hasan-piker-wants-to-win|voice:ezra-klein|2026-11-13",
-        "fp:nytimes.com|hasan-piker-wants-to-win|2026-11-13"
-      ],
-      "voice_ids": [
-        "ezra-klein"
-      ],
-      "first_seen": "2026-11-13T21:31:18Z",
-      "published_at": "2026-11-13T10:39:40Z",
-      "title": "Hasan Piker Wants to Win",
-      "url": "https://www.nytimes.com/2026/11/13/opinion/ezra-klein-podcast-hasan-piker.html",
-      "publication": "The New York Times",
-      "first_morning_surfaced_at": null
-    },
     "url:https://nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html": {
       "keys": [
         "url:https://nytimes.com/2026/11/15/opinion/democrats-permitting-reform-bill-affordability.html",
@@ -765,23 +799,6 @@
       "publication": "Persuasion",
       "first_morning_surfaced_at": null
     },
-    "url:https://persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond": {
-      "keys": [
-        "url:https://persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond",
-        "pid:rss:https://www.persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond",
-        "syn:welcoming-mike-mcfaul-and-larry-diamond-to-american-purpose|voice:francis-fukuyama|2026-11-13",
-        "fp:persuasion.community|welcoming-mike-mcfaul-and-larry-diamond-to-american-purpose|2026-11-13"
-      ],
-      "voice_ids": [
-        "francis-fukuyama"
-      ],
-      "first_seen": "2026-11-13T21:31:18Z",
-      "published_at": "2026-11-13T18:23:41Z",
-      "title": "Welcoming Mike McFaul and Larry Diamond to American Purpose",
-      "url": "https://www.persuasion.community/p/welcoming-mike-mcfaul-and-larry-diamond",
-      "publication": "Persuasion",
-      "first_morning_surfaced_at": null
-    },
     "url:https://theatlantic.com/ideas/2026/11/scandinavia-inclusion-dynamism-welfare-sweden/689556": {
       "keys": [
         "url:https://theatlantic.com/ideas/2026/11/scandinavia-inclusion-dynamism-welfare-sweden/689556",
@@ -866,22 +883,6 @@
       "publication": "The Free Press",
       "first_morning_surfaced_at": null
     },
-    "url:https://theglobeandmail.com/opinion/article-america-needs-to-normalize-impeachment": {
-      "keys": [
-        "url:https://theglobeandmail.com/opinion/article-america-needs-to-normalize-impeachment",
-        "syn:america-needs-to-make-it-easier-to-remove-a-president|voice:andrew-coyne|2026-11-13",
-        "fp:theglobeandmail.com|america-needs-to-make-it-easier-to-remove-a-president|2026-11-13"
-      ],
-      "voice_ids": [
-        "andrew-coyne"
-      ],
-      "first_seen": "2026-11-13T21:31:18Z",
-      "published_at": "2026-11-13T00:00:00Z",
-      "title": "America needs to make it easier to remove a president",
-      "url": "https://www.theglobeandmail.com/opinion/article-america-needs-to-normalize-impeachment/",
-      "publication": "The Globe and Mail",
-      "first_morning_surfaced_at": null
-    },
     "url:https://theglobeandmail.com/opinion/article-on-trade-with-china-where-do-you-draw-the-line-and-how": {
       "keys": [
         "url:https://theglobeandmail.com/opinion/article-on-trade-with-china-where-do-you-draw-the-line-and-how",
@@ -911,6 +912,22 @@
       "published_at": "2026-11-25T00:00:00Z",
       "title": "Quebec’s legislators are shocked – shocked! – to discover they cannot vote to defy the Constitution",
       "url": "https://www.theglobeandmail.com/opinion/article-quebec-oath-to-king-canada-constitution/",
+      "publication": "The Globe and Mail",
+      "first_morning_surfaced_at": null
+    },
+    "url:https://theglobeandmail.com/opinion/article-the-pentagon-is-making-a-strong-case-for-buying-swedish": {
+      "keys": [
+        "url:https://theglobeandmail.com/opinion/article-the-pentagon-is-making-a-strong-case-for-buying-swedish",
+        "syn:the-pentagon-is-making-a-strong-case-for-buying-swedish|voice:andrew-coyne|2026-11-27",
+        "fp:theglobeandmail.com|the-pentagon-is-making-a-strong-case-for-buying-swedish|2026-11-27"
+      ],
+      "voice_ids": [
+        "andrew-coyne"
+      ],
+      "first_seen": "2026-11-27T23:40:05Z",
+      "published_at": "2026-11-27T00:00:00Z",
+      "title": "The Pentagon is making a strong case for buying Swedish",
+      "url": "https://www.theglobeandmail.com/opinion/article-the-pentagon-is-making-a-strong-case-for-buying-swedish/",
       "publication": "The Globe and Mail",
       "first_morning_surfaced_at": null
     },
